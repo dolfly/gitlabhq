@@ -79,3 +79,17 @@ The Fix CI/CD Pipeline Flow examines:
 - Merge request changes: Changes that could have caused the failure.
 - The current repository contents: For identifying syntax, linting, or import errors.
 - Script errors: Command failures, missing executables, or permission issues.
+
+## Flow log processing
+
+The Fix CI/CD Pipeline Flow has a known issue related to log processing.
+
+The AI gateway processes only the last 150 KiB of job logs. If your job produces extensive output, the flow might not capture relevant failure information that appears earlier in the log.
+
+To work around this issue, try the following:
+
+- Reduce verbose output by removing debug logging and progress indicators.
+- Redirect non-critical output using shell redirection (`> /dev/null`).
+- Add a summary step at the end of your script that echoes key error messages.
+- Use `after_script` to output diagnostic information after the main script completes.
+- Split verbose jobs into smaller, focused jobs with more concise logs.

@@ -3658,7 +3658,9 @@
 ##################
 .api-docs:rules:trigger-api-docs-pipeline:
   rules:
-    - <<: *if-dot-com-gitlab-org-default-branch
+    - if: '$CI_SERVER_HOST == "gitlab.com" && $CI_PROJECT_PATH == "gitlab-org/gitlab" && $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "push"'
+      changes:
+        - "doc/api/openapi/openapi_v3.yaml"
 
 .test-metadata:rules:export-predictive-test-metrics:
   rules:

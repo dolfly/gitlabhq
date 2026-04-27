@@ -16,6 +16,5 @@ internal/dependencyproxy/dependencyproxy.go:235:44: G704: SSRF via taint analysi
 internal/listener/listener.go:28:16: G402: TLS MinVersion too low. (gosec)
 internal/sendurl/sendurl.go:146:38: G704: SSRF via taint analysis (gosec)
 internal/testhelper/testhelper.go:251:21: G302: Expect file permissions to be 0600 or less (gosec)
-internal/ai_assist/duoworkflow/runner.go:410:25: SA1019: startReq.WorkflowDefinition is deprecated: Marked as deprecated in contract/contract.proto. (staticcheck)
 cmd/gitlab-workhorse/config_test.go:166:4: error-is-as: use require.ErrorIs or require.ErrorAs depending on the case (testifylint)
 internal/helper/command/command_test.go:94:4: error-is-as: use require.ErrorIs or require.ErrorAs depending on the case (testifylint)

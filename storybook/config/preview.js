@@ -34,7 +34,7 @@ if (typeof navigator !== 'undefined' && navigator.languages) {
 const stylesheetsRequireCtx = require.context(
   '../../app/assets/stylesheets',
   true,
-  /(application|highlight\/themes\/white|lazy_bundles\/gridstack)\.scss$/,
+  /(application|highlight\/themes\/white)\.scss$/,
 );
 
 translateMixin(Vue);
@@ -44,7 +44,6 @@ Vue.use(Vuex);
 stylesheetsRequireCtx('./application.scss');
 import('../../app/assets/builds/tailwind.css');
 stylesheetsRequireCtx('./highlight/themes/white.scss');
-stylesheetsRequireCtx('./lazy_bundles/gridstack.scss');
 
 export const theme = {
   brandTitle: 'GitLab (Product)',

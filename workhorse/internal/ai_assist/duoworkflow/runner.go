@@ -133,7 +133,6 @@ type runner struct {
 	serverCapabilities        []string
 	streamManager             *streamManager
 	mcpManager                mcpManager
-	workflowDefinition        string
 	websocketClosed           atomic.Bool
 	shouldTimeoutHTTPRequests bool
 }
@@ -198,7 +197,7 @@ func (r *runner) Execute(ctx context.Context) error {
 	defer func() {
 		if r.lockFlow {
 			log.WithRequest(r.originalReq).Info("Releasing lock for workflow")
-			r.lockManager.releaseLock(ctx, r.mutex, r.workflowID, r.workflowDefinition)
+			r.lockManager.releaseLock(ctx, r.mutex, r.workflowID)
 		}
 	}()
 
@@ -407,14 +406,13 @@ func intersectServerCapabilities(fromServer []string) []string {
 
 func (r *runner) acquireWorkflowLock(startReq *pb.StartWorkflowRequest) error {
 	r.workflowID = startReq.WorkflowID
-	r.workflowDefinition = startReq.WorkflowDefinition //lint:ignore SA1019 deprecated but still used by workhorse
 
 	if r.workflowID == "" {
 		log.WithRequest(r.originalReq).Error("No workflow ID provided in StartWorkflowRequest")
 		return fmt.Errorf("handleWebSocketMessage: no workflow ID provided in StartWorkflowRequest")
 	}
 
-	mutex, err := r.lockManager.acquireLock(r.originalReq.Context(), r.workflowID, r.workflowDefinition)
+	mutex, err := r.lockManager.acquireLock(r.originalReq.Context(), r.workflowID)
 	if err != nil && err != errLockIsUnavailable {
 		return errFailedToAcquireLockError
 	}
@@ -541,7 +539,7 @@ func (r *runner) stopWorkflow(reason string, closeErr error) error {
 // Errors during shutdown are logged but not returned to allow other runners to proceed.
 func (r *runner) Shutdown(ctx context.Context) error {
 	if r.lockFlow {
-		r.lockManager.releaseLock(ctx, r.mutex, r.workflowID, r.workflowDefinition)
+		r.lockManager.releaseLock(ctx, r.mutex, r.workflowID)
 	}
 
 	select {

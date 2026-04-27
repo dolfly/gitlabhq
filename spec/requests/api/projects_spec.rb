@@ -4337,7 +4337,7 @@ RSpec.describe API::Projects, :aggregate_failures, feature_category: :groups_and
 
     context 'when project is scheduled for deletion' do
       before do
-        project.update!(marked_for_deletion_at: 1.day.ago, deleting_user: user)
+        project.project_namespace.schedule_deletion!(transition_user: user)
       end
 
       it 'restores project' do
@@ -5677,17 +5677,30 @@ RSpec.describe API::Projects, :aggregate_failures, feature_category: :groups_and
     let(:path) { "/projects/#{project.id}/unarchive" }
 
     context 'on an unarchived project' do
-      it 'remains unarchived' do
+      it 'returns error message' do
         post api(path, user)
 
-        expect(response).to have_gitlab_http_status(:created)
-        expect(json_response['archived']).to be_falsey
+        expect(response).to have_gitlab_http_status(:bad_request)
+        expect(json_response['message']).to eq('Failed to unarchive project.')
+      end
+
+      context 'when remove_project_ancestor_inherited_transitions flag is disabled' do
+        before do
+          stub_feature_flags(remove_project_ancestor_inherited_transitions: false)
+        end
+
+        it 'remains unarchived' do
+          post api(path, user)
+
+          expect(response).to have_gitlab_http_status(:created)
+          expect(json_response['archived']).to be_falsey
+        end
       end
     end
 
     context 'on an archived project' do
       before do
-        project.update!(archived: true)
+        project.project_namespace.archive!
       end
 
       it_behaves_like 'authorizing granular token permissions', :unarchive_project do

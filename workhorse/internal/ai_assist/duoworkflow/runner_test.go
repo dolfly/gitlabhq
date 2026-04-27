@@ -1399,7 +1399,7 @@ func TestRunner_Shutdown(t *testing.T) {
 		}
 
 		// Acquire lock first
-		mutex, err := r.lockManager.acquireLock(context.Background(), r.workflowID, "software_development")
+		mutex, err := r.lockManager.acquireLock(context.Background(), r.workflowID)
 		require.NoError(t, err)
 		r.mutex = mutex
 
@@ -1438,7 +1438,7 @@ func TestRunner_Shutdown(t *testing.T) {
 		}
 
 		// Acquire lock first
-		mutex, err := r.lockManager.acquireLock(context.Background(), r.workflowID, "software_development")
+		mutex, err := r.lockManager.acquireLock(context.Background(), r.workflowID)
 		require.NoError(t, err)
 		r.mutex = mutex
 
@@ -1552,7 +1552,7 @@ func TestRunner_AcquireWorkflowLock_ConcurrentAttempts(t *testing.T) {
 	assert.Nil(t, r2.mutex)
 
 	// Clean up
-	r1.lockManager.releaseLock(context.Background(), r1.mutex, r1.workflowID, "software_development")
+	r1.lockManager.releaseLock(context.Background(), r1.mutex, r1.workflowID)
 }
 
 func TestRunner_HandleWebSocketMessage_AcquiresLock(t *testing.T) {
@@ -1587,7 +1587,7 @@ func TestRunner_HandleWebSocketMessage_AcquiresLock(t *testing.T) {
 	assert.NotNil(t, r.mutex)
 
 	// Clean up
-	r.lockManager.releaseLock(context.Background(), r.mutex, r.workflowID, "software_development")
+	r.lockManager.releaseLock(context.Background(), r.mutex, r.workflowID)
 }
 
 func TestRunner_Execute_ReleasesLock(t *testing.T) {
@@ -1628,7 +1628,7 @@ func TestRunner_Execute_ReleasesLock(t *testing.T) {
 	require.Equal(t, "handleWebSocketMessages: failed to read a WS message: EOF", err.Error())
 
 	// Verify lock was released (we can acquire it again)
-	mutex, err := r.lockManager.acquireLock(ctx, "execute-test-123", "software_development")
+	mutex, err := r.lockManager.acquireLock(ctx, "execute-test-123")
 	require.NoError(t, err)
 	require.NotNil(t, mutex)
 }

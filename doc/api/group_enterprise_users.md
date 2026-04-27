@@ -12,7 +12,7 @@ title: Group enterprise users API
 
 {{< /details >}}
 
-Use these API endpoints to interact with enterprise users accounts. For more information, see [enterprise users](../user/enterprise_user/_index.md).
+Use these API endpoints to interact with enterprise users. For more information, see [enterprise users](../user/enterprise_user/_index.md).
 
 These API endpoints only work for top-level groups. Users do not have to be a member of the group.
 

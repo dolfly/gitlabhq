@@ -1403,6 +1403,11 @@ class Group < Namespace
       ancestors(hierarchy_order: :asc).joins(:deletion_schedule).to_a
     end
   end
+
+  override :remove_ancestor_inherited_transitions?
+  def remove_ancestor_inherited_transitions?
+    Feature.enabled?(:remove_group_ancestor_inherited_transitions, self)
+  end
 end
 
 Group.prepend_mod_with('Group')

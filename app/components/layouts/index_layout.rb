@@ -5,10 +5,11 @@ module Layouts
     # @param [String] heading
     # @param [String] description
     # @param [Hash] options
-    def initialize(heading: nil, description: nil, page_heading_sr_only: false, options: {})
+    def initialize(heading: nil, description: nil, page_heading_sr_only: false, loading: false, options: {})
       @heading = heading
       @description = description
       @page_heading_sr_only = page_heading_sr_only
+      @loading = loading
       @options = options
     end
 

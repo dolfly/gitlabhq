@@ -4663,9 +4663,14 @@ RSpec.describe Group, feature_category: :groups_and_projects do
 
   describe '#unarchive_descendants!' do
     let_it_be_with_reload(:parent_group) { create(:group) }
-    let_it_be_with_reload(:group) { create(:group, :archived, parent: parent_group) }
-    let_it_be_with_reload(:subgroup) { create(:group, :archived, parent: group) }
+    let_it_be_with_reload(:group) { create(:group, parent: parent_group) }
+    let_it_be_with_reload(:subgroup) { create(:group, parent: group) }
     let_it_be_with_reload(:sub_subgroup) { create(:group, :archived, parent: subgroup) }
+
+    before do
+      subgroup.namespace_settings.update!(archived: true)
+      group.namespace_settings.update!(archived: true)
+    end
 
     it 'does not unarchive the group itself' do
       group.unarchive_descendants!
@@ -4746,6 +4751,20 @@ RSpec.describe Group, feature_category: :groups_and_projects do
       expect { group.unarchive_all_projects! }
         .to not_change { non_archived_project.reload.project_namespace.state }
           .and not_change { subgroup_non_archived_project.reload.project_namespace.state }
+    end
+  end
+
+  describe 'state transitions' do
+    it { is_expected.to reject_events :unarchive, when: :ancestor_inherited }
+    it { is_expected.to reject_events :cancel_deletion, when: :ancestor_inherited }
+
+    context 'when feature flag is disabled' do
+      before do
+        stub_feature_flags(remove_group_ancestor_inherited_transitions: false)
+      end
+
+      it { is_expected.to handle_events :unarchive, when: :ancestor_inherited }
+      it { is_expected.to handle_events :cancel_deletion, when: :ancestor_inherited }
     end
   end
 end

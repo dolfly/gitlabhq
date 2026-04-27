@@ -703,11 +703,7 @@ RSpec.describe GroupsController, factory_default: :keep, feature_category: :code
   end
 
   describe 'POST #restore' do
-    let_it_be(:group) do
-      create(:group_with_deletion_schedule,
-        marked_for_deletion_on: 1.day.ago,
-        deleting_user: user)
-    end
+    let_it_be(:group) { create(:group, :deletion_scheduled) }
 
     subject { post :restore, params: { group_id: group.to_param } }
 

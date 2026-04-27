@@ -42,13 +42,8 @@ module Resolvers
         response.load_tags if node_selection&.selects?(:tags)
         commits = response.commits.to_a
 
-        # Determine if there's a next page by checking if we got more commits than requested
-        # We request limit + 1 to detect this
-        has_next_page = limit && commits.size > limit
-        commits = commits.first(limit) if has_next_page
-
-        # FIX: use `response.next_cursor` instead of calculating commit manually
-        end_cursor = Base64.encode64(commits.last.sha) if has_next_page
+        has_next_page = response.next_cursor.present?
+        end_cursor = Base64.strict_encode64(response.next_cursor) if has_next_page
 
         Gitlab::Graphql::ExternallyPaginatedArray.new(nil, end_cursor, *commits, has_next_page: has_next_page)
       rescue Gitlab::Git::CommandError => e
@@ -70,8 +65,7 @@ module Resolvers
 
       def list_commits_arguments(arguments, limit, page_token)
         arguments[:pagination_params] = {}.tap do |pagination_params|
-          # Request one extra commit to determine if there's a next page
-          pagination_params[:limit] = limit + 1
+          pagination_params[:limit] = limit
           pagination_params[:page_token] = Base64.decode64(page_token) if page_token
         end
 

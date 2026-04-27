@@ -469,8 +469,7 @@ This heading is referenced by a script: `scripts/cells/application-settings-anal
 {{< /history >}}
 
 In general, all settings are optional. When enabling some settings, you might also need
-to configure other related settings. These requirements are
-`Required` column of the following table.
+to configure other related settings. These requirements are in the `Required` column of the following table.
 
 | Attribute                                | Type             | Required                             | Description |
 |------------------------------------------|------------------|:------------------------------------:|-------------|

@@ -253,11 +253,19 @@ FactoryBot.define do
 
     trait :archived do
       archived { true }
+
+      after(:create) do |project|
+        project.project_namespace.archive!
+      end
     end
 
     trait :aimed_for_deletion do
       marked_for_deletion_at { Date.yesterday }
       deleting_user { creator }
+
+      after(:create) do |project, evaluator|
+        project.project_namespace.schedule_deletion!(transition_user: evaluator.deleting_user)
+      end
     end
 
     trait :not_aimed_for_deletion do

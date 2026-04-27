@@ -407,7 +407,6 @@ module Gitlab
     config.assets.precompile << "page_bundles/xterm.css"
     config.assets.precompile << "page_bundles/zuora.css"
     config.assets.precompile << "lazy_bundles/cropper.css"
-    config.assets.precompile << "lazy_bundles/gridstack.css"
     config.assets.precompile << "performance_bar.css"
     config.assets.precompile << "disable_animations.css"
     config.assets.precompile << "test_environment.css"

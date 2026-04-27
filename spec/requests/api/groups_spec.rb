@@ -17,7 +17,7 @@ RSpec.describe API::Groups, :with_current_organization, feature_category: :group
   let_it_be(:project2) { create(:project, namespace: group2, name: 'testing') }
   let_it_be(:project3) { create(:project, namespace: group1, path: 'test', visibility_level: Gitlab::VisibilityLevel::PRIVATE) }
   let_it_be(:archived_project) { create(:project, namespace: group1, archived: true) }
-  let_it_be(:marked_for_deletion_project) { create(:project, namespace: group1, marked_for_deletion_at: Date.current) }
+  let_it_be(:marked_for_deletion_project) { create(:project, :aimed_for_deletion, namespace: group1) }
 
   def expect_log_keys(caller_id:, route:, root_namespace:)
     expect(API::API::LOG_FORMATTER).to receive(:call) do |_severity, _datetime, _, data|
@@ -2816,12 +2816,8 @@ RSpec.describe API::Groups, :with_current_organization, feature_category: :group
     let_it_be(:user1) { create(:user) }
     let_it_be(:user2) { create(:user) }
 
-    let_it_be_with_refind(:group) { create(:group, owners: user1) }
-    let_it_be_with_refind(:group_2) { create(:group, owners: user1) }
-
-    before_all do
-      group.namespace_settings.update!(archived: true)
-    end
+    let_it_be_with_reload(:group) { create(:group, :archived, owners: user1) }
+    let_it_be_with_reload(:group_2) { create(:group, :archived, owners: user1) }
 
     context 'when unauthenticated' do
       it 'returns 401' do
@@ -3672,7 +3668,8 @@ RSpec.describe API::Groups, :with_current_organization, feature_category: :group
     let_it_be(:user) { user1 }
     let_it_be(:unauthorized_user) { user2 }
     let_it_be(:group) do
-      create(:group_with_deletion_schedule, marked_for_deletion_on: 1.day.ago, deleting_user: user, owners: user)
+      create(:group_with_deletion_schedule, :deletion_scheduled, marked_for_deletion_on: 1.day.ago,
+        deleting_user: user, owners: user)
     end
 
     subject { post api("/groups/#{group.id}/restore", user) }

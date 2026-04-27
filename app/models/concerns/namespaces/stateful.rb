@@ -36,7 +36,6 @@ module Namespaces
         super || 'ancestor_inherited'
       end
 
-      # TODO: Remove `transition ancestor_inherited:` after backfills are complete https://gitlab.com/groups/gitlab-org/-/epics/17956
       state_machine :state, initial: :ancestor_inherited do
         state :creation_in_progress
         state :maintenance
@@ -60,7 +59,8 @@ module Namespaces
 
         event :unarchive do
           transition archived: :ancestor_inherited
-          transition ancestor_inherited: :ancestor_inherited
+          transition ancestor_inherited: :ancestor_inherited,
+            unless: :remove_ancestor_inherited_transitions?
         end
 
         event :schedule_deletion do
@@ -86,7 +86,8 @@ module Namespaces
             if: :restore_to_archived_on_cancel_deletion?
           transition %i[deletion_scheduled deletion_in_progress] => :ancestor_inherited
           transition ancestor_inherited: :archived, if: :restore_to_archived_on_cancel_deletion?
-          transition ancestor_inherited: :ancestor_inherited
+          transition ancestor_inherited: :ancestor_inherited,
+            unless: :remove_ancestor_inherited_transitions?
         end
 
         event :schedule_transfer do
@@ -116,6 +117,10 @@ module Namespaces
       end
 
       private
+
+      def remove_ancestor_inherited_transitions?
+        false
+      end
 
       def stateful_detail
         namespace_details

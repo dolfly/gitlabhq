@@ -277,17 +277,17 @@ RSpec.describe 'getting a repository in a project', feature_category: :source_co
           it 'respects the passed value' do
             expect(repository)
               .to have_received(:list_commits)
-              .with(a_hash_including(pagination_params: { limit: first + 1 }))
+              .with(a_hash_including(pagination_params: { limit: first }))
           end
         end
 
         context 'with a page size exceeding the max_page_size' do
           let(:first) { max_page_size + 1 }
 
-          it 'respects the default_max_page_size' do
+          it 'respects the max_page_size' do
             expect(repository)
               .to have_received(:list_commits)
-              .with(a_hash_including(pagination_params: { limit: max_page_size + 1 }))
+              .with(a_hash_including(pagination_params: { limit: max_page_size }))
           end
         end
 
@@ -295,7 +295,7 @@ RSpec.describe 'getting a repository in a project', feature_category: :source_co
           it 'picks the fields max_page_size' do
             expect(repository)
               .to have_received(:list_commits)
-              .with(a_hash_including(pagination_params: { limit: max_page_size + 1 }))
+              .with(a_hash_including(pagination_params: { limit: max_page_size }))
           end
         end
 
@@ -305,7 +305,7 @@ RSpec.describe 'getting a repository in a project', feature_category: :source_co
           it 'picks the fields max_page_size' do
             expect(repository)
               .to have_received(:list_commits)
-              .with(a_hash_including(pagination_params: { limit: max_page_size + 1 }))
+              .with(a_hash_including(pagination_params: { limit: max_page_size }))
           end
         end
 
@@ -319,7 +319,7 @@ RSpec.describe 'getting a repository in a project', feature_category: :source_co
           it 'passes the decoded page_token' do
             expect(repository)
               .to have_received(:list_commits)
-              .with(a_hash_including(pagination_params: { limit: max_page_size + 1, page_token: page_token }))
+              .with(a_hash_including(pagination_params: { limit: max_page_size, page_token: page_token }))
           end
         end
       end

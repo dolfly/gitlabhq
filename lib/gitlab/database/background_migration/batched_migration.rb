@@ -339,6 +339,7 @@ module Gitlab
 
         def compute_estimated_seconds_remaining
           return if finished? || finalized?
+          return unless total_tuple_count.to_i > 0
           return if migrated_tuple_count == 0
 
           stats = succeeded_job_stats

@@ -172,7 +172,6 @@
     "graphiql": "^3.7.1",
     "graphql": "16.11.0",
     "graphql-tag": "^2.11.0",
-    "gridstack": "^12.2.1",
     "highlight.js": "^11.11.1",
     "highlightjs-glimmer": "^2.2.2",
     "highlightjs-veryl": "^0.16.3",

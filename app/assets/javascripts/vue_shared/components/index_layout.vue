@@ -1,9 +1,11 @@
 <script>
+import { GlLoadingIcon } from '@gitlab/ui';
 import PageHeading from './page_heading.vue';
 
 export default {
   name: 'IndexLayout',
   components: {
+    GlLoadingIcon,
     PageHeading,
   },
   props: {
@@ -22,13 +24,22 @@ export default {
       required: false,
       default: false,
     },
+    loading: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
   },
 };
 </script>
 
 <template>
-  <div>
+  <div class="gl-index-layout">
+    <slot name="before"></slot>
     <page-heading :heading="heading" :class="{ 'gl-sr-only': pageHeadingSrOnly }">
+      <template v-if="$scopedSlots['heading-wrapper']" #heading-wrapper>
+        <slot name="heading-wrapper"></slot>
+      </template>
       <template v-if="$scopedSlots.heading" #heading>
         <slot name="heading"></slot>
       </template>
@@ -42,14 +53,16 @@ export default {
     </page-heading>
     <div
       v-if="$scopedSlots.alerts"
-      id="index-layout-alerts"
-      class="gl-mb-5 gl-flex gl-flex-col gl-gap-3 empty:gl-mb-0"
+      class="gl-index-layout-alerts js-index-layout-alerts"
       data-testid="index-layout-alerts"
     >
       <slot name="alerts"></slot>
     </div>
     <div data-testid="index-layout-content">
-      <slot></slot>
+      <slot v-if="loading" name="loading">
+        <gl-loading-icon class="gl-index-layout-loading-icon" size="lg" />
+      </slot>
+      <slot v-else></slot>
     </div>
   </div>
 </template>
