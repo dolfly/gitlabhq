@@ -16,12 +16,6 @@ module AutoMerge
     def process(merge_request)
       logger.info("Processing Automerge - MWCP")
 
-      unless Feature.enabled?(:mwcp_skip_ci_guard, merge_request.project)
-        return if merge_request.has_ci_enabled? && !merge_request.diff_head_pipeline_success?
-
-        logger.info("Pipeline Success - MWCP")
-      end
-
       use_cache = Feature.disabled?(:automerge_skip_mergeability_cache, merge_request.project)
       return unless merge_request.mergeable?(use_cache: use_cache)
 

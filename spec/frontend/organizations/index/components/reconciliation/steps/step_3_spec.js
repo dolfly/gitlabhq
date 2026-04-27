@@ -1,13 +1,24 @@
-import { shallowMount } from '@vue/test-utils';
+import { GlSprintf } from '@gitlab/ui';
+import { shallowMountExtended } from 'helpers/vue_test_utils_helper';
 import Step3 from '~/organizations/index/components/reconciliation/steps/step_3.vue';
 import BaseStep from '~/organizations/index/components/reconciliation/steps/base_step.vue';
 
 describe('ReconciliationStep3', () => {
   let wrapper;
 
-  const createComponent = () => {
-    wrapper = shallowMount(Step3);
+  const createComponent = ({ props = {} } = {}) => {
+    wrapper = shallowMountExtended(Step3, {
+      propsData: {
+        organizations: [],
+        ...props,
+      },
+      stubs: {
+        GlSprintf,
+      },
+    });
   };
+
+  const findTotalOrganizations = () => wrapper.findByTestId('total-organizations');
 
   it('renders BaseStep', () => {
     createComponent();
@@ -19,5 +30,19 @@ describe('ReconciliationStep3', () => {
     createComponent();
 
     expect(wrapper.text()).toContain('Step 3 placeholder');
+  });
+
+  it('renders total organizations count', () => {
+    createComponent({
+      props: { organizations: [{ id: '1' }, { id: '2' }] },
+    });
+
+    expect(findTotalOrganizations().text()).toBe('Total Organizations: 2');
+  });
+
+  it('renders zero when organizations is empty', () => {
+    createComponent();
+
+    expect(findTotalOrganizations().text()).toBe('Total Organizations: 0');
   });
 });

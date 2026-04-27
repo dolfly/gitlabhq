@@ -1008,6 +1008,19 @@ describe('Settings Panel', () => {
         originalValue,
       );
     });
+
+    it('does not render bot access settings when feature is unavailable', () => {
+      wrapper = mountComponent(
+        {
+          botAccessSettingsAvailable: false,
+          botAccessGroupId: 42,
+          currentSettings: { pipelineExecutionPolicyBotAccessEnabled: true },
+        },
+        mountExtended,
+      );
+
+      expect(findBotAccessSettings().exists()).toBe(false);
+    });
   });
 
   describe.each`

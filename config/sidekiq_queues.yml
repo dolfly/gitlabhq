@@ -677,6 +677,8 @@
   - 1
 - - merge_requests_audit_update_status_check_response
   - 1
+- - merge_requests_auto_assign_reviewers
+  - 1
 - - merge_requests_cleanup_ref
   - 1
 - - merge_requests_close_issue

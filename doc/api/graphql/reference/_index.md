@@ -60819,6 +60819,7 @@ Name of the feature that the callout is for.
 | <a id="usercalloutfeaturenameenum-geo_migrate_hashed_storage"></a>`GEO_MIGRATE_HASHED_STORAGE` | Callout feature name for geo_migrate_hashed_storage. |
 | <a id="usercalloutfeaturenameenum-gke_cluster_integration"></a>`GKE_CLUSTER_INTEGRATION` | Callout feature name for gke_cluster_integration. |
 | <a id="usercalloutfeaturenameenum-gold_trial_billings"></a>`GOLD_TRIAL_BILLINGS` | Callout feature name for gold_trial_billings. |
+| <a id="usercalloutfeaturenameenum-inline_blame_popover"></a>`INLINE_BLAME_POPOVER` | Callout feature name for inline_blame_popover. |
 | <a id="usercalloutfeaturenameenum-joining_a_project_alert"></a>`JOINING_A_PROJECT_ALERT` | Callout feature name for joining_a_project_alert. |
 | <a id="usercalloutfeaturenameenum-merge_request_dashboard_display_preferences_popover"></a>`MERGE_REQUEST_DASHBOARD_DISPLAY_PREFERENCES_POPOVER` | Callout feature name for merge_request_dashboard_display_preferences_popover. |
 | <a id="usercalloutfeaturenameenum-merge_request_dashboard_show_drafts"></a>`MERGE_REQUEST_DASHBOARD_SHOW_DRAFTS` | Callout feature name for merge_request_dashboard_show_drafts. |

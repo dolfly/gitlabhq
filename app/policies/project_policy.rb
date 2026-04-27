@@ -2,6 +2,9 @@
 
 class ProjectPolicy < BasePolicy
   include ::Ci::JobAbilities
+  include ::Authz::RolePermissions
+
+  define_role_permissions(:project)
 
   # https://docs.gitlab.com/18.2/ci/pipelines/settings/#change-which-users-can-view-your-pipelines
   desc "Project-based pipeline visibility enabled"
@@ -317,51 +320,19 @@ class ProjectPolicy < BasePolicy
     enable(*Authz::Role.get(:public_authenticated).permissions(:project))
   end
 
-  rule { guest }.enable :guest_access
+  rule { guest }.policy do
+    enable :guest_access
+
+    # This is needed separate from the role YAML due to the
+    # Ability.users_that_can_read_project method
+    enable :read_project
+  end
   rule { planner }.enable :planner_access
   rule { reporter }.enable :reporter_access
   rule { security_manager }.enable :security_manager_access
   rule { developer }.enable :developer_access
   rule { maintainer }.enable :maintainer_access
   rule { owner | admin | organization_owner }.enable :owner_access
-
-  # Role permissions are maintained in yaml in config/authz/roles/
-  rule { can?(:guest_access) }.policy do
-    enable(*Authz::Role.get(:guest).direct_permissions(:project))
-  end
-
-  rule { can?(:planner_access) }.policy do
-    enable :guest_access
-
-    enable(*Authz::Role.get(:planner).direct_permissions(:project))
-  end
-
-  rule { can?(:reporter_access) }.policy do
-    enable(*Authz::Role.get(:reporter).direct_permissions(:project))
-  end
-
-  rule { can?(:security_manager_access) }.policy do
-    enable(*Authz::Role.get(:security_manager).direct_permissions(:project))
-  end
-
-  rule { can?(:developer_access) }.policy do
-    enable(*Authz::Role.get(:developer).direct_permissions(:project))
-  end
-
-  rule { can?(:maintainer_access) }.policy do
-    enable(*Authz::Role.get(:maintainer).direct_permissions(:project))
-  end
-
-  rule { can?(:owner_access) }.policy do
-    enable :guest_access
-    enable :planner_access
-    enable :reporter_access
-    enable :security_manager_access
-    enable :developer_access
-    enable :maintainer_access
-
-    enable(*Authz::Role.get(:owner).direct_permissions(:project))
-  end
 
   rule { admin }.policy do
     enable :delete_custom_attribute
@@ -813,7 +784,7 @@ class ProjectPolicy < BasePolicy
     enable :read_project
   end
 
-  rule { can?(:create_pipeline) & can?(:maintainer_access) }.enable :create_web_ide_terminal
+  rule { ~can?(:create_pipeline) }.prevent :create_web_ide_terminal
 
   rule { build_service_proxy_enabled }.enable :build_service_proxy_enabled
 

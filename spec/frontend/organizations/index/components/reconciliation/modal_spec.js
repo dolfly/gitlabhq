@@ -1,16 +1,32 @@
 import { shallowMount } from '@vue/test-utils';
+import Vue, { nextTick } from 'vue';
+import VueApollo from 'vue-apollo';
 import { GlModal, GlSprintf } from '@gitlab/ui';
-import { nextTick } from 'vue';
+import createMockApollo from 'helpers/mock_apollo_helper';
+import waitForPromises from 'helpers/wait_for_promises';
+import { createAlert } from '~/alert';
 import ReconciliationModal from '~/organizations/index/components/reconciliation/modal.vue';
+import { mockOrganizationsResponse } from 'jest/organizations/mock_data';
+import organizationsForReconciliationQuery from '~/organizations/index/graphql/queries/organizations_for_reconciliation.query.graphql';
 import Step1 from '~/organizations/index/components/reconciliation/steps/step_1.vue';
 import Step2 from '~/organizations/index/components/reconciliation/steps/step_2.vue';
 import Step3 from '~/organizations/index/components/reconciliation/steps/step_3.vue';
 
+jest.mock('~/alert');
+
+Vue.use(VueApollo);
+
 describe('OrganizationReconciliationModal', () => {
   let wrapper;
+  let mockApollo;
 
-  const createComponent = ({ props = {} } = {}) => {
+  const successHandler = jest.fn().mockResolvedValue(mockOrganizationsResponse);
+
+  const createComponent = ({ props = {}, handler = successHandler } = {}) => {
+    mockApollo = createMockApollo([[organizationsForReconciliationQuery, handler]]);
+
     wrapper = shallowMount(ReconciliationModal, {
+      apolloProvider: mockApollo,
       propsData: {
         ...props,
       },
@@ -19,6 +35,10 @@ describe('OrganizationReconciliationModal', () => {
       },
     });
   };
+
+  afterEach(() => {
+    mockApollo = null;
+  });
 
   const findModal = () => wrapper.findComponent(GlModal);
   const findStep1 = () => wrapper.findComponent(Step1);
@@ -49,6 +69,61 @@ describe('OrganizationReconciliationModal', () => {
     await findModal().vm.$emit('change', true);
 
     expect(wrapper.emitted('change')).toEqual([[true]]);
+  });
+
+  describe('GraphQL query', () => {
+    describe('when modal not visible', () => {
+      beforeEach(() => {
+        createComponent();
+      });
+
+      it('does not fetch organizations when modal is not visible', () => {
+        expect(successHandler).not.toHaveBeenCalled();
+      });
+
+      it('passes empty array when organizations have not loaded', () => {
+        expect(findStep1().props('organizations')).toEqual([]);
+      });
+    });
+
+    describe('when modal is visible', () => {
+      beforeEach(async () => {
+        createComponent({ props: { visible: true } });
+
+        await waitForPromises();
+      });
+
+      it('fetches organizations when modal is visible', () => {
+        expect(successHandler).toHaveBeenCalled();
+      });
+
+      it('passes organizations to step component', () => {
+        expect(findStep1().props('organizations')).toEqual(
+          mockOrganizationsResponse.data.organizations.nodes,
+        );
+      });
+    });
+
+    describe('when query fails', () => {
+      const error = new Error();
+
+      beforeEach(async () => {
+        createComponent({
+          props: { visible: true },
+          handler: jest.fn().mockRejectedValue(error),
+        });
+
+        await waitForPromises();
+      });
+
+      it('calls createAlert', () => {
+        expect(createAlert).toHaveBeenCalledWith({
+          message: 'An error occurred fetching organizations. Please try again.',
+          error,
+          captureError: true,
+        });
+      });
+    });
   });
 
   describe('step components', () => {

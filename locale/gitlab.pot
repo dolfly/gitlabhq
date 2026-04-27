@@ -12614,6 +12614,9 @@ msgstr ""
 msgid "Blame for binary files is not supported."
 msgstr ""
 
+msgid "Blame is now in page"
+msgstr ""
+
 msgid "Blame|Blame preferences"
 msgstr ""
 
@@ -27522,6 +27525,9 @@ msgid "DuoCodeReview|I have encountered some problems while I was reviewing. Ple
 msgstr ""
 
 msgid "DuoCodeReview|I'm already reviewing this merge request. I'll post my feedback when I'm done."
+msgstr ""
+
+msgid "DuoCodeReview|Requires the Code Review foundational flow to be enabled. %{link_start}Learn how to enable foundational flows%{link_end}."
 msgstr ""
 
 msgid "DuoCodeReview|When enabled, GitLab Duo will automatically review new merge requests across all groups and projects. Draft merge requests and merge requests without changes are skipped."
@@ -50047,6 +50053,9 @@ msgstr ""
 msgid "Organization|An error occurred deleting the project. Please refresh the page to try again."
 msgstr ""
 
+msgid "Organization|An error occurred fetching organizations. Please try again."
+msgstr ""
+
 msgid "Organization|An error occurred loading organizations. Please refresh the page to try again."
 msgstr ""
 
@@ -50244,6 +50253,9 @@ msgid "Organization|Step 3 placeholder"
 msgstr ""
 
 msgid "Organization|Switch organizations"
+msgstr ""
+
+msgid "Organization|Total Organizations: %{count}"
 msgstr ""
 
 msgid "Organization|Unable to fetch organizations. Reload the page to try again."
@@ -55833,6 +55845,9 @@ msgstr ""
 msgid "ProjectSettings|Allowed file patterns"
 msgstr ""
 
+msgid "ProjectSettings|Allowed group"
+msgstr ""
+
 msgid "ProjectSettings|Always show thumbs-up and thumbs-down emoji buttons on issues, merge requests, and snippets."
 msgstr ""
 
@@ -56202,6 +56217,9 @@ msgstr ""
 msgid "ProjectSettings|Requirements management system."
 msgstr ""
 
+msgid "ProjectSettings|Restrict access to bots from projects in this group. If not set, defaults to the root ancestor group."
+msgstr ""
+
 msgid "ProjectSettings|Roll out new features without redeploying with feature flags."
 msgstr ""
 
@@ -56338,6 +56356,9 @@ msgid "ProjectSettings|Usage example: \"Title must match validation pattern `%{p
 msgstr ""
 
 msgid "ProjectSettings|Use AI-native features in this project."
+msgstr ""
+
+msgid "ProjectSettings|Use default (root ancestor group)"
 msgstr ""
 
 msgid "ProjectSettings|Used for every new merge request."
@@ -78785,7 +78806,7 @@ msgstr ""
 msgid "User map"
 msgstr ""
 
-msgid "User must have developer access to the project."
+msgid "User must have permission to use Duo Workflows in the project."
 msgstr ""
 
 msgid "User not provided"
@@ -85246,6 +85267,9 @@ msgstr ""
 msgid "You can now submit a merge request to get this change into the original project."
 msgstr ""
 
+msgid "You can now view blame annotations directly on this page by selecting the Blame view."
+msgstr ""
+
 msgid "You can only add up to %{max_contacts} contacts at one time"
 msgstr ""
 
@@ -88269,6 +88293,9 @@ msgid "must be unique by status and elapsed time within a policy"
 msgstr ""
 
 msgid "must be unique. This CA has already been configured for another namespace."
+msgstr ""
+
+msgid "must be within the project hierarchy"
 msgstr ""
 
 msgid "must belong to either a project or an organization"

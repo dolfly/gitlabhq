@@ -2634,6 +2634,10 @@ class MergeRequest < ApplicationRecord
     project.allows_multiple_merge_request_reviewers?
   end
 
+  def reviewer_auto_assignment_enabled?
+    project.project_setting.reviewer_auto_assignment_enabled?
+  end
+
   def supports_assignee?
     true
   end

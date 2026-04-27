@@ -63,6 +63,7 @@ project:
   - change_restrict_user_defined_variables
   - create_ai_catalog_flow
   - create_ai_catalog_flow_item_consumer
+  - create_ai_catalog_item_consumer
   - create_ai_catalog_third_party_flow
   - create_ai_catalog_third_party_flow_item_consumer
   - create_ai_foundational_flow_item_consumer
@@ -81,6 +82,7 @@ project:
   - create_runners
   - create_service_account
   - create_squash_option
+  - create_web_ide_terminal
   - delete_branch_rule
   - delete_freeze_period
   - delete_job_artifact
@@ -113,6 +115,7 @@ project:
   - modify_merge_request_committer_setting
   - modify_product_analytics_settings
   - pages_multiple_versions
+  - provision_ai_catalog
   - provision_cloud_runner
   - provision_gke_runner
   - push_code_to_protected_branches
@@ -189,6 +192,7 @@ group:
   - change_reject_non_dco_commits
   - change_reject_unsigned_commits
   - create_ai_catalog_flow_item_consumer
+  - create_ai_catalog_item_consumer
   - create_ai_catalog_third_party_flow_item_consumer
   - create_ai_foundational_flow_item_consumer
   - create_cluster
@@ -203,6 +207,7 @@ group:
   - import_projects
   - maintainer_access
   - modify_product_analytics_settings
+  - provision_ai_catalog
   - provision_cloud_runner
   - provision_gke_runner
   - read_any_audit_event

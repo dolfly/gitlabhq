@@ -206,16 +206,10 @@ RSpec.describe Groups::ObservabilityController, feature_category: :observability
         expect(assigns(:data).to_h[:query_params]).to eq({ 'ruleId' => 'abc-123', 'tab' => 'overview' })
       end
 
-      it 'drops all params when the query string exceeds 4096 bytes' do
-        get group_observability_path(group, 'alerts', ruleId: 'abc-123', search: 'x' * 4097)
+      it 'drops all params when the query string exceeds 10000 bytes' do
+        get group_observability_path(group, 'alerts', ruleId: 'abc-123', search: 'x' * 10_001)
 
         expect(assigns(:data).to_h[:query_params]).to eq({})
-      end
-
-      it 'drops only the param whose value exceeds 1024 bytes, keeps the rest' do
-        get group_observability_path(group, 'alerts', ruleId: 'abc-123', search: 'y' * 1025)
-
-        expect(assigns(:data).to_h[:query_params]).to eq({ 'ruleId' => 'abc-123' })
       end
 
       it 'includes query_params in the JSON response' do

@@ -28,3 +28,29 @@ export const defaultOrganization = {
   web_url: '/o/default/-/overview',
   avatar_url: null,
 };
+
+export const mockOrganizationsResponse = {
+  data: {
+    organizations: {
+      nodes: [
+        {
+          id: 'gid://gitlab/Organizations::Organization/1',
+          name: 'Test Org',
+          avatarUrl: null,
+          groups: {
+            nodes: [
+              {
+                id: 'gid://gitlab/Group/1',
+                fullName: 'Test Group',
+                groupMembersCount: 5,
+                projectsCount: 10,
+                descendantGroupsCount: 2,
+                visibility: 'private',
+              },
+            ],
+          },
+        },
+      ],
+    },
+  },
+};

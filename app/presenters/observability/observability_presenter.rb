@@ -127,8 +127,7 @@ module Observability
       apiMonitoringParams
     ].freeze
 
-    QUERY_STRING_MAX_BYTES = 4096
-    PARAM_VALUE_MAX_BYTES  = 1024
+    QUERY_STRING_MAX_BYTES = 10_000
 
     # Pre-compiled regexes - one per PATHS template pattern.
     # A template segment starting with `:` matches any non-empty, non-slash token.

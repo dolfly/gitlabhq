@@ -129,7 +129,8 @@ module Users
       duo_panel_auto_expanded: 125, # EE-only
       # 126 removed in https://gitlab.com/gitlab-org/gitlab/-/merge_requests/227807
       work_items_onboarding_modal: 127,
-      duo_panel_empty_state_auto_expanded: 128 # EE-only
+      duo_panel_empty_state_auto_expanded: 128, # EE-only
+      inline_blame_popover: 129
     }
 
     validates :feature_name,

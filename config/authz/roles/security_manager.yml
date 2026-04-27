@@ -48,6 +48,7 @@ group:
   - admin_security_attributes
   - admin_vulnerability
   - apply_security_scan_profiles
+  - create_vulnerability_export
   - enable_secret_push_protection
   - modify_security_policy
   - read_any_audit_event
@@ -56,9 +57,12 @@ group:
   - read_compliance_dashboard
   - read_compliance_violations_report
   - read_dependency
+  - read_group_security_dashboard
   - read_licenses
   - read_security_inventory
   - read_security_orchestration_policies
+  - read_security_resource
   - read_security_scan_profiles
   - read_vulnerability
+  - read_vulnerability_statistics
   - update_security_orchestration_policy_project

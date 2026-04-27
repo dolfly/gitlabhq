@@ -1,6 +1,8 @@
 <script>
 import { GlModal, GlSprintf } from '@gitlab/ui';
 import { s__ } from '~/locale';
+import { createAlert } from '~/alert';
+import organizationsForReconciliationQuery from '~/organizations/index/graphql/queries/organizations_for_reconciliation.query.graphql';
 import Step1 from './steps/step_1.vue';
 import Step2 from './steps/step_2.vue';
 import Step3 from './steps/step_3.vue';
@@ -9,6 +11,7 @@ export default {
   name: 'OrganizationReconciliationModal',
   i18n: {
     stepProgress: s__('Organization|Step %{currentStep} / %{totalSteps}'),
+    errorMessage: s__('Organization|An error occurred fetching organizations. Please try again.'),
   },
   components: {
     GlModal,
@@ -30,7 +33,22 @@ export default {
   data() {
     return {
       currentStep: 1,
+      organizations: [],
     };
+  },
+  apollo: {
+    organizations: {
+      query: organizationsForReconciliationQuery,
+      skip() {
+        return !this.visible;
+      },
+      update(data) {
+        return data?.organizations?.nodes || [];
+      },
+      error(error) {
+        createAlert({ message: this.$options.i18n.errorMessage, error, captureError: true });
+      },
+    },
   },
   computed: {
     stepComponent() {
@@ -79,6 +97,6 @@ export default {
       <template #currentStep>{{ currentStep }}</template>
       <template #totalSteps>{{ totalSteps }}</template>
     </gl-sprintf>
-    <component :is="stepComponent" @next="onNext" @prev="onPrev" />
+    <component :is="stepComponent" :organizations="organizations" @next="onNext" @prev="onPrev" />
   </gl-modal>
 </template>

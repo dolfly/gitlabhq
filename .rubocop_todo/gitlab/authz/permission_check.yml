@@ -148,7 +148,6 @@ Gitlab/Authz/PermissionCheck:
     - 'ee/app/services/ai/catalog/item_consumers/destroy_service.rb'
     - 'ee/app/services/ai/catalog/item_consumers/update_service.rb'
     - 'ee/app/services/ai/catalog/items/base_update_service.rb'
-    - 'ee/app/services/ai/duo_workflows/enablement_check_service.rb'
     - 'ee/app/services/ai/flow_triggers/base_service.rb'
     - 'ee/app/services/alert_management/extract_alert_payload_fields_service.rb'
     - 'ee/app/services/boards/epic_lists/update_service.rb'

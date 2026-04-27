@@ -8442,6 +8442,20 @@ RSpec.describe MergeRequest, factory_default: :keep, feature_category: :code_rev
     it { is_expected.to eq(false) }
   end
 
+  describe '#reviewer_auto_assignment_enabled?' do
+    let(:merge_request) { build_stubbed(:merge_request) }
+
+    subject { merge_request.reviewer_auto_assignment_enabled? }
+
+    before do
+      allow(merge_request.project.project_setting)
+        .to receive(:reviewer_auto_assignment_enabled?)
+        .and_return(true)
+    end
+
+    it { is_expected.to eq(true) }
+  end
+
   describe '#previous_diff' do
     let(:merge_request) { create(:merge_request, :skip_diff_creation) }
 

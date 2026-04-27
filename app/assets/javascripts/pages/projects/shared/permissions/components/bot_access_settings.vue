@@ -1,5 +1,6 @@
 <script>
 import { GlFormCheckbox, GlFormInput } from '@gitlab/ui';
+import GroupSelect from '~/vue_shared/components/entity_select/group_select.vue';
 import { s__ } from '~/locale';
 import ProjectSettingRow from './project_setting_row.vue';
 
@@ -8,6 +9,7 @@ export default {
   components: {
     GlFormCheckbox,
     GlFormInput,
+    GroupSelect,
     ProjectSettingRow,
   },
   i18n: {
@@ -22,6 +24,11 @@ export default {
     botAccessFilePatternsHelpText: s__(
       'ProjectSettings|Comma-separated glob patterns for files the bot can access (for example, ci/**/*.yml).',
     ),
+    botAccessGroupLabel: s__('ProjectSettings|Allowed group'),
+    botAccessGroupDescription: s__(
+      'ProjectSettings|Restrict access to bots from projects in this group. If not set, defaults to the root ancestor group.',
+    ),
+    botAccessGroupEmptyText: s__('ProjectSettings|Use default (root ancestor group)'),
   },
   props: {
     enabled: {
@@ -33,6 +40,16 @@ export default {
       type: Array,
       required: false,
       default: () => [],
+    },
+    groupId: {
+      type: Number,
+      required: false,
+      default: null,
+    },
+    rootGroupId: {
+      type: Number,
+      required: false,
+      default: null,
     },
   },
   data() {
@@ -94,6 +111,19 @@ export default {
       <p class="gl-mt-2 gl-text-secondary">
         {{ $options.i18n.botAccessFilePatternsHelpText }}
       </p>
+      <group-select
+        class="gl-mt-3"
+        :label="$options.i18n.botAccessGroupLabel"
+        :description="$options.i18n.botAccessGroupDescription"
+        :clearable="true"
+        :initial-selection="groupId"
+        :empty-text="$options.i18n.botAccessGroupEmptyText"
+        :parent-group-i-d="rootGroupId ? String(rootGroupId) : null"
+        :groups-filter="rootGroupId ? 'descendant_groups' : null"
+        input-name="project[project_setting_attributes][pipeline_execution_policy_bot_access_group_id]"
+        input-id="pipeline_execution_policy_bot_access_group_id"
+        data-testid="bot-access-group-select"
+      />
     </div>
   </project-setting-row>
 </template>

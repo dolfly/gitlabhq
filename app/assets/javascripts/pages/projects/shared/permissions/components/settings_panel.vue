@@ -316,6 +316,16 @@ export default {
       required: false,
       default: false,
     },
+    botAccessGroupId: {
+      type: Number,
+      required: false,
+      default: null,
+    },
+    botAccessRootGroupId: {
+      type: Number,
+      required: false,
+      default: null,
+    },
   },
   data() {
     const defaults = {
@@ -1140,6 +1150,8 @@ export default {
         v-if="botAccessSettingsAvailable"
         :enabled="pipelineExecutionPolicyBotAccessEnabled"
         :file-patterns="pipelineExecutionPolicyBotAccessFilePatterns"
+        :group-id="botAccessGroupId"
+        :root-group-id="botAccessRootGroupId"
       />
     </template>
 
