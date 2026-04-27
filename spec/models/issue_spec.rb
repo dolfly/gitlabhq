@@ -250,8 +250,8 @@ RSpec.describe Issue, feature_category: :team_planning do
     end
 
     describe '#ensure_work_item_type' do
-      let_it_be(:issue_type) { create(:work_item_type, :issue) }
-      let_it_be(:incident_type) { create(:work_item_type, :incident) }
+      let(:issue_type) { build(:work_item_system_defined_type, :issue) }
+      let(:incident_type) { build(:work_item_system_defined_type, :incident) }
       let_it_be(:project) { create(:project) }
       let(:provider) { ::WorkItems::TypesFramework::Provider.new(issue.namespace) }
 
@@ -2019,7 +2019,7 @@ RSpec.describe Issue, feature_category: :team_planning do
     end
 
     context 'when the work item has the widget' do
-      let(:work_item_type) { create(:work_item_type, :issue) }
+      let(:work_item_type) { build(:work_item_system_defined_type, :issue) }
 
       it { is_expected.to be_truthy }
     end

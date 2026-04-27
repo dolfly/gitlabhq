@@ -4,7 +4,7 @@ require 'spec_helper'
 
 RSpec.describe WorkItems::TypesFramework::HasType, feature_category: :team_planning do
   let_it_be(:namespace) { create(:namespace) }
-  let_it_be(:work_item_type) { create(:work_item_type, namespace: namespace) }
+  let_it_be(:work_item_type) { create(:work_item_type) }
   let_it_be(:system_defined_type) { build(:work_item_system_defined_type, :issue) }
 
   before do

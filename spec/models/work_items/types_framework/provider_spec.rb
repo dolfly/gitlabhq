@@ -392,8 +392,8 @@ RSpec.describe WorkItems::TypesFramework::Provider, feature_category: :team_plan
   end
 
   describe '#base_types_by_ids' do
-    let_it_be(:incident_type) { create(:work_item_type, :incident) }
-    let_it_be(:another_issue_type) { create(:work_item_type, :issue) }
+    let(:incident_type) { build(:work_item_system_defined_type, :incident) }
+    let(:another_issue_type) { build(:work_item_system_defined_type, :issue) }
 
     context 'when given multiple IDs with different base types' do
       it 'returns unique base types' do

@@ -306,7 +306,7 @@ Supported attributes:
 | `labels`            | string           | No         | Comma-separated list of label names, issues must have all labels to be returned. `None` lists all issues with no labels. `Any` lists all issues with at least one label. `No+Label` (Deprecated) lists all issues with no labels. Predefined names are case-insensitive. |
 | `milestone`         | string           | No         | The milestone title. `None` lists all issues with no milestone. `Any` lists all issues that have an assigned milestone.       |
 | `my_reaction_emoji` | string           | No         | Return issues reacted by the authenticated user by the given `emoji`. `None` returns issues not given a reaction. `Any` returns issues given at least one reaction. |
-| `non_archived`      | boolean          | No         | Return issues from non archived projects. Default is true. |
+| `non_archived`      | boolean          | No         | Return issues from non-archived projects. Default is true. |
 | `not`               | Hash             | No         | Return issues that do not match the parameters supplied. Accepts: `labels`, `milestone`, `author_id`, `author_username`, `assignee_id`, `assignee_username`, `my_reaction_emoji`, `search`, `in`. |
 | `order_by`          | string           | No         | Return issues ordered by `created_at`, `updated_at`, `priority`, `due_date`, `relative_position`, `label_priority`, `milestone_due`, `popularity`, `weight` fields. Default is `created_at`                                                               |
 | `scope`             | string           | No         | Return issues for the given scope: `created_by_me`, `assigned_to_me` or `all`. Defaults to `all`. |

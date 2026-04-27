@@ -243,13 +243,8 @@ RSpec.describe Search::Params, feature_category: :global_search do
   describe 'converts type param to work_item_type_ids' do
     using RSpec::Parameterized::TableSyntax
 
-    let(:task_type) { create(:work_item_type, :task) }
-    let(:issue_type) { create(:work_item_type, :issue) }
-
-    before do
-      task_type
-      issue_type
-    end
+    let(:task_type) { build(:work_item_system_defined_type, :task) }
+    let(:issue_type) { build(:work_item_system_defined_type, :issue) }
 
     where(:type_input, :expected_ids) do
       ['task']                     | lazy { [task_type.id] }

@@ -651,7 +651,7 @@ RSpec.describe Notes::QuickActionsService, feature_category: :text_editors do
           end
 
           context 'when work item type does not have the development widget' do
-            let(:work_item_type) { create(:work_item_system_defined_type, :issue) }
+            let(:work_item_type) { build(:work_item_system_defined_type, :issue) }
             let(:noteable) { create(:work_item, project: project, work_item_type: work_item_type) }
 
             before do
