@@ -173,7 +173,7 @@ RSpec.shared_examples 'work item API field parity' do
 end
 
 RSpec.shared_examples 'work item API create parity' do
-  let(:widget_exceptions) { Set.new(%w[crm_contacts_widget]) }
+  let(:widget_exceptions) { Set.new }
 
   # GraphQL mutation args not yet implemented in the REST API
   let(:create_parity_wip) { %w[discussions_to_resolve] }
@@ -196,6 +196,12 @@ RSpec.shared_examples 'work item API create parity' do
   let(:widget_field_exceptions) do
     { 'start_and_due_date_widget' => %w[is_fixed] }
   end
+
+  # Widgets whose REST/GraphQL input fields are structurally incompatible (e.g. REST uses
+  # separate integer IDs where GraphQL uses a single GlobalID) and therefore cannot be
+  # aligned via `widget_field_exceptions`. Add the widget name (e.g. 'status_widget') to
+  # skip the field-name comparison for that widget entirely.
+  let(:widget_field_skipped) { Set.new }
 
   let(:create_route) do
     API::API.routes.find do |r|
@@ -245,7 +251,7 @@ RSpec.shared_examples 'work item API create parity' do
     it 'keeps widget field names in sync with known exceptions', :aggregate_failures do
       shared_widgets = rest_widget_params & graphql_widget_args.keys.to_set
 
-      shared_widgets.each do |widget_key|
+      (shared_widgets - widget_field_skipped).each do |widget_key|
         graphql_fields = graphql_widget_args[widget_key].type.unwrap.arguments.keys
           .map { |k| k.to_s.underscore }.to_set
         feature_key = widget_key.delete_suffix('_widget')

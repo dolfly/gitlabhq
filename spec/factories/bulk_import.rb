@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :bulk_import, class: 'BulkImport' do
     user
-    organization
+    organization { user.organization || association(:common_organization) }
 
     source_type { :gitlab }
     source_version { BulkImport.min_gl_version_for_project_migration.to_s }

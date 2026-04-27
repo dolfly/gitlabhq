@@ -15,6 +15,7 @@ title: Pipelines
 {{< history >}}
 
 - [Introduced](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/228521) in GitLab 18.11.
+- Fields `commit`, `commitPath`, `refPath`, `stages`, and `user` [added](https://gitlab.com/gitlab-org/glql/-/merge_requests/361) in GitLab 18.11.
 
 {{< /history >}}
 
@@ -109,6 +110,8 @@ The following fields are required: [Project](#pipeline-project)
 | Active             | `active`                           | Display whether the pipeline is active |
 | Cancelable         | `cancelable`                       | Display whether the pipeline can be canceled |
 | Child              | `child`                            | Display whether this is a child pipeline |
+| Commit             | `commit`                           | Display commit details (ID, short ID, title, author name, web URL) |
+| Commit path        | `commitPath`                       | Display the path to the commit that triggered the pipeline |
 | Committed at       | `committed`, `committedAt`         | Display the commit timestamp |
 | Complete           | `complete`                         | Display whether the pipeline is complete |
 | Compute minutes    | `computeMinutes`                   | Display the compute minutes used |
@@ -125,14 +128,17 @@ The following fields are required: [Project](#pipeline-project)
 | Name               | `name`                             | Display the pipeline name |
 | Path               | `path`                             | Display the pipeline path |
 | Ref                | `ref`                              | Display the Git ref (branch or tag) |
+| Ref path           | `refPath`                          | Display the path to the ref that triggered the pipeline |
 | Retryable          | `retryable`                        | Display whether the pipeline can be retried |
 | SHA                | `sha`                              | Display the commit SHA |
 | Source             | `source`                           | Display what triggered the pipeline |
+| Stages             | `stages`                           | Display pipeline stages (name and status) |
 | Started at         | `started`, `startedAt`             | Display when the pipeline started |
 | Status             | `status`                           | Display the pipeline status |
 | Stuck              | `stuck`                            | Display whether the pipeline is stuck |
 | Total jobs         | `totalJobs`                        | Display the total number of jobs |
 | Updated at         | `updated`, `updatedAt`             | Display when the pipeline was last updated |
+| User               | `user`                             | Display the user who triggered the pipeline |
 | Warnings           | `warnings`                         | Display pipeline warnings |
 | YAML errors        | `yamlErrors`                       | Display whether the pipeline has YAML errors |
 | YAML error messages| `yamlErrorMessages`                | Display YAML error messages |

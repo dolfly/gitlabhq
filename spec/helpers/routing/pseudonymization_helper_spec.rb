@@ -15,7 +15,6 @@ RSpec.describe ::Routing::PseudonymizationHelper, feature_category: :product_ana
 
   before do
     stub_feature_flags(mask_page_urls: true)
-    allow(::Current).to receive(:organization_assigned).and_return(true)
     stub_current_organization(organization)
   end
 

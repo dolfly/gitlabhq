@@ -82,7 +82,7 @@ RSpec.describe JiraConnectInstallation, feature_category: :integrations do
     subject { installation.oauth_authorization_url }
 
     before do
-      allow(Gitlab).to receive_message_chain('config.gitlab.url') { 'http://test.host' }
+      allow(Gitlab.config.gitlab).to receive(:url).and_return('http://test.host')
     end
 
     it { is_expected.to eq('http://test.host') }

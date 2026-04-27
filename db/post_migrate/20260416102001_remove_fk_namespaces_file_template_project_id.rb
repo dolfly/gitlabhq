@@ -6,14 +6,10 @@ class RemoveFkNamespacesFileTemplateProjectId < Gitlab::Database::Migration[2.3]
   disable_ddl_transaction!
 
   def up
-    with_lock_retries do
-      remove_foreign_key_if_exists :namespaces, :projects,
-        column: :file_template_project_id, name: 'fk_319256d87a'
-    end
+    # no-op: replaced by 20260423130100_retry_remove_fk_namespaces_file_template_project_id
   end
 
   def down
-    add_concurrent_foreign_key :namespaces, :projects,
-      column: :file_template_project_id, on_delete: :nullify, name: 'fk_319256d87a'
+    # no-op
   end
 end

@@ -1323,7 +1323,6 @@
 ######################
 .build-images:rules:build-qa-image-merge-requests:
   rules:
-    - if: '$ENABLE_BUILD_QA_IMAGE == "true"'
     - <<: *if-merge-request-labels-run-all-e2e
     - <<: *if-merge-request
       changes: *ruby-version-patterns

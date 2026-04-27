@@ -177,7 +177,7 @@ Scopes define the actions available when you authenticate with a group access to
 | `write_virtual_registry` | Grants read and write access (pull, push, and delete) to container images through the [dependency proxy](../../packages/dependency_proxy/_index.md). Available only when the dependency proxy is enabled. |
 | `create_runner`          | Grants permission to create runners in the group. |
 | `manage_runner`          | Grants permission to manage runners in the group. |
-| `ai_features`            | Grants permission to perform API actions for GitLab Duo, the Code Suggestions API, and the GitLab Duo Chat API. Designed to work with the GitLab Duo Plugin for JetBrains. For all other extensions, see the individual extension documentation. Does not work for GitLab Self-Managed versions 16.5, 16.6, and 16.7. |
+| `ai_features`            | Grants permission to perform API actions for GitLab Duo, the Code Suggestions API, and the GitLab Duo Chat API. Designed to work with the GitLab Duo Plugin for JetBrains. For all other extensions, see the individual extension documentation. Does not work for GitLab Self-Managed versions 16.5, 16.6, and 16.7. On GitLab Self-Managed and GitLab Dedicated, this scope is only available when GitLab Duo is enabled. |
 | `k8s_proxy`              | Grants permission to perform Kubernetes API calls using the agent for Kubernetes in the group. |
 | `self_rotate`            | Grants permission to rotate this token using the [personal access token API](../../../api/personal_access_tokens.md#rotate-a-personal-access-token). Does not allow rotation of other tokens. |
 

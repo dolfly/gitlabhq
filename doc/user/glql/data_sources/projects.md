@@ -12,6 +12,12 @@ title: Projects
 
 {{< /details >}}
 
+{{< history >}}
+
+- Field `avatarUrl` [added](https://gitlab.com/gitlab-org/glql/-/merge_requests/361) in GitLab 18.11.
+
+{{< /history >}}
+
 ## Query fields
 
 The following fields are required: [Namespace](#project-group)
@@ -95,6 +101,7 @@ You can use either `namespace` or `group` as the field name.
 | Field                            | Name (and alias)                 | Description |
 | -------------------------------- | -------------------------------- | ----------- |
 | Archived                         | `archived`                       | Display whether the project is archived |
+| Avatar URL                       | `avatarUrl`                      | Display the URL of the project avatar |
 | Duo features enabled             | `duoFeaturesEnabled`             | Display whether Duo features are enabled |
 | Forked                           | `forked`                         | Display whether the project is a fork |
 | Forks count                      | `forksCount`                     | Display the number of forks |

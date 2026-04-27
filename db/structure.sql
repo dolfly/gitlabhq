@@ -521,6 +521,14 @@ BEGIN
 END;
 $$;
 
+CREATE FUNCTION find_namespaces_by_id_and_organization_id(namespaces_id bigint, sharding_organization_id bigint) RETURNS namespaces
+    LANGUAGE plpgsql STABLE COST 1 PARALLEL SAFE
+    AS $$
+BEGIN
+  return (SELECT namespaces FROM namespaces WHERE id = namespaces_id AND organization_id = sharding_organization_id LIMIT 1);
+END;
+$$;
+
 CREATE TABLE projects (
     id bigint NOT NULL,
     name character varying,
@@ -613,6 +621,14 @@ CREATE FUNCTION find_projects_by_id(projects_id bigint) RETURNS projects
     AS $$
 BEGIN
   return (SELECT projects FROM projects WHERE id = projects_id LIMIT 1);
+END;
+$$;
+
+CREATE FUNCTION find_projects_by_id_and_organization_id(projects_id bigint, sharding_organization_id bigint) RETURNS projects
+    LANGUAGE plpgsql STABLE COST 1 PARALLEL SAFE
+    AS $$
+BEGIN
+  return (SELECT projects FROM projects WHERE id = projects_id AND organization_id = sharding_organization_id LIMIT 1);
 END;
 $$;
 
@@ -709,6 +725,14 @@ CREATE FUNCTION find_users_by_id(users_id bigint) RETURNS users
     AS $$
 BEGIN
   return (SELECT users FROM users WHERE id = users_id LIMIT 1);
+END;
+$$;
+
+CREATE FUNCTION find_users_by_id_and_organization_id(users_id bigint, sharding_organization_id bigint) RETURNS users
+    LANGUAGE plpgsql STABLE COST 1 PARALLEL SAFE
+    AS $$
+BEGIN
+  return (SELECT users FROM users WHERE id = users_id AND organization_id = sharding_organization_id LIMIT 1);
 END;
 $$;
 
@@ -45063,6 +45087,8 @@ CREATE UNIQUE INDEX idx_vulnerability_ext_issue_links_on_vulne_id_and_ext_issue 
 
 CREATE UNIQUE INDEX idx_vulnerability_ext_issue_links_on_vulne_id_and_link_type ON vulnerability_external_issue_links USING btree (vulnerability_id, link_type) WHERE (link_type = 1);
 
+CREATE UNIQUE INDEX idx_vulnerability_identifiers_on_project_id_fingerprint_part_id ON vulnerability_identifiers USING btree (project_id, fingerprint, partition_id);
+
 CREATE UNIQUE INDEX idx_vulnerability_issue_links_on_vulnerability_id_and_issue_id ON vulnerability_issue_links USING btree (vulnerability_id, issue_id);
 
 CREATE UNIQUE INDEX idx_vulnerability_issue_links_on_vulnerability_id_and_link_type ON vulnerability_issue_links USING btree (vulnerability_id, link_type) WHERE (link_type = 2);
@@ -50082,8 +50108,6 @@ CREATE INDEX index_vulnerability_historical_statistics_on_date_and_id ON vulnera
 CREATE UNIQUE INDEX index_vulnerability_identifiers_on_id_partition_id ON vulnerability_identifiers USING btree (id, partition_id);
 
 CREATE INDEX index_vulnerability_identifiers_on_id_where_external_type_cve ON vulnerability_identifiers USING btree (id) WHERE (lower((external_type)::text) = 'cve'::text);
-
-CREATE UNIQUE INDEX index_vulnerability_identifiers_on_project_id_and_fingerprint ON vulnerability_identifiers USING btree (project_id, fingerprint);
 
 CREATE INDEX index_vulnerability_identifiers_on_project_id_and_name ON vulnerability_identifiers USING btree (project_id, name);
 

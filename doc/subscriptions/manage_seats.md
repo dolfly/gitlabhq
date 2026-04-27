@@ -26,6 +26,7 @@ The following users count as billable:
   - Guest (billable on Premium, non-billable on Free and Ultimate)
   - Planner
   - Reporter
+  - Security Manager
   - Developer
   - Maintainer
   - Owner

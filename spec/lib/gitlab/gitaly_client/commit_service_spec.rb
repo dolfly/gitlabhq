@@ -1672,8 +1672,8 @@ RSpec.describe Gitlab::GitalyClient::CommitService, feature_category: :gitaly do
     context 'when language_id is zero' do
       let(:language_id) { 0 }
 
-      it 'returns nil for language_id' do
-        is_expected.to eq([{ value: 50.0, label: 'Ruby', color: '#701516', highlight: '#701516', language_id: nil }])
+      it 'returns zero for language_id' do
+        is_expected.to eq([{ value: 50.0, label: 'Ruby', color: '#701516', highlight: '#701516', language_id: 0 }])
       end
     end
 

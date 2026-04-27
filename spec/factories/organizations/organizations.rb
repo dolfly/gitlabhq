@@ -32,6 +32,10 @@ FactoryBot.define do
     trait :private do
       visibility_level { Organizations::Organization::PRIVATE }
     end
+
+    trait :isolated do
+      isolated_record { association(:organization_isolation, :isolated) }
+    end
   end
 end
 

@@ -153,7 +153,7 @@ Scopes define the actions available when you authenticate with a personal access
 | `create_runner`          | Grants permission to create runners. |
 | `manage_runner`          | Grants permission to manage runners. |
 | `admin_mode`             | Grants permission to perform API actions when [Admin Mode](../../administration/settings/sign_in_restrictions.md#admin-mode) is enabled. Available only to administrators on GitLab Self-Managed instances. |
-| `ai_features`            | Grants permission to perform API actions for GitLab Duo, the Code Suggestions API, and the GitLab Duo Chat API. Designed to work with the GitLab Duo Plugin for JetBrains. For all other extensions, see the individual extension documentation. Does not work for GitLab Self-Managed versions 16.5, 16.6, and 16.7. |
+| `ai_features`            | Grants permission to perform API actions for GitLab Duo, the Code Suggestions API, and the GitLab Duo Chat API. Designed to work with the GitLab Duo Plugin for JetBrains. For all other extensions, see the individual extension documentation. Does not work for GitLab Self-Managed versions 16.5, 16.6, and 16.7. On GitLab Self-Managed and GitLab Dedicated, this scope is only available when GitLab Duo is enabled. |
 | `k8s_proxy`              | Grants permission to perform Kubernetes API calls using the agent for Kubernetes. |
 | `self_rotate`            | Grants permission to rotate this token using the [personal access token API](../../api/personal_access_tokens.md#rotate-a-personal-access-token). Does not allow rotation of other tokens. |
 | `read_service_ping`      | Grants access to download the Service Ping payloads through the API when authenticated as an administrator. |

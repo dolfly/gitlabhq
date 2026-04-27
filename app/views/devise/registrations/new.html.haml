@@ -12,6 +12,7 @@
   = render_if_exists 'layouts/registration_left_panel'
 - else
   .signup-page
+    = render_if_exists 'devise/registrations/subscription_unification_subtext'
     .gl-mb-3.gl-p-4
       = render 'signup_box_form',
         url: registration_path(resource_name, ::Onboarding::StatusPresenter.registration_path_params(params: params)),

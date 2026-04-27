@@ -10039,7 +10039,7 @@ msgstr ""
 msgid "Applying a template will replace the existing content. Any changes you have made will be lost."
 msgstr ""
 
-msgid "Applying a template will replace the existing issue description. Any changes you have made will be lost."
+msgid "Applying a template will replace the existing description. Any changes you have made will be lost."
 msgstr ""
 
 msgid "Applying command"
@@ -21651,6 +21651,9 @@ msgid "Create %{humanized_resource_name}"
 msgstr ""
 
 msgid "Create %{workspace} label"
+msgstr ""
+
+msgid "Create a GitLab account to purchase GitLab Premium."
 msgstr ""
 
 msgid "Create a Kubernetes cluster"

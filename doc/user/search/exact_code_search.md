@@ -102,6 +102,12 @@ select **Use regular expression** ({{< icon name="regular-expression" >}}).
 
 ### Syntax
 
+{{< history >}}
+
+- `repo:` filter [introduced](https://gitlab.com/gitlab-org/gitlab/-/work_items/488467) in GitLab 19.0.
+
+{{< /history >}}
+
 <!-- Remember to also update the table in `doc/drawers/exact_code_search_syntax.md` -->
 
 This table shows some example queries for exact match and regular expression modes.
