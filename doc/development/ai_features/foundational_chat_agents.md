@@ -127,6 +127,37 @@ Tips:
 1. When using AI catalog, the version field of an agent in `FoundationalChatAgentsDefinitions.rb` should be `experimental`.
    When creating the definition in GitLab Duo Workflow Service, the version should be `v1`.
 
+## Secret-safety requirements for agent prompts
+
+If your foundational agent's scope includes any of the following, you **must** include secret-safety
+guidance in its system prompt:
+
+- Generating or modifying files (for example, `.gitlab-ci.yml`, configuration files, scripts).
+- CI/CD pipeline configuration or conversion.
+- Handling credentials, API keys, tokens, or connection strings.
+
+### Required prompt guidance
+
+Add the following instructions verbatim to the agent's system prompt:
+
+```plaintext
+Never write literal secret values (API keys, tokens, passwords, connection strings, or any credentials)
+into files or repository content. Always substitute secrets with CI/CD variable references
+(for example, $API_KEY, $DB_PASSWORD, $DEPLOY_TOKEN). If a user provides a secret value directly,
+do not echo it into any file — instead, recommend storing it in Settings > CI/CD > Variables and
+reference it as a variable. When converting pipelines from other CI systems (for example, Jenkins,
+GitHub Actions, CircleCI) that contain hardcoded secrets, replace those values with variable
+references and flag to the user that the original pipeline contained hardcoded secrets.
+```
+
+### Checklist
+
+Before merging a new foundational agent, confirm:
+
+- [ ] Agent prompt reviewed for file-writing, CI/CD configuration, or credential-handling scope.
+- [ ] If in scope: secret-safety guidance added verbatim to the system prompt.
+- [ ] If not in scope: documented in the MR description with reasoning.
+
 ## Use feature flags for releasing chat agents
 
 Control the release of new foundational agents with feature flags:

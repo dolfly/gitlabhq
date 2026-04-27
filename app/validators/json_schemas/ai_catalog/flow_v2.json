@@ -39,6 +39,9 @@
           },
           {
             "$ref": "#/definitions/OneOffComponent"
+          },
+          {
+            "$ref": "#/definitions/HumanInputComponent"
           }
         ]
       }
@@ -442,6 +445,70 @@
               "on_tool_call_input",
               "on_tool_execution_success",
               "on_tool_execution_failed"
+            ]
+          }
+        }
+      }
+    },
+    "HumanInputComponent": {
+      "type": "object",
+      "required": [
+        "name",
+        "type",
+        "sends_response_to",
+        "message_template"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/ComponentName"
+        },
+        "type": {
+          "type": "string",
+          "const": "HumanInputComponent"
+        },
+        "sends_response_to": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_]+$",
+          "description": "Name of the component that receives the human's response"
+        },
+        "message_template": {
+          "type": "string",
+          "description": "Message template shown to the user when requesting input"
+        },
+        "inputs": {
+          "type": "array",
+          "description": "List of input data sources for the human input prompt",
+          "default": [],
+          "items": {
+            "oneOf": [
+              {
+                "type": "string",
+                "description": "Simple input reference. Examples: 'context:goal'"
+              },
+              {
+                "$ref": "#/definitions/InputMapping"
+              }
+            ]
+          }
+        },
+        "interaction_type": {
+          "type": "string",
+          "enum": [
+            "approval",
+            "input"
+          ],
+          "default": "approval",
+          "description": "Type of user interaction expected. 'approval' renders approval/rejection buttons; 'input' renders a text input field"
+        },
+        "ui_log_events": {
+          "type": "array",
+          "description": "UI logging configuration for human input interactions",
+          "items": {
+            "type": "string",
+            "enum": [
+              "on_user_input_prompt",
+              "on_user_response"
             ]
           }
         }

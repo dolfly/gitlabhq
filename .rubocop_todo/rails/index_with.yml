@@ -1,6 +1,0 @@
----
-# Cop supports --autocorrect.
-Rails/IndexWith:
-  Details: grace period
-  Exclude:
-    - 'lib/gitlab/safe_request_loader.rb'

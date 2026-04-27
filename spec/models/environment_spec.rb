@@ -1434,6 +1434,17 @@ RSpec.describe Environment, :use_clean_rails_memory_store_caching, feature_categ
         end
       end
     end
+
+    context 'when there are deployments with different finished statuses' do
+      let!(:old_success) { create(:deployment, :success, environment: environment, finished_at: 3.days.ago) }
+      let!(:mid_failed) { create(:deployment, :failed, environment: environment, finished_at: 2.days.ago) }
+      let!(:recent_canceled) { create(:deployment, :canceled, environment: environment, finished_at: 1.day.ago) }
+      let!(:running) { create(:deployment, :running, environment: environment) }
+
+      it 'returns the most recently finished deployment across all finished statuses' do
+        is_expected.to eq(recent_canceled)
+      end
+    end
   end
 
   describe '#last_finished_deployable' do
