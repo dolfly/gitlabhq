@@ -35,6 +35,8 @@ RSpec.describe 'ClickHouse siphon tables', :click_house, feature_category: :data
       static_object_token_encrypted
       unlock_token
       cached_markdown_version
+      secrets
+      id_tokens
       author_id_convert_to_bigint
       closed_by_id_convert_to_bigint
       duplicated_to_id_convert_to_bigint

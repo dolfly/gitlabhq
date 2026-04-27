@@ -7,8 +7,7 @@ describe('OrganizationUrlField', () => {
   let wrapper;
 
   const defaultProvide = {
-    organizationsPath: '/o',
-    rootUrl: 'http://127.0.0.1:3000/',
+    organizationsUrl: 'http://127.0.0.1:3000/o/',
   };
 
   const defaultPropsData = {

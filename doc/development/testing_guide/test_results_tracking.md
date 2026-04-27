@@ -7,11 +7,9 @@ title: Test results tracking
 
 ## Rails test results tracking
 
-The `Gitlab::Rspec::Configurations::TestMetrics` configuration in the
-`gems/gitlab-rspec` gem sets up the
 `GitlabQuality::TestTooling::TestMetricsExporter::Formatter` from the
 [`gitlab_quality-test_tooling`](https://gitlab.com/gitlab-org/ruby/gems/gitlab_quality-test_tooling)
-gem. This formatter exports test execution data to a ClickHouse instance
+gem exports test execution data to a ClickHouse instance
 during CI pipeline runs, collecting per-example metrics including run type,
 pipeline type, feature category, and ownership information.
 

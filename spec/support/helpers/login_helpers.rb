@@ -108,8 +108,7 @@ module LoginHelpers
       click_button "Verify code"
     end
 
-    # Wait for all async client-side requests after signing in if JavaScript test
-    wait_for_requests if javascript_test?
+    page.has_no_current_path?(new_user_session_path, ignore_query: true)
   end
 
   def login_via(provider, user, uid, remember_me: false, additional_info: {})

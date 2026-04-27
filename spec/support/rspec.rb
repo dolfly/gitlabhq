@@ -91,7 +91,7 @@ RSpec.configure do |config|
 
   config.add_formatter GitlabQuality::TestTooling::TestQuarantine::QuarantineFormatter
 
-  Gitlab::Rspec::Configurations::TestMetrics.configure!('backend-rspec-tests') do |exporter_config|
+  GitlabQuality::TestTooling::TestMetricsExporter::ConfigHelper.configure!('backend-rspec-tests') do |exporter_config|
     exporter_config.test_retried_proc = ->(_example) { ENV["RSPEC_RETRY_PROCESS"] == "true" }
   end
 end

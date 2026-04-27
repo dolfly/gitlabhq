@@ -38,7 +38,9 @@ project:
   - read_namespace
   - read_namespace_via_membership
   - read_note
+  - read_pages_content
   - read_project
+  - read_project_for_iids
   - read_project_member
   - read_release
   - read_saved_replies

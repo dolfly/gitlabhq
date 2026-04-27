@@ -309,26 +309,12 @@ class ProjectPolicy < BasePolicy
     Feature.enabled?(:allow_guest_plus_roles_to_pull_packages, @subject.root_ancestor)
   end
 
-  # `:read_project` may be prevented in EE, but `:read_project_for_iids` should
-  # not.
-  rule { guest | admin | organization_owner }.policy do
-    enable :read_project_for_iids
-    # We cannot use `guest_access` because that includes non-members on public projects
-    enable :read_pages_content
+  rule { public_project }.policy do
+    enable(*Authz::Role.get(:public_anonymous).direct_permissions(:project))
   end
 
-  # We define `:public_user_access` separately because there are cases in gitlab-ee
-  # where we enable or prevent it based on other conditions.
   rule { (~anonymous & public_project) | internal_access }.policy do
-    enable :public_user_access
-    enable :guest_access
-
-    enable :build_download_code
-    enable :build_read_container_image
-    enable :request_access
-    enable :fork_project
-
-    enable(*Authz::Role.get(:public_anonymous).direct_permissions(:project))
+    enable(*Authz::Role.get(:public_authenticated).permissions(:project))
   end
 
   rule { guest }.enable :guest_access
@@ -338,10 +324,6 @@ class ProjectPolicy < BasePolicy
   rule { developer }.enable :developer_access
   rule { maintainer }.enable :maintainer_access
   rule { owner | admin | organization_owner }.enable :owner_access
-
-  rule { public_project }.policy do
-    enable(*Authz::Role.get(:public_anonymous).direct_permissions(:project))
-  end
 
   # Role permissions are maintained in yaml in config/authz/roles/
   rule { can?(:guest_access) }.policy do
@@ -403,10 +385,6 @@ class ProjectPolicy < BasePolicy
 
   rule { public_pages }.policy do
     enable :read_pages_content
-  end
-
-  rule { private_project & planner }.policy do
-    prevent :create_merge_request_in
   end
 
   rule { ~can?(:create_issue) }.policy do
@@ -749,9 +727,10 @@ class ProjectPolicy < BasePolicy
   rule { can?(:_read_public_pipeline_schedule) }.enable :read_pipeline_schedule
   rule { can?(:_read_public_ci_cd_analytics) }.enable :read_ci_cd_analytics
 
-  # These rules are included to allow maintainers of projects to push to certain
-  # to run pipelines for the branches they have access to.
-  rule { can?(:public_user_access) & has_merge_requests_allowing_pushes }.policy do
+  # Allow upstream developers to create pipelines on a fork when the fork has
+  # an open MR with "Allow commits from members who can merge to the target
+  # branch" enabled.
+  rule { (public_project | internal_access) & has_merge_requests_allowing_pushes }.policy do
     enable :create_build
     enable :create_pipeline
   end
@@ -792,10 +771,6 @@ class ProjectPolicy < BasePolicy
 
   rule { can?(:read_merge_request) }.policy do
     enable :read_vulnerability_merge_request_link
-  end
-
-  rule { can?(:guest_access) & can?(:download_code) }.policy do
-    enable :create_merge_request_in
   end
 
   # Design abilities could also be prevented in the issue policy.

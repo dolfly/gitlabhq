@@ -1331,6 +1331,8 @@
   - 1
 - - vulnerabilities_update_traversal_ids_of_vulnerability_statistic
   - 1
+- - vulnerabilities_upload_remediations
+  - 1
 - - vulnerability_exports_export
   - 1
 - - vulnerability_exports_export_deletion

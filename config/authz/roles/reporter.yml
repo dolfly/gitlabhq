@@ -25,6 +25,7 @@ project:
   - create_epic
   - create_incident
   - create_iteration
+  - create_merge_request_in
   - create_project_secrets
   - create_requirement
   - create_requirement_test_report

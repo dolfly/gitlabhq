@@ -17,6 +17,8 @@ module Types
           description: 'Whether the current user is subscribed to notifications on the work item.'
 
         def subscribed
+          return false unless current_user
+
           work_item = object.work_item
 
           BatchLoader::GraphQL.for(work_item).batch do |work_items, loader|

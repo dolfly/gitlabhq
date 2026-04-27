@@ -23,7 +23,9 @@ module Organizations
     end
 
     def organization_new_app_data
-      shared_new_settings_general_app_data.to_json
+      {
+        organizations_path: organizations_path
+      }.merge(shared_new_settings_general_app_data).to_json
     end
 
     def organization_settings_general_app_data(organization)
@@ -101,8 +103,7 @@ module Organizations
     def shared_new_settings_general_app_data
       {
         preview_markdown_path: preview_markdown_organizations_path,
-        organizations_path: organizations_path,
-        root_url: root_url
+        organizations_url: organizations_url(trailing_slash: true)
       }
     end
 

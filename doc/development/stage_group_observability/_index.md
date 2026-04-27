@@ -85,7 +85,7 @@ component can have two indicators:
 
 The calculation of the ratio happens as follows:
 
-![error budget calculation](img/error_budget_calculation_v17_2.png)
+![The sum of operations meeting Apdex and total operations minus operations with errors, divided by the sum of total Apdex measurements and total operations.](img/error_budget_calculation_v17_2.png)
 
 <!--
 To update this calculation, paste the following math block in a GitLab comment, update it,
@@ -108,7 +108,7 @@ The row below the error budget row is collapsed by default. Expanding
 it shows which component and violation type had the most offending
 operations in the past 28 days.
 
-![Error attribution](img/stage_group_dashboards_error_attribution_v14_1.png)
+![The budget spend attribution section displaying budget failures, info, and failure log links.](img/stage_group_dashboards_error_attribution_v14_1.png)
 
 The first panel on the left shows a table with the number of errors per
 component. Digging into the first row in that table has
@@ -138,7 +138,7 @@ component means.
 
 For example, see the `server` component of the `web-pages` service:
 
-![web-pages-server-component SLI](img/stage_group_dashboards_service_sli_detail_v14_1.png)
+![The web-pages server component displaying the server's SLI apdex, error ratio, RPS, and details.](img/stage_group_dashboards_service_sli_detail_v14_1.png)
 
 To add more SLIs tailored to specific features, you can use an [Application SLI](../application_slis/_index.md).
 
@@ -146,7 +146,7 @@ To add more SLIs tailored to specific features, you can use an [Application SLI]
 
 For a detailed analysis you can use [a specialized Kibana dashboard](https://log.gprd.gitlab.net/goto/771b5c10-c0ec-11ed-85ed-e7557b0a598c), like this:
 
-![Kibana dashboard](img/error_budgets_kibana_dashboard_v15_10.png)
+![The Kibana dashboard displaying multiple tools for data visualization and analysis.](img/error_budgets_kibana_dashboard_v15_10.png)
 
 Description:
 

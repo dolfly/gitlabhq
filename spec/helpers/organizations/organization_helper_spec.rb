@@ -249,7 +249,7 @@ RSpec.describe Organizations::OrganizationHelper, feature_category: :organizatio
       expect(Gitlab::Json.parse(helper.organization_new_app_data)).to eq(
         {
           'organizations_path' => '/o',
-          'root_url' => 'http://test.host/',
+          'organizations_url' => 'http://test.host/o/',
           'preview_markdown_path' => '/o/-/preview_markdown'
         }
       )
@@ -269,8 +269,7 @@ RSpec.describe Organizations::OrganizationHelper, feature_category: :organizatio
             'avatar' => 'avatar.jpg',
             'visibility_level' => organization.visibility_level
           },
-          'organizations_path' => '/o',
-          'root_url' => 'http://test.host/',
+          'organizations_url' => 'http://test.host/o/',
           'preview_markdown_path' => '/o/-/preview_markdown'
         }
       )

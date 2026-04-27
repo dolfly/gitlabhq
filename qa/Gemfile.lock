@@ -1,14 +1,4 @@
 PATH
-  remote: ../gems/gitlab-rspec
-  specs:
-    gitlab-rspec (0.1.0)
-      activerecord (>= 6.1, < 8)
-      activesupport (>= 6.1, < 8)
-      gitlab_quality-test_tooling (>= 3.8, < 4)
-      rspec (~> 3.0)
-      test-prof (~> 1.5)
-
-PATH
   remote: ../gems/gitlab-utils
   specs:
     gitlab-utils (0.2.0)
@@ -45,12 +35,6 @@ GEM
       erubi (~> 1.11)
       rails-dom-testing (~> 2.2)
       rails-html-sanitizer (~> 1.6)
-    activemodel (7.2.3)
-      activesupport (= 7.2.3)
-    activerecord (7.2.3)
-      activemodel (= 7.2.3)
-      activesupport (= 7.2.3)
-      timeout (>= 0.4.0)
     activesupport (7.2.3)
       base64
       benchmark (>= 0.3)
@@ -168,12 +152,13 @@ GEM
       rainbow (>= 3, < 4)
       table_print (= 1.5.7)
       zeitwerk (>= 2, < 3)
-    gitlab_quality-test_tooling (3.11.0)
+    gitlab_quality-test_tooling (3.13.0)
       activesupport (>= 7.0)
       amatch (~> 0.4.1)
       fog-google (~> 1.24, >= 1.24.1)
       gitlab (>= 4.19, < 7.0)
       http (~> 5.0)
+      http-cookie (>= 1.0, < 1.1.1)
       nokogiri (~> 1.10)
       parallel (>= 1, < 2)
       rainbow (>= 3, < 4)
@@ -381,9 +366,7 @@ GEM
     table_print (1.5.7)
     terminal-table (4.0.0)
       unicode-display_width (>= 1.1.1, < 4)
-    test-prof (1.6.0)
     thor (1.3.1)
-    timeout (0.5.0)
     tins (1.38.0)
       bigdecimal
       sync
@@ -441,9 +424,8 @@ DEPENDENCIES
   fog-google (~> 1.29, >= 1.29.4)
   gitlab-orchestrator!
   gitlab-qa (~> 15, >= 15.7.1)
-  gitlab-rspec!
   gitlab-utils!
-  gitlab_quality-test_tooling (~> 3.11.0)
+  gitlab_quality-test_tooling (~> 3.13.0)
   junit_merge (~> 0.1.2)
   knapsack (~> 4.0)
   nokogiri (~> 1.18, >= 1.18.9)
@@ -467,8 +449,6 @@ DEPENDENCIES
 
 CHECKSUMS
   actionview (7.2.3) sha256=1f427d7a41b43804d7250911535740451b9c32b6416239d87e6dab9d5948ecb2
-  activemodel (7.2.3) sha256=bbaf66aeb93212e98ebf6ab900f8290f9a831645f0b235427f5acf0e074739db
-  activerecord (7.2.3) sha256=6facb7478ceb5f6baa9f0647daa50b4a3a43934997900f0011e6c667ff41a0d7
   activesupport (7.2.3) sha256=5675c9770dac93e371412684249f9dc3c8cec104efd0624362a520ae685c7b10
   addressable (2.8.7) sha256=462986537cf3735ab5f3c0f557f14155d778f4b43ea4f485a9deb9c8f7c58232
   allure-rspec (2.28.0) sha256=a5c925396a5c26dd056f25c35225831dfad144f16333e2ca5dfd2f40e7db4bbb
@@ -517,9 +497,8 @@ CHECKSUMS
   gitlab (4.19.0) sha256=3f645e3e195dbc24f0834fbf83e8ccfb2056d8e9712b01a640aad418a6949679
   gitlab-orchestrator (0.0.1)
   gitlab-qa (15.7.1) sha256=b75bcf2bd114e86beda378357133d20db7c25b3a2a5f053320592ffd19eedbfa
-  gitlab-rspec (0.1.0)
   gitlab-utils (0.2.0)
-  gitlab_quality-test_tooling (3.11.0) sha256=23af50e588ad173a79217f646f657dabd2246b28f5660dac656309e18e2b1131
+  gitlab_quality-test_tooling (3.13.0) sha256=1d3ddf0a1b8c42649ed4161d8a40a88a3f78160d3212d4539597b178b8449c50
   google-apis-compute_v1 (0.101.0) sha256=1dea57ab0a579424305aac3219cbd70196b6f3e0d1c6387e1412e3b676c25f3f
   google-apis-core (0.15.0) sha256=9c95ee9068c6b1fb3f8698b2856f53a031c3a68e886d074cc2e9a482e070a6e4
   google-apis-dns_v1 (0.43.0) sha256=8a0db99fde5a16ede6cc160ab422b737ef2e5e0d146c2b0570795fb83afdabf1
@@ -612,9 +591,7 @@ CHECKSUMS
   sync (0.5.0) sha256=668356cc07c59ac7ed9ecf34fec3929831f179c07adb1f3e1c3b7a1609a638fd
   table_print (1.5.7) sha256=436664281f93387b882335795e16cfeeb839ad0c785ff7f9110fc0f17c68b5cb
   terminal-table (4.0.0) sha256=f504793203f8251b2ea7c7068333053f0beeea26093ec9962e62ea79f94301d2
-  test-prof (1.6.0) sha256=b04cee7b9684b9b31e23e258f835ba67ee5b4fd5f6cc7204d076ef695805c335
   thor (1.3.1) sha256=fa7e3471d4f6a27138e3d9c9b0d4daac9c3d7383927667ae83e9ab42ae7401ef
-  timeout (0.5.0) sha256=852aefd13f41d84c2d0d83099b275034c6517395884b58e635acc8847c9190cb
   tins (1.38.0) sha256=99acd138b73d5b1b2dd8e72f1707ac0905c8f63f729ddd7c746d2d3c3803886d
   toml-rb (4.1.0) sha256=14456ec4549e4703881bf04b83a56f3264ef99884880092d83c98a2058d95846
   trailblazer-option (0.1.2) sha256=20e4f12ea4e1f718c8007e7944ca21a329eee4eed9e0fa5dde6e8ad8ac4344a3

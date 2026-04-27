@@ -10,7 +10,6 @@ excluded_directories:
   - fixtures     # test fixture data, owned via catch-all
   - .ai          # AI configuration, owned via catch-all
   - .devfile     # devfile configuration
-  - .eslint_todo # auto-generated ESLint suppressions
   - .github      # GitHub-specific configuration
   - .lefthook    # Lefthook configuration
   - .vscode      # VS Code editor configuration

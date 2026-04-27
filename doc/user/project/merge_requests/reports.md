@@ -105,6 +105,45 @@ To view license compliance findings:
 1. Select the **Reports** tab.
 1. Select **License compliance**.
 
+## Code quality report
+
+The code quality report shows code quality violations detected in your merge request
+by comparing the source branch pipeline results with the target branch pipeline
+results. The report is available if a report from the target branch is available
+for comparison.
+
+The report shows:
+
+- **New violations**: Code quality violations detected in the source branch that
+  do not exist in the target branch.
+- **Resolved violations**: Code quality violations that exist in the target
+  branch but not in the source branch. Resolved violations are marked with a badge.
+
+Each violation shows the following information:
+
+- Description of the code quality issue
+- Severity level (blocker, critical, major, minor, or info)
+- File path and line number where the violation occurs
+- Check name (the rule or linter that detected the violation)
+
+Duplicated violations, with identical fingerprints, are removed. Only a single entry is displayed.
+
+### View code quality findings
+
+Prerequisites:
+
+- Developer, Maintainer, or Owner role
+- [Code quality scanning](../../../ci/testing/code_quality.md) configured for
+  your project
+
+To view code quality findings:
+
+1. In the left sidebar, select **Search or go to** and find your project.
+1. Select **Code** > **Merge requests**.
+1. Select a merge request.
+1. Select the **Reports** tab.
+1. Select **Code quality**.
+
 ## Troubleshooting
 
 When security scanning is enabled, you might encounter the following issues.

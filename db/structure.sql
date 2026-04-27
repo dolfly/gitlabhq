@@ -28117,7 +28117,7 @@ ALTER SEQUENCE project_relation_exports_id_seq OWNED BY project_relation_exports
 
 CREATE TABLE project_repositories (
     id bigint NOT NULL,
-    shard_id bigint NOT NULL,
+    shard_id bigint,
     disk_path character varying NOT NULL,
     project_id bigint NOT NULL,
     object_format smallint DEFAULT 0 NOT NULL

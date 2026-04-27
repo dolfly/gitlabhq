@@ -2,7 +2,8 @@
 name: auditor
 description: Read-only access to all groups and projects. This is an instance-level
   user type, not a project or group membership role.
-inherits_from: []
+inherits_from:
+  - public_authenticated
 project:
   permissions: []
   raw_permissions:

@@ -1,6 +1,6 @@
 ---
 name: public_anonymous
-description: Unauthenticated users on public projects.
+description: Unauthenticated users on public namespaces.
 inherits_from: []
 project:
   permissions: []

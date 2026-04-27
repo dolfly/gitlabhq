@@ -24,7 +24,7 @@ describe('NewEditForm', () => {
 
   const defaultProvide = {
     organizationsPath: '/o',
-    rootUrl: 'http://127.0.0.1:3000/',
+    organizationsUrl: 'http://127.0.0.1:3000/o/',
     previewMarkdownPath: '/o/-/preview_markdown',
   };
 

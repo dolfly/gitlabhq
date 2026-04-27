@@ -66,7 +66,12 @@ Rakefile @gitlab-org/maintainers/rails-backend
 # Frontend
 *.scss @gitlab-org/maintainers/frontend
 *.js @gitlab-org/maintainers/frontend
+*.mjs @gitlab-org/maintainers/frontend
+*.vue @gitlab-org/maintainers/frontend
 *.graphql @gitlab-org/maintainers/frontend
+package.json @gitlab-org/maintainers/frontend
+yarn.lock @gitlab-org/maintainers/frontend
+/.eslint_todo/ @gitlab-org/maintainers/frontend
 /storybook/ @gitlab-org/maintainers/frontend
 # Overrides above BE directory assignments
 /app/assets/ @gitlab-org/maintainers/frontend

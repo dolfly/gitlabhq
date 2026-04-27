@@ -119,7 +119,7 @@ PATH
     gitlab-rspec (0.1.0)
       activerecord (>= 6.1, < 8)
       activesupport (>= 6.1, < 8)
-      gitlab_quality-test_tooling (>= 3.8, < 4)
+      gitlab_quality-test_tooling (>= 3.13, < 4)
       rspec (~> 3.0)
       test-prof (~> 1.5)
 
@@ -871,12 +871,13 @@ GEM
       omniauth (>= 1.3, < 3)
       pyu-ruby-sasl (>= 0.0.3.3, < 0.1)
       rubyntlm (~> 0.5)
-    gitlab_quality-test_tooling (3.10.1)
+    gitlab_quality-test_tooling (3.13.0)
       activesupport (>= 7.0)
       amatch (~> 0.4.1)
       fog-google (~> 1.24, >= 1.24.1)
       gitlab (>= 4.19, < 7.0)
       http (~> 5.0)
+      http-cookie (>= 1.0, < 1.1.1)
       nokogiri (~> 1.10)
       parallel (>= 1, < 2)
       rainbow (>= 3, < 4)
@@ -1386,7 +1387,7 @@ GEM
       plist (~> 3.1)
       train-core
       wmi-lite (~> 1.0)
-    oj (3.16.16)
+    oj (3.16.17)
       bigdecimal (>= 3.0)
       ostruct (>= 0.2)
     oj-introspect (0.9.0)
@@ -2445,7 +2446,7 @@ DEPENDENCIES
   gitlab-utils!
   gitlab_chronic_duration (~> 0.12)
   gitlab_omniauth-ldap (~> 2.3.0)
-  gitlab_quality-test_tooling (~> 3.10.0)
+  gitlab_quality-test_tooling (~> 3.13.0)
   gitlab_query_language (~> 0.26.0)
   gon (~> 6.5.0)
   google-apis-androidpublisher_v3 (~> 0.92.0)
@@ -2942,7 +2943,7 @@ CHECKSUMS
   gitlab-utils (0.2.0)
   gitlab_chronic_duration (0.12.0) sha256=0d766944d415b5c831f176871ee8625783fc0c5bfbef2d79a3a616f207ffc16d
   gitlab_omniauth-ldap (2.3.0) sha256=167036fe37c2711f2e1d2047260766e4c9b31ac37dfc873b101bcd4ea2a3a3b4
-  gitlab_quality-test_tooling (3.10.1) sha256=5a2e7a2d2369d7b15be023adfc04e36874650687c9afe7e2457abcb876742872
+  gitlab_quality-test_tooling (3.13.0) sha256=1d3ddf0a1b8c42649ed4161d8a40a88a3f78160d3212d4539597b178b8449c50
   gitlab_query_language (0.26.0) sha256=3476c5e141766c24d02f3bb96dbf7e57e5b5d1a35adef58c601a9890c55e6c5d
   gitlab_query_language (0.26.0-aarch64-linux-gnu) sha256=98a9dbd28a61a16e314e01b92977ec16395a702a8e9659307784e5312da077f9
   gitlab_query_language (0.26.0-arm64-darwin) sha256=dff7870381f1da1a94ada11b7c7c28795fced278e3b351b9b7a5a1d6ec74f100
@@ -3136,7 +3137,7 @@ CHECKSUMS
   observer (0.1.2) sha256=d8a3107131ba661138d748e7be3dbafc0d82e732fffba9fccb3d7829880950ac
   octokit (9.2.0) sha256=4fa47ff35ce654127edf2c836ab9269bcc8829f5542dc1e86871f697ce7f4316
   ohai (19.1.24) sha256=a15f3fd2298321a494c536a7af0e97020d71e4034963d42598bd4f33eacd7758
-  oj (3.16.16) sha256=3635b36128991796434f55da8decc0de236a323535adcb36fc04e6d0253c013d
+  oj (3.16.17) sha256=a6688f666143632a1ef11a8d80c8d631b1112733c7da698ffafa4a22a8488244
   oj-introspect (0.9.0) sha256=b7af4974654e8733902bb7707ec96155c1c577d0ba2564eb1d72cd091546834f
   omniauth (2.1.4) sha256=42a05b0496f0d22e1dd85d42aaf602f064e36bb47a6826a27ab55e5ba608763c
   omniauth-alicloud (3.0.0) sha256=9c5c4f3abb40d774b946015f177d503fbde99b2b57c0858284c25cc39369013e

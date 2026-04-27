@@ -37672,6 +37672,7 @@ Describes the usage of consumables for a user under the subscription.
 | <a id="gitlabsubscriptionusageuserusage-overagecreditsused"></a>`overageCreditsUsed` | [`Float`](#float) | Overage GitLab Credits used by the user. |
 | <a id="gitlabsubscriptionusageuserusage-paidtiertrialcreditsused"></a>`paidTierTrialCreditsUsed` | [`Float`](#float) | Paid Tier Trial GitLab Credits used by the user. |
 | <a id="gitlabsubscriptionusageuserusage-totalcredits"></a>`totalCredits` | [`Float`](#float) | Total GitLab Credits available for the user. |
+| <a id="gitlabsubscriptionusageuserusage-totalcreditsused"></a>`totalCreditsUsed` | [`Float`](#float) | Total GitLab Credits used by the user across all wallets. |
 
 ### `GitlabSubscriptionUsageUsersUsage`
 
@@ -38025,7 +38026,7 @@ four standard [pagination arguments](#pagination-arguments):
 **Status**: Experiment.
 {{< /details >}}
 
-Users in the namespace hierarchy that add ons are applicable for. This only applies to root namespaces.
+Users in the namespace hierarchy that add-ons are applicable for. This only applies to root namespaces.
 
 Returns [`AddOnUserConnection`](#addonuserconnection).
 
@@ -44499,7 +44500,7 @@ four standard [pagination arguments](#pagination-arguments):
 **Status**: Experiment.
 {{< /details >}}
 
-Users in the namespace hierarchy that add ons are applicable for. This only applies to root namespaces.
+Users in the namespace hierarchy that add-ons are applicable for. This only applies to root namespaces.
 
 Returns [`AddOnUserConnection`](#addonuserconnection).
 

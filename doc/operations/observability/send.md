@@ -36,9 +36,50 @@ To add OpenTelemetry instrumentation to your applications:
 
 1. Add the OpenTelemetry SDK for your language.
 1. Configure the OTLP exporter to point to your GitLab Observability instance.
+1. Configure recommended resource attributes.
 1. Add spans and attributes to track operations and metadata.
 
 Refer to the [OpenTelemetry documentation](https://opentelemetry.io/docs/instrumentation/) for language-specific guidelines.
+
+### Recommended resource attributes
+
+Configure your OpenTelemetry SDK with these resource attributes to link
+telemetry data back to your GitLab project and code. This enables features
+like correlating traces to commits and automated issue creation from exceptions.
+
+| Resource attribute | GitLab CI/CD variable | Description |
+| --- | --- | --- |
+| `gitlab.project.id` | `CI_PROJECT_ID` | Links telemetry to the GitLab project. Required for GitLab Duo integration. |
+| `gitlab.project.name` | `CI_PROJECT_NAME` | Human-readable project name for display in dashboards. |
+| `service.version` | `CI_COMMIT_SHA` | The commit SHA of the running code. Lets you correlate traces and errors to the exact version deployed. |
+| `deployment.environment.name` | `CI_ENVIRONMENT_NAME` | The environment where the code is running (for example, `production` or `staging`). |
+
+`service.version` and `deployment.environment.name` are
+[OpenTelemetry semantic conventions](https://opentelemetry.io/docs/specs/semconv/resource/).
+The `gitlab.*` attributes use a vendor namespace for GitLab-specific context.
+
+All four variables are [predefined in GitLab CI/CD](../../ci/variables/predefined_variables.md)
+and require no additional configuration when your application runs in a pipeline.
+For local development, set these environment variables manually or accept empty defaults.
+
+The following Ruby example shows how to configure these attributes:
+
+```ruby
+OpenTelemetry::SDK.configure do |c|
+  c.resource = OpenTelemetry::SDK::Resources::Resource.create(
+    'gitlab.project.id'           => ENV.fetch('CI_PROJECT_ID', ''),
+    'gitlab.project.name'         => ENV.fetch('CI_PROJECT_NAME', ''),
+    'service.version'             => ENV.fetch('CI_COMMIT_SHA', ''),
+    'deployment.environment.name' => ENV.fetch('CI_ENVIRONMENT_NAME', '')
+  )
+
+  c.use_all
+end
+```
+
+For other languages, set the same resource attributes using your language's
+OpenTelemetry SDK. The attribute names and environment variables are identical
+across all languages.
 
 ## Send test data
 
@@ -66,7 +107,9 @@ OpenTelemetry::SDK.configure do |c|
   resource = OpenTelemetry::SDK::Resources::Resource.create({
     'service.name' => 'test-service',
     'service.version' => '1.0.0',
-    'deployment.environment' => 'production'
+    'deployment.environment.name' => 'production',
+    'gitlab.project.id' => ENV.fetch('CI_PROJECT_ID', ''),
+    'gitlab.project.name' => ENV.fetch('CI_PROJECT_NAME', '')
   })
   c.resource = resource
 
