@@ -118,9 +118,12 @@ class ProjectSetting < ApplicationRecord
     ::Projects::AllBranchesRule.new(project)
   end
 
+  def reviewer_auto_assignment_available?
+    false
+  end
+
   def reviewer_auto_assignment_enabled?
-    ::Feature.enabled?(:auto_assign_code_owner_reviewers, project) &&
-      !reviewer_assignment_disabled?
+    reviewer_auto_assignment_available? && reviewer_assignment_strategy != 'disabled'
   end
 
   private

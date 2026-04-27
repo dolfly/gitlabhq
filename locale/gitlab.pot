@@ -44223,7 +44223,19 @@ msgstr ""
 msgid "MergeRequestsTab|Merged"
 msgstr ""
 
+msgid "MergeRequests|Automatic reviewer assignment"
+msgstr ""
+
+msgid "MergeRequests|Automatically assign code owners as reviewers"
+msgstr ""
+
+msgid "MergeRequests|Automatically assign reviewers when a merge request is ready."
+msgstr ""
+
 msgid "MergeRequests|Can't perform this action automatically. It may have already been done, or a more recent commit may have updated some of this content. Please perform this action locally."
+msgstr ""
+
+msgid "MergeRequests|Code owners are automatically assigned as reviewers when a merge request is marked as ready. Draft merge requests are excluded."
 msgstr ""
 
 msgid "MergeRequests|Comment could not be submitted: %{reason}."
