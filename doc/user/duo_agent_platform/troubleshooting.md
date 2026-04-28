@@ -112,8 +112,8 @@ ensuring that GitLab Duo is on and that you are properly connected.
 
 - You meet the GitLab Duo Agent Platform [prerequisites](_index.md#prerequisites).
 - Admin mode is [disabled](../../administration/settings/sign_in_restrictions.md#turn-off-admin-mode-for-your-session).
-- Your project is in a [group namespace](../../user/namespace/_index.md).
-- You have a [default GitLab Duo namespace](../../user/profile/preferences.md#namespace-resolution-in-your-local-environment)
+- Your project is in a [group namespace](../namespace/_index.md).
+- You have a [default GitLab Duo namespace](../profile/preferences.md#namespace-resolution-in-your-local-environment)
   set or have a project open that has GitLab Duo access.
 
 For further support, see the troubleshooting page for your extension and IDE:

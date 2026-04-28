@@ -316,7 +316,7 @@ RSpec.describe ProjectMember, feature_category: :groups_and_projects do
 
     context 'when the source project of the project member is destroyed' do
       it 'refreshes the authorization of user to the project in the group' do
-        expect { project.destroy! }.to change { user.can?(:guest_access, project) }.from(true).to(false)
+        expect { project.destroy! }.to change { user.can?(:read_project, project) }.from(true).to(false)
       end
 
       it 'refreshes the authorization without calling AuthorizedProjectUpdate::ProjectRecalculatePerUserWorker' do
@@ -387,7 +387,7 @@ RSpec.describe ProjectMember, feature_category: :groups_and_projects do
       let(:action) { project.add_member(user, Gitlab::Access::GUEST) }
 
       it 'changes access level' do
-        expect { action }.to change { user.can?(:guest_access, project) }.from(false).to(true)
+        expect { action }.to change { user.can?(:read_project, project) }.from(false).to(true)
       end
 
       it_behaves_like 'calls AuthorizedProjectUpdate::ProjectRecalculatePerUserWorker inline to recalculate authorizations'
@@ -417,7 +417,7 @@ RSpec.describe ProjectMember, feature_category: :groups_and_projects do
       end
 
       it 'changes access level' do
-        expect { action }.to change { user.can?(:guest_access, project) }.from(true).to(false)
+        expect { action }.to change { user.can?(:read_project, project) }.from(true).to(false)
       end
 
       it_behaves_like 'calls AuthorizedProjectUpdate::ProjectRecalculatePerUserWorker inline to recalculate authorizations'

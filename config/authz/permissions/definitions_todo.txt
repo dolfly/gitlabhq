@@ -324,7 +324,6 @@ export_work_items
 fork_project
 generate_description
 get_user_associations_count
-guest_access
 import_issues
 import_project_members_from_another_project
 import_requirements

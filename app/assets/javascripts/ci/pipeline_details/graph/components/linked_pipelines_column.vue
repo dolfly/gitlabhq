@@ -8,7 +8,7 @@ import {
   calculatePipelineLayersInfo,
   getQueryHeaders,
   serializeLoadErrors,
-  toggleQueryPollingByVisibility,
+  setupQueryPollingByVisibility,
   unwrapPipelineData,
   validateConfigPaths,
 } from '../utils';
@@ -148,7 +148,12 @@ export default {
     },
   },
   mounted() {
-    toggleQueryPollingByVisibility(this.$apollo.queries.currentPipeline);
+    this.pollingVisibilityCleanup = setupQueryPollingByVisibility(
+      this.$apollo.queries.currentPipeline,
+    );
+  },
+  beforeDestroy() {
+    this.pollingVisibilityCleanup?.();
   },
   titleClasses: ['gl-font-bold', 'gl-pipeline-job-width', 'gl-truncate', 'gl-leading-36'],
   minWidth: `${ONE_COL_WIDTH}px`,

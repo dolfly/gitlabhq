@@ -1274,11 +1274,11 @@ Finally, we can add a visibility check so that the component pauses polling when
 ```javascript
 /* component.vue */
 
-import { toggleQueryPollingByVisibility } from '~/pipelines/components/graph/utils';
+import { setupQueryPollingByVisibility } from '~/pipelines/components/graph/utils';
 
 export default {
   mounted() {
-    toggleQueryPollingByVisibility(this.$apollo.queries.pipeline, POLL_INTERVAL);
+    setupQueryPollingByVisibility(this.$apollo.queries.pipeline, POLL_INTERVAL);
   },
 };
 ```
@@ -1460,7 +1460,7 @@ export default {
 Use visibility-aware polling alongside subscriptions to handle cases where WebSocket connections drop silently. ETag caching ensures these polling requests are lightweight.
 
 ```javascript
-import { toggleQueryPollingByVisibility, etagQueryHeaders } from '~/graphql_shared/utils';
+import { setupQueryPollingByVisibility, etagQueryHeaders } from '~/graphql_shared/utils';
 
 const POLL_INTERVAL = 60000;
 
@@ -1475,7 +1475,7 @@ export default {
     },
   },
   created() {
-    toggleQueryPollingByVisibility(this.$apollo.queries.pipelines, POLL_INTERVAL);
+    setupQueryPollingByVisibility(this.$apollo.queries.pipelines, POLL_INTERVAL);
   },
 };
 ```

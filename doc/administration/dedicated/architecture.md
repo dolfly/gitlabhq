@@ -59,7 +59,7 @@ Geo does not use an active-active failover configuration. For more information, 
 
 Optionally, private connectivity is available for your GitLab Dedicated instance, using [AWS PrivateLink](https://aws.amazon.com/privatelink/) as a connection gateway.
 
-Both [inbound](configure_instance/network_security.md#inbound-private-link) and [outbound](configure_instance/network_security.md#outbound-private-link) private links are supported.
+Both [inbound](configure_instance/network_security.md#inbound-privatelink-connections) and [outbound](configure_instance/network_security.md#outbound-privatelink-connections) PrivateLink connections are supported.
 
 #### Inbound
 

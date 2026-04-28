@@ -55,6 +55,10 @@ module Types
         null: false,
         description: 'Root path in the context of the organization.',
         experiment: { milestone: '18.5' }
+      field :visibility,
+        GraphQL::Types::String,
+        null: true,
+        description: 'Visibility level of the organization.'
       field :web_path,
         GraphQL::Types::String,
         null: false,

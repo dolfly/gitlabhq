@@ -1,5 +1,5 @@
 <script>
-import { GlTab, GlTabs, GlSprintf, GlLink, GlAlert, GlButton } from '@gitlab/ui';
+import { GlTab, GlTabs, GlSprintf, GlLink, GlAlert, GlBadge, GlButton } from '@gitlab/ui';
 import { sprintf, __ } from '~/locale';
 import Api from '~/api';
 import LocalStorageSync from '~/vue_shared/components/local_storage_sync.vue';
@@ -49,6 +49,7 @@ export default {
     GlTabs,
     LocalStorageSync,
     SectionLayout,
+    GlBadge,
     GlButton,
     UserCalloutDismisser,
     TrainingSection,
@@ -144,6 +145,9 @@ export default {
     },
     shouldShowScannerProfiles() {
       return this.glFeatures?.securityScanProfilesFeature;
+    },
+    shouldShowScanProfileUpgradeHint() {
+      return this.shouldShowScannerProfiles && !window.gon?.licensed_features?.securityScanProfiles;
     },
     shouldShowMergeRequestsDisabledAlert() {
       return !this.mergeRequestsEnabled;
@@ -246,12 +250,15 @@ export default {
           @dismiss="dismissAutoDevopsEnabledAlert"
         />
 
-        <section-layout
-          v-if="shouldShowScannerProfiles"
-          stacked
-          class="gl-border-b-0"
-          :heading="$options.i18n.securityProfiles"
-        >
+        <section-layout v-if="shouldShowScannerProfiles" stacked class="gl-border-b-0">
+          <template #heading>
+            <h2 class="gl-mt-0 gl-flex gl-gap-3 gl-text-size-h2">
+              {{ $options.i18n.securityProfiles }}
+              <gl-badge v-if="shouldShowScanProfileUpgradeHint" variant="tier" icon="license">{{
+                __('Ultimate')
+              }}</gl-badge>
+            </h2>
+          </template>
           <template #description>
             <p>
               {{ $options.i18n.securityProfilesDesc }}

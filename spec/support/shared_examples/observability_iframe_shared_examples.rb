@@ -10,5 +10,7 @@ RSpec.shared_examples 'renders observability iframe' do
     expect(response).to have_gitlab_http_status(:ok)
     expect(response.body).to include('js-observability')
     expect(response.body).to include('observability-container')
+    expect(response.body).to match(/data-polling-endpoint="[^"]*format=json[^"]*"/)
+    expect(response.body).to include('data-query-params="{}"')
   end
 end

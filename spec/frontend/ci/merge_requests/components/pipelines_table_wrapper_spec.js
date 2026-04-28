@@ -9,7 +9,7 @@ import { mountExtended, shallowMountExtended } from 'helpers/vue_test_utils_help
 import { createAlert } from '~/alert';
 import Api from '~/api';
 import * as Sentry from '~/sentry/sentry_browser_wrapper';
-import { toggleQueryPollingByVisibility } from '~/ci/pipeline_details/graph/utils';
+import { setupQueryPollingByVisibility } from '~/ci/pipeline_details/graph/utils';
 import PipelinesTable from '~/ci/common/pipelines_table.vue';
 import { DEFAULT_MANUAL_ACTIONS_LIMIT } from '~/ci/constants';
 import PipelinesTableWrapper from '~/ci/merge_requests/components/pipelines_table_wrapper.vue';
@@ -288,7 +288,7 @@ describe('PipelinesTableWrapper component', () => {
     it('toggles polling by tab visibility', async () => {
       await createComponent();
 
-      expect(toggleQueryPollingByVisibility).toHaveBeenCalledWith(expect.anything(), 60000);
+      expect(setupQueryPollingByVisibility).toHaveBeenCalledWith(expect.anything(), 60000);
     });
 
     it('polls every 60 seconds', async () => {

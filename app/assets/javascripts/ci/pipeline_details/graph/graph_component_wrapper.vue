@@ -26,7 +26,7 @@ import {
   calculatePipelineLayersInfo,
   getQueryHeaders,
   serializeLoadErrors,
-  toggleQueryPollingByVisibility,
+  setupQueryPollingByVisibility,
   unwrapPipelineData,
   mergePipelineWithNeeds,
 } from './utils';
@@ -283,8 +283,11 @@ export default {
     if (!this.pipelineIid) {
       this.reportFailure({ type: IID_FAILURE, skipSentry: true });
     }
-    toggleQueryPollingByVisibility(this.$apollo.queries.pipeline);
+    this.pollingVisibilityCleanup = setupQueryPollingByVisibility(this.$apollo.queries.pipeline);
     this.skipRetryModal = Boolean(JSON.parse(localStorage.getItem(SKIP_RETRY_MODAL_KEY)));
+  },
+  beforeDestroy() {
+    this.pollingVisibilityCleanup?.();
   },
   methods: {
     getPipelineInfo() {

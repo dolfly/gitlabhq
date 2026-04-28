@@ -24,6 +24,7 @@ import clearRunnerCacheMutation from '~/ci/pipelines_page/graphql/mutations/clea
 import setSortPreferenceMutation from '~/issues/dashboard/queries/set_sort_preference.mutation.graphql';
 import * as urlUtils from '~/lib/utils/url_utility';
 import * as pipelineDetailsUtils from '~/ci/pipeline_details/utils';
+import { setupQueryPollingByVisibility } from '~/graphql_shared/utils';
 import { PIPELINE_ID_KEY, PIPELINE_IID_KEY, TRACKING_CATEGORIES } from '~/ci/constants';
 import retryPipelineMutation from '~/ci/pipelines_page/graphql/mutations/retry_pipeline.mutation.graphql';
 import cancelPipelineMutation from '~/ci/pipelines_page/graphql/mutations/cancel_pipeline.mutation.graphql';
@@ -50,6 +51,10 @@ import {
 
 jest.mock('~/alert');
 jest.mock('~/sentry/sentry_browser_wrapper');
+jest.mock('~/graphql_shared/utils', () => ({
+  ...jest.requireActual('~/graphql_shared/utils'),
+  setupQueryPollingByVisibility: jest.fn(),
+}));
 jest.mock('~/ci/pipeline_details/utils', () => ({
   ...jest.requireActual('~/ci/pipeline_details/utils'),
   validateParams: jest.fn((params) => ({ ...params })),
@@ -974,6 +979,19 @@ describe('Pipelines App', () => {
       await waitForPromises();
 
       expect(singlePipelineHandler).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('polling visibility cleanup', () => {
+    it('cleans up visibility listener on destroy', async () => {
+      const cleanupFn = jest.fn();
+      setupQueryPollingByVisibility.mockReturnValue(cleanupFn);
+
+      await createComponent();
+
+      wrapper.destroy();
+
+      expect(cleanupFn).toHaveBeenCalled();
     });
   });
 });

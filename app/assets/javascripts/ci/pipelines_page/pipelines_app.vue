@@ -20,7 +20,7 @@ import {
   RAW_TEXT_WARNING,
   TRACKING_CATEGORIES,
 } from '~/ci/constants';
-import { etagQueryHeaders, toggleQueryPollingByVisibility } from '~/graphql_shared/utils';
+import { etagQueryHeaders, setupQueryPollingByVisibility } from '~/graphql_shared/utils';
 import setSortPreferenceMutation from '~/issues/dashboard/queries/set_sort_preference.mutation.graphql';
 import ExternalConfigEmptyState from '~/ci/common/empty_state/external_config_empty_state.vue';
 import { getInitialFilterParams } from '~/ci/pipeline_details/utils';
@@ -351,9 +351,13 @@ export default {
   },
   created() {
     this.fetchUpdatedPipelines = debounce(this.updatePipelines, BATCH_DEBOUNCE);
-    toggleQueryPollingByVisibility(this.$apollo.queries.pipelines, POLL_INTERVAL);
+    this.pollingVisibilityCleanup = setupQueryPollingByVisibility(
+      this.$apollo.queries.pipelines,
+      POLL_INTERVAL,
+    );
   },
   beforeDestroy() {
+    this.pollingVisibilityCleanup?.();
     this.cancelBatch();
   },
   methods: {

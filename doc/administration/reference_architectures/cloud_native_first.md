@@ -71,7 +71,7 @@ sidekiq -[#ff8dd1,norank]--> database
 
 > [!note]
 > When deploying Gitaly on Kubernetes, Gitaly only supports sharded (non-cluster) configurations. You can upgrade Gitaly without downtime through
-> [client retries](../../administration/settings/gitaly_timeouts.md). Each Gitaly pod is a single point of failure for the repositories it serves.
+> [client retries](../settings/gitaly_timeouts.md). Each Gitaly pod is a single point of failure for the repositories it serves.
 > Gitaly Cluster (Praefect) is not supported on Kubernetes.
 >
 > If you require Gitaly high availability with automatic failover, consider [Cloud Native Hybrid architectures](_index.md#cloud-native-hybrid), which deploy Gitaly Cluster on virtual machines while running stateless components in Kubernetes. For Gitaly on Kubernetes requirements and limitations, see [Gitaly on Kubernetes](../gitaly/kubernetes.md#requirements).

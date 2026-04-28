@@ -198,30 +198,6 @@ rule { can?(:planner_access) }.enable :read_issue
 rule { can?(:reporter_access) }.enable :read_issue
 ```
 
-## Common gotchas
-
-### `condition(:guest)` is not the same as `can?(:guest_access)`
-
-These look interchangeable but behave very differently:
-
-- `condition(:guest)` returns `true` only if the user has been **explicitly added** to the project or group as a guest member.
-- `can?(:guest_access)` returns `true` if the user is **accessing a public project** — regardless of whether they are a member.
-
-This means replacing one with the other can silently expand or restrict access,
-particularly on public projects where non-members have implicit guest-level access.
-
-```ruby
-# condition(:guest) - only explicit members with guest role
-rule { guest }.enable :read_issue
-
-# can?(:guest_access) - any user on a public project
-rule { can?(:guest_access) }.enable :read_issue
-```
-
-Do not swap between the two without consulting the teams that introduced the
-original rule. An unintentional switch could grant permissions to logged-in
-non-members on public projects that they did not previously have.
-
 ## Examples
 
 ### Refactoring combined conditions to use `prevent`

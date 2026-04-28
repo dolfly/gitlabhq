@@ -528,6 +528,7 @@ When working with security policies, consider these troubleshooting tips:
 - The owner of a project can enforce policies for that project, provided they also have permissions to create projects in the group.
   Project owners who are not group members may face limitations in adding or editing policies. If you're unable to manage policies for your project,
   contact your group administrator to ensure you have the necessary permissions in the group.
+- For policy conflicts, the most recently applied policy takes precedence.
 
 If you are still experiencing issues, you can [view recent reported bugs](https://gitlab.com/gitlab-org/gitlab/-/issues/?sort=popularity&state=opened&label_name%5B%5D=group%3A%3Asecurity%20policies&label_name%5B%5D=type%3A%3Abug&first_page_size=20) and raise new unreported issues.
 

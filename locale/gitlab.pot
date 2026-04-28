@@ -11366,9 +11366,6 @@ msgstr ""
 msgid "Available only on GitLab Premium."
 msgstr ""
 
-msgid "Available with Ultimate"
-msgstr ""
-
 msgid "Avatar for %{assigneeName}"
 msgstr ""
 
@@ -41617,9 +41614,6 @@ msgstr ""
 msgid "Learn more about shards and replicas in the %{configuration_link_start}advanced search configuration%{configuration_link_end} documentation. Changes don't take place until you %{recreated_link_start}recreate%{recreated_link_end} the index."
 msgstr ""
 
-msgid "Learn more about the Ultimate security suite"
-msgstr ""
-
 msgid "Learn more about vulnerability management on non-default branches and tags."
 msgstr ""
 
@@ -50049,6 +50043,9 @@ msgstr ""
 msgid "Organization|Accessible without any authentication."
 msgstr ""
 
+msgid "Organization|Activate your Organizations"
+msgstr ""
+
 msgid "Organization|An error occurred changing your organization URL. Please try again."
 msgstr ""
 
@@ -50119,6 +50116,9 @@ msgid "Organization|If you proceed with this change you will lose your owner per
 msgstr ""
 
 msgid "Organization|Internal - The organization can be accessed by any signed in user except external users."
+msgstr ""
+
+msgid "Organization|Learn how Organizations work"
 msgstr ""
 
 msgid "Organization|Manage"
@@ -50251,9 +50251,6 @@ msgstr ""
 msgid "Organization|Step %{currentStep} / %{totalSteps}"
 msgstr ""
 
-msgid "Organization|Step 1 placeholder"
-msgstr ""
-
 msgid "Organization|Step 2 placeholder"
 msgstr ""
 
@@ -50273,6 +50270,9 @@ msgid "Organization|Update your organization name, description, and avatar. %{li
 msgstr ""
 
 msgid "Organization|View all"
+msgstr ""
+
+msgid "Organization|We'll create one Organization per top-level group. You can reassign groups between them in the next step."
 msgstr ""
 
 msgid "Organization|You can now start using your new organization."

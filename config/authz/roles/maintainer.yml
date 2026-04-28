@@ -212,6 +212,7 @@ group:
   - provision_gke_runner
   - read_any_audit_event
   - read_deploy_token
+  - read_group_all_available_runners
   - read_jobs_statistics
   - read_namespace_cluster_agent_mapping
   - read_protected_branch

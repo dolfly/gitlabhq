@@ -152,7 +152,7 @@ To resolve this issue:
 1. Verify outbound connections to `cloud.gitlab.com:443` and `customers.gitlab.com:443`.
 1. Add [Cloudflare IP ranges](https://www.cloudflare.com/ips/) to your allowlist if needed.
 1. Check for allowlist or firewall restrictions with
-   [private link](../../administration/dedicated/configure_instance/network_security.md#aws-private-link-connectivity).
+   [private link](../../administration/dedicated/configure_instance/network_security.md#aws-privatelink-connectivity).
 1. Follow [filtering outbound requests](../../security/webhooks.md#gitlab-duo-functionality-is-blocked)
    to troubleshoot connectivity issues.
 1. Test connectivity from the instance.

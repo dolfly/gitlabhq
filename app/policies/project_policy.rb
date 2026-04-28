@@ -320,13 +320,10 @@ class ProjectPolicy < BasePolicy
     enable(*Authz::Role.get(:public_authenticated).permissions(:project))
   end
 
-  rule { guest }.policy do
-    enable :guest_access
+  # This is needed separate from the role YAML due to the
+  # Ability.users_that_can_read_project method
+  rule { guest }.enable :read_project
 
-    # This is needed separate from the role YAML due to the
-    # Ability.users_that_can_read_project method
-    enable :read_project
-  end
   rule { planner }.enable :planner_access
   rule { reporter }.enable :reporter_access
   rule { security_manager }.enable :security_manager_access
@@ -368,8 +365,6 @@ class ProjectPolicy < BasePolicy
 
   rule { ~can?(:read_environment) }.prevent :read_freeze_period
 
-  # We cannot use `guest_access` because that includes non-members on public projects
-  # Only guests that are project members are allowed to set metadata when creating new issues
   rule { guest | can?(:admin_issue) }.policy do
     enable :set_new_issue_metadata
     enable :set_new_work_item_metadata
@@ -876,10 +871,9 @@ class ProjectPolicy < BasePolicy
   end
 
   # TODO: Remove this rule and move :read_package permission from
-  # can?(:reporter_access) to can?(:guest_access)
-  # with the rollout of the FF allow_guest_plus_roles_to_pull_packages
+  # reporter to guest with the rollout of the FF allow_guest_plus_roles_to_pull_packages
   # https://gitlab.com/gitlab-org/gitlab/-/issues/512210
-  rule { can?(:guest_access) & allow_guest_plus_roles_to_pull_packages_enabled }.enable :read_package
+  rule { guest & allow_guest_plus_roles_to_pull_packages_enabled }.enable :read_package
 
   rule { can?(:read_project) }.enable :read_attestation
 

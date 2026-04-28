@@ -2,11 +2,11 @@ import { shallowMount } from '@vue/test-utils';
 import Vue, { nextTick } from 'vue';
 import VueApollo from 'vue-apollo';
 import { GlModal, GlSprintf } from '@gitlab/ui';
+import organizationsForReconciliationResponse from 'test_fixtures/graphql/organizations/organizations_for_reconciliation.query.graphql.json';
 import createMockApollo from 'helpers/mock_apollo_helper';
 import waitForPromises from 'helpers/wait_for_promises';
 import { createAlert } from '~/alert';
 import ReconciliationModal from '~/organizations/index/components/reconciliation/modal.vue';
-import { mockOrganizationsResponse } from 'jest/organizations/mock_data';
 import organizationsForReconciliationQuery from '~/organizations/index/graphql/queries/organizations_for_reconciliation.query.graphql';
 import Step1 from '~/organizations/index/components/reconciliation/steps/step_1.vue';
 import Step2 from '~/organizations/index/components/reconciliation/steps/step_2.vue';
@@ -20,7 +20,7 @@ describe('OrganizationReconciliationModal', () => {
   let wrapper;
   let mockApollo;
 
-  const successHandler = jest.fn().mockResolvedValue(mockOrganizationsResponse);
+  const successHandler = jest.fn().mockResolvedValue(organizationsForReconciliationResponse);
 
   const createComponent = ({ props = {}, handler = successHandler } = {}) => {
     mockApollo = createMockApollo([[organizationsForReconciliationQuery, handler]]);
@@ -77,7 +77,7 @@ describe('OrganizationReconciliationModal', () => {
         createComponent();
       });
 
-      it('does not fetch organizations when modal is not visible', () => {
+      it('does not fetch organizations', () => {
         expect(successHandler).not.toHaveBeenCalled();
       });
 
@@ -93,13 +93,13 @@ describe('OrganizationReconciliationModal', () => {
         await waitForPromises();
       });
 
-      it('fetches organizations when modal is visible', () => {
+      it('fetches organizations', () => {
         expect(successHandler).toHaveBeenCalled();
       });
 
       it('passes organizations to step component', () => {
         expect(findStep1().props('organizations')).toEqual(
-          mockOrganizationsResponse.data.organizations.nodes,
+          organizationsForReconciliationResponse.data.organizations.nodes,
         );
       });
     });

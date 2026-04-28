@@ -1452,8 +1452,8 @@ RSpec.describe Gitlab::Git::Repository, feature_category: :source_code_managemen
   end
 
   describe '#raw_changes_between' do
-    let(:old_rev) {}
-    let(:new_rev) {}
+    let(:old_rev) { nil }
+    let(:new_rev) { nil }
     let(:changes) { repository.raw_changes_between(old_rev, new_rev) }
 
     context 'initial commit' do

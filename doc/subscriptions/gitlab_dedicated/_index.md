@@ -51,7 +51,7 @@ You can configure single sign-on (SSO) using the supported providers for authent
 Two connectivity options are available:
 
 - Public connectivity with IP allowlists: By default, your instance is publicly accessible. You can [configure an IP allowlist](../../administration/dedicated/configure_instance/network_security.md#ip-allowlist) to restrict access to specified IP addresses.
-- Private connectivity with AWS PrivateLink: You can configure [AWS PrivateLink](https://aws.amazon.com/privatelink/) for [inbound](../../administration/dedicated/configure_instance/network_security.md#inbound-private-link) and [outbound](../../administration/dedicated/configure_instance/network_security.md#outbound-private-link) connections.
+- Private connectivity with AWS PrivateLink: You can configure [AWS PrivateLink](https://aws.amazon.com/privatelink/) for [inbound](../../administration/dedicated/configure_instance/network_security.md#inbound-privatelink-connections) and [outbound](../../administration/dedicated/configure_instance/network_security.md#outbound-privatelink-connections) PrivateLink connections.
 
 For private connections to internal resources using non-public certificates, you can also [specify trusted certificates](../../administration/dedicated/configure_instance/network_security.md#custom-certificate-authorities-for-external-services).
 
@@ -64,11 +64,11 @@ it cannot directly connect to local IP addresses in your network.
 To set up private connectivity for your internal services:
 
 1. Assign hostnames to your internal services.
-1. Configure your Private Hosted Zone (PHZ) records to route to these hostnames through outbound private links.
-1. Plan for the 10-endpoint limit on outbound private links.
+1. Configure your Private Hosted Zone (PHZ) records to route to these hostnames through outbound PrivateLink connections.
+1. Plan for the 10-endpoint limit on outbound PrivateLink connections.
 
 If you need to connect to more than 10 endpoints, implement a reverse proxy or TLS passthrough on your infrastructure.
-This approach routes multiple services through fewer private link connections.
+This approach routes multiple services through fewer PrivateLink connections.
 
 #### Data encryption
 

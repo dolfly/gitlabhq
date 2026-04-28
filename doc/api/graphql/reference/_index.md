@@ -29737,6 +29737,7 @@ Counts for each analyzer status in the group and subgroups.
 | <a id="analyzergroupstatustype-failure"></a>`failure` | [`Int!`](#int) | Number of projects where `analyzer_type` failed to execute. |
 | <a id="analyzergroupstatustype-namespaceid"></a>`namespaceId` | [`Int!`](#int) | Namespace ID. |
 | <a id="analyzergroupstatustype-notconfigured"></a>`notConfigured` | [`Int!`](#int) | Number of projects where `analyzer_type` is not configured. |
+| <a id="analyzergroupstatustype-stale"></a>`stale` {{< icon name="warning-solid" >}} | [`Int`](#int) | **Introduced** in GitLab 19.0. **Status**: Experiment. Number of projects where `analyzer_type` has not run in three consecutive pipelines in the default branch. |
 | <a id="analyzergroupstatustype-success"></a>`success` | [`Int!`](#int) | Number of projects where `analyzer_type` completed successfully. |
 | <a id="analyzergroupstatustype-totalprojectscount"></a>`totalProjectsCount` | [`Int!`](#int) | Total number of projects descending from the group. |
 | <a id="analyzergroupstatustype-updatedat"></a>`updatedAt` | [`ISO8601DateTime!`](#iso8601datetime) | Timestamp of when the status was last updated. |
@@ -45408,6 +45409,7 @@ Active period time range for on-call rotation.
 | <a id="organization-organizationusers"></a>`organizationUsers` {{< icon name="warning-solid" >}} | [`OrganizationUserConnection!`](#organizationuserconnection) | **Introduced** in GitLab 16.4. **Status**: Experiment. Users with access to the organization. |
 | <a id="organization-path"></a>`path` {{< icon name="warning-solid" >}} | [`String!`](#string) | **Introduced** in GitLab 16.4. **Status**: Experiment. Path of the organization. |
 | <a id="organization-rootpath"></a>`rootPath` {{< icon name="warning-solid" >}} | [`String!`](#string) | **Introduced** in GitLab 18.5. **Status**: Experiment. Root path in the context of the organization. |
+| <a id="organization-visibility"></a>`visibility` | [`String`](#string) | Visibility level of the organization. |
 | <a id="organization-webpath"></a>`webPath` {{< icon name="warning-solid" >}} | [`String!`](#string) | **Introduced** in GitLab 19.0. **Status**: Experiment. Web path of the organization. |
 | <a id="organization-weburl"></a>`webUrl` {{< icon name="warning-solid" >}} | [`String!`](#string) | **Introduced** in GitLab 16.6. **Status**: Experiment. Web URL of the organization. |
 

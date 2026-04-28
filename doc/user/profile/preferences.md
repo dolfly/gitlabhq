@@ -230,7 +230,7 @@ To set a default GitLab Duo namespace:
 
 When you use GitLab Duo in an IDE or the CLI, the first available namespace determines feature
 availability and credit consumption. Along with the other Agent Platform requirements, the project
-you work on must be in a [group namespace](../../user/namespace/_index.md).
+you work on must be in a [group namespace](../namespace/_index.md).
 
 GitLab Duo checks for a namespace in this order:
 

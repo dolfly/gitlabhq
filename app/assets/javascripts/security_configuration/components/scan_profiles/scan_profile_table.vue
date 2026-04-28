@@ -10,7 +10,6 @@ import {
   GlSprintf,
 } from '@gitlab/ui';
 import { __ } from '~/locale';
-import { PROMO_URL } from '~/constants';
 import { helpPagePath } from '~/helpers/help_page_helper';
 import { InternalEvents } from '~/tracking';
 import {
@@ -98,7 +97,6 @@ export default {
         : 'gl-border-dashed gl-border-strong gl-bg-default gl-text-strong';
     },
   },
-  LEARN_MORE_LINK: `${PROMO_URL}/solutions/application-security-testing/`,
   EVENT_CLICK_SCAN_PROFILE_LEARN_MORE_LINK,
   SCAN_PROFILE_I18N,
 };
@@ -202,21 +200,7 @@ export default {
     <template #cell(status)="{ item }">
       <slot v-if="$scopedSlots['cell(status)']" name="cell(status)" v-bind="{ item }"></slot>
       <div v-else class="gl-flex gl-flex-col">
-        <span class="gl-font-weight-bold">
-          {{ __('Available with Ultimate') }}
-        </span>
-        <span class="gl-mt-1 gl-text-sm gl-text-subtle">
-          <gl-link
-            :href="$options.LEARN_MORE_LINK"
-            target="_blank"
-            :data-event-tracking="$options.EVENT_CLICK_SCAN_PROFILE_LEARN_MORE_LINK"
-            data-event-label="ultimate_hint"
-            data-testid="learn-more-ultimate-link"
-          >
-            {{ __('Learn more about the Ultimate security suite') }}
-            <gl-icon name="external-link" :aria-label="__('(external link)')" />
-          </gl-link>
-        </span>
+        {{ __('—') }}
       </div>
     </template>
 

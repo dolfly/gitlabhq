@@ -272,7 +272,7 @@ To add a custom certificate:
 
 1. Sign in to [Switchboard](https://console.gitlab-dedicated.com/).
 1. At the top of the page, select **Configuration**.
-1. Expand **Custom certificates**.
+1. Expand **Custom certificate authorities**.
 1. Select **+ Add Certificate**.
 1. Paste a single certificate into the text box. Include the `-----BEGIN CERTIFICATE-----` and `-----END CERTIFICATE-----` lines.
 1. Select **Save**.
@@ -283,16 +283,16 @@ If you cannot use Switchboard to add a custom certificate,
 open a [support ticket](https://support.gitlab.com/hc/en-us/requests/new?ticket_form_id=4414917877650)
 and attach each custom certificate as a separate file.
 
-## AWS Private Link connectivity
+## AWS PrivateLink connectivity
 
-### Inbound Private Link
+### Inbound PrivateLink connections
 
-[AWS Private Link](https://docs.aws.amazon.com/vpc/latest/privatelink/what-is-privatelink.html) allows users and applications in your VPC on AWS to securely connect to the GitLab Dedicated endpoint without network traffic going over the public internet.
+[AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/what-is-privatelink.html) allows users and applications in your VPC on AWS to securely connect to the GitLab Dedicated endpoint without network traffic going over the public internet.
 
-You can create private links only in your primary and secondary AWS regions where your
+You can create endpoint services only in your primary and secondary AWS regions where your
 GitLab Dedicated instance is deployed.
 
-When you create a private link, you specify IAM principals that control access.
+When you create an endpoint service, you specify IAM principals that control access.
 Only the IAM principals you specify can create VPC endpoints to connect to your instance.
 
 The endpoint service is available in two availability zones that are either chosen
@@ -336,7 +336,7 @@ For example, attach the following IAM policy to the role or user creating the VP
 }
 ```
 
-#### Create an inbound private link
+#### Create an inbound PrivateLink connection
 
 Prerequisites:
 
@@ -346,12 +346,12 @@ Prerequisites:
   - Valid: `arn:aws:iam::AWS_ACCOUNT_ID:role/RoleName`
   - Invalid: `arn:aws:iam::AWS_ACCOUNT_ID:role/somepath/AnotherRoleName`
 
-To create an inbound private link:
+To create an inbound PrivateLink connection:
 
 1. Sign in to [Switchboard](https://console.gitlab-dedicated.com/).
 1. At the top of the page, select **Configuration**.
-1. Expand **Inbound private link**.
-1. Select **Add endpoint service**. This button is not available if all your available regions already have private links.
+1. Expand **Inbound private connections**.
+1. Select **Add endpoint service**. This button is not available if all your available regions already have endpoint services.
 1. Select a region.
 1. Add IAM principals for the AWS users or roles in your AWS organization that are establishing
    the VPC endpoints. The IAM principals must be
@@ -371,9 +371,9 @@ To create an inbound private link:
 1. Use the instance URL provided during onboarding to connect to your GitLab Dedicated
    instance from your VPC.
 
-#### Enable KAS and registry for Inbound Private Link
+#### Enable KAS and registry for inbound PrivateLink connections
 
-When you use Inbound Private Link to connect to your GitLab Dedicated instance,
+When you use inbound PrivateLink connections to connect to your GitLab Dedicated instance,
 only the main instance URL has automatic DNS resolution through the private network.
 
 To access KAS (GitLab agent for Kubernetes) and registry services through your private network,
@@ -381,13 +381,13 @@ you must create an additional DNS configuration in your VPC.
 
 Prerequisites:
 
-- You have configured Inbound Private Link for your GitLab Dedicated instance.
+- You have configured inbound PrivateLink connections for your GitLab Dedicated instance.
 - You have permissions to create Route 53 private hosted zones in your AWS account.
 
 To enable KAS and registry through your private network:
 
 1. In your AWS console, create a private hosted zone for `gitlab-dedicated.com`
-   and associate it with the VPC that contains your private link connection.
+   and associate it with the VPC that contains your inbound PrivateLink connection.
 1. After you create the private hosted zone, add the following DNS records (replace `example` with your instance name):
 
    1. Create an `A` record for your GitLab Dedicated instance:
@@ -412,7 +412,7 @@ To enable KAS and registry through your private network:
 
 This configuration is robust to IP address changes because it uses the VPC endpoint interface rather than specific IP addresses.
 
-##### Enable Pages for Inbound Private Link
+##### Enable Pages for inbound PrivateLink connections
 
 Access GitLab Pages through your private network by creating additional DNS
 configuration in your VPC, similar to the KAS and registry configuration.
@@ -420,7 +420,7 @@ configuration in your VPC, similar to the KAS and registry configuration.
 To enable Pages through your private network:
 
 1. In your AWS console, create a private hosted zone for `<tenant_name>.gitlab-dedicated.site`
-   and associate it with the VPC that contains your private link connection.
+   and associate it with the VPC that contains your inbound PrivateLink connection.
 1. After you create the private hosted zone, add the following DNS records:
    1. Create an apex `A` alias record for the VPC endpoint.
    1. Create a wildcard `CNAME` for `*.<tenant_name>.gitlab-dedicated.site` that points to `<tenant_name>.gitlab-dedicated.site`.
@@ -482,9 +482,9 @@ To resolve this issue:
 
 1. Using the custom role, retry creating the VPC endpoint in your AWS console or CLI.
 
-### Outbound Private Link
+### Outbound PrivateLink connections
 
-Outbound private links allow your GitLab Dedicated instance and the hosted runners for GitLab Dedicated to securely communicate with services running in your VPC on AWS without exposing any traffic to the public internet.
+Outbound PrivateLink connections allow your GitLab Dedicated instance and the hosted runners for GitLab Dedicated to securely communicate with services running in your VPC on AWS without exposing any traffic to the public internet.
 
 This type of connection allows GitLab functionality to access private services:
 
@@ -500,12 +500,12 @@ This type of connection allows GitLab functionality to access private services:
 
 Consider the following:
 
-- You can only create private links within the same AWS region. Make sure your VPC is in the same region where your GitLab Dedicated instance is deployed.
+- You can only create PrivateLink connections within the same AWS region. Make sure your VPC is in the same region where your GitLab Dedicated instance is deployed.
 - The connection requires the [Availability Zone IDs (AZ IDs)](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#az-ids) for the two Availability Zones (AZs) in the regions that you selected during onboarding.
 - If you did not specify any AZs during onboarding to Dedicated, GitLab randomly selects both AZ IDs. AZ IDs are displayed in Switchboard on the Overview page for both the Primary and Secondary regions.
-- GitLab Dedicated limits the number of outbound private link connections to 10.
+- GitLab Dedicated limits the number of outbound PrivateLink connections to 10 per region.
 
-#### Add an outbound private link with Switchboard
+#### Add an outbound PrivateLink connection with Switchboard
 
 Prerequisites:
 
@@ -523,22 +523,22 @@ Prerequisites:
 
 1. Sign in to [Switchboard](https://console.gitlab-dedicated.com/).
 1. At the top of the page, select **Configuration**.
-1. Expand **Outbound private link**.
+1. Expand **Outbound private connections**.
 1. Complete the fields.
 1. To add endpoint services, select **Add endpoint service**. You can add up to ten endpoint services for each region. At least one endpoint service is required to save the region.
 1. Select **Save**.
-1. Optional. To add an outbound private link for a second region, select **Add outbound connection**, then repeat the previous steps.
+1. Optional. To add an outbound PrivateLink connection for a second region, select **Add outbound connection**, then repeat the previous steps.
 
-#### Delete an outbound private link with Switchboard
+#### Delete an outbound PrivateLink connection with Switchboard
 
 1. Sign in to [Switchboard](https://console.gitlab-dedicated.com/).
 1. At the top of the page, select **Configuration**.
-1. Expand **Outbound private link**.
-1. Go to the outbound private link you want to delete, then select **Delete** ({{< icon name="remove" >}}).
+1. Expand **Outbound private connections**.
+1. Go to the outbound PrivateLink connection you want to delete, then select **Delete** ({{< icon name="remove" >}}).
 1. Select **Delete**.
 1. Optional. To delete all the links in a region, from the region header, select **Delete** ({{< icon name="remove" >}}). This also deletes the region configuration.
 
-#### Add an outbound private link with a support request
+#### Add an outbound PrivateLink connection with a support request
 
 1. [Create the Endpoint service](https://docs.aws.amazon.com/vpc/latest/privatelink/create-endpoint-service.html) through which your internal service
    will be available to GitLab Dedicated. Provide the associated `Service Endpoint Name` on a new
@@ -570,13 +570,13 @@ service names you provided. PrivateLink directs matching outbound connections in
 
 #### Troubleshooting
 
-If you have trouble establishing a connection after setting up the outbound private link,
+If you have trouble establishing a connection after setting up the outbound PrivateLink connection,
 check the following:
 
 - Ensure that cross-zone load balancing is turned on in your Network Load Balancer (NLB).
 - Ensure that the Inbound Rules section of the appropriate Security Groups permits traffic from the correct IP ranges.
 - Ensure that the inbound traffic is mapped to the correct port on the Endpoint Service.
-- In Switchboard, expand **Outbound private link** and confirm that the details appear as you expect.
+- In Switchboard, expand **Outbound private connections** and confirm that the details appear as you expect.
 - Ensure that you have [allowed requests to the local network from webhooks and integrations](../../../security/webhooks.md#allow-requests-to-the-local-network-from-webhooks-and-integrations).
 
 ### NAT gateway IP addresses
@@ -638,8 +638,8 @@ To add a private hosted zone:
 1. Complete the fields.
    - In the **Hostname** field, enter your Private Hosted Zone (PHZ) entry.
    - For **Link type**, choose one of the following:
-     - For an outbound private link PHZ entry, select the endpoint service from the dropdown list.
-       Only links with the `Available` or `Pending Acceptance` status are shown.
+     - For an outbound PrivateLink connection PHZ entry, select the endpoint service from the dropdown list.
+       Only connections with the `Available` or `Pending Acceptance` status are shown.
      - For other PHZ entries, provide a list of DNS aliases.
 1. Select **Save**.
    Your PHZ entry and any aliases should appear in the list.
@@ -647,7 +647,7 @@ To add a private hosted zone:
 
 ### Add a private hosted zone with a support request
 
-If you are unable to use Switchboard to add a private hosted zone, you can open a [support ticket](https://support.gitlab.com/hc/en-us/requests/new?ticket_form_id=4414917877650) and provide a list of DNS names that should resolve to the endpoint service for the outbound private link. The list can be updated as needed.
+If you are unable to use Switchboard to add a private hosted zone, you can open a [support ticket](https://support.gitlab.com/hc/en-us/requests/new?ticket_form_id=4414917877650) and provide a list of DNS names that should resolve to the endpoint service for the outbound PrivateLink connection. The list can be updated as needed.
 
 ## IP allowlist
 

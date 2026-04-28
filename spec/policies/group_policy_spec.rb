@@ -1777,6 +1777,12 @@ RSpec.describe GroupPolicy, feature_category: :system_access do
     context 'with developer' do
       let(:current_user) { developer }
 
+      it { is_expected.to be_disallowed(:read_group_all_available_runners) }
+    end
+
+    context 'with security_manager' do
+      let(:current_user) { security_manager }
+
       it { is_expected.to be_allowed(:read_group_all_available_runners) }
     end
 

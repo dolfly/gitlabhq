@@ -100,7 +100,7 @@ this period.
 
 When the enforcement date passes, you must enter a one-time passcode at every password-based
 sign-in. To avoid being locked out, ensure you can access your primary email address, or
-[change your primary email address](../../profile/_index.md#change-your-primary-email).
+[change your primary email address](../_index.md#change-your-primary-email).
 
 ### Didn't receive email verification code or code has expired
 

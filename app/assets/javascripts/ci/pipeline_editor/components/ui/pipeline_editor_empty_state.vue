@@ -40,10 +40,7 @@ export default {
       </template>
     </gl-empty-state>
     <div class="gl-w-max-full gl-flex gl-flex-wrap gl-items-stretch gl-justify-center gl-gap-5">
-      <duo-analyze-card
-        v-if="glAbilities.accessDuoAgenticChat"
-        @create-empty-config-file="createEmptyConfigFile"
-      />
+      <duo-analyze-card v-if="glAbilities.accessDuoAgenticChat" />
       <gl-card
         class="gl-w-[250px] gl-max-w-[500px] gl-overflow-hidden gl-bg-default gl-shadow-[0_4px_12px_var(--gl-color-alpha-dark-8),0_0_1px_var(--gl-color-alpha-dark-24)]"
         header-class="gl-border-bottom-none gl-pt-5 gl-pb-3"

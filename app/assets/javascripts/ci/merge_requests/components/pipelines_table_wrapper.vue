@@ -11,7 +11,7 @@ import {
 import { createAlert } from '~/alert';
 import Api from '~/api';
 import { fetchPolicies } from '~/lib/graphql';
-import { getQueryHeaders, toggleQueryPollingByVisibility } from '~/ci/pipeline_details/graph/utils';
+import { getQueryHeaders, setupQueryPollingByVisibility } from '~/ci/pipeline_details/graph/utils';
 import { helpPagePath } from '~/helpers/help_page_helper';
 import PipelinesTable from '~/ci/common/pipelines_table.vue';
 import RunPipelineButton from '~/ci/common/run_pipeline_button.vue';
@@ -334,7 +334,7 @@ export default {
     },
   },
   mounted() {
-    this.pollingVisibilityCleanup = toggleQueryPollingByVisibility(
+    this.pollingVisibilityCleanup = setupQueryPollingByVisibility(
       this.$apollo.queries.pipelines,
       60000,
     );

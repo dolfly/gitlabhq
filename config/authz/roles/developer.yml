@@ -135,7 +135,6 @@ group:
   - read_cluster
   - read_cluster_agent
   - read_dependency
-  - read_group_all_available_runners
   - read_group_security_dashboard
   - read_licenses
   - read_observability_portal

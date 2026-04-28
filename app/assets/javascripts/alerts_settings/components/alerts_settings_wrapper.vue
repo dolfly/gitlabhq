@@ -341,7 +341,7 @@ export default {
         class="gl-mb-3"
         :primary-button-text="$options.i18n.integrationCreated.btnCaption"
         :title="$options.i18n.integrationCreated.title"
-        @primaryAction="viewCreatedIntegration"
+        @primary-action="viewCreatedIntegration"
         @dismiss="showSuccessfulCreateAlert = false"
       >
         {{ $options.i18n.integrationCreated.successMsg }}
