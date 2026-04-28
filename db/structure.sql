@@ -28383,7 +28383,6 @@ CREATE TABLE project_settings (
     duo_sast_vr_workflow_enabled boolean DEFAULT false NOT NULL,
     automatic_rebase_enabled boolean DEFAULT false NOT NULL,
     duo_secret_detection_fp_enabled boolean DEFAULT false NOT NULL,
-    code_owner_reviewer_assignment_strategy smallint DEFAULT 0 NOT NULL,
     reviewer_assignment_strategy smallint DEFAULT 0 NOT NULL,
     pipeline_execution_policy_bot_access_enabled boolean DEFAULT false NOT NULL,
     pipeline_execution_policy_bot_access_file_patterns text[] DEFAULT '{}'::text[],

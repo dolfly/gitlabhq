@@ -59,6 +59,11 @@ module MergeRequests
       if changed_fields.include?('target_branch') ||
           changed_fields.include?('source_branch')
         merge_request.mark_as_unchecked unless merge_request.unchecked?
+
+        # Delete HEAD diff and re-enqueue mergeability check so we get to generate
+        # a fresh HEAD diff when either branches have been changed.
+        merge_request.merge_head_diff&.destroy!
+        merge_request.check_mergeability(async: true)
       end
     end
 

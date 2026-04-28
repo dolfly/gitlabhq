@@ -327,3 +327,5 @@ Refer to the [secure coding guidelines for Artificial Intelligence (AI) features
 
 - [Here's how to reach us!](https://handbook.gitlab.com/handbook/engineering/development/data-science/ai-powered/ai-framework/#-how-to-reach-us)
 - View [guidelines](duo_chat.md) for working with GitLab Duo Chat.
+- Learn how to [add foundational chat agents](foundational_chat_agents.md) to GitLab Duo.
+- Learn how to [add foundational flows](foundational_flows.md) to GitLab Duo Agent Platform.

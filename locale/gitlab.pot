@@ -63861,12 +63861,6 @@ msgstr ""
 msgid "SecurityInventory|Secret push protection (SD)"
 msgstr ""
 
-msgid "SecurityInventory|Security configuration"
-msgstr ""
-
-msgid "SecurityInventory|Security configuration: %{projectName}"
-msgstr ""
-
 msgid "SecurityInventory|Security inventory"
 msgstr ""
 
@@ -82087,6 +82081,9 @@ msgstr ""
 msgid "Webhooks|Confidential issue events"
 msgstr ""
 
+msgid "Webhooks|Copy token"
+msgstr ""
+
 msgid "Webhooks|Custom headers"
 msgstr ""
 
@@ -82120,6 +82117,9 @@ msgstr ""
 msgid "Webhooks|File hooks"
 msgstr ""
 
+msgid "Webhooks|Generate signing token"
+msgstr ""
+
 msgid "Webhooks|Go to webhooks"
 msgstr ""
 
@@ -82136,6 +82136,9 @@ msgid "Webhooks|Header value"
 msgstr ""
 
 msgid "Webhooks|Hide sensitive data such as tokens in the UI."
+msgstr ""
+
+msgid "Webhooks|Hide token"
 msgstr ""
 
 msgid "Webhooks|How do I create a custom webhook template?"
@@ -82162,6 +82165,9 @@ msgstr ""
 msgid "Webhooks|Must match part of URL"
 msgstr ""
 
+msgid "Webhooks|Must start with %{codeStart}whsec_%{codeEnd} followed by a base64-encoded 32-byte key."
+msgstr ""
+
 msgid "Webhooks|Name (optional)"
 msgstr ""
 
@@ -82186,6 +82192,9 @@ msgstr ""
 msgid "Webhooks|Rate limited"
 msgstr ""
 
+msgid "Webhooks|Regenerate token"
+msgstr ""
+
 msgid "Webhooks|Regular expression"
 msgstr ""
 
@@ -82207,13 +82216,28 @@ msgstr ""
 msgid "Webhooks|SSL verification"
 msgstr ""
 
+msgid "Webhooks|Save this token now because you can only access it once."
+msgstr ""
+
+msgid "Webhooks|Save this token now because you can only access it once. After you save this form, any apps that rely on the previous token won't work until you replace it with this token."
+msgstr ""
+
 msgid "Webhooks|Secret token"
+msgstr ""
+
+msgid "Webhooks|Secret token (not recommended)"
 msgstr ""
 
 msgid "Webhooks|Sensitive portion of URL"
 msgstr ""
 
+msgid "Webhooks|Show token"
+msgstr ""
+
 msgid "Webhooks|Signing token"
+msgstr ""
+
+msgid "Webhooks|Signing tokens are more secure."
 msgstr ""
 
 msgid "Webhooks|Subgroup events"
@@ -82246,13 +82270,16 @@ msgstr ""
 msgid "Webhooks|The webhook has %{help_link_start}failed%{help_link_end} %{failure_count} times consecutively and is disabled for %{retry_time}. To re-enable the webhook earlier, see %{strong_start}Recent events%{strong_end} for more information about the error, then test your settings."
 msgstr ""
 
+msgid "Webhooks|This hook uses a secret token, which is not recommended. %{linkStart}Switch to the more secure signing token%{linkEnd}."
+msgstr ""
+
 msgid "Webhooks|URL preview"
 msgstr ""
 
-msgid "Webhooks|Used to validate received payloads. Sent with the request in the %{codeStart}X-Gitlab-Token%{codeEnd} HTTP header."
+msgid "Webhooks|Used to validate requests from GitLab. Sent in the %{codeStart}X-Gitlab-Token%{codeEnd} HTTP header."
 msgstr ""
 
-msgid "Webhooks|Used to validate requests from GitLab. Sent in the %{codeStart}webhook-signature%{codeEnd} HTTP header."
+msgid "Webhooks|Used to validate requests from GitLab. Sent in the %{codeStart}webhook-signature%{codeEnd} HTTP header. %{linkStart}How to use a signing token?%{linkEnd}"
 msgstr ""
 
 msgid "Webhooks|Vulnerability events"
@@ -82277,6 +82304,9 @@ msgid "Webhooks|Wildcard pattern"
 msgstr ""
 
 msgid "Webhooks|Wildcards such as %{WILDCARD_CODE_STABLE} or %{WILDCARD_CODE_PRODUCTION} are supported."
+msgstr ""
+
+msgid "Webhooks|You cannot access the token unless you regenerate it."
 msgstr ""
 
 msgid "Webhooks|You've reached the maximum number of custom headers."

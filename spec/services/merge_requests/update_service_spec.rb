@@ -922,6 +922,17 @@ RSpec.describe MergeRequests::UpdateService, :mailer, :request_store, feature_ca
           update_merge_request({ target_branch: "target" })
         end
 
+        it 'destroys the merge_head_diff and enqueues an async mergeability check' do
+          create(:merge_request_diff, :merge_head, merge_request: merge_request)
+
+          expect(merge_request).to receive(:check_mergeability).with(async: true)
+          expect(merge_request.merge_head_diff).to be_present
+
+          update_merge_request({ target_branch: 'target' })
+
+          expect(merge_request.reload.merge_head_diff).not_to be_present
+        end
+
         it_behaves_like "creates a new pipeline" do
           let(:new_target_branch) { "target" }
         end

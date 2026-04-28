@@ -41,7 +41,8 @@ RSpec.describe HooksHelper, feature_category: :integrations do
           is_system_hook: "false",
           triggers: expected_triggers,
           deploy_token_events_enabled: 'false',
-          has_signing_token: 'false'
+          has_signing_token: 'false',
+          signing_token_docs_path: anything
         )
       end
     end
@@ -65,7 +66,8 @@ RSpec.describe HooksHelper, feature_category: :integrations do
           is_system_hook: "false",
           triggers: expected_triggers,
           deploy_token_events_enabled: 'false',
-          has_signing_token: 'false'
+          has_signing_token: 'false',
+          signing_token_docs_path: anything
         )
       end
     end
@@ -89,7 +91,8 @@ RSpec.describe HooksHelper, feature_category: :integrations do
           is_system_hook: "false",
           triggers: expected_triggers,
           deploy_token_events_enabled: 'false',
-          has_signing_token: 'false'
+          has_signing_token: 'false',
+          signing_token_docs_path: anything
         )
       end
     end

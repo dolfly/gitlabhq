@@ -2750,6 +2750,10 @@ In the context of:
 
 Gitaly storages have physical paths and virtual storages have virtual paths.
 
+## subagents
+
+Use **subagents** (no hyphen) instead of **sub-agents**.
+
 ## subgroup
 
 Use **subgroup** (no hyphen) instead of **sub-group**.

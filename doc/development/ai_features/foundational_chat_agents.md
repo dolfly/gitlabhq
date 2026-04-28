@@ -5,6 +5,9 @@ info: Any user with at least the Maintainer role can merge updates to this conte
 title: Managing foundational agents
 ---
 
+> [!note]
+> This guide covers foundational **agents**. For foundational **flows**, see the [foundational flows guide](foundational_flows.md). To understand the difference between agents and flows, see the [glossary](glossary.md#gitlab-duo-agent-platform).
+
 [Foundational agents](../../user/duo_agent_platform/agents/foundational_agents/_index.md) are specialized agents
 that are created and maintained by GitLab, providing more accurate responses for specific use cases. These agents are
 available by default on any place chat and GitLab Duo chat are available, including groups, and are supported on GitLab Duo Self-Hosted.

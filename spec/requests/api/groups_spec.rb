@@ -38,8 +38,8 @@ RSpec.describe API::Groups, :with_current_organization, feature_category: :group
         make_upload_request
 
         group_id = json_response['id']
-        expect(json_response['avatar_url']).to eq('http://localhost/uploads/'\
-                                                  '-/system/group/avatar/'\
+        expect(json_response['avatar_url']).to eq('http://localhost/uploads/' \
+                                                  '-/system/group/avatar/' \
                                                   "#{group_id}/banana_sample.gif")
       end
     end
@@ -310,7 +310,7 @@ RSpec.describe API::Groups, :with_current_organization, feature_category: :group
 
               expect(response).to have_gitlab_http_status(:method_not_allowed)
               expect(json_response['error']).to eq(
-                'Offset pagination has a maximum allowed offset of 50000 for requests that return objects of type Group. '\
+                'Offset pagination has a maximum allowed offset of 50000 for requests that return objects of type Group. ' \
                 'Remaining records can be retrieved using keyset pagination.'
               )
             end

@@ -12,7 +12,9 @@ module HooksHelper
       is_new_hook: hook.new_record?.to_s,
       is_system_hook: hook.is_a?(SystemHook).to_s,
       triggers: Gitlab::Json.dump(all_triggers(hook)),
-      has_signing_token: hook.signing_token.present?.to_s
+      has_signing_token: hook.signing_token.present?.to_s,
+      signing_token_docs_path: help_page_path('user/project/integrations/webhooks.md',
+        anchor: 'signing-tokens')
     }
 
     if hook.is_a?(ProjectHook) && hook.project

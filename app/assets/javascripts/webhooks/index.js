@@ -22,6 +22,7 @@ export default () => {
     triggers: initialTriggers,
     isNewHook,
     hasSigningToken,
+    signingTokenDocsPath,
   } = el.dataset;
 
   return new Vue({
@@ -41,6 +42,7 @@ export default () => {
           isSystemHook: parseBoolean(isSystemHook),
           isNewHook: parseBoolean(isNewHook),
           hasSigningToken: parseBoolean(hasSigningToken),
+          signingTokenDocsPath,
         },
       });
     },

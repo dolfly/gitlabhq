@@ -84,8 +84,6 @@ module WebHooks
       ps = params.require(:hook).permit(*permitted).to_h
 
       ps.delete(:token) if action_name == 'update' && ps[:token] == WebHook::SECRET_MASK
-      ps.delete(:signing_token) if action_name == 'update' && ps[:signing_token] == WebHook::SECRET_MASK
-      ps.delete(:signing_token) if ps[:signing_token].blank?
 
       if ps.key?(:url_variables)
         ps[:url_variables] = ps[:url_variables].to_h do |variable|

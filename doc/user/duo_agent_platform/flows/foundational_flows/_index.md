@@ -33,6 +33,10 @@ The following foundational flows are available:
 - [SAST false positive detection](sast_false_positive_detection.md): Automatically identify and filter false positives in SAST findings.
 - [Secret false positive detection](secret_false_positive_detection.md): Automatically identify and filter false positives in secret detection findings.
 
+## For developers
+
+To learn how to create and add new foundational flows to GitLab, see the [foundational flows development guide](../../../../development/ai_features/foundational_flows.md).
+
 ## Configure flow execution CI/CD details
 
 You can configure the environment where flows use CI/CD to execute.

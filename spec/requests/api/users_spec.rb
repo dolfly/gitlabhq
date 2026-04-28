@@ -2749,7 +2749,7 @@ RSpec.describe API::Users, :with_current_organization, :aggregate_failures, feat
       expect(json_response.first['title']).to eq(key.title)
     end
 
-    it 'returns array of ssh keys with comments replaced with'\
+    it 'returns array of ssh keys with comments replaced with' \
       'a simple identifier of username + hostname' do
       request
 
@@ -3668,7 +3668,7 @@ RSpec.describe API::Users, :with_current_organization, :aggregate_failures, feat
         end
       end
 
-      it 'returns array of ssh keys with comments replaced with'\
+      it 'returns array of ssh keys with comments replaced with' \
         'a simple identifier of username + hostname' do
         request
 
