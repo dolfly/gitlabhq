@@ -26,8 +26,7 @@ RSpec.describe 'new tables missing sharding_key', feature_category: :organizatio
   # the table name to remove this once a decision has been made.
   let(:allowed_to_be_missing_not_null) do
     [
-      'keys.organization_id', # https://gitlab.com/gitlab-org/gitlab/-/issues/577246
-      'spam_logs.organization_id' # https://gitlab.com/gitlab-org/gitlab/-/issues/553470
+      'keys.organization_id' # https://gitlab.com/gitlab-org/gitlab/-/issues/577246
     ]
   end
 
@@ -47,7 +46,6 @@ RSpec.describe 'new tables missing sharding_key', feature_category: :organizatio
       'security_findings.project_id', # No LFK needed: sliding_list partitions are detached once stale and purged
       # LFK already present on ci_pipeline_schedules and cascade delete all ci resources.
       'ci_pipeline_schedule_variables.project_id',
-      'p_ci_build_needs.project_id', # LFK already present on p_ci_builds and cascade delete all ci resources
       'p_ci_build_trace_metadata.project_id', # LFK already present on p_ci_builds and cascade delete all ci resources
       'ci_build_trace_chunks.project_id', # LFK already present on p_ci_builds and cascade delete all ci resources
       'ci_secure_file_states.project_id', # LFK already present on ci_secure_files and cascade delete all ci resources

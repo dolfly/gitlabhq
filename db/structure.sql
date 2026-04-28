@@ -30794,6 +30794,7 @@ CREATE TABLE spam_logs (
     recaptcha_verified boolean DEFAULT false NOT NULL,
     target_id bigint,
     organization_id bigint,
+    CONSTRAINT check_0c0873a24a CHECK ((organization_id IS NOT NULL)),
     CONSTRAINT check_56d1d910ee CHECK ((user_id IS NOT NULL))
 );
 
@@ -38887,9 +38888,6 @@ ALTER TABLE pm_advisories
 
 ALTER TABLE epic_issues
     ADD CONSTRAINT check_048dce81f3 CHECK ((work_item_parent_link_id IS NOT NULL)) NOT VALID;
-
-ALTER TABLE spam_logs
-    ADD CONSTRAINT check_0c0873a24a CHECK ((organization_id IS NOT NULL)) NOT VALID;
 
 ALTER TABLE workspaces
     ADD CONSTRAINT check_2a89035b04 CHECK ((personal_access_token_id IS NOT NULL)) NOT VALID;

@@ -33,6 +33,14 @@ GitLab Duo and SDLC trends measure the impact of GitLab Duo on software developm
 This dashboard provides visibility into key SDLC metrics in the context of AI adoption for projects or groups.
 You can use the dashboard to measure which metrics have improved from your AI investments.
 
+The metrics display a trend indicator showing the percentage change compared to the previous time period.
+If no data is available for the previous time period, the percentage change displays **n/a**.
+
+Values in green indicate positive changes, and values in red indicate negative changes.
+The icons next to the values indicate upward trends {{< icon name="trend-up" >}} or downward trends {{< icon name="trend-down" >}}.
+
+Upward trends are positive (green) for some metrics (like [deployment frequency](dora_metrics.md#deployment-frequency)), but negative (red) for others (like [mean time to merge](merge_request_analytics.md)).
+
 Use GitLab Duo and SDLC trends to:
 
 - Track SDLC trends in relation to your GitLab Duo journey: Examine how trends in GitLab Duo usage in a project or group influence other crucial productivity metrics such as mean time to merge and CI/CD statistics. GitLab Duo usage metrics are displayed for the last six months, including the current one.
@@ -58,6 +66,7 @@ For an overview, see [GitLab Duo AI Impact Dashboard](https://youtu.be/FxSWX64aU
 - Assigned GitLab Duo seat engagement metric [replaced](https://gitlab.com/gitlab-org/gitlab/-/work_items/587298) with GitLab Duo users in GitLab 18.10.
 - GitLab Duo Code Suggestions usage metric [changed](https://gitlab.com/gitlab-org/gitlab/-/work_items/592813) from percentage rate to absolute user count in GitLab 18.10.
 - Code Suggestions acceptance rate metric [replaced](https://gitlab.com/gitlab-org/gitlab/-/work_items/587300) with GitLab Duo agent/flow users in GitLab 18.11.
+- Trend indicators [introduced](https://gitlab.com/gitlab-org/gitlab/-/issues/590535) in GitLab 19.0.
 
 {{< /history >}}
 
@@ -70,13 +79,6 @@ For an overview, see [GitLab Duo AI Impact Dashboard](https://youtu.be/FxSWX64aU
 ## Metric trends
 
 The **Metric trends** table displays metrics for the last six months, with monthly values, percentage changes in the past six months, and trend sparklines.
-
-The change percentage compares the first full month of available statistics to the last completed month, excluding the current month.
-
-Values in green indicate positive changes, and values in red indicate negative changes.
-The icons next to the values indicate upward trends {{< icon name="trend-up" >}} or downward trends {{< icon name="trend-down" >}}.
-
-Upward trends are positive (green) for some metrics (like [deployment frequency](dora_metrics.md#deployment-frequency)), but negative (red) for others (like [mean time to merge](merge_request_analytics.md)).
 
 ### GitLab Duo usage metrics
 

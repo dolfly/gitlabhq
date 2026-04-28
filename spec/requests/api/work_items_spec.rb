@@ -182,6 +182,28 @@ RSpec.describe API::WorkItems, feature_category: :portfolio_management do
         expect(response).to have_gitlab_http_status(:not_found)
       end
     end
+
+    context 'when requesting title_html' do
+      context 'when the title contains a cross-project reference to a private project' do
+        let_it_be(:private_project) { create(:project, :private) }
+        let_it_be(:private_work_item) { create(:work_item, project: private_project, title: 'Secret') }
+        let_it_be(:work_item_with_reference) do
+          create(:work_item, project: project, title: "#{private_project.full_path}##{private_work_item.iid}")
+        end
+
+        it 'does not expose the private work item title in title_html to a user without access' do
+          # Banzai renders cross-project references at write time without a user context, so the
+          # raw cached column contains the private title in an <a title="..."> attribute.
+          expect(work_item_with_reference.title_html).to include('Secret')
+
+          get api("/projects/#{project.id}/-/work_items/#{work_item_with_reference.iid}", user),
+            params: { fields: 'title_html' }
+
+          expect(response).to have_gitlab_http_status(:ok)
+          expect(json_response['title_html']).not_to include('Secret')
+        end
+      end
+    end
   end
 
   describe 'GET /groups/:id/-/work_items' do

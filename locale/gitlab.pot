@@ -7592,6 +7592,9 @@ msgstr ""
 msgid "AiImpactAnalytics|Number of users who used at least one GitLab Duo or GitLab Duo Agent Platform feature."
 msgstr ""
 
+msgid "AiImpactAnalytics|Percentage change compared to the previous time period."
+msgstr ""
+
 msgid "AiImpactAnalytics|Root Cause Analysis usage"
 msgstr ""
 
@@ -7602,6 +7605,9 @@ msgid "AiImpactAnalytics|Value can't be calculated due to insufficient data."
 msgstr ""
 
 msgid "AiImpactAnalytics|Value can't be calculated due to insufficient data. Change calculation requires at least six months of historical data."
+msgstr ""
+
+msgid "AiImpactAnalytics|Value can't be calculated due to insufficient data. No data is available for the previous time period."
 msgstr ""
 
 msgid "AiModelDeprecation|Change model"
