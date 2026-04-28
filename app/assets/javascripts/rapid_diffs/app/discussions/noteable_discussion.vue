@@ -100,6 +100,9 @@ export default {
     resolveWithIssuePath() {
       return !this.discussion.resolved ? this.discussion.resolve_with_issue_path : '';
     },
+    showResolveDiscussionToggle() {
+      return Boolean(this.toggleResolveNote) && this.resolvable && this.canResolve;
+    },
   },
   methods: {
     async toggleResolve() {
@@ -144,7 +147,7 @@ export default {
 
       this.$emit('stopReplying');
     }),
-    async saveNote(noteText) {
+    async saveNote(noteText, shouldResolve) {
       if (!noteText) {
         this.cancelReplyForm();
         return;
@@ -158,13 +161,16 @@ export default {
 
       try {
         await this.store.replyToDiscussion(this.discussion, noteText);
+        if (shouldResolve) {
+          await this.toggleResolve();
+        }
         this.$emit('stopReplying');
       } catch (e) {
         const message = getNoteFormErrorMessages(e.response)[0];
         createAlert({ message, parent: this.$el });
       }
     },
-    async saveDraft(noteText) {
+    async saveDraft(noteText, shouldResolve) {
       if (!noteText) {
         this.cancelReplyForm();
         return;
@@ -177,7 +183,7 @@ export default {
       }
 
       try {
-        await this.store.addDraftToDiscussion(this.discussion, noteText);
+        await this.store.addDraftToDiscussion(this.discussion, noteText, shouldResolve);
         this.$emit('stopReplying');
       } catch (e) {
         const message = getNoteFormErrorMessages(e.response)[0];
@@ -233,6 +239,8 @@ export default {
             :save-draft="canStartReview ? saveDraft : null"
             :has-drafts="Boolean(store.hasDrafts)"
             :request-last-note-editing="() => requestLastNoteEditing(discussion)"
+            :show-resolve-discussion-toggle="showResolveDiscussionToggle"
+            :discussion-resolved="discussion.resolved"
             autofocus
             :autosave-key="autosaveKey"
             @cancel="cancelReplyForm"

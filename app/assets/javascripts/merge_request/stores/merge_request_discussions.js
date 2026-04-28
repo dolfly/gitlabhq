@@ -154,10 +154,10 @@ export const useMergeRequestDiscussions = defineStore('mergeRequestDiscussions',
     diffDiscussions.removeNewFileDiscussionForm(discussion);
   }
 
-  async function addDraftToDiscussion(discussion, noteText) {
+  async function addDraftToDiscussion(discussion, noteText, resolveDiscussion = false) {
     const { draftsPath } = notes.notesData;
     const { diffRefs } = useMergeRequestVersions();
-    const data = buildDraftReplyData({ discussion, noteText, diffRefs });
+    const data = buildDraftReplyData({ discussion, noteText, diffRefs, resolveDiscussion });
     await draftNotes.addDraftToDiscussion({ endpoint: draftsPath, data });
   }
 

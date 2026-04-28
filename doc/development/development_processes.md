@@ -62,8 +62,8 @@ In these cases, use the following workflow:
    - [User Experience (UX)](https://handbook.gitlab.com/handbook/product/ux/)
    - [Security](https://handbook.gitlab.com/handbook/security/)
    - [Quality](https://handbook.gitlab.com/handbook/engineering/quality/)
-     - [Engineering Productivity](https://handbook.gitlab.com/handbook/engineering/infrastructure/engineering-productivity/)
-   - [Infrastructure](https://handbook.gitlab.com/handbook/engineering/infrastructure/)
+     - [Engineering Productivity](https://handbook.gitlab.com/handbook/engineering/infrastructure-platforms/developer-experience/engineering-productivity/)
+   - [Infrastructure](https://handbook.gitlab.com/handbook/engineering/infrastructure-platforms/)
 
    You can skip this step for MRs authored by EMs or Staff Engineers responsible
    for their area.

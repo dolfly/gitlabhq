@@ -2,8 +2,8 @@
 stage: AI-powered
 group: Agent Foundations
 info: To determine the technical writer assigned to the Stage/Group associated with this page, see <https://handbook.gitlab.com/handbook/product/ux/technical-writing/#assignments>
-description: Configure access to the GitLab Duo Agent Platform.
-title: Configure access to the GitLab Duo Agent Platform
+description: Configure access to GitLab Duo.
+title: Configure access to GitLab Duo
 ---
 
 {{< details >}}
@@ -19,10 +19,10 @@ title: Configure access to the GitLab Duo Agent Platform
 
 {{< /history >}}
 
-You can [turn GitLab Duo on or off](../../../user/duo_agent_platform/turn_on_off.md#turn-gitlab-duo-on-or-off) for a group,
-or restrict access to GitLab Duo and Agent Platform to specific groups only.
+You can [turn GitLab Duo on or off](../../../user/duo_agent_platform/turn_on_off.md#turn-gitlab-duo-on-or-off)
+for a group or restrict access to GitLab Duo for one or more groups.
 
-## Give access to Agent Platform features
+## Restrict access to GitLab Duo
 
 {{< history >}}
 
@@ -39,31 +39,36 @@ Prerequisites:
 
 - The Owner role for the top-level group.
 
-To give access to specific Agent Platform features for a top-level group:
+To restrict access to GitLab Duo for a top-level group:
 
 1. In the top bar, select **Search or go to** and find your group.
 1. In the left sidebar, select **Settings** > **GitLab Duo**.
 1. Select **Change configuration**.
-1. Under **Limit access based on group membership**, select **Add group**.
-1. From the dropdown list, select an existing subgroup.
+1. Under **Restrict access based on group membership**, select **Add group**.
+1. From the dropdown list, select a group.
 
-   When you add the first group, a default **All eligible users** rule is also added.
+   When you select the first group, a default **All eligible users** rule is also added.
    You can use this rule to configure access for all other users.
-   This rule is automatically deleted when it has no access to GitLab Duo
-   or Agent Platform and all existing groups are removed.
+   This rule is automatically deleted when the group has no access to GitLab Duo Non-Agentic
+   or GitLab Duo Agent Platform and all existing groups are removed.
 
-1. Select the features that direct group members can access.
+1. Select whether direct group members can access
+   GitLab Duo Non-Agentic and GitLab Duo Agent Platform.
 1. Select **Save changes**.
 
-These settings apply to:
+These settings apply to the following users:
 
-- Users who are direct members of one of the configured groups under **Limit access based on group membership**, and they are executing an AI action in a project or group within this top-level group.
-- Users who have the top-level group as the [default GitLab Duo namespace](../../../user/profile/preferences.md#set-a-default-gitlab-duo-namespace), and they are not a member of the top-level group where the AI action is taking place.
+- Users who are direct members of one of the groups
+  configured under **Restrict access based on group membership**
+  and who execute an AI action in a project or subgroup of the top-level group.
+- Users who have the top-level group as the
+  [default GitLab Duo namespace](../../../user/profile/preferences.md#set-a-default-gitlab-duo-namespace)
+  and who are not members of the top-level group where the AI action is executed.
 
-When you configure group-based access controls, you can select only groups that are direct subgroups of the top-level group. You cannot use nested subgroups in access control rules.
+When you configure access controls, you can select only groups
+that are direct subgroups of the top-level group.
+You cannot use nested subgroups in access control rules.
 
-> [!note]
-> If groups are configured, users must be direct members of one of those groups to have access to GitLab Duo and Agent Platform features or you can use the **All eligible users** configuration. Access is additionally determined by other access methods.
 {{< /tab >}}
 
 {{< tab title="On GitLab Self-Managed" >}}
@@ -72,28 +77,31 @@ Prerequisites:
 
 - Administrator access.
 
-To give access to specific Agent Platform features for an instance:
+To restrict access to GitLab Duo for an instance:
 
 1. In the upper-right corner, select **Admin**.
 1. In the left sidebar, select **GitLab Duo**.
 1. Select **Change configuration**.
-1. Under **Limit access based on group membership**, select **Add group**.
-1. From the dropdown list, select an existing group.
+1. Under **Restrict access based on group membership**:
+   - To add an existing group, select **Add group**.
+   - To create a new group, select **Create group**.
+1. From the dropdown list, select a group.
 
-   When you add the first group, a default **All eligible users** rule is also added.
+   When you select the first group, a default **All eligible users** rule is also added.
    You can use this rule to configure access for all other users.
-   This rule is automatically deleted when it has no access to GitLab Duo
-   or Agent Platform and all existing groups are removed.
+   This rule is automatically deleted when the group has no access to GitLab Duo Non-Agentic
+   or GitLab Duo Agent Platform and all existing groups are removed.
 
-1. Select the features that direct group members can access.
+1. Select whether direct group members can access
+   GitLab Duo Non-Agentic and GitLab Duo Agent Platform.
 1. Select **Save changes**.
 
-These settings apply to users who are direct members of one of the configured groups under **Limit access based on group membership**. The user can now access these features when they are turned on.
+These settings apply to users who are direct members of one of the groups
+configured under **Restrict access based on group membership**.
 
-When you configure group-based access controls, you can select only top-level groups. You cannot use subgroups in access control rules.
+When you configure access controls, you can select only top-level groups.
+You cannot use subgroups in access control rules.
 
-> [!note]
-> If groups are configured, users must be direct members of one of those groups to have access to GitLab Duo and Agent Platform features or you can use the **All eligible users** configuration. Access is additionally determined by other access methods.
 {{< /tab >}}
 
 {{< /tabs >}}

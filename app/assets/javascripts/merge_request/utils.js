@@ -93,10 +93,10 @@ export function buildDraftLineDiscussionData({ discussion, noteBody, viewConfig,
   };
 }
 
-export function buildDraftReplyData({ discussion, noteText, diffRefs }) {
+export function buildDraftReplyData({ discussion, noteText, diffRefs, resolveDiscussion = false }) {
   return {
     in_reply_to_discussion_id: discussion.reply_id,
-    draft_note: { note: noteText },
+    draft_note: { note: noteText, resolve_discussion: resolveDiscussion },
     merge_request_diff_head_sha: diffRefs.head_sha,
   };
 }

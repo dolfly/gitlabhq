@@ -7829,6 +7829,9 @@ msgstr ""
 msgid "AiPowered|GitLab Credits dashboard"
 msgstr ""
 
+msgid "AiPowered|GitLab Duo"
+msgstr ""
+
 msgid "AiPowered|GitLab Duo Agent Platform"
 msgstr ""
 
@@ -7839,9 +7842,6 @@ msgid "AiPowered|GitLab Duo Core available to all users"
 msgstr ""
 
 msgid "AiPowered|GitLab Duo Model Selection"
-msgstr ""
-
-msgid "AiPowered|GitLab Duo Non-Agentic"
 msgstr ""
 
 msgid "AiPowered|GitLab Duo Self-Hosted"
@@ -7875,9 +7875,6 @@ msgid "AiPowered|Learn more"
 msgstr ""
 
 msgid "AiPowered|Learn more about GitLab Credits (opens in new window)"
-msgstr ""
-
-msgid "AiPowered|Limit access based on group membership"
 msgstr ""
 
 msgid "AiPowered|Local AI Gateway URL"
@@ -7934,7 +7931,10 @@ msgstr ""
 msgid "AiPowered|Remove"
 msgstr ""
 
-msgid "AiPowered|Restrict access to GitLab Duo Non-Agentic or GitLab Duo Agent Platform. By default, all eligible users can access all configured AI features."
+msgid "AiPowered|Restrict access based on group membership"
+msgstr ""
+
+msgid "AiPowered|Restrict access to GitLab Duo. By default, all eligible users can access all configured AI features."
 msgstr ""
 
 msgid "AiPowered|Save on GitLab Credits with monthly commitments"

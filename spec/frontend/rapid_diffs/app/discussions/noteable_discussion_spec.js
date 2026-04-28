@@ -324,8 +324,8 @@ describe('NoteableDiscussion', () => {
       it('calls store.addDraftToDiscussion and closes form', async () => {
         const discussion = createDiscussion({ isReplying: true });
         createComponent({ props: { discussion } });
-        await wrapper.findComponent(NoteForm).props('saveDraft')('draft text');
-        expect(store.addDraftToDiscussion).toHaveBeenCalledWith(discussion, 'draft text');
+        await wrapper.findComponent(NoteForm).props('saveDraft')('draft text', false);
+        expect(store.addDraftToDiscussion).toHaveBeenCalledWith(discussion, 'draft text', false);
         expect(wrapper.emitted('stopReplying')).toStrictEqual([[]]);
       });
 
@@ -515,5 +515,60 @@ describe('NoteableDiscussion', () => {
         }),
       );
     });
+  });
+
+  describe('resolve checkbox in reply form', () => {
+    const resolvableNote = {
+      id: 'note-1',
+      resolvable: true,
+      current_user: { can_resolve_discussion: true },
+    };
+
+    it.each`
+      scenario                        | resolvable | hasToggle | expected
+      ${'resolvable with toggle'}     | ${true}    | ${true}   | ${true}
+      ${'resolvable without toggle'}  | ${true}    | ${false}  | ${false}
+      ${'non-resolvable with toggle'} | ${false}   | ${true}   | ${false}
+    `(
+      'sets showResolveDiscussionToggle=$expected for $scenario',
+      ({ resolvable, hasToggle, expected }) => {
+        const noteProps = resolvable ? resolvableNote : {};
+        createComponent({
+          props: {
+            discussion: createDiscussion(
+              { isReplying: true, resolvable, resolved: false },
+              noteProps,
+            ),
+            ...(hasToggle ? { toggleResolveNote: jest.fn() } : {}),
+          },
+        });
+        expect(wrapper.findComponent(NoteForm).props('showResolveDiscussionToggle')).toBe(expected);
+      },
+    );
+
+    it.each`
+      shouldResolve | expectToggle
+      ${true}       | ${true}
+      ${false}      | ${false}
+    `(
+      'toggleResolveNote called=$expectToggle when shouldResolve=$shouldResolve',
+      async ({ shouldResolve, expectToggle }) => {
+        const toggleResolveNote = jest.fn().mockResolvedValue();
+        const discussion = createDiscussion(
+          { isReplying: true, resolvable: true, resolved: false },
+          resolvableNote,
+        );
+        createComponent({
+          props: { discussion, toggleResolveNote },
+        });
+        await wrapper.findComponent(NoteForm).props('saveNote')('test note', shouldResolve);
+        expect(store.replyToDiscussion).toHaveBeenCalledWith(discussion, 'test note');
+        if (expectToggle) {
+          expect(toggleResolveNote).toHaveBeenCalledWith(discussion);
+        } else {
+          expect(toggleResolveNote).not.toHaveBeenCalled();
+        }
+      },
+    );
   });
 });

@@ -373,7 +373,7 @@ For more information, see the [privacy and security details of the Atlassian Mar
 
 When working with the GitLab for Jira Cloud app, you might encounter the following issues.
 
-For administrator documentation, see [GitLab for Jira Cloud app administration](../../administration/settings/jira_cloud_app_troubleshooting.md).
+For administrator troubleshooting, see [GitLab for Jira Cloud app administration](../../administration/settings/jira_cloud_app_troubleshooting.md).
 
 ### Error: `Failed to link group`
 

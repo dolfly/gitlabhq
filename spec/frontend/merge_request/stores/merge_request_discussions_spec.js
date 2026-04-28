@@ -590,7 +590,7 @@ describe('mergeRequestDiscussions store', () => {
         endpoint: '/drafts',
         data: {
           in_reply_to_discussion_id: 'reply-1',
-          draft_note: { note: 'draft reply' },
+          draft_note: { note: 'draft reply', resolve_discussion: false },
           merge_request_diff_head_sha: 'head222',
         },
       });

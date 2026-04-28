@@ -19,7 +19,7 @@ a level that is difficult to manage.
 Test heuristics can help solve this problem. They concisely address many of the common ways bugs
 manifest themselves in our code. When designing our tests, take time to review known test heuristics to inform
 our test design. We can find some helpful heuristics documented in the Handbook in the
-[Test Engineering](https://handbook.gitlab.com/handbook/engineering/infrastructure/test-platform/test-engineering/#test-heuristics) section.
+[Testing Guide](https://handbook.gitlab.com/handbook/engineering/testing/).
 
 ## RSpec
 

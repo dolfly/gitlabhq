@@ -96,6 +96,29 @@ RSpec.describe Gitlab::Workhorse, feature_category: :gitaly do
       end
     end
 
+    context 'when client_name is provided' do
+      subject do
+        described_class.send_git_archive(
+          repository,
+          ref: ref,
+          format: format,
+          append_sha: nil,
+          path: path,
+          include_lfs_blobs: include_lfs_blobs,
+          exclude_paths: exclude_paths,
+          client_name: 'gkg-indexer'
+        )
+      end
+
+      it 'includes client_name in call_metadata' do
+        _, _, params = decode_workhorse_header(subject)
+
+        expect(params.dig('GitalyServer', 'call_metadata')).to include(
+          'client_name' => 'gkg-indexer'
+        )
+      end
+    end
+
     context 'when exclude_paths is present' do
       let(:exclude_paths) { %w[migrations test] }
 
@@ -253,6 +276,18 @@ RSpec.describe Gitlab::Workhorse, feature_category: :gitaly do
         ).to_json
       }.deep_stringify_keys)
     end
+
+    context 'when client_name is provided' do
+      subject { described_class.send_changed_paths(repository, requests, client_name: 'gkg-indexer') }
+
+      it 'includes client_name in call_metadata' do
+        _, _, params = decode_workhorse_header(subject)
+
+        expect(params.dig('GitalyServer', 'call_metadata')).to include(
+          'client_name' => 'gkg-indexer'
+        )
+      end
+    end
   end
 
   describe '.send_list_blobs' do
@@ -278,6 +313,25 @@ RSpec.describe Gitlab::Workhorse, feature_category: :gitaly do
           with_paths: true
         ).to_json
       }.deep_stringify_keys)
+    end
+
+    context 'when client_name is provided' do
+      subject do
+        described_class.send_list_blobs(
+          repository,
+          revisions,
+          bytes_limit: 1_048_576,
+          client_name: 'gkg-indexer'
+        )
+      end
+
+      it 'includes client_name in call_metadata' do
+        _, _, params = decode_workhorse_header(subject)
+
+        expect(params.dig('GitalyServer', 'call_metadata')).to include(
+          'client_name' => 'gkg-indexer'
+        )
+      end
     end
   end
 

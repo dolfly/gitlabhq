@@ -24,13 +24,11 @@ To enable debug logging:
    - For Windows or Linux, press <kbd>Control</kbd>+<kbd>,</kbd>.
 1. Select **Extensions** > **GitLab** > **Other**.
 1. Under **GitLab: Debug**, select the checkbox to turn on debug mode.
-1. Reload the window to restart the extension:
-   - For macOS:
-     1. Press <kbd>Command</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd>.
-     1. Type `reload window` and select **Developer: Reload Window**.
-   - For Windows or Linux:
-     1. Press <kbd>Control</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd>.
-     1. Type `reload window` and select **Developer: Reload Window**.
+1. Reload the window to restart the extension.
+   1. Open the Command Palette:
+      - For macOS, press <kbd>Command</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd>.
+      - For Windows or Linux, press <kbd>Control</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd>.
+   1. Type `Developer: Reload Window` and press <kbd>Enter</kbd>.
 
 ### View debug logs
 
@@ -211,40 +209,42 @@ You might encounter the following network and connectivity errors.
 
 ### Error: `407 Access Denied` failure with a proxy
 
-If you use an authenticated proxy, you might encounter an error like `407 Access Denied (authentication_failed)`:
+If you use an authenticated proxy, you might encounter a `407 Access Denied (authentication_failed)`
+error.
+
+For example:
 
 ```plaintext
 Request failed: Can't add GitLab account for https://gitlab.com. Check your instance URL and network connection.
 Fetching resource from https://gitlab.com/api/v4/personal_access_tokens/self failed
 ```
 
-You must [enable proxy authentication](../language_server/_index.md#enable-proxy-authentication)
+To resolve this error, [enable proxy authentication](../language_server/_index.md#enable-proxy-authentication)
 for the GitLab Language Server.
 
-### Configure self-signed certificates
+### Errors with custom certificates
 
-To use self-signed certificates to connect to your GitLab instance, configure them using these settings.
-These settings are community contributions, because the GitLab team uses a public CA. None of the fields are required.
+If you use custom certificates to connect to your GitLab instance, such as self-signed certificates,
+you might encounter errors.
 
-Prerequisites:
+These errors can occur if your certificates use the following settings:
 
-- You're not using the [`http.proxy` setting](https://code.visualstudio.com/docs/setup/network#_legacy-proxy-server-support)
-  in VS Code. For more information, see [issue 314](https://gitlab.com/gitlab-org/gitlab-vscode-extension/-/issues/314).
+| Setting name                     | Information |
+|----------------------------------|-------------|
+| `gitlab.ca`                      | Deprecated. See [the SSL setup guide](ssl.md) for more information on how to set up your self-signed CA.|
+| `gitlab.cert`                    | Unsupported. See [epic 6244](https://gitlab.com/groups/gitlab-org/-/epics/6244). |
+| `gitlab.certKey`                 | Unsupported. See [epic 6244](https://gitlab.com/groups/gitlab-org/-/epics/6244). |
+| `gitlab.ignoreCertificateErrors` | Unsupported. See [epic 6244](https://gitlab.com/groups/gitlab-org/-/epics/6244). |
 
-| Setting name | Default | Information |
-| ------------ | :-----: | ----------- |
-| `gitlab.ca`  | null    | Deprecated. See [the SSL setup guide](ssl.md) for more information on how to set up your self-signed CA.<br><br>For specific rules and formatting, see [the NodeJS `ca` documentation](https://nodejs.org/docs/latest-v22.x/api/tls.html#:~:text=list%20as%20trusted.-,ca,-%3Cstring%3E%20%7C). |
-| `gitlab.cert`| null    | Unsupported. See [epic 6244](https://gitlab.com/groups/gitlab-org/-/epics/6244). If GitLab Self-Managed requires a custom certificate or key pair, set this option to point to your certificate file. See `gitlab.certKey`.<br><br>For specific rules and formatting, see [the NodeJS `cert` documentation](https://nodejs.org/docs/latest-v22.x/api/tls.html#:~:text=CERTIFICATE%22%2C%20and%20%22CERTIFICATE%22.-,cert,-%3Cstring%3E%20%7C). |
-| `gitlab.certKey`| null    | Unsupported. See [epic 6244](https://gitlab.com/groups/gitlab-org/-/epics/6244). If GitLab Self-Managed requires a custom certificate or key pair, set this option to point to your certificate key file. See `gitlab.cert`.<br><br>For specific rules and formatting, see [the NodeJS `key` documentation](https://nodejs.org/docs/latest-v22.x/api/tls.html#:~:text=for%20more%20information.-,key,-%3Cstring%3E%20%7C). |
-| `gitlab.ignoreCertificateErrors` | false   | Unsupported. See [epic 6244](https://gitlab.com/groups/gitlab-org/-/epics/6244). If you use GitLab Self-Managed with no SSL certificate, or have certificate issues that prevent you from using the extension, set this option to `true` to ignore certificate errors. |
+To resolve, see [configure the extension for Custom Certificate Authorities](https://gitlab.com/gitlab-org/gitlab-vscode-extension/-/blob/main/docs/user/custom-certificates.md).
 
 ### Expired SSL certificate
 
-In some cases, certificates can be falsely classified as expired. This can result in the
-error `API request failed - Error: certificate has expired`. If you encounter this issue, you can disable
-VS Code support for system certificates.
+You might encounter a false expired SSL certificate error. For example:
 
-To disable system certificates:
+`API request failed - Error: certificate has expired`.
+
+To resolve this error, disable system certificates:
 
 1. In VS Code, open the Settings editor:
    - For macOS, press <kbd>Command</kbd>+<kbd>,</kbd>.
@@ -278,54 +278,59 @@ To troubleshoot GitLab Duo errors in VS Code:
 
 For support with Code Suggestions, see [troubleshooting Code Suggestions](../../user/project/repository/code_suggestions/troubleshooting.md#vs-code-troubleshooting).
 
-### Network issues
+### GitLab Duo returns `HTTP/1.1` responses instead of WebSocket endpoints
 
-If you are seeing `HTTP/1.1` responses from GitLab Duo rather than `/-/cable`
-WebSocket endpoints in your logs, your WebSocket connections may be blocked.
+You might see `HTTP/1.1` responses from GitLab Duo in your logs instead of `/-/cable` WebSocket
+endpoints.
 
-Your GitLab instance must allow inbound WebSocket connections from IDE clients.
-Ask your network administrator to
-[allow WebSocket traffic to your GitLab instance](../../administration/gitlab_duo/configure/_index.md#allow-inbound-connections-from-clients-to-the-gitlab-instance)
-if you suspect this is the issue.
+This occurs when your GitLab instance blocks WebSocket connections.
+
+To resolve this error, ask your network administrator to modify your GitLab instance to
+[allow inbound WebSocket connections from IDE clients](../../administration/gitlab_duo/configure/_index.md#allow-inbound-connections-from-clients-to-the-gitlab-instance).
 
 ### GitLab Duo Chat fails to initialize in remote environments
 
 When using GitLab Duo Chat in remote development environments (such as browser-based VS Code or remote
 SSH connections), you might encounter initialization failures like:
 
-- Blank or non-loading Chat panel.
-- Errors in logs: `The webview didn't initialize in 10000ms`.
-- Extension attempting to connect to inaccessible local URLs.
+- A blank or non-loading Chat panel.
+- Errors in logs, such as `The webview didn't initialize in 10000ms`.
+- The extension attempts to connect to inaccessible local URLs.
 
-To resolve these issues:
+To resolve these errors:
 
 1. In VS Code, open the Settings editor:
    - For macOS, press <kbd>Command</kbd>+<kbd>,</kbd>.
    - For Windows or Linux, press <kbd>Control</kbd>+<kbd>,</kbd>.
 1. In the upper-right corner, select **Open Settings (JSON)** to edit your `settings.json` file.
-   - Alternatively, press <kbd>F1</kbd>, enter **Preferences: Open Settings (JSON)**, and select it.
 1. Add or modify this setting:
 
    ```json
    "gitlab.featureFlags.languageServerWebviews": false
    ```
 
-1. Save your changes and reload VS Code.
+1. Save your changes and reload the window:.
+   1. Open the Command Palette:
+      - For macOS, press <kbd>Command</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd>.
+      - For Windows or Linux, press <kbd>Control</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd>.
+   1. Type `Developer: Reload Window` and press <kbd>Enter</kbd>.
 
 For updates on a permanent solution, see
 [issue #1944](https://gitlab.com/gitlab-org/gitlab-vscode-extension/-/issues/1944) and
 [Issue #1943](https://gitlab.com/gitlab-org/gitlab-vscode-extension/-/issues/1943)
 
-### IDE commands fail or run indefinitely
+### GitLab Duo commands fail or run indefinitely
 
-When using GitLab Duo Agentic Chat or the Software Development Flow in your IDE,
-GitLab Duo can get stuck in a loop or have difficulty running commands.
+When you use GitLab Duo Agentic Chat or the Software Development Flow in your IDE, GitLab Duo might
+get stuck in a loop or have difficulty running commands.
 
-This issue can occur when you are using shell themes or integrations, like `Oh My ZSH!` or `powerlevel10k`.
-When a GitLab Duo agent spawns a terminal, a theme or integration can prevent commands from running properly.
+This issue can occur when you use shell themes or integrations, such as `Oh My ZSH!` or `powerlevel10k`.
+When a GitLab Duo agent creates a terminal, the shell theme or integration can prevent commands from
+running properly.
 
-As a workaround, use a simpler theme for commands sent by agents.
-[Issue 2070](https://gitlab.com/gitlab-org/gitlab-vscode-extension/-/issues/2070) tracks improvements to this behavior so this workaround is no longer needed.
+As a workaround, follow the instructions below to use a simpler theme for commands sent by agents.
+
+For more information about a fix, see [issue 2116](https://gitlab.com/gitlab-org/gitlab-vscode-extension/-/work_items/2116).
 
 #### Edit your `.zshrc` file
 
@@ -345,7 +350,7 @@ export ZSH="$HOME/.oh-my-zsh"
 
 # Decide whether to load a full terminal environment,
 # or keep it minimal for agentic AI in IDEs
-if [[ "$TERM_PROGRAM" == "vscode" || "$TERMINAL_EMULATOR" == "JetBrains-JediTerm" ]]; then
+if [[ "$TERM_PROGRAM" == "vscode" ]]; then
   echo "IDE agentic environment detected, not loading full shell integrations"
 else
   # Oh My ZSH
@@ -360,7 +365,7 @@ fi
 
 #### Edit your Bash shell
 
-In VS Code, you can turn off advanced prompts in Bash, so that agents don't initiate them.
+In VS Code, you can turn off advanced prompts in Bash.
 
 Edit your `~/.bashrc` or `~/.bash_profile` file to include this code:
 
@@ -369,7 +374,7 @@ Edit your `~/.bashrc` or `~/.bash_profile` file to include this code:
 
 # Decide whether to load a full terminal environment,
 # or keep it minimal for Agentic AI in IDEs
-if [[ "$TERM_PROGRAM" == "vscode" || "$TERMINAL_EMULATOR" == "JetBrains-JediTerm" ]]; then
+if [[ "$TERM_PROGRAM" == "vscode" ]]; then
   echo "IDE agentic environment detected, not loading full shell integrations"
 
   # Keep only essential settings for agents
@@ -393,23 +398,27 @@ fi
 
 ## Required information for support
 
-Before contacting Support, make sure the latest GitLab for VS Code extension is installed. All releases
-are available on the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=GitLab.gitlab-workflow)
-under the **Version History** tab.
+Before you contact Support, make sure the latest GitLab for VS Code extension is installed.
+
+Find the latest releases in the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=GitLab.gitlab-workflow),
+in the **Version History** tab.
 
 Gather this information from affected users and provide it in your bug report:
 
 1. The error message shown to the user.
-1. Workflow and Language Server logs:
-   1. [Enable debug logs](#enable-debug-logs).
-   1. [Retrieve log files](#view-debug-logs) for the extension, and the Language Server.
+1. **GitLab** and **GitLab Language Server** [logs](#logs).
 1. Diagnostics output.
-   1. Open the Command Palette with <kbd>Command</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> or
-      <kbd>Control</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd>
-   1. Run the command `GitLab: Diagnostics`, and note the extension version.
+   1. Open the Command Palette:
+      - For macOS, press <kbd>Command</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd>.
+      - For Windows or Linux, press <kbd>Control</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd>.
+   1. Type `GitLab: Diagnostics` and press <kbd>Enter</kbd>.
+   1. Note the extension version.
 1. System details:
-   - In VS Code, go to **Code** > **About Visual Studio Code** and find **OS**.
-   - Machine specifications (CPU, RAM): Provide these from your machine. They are not accessible in the IDE.
+   - In VS Code, the **OS** details:
+     - For macOS, go to **Code** > **About Visual Studio Code** and find **OS**.
+     - For Windows or Linux, go to **Help** > **About** and find **OS**.
+   - Machine specifications (CPU, RAM): Provide these from your machine. They are not accessible in
+     the IDE.
 1. Describe the scope of impact. How many users are affected?
 1. Describe how to reproduce the error. Include a screen recording, if possible.
 1. Describe how other GitLab Duo features are affected:
@@ -418,5 +427,5 @@ Gather this information from affected users and provide it in your bug report:
    - Does GitLab Duo Chat in the Web IDE return responses?
 1. Perform extension isolation testing as described in the
    [GitLab for VS Code extension isolation guide](https://gitlab.com/gitlab-org/editor-extensions/gitlab-lsp/-/issues/814#step-2-extension-isolation-testing).
-   Try disabling (or uninstalling) all other extensions to determine if another extension is causing
-   the issue. This helps determine if the problem is with our extension, or from an external source.
+   Try disabling (or uninstalling) all other extensions to determine whether or not another extension
+   is causing the issue.

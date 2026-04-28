@@ -95,7 +95,7 @@ module Gitlab
 
       def send_git_archive(
         repository, ref:, format:, append_sha:, path: nil, include_lfs_blobs: true,
-        exclude_paths: [])
+        exclude_paths: [], client_name: nil)
         format ||= 'tar.gz'
         format = format.downcase
 
@@ -116,7 +116,7 @@ module Gitlab
         # workhorse ignores it.
         params['DisableCache'] = true if git_archive_cache_disabled?
         params['UseArchiveCleaner'] = git_archive_cache_cleaner_enabled?
-        params['GitalyServer'] = gitaly_server_hash(repository)
+        params['GitalyServer'] = gitaly_server_hash(repository, client_name: client_name)
 
         [
           SEND_DATA_HEADER,
@@ -152,9 +152,9 @@ module Gitlab
         ]
       end
 
-      def send_changed_paths(repository, requests)
+      def send_changed_paths(repository, requests, client_name: nil)
         params = {
-          'GitalyServer' => gitaly_server_hash(repository),
+          'GitalyServer' => gitaly_server_hash(repository, client_name: client_name),
           'FindChangedPathsRequest' => Gitaly::FindChangedPathsRequest.new(
             repository: repository.gitaly_repository,
             requests: requests
@@ -167,9 +167,9 @@ module Gitlab
         ]
       end
 
-      def send_list_blobs(repository, revisions, bytes_limit:)
+      def send_list_blobs(repository, revisions, bytes_limit:, client_name: nil)
         params = {
-          'GitalyServer' => gitaly_server_hash(repository),
+          'GitalyServer' => gitaly_server_hash(repository, client_name: client_name),
           'ListBlobsRequest' => Gitaly::ListBlobsRequest.new(
             repository: repository.gitaly_repository,
             revisions: revisions,
@@ -384,7 +384,7 @@ module Gitlab
         Base64.encode64(binary)
       end
 
-      def gitaly_server_hash(repository)
+      def gitaly_server_hash(repository, client_name: nil)
         metadata = Feature::Gitaly.server_feature_flags(
           user: ::Feature::Gitaly.user_actor,
           repository: repository,
@@ -392,6 +392,7 @@ module Gitlab
           group: ::Feature::Gitaly.group_actor(repository.container)
         )
         metadata['retry_config'] = retry_config
+        metadata['client_name'] = client_name if client_name.present?
 
         {
           address: Gitlab::GitalyClient.address(repository.shard),

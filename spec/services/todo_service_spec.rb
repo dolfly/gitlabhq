@@ -955,34 +955,132 @@ RSpec.describe TodoService, feature_category: :notifications do
     end
 
     describe '#close_merge_request' do
-      it 'marks related pending todos to the target for the user as done' do
+      it 'marks all todos as done for the current user regardless of action' do
+        todo = create(:todo, :mentioned, user: john_doe, project: project, target: mentioned_mr, author: author)
+        service.close_merge_request(mentioned_mr, john_doe)
+
+        expect(todo.reload).to be_done
+      end
+
+      it 'calls GraphqlTriggers.issuable_todo_updated' do
+        expect(GraphqlTriggers).to receive(:issuable_todo_updated).with(mentioned_mr)
+
+        service.close_merge_request(mentioned_mr, john_doe)
+      end
+
+      it 'marks assigned todos as done for all users' do
         first_todo = create(:todo, :assigned, user: john_doe, project: project, target: mentioned_mr, author: author)
-        second_todo = create(:todo, :assigned, user: john_doe, project: project, target: mentioned_mr, author: author)
+        second_todo = create(:todo, :assigned, user: author, project: project, target: mentioned_mr, author: john_doe)
         service.close_merge_request(mentioned_mr, john_doe)
 
         expect(first_todo.reload).to be_done
         expect(second_todo.reload).to be_done
       end
+
+      it 'marks review_requested todos as done for all users' do
+        todo = create(:todo, :review_requested, user: john_doe, project: project, target: mentioned_mr, author: author)
+        service.close_merge_request(mentioned_mr, john_doe)
+
+        expect(todo.reload).to be_done
+      end
+
+      it 'marks approval_required todos as done for all users' do
+        todo = create(:todo, :approval_required, user: john_doe, project: project, target: mentioned_mr, author: author)
+        service.close_merge_request(mentioned_mr, john_doe)
+
+        expect(todo.reload).to be_done
+      end
+
+      it 'marks added_approver todos as done for all users' do
+        todo = create(:todo, action: Todo::ADDED_APPROVER, user: john_doe, project: project, target: mentioned_mr, author: author)
+        service.close_merge_request(mentioned_mr, john_doe)
+
+        expect(todo.reload).to be_done
+      end
+
+      it 'does not mark todos with non-qualifying actions as done for other users' do
+        todo = create(:todo, :mentioned, user: author, project: project, target: mentioned_mr, author: john_doe)
+        service.close_merge_request(mentioned_mr, john_doe)
+
+        expect(todo.reload).to be_pending
+      end
+
+      context 'when merge_request_resolve_all_user_todos feature flag is disabled' do
+        before do
+          stub_feature_flags(merge_request_resolve_all_user_todos: false)
+        end
+
+        it 'does not mark todos with qualifying actions as done for other users' do
+          todo = create(:todo, :assigned, user: author, project: project, target: mentioned_mr, author: john_doe)
+          service.close_merge_request(mentioned_mr, john_doe)
+
+          expect(todo.reload).to be_pending
+        end
+      end
     end
 
     describe '#merge_merge_request' do
-      it 'marks related pending todos to the target for the user as done' do
+      it 'marks all todos as done for the current user regardless of action' do
+        todo = create(:todo, :mentioned, user: john_doe, project: project, target: mentioned_mr, author: author)
+        service.merge_merge_request(mentioned_mr, john_doe)
+
+        expect(todo.reload).to be_done
+      end
+
+      it 'calls GraphqlTriggers.issuable_todo_updated' do
+        expect(GraphqlTriggers).to receive(:issuable_todo_updated).with(mentioned_mr)
+
+        service.merge_merge_request(mentioned_mr, john_doe)
+      end
+
+      it 'marks assigned todos as done for all users' do
         first_todo = create(:todo, :assigned, user: john_doe, project: project, target: mentioned_mr, author: author)
-        second_todo = create(:todo, :assigned, user: john_doe, project: project, target: mentioned_mr, author: author)
+        second_todo = create(:todo, :assigned, user: author, project: project, target: mentioned_mr, author: john_doe)
         service.merge_merge_request(mentioned_mr, john_doe)
 
         expect(first_todo.reload).to be_done
         expect(second_todo.reload).to be_done
       end
 
-      it 'does not create todo for guests' do
+      it 'marks review_requested todos as done for all users' do
+        todo = create(:todo, :review_requested, user: john_doe, project: project, target: mentioned_mr, author: author)
         service.merge_merge_request(mentioned_mr, john_doe)
-        should_not_create_todo(user: guest, target: mentioned_mr, action: Todo::MENTIONED)
+
+        expect(todo.reload).to be_done
       end
 
-      it 'does not create directly addressed todo for guests' do
-        service.merge_merge_request(addressed_mr, john_doe)
-        should_not_create_todo(user: guest, target: addressed_mr, action: Todo::DIRECTLY_ADDRESSED)
+      it 'marks approval_required todos as done for all users' do
+        todo = create(:todo, :approval_required, user: john_doe, project: project, target: mentioned_mr, author: author)
+        service.merge_merge_request(mentioned_mr, john_doe)
+
+        expect(todo.reload).to be_done
+      end
+
+      it 'marks added_approver todos as done for all users' do
+        todo = create(:todo, action: Todo::ADDED_APPROVER, user: john_doe, project: project, target: mentioned_mr, author: author)
+        service.merge_merge_request(mentioned_mr, john_doe)
+
+        expect(todo.reload).to be_done
+      end
+
+      it 'does not mark todos with non-qualifying actions as done for other users' do
+        todo = create(:todo, :mentioned, user: author, project: project, target: mentioned_mr, author: john_doe)
+        service.merge_merge_request(mentioned_mr, john_doe)
+
+        expect(todo.reload).to be_pending
+      end
+
+      context 'when merge_request_resolve_all_user_todos feature flag is disabled' do
+        before do
+          stub_feature_flags(merge_request_resolve_all_user_todos: false)
+        end
+
+        it 'does not mark todos with qualifying actions as done for other users' do
+          todo = create(:todo, :assigned, user: author, project: project, target: mentioned_mr, author: john_doe)
+          service.merge_merge_request(mentioned_mr, john_doe)
+
+          expect(todo.reload).to be_pending
+        end
       end
     end
 
@@ -1479,9 +1577,8 @@ RSpec.describe TodoService, feature_category: :notifications do
       expect(another_project_todo.reload).to be_pending
     end
 
-    it 'fetches the pending todos with users preloaded' do
-      expect(PendingTodosFinder).to receive(:new)
-                                      .with(a_hash_including(preload_user_association: true)).and_call_original
+    it 'updates the todo count cache via Users::UpdateTodoCountCacheService' do
+      expect_next(Users::UpdateTodoCountCacheService).to receive(:execute)
 
       service.resolve_access_request_todos(project_requester)
     end

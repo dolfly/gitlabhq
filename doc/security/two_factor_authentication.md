@@ -251,7 +251,7 @@ You cannot use the API endpoint to disable 2FA for administrators.
 
 {{< /details >}}
 
-Top-level group Owners can disable two-factor authentication (2FA) for enterprise users.
+Top-level group Owners can disable two-factor authentication (2FA) for [enterprise users](../user/enterprise_user/_index.md).
 
 To disable 2FA:
 

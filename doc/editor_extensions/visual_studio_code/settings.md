@@ -85,8 +85,7 @@ This extension also integrates with some commands provided by VS Code:
 To learn how to change settings in VS Code, see the VS Code documentation for
 [User and Workspace Settings](https://code.visualstudio.com/docs/configure/settings).
 
-If you use self-signed certificates to connect to your GitLab instance, read the community-contributed
-[settings for self-signed certificates](troubleshooting.md#configure-self-signed-certificates).
+If you use self-signed certificates to connect to your GitLab instance, see [configure the extension for Custom Certificate Authorities](https://gitlab.com/gitlab-org/gitlab-vscode-extension/-/blob/main/docs/user/custom-certificates.md).
 
 | Setting | Default | Information |
 | ------- | ------- | ----------- |

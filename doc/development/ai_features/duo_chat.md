@@ -310,6 +310,28 @@ The `ai-gateway` job activates a cloud license and then assigns a GitLab Duo Pro
 
 For more information, see [AiGateway Scenarios](https://gitlab.com/gitlab-org/gitlab-qa/-/blob/master/docs/what_tests_can_be_run.md#aigateway-scenarios).
 
+## Client-side observability
+
+Duo Agentic Chat reports client-side errors to Sentry to support monitoring and triage.
+
+### Capture Sentry errors
+
+Use the `captureExceptionForDuoChat` wrapper in
+`ee/app/assets/javascripts/ai/duo_agentic_chat/observability/sentry_utils.js`
+instead of calling Sentry directly.
+The wrapper automatically adds the `feature_category: 'duo_chat'` tag to every exception.
+Callers can add extra tags, but cannot override `feature_category`.
+
+```javascript
+import { captureExceptionForDuoChat } from '../observability/sentry_utils';
+
+// Report an error with no extra context.
+captureExceptionForDuoChat(new Error('Something went wrong'));
+
+// Report an error with extra metadata.
+captureExceptionForDuoChat(error, { extra: { info, component: 'MyComponent' } });
+```
+
 ## Integrating with Duo Chat in the frontend
 
 You can add Duo Chat integration to your feature by using one of two shared
@@ -724,7 +746,7 @@ GitLab Duo Chat is enabled in the [Staging](https://staging.gitlab.com/users/sig
 Because GitLab Duo Chat is currently only available to members of groups in the
 Premium and Ultimate tiers, Staging Ref may be an easier place to test changes as a GitLab
 team member because
-[you can make yourself an instance Admin in Staging Ref](https://handbook.gitlab.com/handbook/engineering/infrastructure/environments/staging-ref/#admin-access)
+[you can make yourself an instance Admin in Staging Ref](https://handbook.gitlab.com/handbook/engineering/infrastructure-platforms/environments/staging-ref/#admin-access)
 and, as an Admin, easily create licensed groups for testing.
 
 ### Important Testing Considerations

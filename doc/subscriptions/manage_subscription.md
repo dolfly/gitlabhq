@@ -500,7 +500,18 @@ Example of a license sync request:
 
 {{< /details >}}
 
-To change the group linked to a GitLab.com subscription:
+Prerequisites:
+
+- A group namespace.
+
+Only one group namespace can be linked to a subscription.
+
+If your Premium or Ultimate subscription is on a personal namespace, before linking your subscription, you should either:
+
+- [Transfer your project](../user/project/working_with_projects.md#transfer-a-project) to a group.
+- [Convert your personal namespace to a group](../tutorials/convert_personal_namespace_to_group/_index.md) to preserve your existing URL.
+
+To link your subscription to a group or change the group linked to a GitLab.com subscription:
 
 1. Sign in to the [Customers Portal](https://customers.gitlab.com/customers/sign_in) with a
    [linked](billing_account.md#link-a-gitlabcom-account) GitLab.com account.
@@ -519,8 +530,6 @@ To change the group linked to a GitLab.com subscription:
    - Contact the partner to purchase additional seats now or at the end of your subscription term.
 
 1. Select **Confirm changes**.
-
-Only one namespace can be linked to a subscription.
 
 <i class="fa-youtube-play" aria-hidden="true"></i>
 For a demo, see [Linking GitLab Subscription to the Namespace](https://youtu.be/8iOsN8ajBUw).
@@ -542,4 +551,5 @@ You cannot transfer:
 - A subscription with compute minutes which is already linked to a namespace.
 - A subscription with a Premium or Ultimate plan to a namespace which already has a Premium or Ultimate plan.
 - A subscription with a GitLab Duo add-on to a namespace which already has a subscriptions with a GitLab Duo add-on.
+- A subscription with a Premium or Ultimate plan to a personal namespace.
 - A subscription purchased using a discount code.

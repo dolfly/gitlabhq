@@ -420,14 +420,18 @@ export const getNewWorkItemSharedCache = ({
       textColor: '#FFFFFF',
       __typename: 'WorkItemWidgetColor',
     },
-    status: {
-      ...widgetDefinitionsHash[WIDGET_TYPE_STATUS],
-      status:
-        draftWorkItemCache[WIDGET_TYPE_STATUS]?.status ||
-        widgetDefinitionsHash[WIDGET_TYPE_STATUS]?.defaultOpenStatus ||
-        null,
-      __typename: 'WorkItemWidgetStatus',
-    },
+    status: (() => {
+      const statusWidgetDefinition = widgetDefinitionsHash[WIDGET_TYPE_STATUS];
+      const { defaultOpenStatus, allowedStatuses } = statusWidgetDefinition || {};
+      const cachedStatus = draftWorkItemCache[WIDGET_TYPE_STATUS]?.status;
+      const isCachedStatusAllowed =
+        cachedStatus && allowedStatuses?.some((s) => s.name === cachedStatus.name);
+      return {
+        ...statusWidgetDefinition,
+        status: isCachedStatusAllowed ? cachedStatus : defaultOpenStatus || null,
+        __typename: 'WorkItemWidgetStatus',
+      };
+    })(),
     hierarchy: {
       ...widgetDefinitionsHash[WIDGET_TYPE_HIERARCHY],
       hasChildren: false,
@@ -754,14 +758,16 @@ export const legacyGetNewWorkItemSharedCache = ({
       }
 
       if (widgetName === WIDGET_TYPE_STATUS) {
-        const { defaultOpenStatus } = widgetDefinitions.find(
+        const statusWidgetDefinition = widgetDefinitions.find(
           (widget) => widget.type === WIDGET_TYPE_STATUS,
         );
+        const { defaultOpenStatus, allowedStatuses } = statusWidgetDefinition;
+        const cachedStatus = sharedCacheWidgets[WIDGET_TYPE_STATUS]?.status;
+        const isCachedStatusAllowed =
+          cachedStatus && allowedStatuses?.some((s) => s.name === cachedStatus.name);
         widgets.push({
           type: 'STATUS',
-          status: sharedCacheWidgets[WIDGET_TYPE_STATUS]
-            ? sharedCacheWidgets[WIDGET_TYPE_STATUS]?.status || defaultOpenStatus
-            : defaultOpenStatus,
+          status: isCachedStatusAllowed ? cachedStatus : defaultOpenStatus,
           __typename: 'WorkItemWidgetStatus',
         });
       }

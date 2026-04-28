@@ -441,7 +441,7 @@ Gateway API solution or an externally managed Ingress controller.
 - To discuss this change or learn more, see the [deprecation issue](https://gitlab.com/gitlab-org/gitlab/-/issues/589774).
 
 GitLab follows an
-[annual upgrade cadence for PostgreSQL](https://handbook.gitlab.com/handbook/engineering/infrastructure-platforms/data-access/database-framework/postgresql-upgrade-cadence/).
+[annual upgrade cadence for PostgreSQL](https://handbook.gitlab.com/handbook/engineering/data-engineering/database-excellence/database-frameworks/postgresql-upgrade-cadence/).
 
 Support for PostgreSQL 16 is scheduled for removal in GitLab 19.0.
 In GitLab 19.0, PostgreSQL 17 becomes the minimum required PostgreSQL version.
@@ -1100,7 +1100,7 @@ In GitLab 18.0, we are introducing a new data retention limit for GitLab.com Ult
 - Removal in GitLab 18.0 ([breaking change](https://docs.gitlab.com/update/terminology/#breaking-change))
 - To discuss this change or learn more, see the [deprecation issue](https://gitlab.com/gitlab-org/gitlab/-/issues/521663).
 
-GitLab follows an [annual upgrade cadence for PostgreSQL](https://handbook.gitlab.com/handbook/engineering/infrastructure-platforms/data-access/database-framework/postgresql-upgrade-cadence/).
+GitLab follows an [annual upgrade cadence for PostgreSQL](https://handbook.gitlab.com/handbook/engineering/data-engineering/database-excellence/database-frameworks/postgresql-upgrade-cadence/).
 
 Support for PostgreSQL 14 and 15 is scheduled for removal in GitLab 18.0.
 In GitLab 18.0, PostgreSQL 16 becomes the minimum required PostgreSQL version.
@@ -2094,7 +2094,7 @@ In milestone 17.0, we will remove the `pipelines` attribute from the API respons
 - Removal in GitLab 17.0 ([breaking change](https://docs.gitlab.com/update/terminology/#breaking-change))
 - To discuss this change or learn more, see the [deprecation issue](https://gitlab.com/groups/gitlab-org/-/epics/9065).
 
-GitLab follows an [annual upgrade cadence for PostgreSQL](https://handbook.gitlab.com/handbook/engineering/infrastructure-platforms/data-access/database-framework/postgresql-upgrade-cadence/).
+GitLab follows an [annual upgrade cadence for PostgreSQL](https://handbook.gitlab.com/handbook/engineering/data-engineering/database-excellence/database-frameworks/postgresql-upgrade-cadence/).
 
 Support for PostgreSQL 13 is scheduled for removal in GitLab 17.0.
 In GitLab 17.0, PostgreSQL 14 becomes the minimum required PostgreSQL version.
