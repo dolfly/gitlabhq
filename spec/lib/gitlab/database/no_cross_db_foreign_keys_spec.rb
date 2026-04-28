@@ -32,8 +32,6 @@ RSpec.describe 'cross-database foreign keys', feature_category: :database do
       'appearance_uploads.organization_id',                         # https://gitlab.com/gitlab-org/gitlab/-/issues/534207
       'application_settings.workspaces_oauth_application_id',       # https://gitlab.com/gitlab-org/gitlab/-/issues/574704
       'application_settings.web_ide_oauth_application_id',          # https://gitlab.com/gitlab-org/gitlab/-/issues/574704
-      'analytics_language_trend_repository_languages.programming_language_id', # https://gitlab.com/gitlab-org/gitlab/-/work_items/519895
-
       # https://gitlab.com/gitlab-org/gitlab/-/issues/560435
       'dingtalk_tracker_data.integration_id',
 

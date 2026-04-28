@@ -163,6 +163,15 @@ Doorkeeper.configure do
     end
   end
 
+  Doorkeeper::OAuth::ClientCredentialsRequest.prepend(
+    Module.new do
+      def initialize(server, client, parameters = {})
+        super
+        @parameters[:organization_id] ||= Gitlab::Current::Organization.new.organization.id
+      end
+    end
+  )
+
   application_class "Authn::OauthApplication"
   access_token_class "OauthAccessToken"
 end

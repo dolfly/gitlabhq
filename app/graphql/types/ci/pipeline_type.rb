@@ -10,6 +10,7 @@ module Types
       connection_type_class Types::CountableConnectionType
 
       authorize :read_pipeline
+      authorize_granular_token permissions: :read_pipeline, boundary: :project, boundary_type: :project
       present_using ::Ci::PipelinePresenter
 
       def self.authorization_scopes

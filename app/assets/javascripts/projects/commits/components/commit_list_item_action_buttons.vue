@@ -52,15 +52,20 @@ export default {
       size="small"
     />
     <gl-button
+      v-gl-tooltip
       category="tertiary"
       size="small"
       icon="folder-open"
       :href="browseFilesPath"
+      :title="__('Browse commit files')"
       :aria-label="__('Browse commit files')"
       class="gl-ml-5"
       data-testid="browse-files-button"
     />
-    <div v-if="commit.description" class="gl-border-l gl-ml-4 gl-border-l-section">
+    <div
+      class="gl-border-l gl-ml-4 gl-border-l-section"
+      :class="{ 'gl-invisible': !commit.description }"
+    >
       <expand-collapse-button
         :is-collapsed="isCollapsed"
         :anchor-id="anchorId"

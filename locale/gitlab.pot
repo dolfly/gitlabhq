@@ -67765,6 +67765,9 @@ msgstr ""
 msgid "SecurityProfiles|View job #"
 msgstr ""
 
+msgid "SecurityProfiles|View job #%{jobId}"
+msgstr ""
+
 msgid "SecurityProfiles|What are configuration profiles?"
 msgstr ""
 

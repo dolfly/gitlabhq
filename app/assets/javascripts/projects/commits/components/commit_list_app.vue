@@ -190,7 +190,7 @@ export default {
 </script>
 
 <template>
-  <div class="gl-mt-5">
+  <div class="gl-mt-5 gl-@container/panel">
     <commit-list-header @filter="handleFilter" @ref-change="handleRefChange" />
 
     <gl-loading-icon v-if="isLoading" size="md" class="gl-mt-5" />
@@ -204,7 +204,7 @@ export default {
               {{ getFormattedDate(group.day) }}
             </time>
           </h2>
-          <ul class="daily-commits-item gl-mb-6 gl-list-none gl-p-0">
+          <ul class="daily-commits-item gl-mb-6 gl-flex gl-list-none gl-flex-col gl-gap-3 gl-p-0">
             <commit-list-item v-for="commit in group.commits" :key="commit.id" :commit="commit" />
           </ul>
         </li>

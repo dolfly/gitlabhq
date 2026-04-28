@@ -923,7 +923,7 @@ RSpec.describe MergeRequests::MergeService, feature_category: :code_review_workf
       end
 
       context 'when not mergeable' do
-        let!(:error_message) { 'Merge request is not mergeable' }
+        let(:error_message) { 'Merge request is not mergeable' }
 
         context 'with failing CI' do
           before do

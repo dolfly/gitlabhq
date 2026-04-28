@@ -56,6 +56,10 @@ describe('CommitListItemActionButtons', () => {
       );
       expect(browseButton.attributes('aria-label')).toBe('Browse commit files');
     });
+
+    it('has a tooltip', () => {
+      expect(findBrowseFilesButton().attributes('title')).toBe('Browse commit files');
+    });
   });
 
   describe('expand/collapse button', () => {

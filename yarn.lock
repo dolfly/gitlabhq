@@ -1488,7 +1488,7 @@
   resolved "https://registry.yarnpkg.com/@gitlab/fonts/-/fonts-1.3.1.tgz#dd335ed25cb33927abc1d80dfbfa31fc93e9bd15"
   integrity sha512-/7Q5Sy9Q3pmutV/1EgURm3iDZtV0HcE4nTwFpHLCrGDdxQ3pNv6SdujzeJExnfiI5Y+1FGfOvKwOlmiVuyDtzA==
 
-"@gitlab/noop@^1.0.1", jackspeak@^3.1.2, "jackspeak@npm:@gitlab/noop@1.0.1", jsonify@^0.0.1, "jsonify@npm:@gitlab/noop@1.0.1":
+"@gitlab/noop@^1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@gitlab/noop/-/noop-1.0.1.tgz#71a831146ee02732b4a61d2d3c11204564753454"
   integrity sha512-s++4wjMYeDvBp9IO59DBrWjy8SE/gFkjTDO5ck2W0S6Vv7OlqgErwL7pHngAnrSmTJAzyUG8wHGqo0ViS4jn5Q==
@@ -1514,14 +1514,14 @@
   resolved "https://registry.yarnpkg.com/@gitlab/svgs/-/svgs-3.159.0.tgz#c097379b396b57f4f772ca6d1ec72e1d15faca3c"
   integrity sha512-qDv5ymm07F6/HYcgCW0YYl3WF+g4/SG0TW4DrfQD4sjnfOARw1laC3DwqkY6cR/hjfHBDCj+AYRX48L7T6mZjA==
 
-"@gitlab/ui@131.3.0":
-  version "131.3.0"
-  resolved "https://registry.yarnpkg.com/@gitlab/ui/-/ui-131.3.0.tgz#a9e27fc414942d63beb50b9f820fb7a6b052d41f"
-  integrity sha512-jqT4v0ijSkitSE7gYEesd1V/rwG4vtchmPRORL378eYPUyBNA/kN/iuMROSpierVw04pbsSvl+HsoM9OmnpeQg==
+"@gitlab/ui@132.1.0":
+  version "132.1.0"
+  resolved "https://registry.yarnpkg.com/@gitlab/ui/-/ui-132.1.0.tgz#79cdb158138e9b84b4c7d001f2491325b0e8aac2"
+  integrity sha512-0GGoWKI/IJMMcEUkQjOtaJMIqMrum29jWGbYoio/gJ4yapYjBPDLcq/FxnEL34Yytb4w2TJ0Z7N1bPHv/Spz3w==
   dependencies:
     "@floating-ui/dom" "1.7.6"
     echarts "^5.6.0"
-    gridstack "^12.4.2"
+    gridstack "^12.6.0"
     iframe-resizer "^4.4.5"
     lodash-es "^4.18.1"
     popper.js "^1.16.1"
@@ -9145,10 +9145,10 @@ graphql@^15.1.0:
   resolved "https://registry.yarnpkg.com/graphql/-/graphql-15.10.1.tgz#e9ff3bb928749275477f748b14aa5c30dcad6f2f"
   integrity sha512-BL/Xd/T9baO6NFzoMpiMD7YUZ62R6viR5tp/MULVEnbYJXZA//kRNW7J0j1w/wXArgL0sCxhDfK5dczSKn3+cg==
 
-gridstack@^12.4.2:
-  version "12.4.2"
-  resolved "https://registry.yarnpkg.com/gridstack/-/gridstack-12.4.2.tgz#188de180b6cda77e48b1414aac1d778a38f48f04"
-  integrity sha512-aXbJrQpi3LwpYXYOr4UriPM5uc/dPcjK01SdOE5PDpx2vi8tnLhU7yBg/1i4T59UhNkG/RBfabdFUObuN+gMnw==
+gridstack@^12.6.0:
+  version "12.6.0"
+  resolved "https://registry.yarnpkg.com/gridstack/-/gridstack-12.6.0.tgz#acfd8c036b202304712c0562078c86ed2ab6e83f"
+  integrity sha512-dUrqsormSybFn/2P4Dz8AgprftKD5e/IiV7UmC0XLQU+G+/WtkAeFiCSNLoAGhPDXoJ/O61Xtj3gljY/Ds83yQ==
 
 gzip-size@^6.0.0:
   version "6.0.0"
@@ -10121,6 +10121,11 @@ istanbul-reports@^3.1.3:
     html-escaper "^2.0.0"
     istanbul-lib-report "^3.0.0"
 
+jackspeak@^3.1.2, "jackspeak@npm:@gitlab/noop@1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@gitlab/noop/-/noop-1.0.1.tgz#71a831146ee02732b4a61d2d3c11204564753454"
+  integrity sha512-s++4wjMYeDvBp9IO59DBrWjy8SE/gFkjTDO5ck2W0S6Vv7OlqgErwL7pHngAnrSmTJAzyUG8wHGqo0ViS4jn5Q==
+
 jed@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/jed/-/jed-1.1.1.tgz#7a549bbd9ffe1585b0cd0a191e203055bee574b4"
@@ -10708,6 +10713,11 @@ jsonfile@^6.0.1:
     universalify "^2.0.0"
   optionalDependencies:
     graceful-fs "^4.1.6"
+
+jsonify@^0.0.1, "jsonify@npm:@gitlab/noop@1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@gitlab/noop/-/noop-1.0.1.tgz#71a831146ee02732b4a61d2d3c11204564753454"
+  integrity sha512-s++4wjMYeDvBp9IO59DBrWjy8SE/gFkjTDO5ck2W0S6Vv7OlqgErwL7pHngAnrSmTJAzyUG8wHGqo0ViS4jn5Q==
 
 jstimezonedetect@1.0.7:
   version "1.0.7"

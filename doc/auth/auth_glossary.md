@@ -196,3 +196,99 @@ How GitLab identifies itself to the IdP. Also known as a "Relying party trust id
 
 Confirms that communications over SAML are secure by checking that the server is signing
 communications with the correct certificate. Also known as a certificate thumbprint.
+
+## Group access token
+
+A token scoped to a specific group for automated tasks in that group and any subgroups.
+[Group access tokens](../user/group/settings/group_access_tokens.md) inherit the group's permissions
+and support API access and Git operations.
+
+## Project access token
+
+A token scoped to a specific project for automated tasks in that project.
+[Project access tokens](../user/project/settings/project_access_tokens.md) are commonly used for
+CI/CD pipelines and integrations that need project-specific access.
+
+## Deploy token
+
+A token with limited scopes for deployment automation.
+[Deploy tokens](../user/project/deploy_tokens/_index.md) provide read-only or write access to
+repositories and package registries without requiring a user account.
+
+## JWT (JSON Web Token)
+
+A compact token format for securely transmitting information between parties. GitLab uses JWTs for
+CI/CD job authentication, OAuth flows, and service-to-service communication.
+
+## Namespace
+
+A container that organizes groups and projects in a hierarchical structure. Namespaces determine
+resource paths and permission inheritance. Each user has a personal namespace, and groups provide
+shared namespaces for teams.
+
+## Claim
+
+Information about a user identity or attributes included in authentication tokens. Claims are used
+in OAuth, OIDC, and JWT tokens to convey details like username, email, or group membership.
+
+## Session
+
+A temporary authenticated state that persists after a user signs in to GitLab. Sessions persist
+across requests until the session expires or is terminated.
+
+## Provisioning
+
+The automated process of creating and configuring user accounts and access rights. You can use SCIM
+or LDAP to synchronize users from external identity systems into GitLab.
+
+## Impersonation
+
+An administrative capability for authorized users to temporarily act as another user.
+[Impersonation](../api/rest/authentication.md#impersonation-tokens) is sometimes used to troubleshoot
+user-specific issues.
+
+## Policy
+
+A set of authorization rules that determine what actions principals can perform on resources.
+GitLab enforces access control decisions using the
+[Declarative Policy framework](../development/policies.md).
+
+## OAuth
+
+An authorization protocol for accessing GitLab resources on behalf of users without sharing
+passwords. [OAuth](../integration/oauth_provider.md) supports third-party integrations and GitLab
+as an identity provider.
+
+## SAML
+
+Security Assertion Markup Language, an XML-based protocol for exchanging authentication and
+authorization data between identity providers and service providers. GitLab supports
+[SAML authentication](../integration/saml.md) for enterprise single sign-on.
+
+## LDAP
+
+Lightweight Directory Access Protocol, a standard for accessing and maintaining directory
+information services. GitLab integrates with [LDAP servers](../administration/auth/ldap/_index.md)
+to authenticate users and synchronize account information.
+
+## SCIM
+
+System for Cross-domain Identity Management, a standard for automating user provisioning and
+deprovisioning. GitLab supports [SCIM](../user/group/saml_sso/scim_setup.md) to synchronize user
+lifecycle events from identity providers.
+
+## OIDC (OpenID Connect)
+
+An authentication layer built on OAuth 2.0 that provides identity verification. GitLab supports
+[OIDC](../administration/auth/oidc.md) for authentication and acts as an OIDC provider for
+external applications.
+
+## Passkey
+
+A passwordless authentication method using cryptographic credentials stored on devices.
+[Passkeys](passkeys.md) provide phishing-resistant authentication using biometrics or device PINs.
+
+## RBAC (Role-Based Access Control)
+
+An access control model where permissions are assigned through roles rather than directly to users.
+In GitLab, users receive permissions based on their assigned role in a group or project.

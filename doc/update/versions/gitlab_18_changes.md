@@ -55,7 +55,7 @@ Before upgrading to GitLab 18.10, review the following:
 - [18.10.0 - 18.10.3] - [Geo site URL blocked when using outbound filtering](#geo-site-url-blocked-when-using-outbound-filtering) (Geo)
 - [18.10.0 - 18.10.3] - [Geo blob download failures on Ubuntu 24.04 with kernel 6.8+](#geo-blob-download-failures-on-ubuntu-2404-with-kernel-68) (Linux package, Geo)
 - [18.10.0 - 18.10.3] - [Geo secondary throttled jobs not draining](#geo-secondary-throttled-jobs-not-draining) (Geo)
-- [18.10.0] - [Geo blob download timeout setting](#geo-blob-download-timeout-setting) (Geo)
+- [18.10.0 - 18.10.3] - [Sidekiq concurrency limiter causes job backlogs on Helm chart and Operator deployments](#sidekiq-concurrency-limiter-causes-job-backlogs-on-helm-chart-and-operator-deployments) (Helm chart, Operator)
 
 ### Upgrade to 18.9
 
@@ -63,6 +63,7 @@ Before upgrading to GitLab 18.9, review the following:
 
 - [18.9.0 - 18.9.5] - [Geo site URL blocked when using outbound filtering](#geo-site-url-blocked-when-using-outbound-filtering) (Geo)
 - [18.9.0 - 18.9.5] - [Geo secondary throttled jobs not draining](#geo-secondary-throttled-jobs-not-draining) (Geo)
+- [18.9.0 - 18.9.5] - [Sidekiq concurrency limiter causes job backlogs on Helm chart and Operator deployments](#sidekiq-concurrency-limiter-causes-job-backlogs-on-helm-chart-and-operator-deployments) (Helm chart, Operator)
 - [18.9.0] - [Upgrade to 18.9 fails with PostgreSQL CheckViolation](#upgrade-to-189-fails-with-postgresql-checkviolation)
 
 ### Upgrade to 18.8
@@ -1035,3 +1036,58 @@ Upgrading to GitLab 18.11 triggers an automatic upgrade to [PostgreSQL 17.7](../
 > For Geo deployments, PostgreSQL upgrades must be [deliberately scheduled and planned](../../administration/geo/replication/upgrading_the_geo_sites.md)
 > because a major version upgrade requires re-initializing PostgreSQL replication to Geo secondaries.
 > This may result in larger than expected downtime.
+
+### Sidekiq concurrency limiter causes job backlogs on Helm chart and Operator deployments
+
+- Affects: Helm chart, Operator
+- Affected versions:
+
+  | Release | Affected patch releases | Fixed patch level |
+  | ------- | ----------------------- | ----------------- |
+  | 18.10   | 18.10.0 - 18.10.3      | 18.10.4           |
+  | 18.9    | 18.9.0 - 18.9.5        | 18.9.6            |
+
+In GitLab 18.9, the GitLab Helm chart began setting `GITLAB_SIDEKIQ_MAX_REPLICAS` by default
+([charts/GitLab merge request 4348](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4348)).
+On GitLab Self-Managed and GitLab Dedicated environments that do not use KEDA-based autoscaling,
+this causes the Sidekiq concurrency limiter to become active unexpectedly and defer jobs into
+Redis-backed throttled queues.
+
+This can result in:
+
+- Sidekiq job backlogs.
+- Redis memory growth.
+- Delayed job execution.
+- Impact to workers such as `WebHookWorker`, `AuditEvents::AuditEventStreamingWorker`,
+  and Geo replication workers (`Geo::EventWorker`, `Geo::SyncWorker`).
+
+If you are affected, you can use one of the following temporary mitigations until you upgrade to a fixed version:
+
+- **Disable the concurrency limiter for a specific worker** by enabling a feature flag.
+  Open a Rails console by running `exec` on a Sidekiq pod:
+
+  ```shell
+  kubectl exec -it <sidekiq-pod-name> -- gitlab-rails console
+  ```
+
+  Then enable the flag for the affected worker:
+
+  ```ruby
+  Feature.enable(:"disable_sidekiq_concurrency_limit_middleware_<WorkerClass>")
+  ```
+
+  Replace `<WorkerClass>` with the affected worker name (for example, `WebHookWorker`).
+
+- **Disable all default concurrency limits** by setting `GITLAB_SIDEKIQ_MAX_REPLICAS=0`
+  in your Sidekiq pod environment configuration. This disables the default concurrency limit
+  calculation entirely.
+
+> [!warning]
+> If you use Geo, already-throttled jobs on secondary sites might not drain automatically
+> because `ConcurrencyLimit::ResumeWorker` does not run on Geo secondaries. You may need to
+> manually intervene to clear the throttled queues.
+
+A fix that gates the default concurrency limit calculation behind a feature flag was merged in
+[merge request 230713](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/230713) and
+backported to 18.10.4 ([merge request 231085](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/231085))
+and 18.9.6 ([merge request 231297](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/231297)).

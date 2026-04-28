@@ -14221,16 +14221,6 @@ CREATE SEQUENCE analytics_devops_adoption_snapshots_id_seq
 
 ALTER SEQUENCE analytics_devops_adoption_snapshots_id_seq OWNED BY analytics_devops_adoption_snapshots.id;
 
-CREATE TABLE analytics_language_trend_repository_languages (
-    file_count integer DEFAULT 0 NOT NULL,
-    programming_language_id bigint NOT NULL,
-    project_id bigint NOT NULL,
-    loc integer DEFAULT 0 NOT NULL,
-    bytes integer DEFAULT 0 NOT NULL,
-    percentage smallint DEFAULT 0 NOT NULL,
-    snapshot_date date NOT NULL
-);
-
 CREATE TABLE analytics_usage_trends_measurements (
     id bigint NOT NULL,
     count bigint NOT NULL,
@@ -38546,9 +38536,6 @@ ALTER TABLE ONLY analytics_devops_adoption_segments
 ALTER TABLE ONLY analytics_devops_adoption_snapshots
     ADD CONSTRAINT analytics_devops_adoption_snapshots_pkey PRIMARY KEY (id);
 
-ALTER TABLE ONLY analytics_language_trend_repository_languages
-    ADD CONSTRAINT analytics_language_trend_repository_languages_pkey PRIMARY KEY (programming_language_id, project_id, snapshot_date);
-
 ALTER TABLE ONLY analytics_usage_trends_measurements
     ADD CONSTRAINT analytics_usage_trends_measurements_pkey PRIMARY KEY (id);
 
@@ -44063,8 +44050,6 @@ CREATE INDEX alert_management_alert_metric_model_id_model_type_uploader__idx ON 
 CREATE INDEX analytics_index_audit_events_part_on_created_at_and_author_id ON ONLY audit_events USING btree (created_at, author_id);
 
 CREATE INDEX analytics_index_events_on_created_at_and_author_id ON events USING btree (created_at, author_id);
-
-CREATE INDEX analytics_repository_languages_on_project_id ON analytics_language_trend_repository_languages USING btree (project_id);
 
 CREATE UNIQUE INDEX any_approver_project_rule_type_unique_index ON approval_project_rules USING btree (project_id) WHERE (rule_type = 3);
 
@@ -59805,9 +59790,6 @@ ALTER TABLE ONLY workspaces_agent_config_versions
 ALTER TABLE ONLY deployment_merge_requests
     ADD CONSTRAINT fk_rails_86a6d8bf12 FOREIGN KEY (merge_request_id) REFERENCES merge_requests(id) ON DELETE CASCADE;
 
-ALTER TABLE ONLY analytics_language_trend_repository_languages
-    ADD CONSTRAINT fk_rails_86cc9aef5f FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE;
-
 ALTER TABLE ONLY merge_request_diff_details
     ADD CONSTRAINT fk_rails_86f4d24ecd FOREIGN KEY (merge_request_diff_id) REFERENCES merge_request_diffs(id) ON DELETE CASCADE;
 
@@ -59999,9 +59981,6 @@ ALTER TABLE ONLY packages_debian_project_components
 
 ALTER TABLE ONLY gpg_keys
     ADD CONSTRAINT fk_rails_9d1f5d8719 FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE;
-
-ALTER TABLE ONLY analytics_language_trend_repository_languages
-    ADD CONSTRAINT fk_rails_9d851d566c FOREIGN KEY (programming_language_id) REFERENCES programming_languages(id) ON DELETE CASCADE;
 
 ALTER TABLE ONLY namespaces_sync_events
     ADD CONSTRAINT fk_rails_9da32a0431 FOREIGN KEY (namespace_id) REFERENCES namespaces(id) ON DELETE CASCADE;

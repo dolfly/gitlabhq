@@ -47,8 +47,9 @@
     .nav-controls.gl-flex-wrap.gl-items-center{ class: '!gl-flex' }
       - if @tag.has_signature?
         - signature_object = tag_view_signature(@tag)
-        .gl-mr-3
-          = render partial: 'projects/commit/signature', object: signature_object
+        - if signature_object.present?
+          .gl-mr-3
+            = render partial: 'projects/commit/signature', object: signature_object
 
       - if @pipeline_status
         .gl-mr-3

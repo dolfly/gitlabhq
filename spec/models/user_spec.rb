@@ -585,7 +585,7 @@ RSpec.describe User, :with_current_organization, feature_category: :user_profile
 
   describe 'validations' do
     describe 'password' do
-      let!(:user) { build(:user) }
+      let(:user) { build(:user) }
 
       before do
         allow(Devise).to receive(:password_length).and_return(8..128)

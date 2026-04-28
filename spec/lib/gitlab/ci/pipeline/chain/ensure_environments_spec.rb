@@ -3,12 +3,12 @@
 require 'spec_helper'
 
 RSpec.describe Gitlab::Ci::Pipeline::Chain::EnsureEnvironments, :aggregate_failures do
-  let(:project) { create(:project, :repository) }
-  let(:user) { create(:user) }
+  let_it_be(:project) { create(:project, :repository) }
+  let_it_be(:user) { create(:user) }
   let(:ref) { 'master' }
   let(:stage) { build(:ci_stage, project: project, statuses: [job]) }
   let(:pipeline) { build(:ci_pipeline, project: project, ref: ref, stages: [stage]) }
-  let(:merge_request) { create(:merge_request, source_project: project) }
+  let_it_be(:merge_request) { create(:merge_request, source_project: project) }
   let(:environment) { project.environments.find_by_name("review/#{ref}") }
 
   let(:command) do
@@ -25,7 +25,7 @@ RSpec.describe Gitlab::Ci::Pipeline::Chain::EnsureEnvironments, :aggregate_failu
     end
 
     context 'when a pipeline contains a deployment job' do
-      let!(:job) { build(:ci_build, :start_review_app, project: project, ref: ref) }
+      let(:job) { build(:ci_build, :start_review_app, project: project, ref: ref) }
 
       context 'and the environment does not exist' do
         it 'creates the environment specified by the job' do
@@ -95,7 +95,7 @@ RSpec.describe Gitlab::Ci::Pipeline::Chain::EnsureEnvironments, :aggregate_failu
     end
 
     context 'when a pipeline contains a teardown job' do
-      let!(:job) { build(:ci_build, :stop_review_app, project: project, ref: ref) }
+      let(:job) { build(:ci_build, :stop_review_app, project: project, ref: ref) }
 
       it 'ensures environment existence for the job' do
         expect { subject }.to change { Environment.count }.by(1)
@@ -107,7 +107,7 @@ RSpec.describe Gitlab::Ci::Pipeline::Chain::EnsureEnvironments, :aggregate_failu
     end
 
     context 'when a pipeline does not contain a deployment job' do
-      let!(:job) { build(:ci_build, project: project) }
+      let(:job) { build(:ci_build, project: project) }
 
       it 'does not create any environments' do
         expect { subject }.not_to change { Environment.count }

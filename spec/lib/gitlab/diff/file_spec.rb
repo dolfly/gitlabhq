@@ -1476,6 +1476,16 @@ RSpec.describe Gitlab::Diff::File, feature_category: :source_code_management do
         expect(old_positions).to eq(old_positions.sort)
       end
 
+      it 'does not duplicate lines at expansion boundaries' do
+        diff_file.expand_to_full!
+
+        lines = diff_file.highlighted_diff_lines
+        context_lines = lines.reject { |l| l.type == 'old' }
+        new_positions = context_lines.map(&:new_pos)
+
+        expect(new_positions).to eq(new_positions.uniq)
+      end
+
       it 'preserves line codes on changed lines for commenting' do
         diff_file.expand_to_full!
 

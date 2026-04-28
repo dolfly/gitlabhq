@@ -410,6 +410,9 @@ export default {
       </gl-filtered-search>
     </div>
     <div
+      v-if="
+        selectedSortOption || $scopedSlots['user-preference'] || $scopedSlots['time-range-filter']
+      "
       :class="{
         'gl-flex gl-items-center gl-justify-between gl-gap-3':
           $scopedSlots['user-preference'] || $scopedSlots['time-range-filter'],

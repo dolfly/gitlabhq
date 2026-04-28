@@ -72,7 +72,7 @@ RSpec.describe Environment, :use_clean_rails_memory_store_caching, feature_categ
     end
 
     context 'tier' do
-      let!(:env) { build(:environment, tier: nil) }
+      let(:env) { build(:environment, tier: nil) }
 
       before do
         # Disable `before_validation: :ensure_environment_tier` since it always set tier and interfere with tests.
@@ -175,12 +175,13 @@ RSpec.describe Environment, :use_clean_rails_memory_store_caching, feature_categ
   end
 
   describe '.order_by_last_deployed_at' do
-    let!(:environment1) { create(:environment, project: project) }
-    let!(:environment2) { create(:environment, project: project) }
-    let!(:environment3) { create(:environment, project: project) }
-    let!(:deployment1) { create(:deployment, environment: environment1) }
-    let!(:deployment2) { create(:deployment, environment: environment2) }
-    let!(:deployment3) { create(:deployment, environment: environment1) }
+    let_it_be(:project) { create(:project, :repository) }
+    let_it_be(:environment1) { create(:environment, project: project) }
+    let_it_be(:environment2) { create(:environment, project: project) }
+    let_it_be(:environment3) { create(:environment, project: project) }
+    let_it_be(:deployment1) { create(:deployment, environment: environment1) }
+    let_it_be(:deployment2) { create(:deployment, environment: environment2) }
+    let_it_be(:deployment3) { create(:deployment, environment: environment1) }
 
     it 'returns the environments in ascending order of having been last deployed' do
       expect(project.environments.order_by_last_deployed_at.to_a).to eq([environment3, environment2, environment1])
@@ -198,25 +199,25 @@ RSpec.describe Environment, :use_clean_rails_memory_store_caching, feature_categ
     let(:not_long_ago) { (described_class::LONG_STOP - 1.day).ago }
 
     context 'when a stopping environment has not been updated recently' do
-      let!(:environment1) { create(:environment, state: 'stopping', project: project, updated_at: long_ago) }
+      let(:environment1) { create(:environment, state: 'stopping', project: project, updated_at: long_ago) }
 
       it { is_expected.to eq(true) }
     end
 
     context 'when a stopping environment has been updated recently' do
-      let!(:environment1) { create(:environment, state: 'stopping', project: project, updated_at: not_long_ago) }
+      let(:environment1) { create(:environment, state: 'stopping', project: project, updated_at: not_long_ago) }
 
       it { is_expected.to eq(false) }
     end
 
     context 'when a non stopping environment has not been updated recently' do
-      let!(:environment1) { create(:environment, project: project, updated_at: long_ago) }
+      let(:environment1) { create(:environment, project: project, updated_at: long_ago) }
 
       it { is_expected.to eq(false) }
     end
 
     context 'when a non stopping environment has been updated recently' do
-      let!(:environment1) { create(:environment, project: project, updated_at: not_long_ago) }
+      let(:environment1) { create(:environment, project: project, updated_at: not_long_ago) }
 
       it { is_expected.to eq(false) }
     end
@@ -294,7 +295,7 @@ RSpec.describe Environment, :use_clean_rails_memory_store_caching, feature_categ
     end
 
     context 'when environment has auto stop period' do
-      let!(:environment) { create(:environment, :available, :auto_stoppable, project: project) }
+      let(:environment) { create(:environment, :available, :auto_stoppable, project: project) }
 
       it 'clears auto stop period when the environment has stopped' do
         environment.stop!
@@ -311,7 +312,8 @@ RSpec.describe Environment, :use_clean_rails_memory_store_caching, feature_categ
   describe '.for_name_like' do
     subject { project.environments.for_name_like(query, limit: limit) }
 
-    let!(:environment) { create(:environment, name: 'production', project: project) }
+    let_it_be(:project) { create(:project, :repository) }
+    let_it_be(:environment) { create(:environment, name: 'production', project: project) }
     let(:query) { 'pro' }
     let(:limit) { 5 }
 
@@ -371,6 +373,7 @@ RSpec.describe Environment, :use_clean_rails_memory_store_caching, feature_categ
   describe '.for_name_like_within_folder' do
     subject { project.environments.for_name_like_within_folder(query, limit: limit) }
 
+    let_it_be(:project) { create(:project, :repository) }
     let!(:environment) { create(:environment, name: 'review/test-app', project: project) }
     let!(:environment_a) { create(:environment, name: 'test-app', project: project) }
     let(:query) { 'test' }

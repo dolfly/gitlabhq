@@ -336,6 +336,7 @@ Audit event types belong to the following product categories.
 | [`composite_oauth_token_created`](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/231162) | A composite OAuth token was created for a Duo workflow | {{< yes >}} | GitLab [19.0](https://gitlab.com/gitlab-org/gitlab/-/work_items/593023) | Group, Project, User |
 | [`duo_agent_platform_enabled_updated`](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/232180) | Duo Agent Platform enabled setting on group changed | {{< yes >}} | GitLab [19.0](https://gitlab.com/gitlab-org/gitlab/-/work_items/593025) | Group |
 | [`duo_session_created`](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/216689) | Duo session is created | {{< yes >}} | GitLab [18.8](https://gitlab.com/gitlab-org/gitlab/-/issues/581004) | Project |
+| [`duo_session_deleted`](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/232456) | Duo session is deleted | {{< yes >}} | GitLab [19.0](https://gitlab.com/gitlab-org/gitlab/-/work_items/593027) | Group, Project |
 | [`duo_session_failed`](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/216689) | Duo session has failed | {{< yes >}} | GitLab [18.8](https://gitlab.com/gitlab-org/gitlab/-/issues/581004) | Project |
 | [`duo_session_finished`](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/216689) | Duo session is finished | {{< yes >}} | GitLab [18.8](https://gitlab.com/gitlab-org/gitlab/-/issues/581004) | Project |
 | [`duo_session_resumed`](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/222303) | Duo session is resumed | {{< yes >}} | GitLab [18.9](https://gitlab.com/gitlab-org/gitlab/-/issues/581004) | Project |
@@ -767,6 +768,7 @@ Audit event types belong to the following product categories.
 | [`authenticated_with_two_factor`](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/198216) | User successfully signed in with two-factor authentication | {{< yes >}} | GitLab [18.3](https://gitlab.com/gitlab-org/gitlab/-/issues/555101) | User |
 | [`authenticated_with_webauthn`](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/198216) | User successfully signed in with WebAuthn device | {{< yes >}} | GitLab [18.3](https://gitlab.com/gitlab-org/gitlab/-/issues/555101) | User |
 | [`step_up_auth_required_oauth_provider_updated`](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/199423) | Step-up authentication OAuth provider requirement is updated | {{< yes >}} | GitLab [18.4](https://gitlab.com/gitlab-org/gitlab/-/issues/556943) | Group |
+| [`user_signed_in_from_unseen_ip`](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/231250) | User signed in from a previously unseen IP address | {{< yes >}} | GitLab [19.0](https://gitlab.com/gitlab-org/gitlab/-/work_items/588994) | User |
 
 ### Team planning
 
