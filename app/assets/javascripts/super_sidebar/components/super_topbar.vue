@@ -107,7 +107,7 @@ export default {
 
 <template>
   <header
-    class="super-topbar js-super-topbar gl-grid gl-grid-cols-[1fr_1fr] gl-items-center gl-outline-none sm:gl-grid-cols-[1fr_auto_1fr] forced-colors:gl-outline-0"
+    class="super-topbar js-super-topbar gl-grid gl-grid-cols-[1fr_1fr] gl-items-center gl-gap-x-5 gl-outline-none sm:gl-grid-cols-[1fr_auto_1fr] forced-colors:gl-outline-0"
     tabindex="0"
     autofocus
   >
@@ -152,7 +152,7 @@ export default {
       <div
         v-if="glFeatures.pageBreadcrumbsInTopBar"
         id="js-vue-page-breadcrumbs-wrapper"
-        class="gl-grow"
+        class="gl-ml-3 gl-grow"
         data-testid="breadcrumb-links"
       >
         <gl-breadcrumb

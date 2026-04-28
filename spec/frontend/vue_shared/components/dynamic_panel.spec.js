@@ -39,4 +39,18 @@ describe('DynamicPanel', () => {
     createComponent();
     expect(findCloseButton().attributes('aria-label')).toBe('Close panel');
   });
+
+  it('provides panelHeadingTag as h2 to descendants', () => {
+    let injected;
+    const Child = {
+      inject: ['panelHeadingTag'],
+      render() {
+        injected = this.panelHeadingTag;
+        return null;
+      },
+    };
+    createComponent({ slots: { default: Child } });
+
+    expect(injected).toBe('h2');
+  });
 });

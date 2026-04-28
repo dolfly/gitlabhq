@@ -52,8 +52,6 @@ class MergeRequest < ApplicationRecord
   SORTING_PREFERENCE_FIELD = :merge_requests_sort
   CI_MERGE_REQUEST_DESCRIPTION_MAX_LENGTH = 2700
   MERGE_LEASE_TIMEOUT = 15.minutes.to_i
-  DIFF_VERSION_LIMIT = 1_000
-  DIFF_COMMITS_LIMIT = 1_000_000
 
   belongs_to :target_project, class_name: "Project"
   belongs_to :source_project, class_name: "Project"
@@ -2823,7 +2821,7 @@ class MergeRequest < ApplicationRecord
   def reached_versions_limit?
     return false if Feature.disabled?(:merge_requests_diffs_limit, target_project)
 
-    merge_request_diffs.count >= DIFF_VERSION_LIMIT
+    merge_request_diffs.count >= Gitlab::CurrentSettings.diff_max_versions
   end
 
   def reached_diff_commits_limit?
@@ -2834,7 +2832,7 @@ class MergeRequest < ApplicationRecord
       .pick('SUM(commits_count)')
       .to_i
 
-    total_commits_count >= DIFF_COMMITS_LIMIT
+    total_commits_count >= Gitlab::CurrentSettings.diff_max_commits
   end
 
   def diffs_batch_cache_key
@@ -2947,7 +2945,7 @@ class MergeRequest < ApplicationRecord
     merge_request_diffs
       .viewable
       .order_id_desc
-      .limit(DIFF_VERSION_LIMIT)
+      .limit(Gitlab::CurrentSettings.diff_max_versions)
   end
 
   def find_viewable_diff_by_id(diff_id)

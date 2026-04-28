@@ -10,6 +10,9 @@ export default {
   directives: {
     GlTooltip: GlTooltipDirective,
   },
+  provide() {
+    return { panelHeadingTag: 'h2' };
+  },
   props: {
     /**
      * Text to display in the panel header. The header slot takes precendence.

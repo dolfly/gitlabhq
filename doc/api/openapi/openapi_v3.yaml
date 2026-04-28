@@ -16942,7 +16942,7 @@ paths:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/RequestBody_bc816d46aa91"
+              "$ref": "#/components/schemas/RequestBody_d06b27b59ee0"
   "/api/v4/projects/{id}/issues/{eventable_id}/resource_state_events":
     get:
       operationId: getApiV4ProjectsIdIssuesEventableIdResourceStateEvents
@@ -73973,6 +73973,10 @@ components:
           type: string
         diff_max_lines:
           type: string
+        diff_max_versions:
+          type: string
+        diff_max_commits:
+          type: string
         commit_email_hostname:
           type: string
         protected_ci_variables:
@@ -91856,7 +91860,7 @@ components:
           nullable: true
       required:
       - avatar
-    RequestBody_bc816d46aa91:
+    RequestBody_d06b27b59ee0:
       type: object
       properties:
         admin_mode:
@@ -93515,6 +93519,12 @@ components:
           type: string
           nullable: true
         diff_max_lines:
+          type: string
+          nullable: true
+        diff_max_versions:
+          type: string
+          nullable: true
+        diff_max_commits:
           type: string
           nullable: true
         commit_email_hostname:

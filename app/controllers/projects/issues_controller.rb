@@ -173,8 +173,9 @@ class Projects::IssuesController < Projects::ApplicationController
 
       redirect_to project_issue_path(@project, @issue)
     else
-      # NOTE: this CAPTCHA support method is indirectly included via IssuableActions
-      with_captcha_check_html_format(spammable: spammable) { render :new }
+      with_captcha_check_json_format(spammable: spammable) do
+        render json: { errors: @issue.errors.full_messages }, status: :unprocessable_entity
+      end
     end
   end
 

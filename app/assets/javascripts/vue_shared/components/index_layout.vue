@@ -14,6 +14,12 @@ export default {
       required: false,
       default: null,
     },
+    headingTag: {
+      type: String,
+      required: false,
+      default: null,
+      validator: (value) => value === null || ['h1', 'h2'].includes(value),
+    },
     description: {
       type: String,
       required: false,
@@ -36,7 +42,11 @@ export default {
 <template>
   <div class="gl-index-layout">
     <slot name="before"></slot>
-    <page-heading :heading="heading" :class="{ 'gl-sr-only': pageHeadingSrOnly }">
+    <page-heading
+      :heading="heading"
+      :heading-tag="headingTag"
+      :class="{ 'gl-sr-only': pageHeadingSrOnly }"
+    >
       <template v-if="$scopedSlots['heading-wrapper']" #heading-wrapper>
         <slot name="heading-wrapper"></slot>
       </template>

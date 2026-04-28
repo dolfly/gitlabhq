@@ -17,7 +17,7 @@ When working with dependency scanning, you might encounter the following issues.
 ## Debug-level logging
 
 Debug-level logging can help when troubleshooting. For details, see
-[debug-level logging](../troubleshooting_application_security.md#debug-level-logging).
+[debug-level logging](../troubleshooting_application_security.md#turn-on-debug-level-logging).
 
 ## Run the analyzer in a local environment
 

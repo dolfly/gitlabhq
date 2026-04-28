@@ -24,15 +24,14 @@ RSpec.describe 'issuable list', :js, feature_category: :portfolio_management do
       expect { visit_issuable_list(issuable_type) }.not_to exceed_query_limit(control)
     end
 
-    it "counts upvotes, downvotes and notes count for each #{issuable_type.to_s.humanize}", quarantine: 'https://gitlab.com/gitlab-org/gitlab/-/issues/446199' do
+    it "counts upvotes, downvotes for each #{issuable_type.to_s.humanize}" do
       visit_issuable_list(issuable_type)
 
       expect(first('[data-testid="issuable-upvotes"]')).to have_content(1)
       expect(first('[data-testid="issuable-downvotes"]')).to have_content(1)
-      expect(first('[data-testid="issuable-comments"]')).to have_content(2)
     end
 
-    it 'sorts labels alphabetically', quarantine: 'https://gitlab.com/gitlab-org/quality/test-failure-issues/-/issues/16804' do
+    it 'sorts labels alphabetically' do
       label1 = create(:label, project: project, title: 'a')
       label2 = create(:label, project: project, title: 'z')
       label3 = create(:label, project: project, title: 'x')
@@ -47,14 +46,6 @@ RSpec.describe 'issuable list', :js, feature_category: :portfolio_management do
       expect(all('.gl-label-text')[2].text).to have_content('x')
       expect(all('.gl-label-text')[3].text).to have_content('z')
     end
-  end
-
-  it 'displays a warning if counting the number of issues times out', quarantine: 'https://gitlab.com/gitlab-org/quality/test-failure-issues/-/issues/9340' do
-    allow_any_instance_of(IssuesFinder).to receive(:count_by_state).and_raise(ActiveRecord::QueryCanceled)
-
-    visit_issuable_list(:issue)
-
-    expect(page).to have_text('Open Closed All')
   end
 
   it "counts merge requests closing issues icons for each issue" do

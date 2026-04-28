@@ -6,13 +6,13 @@
   "properties": {
     "diff_max_versions": {
       "type": "integer",
-      "minimum": 0,
-      "description": "Maximum number of diff versions per merge request. Set to 0 to disable."
+      "minimum": 1,
+      "description": "Maximum number of diff versions per merge request."
     },
     "diff_max_commits": {
       "type": "integer",
-      "minimum": 0,
-      "description": "Maximum number of diff commits per merge request. Set to 0 to disable."
+      "minimum": 1,
+      "description": "Maximum number of diff commits per merge request."
     }
   }
 }

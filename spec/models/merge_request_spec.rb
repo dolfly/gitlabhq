@@ -9528,7 +9528,7 @@ RSpec.describe MergeRequest, factory_default: :keep, feature_category: :code_rev
 
     context 'when limited' do
       before do
-        stub_const("#{described_class}::DIFF_VERSION_LIMIT", 1)
+        stub_application_setting(diff_max_versions: 1)
       end
 
       it 'returns limited viewable diffs' do

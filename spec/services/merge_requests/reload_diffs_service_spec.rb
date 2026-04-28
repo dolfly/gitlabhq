@@ -42,7 +42,7 @@ RSpec.describe MergeRequests::ReloadDiffsService, :use_clean_rails_memory_store_
 
     context 'when the number of diff versions reaches the limit' do
       before do
-        stub_const('MergeRequest::DIFF_VERSION_LIMIT', 1)
+        stub_application_setting(diff_max_versions: 1)
       end
 
       it 'does not create a new diff' do
@@ -62,7 +62,7 @@ RSpec.describe MergeRequests::ReloadDiffsService, :use_clean_rails_memory_store_
 
     context 'when the number of diff commits reaches the limit' do
       before do
-        stub_const('MergeRequest::DIFF_COMMITS_LIMIT', 1)
+        stub_application_setting(diff_max_commits: 1)
       end
 
       it 'does not create a new diff' do

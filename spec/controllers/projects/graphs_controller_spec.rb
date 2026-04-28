@@ -57,7 +57,7 @@ RSpec.describe Projects::GraphsController, feature_category: :source_code_manage
 
   describe 'GET languages' do
     it "redirects_to action charts" do
-      get(:commits, params: { namespace_id: project.namespace.path, project_id: project.path, id: 'master' })
+      get(:languages, params: { namespace_id: project.namespace.path, project_id: project.path, id: 'master' })
 
       expect(response).to redirect_to action: :charts
     end

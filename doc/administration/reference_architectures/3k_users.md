@@ -4,7 +4,6 @@ group: Operate
 info: To determine the technical writer assigned to the Stage/Group associated with this page, see <https://handbook.gitlab.com/handbook/product/ux/technical-writing/#assignments>
 description: Deploy a GitLab Self-Managed instance for up to 3,000 users or 60 RPS with high-availability components and recommended sizing.
 title: 'Reference architecture: Up to 60 RPS or 3,000 users'
-description: GitLab reference architecture for scaling to 3,000 users. Discover the hardware requirements, optimal node configurations, and topologies.
 ---
 
 {{< details >}}

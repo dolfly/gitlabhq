@@ -1,15 +1,32 @@
 <script>
 export default {
+  inject: {
+    injectedHeadingTag: {
+      from: 'panelHeadingTag',
+      default: 'h1',
+    },
+  },
   props: {
     heading: {
       type: String,
       required: false,
       default: null,
     },
+    headingTag: {
+      type: String,
+      required: false,
+      default: null,
+      validator: (value) => value === null || ['h1', 'h2'].includes(value),
+    },
     inlineActions: {
       type: Boolean,
       required: false,
       default: false,
+    },
+  },
+  computed: {
+    computedHeadingTag() {
+      return this.headingTag ?? this.injectedHeadingTag;
     },
   },
 };
@@ -21,10 +38,10 @@ export default {
       class="gl-flex gl-w-full gl-flex-wrap gl-items-start gl-justify-between gl-gap-x-5 gl-gap-y-3 @md/panel:gl-flex-nowrap"
     >
       <slot name="heading-wrapper">
-        <h1 class="gl-heading-1 !gl-m-0" data-testid="page-heading">
+        <component :is="computedHeadingTag" class="gl-heading-1 !gl-m-0" data-testid="page-heading">
           <slot name="heading"></slot>
           <template v-if="!$scopedSlots.heading">{{ heading }}</template>
-        </h1>
+        </component>
       </slot>
       <div
         v-if="$scopedSlots.actions"

@@ -335,6 +335,18 @@ class ApplicationSetting < ApplicationRecord
       less_than_or_equal_to: Commit::MAX_DIFF_LINES_SETTING_UPPER_BOUND
     }
 
+  validates :diff_max_versions,
+    numericality: {
+      only_integer: true,
+      greater_than: 0
+    }
+
+  validates :diff_max_commits,
+    numericality: {
+      only_integer: true,
+      greater_than: 0
+    }
+
   validates :user_default_internal_regex, js_regex: true, allow_nil: true
   validates :default_preferred_language, presence: true, inclusion: { in: Gitlab::I18n.available_locales }
 

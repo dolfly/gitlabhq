@@ -1389,6 +1389,8 @@ GitLab limits each merge request to 1000 [diff versions](../user/project/merge_r
 Merge requests that reach this limit cannot be updated further. Instead,
 close the affected merge request and create a new merge request.
 
+To configure this limit, see [diff limits administration](diff_limits.md).
+
 ### Merge request reports size limit
 
 Reports that go over the 20 MB limit aren't loaded. Affected reports:

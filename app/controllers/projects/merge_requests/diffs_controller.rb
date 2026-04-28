@@ -242,7 +242,13 @@ class Projects::MergeRequests::DiffsController < Projects::MergeRequests::Applic
 
     draft_notes =
       if current_user
-        merge_request.draft_notes.authored_by(current_user)
+        drafts = merge_request.draft_notes.authored_by(current_user)
+        current_diff_refs = @compare&.diff_refs
+        if current_diff_refs
+          drafts.select { |draft| draft.active?(current_diff_refs) }
+        else
+          drafts.to_a
+        end
       else
         []
       end

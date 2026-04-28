@@ -21,7 +21,7 @@ expected, reach out to GitLab Support for further assistance with the following 
 
 - [GitLab Advanced SAST analyzer version](#identify-the-gitlab-advanced-sast-analyzer-version)
 - Programming language used in your repository
-- [Debug logs](../troubleshooting_application_security.md#debug-level-logging)
+- [Debug logs](../troubleshooting_application_security.md#turn-on-debug-level-logging)
 - [Performance debugging artifact](#generate-a-performance-debugging-artifact)
 
 ### Identify the GitLab Advanced SAST analyzer version

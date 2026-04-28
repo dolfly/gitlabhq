@@ -349,6 +349,8 @@ type GitAuditEventRequest struct {
 	Identifier    string                                  `json:"identifier"`
 	PackfileStats *gitalypb.PackfileNegotiationStatistics `json:"packfile_stats,omitempty"`
 	Changes       string                                  `json:"changes"`
+	WrittenBytes  int64                                   `json:"written_bytes,omitempty"`
+	ReceivedBytes int64                                   `json:"received_bytes,omitempty"`
 }
 
 // SendGitAuditEvent sends a Git audit event using the API client.

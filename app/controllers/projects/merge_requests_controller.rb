@@ -713,15 +713,15 @@ class Projects::MergeRequestsController < Projects::MergeRequests::ApplicationCo
     if @merge_request.reached_versions_limit?
       flash[:alert] = format(
         _("This merge request has reached the maximum limit of %{limit} versions and cannot be updated further. " \
-          "Close this merge request and create a new one instead."), limit: MergeRequest::DIFF_VERSION_LIMIT)
+          "Close this merge request and create a new one instead."), limit: Gitlab::CurrentSettings.diff_max_versions)
       return
     end
 
     return unless @merge_request.reached_diff_commits_limit?
 
-    flash[:alert] =
-      _("This merge request has too many diff commits, and can't be updated. " \
-        "Close this merge request and create a new one.")
+    flash[:alert] = format(
+      _("This merge request has reached the maximum limit of %{limit} diff commits and cannot be updated further. " \
+        "Close this merge request and create a new one instead."), limit: Gitlab::CurrentSettings.diff_max_commits)
   end
 
   def diff_file_component(base_args)

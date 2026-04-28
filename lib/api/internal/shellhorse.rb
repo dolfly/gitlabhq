@@ -47,6 +47,10 @@ module API
               # haves is the number of objects the client announced it has.
               optional :haves, type: Integer, desc: 'Number of objects the client announces it has.'
             end
+            optional :written_bytes, type: Integer,
+              desc: 'Number of bytes written (sent to client) during the git operation.'
+            optional :received_bytes, type: Integer,
+              desc: 'Number of bytes received (from client) during the git operation.'
           end
 
           route_setting :authorization, skip_granular_token_authorization: :gitlab_shared_secret_auth
@@ -74,6 +78,9 @@ module API
               action: params[:action],
               verb: check_clone_or_pull_or_push_verb(params)
             }
+
+            audit_message[:written_bytes] = params[:written_bytes] if params[:written_bytes].present?
+            audit_message[:received_bytes] = params[:received_bytes] if params[:received_bytes].present?
 
             # If the protocol is SSH, we need to send the original IP from the PROXY
             # protocol to the audit streaming event. The original IP from gitlab-shell

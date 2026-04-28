@@ -39560,6 +39560,11 @@ msgstr ""
 msgid "Iterations|Select start date"
 msgstr ""
 
+msgid "Iterations|Showing %{count} iteration"
+msgid_plural "Iterations|Showing %{count} iterations"
+msgstr[0] ""
+msgstr[1] ""
+
 msgid "Iterations|Start date"
 msgstr ""
 
@@ -46402,9 +46407,6 @@ msgid "New GitLab Duo Chat"
 msgstr ""
 
 msgid "New Group"
-msgstr ""
-
-msgid "New Issue"
 msgstr ""
 
 msgid "New Jira import"
@@ -74785,10 +74787,10 @@ msgstr ""
 msgid "This merge request does not have codequality reports"
 msgstr ""
 
-msgid "This merge request has reached the maximum limit of %{limit} versions and cannot be updated further. Close this merge request and create a new one instead."
+msgid "This merge request has reached the maximum limit of %{limit} diff commits and cannot be updated further. Close this merge request and create a new one instead."
 msgstr ""
 
-msgid "This merge request has too many diff commits, and can't be updated. Close this merge request and create a new one."
+msgid "This merge request has reached the maximum limit of %{limit} versions and cannot be updated further. Close this merge request and create a new one instead."
 msgstr ""
 
 msgid "This merge request is closed. To apply this suggestion, edit this file directly."

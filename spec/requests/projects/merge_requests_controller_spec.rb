@@ -47,14 +47,14 @@ RSpec.describe Projects::MergeRequestsController, feature_category: :source_code
 
     context 'when diff version limit is reached' do
       before do
-        stub_const('MergeRequest::DIFF_VERSION_LIMIT', 1)
+        stub_application_setting(diff_max_versions: 1)
       end
 
       it 'displays a warning' do
         get project_merge_request_path(project, merge_request)
 
         expect(flash[:alert]).to include('This merge request has reached the maximum limit')
-        expect(flash[:alert]).not_to include("This merge request has too many diff commits, and can't be updated")
+        expect(flash[:alert]).not_to include("diff commits")
       end
 
       context 'when "merge_requests_diffs_limit" feature flag is disabled' do
@@ -72,7 +72,7 @@ RSpec.describe Projects::MergeRequestsController, feature_category: :source_code
 
     context 'when diff commits limit is reached' do
       before do
-        stub_const('MergeRequest::DIFF_COMMITS_LIMIT', 1)
+        stub_application_setting(diff_max_commits: 1)
         # merge_request_diff model has a after_save callback that nullifies commits counts
         # using #update_column to override this behavior
         merge_request.merge_request_diff.update_column(:commits_count, 2)
@@ -81,7 +81,8 @@ RSpec.describe Projects::MergeRequestsController, feature_category: :source_code
       it 'displays a warning' do
         get project_merge_request_path(project, merge_request)
 
-        expect(flash[:alert]).to include("This merge request has too many diff commits, and can't be updated")
+        expect(flash[:alert]).to include("has reached the maximum limit of")
+        expect(flash[:alert]).to include("diff commits")
       end
 
       context 'when "merge_requests_diff_commits_limit" feature flag is disabled' do
@@ -98,14 +99,14 @@ RSpec.describe Projects::MergeRequestsController, feature_category: :source_code
 
       context 'when diff version limit is also reached' do
         before do
-          stub_const('MergeRequest::DIFF_VERSION_LIMIT', 1)
+          stub_application_setting(diff_max_versions: 1)
         end
 
         it 'displays only one warning' do
           get project_merge_request_path(project, merge_request)
 
           expect(flash[:alert]).to include('This merge request has reached the maximum limit')
-          expect(flash[:alert]).not_to include("This merge request has too many diff commits, and can't be updated")
+          expect(flash[:alert]).not_to include("diff commits")
         end
       end
     end

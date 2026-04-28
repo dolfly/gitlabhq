@@ -65,6 +65,18 @@ describe('IndexLayout', () => {
     });
   });
 
+  describe('headingTag', () => {
+    it('defaults to null', () => {
+      createComponent();
+      expect(findPageHeading().props('headingTag')).toBeNull();
+    });
+
+    it('passes headingTag prop to PageHeading', () => {
+      createComponent({ headingTag: 'h2' });
+      expect(findPageHeading().props('headingTag')).toBe('h2');
+    });
+  });
+
   describe('pageHeadingSrOnly', () => {
     it('does not apply gl-sr-only class by default', () => {
       createComponent({ heading: 'Test Heading' });

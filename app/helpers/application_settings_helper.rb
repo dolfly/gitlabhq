@@ -532,6 +532,8 @@ module ApplicationSettingsHelper
       :diff_max_patch_bytes,
       :diff_max_files,
       :diff_max_lines,
+      :diff_max_versions,
+      :diff_max_commits,
       :commit_email_hostname,
       :protected_ci_variables,
       :local_markdown_version,

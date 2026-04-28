@@ -410,7 +410,7 @@ include:
 ### Debug-level logging
 
 Debug-level logging can help when troubleshooting. For details, see
-[debug-level logging](../../troubleshooting_application_security.md#debug-level-logging).
+[debug-level logging](../../troubleshooting_application_security.md#turn-on-debug-level-logging).
 
 #### Warning: `gl-secret-detection-report.json: no matching files`
 
@@ -420,7 +420,7 @@ For information on this, see the [general application security troubleshooting s
 
 This error indicates the analyzer cannot access required commits. While the analyzer automatically fetches missing commits in most cases, issues can occur in restricted environments.
 
-To diagnose the issue, enable [debug-level logging](../../troubleshooting_application_security.md#debug-level-logging) and look for:
+To diagnose the issue, enable [debug-level logging](../../troubleshooting_application_security.md#turn-on-debug-level-logging) and look for:
 
 ```plaintext
 ERRO[2020-11-18T18:05:52Z] object not found
