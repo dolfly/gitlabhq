@@ -1467,9 +1467,6 @@ msgstr ""
 msgid "%{statusStart}Dismissed%{statusEnd}: %{dismissalReason} on pipeline %{pipelineLink} at %{projectLink}"
 msgstr ""
 
-msgid "%{strongOpen}Warning:%{strongClose} SAML group links can cause GitLab to automatically change member roles or remove members from groups."
-msgstr ""
-
 msgid "%{strongStart}%{count}%{strongEnd} commit"
 msgid_plural "%{strongStart}%{count}%{strongEnd} commits"
 msgstr[0] ""
@@ -35077,7 +35074,7 @@ msgstr ""
 msgid "GroupSAML|This will be set as the access level of users added to the group."
 msgstr ""
 
-msgid "GroupSAML|Use SAML group links to manage group membership using SAML."
+msgid "GroupSAML|Use SAML group links to manage group membership through SAML. If SAML group links are active, GitLab may automatically change member roles or remove members from groups. %{link_start}Learn more%{link_end}."
 msgstr ""
 
 msgid "GroupSAML|Users in this SAML group will be assigned a GitLab Duo Pro or GitLab Duo Enterprise seat, if available"
@@ -58143,9 +58140,6 @@ msgstr ""
 msgid "Read more at %{link_to_promo}."
 msgstr ""
 
-msgid "Read the documentation before applying changes."
-msgstr ""
-
 msgid "Read their documentation."
 msgstr ""
 
@@ -64171,6 +64165,9 @@ msgstr ""
 msgid "SecurityOrchestration|Add a numeric suffix to ensure unique job names."
 msgstr ""
 
+msgid "SecurityOrchestration|Add another category"
+msgstr ""
+
 msgid "SecurityOrchestration|Add another variable"
 msgstr ""
 
@@ -65987,6 +65984,9 @@ msgid "SecurityOrchestration|Release Created"
 msgstr ""
 
 msgid "SecurityOrchestration|Release Security"
+msgstr ""
+
+msgid "SecurityOrchestration|Remove row %{number}"
 msgstr ""
 
 msgid "SecurityOrchestration|Replacement Strategy"

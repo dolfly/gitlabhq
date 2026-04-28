@@ -36,7 +36,6 @@ export default {
     'app/assets/javascripts/glql/components/presenters/label.vue',
     'app/assets/javascripts/glql/utils/common.js',
     'app/assets/javascripts/google_cloud/databases/cloudsql/instance_table.vue',
-    'app/assets/javascripts/groups/settings/api/access_dropdown_api.js',
     'app/assets/javascripts/helpers/help_page_helper.js',
     'app/assets/javascripts/homepage/components/activity_widget.vue',
     'app/assets/javascripts/homepage/components/todos_widget.vue',

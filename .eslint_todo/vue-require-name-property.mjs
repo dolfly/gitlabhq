@@ -390,7 +390,6 @@ export default {
     'app/assets/javascripts/groups/components/item_stats.vue',
     'app/assets/javascripts/groups/components/item_stats_value.vue',
     'app/assets/javascripts/groups/components/item_type_icon.vue',
-    'app/assets/javascripts/groups/settings/components/access_dropdown.vue',
     'app/assets/javascripts/groups_projects/components/filtered_search_and_sort.vue',
     'app/assets/javascripts/groups_projects/components/more_actions_dropdown.vue',
     'app/assets/javascripts/groups_projects/unarchive/components/unarchive_settings.vue',

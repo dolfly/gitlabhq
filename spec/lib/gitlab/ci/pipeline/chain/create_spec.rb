@@ -897,5 +897,36 @@ RSpec.describe Gitlab::Ci::Pipeline::Chain::Create, feature_category: :pipeline_
         expect(persisted_build.stage_id).to be_nil
       end
     end
+
+    context 'with deployment jobs' do
+      let(:pipeline) { build(:ci_empty_pipeline, project: project, ref: 'master', user: user) }
+      let(:stage) { build(:ci_stage, pipeline: pipeline, project: project, name: 'deploy') }
+      let(:environment) { create(:environment, project: project, name: 'production') }
+      let(:deploy_job) do
+        build(:ci_build, :start_review_app, ci_stage: stage, pipeline: pipeline, project: project).tap do |job|
+          job.persisted_environment = environment
+          config = { options: { script: ['echo deploy'] } }
+          job_def = Ci::JobDefinition.fabricate(config: config, project_id: project.id,
+            partition_id: pipeline.partition_id)
+          job.temp_job_definition = job_def
+        end
+      end
+
+      before do
+        stub_feature_flags(ci_bulk_insert_pipeline_records: true)
+        pipeline.stages = [stage]
+        stage.statuses = [deploy_job]
+        Gitlab::Ci::Pipeline::Chain::EnsureEnvironments.new(pipeline, command).perform!
+      end
+
+      it 'bulk inserts job_environments records' do
+        step.perform!
+
+        job_env = Environments::Job.find_by(ci_pipeline_id: pipeline.id, ci_job_id: deploy_job.id)
+        expect(job_env).to be_present
+        expect(job_env.environment_id).to eq(environment.id)
+        expect(job_env.expanded_environment_name).to eq(environment.name)
+      end
+    end
   end
 end

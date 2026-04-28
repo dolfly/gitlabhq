@@ -254,6 +254,9 @@ module Ci
       joins(:pipeline).where(pipeline: { project_id: project_id, iid: iid })
     end
 
+    scope :iac_sast_jobs, -> { where("name ~ ?", "^kics-iac-sast(-\\d+)?$") }
+    scope :with_sast_artifacts, -> { joins(:job_artifacts_sast) }
+
     add_authentication_token_field :token,
       encrypted: :required,
       format_with_prefix: :prefix_and_partition_for_token,

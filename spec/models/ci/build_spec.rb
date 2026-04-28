@@ -550,6 +550,28 @@ RSpec.describe Ci::Build, feature_category: :continuous_integration, factory_def
         it { expect(eager_load_for_api.last.pipeline.association(:project)).to be_loaded }
       end
     end
+
+    describe '.iac_sast_jobs' do
+      let_it_be(:pipeline) { create(:ci_pipeline) }
+
+      let_it_be(:standard_iac_job) { create(:ci_build, name: 'kics-iac-sast', pipeline: pipeline) }
+      let_it_be(:sep_iac_job_0) { create(:ci_build, name: 'kics-iac-sast-0', pipeline: pipeline) }
+      let_it_be(:sep_iac_job_1) { create(:ci_build, name: 'kics-iac-sast-1', pipeline: pipeline) }
+      let_it_be(:other_job) { create(:ci_build, name: 'my-kics-iac-sast-custom', pipeline: pipeline) }
+      let_it_be(:unrelated_job) { create(:ci_build, name: 'test-job', pipeline: pipeline) }
+
+      it 'returns jobs matching the IaC SAST pattern' do
+        expect(described_class.iac_sast_jobs).to contain_exactly(
+          standard_iac_job,
+          sep_iac_job_0,
+          sep_iac_job_1
+        )
+      end
+
+      it 'excludes jobs that do not match the pattern' do
+        expect(described_class.iac_sast_jobs).not_to include(other_job, unrelated_job)
+      end
+    end
   end
 
   describe 'callbacks' do

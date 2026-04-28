@@ -36,6 +36,12 @@ RSpec.describe Gitlab::Ci::Pipeline::Chain::EnsureEnvironments, :aggregate_failu
           expect(job.expanded_environment_name).to eq("review/#{ref}")
         end
 
+        it 'sets persisted_environment on the job for later linking' do
+          subject
+
+          expect(job.persisted_environment).to eq(environment)
+        end
+
         context 'and the pipeline is for a merge request' do
           let(:pipeline) do
             build(:ci_pipeline, project: project, ref: ref, stages: [stage], merge_request: merge_request)

@@ -155,6 +155,7 @@ module Gitlab
 
             bulk_insert_needs!(builds)
             bulk_insert_job_sources!(builds)
+            bulk_insert_job_environments!(builds)
           end
 
           def bulk_insert_job_definition_instances!(builds, result)
@@ -202,6 +203,30 @@ module Gitlab
 
             job_sources.each_slice(BULK_INSERT_BATCH_SIZE) do |batch|
               insert_records_and_restore_ids(::Ci::BuildSource, batch, returning: [])
+            end
+          end
+
+          def bulk_insert_job_environments!(builds)
+            job_environments = builds.filter_map do |build|
+              next unless build.has_environment_keyword?
+
+              environment = build.persisted_environment
+              next if environment.nil?
+
+              ::Environments::Job.new(
+                environment_id: environment.id,
+                expanded_environment_name: environment.name,
+                project_id: build.project_id,
+                ci_pipeline_id: pipeline.id,
+                ci_job_id: build.id,
+                options: build.environment_options_for_permanent_storage
+              )
+            end
+
+            return if job_environments.empty?
+
+            job_environments.each_slice(BULK_INSERT_BATCH_SIZE) do |batch|
+              insert_records_and_restore_ids(::Environments::Job, batch, returning: [])
             end
           end
 
