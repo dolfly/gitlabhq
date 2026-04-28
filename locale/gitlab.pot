@@ -7481,6 +7481,9 @@ msgstr ""
 msgid "AggregationEngine|maximum size of %{max_size} exceeded for filter `%{key}`"
 msgstr ""
 
+msgid "AggregationEngine|metric '%{metric}' requires dimension '%{dimension}' to be requested"
+msgstr ""
+
 msgid "AggregationEngine|the specified identifier is not available: '%{identifier}'"
 msgstr ""
 

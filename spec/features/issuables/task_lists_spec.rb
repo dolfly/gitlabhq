@@ -189,7 +189,7 @@ RSpec.describe 'Task Lists', :js, feature_category: :markdown do
 
         expect(page).to have_selector(container)
         expect(page).to have_selector("#{container} .md .task-list .task-list-item .task-list-item-checkbox")
-        expect(page).to have_selector("#{container} .js-task-list-field", visible: false)
+        expect(page).to have_selector("#{container} .js-task-list-field", visible: :hidden)
         expect(page).to have_selector('form.js-issuable-update')
       end
 

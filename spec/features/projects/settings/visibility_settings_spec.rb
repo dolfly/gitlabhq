@@ -37,12 +37,6 @@ RSpec.describe 'Projects > Settings > Visibility settings', :js, feature_categor
         email_notifications_checkbox = find('.js-emails-enabled input[type="checkbox"]')
 
         email_notifications_checkbox.click
-        expect(page).to have_field(
-          'project[project_setting_attributes][emails_enabled]',
-          type: 'hidden',
-          with: 'false',
-          visible: :hidden
-        )
 
         expect { save_permissions_group }.to change { updated_emails_disabled? }.to(true)
       end
@@ -75,8 +69,11 @@ RSpec.describe 'Projects > Settings > Visibility settings', :js, feature_categor
   def save_permissions_group
     within_testid('visibility-features-permissions-content') do
       click_button 'Save changes'
-      wait_for_requests
     end
+
+    # Ensures that the changes gets saved before continuing with the test assertions
+    expect(page)
+      .to have_content(format(_("Project '%{project_name}' was successfully updated."), project_name: project.name))
   end
 
   def updated_emails_disabled?

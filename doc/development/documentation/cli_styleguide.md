@@ -239,7 +239,9 @@ When writing flag descriptions in Go source:
 - End with a period.
 - Use angle-bracket placeholders for user-supplied values.
   For example: `<username>`, `<branch>`.
-- Always state the default for boolean flags. For example: `(default false)`.
+- For boolean flags with a `true` default, pflag automatically appends `(default true)` in the
+  generated Markdown output. Do not add it manually. No default annotation is required for boolean
+  flags with a `false` default.
 - Use standard metavars for common value types:
 
   | Value type    | Metavar |

@@ -225,6 +225,12 @@ module WorkItems
       true
     end
 
+    # The id used to persist a reference to this type. See
+    # WorkItems::TypesFramework::SystemDefined::Type#persistable_id for details.
+    def persistable_id
+      id
+    end
+
     private
 
     def strip_whitespace

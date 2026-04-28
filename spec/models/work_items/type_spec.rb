@@ -369,4 +369,12 @@ RSpec.describe WorkItems::Type, feature_category: :team_planning do
       end
     end
   end
+
+  describe '#persistable_id' do
+    let_it_be(:work_item_type) { described_class.find_by(base_type: :issue) }
+
+    it 'returns the type id' do
+      expect(work_item_type.persistable_id).to eq(work_item_type.id)
+    end
+  end
 end

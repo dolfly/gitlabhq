@@ -94,6 +94,16 @@ module WorkItems
         end
         alias_method :to_gid, :to_global_id
 
+        # The id used to persist a reference to this type (e.g. in join tables
+        # like work_item_type_custom_fields). For system-defined types this is
+        # simply the type id. Custom types override this to return the
+        # converted_from_system_defined_type_identifier when applicable, which
+        # keeps persisted references consistent with how work items store
+        # work_item_type_id.
+        def persistable_id
+          id
+        end
+
         def widget_definitions
           WorkItems::TypesFramework::SystemDefined::WidgetDefinition.where(work_item_type_id: id)
         end

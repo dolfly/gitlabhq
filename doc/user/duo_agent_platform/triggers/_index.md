@@ -24,7 +24,8 @@ title: Triggers
 > To change the location of your flow configuration file, you must enable a feature flag.
 > For more information, see the history.
 
-A trigger determines when a flow runs.
+A trigger determines when a flow or external agent runs.
+A trigger cannot be created for a custom agent or foundational agent.
 
 For example, you can specify flows to be triggered when you mention them
 in a discussion, or when you assign them as a reviewer.

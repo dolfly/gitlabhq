@@ -21,7 +21,7 @@ module Gitlab
           @filters ||= begin
             definitions = engine.class.filters.index_by(&:identifier)
             request.filters.map do |configuration|
-              Filter.new(definitions[configuration[:identifier]], configuration)
+              Filter.new(definitions[configuration[:identifier]], configuration, query_plan: self)
             end
           end
         end
@@ -38,7 +38,7 @@ module Gitlab
             end
 
             request.dimensions.map do |configuration|
-              Dimension.new(definitions[configuration[:identifier]], configuration)
+              Dimension.new(definitions[configuration[:identifier]], configuration, query_plan: self)
             end
           end
         end
@@ -47,7 +47,7 @@ module Gitlab
           @metrics ||= begin
             definitions = engine.class.metrics.index_by(&:identifier)
             request.metrics.map do |configuration|
-              Metric.new(definitions[configuration[:identifier]], configuration)
+              Metric.new(definitions[configuration[:identifier]], configuration, query_plan: self)
             end
           end
         end
@@ -58,7 +58,7 @@ module Gitlab
               configuration.except(:direction) == plan_part.configuration
             end
 
-            Order.new(plan_part, configuration)
+            Order.new(plan_part, configuration, query_plan: self)
           end
         end
 

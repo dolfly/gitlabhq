@@ -7,16 +7,17 @@ module Gitlab
         class BasePart
           include ActiveModel::Validations
 
-          attr_reader :definition, :configuration
+          attr_reader :definition, :configuration, :query_plan
 
           delegate :name, :type, :identifier, to: :definition
 
           validate :validate_definition_presence
           validate -> { definition&.validate_part(self) }
 
-          def initialize(definition, configuration)
+          def initialize(definition, configuration, query_plan:)
             @definition = definition
             @configuration = configuration
+            @query_plan = query_plan
           end
 
           def instance_key

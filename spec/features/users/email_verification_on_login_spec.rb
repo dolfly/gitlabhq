@@ -520,7 +520,7 @@ RSpec.describe 'Email Verification On Login', :with_current_organization, :clean
   def expect_successful_verification
     expect(page).to have_content(s_('IdentityVerification|Verification successful'))
     expect(page).to have_current_path(users_successful_verification_path)
-    expect(page).to have_selector("meta[http-equiv='refresh'][content='3; url=#{root_path}']", visible: false)
+    expect(page).to have_selector("meta[http-equiv='refresh'][content='3; url=#{root_path}']", visible: :hidden)
 
     expect_log_message('Successful')
     expect_log_message(message: "Successful Login: username=#{user.username} "\
