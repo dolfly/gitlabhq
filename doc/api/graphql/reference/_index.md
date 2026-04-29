@@ -58172,7 +58172,7 @@ Status of the error tracking service.
 | <a id="errortrackingstatus-error"></a>`ERROR` | Error tracking service respond with an error. |
 | <a id="errortrackingstatus-not_found"></a>`NOT_FOUND` | Sentry issue not found. |
 | <a id="errortrackingstatus-retry"></a>`RETRY` | Error tracking service is not ready. |
-| <a id="errortrackingstatus-success"></a>`SUCCESS` | Successfuly fetch the stack trace. |
+| <a id="errortrackingstatus-success"></a>`SUCCESS` | Successfully fetch the stack trace. |
 
 ### `EscalationRuleStatus`
 

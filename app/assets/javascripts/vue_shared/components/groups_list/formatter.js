@@ -36,6 +36,7 @@ export const formatGroupForGraphQLResolver = (group) => ({
   __typename: TYPENAME_GROUP,
   id: convertToGraphQLId(TYPENAME_GROUP, group.id),
   name: group.name,
+  path: group.path,
   fullName: group.full_name,
   fullPath: group.full_path,
   editPath: group.edit_path,
@@ -54,6 +55,7 @@ export const formatGroupForGraphQLResolver = (group) => ({
   userPermissions: {
     archiveGroup: group.can_archive,
     canLeave: group.can_leave,
+    changeGroup: group.can_transfer,
     removeGroup: group.can_remove,
     viewEditPage: group.can_edit,
   },

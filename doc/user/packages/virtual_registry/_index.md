@@ -76,6 +76,7 @@ The virtual registry endpoint can be used by any of following tokens:
 - A [group deploy token](../../project/deploy_tokens/_index.md) for the top-level group hosting the considered virtual registry.
 - A [group access token](../../group/settings/group_access_tokens.md) for the top-level group hosting the considered virtual registry.
 - A [CI/CD job token](../../../ci/jobs/ci_job_token.md).
+- An [OAuth 2.0 token](../../../api/oauth2.md), sent as a Bearer header or query parameter.
 
 Tokens need one of the following scopes:
 

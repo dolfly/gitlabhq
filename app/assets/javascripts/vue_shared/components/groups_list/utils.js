@@ -8,6 +8,7 @@ import {
   ACTION_LEAVE,
   ACTION_RESTORE,
   ACTION_ARCHIVE,
+  ACTION_TRANSFER,
   ACTION_UNARCHIVE,
 } from '~/vue_shared/components/list_actions/constants';
 
@@ -26,6 +27,7 @@ export const availableGraphQLGroupActions = ({
 
   // Rules
   const canEdit = userPermissions.viewEditPage;
+  const canTransfer = userPermissions.changeGroup;
   const canArchive = userPermissions.archiveGroup && !archived && !markedForDeletion;
   const canUnarchive = userPermissions.archiveGroup && isSelfArchived;
   const canRestore = userPermissions.removeGroup && isSelfDeletionScheduled;
@@ -38,6 +40,7 @@ export const availableGraphQLGroupActions = ({
   const actions = {
     [ACTION_COPY_ID]: true,
     [ACTION_EDIT]: canEdit,
+    [ACTION_TRANSFER]: canTransfer,
     [ACTION_ARCHIVE]: canArchive,
     [ACTION_UNARCHIVE]: canUnarchive,
     [ACTION_RESTORE]: canRestore,
@@ -99,6 +102,14 @@ export const renderArchiveSuccessToast = (group) => {
 export const renderUnarchiveSuccessToast = (group) => {
   toast(
     sprintf(__("Group '%{group_name}' has been successfully unarchived."), {
+      group_name: group.fullName,
+    }),
+  );
+};
+
+export const renderTransferSuccessToast = (group) => {
+  toast(
+    sprintf(__("Group '%{group_name}' has been successfully transferred."), {
       group_name: group.fullName,
     }),
   );

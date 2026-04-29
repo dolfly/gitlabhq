@@ -1991,6 +1991,9 @@ msgstr ""
 msgid "/q test is now supported by using /q dev in an issue or merge request. To generate unit tests for this MR, add an inline comment and enter /q dev along with a comment about the tests you want written."
 msgstr ""
 
+msgid "0"
+msgstr ""
+
 msgid "0 B"
 msgstr ""
 
@@ -34595,6 +34598,9 @@ msgid "Group '%{group_name}' has been successfully archived."
 msgstr ""
 
 msgid "Group '%{group_name}' has been successfully restored."
+msgstr ""
+
+msgid "Group '%{group_name}' has been successfully transferred."
 msgstr ""
 
 msgid "Group '%{group_name}' has been successfully unarchived."
@@ -72251,16 +72257,25 @@ msgstr ""
 msgid "SuperSonics|Could not activate subscription"
 msgstr ""
 
+msgid "SuperSonics|Credits"
+msgstr ""
+
 msgid "SuperSonics|Enter activation code"
 msgstr ""
 
 msgid "SuperSonics|Export license usage file"
 msgstr ""
 
+msgid "SuperSonics|GitLab Credits"
+msgstr ""
+
 msgid "SuperSonics|I agree that my use of the GitLab Software is subject to the Subscription Agreement located at the %{linkStart}Terms of Service%{linkEnd}, unless otherwise agreed to in writing with GitLab."
 msgstr ""
 
 msgid "SuperSonics|Learn how to %{linkStart}activate your subscription%{linkEnd}."
+msgstr ""
+
+msgid "SuperSonics|Learn more"
 msgstr ""
 
 msgid "SuperSonics|Learn more about %{activationLinkStart}activating your subscription%{activationLinkEnd}. If you need further assistance, %{supportLinkStart}contact GitLab Support%{supportLinkEnd}."
@@ -72276,6 +72291,12 @@ msgid "SuperSonics|Offline license"
 msgstr ""
 
 msgid "SuperSonics|Online license"
+msgstr ""
+
+msgid "SuperSonics|Purchase credits"
+msgstr ""
+
+msgid "SuperSonics|Purchase monthly credits for your instance and unlock AI capabilities. Volume discounts available."
 msgstr ""
 
 msgid "SuperSonics|Received a license key? %{linkStart}Go to license settings%{linkEnd} to add it to your GitLab instance."
@@ -88265,6 +88286,9 @@ msgid "must be a string"
 msgstr ""
 
 msgid "must be a valid IPv4 or IPv6 address"
+msgstr ""
+
+msgid "must be a valid URL"
 msgstr ""
 
 msgid "must be a valid group"

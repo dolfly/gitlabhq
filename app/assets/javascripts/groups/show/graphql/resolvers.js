@@ -10,7 +10,7 @@ const formatSubgroupsAndProjects = (item) => {
   const baseItem = {
     type: item.type,
     name: item.name,
-    path: '', // TODO: Assign value using `item.path` once it is exposed from API in https://gitlab.com/groups/gitlab-org/-/work_items/20249
+    path: item.path,
     fullPath: item.full_path,
     editPath: item.edit_path,
     archived: item.archived,
@@ -41,6 +41,7 @@ const formatSubgroupsAndProjects = (item) => {
       userPermissions: {
         archiveGroup: item.can_archive,
         canLeave: item.can_leave,
+        changeGroup: item.can_transfer,
         removeGroup: item.can_remove,
         viewEditPage: item.can_edit,
       },

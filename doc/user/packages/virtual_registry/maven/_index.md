@@ -149,6 +149,7 @@ You should use one of the configurations below for each client.
 | Group deploy token    | `Deploy-Token`  | Paste token as-is, or define an environment variable to hold the token. |
 | Group access token    | `Private-Token` | Paste token as-is, or define an environment variable to hold the token. |
 | CI/CD Job token          | `Job-Token`     | `${CI_JOB_TOKEN}`                                                       |
+| OAuth 2.0 token       | `Authorization` | `Bearer <your_oauth_token>`                                             |
 
 Add the following section to your
 [`settings.xml`](https://maven.apache.org/settings.html) file.
@@ -220,6 +221,7 @@ To configure a Maven virtual registry as a replacement of the default registry, 
 | Group deploy token    | `Deploy-Token`  | Paste token as-is, or define an environment variable to hold the token. |
 | Group access token    | `Private-Token` | Paste token as-is, or define an environment variable to hold the token. |
 | CI/CD Job token          | `Job-Token`     | `${CI_JOB_TOKEN}`                                                       |
+| OAuth 2.0 token       | `Authorization` | `Bearer <your_oauth_token>`                                             |
 
 In [your `GRADLE_USER_HOME` directory](https://docs.gradle.org/current/userguide/directory_layout.html#dir:gradle_user_home),
 create a file `gradle.properties` with the following content:

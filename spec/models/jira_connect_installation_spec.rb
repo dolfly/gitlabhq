@@ -24,6 +24,8 @@ RSpec.describe JiraConnectInstallation, feature_category: :integrations do
 
     it { is_expected.to allow_value('https://test.atlassian.net').for(:instance_url) }
     it { is_expected.not_to allow_value('not/a/url').for(:instance_url) }
+    it { is_expected.not_to allow_value("https://example.coצ").for(:instance_url) }
+    it { is_expected.not_to allow_value('https://user:p@ss@example.com').for(:instance_url) }
   end
 
   describe 'scopes' do

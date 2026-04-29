@@ -64,7 +64,7 @@ describe('formatGraphQLGroupsAndProjects', () => {
       accessLevel: {
         integerValue: 50,
       },
-      availableActions: ['copy-id', 'edit', 'restore', 'leave', 'delete-immediately'],
+      availableActions: ['copy-id', 'edit', 'transfer', 'restore', 'leave', 'delete-immediately'],
       childrenLoading: false,
       hasChildren: true,
       relativeWebUrl: `/gitlab/${firstMockGroup.fullPath}`,
