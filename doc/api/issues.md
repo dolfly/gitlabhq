@@ -471,7 +471,7 @@ Issues created by users on GitLab Ultimate include the `health_status` property:
 
 {{< history >}}
 
-- Support for keyset pagination [introduced](https://gitlab.com/gitlab-com/gl-infra/production-engineering/-/issues/26555) in GitLab 18.3.
+- Support for keyset pagination introduced in GitLab 18.3.
 
 {{< /history >}}
 

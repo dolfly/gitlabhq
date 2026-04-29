@@ -44287,7 +44287,7 @@ CREATE INDEX i_protected_branch_unprotect_access_levels_protected_branch_pro ON 
 
 CREATE INDEX i_resource_iteration_events_on_triggered_by_id ON resource_iteration_events USING btree (triggered_by_id);
 
-CREATE UNIQUE INDEX i_sbom_occurrences_vulnerabilities_on_occ_id_and_vuln_id ON sbom_occurrences_vulnerabilities USING btree (sbom_occurrence_id, vulnerability_id);
+CREATE UNIQUE INDEX i_sbom_occ_vulns_on_occ_id_vuln_id_and_project_id ON sbom_occurrences_vulnerabilities USING btree (sbom_occurrence_id, vulnerability_id, project_id);
 
 CREATE INDEX i_software_license_policies_on_custom_software_license_id ON software_license_policies USING btree (custom_software_license_id);
 

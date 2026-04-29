@@ -469,7 +469,7 @@ DECOMPRESS_CMD=tee gitlab-backup restore
 An example of compressing backups with `pigz` using 4 processes:
 
 ```shell
-sudo COMPRESS_CMD="pigz --compress --stdout --fast --processes=4" gitlab-backup create
+sudo COMPRESS_CMD="pigz --stdout --fast --processes 4" gitlab-backup create
 ```
 
 Because `pigz` compresses to the `gzip` format, it is not required to use `pigz` to decompress backups which were compressed by `pigz`. However, it can still have a performance benefit over `gzip`. An example of decompressing backups with `pigz`:

@@ -54,6 +54,8 @@ Service accounts have the following characteristics:
   of GitLab. On GitLab.com, the Owner of the top-level group must verify their identity first.
 
 You can also manage service accounts through the [service accounts API](../../api/service_accounts.md).
+To manage SSH keys for service accounts, use the [user SSH and GPG keys API](../../api/user_keys.md). You
+cannot manage SSH keys through the GitLab UI.
 
 The number of service accounts you can create depends on your subscription and offering:
 

@@ -785,7 +785,7 @@ RSpec.describe WebHookService, :request_store, :clean_gitlab_redis_shared_state,
 
       context 'when overriding predefined headers' do
         let(:custom_headers) do
-          { Gitlab::WebHooks::RecursionDetection::UUID::HEADER => 'some overriden value' }
+          { Gitlab::WebHooks::RecursionDetection::UUID::HEADER => 'some overridden value' }
         end
 
         it 'does not take user-provided value' do

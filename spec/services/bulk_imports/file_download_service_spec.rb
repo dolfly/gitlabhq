@@ -124,12 +124,12 @@ RSpec.describe BulkImports::FileDownloadService, feature_category: :importers do
     end
 
     context 'when dir is not in tmpdir' do
-      let(:tmpdir) { '/etc' }
+      let(:tmpdir) { FileUtils.mkdir_p(Rails.root.join('tmp/import-test-dir')).first }
 
       it 'raises an error' do
         expect { service.execute }.to raise_error(
           StandardError,
-          'path /etc is not allowed'
+          "path #{tmpdir} is not allowed"
         )
       end
     end

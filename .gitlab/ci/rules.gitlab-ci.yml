@@ -1235,15 +1235,6 @@
     - <<: *if-merge-request
       changes: *backend-spec-patterns
 
-# TODO: Why is this rule unused? It seems .rails:rules:rspec-predictive:pipeline-generate superseded it, but that provides no way to selectively target system tests
-.rails:rules:ee-and-foss-system:predictive:
-  rules:
-    - !reference [".rails:rules:only-run-system-if-medium-runners-available", rules]
-    - <<: *if-fork-merge-request
-      changes: *code-backstage-spec-patterns
-    - !reference [".rails:rules:predictive-default-rules", rules]
-    - !reference [".rails:rules:system:predictive-default-rules", rules]
-
 .rails:rules:ee-only-migration:predictive:
   rules:
     - <<: *if-not-ee
@@ -1272,29 +1263,6 @@
     - !reference [".rails:rules:unit-integration:predictive-default-rules", rules]
     - <<: *if-merge-request
       changes: *backend-spec-patterns
-
-# TODO: Why is this rule unused? It seems .rails:rules:rspec-predictive:pipeline-generate superseded it, but that provides no way to selectively target system tests
-.rails:rules:ee-only-integration:predictive:
-  rules:
-    - <<: *if-not-ee
-      when: never
-    - <<: *if-fork-merge-request
-      changes: *backend-spec-patterns
-    - !reference [".rails:rules:predictive-default-rules", rules]
-    - !reference [".rails:rules:unit-integration:predictive-default-rules", rules]
-    - <<: *if-merge-request
-      changes: *backend-spec-patterns
-
-# TODO: Why is this rule unused? It seems .rails:rules:rspec-predictive:pipeline-generate superseded it, but that provides no way to selectively target system tests
-.rails:rules:ee-only-system:predictive:
-  rules:
-    - <<: *if-not-ee
-      when: never
-    - !reference [".rails:rules:only-run-system-if-medium-runners-available", rules]
-    - <<: *if-fork-merge-request
-      changes: *code-backstage-spec-patterns
-    - !reference [".rails:rules:predictive-default-rules", rules]
-    - !reference [".rails:rules:system:predictive-default-rules", rules]
 
 ######################
 # DB rules #

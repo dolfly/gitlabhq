@@ -52,7 +52,7 @@ see the [upgrade notes for GitLab 18](versions/gitlab_18_changes.md). If a versi
 in the upgrade notes, then there's nothing specific about that version to be aware of.
 
 Find the patch releases in the GitLab package repository. For example, to search for the latest
-GitLab 18.2 Enterprise Edition version, go to <https://packages.gitlab.com/app/gitlab/gitlab-ee/search?q=18.2>.
+GitLab 18.2 Enterprise Edition version, go to <https://packages.gitlab.com/gitlab/gitlab-ee>.
 
 ### Required GitLab 17 upgrade stops
 

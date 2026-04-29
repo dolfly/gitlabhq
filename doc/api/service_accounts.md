@@ -35,6 +35,7 @@ The number of service accounts you can create depends on your subscription and o
     This includes all service accounts regardless of how they are provisioned (instance, group, or project level).
 
 You can also interact with service accounts through the [users API](users.md).
+To manage SSH keys for service accounts, use the [user SSH and GPG keys API](user_keys.md).
 
 ## Instance service accounts
 

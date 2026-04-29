@@ -3133,7 +3133,7 @@ RSpec.describe Gitlab::Git::Repository, feature_category: :source_code_managemen
       context 'when the manual override is used on non-detectable file' do
         let(:gitattr_content) { "file1.txt gitlab-generated\n" }
 
-        it 'returns both manually overriden file and the detected file' do
+        it 'returns both manually overridden file and the detected file' do
           expect(generated_files).to contain_exactly('file1.txt', 'package-lock.json')
         end
       end
@@ -3141,7 +3141,7 @@ RSpec.describe Gitlab::Git::Repository, feature_category: :source_code_managemen
       context 'when the manual override is used on the detectable file' do
         let(:gitattr_content) { "package-lock.json gitlab-generated\n" }
 
-        it 'returns the overriden file' do
+        it 'returns the overridden file' do
           expect(generated_files).to contain_exactly('package-lock.json')
         end
       end

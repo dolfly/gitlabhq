@@ -137,7 +137,11 @@ export default {
       />
     </gl-form-group>
 
-    <form-url-app :initial-url="initialUrl" :initial-url-variables="initialUrlVariables" />
+    <form-url-app
+      :initial-url="initialUrl"
+      :initial-url-variables="initialUrlVariables"
+      :initial-secret-token="initialSecretToken"
+    />
 
     <webhook-token-input
       v-if="glFeatures.webhookSigningToken"

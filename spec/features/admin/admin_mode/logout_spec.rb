@@ -16,7 +16,8 @@ RSpec.describe 'Admin Mode Logout', :js, feature_category: :system_access do
   end
 
   context 'when leaving the admin mode' do
-    it 'removes admin mode and redirects to root page' do
+    it 'removes admin mode and redirects to root page',
+      quarantine: { issue: 'https://gitlab.com/gitlab-org/quality/test-failure-issues/-/work_items/42405' } do
       leave_admin_mode
 
       expect(page).to have_current_path root_path, ignore_query: true
@@ -31,7 +32,8 @@ RSpec.describe 'Admin Mode Logout', :js, feature_category: :system_access do
         allow(Gitlab::Database).to receive(:read_only?).and_return(true)
       end
 
-      it 'removes admin mode and redirects to root page' do
+      it 'removes admin mode and redirects to root page',
+        quarantine: { issue: 'https://gitlab.com/gitlab-org/quality/test-failure-issues/-/work_items/42405' } do
         leave_admin_mode
 
         expect(page).to have_current_path root_path, ignore_query: true

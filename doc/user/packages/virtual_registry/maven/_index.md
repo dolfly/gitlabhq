@@ -50,6 +50,7 @@ Before you can use the Maven virtual registry:
 
 - Review the [prerequisites](../_index.md#prerequisites) to use the virtual registry.
 - Configure authentication to the virtual registry. For more information, see [Authenticate to the virtual registry](../_index.md#authenticate-to-the-virtual-registry).
+- On GitLab Self-Managed: Allow outbound requests to the local network. For more information, see [allow requests to the local network](../../../../security/webhooks.md#allow-requests-to-the-local-network-from-webhooks-and-integrations).
 
 When using the Maven virtual registry, remember the following restrictions:
 
@@ -305,3 +306,33 @@ Make sure that the first argument of `Credentials` is `"GitLab Virtual Registry"
 {{< /tab >}}
 
 {{< /tabs >}}
+
+## Troubleshooting
+
+When working with Maven virtual registries, you might encounter the following issues.
+
+### Error: `Connect to gitlab.example.com:443 failed: Connection timed out`
+
+You might get intermittent connection timeout errors when pulling
+Maven dependencies through the virtual registry, such as:
+
+```plaintext
+Connect to gitlab.example.com:443 failed: Connect timed out
+```
+
+This issue can occur on GitLab Self-Managed instances when the upstream
+registry URL resolves to a local network address. By default, GitLab
+blocks outbound requests to local network addresses for security reasons.
+
+To resolve this issue:
+
+1. In the upper-right corner, select **Admin**.
+1. In the left sidebar, select **Settings > Network**.
+1. Expand **Outbound requests**.
+1. Select the **Allow requests to the local network from webhooks and integrations** checkbox.
+1. Optional. If you prefer to allow only specific addresses instead of all local network requests,
+   in **Local IP addresses and domain names that hooks and integrations can access**,
+   add the hostname or IP address of your upstream registry.
+1. Select **Save changes**.
+
+For more information, see [allow requests to the local network](../../../../security/webhooks.md#allow-requests-to-the-local-network-from-webhooks-and-integrations).

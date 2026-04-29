@@ -51,6 +51,10 @@ module API
               desc: 'Number of bytes written (sent to client) during the git operation.'
             optional :received_bytes, type: Integer,
               desc: 'Number of bytes received (from client) during the git operation.'
+            optional :key_id, type: Integer,
+              desc: 'ID of the SSH key used for authentication. Present when a deploy key authenticates via SSH.'
+            optional :username, type: String,
+              desc: 'Username of the user performing the git operation.'
           end
 
           route_setting :authorization, skip_granular_token_authorization: :gitlab_shared_secret_auth
@@ -59,8 +63,6 @@ module API
               break response_with_status(code: 400, success: false, message: "No valid action specified")
             end
 
-            # ToDo: move need_git_audit_event? check after access_check_result when the human guard is removed
-            # the issue: https://gitlab.com/gitlab-org/gitlab/-/work_items/591573
             unless need_git_audit_event?
               break response_with_status(code: 200, success: false, message: "No git audit event needed")
             end

@@ -820,7 +820,7 @@ RSpec.describe SidebarsHelper, feature_category: :navigation do
     # Testing this private method because:
     # 1. This helper is just so complex that it isn't feasible to test everything through the few public methods.
     # 2. private really isn't a thing in Rails helpers so the current private segregation is merely communicating use.
-    # 3. EE override of this method is making it public anyway due to how it is overriden in the public space.
+    # 3. EE override of this method is making it public anyway due to how it is overridden in the public space.
 
     let(:project) { build(:project) }
 

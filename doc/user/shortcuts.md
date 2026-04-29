@@ -244,7 +244,7 @@ These shortcuts are available when editing a file with the
 
 {{< history >}}
 
-- [Introduced](https://gitlab.com/groups/gitlab-org/editor-extensions/-/epics/197) in GitLab 18.7.
+- Introduced in GitLab 18.7.
 
 {{< /history >}}
 

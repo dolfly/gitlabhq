@@ -122,23 +122,27 @@ describe('WebhookFormApp', () => {
       expect(findFormUrlApp().props()).toMatchObject({
         initialUrl: null,
         initialUrlVariables: [],
+        initialSecretToken: '',
       });
     });
 
-    it('passes initialUrl and initialUrlVariables to FormUrlApp', () => {
+    it('passes initialUrl, initialUrlVariables, and initialSecretToken to FormUrlApp', () => {
       const initialUrl = 'https://webhook.site';
       const initialUrlVariables = [{ key: 'test', value: 'value' }];
+      const initialSecretToken = '************';
 
       createComponent({
         props: {
           initialUrl,
           initialUrlVariables,
+          initialSecretToken,
         },
       });
 
       expect(findFormUrlApp().props()).toMatchObject({
         initialUrl,
         initialUrlVariables,
+        initialSecretToken,
       });
     });
   });

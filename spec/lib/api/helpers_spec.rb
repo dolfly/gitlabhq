@@ -1562,7 +1562,7 @@ RSpec.describe API::Helpers, feature_category: :api do
         subject
       end
 
-      context 'with an overriden content type' do
+      context 'with an overridden content type' do
         let(:content_type) { 'application/zip' }
 
         it 'calls present_disk_file! with the correct content type' do
@@ -1602,7 +1602,7 @@ RSpec.describe API::Helpers, feature_category: :api do
           subject
         end
 
-        context 'with an overriden content type' do
+        context 'with an overridden content type' do
           let(:content_type) { 'application/zip' }
           let(:content_disposition) { :inline }
 
@@ -1639,7 +1639,7 @@ RSpec.describe API::Helpers, feature_category: :api do
           subject
         end
 
-        context 'with an overriden content type' do
+        context 'with an overridden content type' do
           let(:content_type) { 'application/zip' }
           let(:content_disposition) { :inline }
 

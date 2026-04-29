@@ -768,7 +768,7 @@ Example request:
 ```shell
 curl --header "PRIVATE-TOKEN: <your_access_token>" \
      --header "Accept: application/json" \
-     --url "https://gitlab.example.com/api/v4/projects
+     --url "https://gitlab.example.com/api/v4/projects"
 ```
 
 Example response:

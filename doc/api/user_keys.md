@@ -12,7 +12,8 @@ title: User SSH and GPG keys API
 
 {{< /details >}}
 
-Use this API to interact with SSH and GPG keys for users. For more information, see [SSH keys](../user/ssh.md) and [GPG keys](../user/project/repository/signed_commits/gpg.md).
+Use this API to interact with [SSH keys](../user/ssh.md) and [GPG keys](../user/project/repository/signed_commits/gpg.md)
+for users.
 
 ## List all SSH keys
 
