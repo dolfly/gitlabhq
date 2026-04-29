@@ -7599,7 +7599,7 @@ RSpec.describe Project, factory_default: :keep, feature_category: :groups_and_pr
     let_it_be_with_reload(:project) { create(:project) }
 
     shared_examples 'webhook is added to execution list' do
-      it 'executes webhook succesfully' do
+      it 'executes webhook successfully' do
         expect(ProjectHook).to receive(:select_active)
         .with(hook_scope, data)
         .and_return([hook])

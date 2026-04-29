@@ -205,16 +205,6 @@ RSpec.describe 'Projects > Show > User sees setup shortcut buttons', feature_cat
       end
 
       describe 'GitLab CI configuration button' do
-        context 'when Auto DevOps is enabled' do
-          it 'no "Set up CI/CD" button if the project has Auto DevOps enabled' do
-            visit project_path(project)
-
-            within_testid('project-buttons') do
-              expect(page).not_to have_link('Set up CI/CD')
-            end
-          end
-        end
-
         context 'when Auto DevOps is not enabled' do
           let(:project) { create(:project, :public, :repository, auto_devops_attributes: { enabled: false }) }
 

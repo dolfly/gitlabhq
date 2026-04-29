@@ -545,10 +545,10 @@ Use the following command to connect to the registry metadata database:
 gitlab-psql -d registry
 ```
 
-### Queries to determine status of online garbage collection tasks 
+### Queries to determine status of online garbage collection tasks
 
-The following queries return tasks that were retried more than 10 times, or were eligible for review for longer than 24 hours. 
-The online garbage collector should pick up an item for review within 24 hours with few failed attempts. 
+The following queries return tasks that were retried more than 10 times, or were eligible for review for longer than 24 hours.
+The online garbage collector should pick up an item for review within 24 hours with few failed attempts.
 If any rows are returned, investigate the health of your online garbage collector.
 
 For manifests:
@@ -787,7 +787,7 @@ to back up and restore the registry database independently.
 
 {{< /history >}}
 
-For Helm chart (Kubernetes) deployments, configure the toolbox pod with 
+For Helm chart (Kubernetes) deployments, configure the toolbox pod with
 dedicated database credentials for backup and restore operations.
 Two separate PostgreSQL users are required:
 
@@ -813,7 +813,7 @@ kubectl create secret generic my-registry-db-password-secret \
 
 #### Configure registry database credentials
 
-Add the required YAML to your Helm `values.yaml` to configure backup and restore users. Refer to the following table for configuration setting definitions. 
+Add the required YAML to your Helm `values.yaml` to configure backup and restore users. Refer to the following table for configuration setting definitions.
 
 | Setting | Default | Description |
 |---|---|---|

@@ -137,7 +137,7 @@ They contain a list of versions that link to relevant upgrade notes.
   headings for patch releases. List minor versions in descending order (latest at the top).
 
   For example:
-  
+
   ```markdown
   ### Upgrade to X.Y
 

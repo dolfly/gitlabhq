@@ -24,7 +24,7 @@ GPT OSS 120B was trained on NVIDIA H100s and runs best on H100 or later data cen
 How your GPUs connect determines the following parallelism strategies:
 
 - If your GPUs connect through NVLink (hundreds of GB/s), use tensor parallelism in a single node. Tensor parallelism splits each layer across GPUs and requires high bandwidth.
-- If your GPUs have a lower bandwidth and work over PCIe (approximately 64 GB/s), use pipeline parallelism. Pipeline parallelism splits layers sequentially across GPUs. 
+- If your GPUs have a lower bandwidth and work over PCIe (approximately 64 GB/s), use pipeline parallelism. Pipeline parallelism splits layers sequentially across GPUs.
 
 If you've reached the maximum limit on tensor parallelism but require more model distribution, you can combine both parallelism strategies. For example, tensor parallelism in a node and pipeline parallelism across nodes.
 
@@ -227,8 +227,8 @@ The values in your vLLM configuration depend on your traffic pattern. Start with
 
 ## Prescriptive setups
 
-The following table lists the prescriptive setups for each hardware. Choose the row that matches your hardware and expected traffic patterns, 
-then use the corresponding configuration. 
+The following table lists the prescriptive setups for each hardware. Choose the row that matches your hardware and expected traffic patterns,
+then use the corresponding configuration.
 
 The `Approximate concurrent requests` column shows the approximate KV-cache-limited concurrency at the listed context length, not the `--max-num-seqs` value.
 
@@ -334,7 +334,7 @@ You should see a JSON response with the model's completion. If the server isn't 
 
 vLLM exposes a Prometheus-compatible `/metrics` endpoint. See [Production Metrics - vLLM](https://docs.vllm.ai/en/stable/usage/metrics/) for the full list.
 
-To monitor vLLM, look at metrics for user-facing latency and capacity pressure. 
+To monitor vLLM, look at metrics for user-facing latency and capacity pressure.
 
 | Metric | Description |
 |---|---|

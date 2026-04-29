@@ -394,7 +394,7 @@ Use `include:template` to include [`.gitlab-ci.yml` templates](https://gitlab.co
 
 **Supported values**:
 
-- The filename of a CI/CD template, for example `Auto-DevOps.gitlab-ci.yml`. 
+- The filename of a CI/CD template, for example `Auto-DevOps.gitlab-ci.yml`.
 - You can use [certain CI/CD variables](includes.md#use-variables-with-include).
 
 **Example of `include:template`**:

@@ -592,7 +592,6 @@ Style/IfUnlessModifier:
     - 'lib/tasks/gitlab/shell.rake'
     - 'lib/tasks/gitlab/sidekiq.rake'
     - 'lib/tasks/gitlab/update_templates.rake'
-    - 'qa/qa/page/mattermost/login.rb'
     - 'qa/qa/page/page_concern.rb'
     - 'qa/qa/page/view.rb'
     - 'qa/qa/resource/registry_repository.rb'

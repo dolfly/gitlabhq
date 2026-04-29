@@ -72,7 +72,7 @@ curl --head "https://connect-install-keys.atlassian.com"
 
 ## Review installation changes to the GitLab for Jira Cloud app
 
-There are several methods to review any installation changes to the GitLab for Jira Cloud app. For more information, see the official [Jira documentation](https://support.atlassian.com/jira/kb/how-to-check-who-installed-enabled-disabled-uninstalled-plugin-in-jira/). 
+There are several methods to review any installation changes to the GitLab for Jira Cloud app. For more information, see the official [Jira documentation](https://support.atlassian.com/jira/kb/how-to-check-who-installed-enabled-disabled-uninstalled-plugin-in-jira/).
 
 ## Data sync fails with `Invalid JWT`
 

@@ -59,6 +59,7 @@ module Organizations
         transfer_namespaces_and_projects
         transfer_users
         schedule_ci_runners_transfer
+        publish_event
       end
 
       def transfer_namespaces_and_projects
@@ -90,6 +91,27 @@ module Organizations
         end
       end
       # rubocop:enable CodeReuse/ActiveRecord
+
+      def publish_event
+        # Capture IDs before the block: instance_eval in run_after_commit_or_now
+        # changes self to the group object, so attr_reader methods would not resolve.
+        group_id = group.id
+        old_org_id = old_organization.id
+        new_org_id = new_organization.id
+
+        # Publish once for the root group only. Descendants implicitly move with it.
+        # Subscribers that need to act on descendant projects must traverse them
+        # independently (e.g. via NamespaceEachBatch).
+        group.run_after_commit_or_now do
+          Gitlab::EventStore.publish(
+            Organizations::GroupTransferredEvent.new(data: {
+              group_id: group_id,
+              old_organization_id: old_org_id,
+              new_organization_id: new_org_id
+            })
+          )
+        end
+      end
 
       def transfer_users
         user_transfer_service.execute

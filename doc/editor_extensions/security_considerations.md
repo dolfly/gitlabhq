@@ -74,6 +74,9 @@ Verify that:
 If you use the GitLab Duo CLI in headless mode, tool calls are approved automatically. Use headless
 mode with caution and in a controlled sandbox environment, such as a development container.
 
+To streamline tool approvals, you can
+[approve tools for an entire session](../user/gitlab_duo_chat/agentic_chat.md#tool-approvals).
+
 ### Verify MCP server sources and permissions
 
 To use Model Context Protocol (MCP) servers securely with GitLab Duo:

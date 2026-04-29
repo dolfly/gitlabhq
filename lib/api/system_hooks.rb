@@ -21,11 +21,18 @@ module API
         SystemHook
       end
 
+      def webhook_signing_token_actor
+        :instance
+      end
+
       params :hook_parameters do
         optional :name, type: String, desc: 'Name of the hook'
         optional :description, type: String, desc: 'Description of the hook'
         optional :token, type: String,
           desc: "Secret token to validate received payloads; this isn't returned in the response"
+        optional :signing_token, type: String,
+          desc: "HMAC signing token used to compute the webhook-signature header. " \
+            "Must be in whsec_<base64> format encoding a 32-byte key. Not returned in the response"
         optional :push_events, type: Boolean, desc: 'When true, the hook fires on push events'
         optional :tag_push_events, type: Boolean, desc: 'When true, the hook fires on new tags being pushed'
         optional :merge_requests_events, type: Boolean, desc: 'Trigger hook on merge requests events'

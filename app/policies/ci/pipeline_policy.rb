@@ -28,7 +28,7 @@ module Ci
 
     # Allow reading builds for external pipelines regardless of whether CI/CD is disabled
     overrides :read_build
-    rule { project_allows_read_build | (external_pipeline & can?(:reporter_access)) }.policy do
+    rule { project_allows_read_build | (external_pipeline & project.reporter) }.policy do
       enable :read_build
     end
 

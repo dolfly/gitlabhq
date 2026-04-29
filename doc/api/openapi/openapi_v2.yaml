@@ -66508,6 +66508,14 @@ definitions:
           type: object
         example:
           X-Custom-Header: value
+      token_present:
+        type: boolean
+        example: false
+        description: Whether a secret token is configured
+      signing_token_present:
+        type: boolean
+        example: false
+        description: Whether an HMAC signing token is configured
       project_id:
         type: string
         example: 1
@@ -66557,6 +66565,8 @@ definitions:
     - push_events_branch_filter
     - branch_filter_strategy
     - custom_webhook_template
+    - token_present
+    - signing_token_present
     - project_id
     - issues_events
     - confidential_issues_events
@@ -66644,6 +66654,11 @@ definitions:
         type: string
         description: Secret token to validate received payloads; this will not be
           returned in the response
+      signing_token:
+        type: string
+        description: HMAC signing token used to compute the webhook-signature header.
+          Must be in whsec_<base64> format encoding a 32-byte key. Not returned in
+          the response
       push_events_branch_filter:
         type: string
         description: Trigger hook on specified branch only
@@ -66767,6 +66782,11 @@ definitions:
         type: string
         description: Secret token to validate received payloads; this will not be
           returned in the response
+      signing_token:
+        type: string
+        description: HMAC signing token used to compute the webhook-signature header.
+          Must be in whsec_<base64> format encoding a 32-byte key. Not returned in
+          the response
       push_events_branch_filter:
         type: string
         description: Trigger hook on specified branch only
@@ -75871,6 +75891,14 @@ definitions:
           type: object
         example:
           X-Custom-Header: value
+      token_present:
+        type: boolean
+        example: false
+        description: Whether a secret token is configured
+      signing_token_present:
+        type: boolean
+        example: false
+        description: Whether an HMAC signing token is configured
     required:
     - id
     - url
@@ -75887,6 +75915,8 @@ definitions:
     - push_events_branch_filter
     - branch_filter_strategy
     - custom_webhook_template
+    - token_present
+    - signing_token_present
     description: API_Entities_Hook model
   postApiV4Hooks:
     type: object
@@ -75905,6 +75935,11 @@ definitions:
         type: string
         description: Secret token to validate received payloads; this isn't returned
           in the response
+      signing_token:
+        type: string
+        description: HMAC signing token used to compute the webhook-signature header.
+          Must be in whsec_<base64> format encoding a 32-byte key. Not returned in
+          the response
       push_events:
         type: boolean
         description: When true, the hook fires on push events
@@ -75987,6 +76022,11 @@ definitions:
         type: string
         description: Secret token to validate received payloads; this isn't returned
           in the response
+      signing_token:
+        type: string
+        description: HMAC signing token used to compute the webhook-signature header.
+          Must be in whsec_<base64> format encoding a 32-byte key. Not returned in
+          the response
       push_events:
         type: boolean
         description: When true, the hook fires on push events

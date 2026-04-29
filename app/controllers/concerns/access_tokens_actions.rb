@@ -27,7 +27,9 @@ module AccessTokensActions
 
   # rubocop:disable Gitlab/ModuleWithInstanceVariables
   def create
-    token_response = ResourceAccessTokens::CreateService.new(current_user, resource, create_params).execute
+    sanitized_user_agent = Gitlab::Audit::Sanitizer.sanitize_user_agent(request.user_agent)
+    token_params = create_params.merge(audit_user_agent: sanitized_user_agent)
+    token_response = ResourceAccessTokens::CreateService.new(current_user, resource, token_params).execute
 
     if token_response.success?
       @resource_access_token = token_response.payload[:access_token]

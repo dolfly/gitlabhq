@@ -342,7 +342,7 @@ gem 'slack-messenger', '~> 2.3.5', feature_category: :integrations
 gem 'kubeclient', '~> 4.12.0', feature_category: :shared # rubocop:todo Gemfile/MissingFeatureCategory -- https://gitlab.com/gitlab-org/gitlab/-/issues/581839
 
 # AI
-gem 'circuitbox', '2.0.0', feature_category: :shared # rubocop:todo Gemfile/MissingFeatureCategory -- https://gitlab.com/gitlab-org/gitlab/-/issues/581839
+gem 'circuitbox', '2.0.0', feature_category: :ai_abstraction_layer
 
 # Sanitize user input
 gem 'sanitize', '~> 6.0.2', feature_category: :shared # rubocop:todo Gemfile/MissingFeatureCategory -- https://gitlab.com/gitlab-org/gitlab/-/issues/581839

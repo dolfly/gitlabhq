@@ -34,11 +34,11 @@ Prerequisites:
 
 - You must be an administrator.
 
-Data collection for GitLab Duo differs based on your configuration of the AI Gateway. 
+Data collection for GitLab Duo differs based on your configuration of the AI Gateway.
 
 ### On GitLab Self-Managed with a self-hosted AI Gateway
 
-When you enable data collection, verbose AI logs (prompts and responses) are stored 
+When you enable data collection, verbose AI logs (prompts and responses) are stored
 locally in the `llm.log` on your GitLab instance and AI Gateway. Data is not shared with GitLab.
 
 To turn on data collection:
@@ -127,7 +127,7 @@ Turning data collection off disables logging for specific operations.
 In a self-hosted AI Gateway configuration, when data collection is turned on, code generation and GitLab Duo Chat
 events that occur through your GitLab Self-Managed instance are captured in the
 [`llm.log` file](../logs/_index.md#llmlog). The log file does not capture anything when it is not
-turned on. 
+turned on.
 
 Code completion logs are captured in the AI Gateway. These logs are not
 transmitted to GitLab. They are visible only on your GitLab Self-Managed infrastructure.
@@ -337,7 +337,7 @@ In this configuration, both GitLab and the AI Gateway are hosted by the customer
   - Logging of sensitive information can be enabled or disabled at the customer's discretion.
 
   > [!note]
-  > When an AI feature uses a GitLab-managed model, even if data collection is 
+  > When an AI feature uses a GitLab-managed model, even if data collection is
   > turned on, detailed logs are not generated in the GitLab-managed AI Gateway. This prevents
   > unintended leaks of sensitive information.
 

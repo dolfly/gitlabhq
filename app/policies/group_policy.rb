@@ -160,8 +160,6 @@ class GroupPolicy < Namespaces::GroupProjectNamespaceSharedPolicy
   end
 
   rule { reporter }.policy do
-    enable :reporter_access
-
     enable(*Authz::Role.get(:reporter).direct_permissions(:group))
   end
 

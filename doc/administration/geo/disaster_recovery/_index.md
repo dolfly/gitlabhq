@@ -25,8 +25,8 @@ Some [known issues](../_index.md#known-issues) exist.
 
 ## Secondary sites with selective synchronization enabled
 
-Promoting a **secondary** site with selective synchronization enabled results in **permanent data loss**  
-for all data that was not replicated to that secondary site. For more information, see 
+Promoting a **secondary** site with selective synchronization enabled results in **permanent data loss**
+for all data that was not replicated to that secondary site. For more information, see
 [Promoting a secondary site with selective synchronization enabled](../replication/selective_synchronization.md#promoting-a-secondary-site-with-selective-synchronization-enabled).
 
 ## The `gitlab-cluster.json` file

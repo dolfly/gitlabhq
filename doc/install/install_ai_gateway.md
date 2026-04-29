@@ -134,7 +134,7 @@ registry.gitlab.com/gitlab-org/modelops/applied-ml/code-suggestions/ai-assist/mo
 
 ### Restrict network access
 
-To harden your system, make the following network configurations: 
+To harden your system, make the following network configurations:
 
 - Restrict the AI Gateway container's outbound network access.
 - Block all other outbound traffic from the container.

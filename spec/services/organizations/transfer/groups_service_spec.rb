@@ -222,6 +222,15 @@ RSpec.describe Organizations::Transfer::GroupsService, :aggregate_failures, feat
         service.execute
       end
 
+      it 'publishes a GroupTransferredEvent' do
+        expect { service.execute }.to publish_event(Organizations::GroupTransferredEvent)
+          .with(
+            group_id: group.id,
+            old_organization_id: old_organization.id,
+            new_organization_id: new_organization.id
+          )
+      end
+
       it 'updates users successfully' do
         service.execute
 
@@ -906,6 +915,10 @@ RSpec.describe Organizations::Transfer::GroupsService, :aggregate_failures, feat
         expect(Ci::Runners::TransferOrganizationWorker).not_to receive(:perform_async)
 
         service.execute
+      end
+
+      it 'does not publish a GroupTransferredEvent' do
+        expect { service.execute }.not_to publish_event(Organizations::GroupTransferredEvent)
       end
     end
 

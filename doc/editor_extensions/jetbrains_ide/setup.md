@@ -83,6 +83,9 @@ To enable GitLab Duo features:
 
 For GitLab Duo Code Suggestions, [review the additional prerequisites and setup steps](../../user/project/repository/code_suggestions/set_up.md#prerequisites).
 
+To approve Agentic Chat tools once per session instead of individually,
+see [tool approvals](../../user/gitlab_duo_chat/agentic_chat.md#tool-approvals).
+
 ## Install alpha versions of the plugin
 
 GitLab publishes pre-release (alpha) builds of the plugin to the

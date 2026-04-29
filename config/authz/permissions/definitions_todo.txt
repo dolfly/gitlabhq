@@ -623,7 +623,6 @@ rename_project
 reopen_issue
 reopen_merge_request
 report_spam
-reporter_access
 reposition_note
 request_access
 reset_merge_request_approvals

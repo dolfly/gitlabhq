@@ -256,6 +256,9 @@ GitLab Duo features are enabled by default in VS Code when you meet the prerequi
   set or have a project open that has GitLab Duo access.
 - For GitLab Duo Code Suggestions, you [meet the additional prerequisites](../../user/project/repository/code_suggestions/set_up.md#prerequisites).
 
+To approve Agentic Chat tools once per session instead of individually,
+see [tool approvals](../../user/gitlab_duo_chat/agentic_chat.md#tool-approvals).
+
 #### Turn off GitLab Duo
 
 To turn off GitLab Duo features in VS Code:

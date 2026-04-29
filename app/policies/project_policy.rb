@@ -325,7 +325,6 @@ class ProjectPolicy < BasePolicy
   rule { guest }.enable :read_project
 
   rule { planner }.enable :planner_access
-  rule { reporter }.enable :reporter_access
   rule { security_manager }.enable :security_manager_access
   rule { developer }.enable :developer_access
   rule { maintainer }.enable :maintainer_access

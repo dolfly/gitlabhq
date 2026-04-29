@@ -417,7 +417,6 @@ Style/GuardClause:
     - 'lib/tasks/gettext.rake'
     - 'qa/qa/ee/page/file/show.rb'
     - 'qa/qa/page/component/snippet.rb'
-    - 'qa/qa/page/mattermost/login.rb'
     - 'qa/qa/page/page_concern.rb'
     - 'qa/qa/resource/package.rb'
     - 'qa/qa/resource/registry_repository.rb'

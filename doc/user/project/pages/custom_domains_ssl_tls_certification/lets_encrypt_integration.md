@@ -78,7 +78,7 @@ To resolve this issue:
 1. In the top bar, select **Search or go to** and find your project.
 1. In the left sidebar, select **Settings** > **General**.
 1. Expand **Visibility, project features, permissions**.
-1. Under **Pages**, from the dropdown list, select **Everyone With Access**. 
+1. Under **Pages**, from the dropdown list, select **Everyone With Access**.
 1. Select **Deploy** > **Pages** > **Domains & settings**.
 1. Next to the domain name, select **Edit** ({{< icon name="pencil" >}}).
 1. In **Verification status**, select **Retry verification** ({{< icon name="retry" >}}).

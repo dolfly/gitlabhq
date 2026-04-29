@@ -69647,9 +69647,6 @@ msgstr ""
 msgid "Set up Jira Integration"
 msgstr ""
 
-msgid "Set up a CI/CD pipeline"
-msgstr ""
-
 msgid "Set up a WebAuthn device to enable two-factor authentication (2FA)."
 msgstr ""
 

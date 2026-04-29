@@ -1152,7 +1152,9 @@ RSpec.describe ProjectPolicy, feature_category: :system_access do
   context 'alert bot' do
     let(:current_user) { Users::Internal.in_organization(project.organization).alert_bot }
 
-    it { is_expected.to be_allowed(:reporter_access) }
+    it 'has the reporter role' do
+      expect(subject.role).to eq(Authz::Role.get(:reporter))
+    end
 
     context 'within a private project' do
       let(:project) { private_project }
@@ -1306,13 +1308,18 @@ RSpec.describe ProjectPolicy, feature_category: :system_access do
 
   context 'support bot' do
     let(:current_user) { create(:support_bot) }
-    let(:permissions) { %i[reporter_access create_note read_issue read_work_item create_ticket] }
+
+    it 'has the reporter role' do
+      expect(subject.role).to eq(Authz::Role.get(:reporter))
+    end
 
     context 'with service desk disabled' do
-      it { expect_disallowed(*permissions) }
+      it_behaves_like 'prevent all'
     end
 
     context 'with service desk enabled' do
+      let(:permissions) { %i[create_note read_issue read_work_item create_ticket] }
+
       before do
         allow(::ServiceDesk).to receive(:enabled?).with(project).and_return(true)
       end

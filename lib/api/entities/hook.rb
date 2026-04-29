@@ -30,6 +30,18 @@ module API
         if: ->(_, options) { options[:with_custom_headers] != false },
         documentation: { type: 'Hash', example: { "X-Custom-Header" => "value" }, is_array: true }
 
+      expose :token_present,
+        documentation: { type: 'Boolean', example: false,
+                         desc: 'Whether a secret token is configured' } do |hook|
+        hook.token.present?
+      end
+
+      expose :signing_token_present,
+        documentation: { type: 'Boolean', example: false,
+                         desc: 'Whether an HMAC signing token is configured' } do |hook|
+        hook.signing_token.present?
+      end
+
       def url_variables
         object.masked_url_variables
       end

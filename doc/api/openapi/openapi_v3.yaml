@@ -6612,7 +6612,7 @@ paths:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/RequestBody_f31eb0c6dc1a"
+              "$ref": "#/components/schemas/RequestBody_a746ddee6a88"
   "/api/v4/groups/{id}/hooks/{hook_id}":
     get:
       operationId: getApiV4GroupsIdHooksHookId
@@ -6683,7 +6683,7 @@ paths:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/RequestBody_dc55cfcafa2c"
+              "$ref": "#/components/schemas/RequestBody_8d712278f973"
     delete:
       operationId: deleteApiV4GroupsIdHooksHookId
       summary: Delete group hook
@@ -25098,7 +25098,7 @@ paths:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/RequestBody_ab27a6a69ff0"
+              "$ref": "#/components/schemas/RequestBody_dbe04ff1d37d"
   "/api/v4/hooks/{hook_id}":
     get:
       operationId: getApiV4HooksHookId
@@ -25153,7 +25153,7 @@ paths:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/RequestBody_12cf9f027a41"
+              "$ref": "#/components/schemas/RequestBody_894e3528a83b"
     post:
       operationId: postApiV4HooksHookId
       summary: Test a hook
@@ -33012,7 +33012,7 @@ paths:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/RequestBody_7635263b8976"
+              "$ref": "#/components/schemas/RequestBody_924ec35a96aa"
   "/api/v4/projects/{id}/hooks/{hook_id}":
     get:
       operationId: getApiV4ProjectsIdHooksHookId
@@ -33083,7 +33083,7 @@ paths:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/RequestBody_d1660b73a20c"
+              "$ref": "#/components/schemas/RequestBody_1423636206a1"
     delete:
       operationId: deleteApiV4ProjectsIdHooksHookId
       summary: Delete a project hook
@@ -76090,6 +76090,14 @@ components:
             X-Custom-Header: value
           items:
             type: object
+        token_present:
+          type: boolean
+          description: Whether a secret token is configured
+          example: false
+        signing_token_present:
+          type: boolean
+          description: Whether an HMAC signing token is configured
+          example: false
     APIEntitiesProjectsContainerRegistryProtectionTagRule:
       type: object
       properties:
@@ -81451,6 +81459,14 @@ components:
             X-Custom-Header: value
           items:
             type: object
+        token_present:
+          type: boolean
+          description: Whether a secret token is configured
+          example: false
+        signing_token_present:
+          type: boolean
+          description: Whether an HMAC signing token is configured
+          example: false
         group_id:
           type: string
           example: 1
@@ -81548,6 +81564,14 @@ components:
             X-Custom-Header: value
           items:
             type: object
+        token_present:
+          type: boolean
+          description: Whether a secret token is configured
+          example: false
+        signing_token_present:
+          type: boolean
+          description: Whether an HMAC signing token is configured
+          example: false
         project_id:
           type: string
           example: 1
@@ -89021,7 +89045,7 @@ components:
           type: boolean
           description: Require approver to authenticate before approving
           nullable: true
-    RequestBody_f31eb0c6dc1a:
+    RequestBody_a746ddee6a88:
       type: object
       properties:
         url:
@@ -89130,6 +89154,12 @@ components:
           description: Secret token to validate received payloads; this will not be
             returned in the response
           nullable: true
+        signing_token:
+          type: string
+          description: HMAC signing token used to compute the webhook-signature header.
+            Must be in whsec_<base64> format encoding a 32-byte key. Not returned
+            in the response
+          nullable: true
         custom_webhook_template:
           type: string
           description: Custom template for the request payload
@@ -89185,7 +89215,7 @@ components:
           nullable: true
       required:
       - url
-    RequestBody_dc55cfcafa2c:
+    RequestBody_8d712278f973:
       type: object
       properties:
         url:
@@ -89292,6 +89322,12 @@ components:
           type: string
           description: Secret token to validate received payloads; this will not be
             returned in the response
+          nullable: true
+        signing_token:
+          type: string
+          description: HMAC signing token used to compute the webhook-signature header.
+            Must be in whsec_<base64> format encoding a 32-byte key. Not returned
+            in the response
           nullable: true
         custom_webhook_template:
           type: string
@@ -95586,7 +95622,7 @@ components:
       required:
       - tag_name
       - ref
-    RequestBody_ab27a6a69ff0:
+    RequestBody_dbe04ff1d37d:
       type: object
       properties:
         url:
@@ -95605,6 +95641,12 @@ components:
         token:
           type: string
           description: Secret token to validate received payloads; this isn't returned
+            in the response
+          nullable: true
+        signing_token:
+          type: string
+          description: HMAC signing token used to compute the webhook-signature header.
+            Must be in whsec_<base64> format encoding a 32-byte key. Not returned
             in the response
           nullable: true
         push_events:
@@ -95686,7 +95728,7 @@ components:
           nullable: true
       required:
       - url
-    RequestBody_12cf9f027a41:
+    RequestBody_894e3528a83b:
       type: object
       properties:
         url:
@@ -95704,6 +95746,12 @@ components:
         token:
           type: string
           description: Secret token to validate received payloads; this isn't returned
+            in the response
+          nullable: true
+        signing_token:
+          type: string
+          description: HMAC signing token used to compute the webhook-signature header.
+            Must be in whsec_<base64> format encoding a 32-byte key. Not returned
             in the response
           nullable: true
         push_events:
@@ -100350,7 +100398,7 @@ components:
       - access_key_id
       - secret_access_key
       - path
-    RequestBody_7635263b8976:
+    RequestBody_924ec35a96aa:
       type: object
       properties:
         url:
@@ -100443,6 +100491,12 @@ components:
           description: Secret token to validate received payloads; this will not be
             returned in the response
           nullable: true
+        signing_token:
+          type: string
+          description: HMAC signing token used to compute the webhook-signature header.
+            Must be in whsec_<base64> format encoding a 32-byte key. Not returned
+            in the response
+          nullable: true
         push_events_branch_filter:
           type: string
           description: Trigger hook on specified branch only
@@ -100506,7 +100560,7 @@ components:
           nullable: true
       required:
       - url
-    RequestBody_d1660b73a20c:
+    RequestBody_1423636206a1:
       type: object
       properties:
         url:
@@ -100597,6 +100651,12 @@ components:
           type: string
           description: Secret token to validate received payloads; this will not be
             returned in the response
+          nullable: true
+        signing_token:
+          type: string
+          description: HMAC signing token used to compute the webhook-signature header.
+            Must be in whsec_<base64> format encoding a 32-byte key. Not returned
+            in the response
           nullable: true
         push_events_branch_filter:
           type: string

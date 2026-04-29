@@ -40199,8 +40199,10 @@ four standard [pagination arguments](#pagination-arguments):
 | <a id="grouphook-pusheventsbranchfilter"></a>`pushEventsBranchFilter` | [`String`](#string) | Trigger hook on push events for matching branches only. |
 | <a id="grouphook-releasesevents"></a>`releasesEvents` | [`Boolean!`](#boolean) | Whether the webhook is triggered on releases events. |
 | <a id="grouphook-resourceaccesstokenevents"></a>`resourceAccessTokenEvents` | [`Boolean!`](#boolean) | Whether the webhook is triggered on resource access token events. |
+| <a id="grouphook-signingtokenpresent"></a>`signingTokenPresent` | [`Boolean!`](#boolean) | Whether an HMAC signing token is configured for webhook-signature header generation. |
 | <a id="grouphook-subgroupevents"></a>`subgroupEvents` | [`Boolean!`](#boolean) | Whether the webhook is triggered on subgroup events. |
 | <a id="grouphook-tagpushevents"></a>`tagPushEvents` | [`Boolean!`](#boolean) | Whether the webhook is triggered on tag push events. |
+| <a id="grouphook-tokenpresent"></a>`tokenPresent` | [`Boolean!`](#boolean) | Whether a secret token is configured for X-Gitlab-Token header validation. |
 | <a id="grouphook-url"></a>`url` | [`String!`](#string) | URL of the webhook. |
 | <a id="grouphook-urlvariables"></a>`urlVariables` | [`[WebhookUrlVariable!]`](#webhookurlvariable) | List of URL variable masks to hide sensitive portions of the webhook URL. |
 | <a id="grouphook-vulnerabilityevents"></a>`vulnerabilityEvents` | [`Boolean!`](#boolean) | Whether the webhook is triggered on vulnerability events. |
@@ -49842,7 +49844,9 @@ Represents the access level required by the user to access a project feature.
 | <a id="projecthook-pusheventsbranchfilter"></a>`pushEventsBranchFilter` | [`String`](#string) | Trigger hook on push events for matching branches only. |
 | <a id="projecthook-releasesevents"></a>`releasesEvents` | [`Boolean!`](#boolean) | Whether the webhook is triggered on releases events. |
 | <a id="projecthook-resourceaccesstokenevents"></a>`resourceAccessTokenEvents` | [`Boolean!`](#boolean) | Whether the webhook is triggered on resource access token events. |
+| <a id="projecthook-signingtokenpresent"></a>`signingTokenPresent` | [`Boolean!`](#boolean) | Whether an HMAC signing token is configured for webhook-signature header generation. |
 | <a id="projecthook-tagpushevents"></a>`tagPushEvents` | [`Boolean!`](#boolean) | Whether the webhook is triggered on tag push events. |
+| <a id="projecthook-tokenpresent"></a>`tokenPresent` | [`Boolean!`](#boolean) | Whether a secret token is configured for X-Gitlab-Token header validation. |
 | <a id="projecthook-url"></a>`url` | [`String!`](#string) | URL of the webhook. |
 | <a id="projecthook-urlvariables"></a>`urlVariables` | [`[WebhookUrlVariable!]`](#webhookurlvariable) | List of URL variable masks to hide sensitive portions of the webhook URL. |
 | <a id="projecthook-vulnerabilityevents"></a>`vulnerabilityEvents` | [`Boolean!`](#boolean) | Whether the webhook is triggered on vulnerability events. |

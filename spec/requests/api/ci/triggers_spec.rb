@@ -205,7 +205,7 @@ RSpec.describe API::Ci::Triggers, feature_category: :pipeline_composition do
       end
 
       shared_examples 'sending request using inputs' do
-        shared_examples 'creating a succesful pipeline' do
+        shared_examples 'creating a successful pipeline' do
           it 'creates a pipeline using inputs' do
             expect { post_request }.to change { Ci::Pipeline.count }.by(1)
 
@@ -231,7 +231,7 @@ RSpec.describe API::Ci::Triggers, feature_category: :pipeline_composition do
               params: { ref: 'refs/heads/other-branch', inputs: inputs }.to_json
           end
 
-          it_behaves_like 'creating a succesful pipeline'
+          it_behaves_like 'creating a successful pipeline'
         end
 
         context 'when passing parameters as form data' do
@@ -249,7 +249,7 @@ RSpec.describe API::Ci::Triggers, feature_category: :pipeline_composition do
               params: { ref: 'refs/heads/other-branch', inputs: transformed_values }
           end
 
-          it_behaves_like 'creating a succesful pipeline'
+          it_behaves_like 'creating a successful pipeline'
         end
       end
 

@@ -506,7 +506,7 @@ class ProjectPresenter < Gitlab::View::Presenter::Delegated
   end
 
   def cicd_missing?
-    current_user && can_current_user_push_code? && !project.has_ci? && cicd_enabled?
+    current_user && can_current_user_push_code? && !project.has_ci_config_file? && cicd_enabled?
   end
 
   def can_instantiate_cluster?
