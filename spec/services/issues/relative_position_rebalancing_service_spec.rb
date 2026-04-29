@@ -177,6 +177,33 @@ RSpec.describe Issues::RelativePositionRebalancingService, :clean_gitlab_redis_s
       end
     end
 
+    context 'when multiple projects belong to the same namespace' do
+      let_it_be(:group) { create(:group) }
+      let_it_be(:project1) { create(:project, namespace: group) }
+      let_it_be(:project2) { create(:project, namespace: group) }
+      let_it_be(:issue1) { create(:issue, project: project1, relative_position: 100) }
+      let_it_be(:issue2) { create(:issue, project: project2, relative_position: 200) }
+
+      subject(:multi_project_service) { described_class.new(Project.id_in([project1, project2])) }
+
+      describe '#preload_issue_ids' do
+        it 'caches issues from all projects in the namespace' do
+          multi_project_service.send(:preload_issue_ids)
+          caching = multi_project_service.send(:caching)
+
+          expect(caching.issue_count).to eq(2)
+          expect(caching.get_cached_issue_ids(0, 10)).to contain_exactly(issue1.id.to_s, issue2.id.to_s)
+        end
+
+        it 'processes each project namespace separately' do
+          caching = multi_project_service.send(:caching)
+          expect(caching).to receive(:cache_current_namespace_id).twice.and_call_original
+
+          multi_project_service.send(:preload_issue_ids)
+        end
+      end
+    end
+
     context 'when error is raised in cache cleanup step' do
       let_it_be(:root_namespace_id) { project.root_namespace.id }
 

@@ -31,8 +31,8 @@ GitLab CI/CD jobs using secrets from the GitLab Secrets Manager must use
 OpenBao integrates with GitLab as an optional component that runs in parallel to existing GitLab services.
 
 - The Rails backend and runners connect to the OpenBao API through a load balancer.
-- OpenBao stores data in PostgreSQL.
-  The Helm chart configures OpenBao to store data in the main GitLab database by default.
+- OpenBao stores data in a separate logical database on PostgreSQL.
+  Configure the connection using `global.openbao.psql` in the Helm chart.
 - OpenBao gets the unseal key from a secret store.
 - OpenBao reads the unseal key from a Kubernetes secret mounted by the Helm chart.
 - OpenBao posts audit logs to the Rails backend when audit logs are enabled.
@@ -117,7 +117,8 @@ Usage example:
 
 ## Backup and restore
 
-OpenBao data is stored in PostgreSQL and should be included in your regular GitLab backup procedures.
+OpenBao stores data in a separate logical database on PostgreSQL. Back up this database alongside your
+regular GitLab backup to ensure secrets can be restored after a failure.
 
 For detailed backup and restore procedures specific to OpenBao, see the [OpenBao backup documentation](https://docs.gitlab.com/charts/charts/openbao/#back-up-openbao).
 

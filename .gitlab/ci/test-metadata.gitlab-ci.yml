@@ -103,3 +103,14 @@ export-predictive-test-metrics:
       - $GLCI_PREDICTIVE_TEST_METRICS_OUTPUT_DIR
     when: always
   allow_failure: true
+
+export-diff-stats:
+  stage: post-test
+  extends:
+    - .default-retry
+    - .test-metadata:rules:export-diff-stats
+  image: ${GITLAB_DEPENDENCY_PROXY_ADDRESS}ruby:${RUBY_VERSION}
+  needs: []
+  script:
+    - tooling/bin/export_diff_stats
+  allow_failure: true

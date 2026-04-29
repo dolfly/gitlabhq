@@ -2881,6 +2881,7 @@
     - <<: *if-export-coverage
     - <<: *if-schedule-pipeline
       when: manual
+      allow_failure: true
 
 # These rules should match .rails:rules:rspec-coverage to ensure undercoverage runs whenever coverage data is generated
 .rails:rules:rspec-undercoverage:
@@ -3675,3 +3676,7 @@
   rules:
     - <<: *if-default-refs
       changes: *ai-harness-patterns
+
+.test-metadata:rules:export-diff-stats:
+  rules:
+    - *if-merge-request

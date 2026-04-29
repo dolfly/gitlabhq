@@ -4623,7 +4623,7 @@ RSpec.describe Ci::Build, feature_category: :continuous_integration, factory_def
       end
 
       it 'assigns the token' do
-        expect { build.enqueue }.to change(build, :token).from(nil).to(an_instance_of(String))
+        expect { build.enqueue }.to change { build.token }.from(nil).to(an_instance_of(String))
       end
     end
 

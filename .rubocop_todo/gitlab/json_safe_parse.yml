@@ -279,7 +279,6 @@ Gitlab/JsonSafeParse:
     - 'lib/gitlab/kas/user_access.rb'
     - 'lib/gitlab/manifest_import/metadata.rb'
     - 'lib/gitlab/merge_requests/mergeability/redis_interface.rb'
-    - 'lib/gitlab/metrics/samplers/puma_sampler.rb'
     - 'lib/gitlab/performance_bar/stats.rb'
     - 'lib/gitlab/prometheus_client.rb'
     - 'lib/gitlab/sidekiq_daemon/monitor.rb'

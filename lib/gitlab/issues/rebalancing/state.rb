@@ -81,11 +81,11 @@ module Gitlab
           with_redis { |redis| redis.get(current_index_key).to_i }
         end
 
-        def cache_current_project_id(project_id)
-          with_redis { |redis| redis.set(current_project_key, project_id, ex: REDIS_EXPIRY_TIME) }
+        def cache_current_namespace_id(namespace_id)
+          with_redis { |redis| redis.set(current_project_key, namespace_id, ex: REDIS_EXPIRY_TIME) }
         end
 
-        def get_current_project_id
+        def get_current_namespace_id
           with_redis { |redis| redis.get(current_project_key) }
         end
 
@@ -93,7 +93,7 @@ module Gitlab
           @issue_count ||= with_redis { |redis| redis.zcard(issue_ids_key) }
         end
 
-        def remove_current_project_id_cache
+        def remove_current_namespace_id_cache
           with_redis { |redis| redis.del(current_project_key) }
         end
 

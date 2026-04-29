@@ -59,9 +59,9 @@ module Issues
     def get_issue_ids(index, limit)
       issue_ids = caching.get_cached_issue_ids(index, limit)
 
-      # if we have a list of cached issues and no current project id cached,
-      # then we successfully cached issues for all projects
-      return issue_ids if issue_ids.any? && caching.get_current_project_id.blank?
+      # if we have a list of cached issues and no current namespace id cached,
+      # then we successfully cached issues for all namespaces
+      return issue_ids if issue_ids.any? && caching.get_current_namespace_id.blank?
 
       # if we got no issue ids at the start of re-balancing then we did not cache any issue ids yet
       preload_issue_ids
@@ -71,16 +71,20 @@ module Issues
 
     # rubocop: disable CodeReuse/ActiveRecord
     def preload_issue_ids
-      index = 0
-      cached_project_id = caching.get_current_project_id
+      cached_namespace_id = caching.get_current_namespace_id
 
-      collection = projects_collection
-      collection = projects_collection.where(Project.arel_table[:id].gteq(cached_project_id.to_i)) if cached_project_id.present?
+      namespace_scope = Project.where(id: projects_collection).reorder(:project_namespace_id).select(:project_namespace_id).distinct
+      namespace_scope = namespace_scope.where(project_namespace_id: cached_namespace_id.to_i..) if cached_namespace_id.present?
 
-      collection.each do |project|
-        caching.cache_current_project_id(project.id)
-        index += 1
-        scope = Issue.in_projects(project).order_by_relative_position.with_non_null_relative_position.select(:id, :relative_position)
+      namespace_scope.each do |record|
+        namespace_id = record.project_namespace_id
+        caching.cache_current_namespace_id(namespace_id)
+
+        scope = Issue
+          .in_projects(projects_collection.where(project_namespace_id: namespace_id))
+          .order_by_relative_position
+          .with_non_null_relative_position
+          .select(:id, :relative_position)
 
         with_retry(PREFETCH_ISSUES_BATCH_SIZE, 100) do |batch_size|
           Gitlab::Pagination::Keyset::Iterator.new(scope: scope).each_batch(of: batch_size) do |batch|
@@ -89,7 +93,7 @@ module Issues
         end
       end
 
-      caching.remove_current_project_id_cache
+      caching.remove_current_namespace_id_cache
     end
     # rubocop: enable CodeReuse/ActiveRecord
 

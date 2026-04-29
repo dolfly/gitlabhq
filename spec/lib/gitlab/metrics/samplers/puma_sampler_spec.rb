@@ -111,6 +111,27 @@ RSpec.describe Gitlab::Metrics::Samplers::PumaSampler do
         subject.sample
       end
     end
+
+    context 'when puma stats json violates safe parsing limits' do
+      let(:deep_json) do
+        nested = '"value"'
+        33.times { nested = %({ "a": #{nested} }) }
+        nested
+      end
+
+      let(:puma_stats) { deep_json }
+
+      it 'does not raise' do
+        expect { subject.sample }.not_to raise_error
+      end
+
+      it 'logs a warning' do
+        allow(Gitlab::AppLogger).to receive(:warn)
+        expect(Gitlab::AppLogger).to receive(:warn).with(/failed to parse Puma stats/)
+
+        subject.sample
+      end
+    end
   end
 
   def expect_worker_stats(labels)

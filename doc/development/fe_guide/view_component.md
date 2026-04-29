@@ -264,8 +264,7 @@ A layout that establishes spacing between heading, alerts, and content areas. It
 = render ::Layouts::IndexLayout.new(heading: _('Page title'), description: _('Page description')) do |c|
   - c.with_alerts do
     = render Pajamas::AlertComponent.new(title: 'Alert message')
-  - c.with_content do
-    = render 'items_table'
+  = render 'items_table'
 ```
 
 The component supports the following slots:
@@ -277,6 +276,31 @@ The component supports the following slots:
 
 For the full list of options, see its
 [source](https://gitlab.com/gitlab-org/gitlab/-/blob/master/app/components/layouts/index_layout.rb).
+
+#### Detail layout
+
+A layout that establishes spacing between heading, alerts, and content areas. It provides a consistent structure for detail pages with optional page heading, alerts, sidebar, and main content sections.
+
+**Example**:
+
+```ruby
+= render ::Layouts::DetailLayout.new(heading: _('Page title'), description: _('Page description')) do |c|
+  - c.with_alerts do
+    = render Pajamas::AlertComponent.new(title: 'Alert message')
+  - c.with_sidebar do
+    = render 'sidebar'
+
+  = render 'items_table'
+The component supports the following slots:
+
+- `heading`: Custom heading markup (uses `PageHeadingComponent` internally)
+- `description`: Custom description content (uses `PageHeadingComponent` internally)
+- `alerts`: Page alerts container (takes no space when empty)
+- `sidebar`: Page sidebar
+- `content`: Page content
+
+For the full list of options, see its
+[source](https://gitlab.com/gitlab-org/gitlab/-/blob/master/app/components/layouts/detail_layout.rb).
 
 #### CRUD component
 

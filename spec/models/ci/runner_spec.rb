@@ -125,7 +125,7 @@ RSpec.describe Ci::Runner, type: :model, factory_default: :keep, feature_categor
         let(:tag_name) { 'new-tag' }
 
         it 'creates a tag' do
-          expect { runner.save! }.to change(Ci::Tag, :count).by(1)
+          expect { runner.save! }.to change { Ci::Tag.count }.by(1)
         end
 
         it 'creates an association to the tag' do
@@ -141,7 +141,7 @@ RSpec.describe Ci::Runner, type: :model, factory_default: :keep, feature_categor
         end
 
         it 'does not create a tag' do
-          expect { runner.save! }.not_to change(Ci::Tag, :count)
+          expect { runner.save! }.not_to change { Ci::Tag.count }
         end
 
         it 'creates an association to the tag' do

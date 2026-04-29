@@ -832,7 +832,7 @@ RSpec.describe Ci::JobArtifact, feature_category: :job_artifacts do
     let(:artifact) { build(:ci_job_artifact, job: job, partition_id: nil) }
 
     it 'copies the partition_id from job' do
-      expect { artifact.valid? }.to change(artifact, :partition_id).from(nil).to(123)
+      expect { artifact.valid? }.to change { artifact.partition_id }.from(nil).to(123)
     end
 
     context 'when the job is missing' do
@@ -844,7 +844,7 @@ RSpec.describe Ci::JobArtifact, feature_category: :job_artifacts do
       end
 
       it 'does not change the partition_id value' do
-        expect { artifact.valid? }.not_to change(artifact, :partition_id)
+        expect { artifact.valid? }.not_to change { artifact.partition_id }
       end
     end
   end
