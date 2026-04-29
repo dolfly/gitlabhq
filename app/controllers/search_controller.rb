@@ -28,6 +28,11 @@ class SearchController < ApplicationController
 
   around_action :allow_gitaly_ref_name_caching
 
+  # Ensure organization is resolved before authenticate_user! because
+  # authenticate? calls search_service which needs Current.organization.
+  skip_before_action :set_current_organization
+  prepend_before_action :set_current_organization
+
   skip_before_action :authenticate_user!, unless: :authenticate?
 
   before_action :check_scope_global_search_enabled, except: :opensearch

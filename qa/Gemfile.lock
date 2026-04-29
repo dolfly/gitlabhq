@@ -142,7 +142,7 @@ GEM
     gitlab (4.19.0)
       httparty (~> 0.20)
       terminal-table (>= 1.5.1)
-    gitlab-qa (15.7.1)
+    gitlab-qa (15.7.2)
       activesupport (>= 6.1, < 8)
       ffi (~> 1.17)
       gitlab (~> 4.19)
@@ -420,7 +420,7 @@ DEPENDENCIES
   faraday-retry (~> 2.4)
   fog-google (~> 1.29, >= 1.29.4)
   gitlab-orchestrator!
-  gitlab-qa (~> 15, >= 15.7.1)
+  gitlab-qa (~> 15, >= 15.7.2)
   gitlab-utils!
   gitlab_quality-test_tooling (~> 3.13.0)
   junit_merge (~> 0.1.2)
@@ -493,7 +493,7 @@ CHECKSUMS
   formatador (0.3.0) sha256=65c37ec773f3fc7faa02cd5efd9599dc72970af5ebca8041a3e5dbcf5b70f956
   gitlab (4.19.0) sha256=3f645e3e195dbc24f0834fbf83e8ccfb2056d8e9712b01a640aad418a6949679
   gitlab-orchestrator (0.0.1)
-  gitlab-qa (15.7.1) sha256=b75bcf2bd114e86beda378357133d20db7c25b3a2a5f053320592ffd19eedbfa
+  gitlab-qa (15.7.2) sha256=4b6584fabf325f5229b98a3641af2b6ad5abbd0d6682816602d08c760729422c
   gitlab-utils (0.2.0)
   gitlab_quality-test_tooling (3.13.0) sha256=1d3ddf0a1b8c42649ed4161d8a40a88a3f78160d3212d4539597b178b8449c50
   google-apis-compute_v1 (0.101.0) sha256=1dea57ab0a579424305aac3219cbd70196b6f3e0d1c6387e1412e3b676c25f3f

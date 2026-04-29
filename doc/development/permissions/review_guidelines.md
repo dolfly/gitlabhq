@@ -179,25 +179,6 @@ rule { admin | organization_owner | owner }.enable :delete_project
 rule { owner }.enable :delete_project
 ```
 
-### Avoid OR in rules
-
-Do not use conditions such as `planner_or_reporter_access` as a shorthand. Use separate rules for
-each role instead. This keeps permissions explicit and enumerable, and avoids
-hiding which roles actually have access.
-
-```ruby
-# bad
-condition(:planner_or_reporter_access) do
-  can?(:reporter_access) || can?(:planner_access)
-end
-
-rule { can?(:planner_or_reporter_access) }.enable :read_issue
-
-# good
-rule { can?(:planner_access) }.enable :read_issue
-rule { can?(:reporter_access) }.enable :read_issue
-```
-
 ## Examples
 
 ### Refactoring combined conditions to use `prevent`

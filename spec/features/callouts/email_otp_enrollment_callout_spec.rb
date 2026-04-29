@@ -6,6 +6,10 @@ RSpec.describe 'Email OTP enrollment callout', :js, feature_category: :system_ac
   let_it_be(:user) { create(:user, :with_namespace) }
   let(:expected_title) { s_('EmailOTP|Enhanced authentication coming soon') }
 
+  before do
+    stub_current_organization(user.organization)
+  end
+
   context 'when user is eligible for the callout' do
     let(:email_otp_required_after) { 8.days.from_now }
 

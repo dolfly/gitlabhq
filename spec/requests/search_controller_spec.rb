@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe SearchController, feature_category: :global_search do
+RSpec.describe SearchController, :with_current_organization, feature_category: :global_search do
   let_it_be(:user) { create(:user) }
   let_it_be(:group) { create(:group) }
   let_it_be(:project) { create(:project, :public, :repository, :wiki_repo, name: 'awesome project', group: group) }

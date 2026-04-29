@@ -610,7 +610,7 @@ class ApplicationSetting < ApplicationRecord
   validates :integrations, json_schema: { filename: "application_setting_integrations" }
 
   jsonb_accessor :topology_service_settings,
-    topology_service_concurrency_limit: [:integer, { default: 200 }]
+    topology_service_concurrency_limit: [:integer, { default: 40 }]
 
   validates :topology_service_settings, json_schema: { filename: "application_setting_topology_service_settings" }
 

@@ -219,6 +219,7 @@ export const sidebarData = {
   new_user_registration_path: '/sign_up',
   trial_registration_path: '/trial_registrations/new',
   has_multiple_organizations: false,
+  explore_analytics_dashboards_path: '/explore/analytics/dashboards',
 };
 
 export const loggedOutSidebarData = {

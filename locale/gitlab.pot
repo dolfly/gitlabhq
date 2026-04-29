@@ -2708,7 +2708,7 @@ msgstr ""
 msgid "AICatalog|Copy configuration"
 msgstr ""
 
-msgid "AICatalog|Copy of"
+msgid "AICatalog|Copy of %{name}"
 msgstr ""
 
 msgid "AICatalog|Could not create MCP server. Please try again."
@@ -9492,6 +9492,9 @@ msgid "AnalyticsDashboards|Root Cause Analysis"
 msgstr ""
 
 msgid "AnalyticsDashboards|This table doesn't include GitLab Duo Agent Platform events."
+msgstr ""
+
+msgid "AnalyticsDashboards|View analytics dashboards"
 msgstr ""
 
 msgid "Analytics|%{linkStart}Learn more%{linkEnd} about managing and interacting with analytics dashboards."
@@ -68933,6 +68936,9 @@ msgstr ""
 msgid "SemanticSearch|Advanced Search cluster"
 msgstr ""
 
+msgid "SemanticSearch|Changing the embeddings model or dimensions results in a backfill"
+msgstr ""
+
 msgid "SemanticSearch|Configure"
 msgstr ""
 
@@ -68940,6 +68946,9 @@ msgid "SemanticSearch|Connect"
 msgstr ""
 
 msgid "SemanticSearch|Connect a vector store to index and store embeddings."
+msgstr ""
+
+msgid "SemanticSearch|Current model"
 msgstr ""
 
 msgid "SemanticSearch|Current status of semantic code search."
@@ -68969,13 +68978,37 @@ msgstr ""
 msgid "SemanticSearch|In use"
 msgstr ""
 
+msgid "SemanticSearch|Make sure the model allows the value, and your vector store can handle it."
+msgstr ""
+
+msgid "SemanticSearch|Make sure you have access to GitLab-operated AI Gateway before selecting a GitLab-managed model."
+msgstr ""
+
+msgid "SemanticSearch|Next model"
+msgstr ""
+
 msgid "SemanticSearch|Reuse your existing Advanced Search configuration."
 msgstr ""
 
 msgid "SemanticSearch|Save changes"
 msgstr ""
 
+msgid "SemanticSearch|Select embedding dimensions"
+msgstr ""
+
+msgid "SemanticSearch|Select embedding model"
+msgstr ""
+
+msgid "SemanticSearch|Semantic search %{collection} embeddings"
+msgstr ""
+
 msgid "SemanticSearch|Semantic search will be disabled soon."
+msgstr ""
+
+msgid "SemanticSearch|Set embeddings"
+msgstr ""
+
+msgid "SemanticSearch|Set or update the embedding model and dimensions for the collection"
 msgstr ""
 
 msgid "SemanticSearch|Status"
@@ -68984,10 +69017,19 @@ msgstr ""
 msgid "SemanticSearch|Successfully connected. Indexing will start soon."
 msgstr ""
 
+msgid "SemanticSearch|Switching to: %{model_name}"
+msgstr ""
+
 msgid "SemanticSearch|The URLs for connecting to the Elasticsearch cluster. For clustering, add the URLs separated by commas."
 msgstr ""
 
 msgid "SemanticSearch|This action is destructive. Disabling semantic search will remove all indexed data. If you reconnect in the future, a full index will be performed."
+msgstr ""
+
+msgid "SemanticSearch|This process can take several hours depending on your codebase size. Semantic search will remain available during the backfill."
+msgstr ""
+
+msgid "SemanticSearch|Update embeddings and start backfill process"
 msgstr ""
 
 msgid "SemanticSearch|Vector storage"

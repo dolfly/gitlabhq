@@ -39,7 +39,7 @@ Each metric is defined in a YAML file consisting of a number of fields:
 | `key_path`                   | yes      | JSON key path for the metric, location in Service Ping payload. |
 | `description`                | yes      |                        |
 | `product_group`              | yes      | The [group](https://gitlab.com/gitlab-com/www-gitlab-com/blob/master/data/stages.yml) that owns the metric. |
-| `product_categories`         | no       | `array`; The [feature categories](https://gitlab.com/gitlab-org/gitlab/-/blob/master/config/feature_categories.yml) that the metric represents usage of. Some metrics may correspond to multiple categories or no category. |
+| `product_categories`         | yes   | `array`; The [feature categories](https://gitlab.com/gitlab-org/gitlab/-/blob/master/config/feature_categories.yml) that the metric represents usage of. |
 | `value_type`                 | yes      | `string`; one of [`string`, `number`, `boolean`, `object`](https://json-schema.org/understanding-json-schema/reference/type). |
 | `status`                     | yes      | `string`; [status](#metric-statuses) of the metric, may be set to `active`, `removed`, `broken`. |
 | `time_frame`                 | yes      | `string` or `array`; may be set to `7d`, `28d`, `all`, `none` or an array including any of these values except for `none`. |
@@ -124,6 +124,8 @@ instance unique identifier.
 key_path: uuid
 description: GitLab instance unique identifier
 product_group: analytics_instrumentation
+product_categories:
+- service_ping
 value_type: string
 status: active
 milestone: 9.1

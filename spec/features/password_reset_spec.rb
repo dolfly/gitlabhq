@@ -4,6 +4,10 @@ require 'spec_helper'
 
 RSpec.describe 'Password reset', feature_category: :system_access do
   describe 'throttling', :js do
+    before do
+      stub_current_organization(create(:organization))
+    end
+
     it 'sends reset instructions when not previously sent' do
       user = create(:user)
       forgot_password(user)

@@ -180,7 +180,7 @@ module SearchHelper
   end
 
   def search_service
-    @search_service ||= ::SearchService.new(current_user, params)
+    @search_service ||= ::SearchService.new(current_user, params.merge(organization_id: Current.organization.id))
   end
 
   def search_sort_options

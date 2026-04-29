@@ -39,6 +39,8 @@ describe('SuperTopbar', () => {
   const findPromoMenu = () => wrapper.findComponent(PromoMenu);
   const findBreadcrumbComponent = () => wrapper.findComponent(GlBreadcrumb);
   const findBreadcrumbSlot = () => wrapper.find('#js-super-topbar-breadcrumbs-slot');
+  const findAnalyticsDashboardsButton = () =>
+    wrapper.findByTestId('topbar-analytics-dashboards-button');
 
   const createComponent = (props = {}, provideOverrides = {}) => {
     wrapper = shallowMountExtended(SuperTopbar, {
@@ -524,6 +526,65 @@ describe('SuperTopbar', () => {
         it('does not render', () => {
           createComponent();
           expect(findSignupButton().exists()).toBe(false);
+        });
+      });
+    });
+
+    describe('Analytics dashboards button', () => {
+      describe('when exploreAnalyticsDashboards feature is enabled', () => {
+        it('renders with correct href', () => {
+          createComponent(
+            {
+              sidebarData: {
+                ...mockSidebarData,
+                explore_analytics_dashboards_path: '/explore/analytics/dashboards',
+              },
+            },
+            { glFeatures: { exploreAnalyticsDashboards: true } },
+          );
+
+          expect(findAnalyticsDashboardsButton().exists()).toBe(true);
+          expect(findAnalyticsDashboardsButton().attributes('href')).toBe(
+            '/explore/analytics/dashboards',
+          );
+          expect(findAnalyticsDashboardsButton().attributes('icon')).toBe('chart');
+          expect(findAnalyticsDashboardsButton().attributes('size')).toBe('small');
+          expect(findAnalyticsDashboardsButton().attributes('aria-label')).toBe(
+            'View analytics dashboards',
+          );
+        });
+      });
+
+      describe('when exploreAnalyticsDashboards feature is disabled', () => {
+        it('does not render', () => {
+          createComponent(
+            {
+              sidebarData: {
+                ...mockSidebarData,
+                explore_analytics_dashboards_path: '/explore/analytics/dashboards',
+              },
+            },
+            { glFeatures: { exploreAnalyticsDashboards: false } },
+          );
+
+          expect(findAnalyticsDashboardsButton().exists()).toBe(false);
+        });
+      });
+
+      describe('when user is not logged in', () => {
+        it('does not render', () => {
+          createComponent(
+            {
+              sidebarData: {
+                ...mockSidebarData,
+                is_logged_in: false,
+                explore_analytics_dashboards_path: '/explore/analytics/dashboards',
+              },
+            },
+            { glFeatures: { exploreAnalyticsDashboards: true } },
+          );
+
+          expect(findAnalyticsDashboardsButton().exists()).toBe(false);
         });
       });
     });

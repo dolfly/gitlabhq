@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe SearchHelper, feature_category: :global_search do
+RSpec.describe SearchHelper, :with_current_organization, feature_category: :global_search do
   include MarkupHelper
   include BadgesHelper
 
@@ -926,7 +926,10 @@ RSpec.describe SearchHelper, feature_category: :global_search do
     end
 
     it 'instantiates a new SearchService with current_user and params' do
-      expect(::SearchService).to receive(:new).with(:the_current_user, { include_archived: true })
+      expect(::SearchService).to receive(:new).with(
+        :the_current_user,
+        hash_including(include_archived: true, organization_id: current_organization.id)
+      )
 
       search_service
     end

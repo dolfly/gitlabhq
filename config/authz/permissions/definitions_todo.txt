@@ -365,7 +365,6 @@ move_work_item
 override_group_member
 owner_access
 pages_multiple_versions
-planner_access
 project_bot_access
 promote_to_epic
 provide_status_check_response

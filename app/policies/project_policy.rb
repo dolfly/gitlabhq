@@ -324,7 +324,6 @@ class ProjectPolicy < BasePolicy
   # Ability.users_that_can_read_project method
   rule { guest }.enable :read_project
 
-  rule { planner }.enable :planner_access
   rule { security_manager }.enable :security_manager_access
   rule { developer }.enable :developer_access
   rule { maintainer }.enable :maintainer_access

@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe Gitlab::ProjectSearchResults, feature_category: :global_search do
+RSpec.describe Gitlab::ProjectSearchResults, :with_current_organization, feature_category: :global_search do
   include SearchHelpers
 
   let_it_be(:user) { create(:user) }
@@ -292,6 +292,24 @@ RSpec.describe Gitlab::ProjectSearchResults, feature_category: :global_search do
       let(:query) { 'foo' }
 
       include_examples 'search results filtered by state'
+    end
+  end
+
+  describe 'organization_id propagation to NotesFinder' do
+    let(:project) { create(:project, :public) }
+    let(:query) { 'test' }
+
+    subject(:results) do
+      described_class.new(user, query, project: project, organization_id: current_organization.id)
+    end
+
+    it 'passes organization_id to NotesFinder' do
+      expect(NotesFinder).to receive(:new).with(
+        anything,
+        hash_including(organization_id: current_organization.id)
+      ).and_call_original
+
+      results.objects('notes')
     end
   end
 

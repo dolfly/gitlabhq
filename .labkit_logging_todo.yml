@@ -1603,6 +1603,18 @@ offenses:
   deprecated_field: username
   standard_field: Labkit::Fields::GL_USER_NAME
 - logger_class: Gitlab::AppJsonLogger
+  callsite: ee/app/services/dependency_management/provision_service_account_service.rb
+  deprecated_field: error
+  standard_field: Labkit::Fields::ERROR_MESSAGE
+- logger_class: Gitlab::AppJsonLogger
+  callsite: ee/app/services/dependency_management/provision_service_account_service.rb
+  deprecated_field: reason
+  standard_field: Labkit::Fields::LOG_MESSAGE
+- logger_class: Gitlab::AppJsonLogger
+  callsite: ee/app/services/dependency_management/provision_service_account_service.rb
+  deprecated_field: user_id
+  standard_field: Labkit::Fields::GL_USER_ID
+- logger_class: Gitlab::AppJsonLogger
   callsite: ee/app/services/ee/ci/runners/create_runner_service.rb
   deprecated_field: class
   standard_field: Labkit::Fields::CLASS_NAME
@@ -2866,6 +2878,10 @@ offenses:
   callsite: lib/gitlab/auth/unique_ips_limiter.rb
   deprecated_field: user_id
   standard_field: Labkit::Fields::GL_USER_ID
+- logger_class: Gitlab::AppJsonLogger
+  callsite: lib/gitlab/background_migration/backfill_group_wiki_repository_last_updated.rb
+  deprecated_field: class
+  standard_field: Labkit::Fields::CLASS_NAME
 - logger_class: Gitlab::AppJsonLogger
   callsite: lib/gitlab/background_migration/move_ci_builds_metadata.rb
   deprecated_field: class

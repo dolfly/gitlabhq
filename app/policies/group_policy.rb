@@ -154,8 +154,6 @@ class GroupPolicy < Namespaces::GroupProjectNamespaceSharedPolicy
   end
 
   rule { planner }.policy do
-    enable :planner_access
-
     enable(*Authz::Role.get(:planner).direct_permissions(:group))
   end
 

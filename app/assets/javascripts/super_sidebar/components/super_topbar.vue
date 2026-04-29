@@ -53,6 +53,7 @@ export default {
     skipToMainContent: __('Skip to main content'),
     adminArea: s__('Navigation|Admin'),
     searchBtnText: __('Search or go to…'),
+    analyticsDashboardsBtnText: s__('AnalyticsDashboards|View analytics dashboards'),
     menuLabel: __('Open navigation menu'),
   },
   inject: ['isSaas'],
@@ -198,6 +199,17 @@ export default {
         @dragover.prevent
       />
       <template v-if="isLoggedIn">
+        <gl-button
+          v-if="glFeatures.exploreAnalyticsDashboards"
+          v-gl-tooltip.bottom="$options.i18n.analyticsDashboardsBtnText"
+          :href="sidebarData.explore_analytics_dashboards_path"
+          :aria-label="$options.i18n.analyticsDashboardsBtnText"
+          category="tertiary"
+          icon="chart"
+          size="small"
+          class="gl-self-center"
+          data-testid="topbar-analytics-dashboards-button"
+        />
         <create-menu
           v-if="isLoggedIn && sidebarData.create_new_menu_groups.length > 0"
           :groups="sidebarData.create_new_menu_groups"

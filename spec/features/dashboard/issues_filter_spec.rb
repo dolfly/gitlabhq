@@ -98,13 +98,13 @@ RSpec.describe 'Dashboard Issues filtering', :js, feature_category: :portfolio_m
 
   context 'sorting' do
     before do
+      create(:user_preference, user: user)
       visit issues_dashboard_path(assignee_username: user.username)
     end
 
-    it 'remembers last sorting value',
-      quarantine: 'https://gitlab.com/gitlab-org/quality/test-failure-issues/-/issues/9338' do
-      click_button 'Created date'
-      click_button 'Updated date'
+    it 'remembers last sorting value' do
+      pajamas_sort_by 'Updated date', from: 'Created date'
+      wait_for_requests
 
       visit issues_dashboard_path(assignee_username: user.username)
 

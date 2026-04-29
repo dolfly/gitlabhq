@@ -445,6 +445,35 @@ scope :order_by_updated_at, ->(direction = :asc) { order(updated_at: direction) 
 Project.order_by_updated_at(:desc)
 ```
 
+### Avoid application logic at class load time
+
+Do not call application logic when defining class-level constants.
+These expressions run once at class load time, not at request time, which causes several problems:
+
+- Boot failures occur if the logic raises an error (for example, a missing database).
+- The constant never reflects changes that happen after the process starts.
+- Application boot slows down.
+
+```ruby
+# bad - result is frozen at boot; Gitlab::ProjectTemplate.all returns different results depending on state
+class GroupsController
+  VALID_TEMPLATE_NAMES = Gitlab::ProjectTemplate.all.map(&:name).to_set.freeze
+end
+```
+
+Use a method instead, so the logic runs at call time:
+
+```ruby
+# good
+def valid_template_names
+  Gitlab::ProjectTemplate.all.map(&:name).to_set
+end
+```
+
+Use [memoization](../utilities.md#strongmemoize) in case the result will not change during a request.
+
+This applies to any logic that queries the database, calls services, or invokes I18n helpers such as `_()`.
+
 ## Styles we have no opinion on
 
 If a RuboCop rule is proposed and we choose not to add it, we should document that decision in this guide so it is more discoverable and link the relevant discussion as a reference.
