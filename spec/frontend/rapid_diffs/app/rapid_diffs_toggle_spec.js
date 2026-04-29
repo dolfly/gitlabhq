@@ -28,9 +28,15 @@ describe('RapidDiffsToggle', () => {
   const findDropdown = () => wrapper.findByTestId('rapid-diffs-dropdown');
   const findDropdownGroups = () => wrapper.findAllComponents(GlDisclosureDropdownGroup);
 
+  const GlDisclosureDropdownStub = {
+    template: `<div v-bind="$attrs"><slot name="toggle" v-bind="{ accessibilityAttributes: {} }" /><slot /></div>`,
+  };
+
   const createComponent = (cookieValue = null) => {
     getCookie.mockReturnValue(cookieValue);
-    wrapper = shallowMountExtended(RapidDiffsToggle);
+    wrapper = shallowMountExtended(RapidDiffsToggle, {
+      stubs: { GlDisclosureDropdown: GlDisclosureDropdownStub },
+    });
   };
 
   describe('when disabled', () => {
@@ -43,6 +49,7 @@ describe('RapidDiffsToggle', () => {
       expect(findTryButton().props()).toMatchObject({ variant: 'confirm', category: 'tertiary' });
       expect(findBadge().text()).toBe('Beta');
       expect(findPopover().props('title')).toBe('Improved performance loading diffs');
+      expect(findPopover().text()).toContain('Some classic diff features are not yet available.');
       expect(findLearnMoreButton().attributes('href')).toBe(DOCS_URL);
     });
 
@@ -71,10 +78,10 @@ describe('RapidDiffsToggle', () => {
       createComponent('true');
     });
 
-    it('renders the dropdown with two groups separated by a divider', () => {
+    it('renders the dropdown with beta badge and two groups separated by a divider', () => {
       const dropdown = findDropdown();
       expect(dropdown.exists()).toBe(true);
-      expect(dropdown.props('toggleText')).toBe('Rapid Diffs');
+      expect(findBadge().text()).toBe('Beta');
 
       const groups = findDropdownGroups();
       expect(groups).toHaveLength(2);

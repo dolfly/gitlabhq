@@ -261,19 +261,12 @@ For premium models with optimized integration:
 | `gpt-5.3-codex` | 2.5 |
 | `claude-3.5-sonnet` | 2.0 |
 | `claude-3.7-sonnet` | 2.0 |
-| `claude-sonnet-4` <sup>1</sup> | 2.0 |
-| `claude-sonnet-4.5` <sup>1</sup> | 2.0 |
+| `claude-sonnet-4` | 2.0 |
+| `claude-sonnet-4.5` | 2.0 |
 | `claude-sonnet-4.6` | 2.0 |
 | `claude-opus-4.5` | 1.2 |
 | `claude-opus-4.6`  | 1.1 |
 | `claude-opus-4.7` | 1.1 |
-| `claude-sonnet-4` <sup>2</sup> | 1.1 |
-| `claude-sonnet-4.5` <sup>2</sup> | 1.1 |
-
-**Footnotes**:
-
-1. Prompts with up to 200,000 tokens.
-1. Prompts with more than 200,000 tokens.
 
 ### Features
 

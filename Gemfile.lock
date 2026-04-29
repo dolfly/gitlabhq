@@ -843,7 +843,7 @@ GEM
       activesupport (>= 5.2.0)
       rake (~> 13.0)
       snowplow-tracker (~> 0.8.0)
-    gitlab-secret_detection (0.40.0)
+    gitlab-secret_detection (0.41.0)
       grpc (>= 1.63.0, < 2)
       grpc_reflection (~> 0.1)
       parallel (~> 1)
@@ -2935,7 +2935,7 @@ CHECKSUMS
   gitlab-safe_request_store (0.1.0)
   gitlab-schema-validation (0.1.0)
   gitlab-sdk (0.3.1) sha256=48ba49084f4ab92df7c7ef9f347020d9dfdf6ed9c1e782b67264e98ffe6ea710
-  gitlab-secret_detection (0.40.0) sha256=d9ecde145b0aa6a609ff2fda734562a07437150a83dc585b57bf0d7609e07ca0
+  gitlab-secret_detection (0.41.0) sha256=6d64971af2c4b37eda3eb79f61ef6cbe67e841e730fc52e1549a9ceb34c3329c
   gitlab-security_report_schemas (0.2.0.min15.0.0.max15.2.4) sha256=7ed47c45096101514327ad512979a672889ac899531bfc948cb5905c816e39bf
   gitlab-sidekiq-fetcher (0.12.1)
   gitlab-styles (14.0.0) sha256=68b18899d795f70b67d6f190871c18cf194833cb57b4ea4c3070548464565783

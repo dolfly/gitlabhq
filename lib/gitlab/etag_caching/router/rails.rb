@@ -80,6 +80,12 @@ module Gitlab
             :realtime_changes
           ],
           [
+            %r{#{RESERVED_WORDS_PREFIX}/import/bitbucket/realtime_changes\.json\z},
+            'realtime_changes_import_bitbucket',
+            ::Import::BitbucketController,
+            :realtime_changes
+          ],
+          [
             %r{#{RESERVED_WORDS_PREFIX}/import/gitea/realtime_changes\.json\z},
             'realtime_changes_import_gitea',
             ::Import::GiteaController,

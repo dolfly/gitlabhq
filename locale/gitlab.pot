@@ -703,6 +703,9 @@ msgid_plural "%{count} Participants"
 msgstr[0] ""
 msgstr[1] ""
 
+msgid "%{count} active"
+msgstr ""
+
 msgid "%{count} active project"
 msgid_plural "%{count} active projects"
 msgstr[0] ""
@@ -728,6 +731,9 @@ msgid "%{count} event has ocurred"
 msgid_plural "%{count} events have ocurred"
 msgstr[0] ""
 msgstr[1] ""
+
+msgid "%{count} failed"
+msgstr ""
 
 msgid "%{count} file"
 msgid_plural "%{count} files"
@@ -58037,6 +58043,9 @@ msgstr ""
 msgid "RapidDiffs|Show options"
 msgstr ""
 
+msgid "RapidDiffs|Some classic diff features are not yet available."
+msgstr ""
+
 msgid "RapidDiffs|Some discussions for this file could not be displayed."
 msgstr ""
 
@@ -63503,6 +63512,12 @@ msgstr ""
 msgid "SecurityConfiguration|Enable merge requests in Project Settings %{gt} General %{gt} Visibility, project features, permissions."
 msgstr ""
 
+msgid "SecurityConfiguration|Enable scanners, monitor health, and track coverage across your projects. For full tool coverage, visit the %{linkStart}Security Inventory%{linkEnd}."
+msgstr ""
+
+msgid "SecurityConfiguration|Enable security scanning to automatically detect vulnerabilities in your projects."
+msgstr ""
+
 msgid "SecurityConfiguration|Enable security training to help your developers learn how to fix vulnerabilities."
 msgstr ""
 
@@ -63533,6 +63548,9 @@ msgstr ""
 msgid "SecurityConfiguration|Merge requests are disabled"
 msgstr ""
 
+msgid "SecurityConfiguration|No scanners enabled yet"
+msgstr ""
+
 msgid "SecurityConfiguration|Not enabled"
 msgstr ""
 
@@ -63542,10 +63560,19 @@ msgstr ""
 msgid "SecurityConfiguration|Profile-based scanner configuration"
 msgstr ""
 
+msgid "SecurityConfiguration|Project coverage"
+msgstr ""
+
 msgid "SecurityConfiguration|Quickly enable all continuous testing and compliance tools by enabling %{linkStart}Auto DevOps%{linkEnd}"
 msgstr ""
 
 msgid "SecurityConfiguration|SAST configuration"
+msgstr ""
+
+msgid "SecurityConfiguration|Scanner"
+msgstr ""
+
+msgid "SecurityConfiguration|Scanners"
 msgstr ""
 
 msgid "SecurityConfiguration|Secret detection configuration"
@@ -77855,6 +77882,9 @@ msgid_plural "UsageBilling|%{poolCreditsRemaining} credits remaining"
 msgstr[0] ""
 msgstr[1] ""
 
+msgid "UsageBilling|%{productsCount} selected"
+msgstr ""
+
 msgid "UsageBilling|(Trial)"
 msgstr ""
 
@@ -77936,6 +77966,9 @@ msgid "UsageBilling|Edit your search and try again."
 msgstr ""
 
 msgid "UsageBilling|Explore GitLab Duo"
+msgstr ""
+
+msgid "UsageBilling|Filter by product"
 msgstr ""
 
 msgid "UsageBilling|GitLab Credits"
@@ -78034,6 +78067,9 @@ msgstr ""
 msgid "UsageBilling|Product"
 msgstr ""
 
+msgid "UsageBilling|Products"
+msgstr ""
+
 msgid "UsageBilling|Purchase monthly commitment"
 msgstr ""
 
@@ -78044,6 +78080,9 @@ msgid "UsageBilling|Regular usage"
 msgstr ""
 
 msgid "UsageBilling|Save on GitLab Credits with monthly commitment"
+msgstr ""
+
+msgid "UsageBilling|Select products"
 msgstr ""
 
 msgid "UsageBilling|Share"

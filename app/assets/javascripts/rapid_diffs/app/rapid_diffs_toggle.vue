@@ -2,6 +2,7 @@
 import {
   GlBadge,
   GlButton,
+  GlIcon,
   GlPopover,
   GlDisclosureDropdown,
   GlDisclosureDropdownGroup,
@@ -38,6 +39,7 @@ export default {
   components: {
     GlBadge,
     GlButton,
+    GlIcon,
     GlPopover,
     GlDisclosureDropdown,
     GlDisclosureDropdownGroup,
@@ -100,6 +102,7 @@ export default {
     popoverBody: s__(
       'RapidDiffs|Speeds up diff loading and interactions when reviewing code changes.',
     ),
+    popoverBetaNote: s__('RapidDiffs|Some classic diff features are not yet available.'),
     learnMore: __('Learn more'),
     rapidDiffsEnabled: s__('RapidDiffs|Rapid Diffs'),
     leaveFeedback: s__('RapidDiffs|Leave feedback'),
@@ -129,7 +132,8 @@ export default {
         placement="bottom"
         :title="$options.i18n.popoverTitle"
       >
-        <p class="gl-mb-0">{{ $options.i18n.popoverBody }}</p>
+        <p>{{ $options.i18n.popoverBody }}</p>
+        <p class="gl-mb-0">{{ $options.i18n.popoverBetaNote }}</p>
         <gl-button
           class="gl-mt-3"
           :href="$options.docsUrl"
@@ -141,12 +145,16 @@ export default {
         </gl-button>
       </gl-popover>
     </template>
-    <gl-disclosure-dropdown
-      v-else
-      :toggle-text="$options.i18n.rapidDiffsEnabled"
-      category="tertiary"
-      data-testid="rapid-diffs-dropdown"
-    >
+    <gl-disclosure-dropdown v-else data-testid="rapid-diffs-dropdown">
+      <template #toggle="{ accessibilityAttributes }">
+        <gl-button v-bind="accessibilityAttributes" category="tertiary">
+          {{ $options.i18n.rapidDiffsEnabled }}
+          <gl-badge variant="neutral" data-testid="rapid-diffs-beta-badge">
+            {{ $options.i18n.beta }}
+          </gl-badge>
+          <gl-icon class="dropdown-chevron" name="chevron-down" />
+        </gl-button>
+      </template>
       <gl-disclosure-dropdown-group :group="infoGroup" />
       <gl-disclosure-dropdown-group :group="switchGroup" bordered />
     </gl-disclosure-dropdown>

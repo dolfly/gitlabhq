@@ -307,13 +307,13 @@ RSpec.describe 'Admin::Users', :with_current_organization, feature_category: :us
 
         expect(page).to have_content("Approve user #{user.name}?")
 
-        within_modal do
-          perform_enqueued_jobs do
+        perform_enqueued_jobs do
+          within_modal do
             click_button 'Approve'
           end
-        end
 
-        expect(page).to have_content('Successfully approved')
+          expect(page).to have_content('Successfully approved')
+        end
 
         welcome_email = ActionMailer::Base.deliveries.find { |m| m.subject == 'Welcome to GitLab!' }
         expect(welcome_email.to).to eq([user.email])

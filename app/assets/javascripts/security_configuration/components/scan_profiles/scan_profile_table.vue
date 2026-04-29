@@ -13,18 +13,11 @@ import { __ } from '~/locale';
 import { helpPagePath } from '~/helpers/help_page_helper';
 import { InternalEvents } from '~/tracking';
 import {
-  SCAN_PROFILE_CATEGORIES,
   SCAN_PROFILE_I18N,
-  SCAN_PROFILE_SCANNER_HEALTH_ACTIVE,
-  SCAN_PROFILE_SCANNER_HEALTH_FAILED,
-  SCAN_PROFILE_SCANNER_HEALTH_PENDING,
-  SCAN_PROFILE_SCANNER_HEALTH_STALE,
-  SCAN_PROFILE_SCANNER_HEALTH_UNCONFIGURED,
-  SCAN_PROFILE_SCANNER_HEALTH_WARNING,
   EVENT_VIEW_SCAN_PROFILE_TABLE,
   EVENT_CLICK_SCAN_PROFILE_LEARN_MORE_LINK,
 } from '~/security_configuration/constants';
-import glFeatureFlagsMixin from '~/vue_shared/mixins/gl_feature_flags_mixin';
+import ScanTypeCell from '~/security_configuration/components/scan_profiles/scan_type_cell.vue';
 
 export default {
   name: 'ScanProfileTable',
@@ -37,8 +30,9 @@ export default {
     GlLink,
     GlSkeletonLoader,
     GlSprintf,
+    ScanTypeCell,
   },
-  mixins: [glFeatureFlagsMixin(), InternalEvents.mixin()],
+  mixins: [InternalEvents.mixin()],
   props: {
     tableItems: {
       type: Array,
@@ -67,35 +61,6 @@ export default {
   },
   mounted() {
     this.trackEvent(EVENT_VIEW_SCAN_PROFILE_TABLE);
-  },
-  methods: {
-    getScannerMetadata(scanType) {
-      return SCAN_PROFILE_CATEGORIES[scanType] || {};
-    },
-    scanTypeBadgeClass(item) {
-      if (this.glFeatures.securityScanProfilesStatusIndicators) {
-        const classMap = {
-          [SCAN_PROFILE_SCANNER_HEALTH_ACTIVE]:
-            'gl-border-feedback-success gl-bg-status-success gl-text-status-success',
-          [SCAN_PROFILE_SCANNER_HEALTH_WARNING]:
-            'gl-border-feedback-warning gl-bg-status-warning gl-text-status-warning',
-          [SCAN_PROFILE_SCANNER_HEALTH_FAILED]:
-            'gl-border-feedback-danger gl-bg-status-danger gl-text-status-danger',
-          [SCAN_PROFILE_SCANNER_HEALTH_PENDING]:
-            'gl-border-strong gl-bg-status-neutral gl-text-strong',
-          [SCAN_PROFILE_SCANNER_HEALTH_STALE]:
-            'gl-border-strong gl-bg-status-neutral gl-text-strong',
-          [SCAN_PROFILE_SCANNER_HEALTH_UNCONFIGURED]:
-            'gl-border-dashed gl-border-strong gl-bg-default gl-text-strong',
-        };
-        return (
-          classMap[item.status] || 'gl-border-dashed gl-border-strong gl-bg-default gl-text-strong'
-        );
-      }
-      return item?.isConfigured
-        ? 'gl-border-green-500 gl-bg-green-100 gl-text-green-800'
-        : 'gl-border-dashed gl-border-strong gl-bg-default gl-text-strong';
-    },
   },
   EVENT_CLICK_SCAN_PROFILE_LEARN_MORE_LINK,
   SCAN_PROFILE_I18N,
@@ -151,41 +116,11 @@ export default {
     </template>
 
     <template #cell(scanType)="{ item }">
-      <div class="gl-flex gl-items-center">
-        <div
-          class="gl-border gl-mr-3 gl-flex gl-h-7 gl-w-7 gl-items-center gl-justify-center gl-rounded-lg gl-p-2"
-          :class="scanTypeBadgeClass(item)"
-        >
-          <span class="gl-font-weight-bold gl-text-xs">{{
-            getScannerMetadata(item.scanType).label
-          }}</span>
-        </div>
-        <span class="gl-font-bold">{{ getScannerMetadata(item.scanType).displayName }}</span>
-        <gl-icon
-          :id="`scanner-info-${item.scanType}`"
-          name="information-o"
-          variant="info"
-          class="gl-ml-2"
-        />
-        <gl-popover
-          :target="`scanner-info-${item.scanType}`"
-          placement="top"
-          :title="getScannerMetadata(item.scanType).helpTitle"
-        >
-          <gl-sprintf :message="getScannerMetadata(item.scanType).helpDescription">
-            <template #link="{ content }">
-              <gl-link
-                :href="getScannerMetadata(item.scanType).helpLink"
-                target="_blank"
-                :data-event-tracking="$options.EVENT_CLICK_SCAN_PROFILE_LEARN_MORE_LINK"
-                data-event-label="scanner_help"
-              >
-                {{ content }}
-              </gl-link>
-            </template>
-          </gl-sprintf>
-        </gl-popover>
-      </div>
+      <scan-type-cell
+        :scan-type="item.scanType"
+        :is-configured="item.isConfigured"
+        :status="item.status"
+      />
     </template>
 
     <template #cell(name)="{ item }">

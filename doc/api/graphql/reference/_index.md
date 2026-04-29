@@ -39842,11 +39842,6 @@ Returns [`GroupHook`](#grouphook).
 
 ##### `Group.workItem`
 
-{{< details >}}
-**Introduced** in GitLab 16.4.
-**Status**: Experiment.
-{{< /details >}}
-
 Find a work item by IID directly associated with the group.
 
 Returns [`WorkItem`](#workitem).
@@ -39880,11 +39875,6 @@ four standard [pagination arguments](#pagination-arguments):
 | <a id="group-workitemdescriptiontemplates-search"></a>`search` {{< icon name="warning-solid" >}} | [`String`](#string) | **Deprecated** in GitLab 17.8. search on template names is performed on the FE only. |
 
 ##### `Group.workItemStateCounts`
-
-{{< details >}}
-**Introduced** in GitLab 16.7.
-**Status**: Experiment.
-{{< /details >}}
 
 Counts of work items by state for the namespace.
 
@@ -39965,11 +39955,6 @@ four standard [pagination arguments](#pagination-arguments):
 | <a id="group-workitemtypes-onlyavailable"></a>`onlyAvailable` {{< icon name="warning-solid" >}} | [`Boolean`](#boolean) | **Introduced** in GitLab 18.6. **Status**: Experiment. When true, returns only the available work item types for the current user. This experimental field will be removed in 19.0. Use canUserCreateItems and isFilterableListView fields from the WorkItemTypes API instead. |
 
 ##### `Group.workItems`
-
-{{< details >}}
-**Introduced** in GitLab 16.3.
-**Status**: Experiment.
-{{< /details >}}
 
 Work items that belong to the namespace.
 

@@ -29747,6 +29747,32 @@ CREATE SEQUENCE scan_result_policies_id_seq
 
 ALTER SEQUENCE scan_result_policies_id_seq OWNED BY scan_result_policies.id;
 
+CREATE TABLE scan_result_policy_violation_details (
+    id bigint NOT NULL,
+    scan_result_policy_violation_id bigint NOT NULL,
+    project_id bigint NOT NULL,
+    created_at timestamp with time zone NOT NULL,
+    updated_at timestamp with time zone NOT NULL,
+    policy_rule_type smallint NOT NULL,
+    finding_state smallint,
+    finding_uuid text,
+    license_name text,
+    dependencies text[] DEFAULT '{}'::text[] NOT NULL,
+    commit_shas text[] DEFAULT '{}'::text[] NOT NULL,
+    metadata jsonb DEFAULT '{}'::jsonb NOT NULL,
+    CONSTRAINT check_157ca48e3c CHECK ((char_length(license_name) <= 255)),
+    CONSTRAINT check_d2dc12651e CHECK ((char_length(finding_uuid) <= 50))
+);
+
+CREATE SEQUENCE scan_result_policy_violation_details_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+ALTER SEQUENCE scan_result_policy_violation_details_id_seq OWNED BY scan_result_policy_violation_details.id;
+
 CREATE TABLE scan_result_policy_violations (
     id bigint NOT NULL,
     scan_result_policy_id bigint,
@@ -36693,6 +36719,8 @@ ALTER TABLE ONLY scan_execution_policy_rules ALTER COLUMN id SET DEFAULT nextval
 
 ALTER TABLE ONLY scan_result_policies ALTER COLUMN id SET DEFAULT nextval('scan_result_policies_id_seq'::regclass);
 
+ALTER TABLE ONLY scan_result_policy_violation_details ALTER COLUMN id SET DEFAULT nextval('scan_result_policy_violation_details_id_seq'::regclass);
+
 ALTER TABLE ONLY scan_result_policy_violations ALTER COLUMN id SET DEFAULT nextval('scan_result_policy_violations_id_seq'::regclass);
 
 ALTER TABLE ONLY scim_group_memberships ALTER COLUMN id SET DEFAULT nextval('scim_group_memberships_id_seq'::regclass);
@@ -40827,6 +40855,9 @@ ALTER TABLE ONLY scan_execution_policy_rules
 
 ALTER TABLE ONLY scan_result_policies
     ADD CONSTRAINT scan_result_policies_pkey PRIMARY KEY (id);
+
+ALTER TABLE ONLY scan_result_policy_violation_details
+    ADD CONSTRAINT scan_result_policy_violation_details_pkey PRIMARY KEY (id);
 
 ALTER TABLE ONLY scan_result_policy_violations
     ADD CONSTRAINT scan_result_policy_violations_pkey PRIMARY KEY (id);
@@ -49235,6 +49266,10 @@ CREATE INDEX index_scan_result_policies_on_namespace_id ON scan_result_policies 
 
 CREATE INDEX index_scan_result_policies_on_project_id ON scan_result_policies USING btree (project_id);
 
+CREATE INDEX index_scan_result_policy_violation_details_on_project_id ON scan_result_policy_violation_details USING btree (project_id);
+
+CREATE INDEX index_scan_result_policy_violation_details_on_violation_id ON scan_result_policy_violation_details USING btree (scan_result_policy_violation_id);
+
 CREATE INDEX index_scan_result_policy_violations_on_approval_policy_rule_id ON scan_result_policy_violations USING btree (approval_policy_rule_id);
 
 CREATE INDEX index_scan_result_policy_violations_on_merge_request_id ON scan_result_policy_violations USING btree (merge_request_id);
@@ -56868,6 +56903,9 @@ ALTER TABLE ONLY ml_models
 ALTER TABLE ONLY projects
     ADD CONSTRAINT fk_6ca23af0a3 FOREIGN KEY (project_namespace_id) REFERENCES namespaces(id) ON DELETE CASCADE;
 
+ALTER TABLE ONLY scan_result_policy_violation_details
+    ADD CONSTRAINT fk_6cfb6bae9a FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE;
+
 ALTER TABLE ONLY compliance_framework_security_policies
     ADD CONSTRAINT fk_6d3bd0c9f1 FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE;
 
@@ -58277,6 +58315,9 @@ ALTER TABLE ONLY tag_gpg_signatures
 
 ALTER TABLE ONLY compliance_requirements
     ADD CONSTRAINT fk_ebf5c3365b FOREIGN KEY (framework_id) REFERENCES compliance_management_frameworks(id) ON DELETE CASCADE;
+
+ALTER TABLE ONLY scan_result_policy_violation_details
+    ADD CONSTRAINT fk_ebf95a08ea FOREIGN KEY (scan_result_policy_violation_id) REFERENCES scan_result_policy_violations(id) ON DELETE CASCADE;
 
 ALTER TABLE ONLY catalog_resource_components
     ADD CONSTRAINT fk_ec417536da FOREIGN KEY (catalog_resource_id) REFERENCES catalog_resources(id) ON DELETE CASCADE;

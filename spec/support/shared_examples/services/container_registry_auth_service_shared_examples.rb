@@ -35,22 +35,22 @@ end
 RSpec.shared_examples 'a valid token' do
   it { is_expected.to include(:token) }
   it { expect(payload).to include('access') }
+end
 
-  context 'a expirable' do
-    let(:expires_at) { Time.zone.at(payload['exp']) }
-    let(:expire_delay) { 10 }
+RSpec.shared_examples 'an expirable token' do
+  let(:expires_at) { Time.zone.at(payload['exp']) }
+  let(:expire_delay) { 10 }
 
-    context 'for default configuration' do
-      it { expect(expires_at).not_to be_within(2.seconds).of(Time.current + expire_delay.minutes) }
+  context 'for default configuration' do
+    it { expect(expires_at).not_to be_within(2.seconds).of(Time.current + expire_delay.minutes) }
+  end
+
+  context 'for changed configuration' do
+    before do
+      stub_application_setting(container_registry_token_expire_delay: expire_delay)
     end
 
-    context 'for changed configuration' do
-      before do
-        stub_application_setting(container_registry_token_expire_delay: expire_delay)
-      end
-
-      it { expect(expires_at).to be_within(2.seconds).of(Time.current + expire_delay.minutes) }
-    end
+    it { expect(expires_at).to be_within(2.seconds).of(Time.current + expire_delay.minutes) }
   end
 end
 
@@ -233,6 +233,7 @@ RSpec.shared_examples 'a container registry auth service' do
     end
 
     it_behaves_like 'not a container repository factory'
+    it_behaves_like 'an expirable token'
   end
 
   describe '.pull_access_token' do
@@ -753,6 +754,7 @@ RSpec.shared_examples 'a container registry auth service' do
     end
 
     it_behaves_like 'a valid token'
+    it_behaves_like 'an expirable token'
     it_behaves_like 'with auth_type'
 
     context 'allow to pull and push images' do
