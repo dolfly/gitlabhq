@@ -39,59 +39,15 @@ RSpec.describe Banzai::Filter::References::UserReferenceFilter, feature_category
     end
   end
 
-  context 'when `disable_all_mention` FF is enabled' do
-    let(:reference) { User.reference_prefix + 'all' }
-
-    context 'mentioning @all' do
-      before do
-        stub_feature_flags(disable_all_mention: true)
-
-        project.add_developer(project.creator)
-      end
-
-      it 'ignores reference to @all' do
-        doc = reference_filter("Hey #{reference}", author: project.creator)
-
-        expect(doc.css('a').length).to eq 0
-      end
-    end
-  end
-
-  context 'mentioning @all (when `disable_all_mention` FF is disabled)' do
+  context 'mentioning @all' do
     let(:reference) { User.reference_prefix + 'all' }
 
     before do
-      stub_feature_flags(disable_all_mention: false)
-
       project.add_developer(project.creator)
     end
 
-    it_behaves_like 'a reference containing an element node'
-
-    it 'supports a special @all mention' do
-      project.add_developer(user)
-      doc = reference_filter("Hey #{reference}", author: user)
-
-      expect(doc.css('a').length).to eq 1
-      expect(doc.css('a').first.attr('href'))
-        .to eq urls.project_url(project)
-    end
-
-    it 'includes a data-author attribute when there is an author' do
-      project.add_developer(user)
-      doc = reference_filter(reference, author: user)
-
-      expect(doc.css('a').first.attr('data-author')).to eq(user.id.to_s)
-    end
-
-    it 'does not include a data-author attribute when there is no author' do
-      doc = reference_filter(reference)
-
-      expect(doc.css('a').first.has_attribute?('data-author')).to eq(false)
-    end
-
-    it 'ignores reference to all when the user is not a project member' do
-      doc = reference_filter("Hey #{reference}", author: user)
+    it 'ignores reference to @all' do
+      doc = reference_filter("Hey #{reference}", author: project.creator)
 
       expect(doc.css('a').length).to eq 0
     end
@@ -177,15 +133,6 @@ RSpec.describe Banzai::Filter::References::UserReferenceFilter, feature_category
 
     before do
       group.add_developer(group_member)
-    end
-
-    it 'supports a special @all mention' do
-      stub_feature_flags(disable_all_mention: false)
-      reference = User.reference_prefix + 'all'
-      doc = reference_filter("Hey #{reference}", context)
-
-      expect(doc.css('a').length).to eq(1)
-      expect(doc.css('a').first.attr('href')).to eq urls.group_url(group)
     end
 
     it 'supports mentioning a single user' do

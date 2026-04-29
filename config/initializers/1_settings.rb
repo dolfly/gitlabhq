@@ -518,6 +518,14 @@ Settings.cron_jobs['bbo_users_delete_unconfirmed_secondary']['args'] = {
   'table_name' => 'emails',
   'column_name' => 'id'
 }
+Settings.cron_jobs['background_operation_environments_auto_delete'] ||= {}
+Settings.cron_jobs['background_operation_environments_auto_delete']['cron'] ||= '24 * * * *'
+Settings.cron_jobs['background_operation_environments_auto_delete']['job_class'] = 'Database::BackgroundOperation::CronEnqueueWorker'
+Settings.cron_jobs['background_operation_environments_auto_delete']['args'] = {
+  'job_class_name' => 'EnvironmentsAutoDelete',
+  'table_name' => 'environments',
+  'column_name' => 'id'
+}
 
 Settings.cron_jobs['adjourned_group_deletion_worker'] ||= {}
 Settings.cron_jobs['adjourned_group_deletion_worker']['cron'] ||= '0 2 * * *'

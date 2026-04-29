@@ -139,7 +139,7 @@ function createSuggestionPlugin({
 
           popup = tippy('body', {
             getReferenceClientRect: props.clientRect,
-            appendTo: () => document.body,
+            appendTo: () => props.editor.view.dom.parentNode || document.body,
             onHide: () => {
               isHidden = true;
             },

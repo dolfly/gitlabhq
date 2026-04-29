@@ -52,7 +52,7 @@ To restrict access to GitLab Duo for a top-level group:
    This rule is automatically deleted when the group has no access to GitLab Duo Non-Agentic
    or GitLab Duo Agent Platform and all existing groups are removed.
 
-1. Select whether direct group members can access
+1. Select whether direct members of the group can access
    GitLab Duo Non-Agentic and GitLab Duo Agent Platform.
 1. Select **Save changes**.
 
@@ -92,7 +92,7 @@ To restrict access to GitLab Duo for an instance:
    This rule is automatically deleted when the group has no access to GitLab Duo Non-Agentic
    or GitLab Duo Agent Platform and all existing groups are removed.
 
-1. Select whether direct group members can access
+1. Select whether direct members of the group can access
    GitLab Duo Non-Agentic and GitLab Duo Agent Platform.
 1. Select **Save changes**.
 
@@ -111,18 +111,17 @@ If you do not want to manually manage group membership, you can
 
 ### Group membership
 
-When a user is assigned to more than one group, they access features from all assigned groups.
-For example:
+When a user is assigned to more than one group,
+the user has access to features from all assigned groups.
+For example, if a user has access to GitLab Duo Non-Agentic
+in group A and GitLab Duo Agent Platform in group B,
+the user has access to both sets of features.
 
-- In group A, the user has access to GitLab Duo features only.
-- In group B, the user has access to Agent Platform only.
+If the **All eligible users** rule is configured, the following users
+can access both GitLab Duo Non-Agentic and GitLab Duo Agent Platform:
 
-In this example, the user has access to both GitLab Duo features and Agent Platform.
-
-If **All eligible users** is configured:
-
-- On GitLab.com: All members of the top-level group can access GitLab Duo and Agent Platform features.
-- On GitLab Self-Managed: All users can access GitLab Duo and Agent Platform features.
+- On GitLab.com: All members of the top-level group.
+- On GitLab Self-Managed: All users.
 
 Additional controls (such as disabling features for the top-level group or instance) still apply.
 
@@ -130,7 +129,7 @@ Additional controls (such as disabling features for the top-level group or insta
 
 If you use LDAP or SAML for authentication, you can synchronize group membership automatically:
 
-1. Configure your LDAP or SAML provider to include a group that represents Agent Platform users.
+1. Configure your LDAP or SAML provider to include a group that represents GitLab Duo Agent Platform users.
 1. In GitLab, ensure the group is linked to your LDAP or SAML provider.
 1. Group membership updates automatically when users are added or removed from the provider group.
 
@@ -146,7 +145,7 @@ You can use access control for phased rollouts or testing and validation.
 
 ### Phased rollouts
 
-To implement a phased rollout of GitLab Duo or Agent Platform:
+To implement a phased rollout of GitLab Duo:
 
 1. Create a group for pilot users (for example, `pilot-users`).
 1. Add a subset of users to this group.
@@ -155,7 +154,7 @@ To implement a phased rollout of GitLab Duo or Agent Platform:
 
 ### Testing and validation
 
-To test GitLab Duo or Agent Platform capabilities in a controlled environment:
+To test GitLab Duo capabilities in a controlled environment:
 
 1. Create a dedicated group for testing (for example, `agent-testers`).
 1. Create a test group or project.
@@ -164,26 +163,28 @@ To test GitLab Duo or Agent Platform capabilities in a controlled environment:
 
 ## Troubleshooting
 
-### User cannot access GitLab Duo or Agent Platform features
+### User cannot access GitLab Duo features
 
-If a user cannot access GitLab Duo or Agent Platform features, it might be because GitLab Duo or Agent Platform is either:
+A user cannot access GitLab Duo features in the following scenarios:
 
-- Not configured for the group the user is a direct member of.
-- Configured, but either:
+- Access to GitLab Duo Non-Agentic or GitLab Duo Agent Platform
+  is not configured for the group.
+- Access to GitLab Duo Non-Agentic or GitLab Duo Agent Platform
+  is configured for the group, but one of the following applies:
   - The user is not a direct member of the group.
-  - The **All eligible users** rule is not configured accordingly.
+  - The **All eligible users** rule is not configured.
 
-To resolve this issue, either:
+To resolve this issue, do one of the following:
 
-- Add the user to a configured group: Add the user as a direct member to one of the configured groups.
-- Activate GitLab Duo or Agent Platform for the **All eligible users** rule, so that users who are not members of the group receive access to the features.
+- Add the user as a direct member to one of the configured groups.
+- Give **All eligible users** access to GitLab Duo Non-Agentic or GitLab Duo Agent Platform.
 - Remove all group membership access rules.
 
 ### GitLab Duo sidebar does not display for certain groups
 
-In GitLab 18.8 and earlier, if you give a group access to Agent Platform but not to
-GitLab Duo, the GitLab Duo sidebar does not display for members of that group.
+In GitLab 18.8 and earlier, if you give a group access to GitLab Duo Agent Platform but not to
+GitLab Duo Non-Agentic, the GitLab Duo sidebar does not display for members of that group.
 As a workaround, ensure the group has access to both
-GitLab Duo and Agent Platform features.
+GitLab Duo Non-Agentic and GitLab Duo Agent Platform.
 
 To resolve this issue, upgrade to GitLab 18.9 or later.

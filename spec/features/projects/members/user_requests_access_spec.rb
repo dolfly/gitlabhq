@@ -17,7 +17,6 @@ RSpec.describe 'Projects > Members > User requests access', :js, feature_categor
   context 'when user has no existing access request' do
     before do
       sign_in(user)
-      visit project_path(project)
     end
 
     it 'request access feature is disabled' do
@@ -29,6 +28,8 @@ RSpec.describe 'Projects > Members > User requests access', :js, feature_categor
     end
 
     it 'user can request access to a project' do
+      visit project_path(project)
+
       perform_enqueued_jobs do
         more_actions_dropdown.click
         request_access

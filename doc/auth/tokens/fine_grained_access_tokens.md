@@ -914,6 +914,7 @@ Grants the ability to read knowledge graph data.
 | ------ | ------ | ------ | ---- |
 | Read | User | `GET` | `/orbit/schema` |
 | Read | User | `GET` | `/orbit/status` |
+| Read | User | `GET` | `/orbit/graph_status` |
 | Read | User | `GET` | `/orbit/tools` |
 | Read | User | `POST` | `/orbit/query` |
 

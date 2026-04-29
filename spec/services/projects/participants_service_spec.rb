@@ -23,10 +23,6 @@ RSpec.describe Projects::ParticipantsService, feature_category: :groups_and_proj
       project.add_developer(org_user_detail.user)
     end
 
-    before do
-      stub_feature_flags(disable_all_mention: false)
-    end
-
     def run_service
       described_class.new(project, user, params).execute(noteable)
     end
@@ -35,12 +31,8 @@ RSpec.describe Projects::ParticipantsService, feature_category: :groups_and_proj
       group = create(:group, owners: user)
 
       expect(run_service.pluck(:username)).to eq([
-        noteable.author.username, 'all', user.username, org_user_detail.username, group.full_path
+        noteable.author.username, user.username, org_user_detail.username, group.full_path
       ])
-    end
-
-    it 'includes `All Project and Group Members`' do
-      expect(run_service).to include(a_hash_including({ username: "all", name: "All Project and Group Members" }))
     end
 
     context 'N+1 checks' do
@@ -161,7 +153,7 @@ RSpec.describe Projects::ParticipantsService, feature_category: :groups_and_proj
           group = create(:group, owners: user)
 
           expect(run_service.pluck(:username)).to eq([
-            noteable.author.username, 'all', user.username, org_user_detail.user.username, group.full_path
+            noteable.author.username, user.username, org_user_detail.user.username, group.full_path
           ])
         end
       end
@@ -283,14 +275,8 @@ RSpec.describe Projects::ParticipantsService, feature_category: :groups_and_proj
       end
     end
 
-    context 'when `disable_all_mention` FF is enabled' do
-      before do
-        stub_feature_flags(disable_all_mention: true)
-      end
-
-      it 'does not include `All Project and Group Members`' do
-        expect(run_service).not_to include(a_hash_including({ username: "all", name: "All Project and Group Members" }))
-      end
+    it 'does not include `All Project and Group Members`' do
+      expect(run_service).not_to include(a_hash_including({ username: "all", name: "All Project and Group Members" }))
     end
   end
 

@@ -45,6 +45,7 @@ describe('YourWorkProjectsApp', () => {
   const defaultPropsData = {
     initialSort: 'created_desc',
     programmingLanguages,
+    canCreateProject: true,
   };
 
   const defaultRoute = {
@@ -66,13 +67,14 @@ describe('YourWorkProjectsApp', () => {
     handlers = [],
     route = defaultRoute,
     stubs = {},
+    props = {},
   } = {}) => {
     const apolloProvider = createMockApollo(handlers);
     router = createRouter();
     await router.push(route);
 
     wrapper = mountFn(YourWorkProjectsApp, {
-      propsData: defaultPropsData,
+      propsData: { ...defaultPropsData, ...props },
       apolloProvider,
       router,
       stubs,
@@ -125,6 +127,38 @@ describe('YourWorkProjectsApp', () => {
       shouldUpdateActiveTabCountFromTabQuery: true,
       userPreferencesSortKey: null,
       sortStorageKey: 'projects',
+    });
+  });
+
+  describe('header actions', () => {
+    it('renders the "Explore projects" button linking to the explore projects page', async () => {
+      await createComponent({ mountFn: mountExtended });
+
+      expect(wrapper.findByRole('link', { name: 'Explore projects' }).attributes('href')).toBe(
+        '/explore/projects',
+      );
+    });
+
+    describe('when canCreateProject is true', () => {
+      it('renders the "New project" button', async () => {
+        await createComponent({ mountFn: mountExtended });
+
+        expect(wrapper.findByTestId('new-project-button').exists()).toBe(true);
+      });
+    });
+
+    describe('when canCreateProject is false', () => {
+      it('does not render the "New project" button', async () => {
+        await createComponent({ mountFn: mountExtended, props: { canCreateProject: false } });
+
+        expect(wrapper.findByTestId('new-project-button').exists()).toBe(false);
+      });
+
+      it('still renders the "Explore projects" button', async () => {
+        await createComponent({ mountFn: mountExtended, props: { canCreateProject: false } });
+
+        expect(wrapper.findByRole('link', { name: 'Explore projects' }).exists()).toBe(true);
+      });
     });
   });
 

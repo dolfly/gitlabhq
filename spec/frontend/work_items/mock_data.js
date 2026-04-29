@@ -5911,6 +5911,27 @@ export const getTodosMutationResponse = (state) => {
   };
 };
 
+export const getMarkAllDoneTodosMutationResponse = () => {
+  return {
+    data: {
+      workItemUpdate: {
+        workItem: {
+          id: 'gid://gitlab/WorkItem/1',
+          widgets: [
+            {
+              type: 'CURRENT_USER_TODOS',
+              currentUserTodos: {
+                nodes: [],
+              },
+            },
+          ],
+        },
+        errors: [],
+      },
+    },
+  };
+};
+
 export const linkedWorkItemResponse = (options, errors = []) => {
   const response = workItemResponseFactory(options);
   return {

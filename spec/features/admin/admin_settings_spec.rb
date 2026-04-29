@@ -466,37 +466,6 @@ RSpec.describe 'Admin updates settings', feature_category: :shared do
         end
       end
 
-      describe 'Analytics reports settings', feature_category: :value_stream_management do
-        before do
-          allow(Gitlab::ClickHouse).to receive(:configured?).and_return(true)
-        end
-
-        it 'enables clickhouse settings' do
-          visit general_admin_application_settings_path
-
-          page.within('#js-analytics-settings') do
-            check 'Enable ClickHouse'
-
-            click_button 'Save changes'
-          end
-
-          expect(page).to have_content 'Application settings saved successfully'
-          expect(current_settings.use_clickhouse_for_analytics).to be_truthy
-        end
-
-        context 'when ClickHouse is not configured' do
-          it 'disables checkbox to enable ClickHouse' do
-            allow(Gitlab::ClickHouse).to receive(:configured?).and_return(false)
-
-            visit general_admin_application_settings_path
-
-            page.within('#js-analytics-settings') do |page|
-              expect(page).to have_field('application_setting_use_clickhouse_for_analytics', disabled: true)
-            end
-          end
-        end
-      end
-
       context 'Web IDE Settings' do
         it 'changes and restores web ide extension host domain setting' do
           default_host_domain = ::WebIde::ExtensionMarketplace::DEFAULT_EXTENSION_HOST_DOMAIN
@@ -641,6 +610,41 @@ RSpec.describe 'Admin updates settings', feature_category: :shared do
               expect(page).to have_content('Application settings saved successfully')
               expect(current_settings.enforce_granular_tokens).to be(false)
             end
+          end
+        end
+      end
+    end
+
+    describe 'Analytics reports settings', feature_category: :value_stream_management do
+      context 'when ClickHouse is configured' do
+        before do
+          allow(Gitlab::ClickHouse).to receive(:configured?).and_return(true)
+
+          visit general_admin_application_settings_path
+        end
+
+        it 'enables clickhouse settings' do
+          page.within('#js-analytics-settings') do
+            check 'Enable ClickHouse'
+
+            click_button 'Save changes'
+          end
+
+          expect(page).to have_content 'Application settings saved successfully'
+          expect(current_settings.use_clickhouse_for_analytics).to be_truthy
+        end
+      end
+
+      context 'when ClickHouse is not configured' do
+        before do
+          allow(Gitlab::ClickHouse).to receive(:configured?).and_return(false)
+
+          visit general_admin_application_settings_path
+        end
+
+        it 'disables checkbox to enable ClickHouse' do
+          page.within('#js-analytics-settings') do |page|
+            expect(page).to have_field('application_setting_use_clickhouse_for_analytics', disabled: true)
           end
         end
       end
@@ -1020,8 +1024,6 @@ RSpec.describe 'Admin updates settings', feature_category: :shared do
 
         context 'when service data not cached' do
           it 'renders missing cache information' do
-            visit metrics_and_profiling_admin_application_settings_path
-
             expect(page).to have_text('Service Ping payload not found in the application cache')
           end
         end
@@ -1584,7 +1586,6 @@ RSpec.describe 'Admin updates settings', feature_category: :shared do
       end
 
       it "change Pages Let's Encrypt settings" do
-        visit preferences_admin_application_settings_path
         within_testid('pages-content') do
           fill_in "Let's Encrypt email", with: 'my@test.example.com'
           check "I have read and agree to the Let's Encrypt Terms of Service"
@@ -1597,8 +1598,6 @@ RSpec.describe 'Admin updates settings', feature_category: :shared do
 
       context 'Terraform state settings' do
         it 'allows changing encryption settings' do
-          visit preferences_admin_application_settings_path
-
           expect(current_settings.terraform_state_encryption_enabled).to be true
 
           within '#js-terraform-limits-settings' do

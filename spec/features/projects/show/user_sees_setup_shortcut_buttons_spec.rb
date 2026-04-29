@@ -22,8 +22,6 @@ RSpec.describe 'Projects > Show > User sees setup shortcut buttons', feature_cat
       end
 
       it 'project buttons are not visible' do
-        visit project_path(project)
-
         within_testid('project-page-sidebar') do
           expect(page).not_to have_link('New file')
           expect(page).not_to have_link('Add README')
@@ -95,8 +93,6 @@ RSpec.describe 'Projects > Show > User sees setup shortcut buttons', feature_cat
 
       context 'when Auto DevOps is enabled' do
         it '"Auto DevOps enabled" button not linked' do
-          visit project_path(project)
-
           within_testid('project-buttons') do
             expect(page).to have_text('Auto DevOps enabled')
           end

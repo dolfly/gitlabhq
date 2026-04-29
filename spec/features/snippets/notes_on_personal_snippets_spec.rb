@@ -60,8 +60,6 @@ RSpec.describe 'Comments on personal snippets', :js, feature_category: :source_c
     end
 
     it 'shows the author name' do
-      visit snippet_path(snippet)
-
       within("#note_#{snippet_notes[0].id}") do
         expect(page).to have_content(user_name)
       end

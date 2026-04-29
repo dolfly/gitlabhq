@@ -63,7 +63,7 @@ When all emails were successfully sent:
 {  "status":  "success"  }
 ```
 
-When there was any error sending the email:
+When there were any errors sending the email:
 
 ```json
 {

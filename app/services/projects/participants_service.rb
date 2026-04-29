@@ -11,7 +11,6 @@ module Projects
       participants =
         noteable_owner +
         participants_in_noteable +
-        all_members +
         project_members
 
       participants += groups(organization: organization) unless relation_at_search_limit?(project_members)
@@ -24,12 +23,6 @@ module Projects
       filter_and_sort_users(project_members_relation)
     end
     strong_memoize_attr :project_members
-
-    def all_members
-      return [] if Feature.enabled?(:disable_all_mention)
-
-      [{ username: "all", name: "All Project and Group Members", count: project_members_relation.count }]
-    end
 
     def project_members_relation
       project.authorized_users.with_organization_user_details

@@ -72447,6 +72447,10 @@ definitions:
       runner:
         type: string
         description: A runner ID, or comma-separated list of runner IDs
+      endpoint:
+        type: string
+        description: A caller_id identifying a code path, for example `GET /api/v4/projects/:id`
+          or `ProjectsController#show`. Use comma to separate multiple endpoint paths
       force:
         type: boolean
         description: Skip feature flag validation checks, such as a YAML definition

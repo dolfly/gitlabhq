@@ -1534,56 +1534,30 @@ RSpec.describe NotificationService, :mailer, feature_category: :team_planning do
           end
         end
 
-        context 'when `disable_all_mention` FF is disabled' do
-          before do
-            stub_feature_flags(disable_all_mention: false)
+        context 'when `@all` mention is used' do
+          before_all do
+            # user_to_exclude is in the note's project but is neither mentioned nor participating.
+            project.add_maintainer(user_to_exclude)
           end
 
-          context 'when `@all` mention is used' do
-            let(:note_content) { "@all mentioned" }
+          let(:note_content) { "@all mentioned" }
 
-            it_behaves_like 'correct team members are notified'
-          end
+          it "does not notify users who are not participating or mentioned" do
+            reset_delivered_emails!
 
-          context 'when users are individually mentioned' do
-            # `user_mentions` is concatenanting individual user mentions
-            # so that the end result is the same as `@all`.
-            let(:note_content) { "#{user_mentions} mentioned" }
+            notification.new_note(note)
 
-            it_behaves_like 'correct team members are notified'
+            should_email(note.noteable.author)
+            should_not_email(user_to_exclude)
           end
         end
 
-        context 'when `disable_all_mention` FF is enabled' do
-          before do
-            stub_feature_flags(disable_all_mention: true)
-          end
+        context 'when users are individually mentioned' do
+          # `user_mentions` is concatenanting individual user mentions
+          # so that the end result is the same as `@all`.
+          let(:note_content) { "#{user_mentions} mentioned" }
 
-          context 'when `@all` mention is used' do
-            before_all do
-              # user_to_exclude is in the note's project but is neither mentioned nor participating.
-              project.add_maintainer(user_to_exclude)
-            end
-
-            let(:note_content) { "@all mentioned" }
-
-            it "does not notify users who are not participating or mentioned" do
-              reset_delivered_emails!
-
-              notification.new_note(note)
-
-              should_email(note.noteable.author)
-              should_not_email(user_to_exclude)
-            end
-          end
-
-          context 'when users are individually mentioned' do
-            # `user_mentions` is concatenanting individual user mentions
-            # so that the end result is the same as `@all`.
-            let(:note_content) { "#{user_mentions} mentioned" }
-
-            it_behaves_like 'correct team members are notified'
-          end
+          it_behaves_like 'correct team members are notified'
         end
       end
 
@@ -1704,57 +1678,31 @@ RSpec.describe NotificationService, :mailer, feature_category: :team_planning do
           end
         end
 
-        context 'when `disable_all_mention` FF is disabled' do
+        context 'when `@all` mention is used' do
+          let(:user_to_exclude) { create(:user) }
+          let(:note_content) { "@all mentioned" }
+
           before do
-            stub_feature_flags(disable_all_mention: false)
+            project.add_maintainer(author)
+            project.add_maintainer(user_to_exclude)
+
+            reset_delivered_emails!
           end
 
-          context 'when `@all` mention is used' do
-            let(:note_content) { "@all mentioned" }
+          it "does not notify users who are not participating or mentioned" do
+            notification.new_note(note)
 
-            it_behaves_like 'correct team members are notified'
-          end
-
-          context 'when users are individually mentioned' do
-            # `user_mentions` is concatenanting individual user mentions
-            # so that the end result is the same as `@all`.
-            let(:note_content) { "#{user_mentions} mentioned" }
-
-            it_behaves_like 'correct team members are notified'
+            should_email(note.noteable.author)
+            should_not_email(user_to_exclude)
           end
         end
 
-        context 'when `disable_all_mention` FF is enabled' do
-          before do
-            stub_feature_flags(disable_all_mention: true)
-          end
+        context 'when users are individually mentioned' do
+          # `user_mentions` is concatenanting individual user mentions
+          # so that the end result is the same as `@all`.
+          let(:note_content) { "#{user_mentions} mentioned" }
 
-          context 'when `@all` mention is used' do
-            let(:user_to_exclude) { create(:user) }
-            let(:note_content) { "@all mentioned" }
-
-            before do
-              project.add_maintainer(author)
-              project.add_maintainer(user_to_exclude)
-
-              reset_delivered_emails!
-            end
-
-            it "does not notify users who are not participating or mentioned" do
-              notification.new_note(note)
-
-              should_email(note.noteable.author)
-              should_not_email(user_to_exclude)
-            end
-          end
-
-          context 'when users are individually mentioned' do
-            # `user_mentions` is concatenanting individual user mentions
-            # so that the end result is the same as `@all`.
-            let(:note_content) { "#{user_mentions} mentioned" }
-
-            it_behaves_like 'correct team members are notified'
-          end
+          it_behaves_like 'correct team members are notified'
         end
       end
     end

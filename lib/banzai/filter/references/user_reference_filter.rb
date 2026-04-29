@@ -52,16 +52,12 @@ module Banzai
         # Returns nil if no replacements were made.
         def object_link_filter(text, pattern, link_content_html: nil, link_reference: false)
           references_in(text, pattern) do |match_text, username|
-            if Feature.disabled?(:disable_all_mention) && username == 'all' && !skip_project_check?
-              link_to_all(match_text:, link_content_html:)
-            else
-              cached_call(:banzai_url_for_object, link_content_html ? nil : match_text, path: [User, username]) do
-                # order is important: per-organization usernames should be checked before global namespace
-                if org_user_detail = org_user_details[username.downcase]
-                  link_to_org_user_detail(org_user_detail, match_text:, link_content_html:)
-                elsif namespace = namespaces[username.downcase]
-                  link_to_namespace(namespace, match_text:, link_content_html:)
-                end
+            cached_call(:banzai_url_for_object, link_content_html ? nil : match_text, path: [User, username]) do
+              # order is important: per-organization usernames should be checked before global namespace
+              if org_user_detail = org_user_details[username.downcase]
+                link_to_org_user_detail(org_user_detail, match_text:, link_content_html:)
+              elsif namespace = namespaces[username.downcase]
+                link_to_namespace(namespace, match_text:, link_content_html:)
               end
             end
           end

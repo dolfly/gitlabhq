@@ -52762,7 +52762,7 @@ paths:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/RequestBody_85aa94c04f69"
+              "$ref": "#/components/schemas/RequestBody_364c1989dcd7"
     delete:
       operationId: deleteApiV4FeaturesName
       summary: Delete a feature
@@ -105807,7 +105807,7 @@ components:
           nullable: true
       required:
       - file
-    RequestBody_85aa94c04f69:
+    RequestBody_364c1989dcd7:
       type: object
       properties:
         value:
@@ -105852,6 +105852,12 @@ components:
         runner:
           type: string
           description: A runner ID, or comma-separated list of runner IDs
+          nullable: true
+        endpoint:
+          type: string
+          description: A caller_id identifying a code path, for example `GET /api/v4/projects/:id`
+            or `ProjectsController#show`. Use comma to separate multiple endpoint
+            paths
           nullable: true
         force:
           type: boolean

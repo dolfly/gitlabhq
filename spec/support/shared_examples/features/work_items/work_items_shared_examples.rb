@@ -519,7 +519,7 @@ RSpec.shared_examples 'work items todos' do
 
     click_button s_('WorkItem|Add a to-do item')
 
-    expect(page).to have_button s_('WorkItem|Mark as done')
+    expect(page).to have_button s_('WorkItem|Mark to-do items done')
 
     within_testid 'todos-shortcut-button' do
       expect(page).to have_content '1'
@@ -528,7 +528,7 @@ RSpec.shared_examples 'work items todos' do
 
   it 'marks to-do item as done', :aggregate_failures do
     click_button s_('WorkItem|Add a to-do item')
-    click_button s_('WorkItem|Mark as done')
+    click_button s_('WorkItem|Mark to-do items done')
 
     expect(page).to have_button s_('WorkItem|Add a to-do item')
     within_testid 'todos-shortcut-button' do

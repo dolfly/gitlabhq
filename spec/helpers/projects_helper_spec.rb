@@ -1846,12 +1846,17 @@ RSpec.describe ProjectsHelper, feature_category: :source_code_management do
   end
 
   describe '#dashboard_projects_app_data' do
+    before do
+      allow(user).to receive(:can_create_project?).and_return(true)
+    end
+
     it 'returns expected json' do
       expect(Gitlab::Json.parse(helper.dashboard_projects_app_data)).to eq(
         {
           'initial_sort' => 'created_desc',
           'programming_languages' => ProgrammingLanguage.most_popular,
-          'base_path' => '/'
+          'base_path' => '/',
+          'can_create_project' => true
         }
       )
     end

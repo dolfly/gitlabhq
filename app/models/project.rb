@@ -3634,10 +3634,6 @@ class Project < ApplicationRecord
     group&.allow_iframes_in_markdown_feature_flag_enabled? || Feature.enabled?(:allow_iframes_in_markdown, self, type: :wip)
   end
 
-  def use_mermaid_v11_feature_flag_enabled?
-    group&.use_mermaid_v11_feature_flag_enabled? || Feature.enabled?(:use_mermaid_v11, self, type: :gitlab_com_derisk)
-  end
-
   def sscs_malware_detection_feature_flag_enabled?
     group&.sscs_malware_detection_feature_flag_enabled? || Feature.enabled?(:sscs_malware_detection, type: :wip)
   end

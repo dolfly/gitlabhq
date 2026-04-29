@@ -350,7 +350,7 @@ export default {
             :id="`suggestion-option-${index}`"
             :key="index"
             role="option"
-            class="gl-new-dropdown-item"
+            class="gl-new-dropdown-item !gl-ml-0 !gl-pl-2"
             :class="{ focused: index === selectedIndex }"
           >
             <div

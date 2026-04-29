@@ -2615,9 +2615,6 @@ msgstr ""
 msgid "AICatalog|Are you sure you want to delete %{itemType} %{name}?"
 msgstr ""
 
-msgid "AICatalog|Are you sure you want to delete flow %{name}?"
-msgstr ""
-
 msgid "AICatalog|Are you sure you want to disable agent %{name}? The agent will also be disabled from any projects in this group."
 msgstr ""
 
@@ -42646,6 +42643,9 @@ msgid "Mark this issue as a duplicate of another issue"
 msgstr ""
 
 msgid "Mark to-do item as done"
+msgstr ""
+
+msgid "Mark to-do items done"
 msgstr ""
 
 msgid "Markdown Help"
@@ -83874,10 +83874,10 @@ msgstr ""
 msgid "WorkItem|Make default for %{defaultState} items"
 msgstr ""
 
-msgid "WorkItem|Mark as done"
+msgid "WorkItem|Mark this item as related to: %{workItemType} %{workItemReference}"
 msgstr ""
 
-msgid "WorkItem|Mark this item as related to: %{workItemType} %{workItemReference}"
+msgid "WorkItem|Mark to-do items done"
 msgstr ""
 
 msgid "WorkItem|Maximum %{maxLimit} statuses reached. Remove a status to add more."

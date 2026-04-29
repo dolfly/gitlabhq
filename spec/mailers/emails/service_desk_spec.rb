@@ -408,21 +408,7 @@ RSpec.describe Emails::ServiceDesk, feature_category: :service_desk do
 
         let(:template_content) { 'some text %{ NOTE_TEXT  }' }
 
-        context 'when `disable_all_mention` is disabled' do
-          before do
-            stub_feature_flags(disable_all_mention: false)
-          end
-
-          it_behaves_like 'a service desk notification email with template content'
-        end
-
-        context 'when `disable_all_mention` is enabled' do
-          before do
-            stub_feature_flags(disable_all_mention: true)
-          end
-
-          it_behaves_like 'a service desk notification email with template content'
-        end
+        it_behaves_like 'a service desk notification email with template content'
       end
     end
 

@@ -675,7 +675,8 @@ module ProjectsHelper
     {
       initial_sort: group_project_list_sort_by,
       programming_languages: programming_languages,
-      base_path: root_path
+      base_path: root_path,
+      can_create_project: current_user.can_create_project?
     }.to_json
   end
 

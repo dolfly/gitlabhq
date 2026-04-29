@@ -118,7 +118,6 @@ InitializerConnections.warn_if_database_connection do
       # Use this scope for all new global routes.
       scope path: '-' do
         # sandbox
-        get '/sandbox/mermaid_v10' => 'sandbox#mermaid_v10'
         get '/sandbox/mermaid_v11' => 'sandbox#mermaid_v11'
         get '/sandbox/swagger' => 'sandbox#swagger'
 

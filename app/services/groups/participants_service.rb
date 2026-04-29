@@ -11,7 +11,6 @@ module Groups
       participants =
         noteable_owner +
         participants_in_noteable +
-        all_members +
         group_hierarchy_users
 
       participants += groups unless relation_at_search_limit?(group_hierarchy_users)
@@ -23,12 +22,6 @@ module Groups
 
     def participation_object
       group
-    end
-
-    def all_members
-      return [] if group.nil? || Feature.enabled?(:disable_all_mention)
-
-      [{ username: "all", name: "All Group Members", count: group.users_count }]
     end
 
     def group_hierarchy_users

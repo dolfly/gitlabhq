@@ -265,6 +265,7 @@ The following CI/CD variables are available:
 |----------------------------|------------------------------|-------------|
 | All                        | `GITLAB_TOKEN_<integration>` | Personal access token for the service account user. |
 | All                        | `GITLAB_HOST`                | GitLab instance hostname (for example, `gitlab.com`). |
+| All                        | `ADDITIONAL_INSTRUCTIONS`    | Additional instructions that the agent includes in prompts. |
 | Amazon Q                   | `AWS_SECRET_NAME`            | AWS Secret Manager secret name. |
 | Amazon Q                   | `AWS_REGION_NAME`            | AWS region name. |
 | Amazon Q                   | `AMAZON_Q_SIGV4`             | Amazon Q Sig V4 credentials. |

@@ -16,7 +16,6 @@ RSpec.describe 'Groups > Members > Request access', feature_category: :groups_an
   context 'when user has no existing access request' do
     before do
       sign_in(user)
-      visit group_path(group)
     end
 
     it 'request access feature is disabled', :js do
@@ -28,6 +27,8 @@ RSpec.describe 'Groups > Members > Request access', feature_category: :groups_an
     end
 
     it 'user can request access to a group', :js do
+      visit group_path(group)
+
       perform_enqueued_jobs do
         more_actions_dropdown.click
         request_access
@@ -40,6 +41,8 @@ RSpec.describe 'Groups > Members > Request access', feature_category: :groups_an
     end
 
     it 'user does not see private projects', :js do
+      visit group_path(group)
+
       perform_enqueued_jobs do
         more_actions_dropdown.click
         request_access
@@ -49,6 +52,8 @@ RSpec.describe 'Groups > Members > Request access', feature_category: :groups_an
     end
 
     it 'user does not see group in the Dashboard > Groups page', :js do
+      visit group_path(group)
+
       perform_enqueued_jobs do
         more_actions_dropdown.click
         request_access
