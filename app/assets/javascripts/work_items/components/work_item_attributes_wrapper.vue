@@ -14,7 +14,6 @@ import {
   WIDGET_TYPE_MILESTONE,
   WIDGET_TYPE_PARTICIPANTS,
   WIDGET_TYPE_PROGRESS,
-  WIDGET_TYPE_START_AND_DUE_DATE,
   WIDGET_TYPE_TIME_TRACKING,
   WIDGET_TYPE_WEIGHT,
   WIDGET_TYPE_COLOR,
@@ -27,6 +26,7 @@ import {
   findAssigneesWidget,
   findCrmContactsWidget,
   findHierarchyWidgetDefinition,
+  findStartAndDueDateWidget,
 } from '../utils';
 import workItemParticipantsQuery from '../graphql/work_item_participants.query.graphql';
 import workItemAllowedParentTypesQuery from '../graphql/work_item_allowed_parent_types.query.graphql';
@@ -162,7 +162,7 @@ export default {
       return this.isWidgetPresent(WIDGET_TYPE_STATUS);
     },
     workItemStartAndDueDate() {
-      return this.isWidgetPresent(WIDGET_TYPE_START_AND_DUE_DATE);
+      return findStartAndDueDateWidget(this.workItem);
     },
     canWorkItemRollUp() {
       return this.workItemType === WORK_ITEM_TYPE_NAME_EPIC;

@@ -77,6 +77,34 @@ RSpec.describe Resolvers::Repositories::CommitsResolver, feature_category: :sour
         end
       end
 
+      describe 'path' do
+        let(:arguments) { { ref: ref, path: 'files/ruby/popen.rb' } }
+
+        it 'returns only commits that touch the given path' do
+          expect(commits).to all satisfy { |c|
+            c.deltas.any? { |d| d.new_path == 'files/ruby/popen.rb' || d.old_path == 'files/ruby/popen.rb' }
+          }
+        end
+
+        it 'returns fewer commits than the unfiltered list' do
+          all_commits = repository.list_commits(ref: ref).commits
+          expect(commits.length).to be < all_commits.length
+          expect(commits.length).to be > 0
+        end
+
+        context 'when path is an empty string' do
+          let(:arguments) { { ref: ref, path: '' } }
+
+          it 'normalizes empty string to nil' do
+            expect(repository).to receive(:list_commits)
+              .with(hash_including(path: nil))
+              .and_call_original
+
+            commits
+          end
+        end
+      end
+
       describe 'pagination params' do
         before do
           allow(repository).to receive(:list_commits).and_call_original

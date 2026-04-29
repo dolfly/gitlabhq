@@ -339,7 +339,8 @@ RSpec.describe TodosFinder, feature_category: :notifications do
 
       expected_result =
         if Gitlab.ee?
-          %w[Epic Vulnerability User ComplianceManagement::Projects::ComplianceViolation] + shared_types
+          %w[Epic Vulnerability User ComplianceManagement::Projects::ComplianceViolation
+            Ai::DuoWorkflows::Workflow] + shared_types
         else
           shared_types
         end

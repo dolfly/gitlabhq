@@ -36,6 +36,9 @@ msgstr ""
 msgid " This action will also delete:"
 msgstr ""
 
+msgid " UTC"
+msgstr ""
+
 msgid " and "
 msgstr ""
 
@@ -11726,10 +11729,16 @@ msgstr ""
 msgid "Billing"
 msgstr ""
 
+msgid "BillingPlans|$%{cost}/yr"
+msgstr ""
+
 msgid "BillingPlans|$12 in GitLab Credits per user per month"
 msgstr ""
 
 msgid "BillingPlans|$24 in GitLab Credits per user per month"
+msgstr ""
+
+msgid "BillingPlans|%{amount} × $%{pricePerCredit} = $%{cost}/mo"
 msgstr ""
 
 msgid "BillingPlans|%{creditsPerUser} credits/user/month included in plan for:"
@@ -19928,9 +19937,6 @@ msgstr ""
 msgid "Confidentiality"
 msgstr ""
 
-msgid "Configuration"
-msgstr ""
-
 msgid "Configuration help"
 msgstr ""
 
@@ -23783,9 +23789,6 @@ msgid "DastSiteValidation|You will not be able to run active scans against %{url
 msgstr ""
 
 msgid "Data Analyst"
-msgstr ""
-
-msgid "Data Explorer"
 msgstr ""
 
 msgid "Data is still calculating…"
@@ -31396,9 +31399,6 @@ msgid "Focus file tree browser filter bar"
 msgstr ""
 
 msgid "Focus filter bar"
-msgstr ""
-
-msgid "Focus on the search bar"
 msgstr ""
 
 msgid "FogBugz Email"
@@ -48888,7 +48888,13 @@ msgstr ""
 msgid "OfflineTransferImport|Import groups and projects from a previously exported offline transfer."
 msgstr ""
 
+msgid "OfflineTransfer|Configure"
+msgstr ""
+
 msgid "OfflineTransfer|Export"
+msgstr ""
+
+msgid "OfflineTransfer|Export configuration"
 msgstr ""
 
 msgid "OfflineTransfer|Export failed. Entity full paths must be provided."
@@ -48907,6 +48913,21 @@ msgid "OfflineTransfer|Offline transfer"
 msgstr ""
 
 msgid "OfflineTransfer|One or more destination paths is invalid."
+msgstr ""
+
+msgid "OfflineTransfer|Review"
+msgstr ""
+
+msgid "OfflineTransfer|Review export"
+msgstr ""
+
+msgid "OfflineTransfer|Select entities"
+msgstr ""
+
+msgid "OfflineTransfer|Select groups and projects to export"
+msgstr ""
+
+msgid "OfflineTransfer|Start export"
 msgstr ""
 
 msgid "OfflineTransfer|Unable to access object storage bucket."
@@ -49674,25 +49695,76 @@ msgstr ""
 msgid "Orbit"
 msgstr ""
 
+msgid "Orbit|%{boldStart}The initial scan can take some time depending on the amount of content.%{boldEnd} After that, updated content is automatically re-indexed. You can turn off Orbit at any time."
+msgstr ""
+
+msgid "Orbit|1. Navigate to %{link} (%{url})"
+msgstr ""
+
+msgid "Orbit|2. Click \"Get started\""
+msgstr ""
+
+msgid "Orbit|3. Review and confirm"
+msgstr ""
+
+msgid "Orbit|Add this to your %{configPath} file."
+msgstr ""
+
 msgid "Orbit|Additional metadata if required"
+msgstr ""
+
+msgid "Orbit|Agents that know your codebase like your team does"
+msgstr ""
+
+msgid "Orbit|All content from this group, its subgroups, and projects will be added to Orbit. Existing access controls still apply — users who cannot access content in this group won't see it through Orbit."
 msgstr ""
 
 msgid "Orbit|All domains"
 msgstr ""
 
+msgid "Orbit|All groups and projects"
+msgstr ""
+
 msgid "Orbit|Ask your GitLab anything"
+msgstr ""
+
+msgid "Orbit|Available groups"
 msgstr ""
 
 msgid "Orbit|Branch"
 msgstr ""
 
+msgid "Orbit|CI/CD"
+msgstr ""
+
 msgid "Orbit|CLI"
+msgstr ""
+
+msgid "Orbit|CLI & API"
+msgstr ""
+
+msgid "Orbit|CLI command"
+msgstr ""
+
+msgid "Orbit|Cancel"
+msgstr ""
+
+msgid "Orbit|Claude Code"
+msgstr ""
+
+msgid "Orbit|Claude for Desktop"
 msgstr ""
 
 msgid "Orbit|Clear"
 msgstr ""
 
 msgid "Orbit|Close"
+msgstr ""
+
+msgid "Orbit|Code Review"
+msgstr ""
+
+msgid "Orbit|Codex"
 msgstr ""
 
 msgid "Orbit|Collapse"
@@ -49704,16 +49776,67 @@ msgstr ""
 msgid "Orbit|Configuration"
 msgstr ""
 
+msgid "Orbit|Configure"
+msgstr ""
+
+msgid "Orbit|Configure MCP"
+msgstr ""
+
+msgid "Orbit|Configure MCP host"
+msgstr ""
+
+msgid "Orbit|Configure Orbit for a group"
+msgstr ""
+
+msgid "Orbit|Connect to Orbit"
+msgstr ""
+
+msgid "Orbit|Connect your AI assistant to Orbit via MCP. Choose your host application, then use the CLI command or manual configuration to finish setup."
+msgstr ""
+
+msgid "Orbit|Connected Entities"
+msgstr ""
+
 msgid "Orbit|Connections"
+msgstr ""
+
+msgid "Orbit|Copied"
+msgstr ""
+
+msgid "Orbit|Copy MCP endpoint"
+msgstr ""
+
+msgid "Orbit|Copy command"
+msgstr ""
+
+msgid "Orbit|Copy configuration"
+msgstr ""
+
+msgid "Orbit|Copy install command"
+msgstr ""
+
+msgid "Orbit|Copy this configuration and add it to your %{host} settings."
+msgstr ""
+
+msgid "Orbit|Copy to clipboard"
 msgstr ""
 
 msgid "Orbit|Copy tool name"
 msgstr ""
 
+msgid "Orbit|Core"
+msgstr ""
+
 msgid "Orbit|Could not locate the selected node in the graph."
 msgstr ""
 
+msgid "Orbit|Cursor"
+msgstr ""
+
 msgid "Orbit|Data Explorer"
+msgstr ""
+
+msgid "Orbit|Deeper intelligence, not just faster responses"
 msgstr ""
 
 msgid "Orbit|Define how node types connect to each other. Relationships are also known as edges."
@@ -49737,6 +49860,9 @@ msgstr ""
 msgid "Orbit|Download CSV"
 msgstr ""
 
+msgid "Orbit|Duo agents reason about how your code, pipelines, issues, and MRs actually connect — not just what's in a single file or prompt."
+msgstr ""
+
 msgid "Orbit|Enable"
 msgstr ""
 
@@ -49746,19 +49872,43 @@ msgstr ""
 msgid "Orbit|Enable Orbit for a top-level group to index its projects and make them queryable"
 msgstr ""
 
+msgid "Orbit|Enable indexing for a top-level group to make its projects queryable."
+msgstr ""
+
+msgid "Orbit|Entities"
+msgstr ""
+
+msgid "Orbit|Every merge request, resolved incident, and linked issue enriches the graph, so Duo agents get progressively more intelligent about your organization."
+msgstr ""
+
 msgid "Orbit|Execute query"
+msgstr ""
+
+msgid "Orbit|Exit full screen"
 msgstr ""
 
 msgid "Orbit|Expand"
 msgstr ""
 
+msgid "Orbit|Explore"
+msgstr ""
+
+msgid "Orbit|Explore data"
+msgstr ""
+
 msgid "Orbit|FQN"
+msgstr ""
+
+msgid "Orbit|Failed to enable Orbit. Please try again."
 msgstr ""
 
 msgid "Orbit|Failed to execute query. Please try again."
 msgstr ""
 
 msgid "Orbit|Failed to expand node neighbors."
+msgstr ""
+
+msgid "Orbit|Failed to load group. Please try again."
 msgstr ""
 
 msgid "Orbit|Failed to load groups."
@@ -49782,10 +49932,28 @@ msgstr ""
 msgid "Orbit|Finding"
 msgstr ""
 
+msgid "Orbit|Get started"
+msgstr ""
+
 msgid "Orbit|Get started with Orbit"
 msgstr ""
 
+msgid "Orbit|GitLab Duo"
+msgstr ""
+
+msgid "Orbit|GitLab Duo will use Orbit to provide enhanced intelligence."
+msgstr ""
+
+msgid "Orbit|GitLab status"
+msgstr ""
+
+msgid "Orbit|Give your tools the full picture. Orbit gives your AI tools structured access to how your organization builds software in GitLab, from code and history to plans and standards, so agents return answers that are more accurate and more efficient."
+msgstr ""
+
 msgid "Orbit|Group"
+msgstr ""
+
+msgid "Orbit|Groups"
 msgstr ""
 
 msgid "Orbit|Healthy"
@@ -49794,16 +49962,34 @@ msgstr ""
 msgid "Orbit|Hide SQL"
 msgstr ""
 
+msgid "Orbit|Hide schema"
+msgstr ""
+
+msgid "Orbit|Hide services"
+msgstr ""
+
 msgid "Orbit|ImportedSymbol"
 msgstr ""
 
+msgid "Orbit|Index"
+msgstr ""
+
 msgid "Orbit|Indexed"
+msgstr ""
+
+msgid "Orbit|Indexed content"
+msgstr ""
+
+msgid "Orbit|Indexed groups"
 msgstr ""
 
 msgid "Orbit|Indexes"
 msgstr ""
 
 msgid "Orbit|Indexing…"
+msgstr ""
+
+msgid "Orbit|Instead of manually gathering context before asking an agent for help, the Knowledge Graph provides that connective tissue automatically."
 msgstr ""
 
 msgid "Orbit|Invalid JSON query. Please check the syntax."
@@ -49815,7 +50001,19 @@ msgstr ""
 msgid "Orbit|Label"
 msgstr ""
 
+msgid "Orbit|Last indexed:"
+msgstr ""
+
 msgid "Orbit|Learn more"
+msgstr ""
+
+msgid "Orbit|Learn more about Orbit"
+msgstr ""
+
+msgid "Orbit|Less context-switching, more flow"
+msgstr ""
+
+msgid "Orbit|List pipelines that failed in the last week"
 msgstr ""
 
 msgid "Orbit|Location"
@@ -49824,7 +50022,13 @@ msgstr ""
 msgid "Orbit|MCP"
 msgstr ""
 
-msgid "Orbit|MR count by user"
+msgid "Orbit|MCP host application"
+msgstr ""
+
+msgid "Orbit|MCP quickstart"
+msgstr ""
+
+msgid "Orbit|Manual configuration"
 msgstr ""
 
 msgid "Orbit|Marketing visual"
@@ -49848,7 +50052,16 @@ msgstr ""
 msgid "Orbit|Minimize"
 msgstr ""
 
+msgid "Orbit|My authored merge requests"
+msgstr ""
+
+msgid "Orbit|My neighbors in the graph"
+msgstr ""
+
 msgid "Orbit|Name"
+msgstr ""
+
+msgid "Orbit|Navigate to"
 msgstr ""
 
 msgid "Orbit|No"
@@ -49857,10 +50070,22 @@ msgstr ""
 msgid "Orbit|No connection"
 msgstr ""
 
+msgid "Orbit|No groups match your search."
+msgstr ""
+
+msgid "Orbit|No indexing data available yet."
+msgstr ""
+
+msgid "Orbit|No namespaces have indexing enabled."
+msgstr ""
+
 msgid "Orbit|No results"
 msgstr ""
 
 msgid "Orbit|No results. Execute a query to see data."
+msgstr ""
+
+msgid "Orbit|No tools available."
 msgstr ""
 
 msgid "Orbit|Node Explorer"
@@ -49878,22 +50103,70 @@ msgstr ""
 msgid "Orbit|Nullable"
 msgstr ""
 
+msgid "Orbit|Once indexed, team members can use Orbit data through GitLab Duo Agent Platform or via MCP and CLI connections."
+msgstr ""
+
+msgid "Orbit|Only owners of this top-level group can change Orbit indexing."
+msgstr ""
+
 msgid "Orbit|Only top-level groups can be indexed"
+msgstr ""
+
+msgid "Orbit|Open as query"
+msgstr ""
+
+msgid "Orbit|Open merge requests"
+msgstr ""
+
+msgid "Orbit|Open vulnerabilities"
 msgstr ""
 
 msgid "Orbit|Orbit"
 msgstr ""
 
+msgid "Orbit|Orbit configuration"
+msgstr ""
+
 msgid "Orbit|Orbit is an SDLC analysis engine that transforms your GitLab into a structured knowledge graph."
+msgstr ""
+
+msgid "Orbit|Orbit is available"
+msgstr ""
+
+msgid "Orbit|Orbit is unavailable"
+msgstr ""
+
+msgid "Orbit|Orbit is unavailable."
+msgstr ""
+
+msgid "Orbit|Orbit not enabled"
+msgstr ""
+
+msgid "Orbit|Orbit requires a top-level group with at least a Premium license."
+msgstr ""
+
+msgid "Orbit|Orbit transforms your GitLab data into a structured knowledge graph you can query, explore, and integrate with AI tools."
 msgstr ""
 
 msgid "Orbit|Overall status"
 msgstr ""
 
+msgid "Orbit|Owner instructions"
+msgstr ""
+
+msgid "Orbit|Pending"
+msgstr ""
+
 msgid "Orbit|Pipeline"
 msgstr ""
 
+msgid "Orbit|Planning"
+msgstr ""
+
 msgid "Orbit|Project"
+msgstr ""
+
+msgid "Orbit|Projects"
 msgstr ""
 
 msgid "Orbit|Properties"
@@ -49902,7 +50175,13 @@ msgstr ""
 msgid "Orbit|Query Editor"
 msgstr ""
 
+msgid "Orbit|Query Orbit directly, or power up your agents with GitLab context. Using Orbit outside of GitLab uses GitLab Credits."
+msgstr ""
+
 msgid "Orbit|REST API"
+msgstr ""
+
+msgid "Orbit|Related Entities"
 msgstr ""
 
 msgid "Orbit|Relationships"
@@ -49917,6 +50196,12 @@ msgstr ""
 msgid "Orbit|Run a query to see results here."
 msgstr ""
 
+msgid "Orbit|Run this command in your terminal to configure %{host} automatically."
+msgstr ""
+
+msgid "Orbit|SDLC Map"
+msgstr ""
+
 msgid "Orbit|Sample prompt"
 msgstr ""
 
@@ -49926,31 +50211,64 @@ msgstr ""
 msgid "Orbit|Schema"
 msgstr ""
 
-msgid "Orbit|Search merge requests"
+msgid "Orbit|Search entities and relationships"
 msgstr ""
 
 msgid "Orbit|Search nodes and relationships..."
 msgstr ""
 
-msgid "Orbit|Search users"
+msgid "Orbit|Security"
 msgstr ""
 
 msgid "Orbit|SecurityScan"
 msgstr ""
 
+msgid "Orbit|Select scope"
+msgstr ""
+
 msgid "Orbit|Selected Entity"
+msgstr ""
+
+msgid "Orbit|Setting up Orbit requires an Owner role in a group with at least a Premium license."
 msgstr ""
 
 msgid "Orbit|Settings"
 msgstr ""
 
+msgid "Orbit|Settings, then Orbit"
+msgstr ""
+
+msgid "Orbit|Setup Orbit"
+msgstr ""
+
+msgid "Orbit|Setup guide"
+msgstr ""
+
 msgid "Orbit|Show SQL"
+msgstr ""
+
+msgid "Orbit|Show in Map"
 msgstr ""
 
 msgid "Orbit|Show less"
 msgstr ""
 
+msgid "Orbit|Show me recent merge requests with failing pipelines"
+msgstr ""
+
 msgid "Orbit|Show more"
+msgstr ""
+
+msgid "Orbit|Show schema"
+msgstr ""
+
+msgid "Orbit|Show services"
+msgstr ""
+
+msgid "Orbit|Smarter over time"
+msgstr ""
+
+msgid "Orbit|Source Code"
 msgstr ""
 
 msgid "Orbit|Stage"
@@ -49965,31 +50283,76 @@ msgstr ""
 msgid "Orbit|Templates"
 msgstr ""
 
+msgid "Orbit|The Knowledge Graph gives agents the relationship context they need to make recommendations grounded in how your team actually works."
+msgstr ""
+
+msgid "Orbit|Toggle indexed content"
+msgstr ""
+
 msgid "Orbit|Tools"
+msgstr ""
+
+msgid "Orbit|Tools overview"
+msgstr ""
+
+msgid "Orbit|Top authors of merged merge requests"
+msgstr ""
+
+msgid "Orbit|Try asking"
+msgstr ""
+
+msgid "Orbit|Turn off Orbit indexing"
+msgstr ""
+
+msgid "Orbit|Turn off indexing"
+msgstr ""
+
+msgid "Orbit|Turn on Orbit for %{groupName}"
+msgstr ""
+
+msgid "Orbit|Turn on Orbit for %{groupName} to supercharge agents with deep contextual intelligence — they understand how code, pipelines, work items, and merge requests connect across GitLab. This means better recommendations, less manual context-gathering, and agents that get smarter as your graph grows."
+msgstr ""
+
+msgid "Orbit|Turn on Orbit indexing for %{groupName}"
+msgstr ""
+
+msgid "Orbit|Turn on indexing"
+msgstr ""
+
+msgid "Orbit|Turning off Orbit indexing will prevent users and agents from accessing Orbit data. Updates will not be scanned by Orbit."
 msgstr ""
 
 msgid "Orbit|Type"
 msgstr ""
 
+msgid "Orbit|Unable to load Orbit schema. Please try again."
+msgstr ""
+
 msgid "Orbit|Unable to load cluster status."
+msgstr ""
+
+msgid "Orbit|Unable to load index status. Please try again."
 msgstr ""
 
 msgid "Orbit|Unhealthy"
 msgstr ""
 
+msgid "Orbit|Use Orbit with GitLab Duo"
+msgstr ""
+
+msgid "Orbit|Use Orbit with your tools"
+msgstr ""
+
 msgid "Orbit|User"
-msgstr ""
-
-msgid "Orbit|User authored MRs"
-msgstr ""
-
-msgid "Orbit|User neighbors"
 msgstr ""
 
 msgid "Orbit|Variants"
 msgstr ""
 
 msgid "Orbit|Version"
+msgstr ""
+
+msgid "Orbit|View Owners"
 msgstr ""
 
 msgid "Orbit|Vulnerability"
@@ -50010,13 +50373,37 @@ msgstr ""
 msgid "Orbit|What issues are blocking the login feature?"
 msgstr ""
 
+msgid "Orbit|What open vulnerabilities exist in my projects?"
+msgstr ""
+
 msgid "Orbit|What types of data are available?"
+msgstr ""
+
+msgid "Orbit|Who merged the most this quarter?"
 msgstr ""
 
 msgid "Orbit|WorkItem"
 msgstr ""
 
 msgid "Orbit|Yes"
+msgstr ""
+
+msgid "Orbit|You must have the Owner role in a top-level group to turn on Orbit. Ask an owner to turn on Orbit."
+msgstr ""
+
+msgid "Orbit|Your SDLC Context Graph"
+msgstr ""
+
+msgid "Orbit|entities"
+msgstr ""
+
+msgid "Orbit|filterable"
+msgstr ""
+
+msgid "Orbit|indexed"
+msgstr ""
+
+msgid "Orbit|relationships"
 msgstr ""
 
 msgid "Orbit|rows"
@@ -59424,7 +59811,13 @@ msgstr ""
 msgid "Repository|New tag"
 msgstr ""
 
+msgid "Repository|No results found"
+msgstr ""
+
 msgid "Repository|Search files (*.vue, *.rb...)"
+msgstr ""
+
+msgid "Repository|Something went wrong while loading the files"
 msgstr ""
 
 msgid "Repository|This directory"

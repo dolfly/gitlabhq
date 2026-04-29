@@ -19,6 +19,16 @@ RSpec.describe Gitlab::DatabaseImporters::DefaultOrganizationImporter, feature_c
         expect(default_org.name).to eq('Default')
         expect(default_org.path).to eq('default')
         expect(default_org).to be_public
+        expect(default_org).to be_active
+      end
+
+      it 'creates the default organization without confirmed_by_user_id' do
+        subject
+
+        default_org = Organizations::Organization.find(default_id)
+
+        expect(default_org.organization_detail.confirmed_by_user_id).to be_nil
+        expect(default_org.organization_detail.confirmed_at).to be_nil
       end
     end
 

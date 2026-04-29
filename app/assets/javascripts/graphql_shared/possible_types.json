@@ -332,6 +332,7 @@
     "CountableVulnerability",
     "CurrentUser",
     "Design",
+    "DuoWorkflow",
     "Epic",
     "EpicIssue",
     "Group",

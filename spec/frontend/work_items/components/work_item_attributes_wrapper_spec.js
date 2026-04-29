@@ -177,6 +177,22 @@ describe('WorkItemAttributesWrapper component', () => {
 
       expect(findWorkItemDates().exists()).toBe(true);
     });
+
+    it('renders when features.startAndDueDate is present', () => {
+      createComponent({
+        workItem: {
+          ...workItemResponseFactory({ datesWidgetPresent: false }).data.workItem,
+          features: {
+            startAndDueDate: {
+              startDate: '2024-01-01',
+              dueDate: '2024-01-31',
+            },
+          },
+        },
+      });
+
+      expect(findWorkItemDates().exists()).toBe(true);
+    });
   });
 
   describe('milestone widget', () => {

@@ -13,12 +13,14 @@ module Organizations
       attribute :state, :integer, limit: 2, default: 0
 
       enum :state, {
-        active: 0,
+        unconfirmed: 0,
         deletion_scheduled: 1,
-        deletion_in_progress: 2
+        deletion_in_progress: 2,
+        confirmed: 3,
+        active: 4
       }, instance_methods: false
 
-      state_machine :state, initial: :active do
+      state_machine :state, initial: :unconfirmed do
         before_transition :update_state_metadata
         before_transition on: :schedule_deletion, do: :ensure_transition_user
         before_transition on: :schedule_deletion, do: :set_deletion_schedule_data
@@ -26,6 +28,16 @@ module Organizations
         # We don't call :set_deletion_schedule_data on :reschedule_deletion
         # as it would change the actual deletion date/time.
         before_transition on: :reschedule_deletion, do: :set_deletion_error_data
+        before_transition on: :confirm, do: :ensure_confirmed_by_user
+        before_transition on: :confirm, do: :set_confirmation_data
+
+        event :confirm do
+          transition unconfirmed: :confirmed
+        end
+
+        event :activate do
+          transition confirmed: :active
+        end
 
         event :schedule_deletion do
           transition active: :deletion_scheduled
@@ -49,6 +61,24 @@ module Organizations
       end
 
       private
+
+      def ensure_confirmed_by_user(transition)
+        return true if confirmed_by_user(transition)
+
+        errors.add(:state, "#{transition.event} transition needs confirmed_by_user")
+        false
+      end
+
+      def confirmed_by_user(transition)
+        transition_args(transition)[:confirmed_by_user]
+      end
+
+      def set_confirmation_data(transition)
+        state_metadata.merge!(
+          confirmed_at: Time.current.as_json,
+          confirmed_by_user_id: confirmed_by_user(transition).id
+        )
+      end
 
       def stateful_detail
         organization_detail

@@ -20263,6 +20263,7 @@ CREATE TABLE duo_workflows_workflows (
     tool_call_approvals jsonb DEFAULT '{}'::jsonb NOT NULL,
     ai_catalog_item_id bigint,
     summary text,
+    messaging_callback_context jsonb,
     CONSTRAINT check_13bb5688db CHECK ((char_length(summary) <= 1024)),
     CONSTRAINT check_30ca07a4ef CHECK ((char_length(goal) <= 16384)),
     CONSTRAINT check_3a9162f1ae CHECK ((char_length(image) <= 2048)),
@@ -44948,6 +44949,8 @@ CREATE INDEX idx_scan_result_policies_on_configuration_id_id_updated_at ON scan_
 
 CREATE INDEX idx_scan_result_policy_violations_on_policy_id_and_id ON scan_result_policy_violations USING btree (scan_result_policy_id, id);
 
+CREATE INDEX idx_sec_inv_filters_traversal_project_ids_aggregate_booleans ON security_inventory_filters USING btree (traversal_ids, project_id) INCLUDE (has_scanners, has_failed_or_warning, has_stale) WHERE (NOT archived);
+
 CREATE INDEX idx_sec_inv_filters_traversals_unarchived_proj_severities_sort ON security_inventory_filters USING btree (traversal_ids, project_id, id DESC) WHERE ((NOT archived) AND ((critical > 0) OR (high > 0)));
 
 CREATE INDEX idx_sec_pol_sched_pipes_on_policy_id ON security_policy_schedule_pipelines USING btree (security_policy_id);
@@ -44963,8 +44966,6 @@ CREATE UNIQUE INDEX idx_secrets_management_recovery_keys_on_active_true ON secre
 CREATE INDEX idx_security_finding_token_on_created_at ON security_finding_token_statuses USING btree (created_at);
 
 CREATE INDEX idx_security_finding_token_on_project_id ON security_finding_token_statuses USING btree (project_id);
-
-CREATE INDEX idx_security_inventory_filters_traversal_ids_unarchived_project ON security_inventory_filters USING btree (traversal_ids, project_id) WHERE (NOT archived);
 
 CREATE INDEX idx_security_pipeline_execution_project_schedules_next_run_at ON security_pipeline_execution_project_schedules USING btree (next_run_at, id);
 

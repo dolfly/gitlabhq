@@ -142,6 +142,7 @@ export const findNotesWidget = (workItem) =>
   workItem?.widgets?.find((widget) => widget.type === WIDGET_TYPE_NOTES);
 
 export const findStartAndDueDateWidget = (workItem) =>
+  workItem?.features?.startAndDueDate ||
   workItem?.widgets?.find((widget) => widget.type === WIDGET_TYPE_START_AND_DUE_DATE);
 
 export const findStatusWidget = (workItem) =>

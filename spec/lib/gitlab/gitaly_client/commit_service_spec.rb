@@ -1044,6 +1044,32 @@ RSpec.describe Gitlab::GitalyClient::CommitService, feature_category: :gitaly do
       it_behaves_like 'a ListCommits request'
     end
 
+    context 'with path filter' do
+      before do
+        ::Gitlab::GitalyClient.clear_stubs!
+      end
+
+      it 'includes path in the request' do
+        expect_next_instance_of(Gitaly::CommitService::Stub) do |service|
+          expect(service).to receive(:list_commits) do |request, _options|
+            expect(request.paths).to eq([Gitlab::EncodingHelper.encode_binary('files/ruby/popen.rb')])
+          end.and_return([])
+        end
+
+        client.list_commits('master', { path: 'files/ruby/popen.rb' })
+      end
+
+      it 'does not include path when it is an empty string' do
+        expect_next_instance_of(Gitaly::CommitService::Stub) do |service|
+          expect(service).to receive(:list_commits) do |request, _options|
+            expect(request.paths).to be_empty
+          end.and_return([])
+        end
+
+        client.list_commits('master', { path: '' })
+      end
+    end
+
     describe 'pagination' do
       it 'returns next_cursor and accepts it in the following request', :aggregate_failures do
         response_1 = client.list_commits('master', { pagination_params: { limit: 1 } })

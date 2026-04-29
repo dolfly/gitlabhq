@@ -5,6 +5,7 @@ module Types
     class StageType < BaseObject
       graphql_name 'CiStage'
       authorize :read_build
+      authorize_granular_token permissions: :read_pipeline_stage, boundary: :project, boundary_type: :project
 
       field :detailed_status, Types::Ci::DetailedStatusType, null: true,
         description: 'Detailed status of the stage.'

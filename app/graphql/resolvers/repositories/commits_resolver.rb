@@ -11,6 +11,10 @@ module Resolvers
         required: true,
         description: 'Branch or tag to search for commits.'
 
+      argument :path, GraphQL::Types::String,
+        required: false,
+        description: 'File path to filter commits by.'
+
       argument :query, Types::UntrustedRegexp,
         required: false,
         description: 'Regular expression to filter the commits.'
@@ -64,6 +68,7 @@ module Resolvers
       end
 
       def list_commits_arguments(arguments, limit, page_token)
+        arguments[:path] = arguments[:path].presence
         arguments[:pagination_params] = {}.tap do |pagination_params|
           pagination_params[:limit] = limit
           pagination_params[:page_token] = Base64.decode64(page_token) if page_token

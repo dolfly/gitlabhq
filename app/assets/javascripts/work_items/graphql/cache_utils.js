@@ -403,6 +403,7 @@ export const getNewWorkItemSharedCache = ({
     },
     startAndDueDate: {
       ...startAndDueDateWidgetDefinitionHash,
+      type: WIDGET_TYPE_START_AND_DUE_DATE,
       dueDate: startAndDueDateWidgetDefinitionHash?.dueDate || null,
       startDate: startAndDueDateWidgetDefinitionHash?.startDate || null,
       isFixed: startAndDueDateWidgetDefinitionHash?.isFixed || false,

@@ -160,6 +160,16 @@ RSpec.describe API::WorkItems, feature_category: :portfolio_management do
 
     it_behaves_like 'work item show endpoint'
 
+    context 'when authenticated with a token that has the ai_workflows scope' do
+      let_it_be(:oauth_token) { create(:oauth_access_token, user: user, scopes: [:ai_workflows]) }
+
+      it 'returns the work item successfully' do
+        get api("#{api_request_path}/#{primary_work_item.iid}", oauth_access_token: oauth_token)
+
+        expect(response).to have_gitlab_http_status(:ok)
+      end
+    end
+
     it_behaves_like 'authorizing granular token permissions', :read_work_item do
       let(:boundary_object) { project }
       let(:request) do

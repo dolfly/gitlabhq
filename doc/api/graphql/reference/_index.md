@@ -35760,6 +35760,7 @@ GitLab Duo Agent Platform session.
 | <a id="duoworkflow-lastexecutorlogsurl"></a>`lastExecutorLogsUrl` | [`String`](#string) | URL to the latest executor logs of the workflow. |
 | <a id="duoworkflow-latestcheckpoint"></a>`latestCheckpoint` | [`DuoWorkflowEvent`](#duoworkflowevent) | Latest checkpoint of the session. |
 | <a id="duoworkflow-mcpenabled"></a>`mcpEnabled` | [`Boolean`](#boolean) | Has MCP been enabled for the namespace. |
+| <a id="duoworkflow-name"></a>`name` | [`String`](#string) | Name or title of the object. |
 | <a id="duoworkflow-namespace"></a>`namespace` | [`Namespace`](#namespace) | namespace that the session is in. |
 | <a id="duoworkflow-namespaceid"></a>`namespaceId` | [`TypesNamespaceID`](#typesnamespaceid) | ID of the namespace. |
 | <a id="duoworkflow-preapprovedagentprivilegesnames"></a>`preApprovedAgentPrivilegesNames` | [`[String!]`](#string) | Privileges pre-approved for the agent during execution. |
@@ -35773,6 +35774,7 @@ GitLab Duo Agent Platform session.
 | <a id="duoworkflow-updatedat"></a>`updatedAt` | [`Time!`](#time) | Timestamp of when the session was last updated. |
 | <a id="duoworkflow-userid"></a>`userId` | [`UserID!`](#userid) | ID of the user. |
 | <a id="duoworkflow-userpermissions"></a>`userPermissions` | [`DuoWorkflowPermissions`](#duoworkflowpermissions) | Permissions of the current user for the workflow. |
+| <a id="duoworkflow-weburl"></a>`webUrl` | [`String`](#string) | URL of the object. |
 | <a id="duoworkflow-workflowdefinition"></a>`workflowDefinition` | [`String`](#string) | GitLab Duo Agent Platform flow type based on its capabilities. |
 
 ### `DuoWorkflowEnablement`
@@ -37928,6 +37930,7 @@ GPG signature for a signed commit.
 | <a id="group-isselfarchived"></a>`isSelfArchived` | [`Boolean`](#boolean) | Indicates if the group is archived. |
 | <a id="group-isselfdeletioninprogress"></a>`isSelfDeletionInProgress` {{< icon name="warning-solid" >}} | [`Boolean!`](#boolean) | **Introduced** in GitLab 18.2. **Status**: Experiment. Indicates if group deletion is in progress. |
 | <a id="group-isselfdeletionscheduled"></a>`isSelfDeletionScheduled` {{< icon name="warning-solid" >}} | [`Boolean!`](#boolean) | **Introduced** in GitLab 18.2. **Status**: Experiment. Indicates if group deletion is scheduled. |
+| <a id="group-knowledgegraphavailable"></a>`knowledgeGraphAvailable` {{< icon name="warning-solid" >}} | [`Boolean!`](#boolean) | **Introduced** in GitLab 19.0. **Status**: Experiment. Indicates whether the Knowledge Graph can be enabled for the namespace. |
 | <a id="group-knowledgegraphenabled"></a>`knowledgeGraphEnabled` {{< icon name="warning-solid" >}} | [`Boolean!`](#boolean) | **Introduced** in GitLab 18.10. **Status**: Experiment. Indicates whether the Knowledge Graph is enabled for the namespace. |
 | <a id="group-lfsenabled"></a>`lfsEnabled` | [`Boolean`](#boolean) | Indicates if Large File Storage (LFS) is enabled for namespace. |
 | <a id="group-licensedfeatures"></a>`licensedFeatures` {{< icon name="warning-solid" >}} | [`NamespaceAvailableFeatures!`](#namespaceavailablefeatures) | **Introduced** in GitLab 18.1. **Status**: Experiment. Licensed features available on the namespace. |
@@ -37967,6 +37970,7 @@ GPG signature for a signed commit.
 | <a id="group-rootstoragestatistics"></a>`rootStorageStatistics` | [`RootStorageStatistics`](#rootstoragestatistics) | Aggregated storage statistics of the namespace. Only available for root namespaces. |
 | <a id="group-securitycategories"></a>`securityCategories` | [`[SecurityCategory!]`](#securitycategory) | Security categories for the group. |
 | <a id="group-securitypolicyproject"></a>`securityPolicyProject` | [`Project`](#project) | Security policy project assigned to the namespace. |
+| <a id="group-securityposturecounters"></a>`securityPostureCounters` {{< icon name="warning-solid" >}} | [`SecurityPostureCounters`](#securityposturecounters) | **Introduced** in GitLab 19.0. **Status**: Experiment. Security posture counters for the group. |
 | <a id="group-sharewithgrouplock"></a>`shareWithGroupLock` | [`Boolean`](#boolean) | Indicates if sharing a project with another group within the group is prevented. |
 | <a id="group-sharedrunnerssetting"></a>`sharedRunnersSetting` | [`SharedRunnersSetting`](#sharedrunnerssetting) | Shared runners availability for the namespace and its descendants. |
 | <a id="group-sidebar"></a>`sidebar` {{< icon name="warning-solid" >}} | [`NamespaceSidebar`](#namespacesidebar) | **Introduced** in GitLab 17.6. **Status**: Experiment. Data needed to render the sidebar for the namespace. |
@@ -50819,6 +50823,7 @@ four standard [pagination arguments](#pagination-arguments):
 | <a id="repository-commits-author"></a>`author` | [`String`](#string) | Name or email of the author. |
 | <a id="repository-commits-committedafter"></a>`committedAfter` | [`Time`](#time) | Commits created after an ISO8601 formatted time or date. |
 | <a id="repository-commits-committedbefore"></a>`committedBefore` | [`Time`](#time) | Commits created before an ISO8601 formatted time or date. |
+| <a id="repository-commits-path"></a>`path` | [`String`](#string) | File path to filter commits by. |
 | <a id="repository-commits-query"></a>`query` | [`UntrustedRegexp`](#untrustedregexp) | Regular expression to filter the commits. |
 | <a id="repository-commits-ref"></a>`ref` | [`String!`](#string) | Branch or tag to search for commits. |
 
@@ -51671,6 +51676,18 @@ Security policy validation error.
 | <a id="securitypolicyvalidationerror-level"></a>`level` | [`String!`](#string) | Error level. |
 | <a id="securitypolicyvalidationerror-message"></a>`message` | [`String!`](#string) | Error message. |
 | <a id="securitypolicyvalidationerror-title"></a>`title` | [`String`](#string) | Error title. |
+
+### `SecurityPostureCounters`
+
+Aggregated security posture counters for a namespace.
+
+#### Fields
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| <a id="securityposturecounters-withfailures"></a>`withFailures` {{< icon name="warning-solid" >}} | [`Int!`](#int) | **Introduced** in GitLab 19.0. **Status**: Experiment. Number of unarchived projects with at least one failed scan. |
+| <a id="securityposturecounters-withscanners"></a>`withScanners` {{< icon name="warning-solid" >}} | [`Int!`](#int) | **Introduced** in GitLab 19.0. **Status**: Experiment. Number of unarchived projects with at least one security scanner configured. |
+| <a id="securityposturecounters-withstale"></a>`withStale` {{< icon name="warning-solid" >}} | [`Int!`](#int) | **Introduced** in GitLab 19.0. **Status**: Experiment. Number of unarchived projects with at least one stale scan. |
 
 ### `SecurityReportSummary`
 
@@ -60713,6 +60730,7 @@ Values for sorting timelogs.
 | <a id="todoactionenum-duo_core_access_granted"></a>`duo_core_access_granted` | Todo action name for duo_core_access_granted. |
 | <a id="todoactionenum-duo_enterprise_access_granted"></a>`duo_enterprise_access_granted` | Todo action name for duo_enterprise_access_granted. |
 | <a id="todoactionenum-duo_pro_access_granted"></a>`duo_pro_access_granted` | Todo action name for duo_pro_access_granted. |
+| <a id="todoactionenum-duo_workflow_input_required"></a>`duo_workflow_input_required` | Todo action name for duo_workflow_input_required. |
 | <a id="todoactionenum-marked"></a>`marked` | Todo action name for marked. |
 | <a id="todoactionenum-member_access_requested"></a>`member_access_requested` | Todo action name for member_access_requested. |
 | <a id="todoactionenum-mentioned"></a>`mentioned` | Todo action name for mentioned. |
@@ -60756,6 +60774,7 @@ Sort options for todos.
 | <a id="todotargetenum-commit"></a>`COMMIT` | Commit. |
 | <a id="todotargetenum-compliance_violation"></a>`COMPLIANCE_VIOLATION` | Project Compliance Violation. |
 | <a id="todotargetenum-design"></a>`DESIGN` | Design. |
+| <a id="todotargetenum-duo_workflow"></a>`DUO_WORKFLOW` | Duo Workflow session. |
 | <a id="todotargetenum-epic"></a>`EPIC` | An Epic. |
 | <a id="todotargetenum-issue"></a>`ISSUE` | Issue. |
 | <a id="todotargetenum-key"></a>`KEY` | SSH key. |
@@ -64333,6 +64352,7 @@ Implementations:
 - [`CountableVulnerability`](#countablevulnerability)
 - [`CurrentUser`](#currentuser)
 - [`Design`](#design)
+- [`DuoWorkflow`](#duoworkflow)
 - [`Epic`](#epic)
 - [`EpicIssue`](#epicissue)
 - [`Group`](#group)

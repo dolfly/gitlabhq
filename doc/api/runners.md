@@ -165,8 +165,8 @@ GET /runners/all?tag_list=tag1,tag2
 
 ```shell
 curl --header "PRIVATE-TOKEN: <your_access_token>" \
-curl --header "PRIVATE-TOKEN: <your_access_token>" \
      --url "https://gitlab.example.com/api/v4/runners/all"
+```
 
 > [!warning]
 > Deprecations:

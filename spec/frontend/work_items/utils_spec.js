@@ -45,6 +45,7 @@ import {
   findOpenChildItemsCountsByType,
   findCrmContactsWidget,
   findLinkedResourcesWidget,
+  findStartAndDueDateWidget,
   formatLabelForListbox,
   formatUserForListbox,
   newWorkItemPath,
@@ -1259,6 +1260,34 @@ describe('findLinkedResourcesWidget', () => {
 
   it('returns undefined when neither exists', () => {
     expect(findLinkedResourcesWidget({ widgets: [] })).toBeUndefined();
+  });
+});
+
+describe('findStartAndDueDateWidget', () => {
+  const startAndDueDateWidget = {
+    type: WIDGET_TYPE_START_AND_DUE_DATE,
+    startDate: '2024-01-01',
+    dueDate: '2024-01-31',
+  };
+  const featuresStartAndDueDate = { startDate: '2024-02-01', dueDate: '2024-02-28' };
+
+  it('returns features.startAndDueDate when present', () => {
+    const workItem = {
+      features: { startAndDueDate: featuresStartAndDueDate },
+      widgets: [startAndDueDateWidget],
+    };
+
+    expect(findStartAndDueDateWidget(workItem)).toBe(featuresStartAndDueDate);
+  });
+
+  it('falls back to widgets when features not present', () => {
+    const workItem = { widgets: [startAndDueDateWidget] };
+
+    expect(findStartAndDueDateWidget(workItem)).toBe(startAndDueDateWidget);
+  });
+
+  it('returns undefined when neither exists', () => {
+    expect(findStartAndDueDateWidget({ widgets: [] })).toBeUndefined();
   });
 });
 

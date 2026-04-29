@@ -1,31 +1,20 @@
 <script>
 import { mapState } from 'pinia';
-import {
-  GlTooltipDirective,
-  GlLoadingIcon,
-  GlTooltip,
-  GlButton,
-  GlHoverLoadDirective,
-} from '@gitlab/ui';
+import { GlLoadingIcon, GlHoverLoadDirective } from '@gitlab/ui';
 import { createAlert } from '~/alert';
 import FileRow from '~/vue_shared/components/file_row.vue';
 import FileTreeBrowserToggle from '~/repository/file_tree_browser/components/file_tree_browser_toggle.vue';
-import { s__, __ } from '~/locale';
-import { waitForElement } from '~/lib/utils/dom_utils';
+import { __ } from '~/locale';
 import { InternalEvents } from '~/tracking';
 import { joinPaths, buildURLwithRefType, visitUrl } from '~/lib/utils/url_utility';
 import paginatedTreeQuery from 'shared_queries/repository/paginated_tree.query.graphql';
 import { TREE_PAGE_SIZE } from '~/repository/constants';
 import { getRefType } from '~/repository/utils/ref_type';
-import { FOCUS_FILE_TREE_BROWSER_FILTER_BAR, keysFor } from '~/behaviors/shortcuts/keybindings';
-import { shouldDisableShortcuts } from '~/behaviors/shortcuts/shortcuts_toggle';
-import { Mousetrap } from '~/lib/mousetrap';
-import Shortcut from '~/behaviors/shortcuts/shortcut.vue';
 import { useFileTreeBrowserVisibility } from '~/repository/stores/file_tree_browser_visibility';
-import { EVENT_OPEN_GLOBAL_SEARCH } from '~/vue_shared/global_search/constants';
 import getRefMixin from '~/repository/mixins/get_ref';
 import FileTreeBrowserPopover from '~/repository/file_tree_browser/components/file_tree_browser_popover.vue';
 import UserCalloutDismisser from '~/vue_shared/components/user_callout_dismisser.vue';
+import FileTreeSearch from '~/repository/file_tree_browser/components/file_tree_search.vue';
 import blobInfoQuery from 'shared_queries/repository/blob_info.query.graphql';
 import { createItemVisibilityObserver, observeElements } from '~/lib/utils/lazy_render_utils';
 import { scrollUp } from '~/lib/utils/scroll_utils';
@@ -42,20 +31,16 @@ import {
 
 export default {
   name: 'FileTreeBrowser',
-  FOCUS_FILE_TREE_BROWSER_FILTER_BAR,
   directives: {
-    GlTooltip: GlTooltipDirective,
     GlHoverLoad: GlHoverLoadDirective,
   },
   components: {
     UserCalloutDismisser,
     FileTreeBrowserPopover,
-    GlButton,
     FileRow,
     GlLoadingIcon,
     FileTreeBrowserToggle,
-    GlTooltip,
-    Shortcut,
+    FileTreeSearch,
   },
   mixins: [InternalEvents.mixin(), getRefMixin],
   props: {
@@ -96,15 +81,6 @@ export default {
     },
     isRootLoading() {
       return this.isDirectoryLoading('/') && this.isDirectoryEmpty('/');
-    },
-    filterSearchShortcutKey() {
-      if (this.shortcutsDisabled) {
-        return null;
-      }
-      return keysFor(FOCUS_FILE_TREE_BROWSER_FILTER_BAR)[0];
-    },
-    shortcutsDisabled() {
-      return shouldDisableShortcuts();
     },
     currentRouterPath() {
       return this.$route.params?.path && normalizePath(this.$route.params.path);
@@ -147,15 +123,9 @@ export default {
   mounted() {
     this.observeItemVisibility();
     this.loadInitialPath();
-    this.mousetrap = new Mousetrap();
-
-    if (!this.shortcutsDisabled) {
-      this.mousetrap.bind(keysFor(FOCUS_FILE_TREE_BROWSER_FILTER_BAR), this.triggerFocusFilterBar);
-    }
   },
   beforeDestroy() {
     this.itemObserver?.disconnect();
-    this.mousetrap.unbind(keysFor(FOCUS_FILE_TREE_BROWSER_FILTER_BAR));
     if (this.focusRAFId) {
       cancelAnimationFrame(this.focusRAFId);
     }
@@ -422,37 +392,6 @@ export default {
       const lastItemPath = normalizePath([...trees, ...blobs, ...submodules].at(-1)?.path);
       return itemPath === lastItemPath && pageInfo?.hasNextPage;
     },
-    triggerFocusFilterBar() {
-      const filterBar = this.$refs.filterInput;
-      if (filterBar && filterBar.$el) {
-        this.trackEvent('focus_file_tree_browser_filter_bar_on_repository_page', {
-          label: 'shortcut',
-        });
-        this.openGlobalSearch();
-      }
-    },
-    onFilterBarClick() {
-      this.trackEvent('focus_file_tree_browser_filter_bar_on_repository_page', {
-        label: 'click',
-      });
-
-      this.openGlobalSearch();
-    },
-    async openGlobalSearch() {
-      document.dispatchEvent(new CustomEvent(EVENT_OPEN_GLOBAL_SEARCH));
-      const searchInput = await waitForElement('#super-sidebar-search-modal #search');
-      if (!searchInput) return;
-      searchInput.value = '~';
-      searchInput.dispatchEvent(new Event('input')); // Ensures the @input handler is called on global_search.vue
-    },
-    filterInputTooltipTarget() {
-      // The input might not always be available (i.e. when the FTB is in collapsed state)
-      return this.$refs.filterInput?.$el;
-    },
-    siblingInfo(item) {
-      const siblings = this.siblingMap.get(`${item.parentPath || ''}-${item.level}`);
-      return [siblings.length, siblings.indexOf(item.id) + 1];
-    },
     onTreeKeydown(event) {
       const items = this.flatFilesList;
       const current = items.findIndex((i) => i.id === this.activeItemId);
@@ -602,6 +541,10 @@ export default {
       this.toggleDirectory(item.path, { toggleClose: false });
       this.handleNavigate(item.path, item.routerPath);
     },
+    siblingInfo(item) {
+      const siblings = this.siblingMap.get(`${item.parentPath || ''}-${item.level}`);
+      return [siblings.length, siblings.indexOf(item.id) + 1];
+    },
     handlePreload(item) {
       if (item.submodule || item.isSkeleton || item.isShowMore) return;
       if (item.type === 'tree') {
@@ -641,7 +584,6 @@ export default {
       });
     },
   },
-  searchLabel: s__('Repository|Search files (*.vue, *.rb...)'),
 };
 </script>
 
@@ -668,29 +610,7 @@ export default {
     </div>
 
     <div class="gl-relative gl-flex gl-pr-3">
-      <gl-button
-        ref="filterInput"
-        icon="search"
-        data-testid="search-trigger"
-        :aria-label="$options.searchLabel"
-        :aria-keyshortcuts="filterSearchShortcutKey"
-        class="gl-w-full !gl-px-3"
-        button-text-classes="gl-flex gl-w-full gl-text-subtle"
-        @click="onFilterBarClick"
-      >
-        <span class="gl-grow gl-text-left">{{ $options.searchLabel }}</span>
-      </gl-button>
-      <gl-tooltip
-        v-if="!shortcutsDisabled"
-        custom-class="file-browser-filter-tooltip"
-        :target="filterInputTooltipTarget"
-      >
-        {{ __('Focus on the search bar') }}
-        <shortcut
-          class="gl-whitespace-nowrap"
-          :shortcuts="$options.FOCUS_FILE_TREE_BROWSER_FILTER_BAR.defaultKeys"
-        />
-      </gl-tooltip>
+      <file-tree-search :project-path="projectPath" :ref-type="refType" :escaped-ref="escapedRef" />
     </div>
     <gl-loading-icon v-if="isRootLoading" class="gl-mt-5" />
     <nav

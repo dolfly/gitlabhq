@@ -41,6 +41,7 @@ fragment BaseWorkItemFeatures on WorkItemFeatures {
     }
   }
   startAndDueDate {
+    type
     startDate
     dueDate
   }

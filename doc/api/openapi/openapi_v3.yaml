@@ -16066,6 +16066,7 @@ paths:
           - duo_pro_access_granted
           - duo_enterprise_access_granted
           - duo_core_access_granted
+          - duo_workflow_input_required
           nullable: true
         in: query
       - name: author_id
@@ -16119,6 +16120,7 @@ paths:
           - Vulnerability
           - User
           - ComplianceManagement::Projects::ComplianceViolation
+          - Ai::DuoWorkflows::Workflow
           nullable: true
         in: query
   "/api/v4/todos/{id}/mark_as_done":
@@ -70263,7 +70265,7 @@ components:
       type: object
       properties:
         namespace_id:
-          type: string
+          type: integer
           example: 123
         expires_at:
           type: string
@@ -70303,7 +70305,7 @@ components:
           example: A-S00000001
         trial:
           type: boolean
-          example: 'false'
+          example: false
     GitlabSubscriptionsAPIEntitiesInternalNamespacesUserPermissions:
       type: object
       properties:
@@ -70783,7 +70785,7 @@ components:
       type: object
       properties:
         id:
-          type: string
+          type: integer
           example: 142
         user:
           "$ref": "#/components/schemas/APIEntitiesUserBasic"
@@ -70795,7 +70797,7 @@ components:
           type: string
           example: Issue
         resource_id:
-          type: string
+          type: integer
           example: 253
         iteration:
           "$ref": "#/components/schemas/APIEntitiesIteration"
@@ -70806,7 +70808,7 @@ components:
       type: object
       properties:
         id:
-          type: string
+          type: integer
           example: 142
         user:
           "$ref": "#/components/schemas/APIEntitiesUserBasic"
@@ -70815,10 +70817,10 @@ components:
           format: date-time
           example: '2012-05-28T04:42:42-07:00'
         issue_id:
-          type: string
+          type: integer
           example: 253
         weight:
-          type: string
+          type: integer
           example: 3
     APIEntitiesProtectedEnvironment:
       type: object
@@ -71517,7 +71519,7 @@ components:
       type: object
       properties:
         id:
-          type: string
+          type: integer
           example: 2
         created_at:
           type: string
@@ -71653,7 +71655,7 @@ components:
       type: object
       properties:
         id:
-          type: string
+          type: integer
           example: 1
         plan:
           type: string
@@ -72885,7 +72887,7 @@ components:
             "$ref": "#/components/schemas/APIEntitiesProtectedBranch"
         hmac:
           type: boolean
-          example: 'true'
+          example: true
     APIEntitiesClustersAgentUrlConfiguration:
       type: object
       properties:
@@ -75691,7 +75693,7 @@ components:
           format: date-time
           example: '2020-01-06T17:31:55.864Z'
         last_error:
-          type: integer
+          type: string
           example: The remote mirror URL is invalid.
         only_protected_branches:
           type: boolean
@@ -76010,7 +76012,7 @@ components:
       type: object
       properties:
         id:
-          type: string
+          type: integer
           example: 1
         created_at:
           type: string
@@ -76034,7 +76036,7 @@ components:
       type: object
       properties:
         id:
-          type: string
+          type: integer
           example: 1
         url:
           type: string
@@ -76072,7 +76074,7 @@ components:
         url_variables:
           type: array
           example:
-            token: secr3t
+          - token: secr3t
           items:
             type: object
         push_events_branch_filter:
@@ -76087,7 +76089,7 @@ components:
         custom_headers:
           type: array
           example:
-            X-Custom-Header: value
+          - X-Custom-Header: value
           items:
             type: object
         token_present:
@@ -76288,7 +76290,8 @@ components:
       properties:
         versions:
           type: array
-          example: 1.3.0.17
+          example:
+          - 1.3.0.17
           items:
             type: string
     APIEntitiesNugetSearchResultVersion:
@@ -76506,7 +76509,8 @@ components:
           type: boolean
         suggests:
           type: array
-          example: my-group1
+          example:
+          - my-group1
           items:
             type: string
     APIEntitiesNamespacesStorageLimitExclusion:
@@ -76906,7 +76910,7 @@ components:
           type: string
           example: Jenkins CI
         slug:
-          type: integer
+          type: string
           example: jenkins
         created_at:
           type: string
@@ -77177,12 +77181,14 @@ components:
           example: 604800
         components:
           type: array
-          example: main
+          example:
+          - main
           items:
             type: string
         architectures:
           type: array
-          example: amd64
+          example:
+          - amd64
           items:
             type: string
     APIEntitiesGoModuleVersion:
@@ -78234,8 +78240,7 @@ components:
           example: deploy
         wiki_page_meta_id:
           type: integer
-          example:
-            wiki_page_meta_id: 123
+          example: 123
     APIEntitiesNoteCommands:
       type: object
       properties:
@@ -80405,7 +80410,8 @@ components:
           example: users
         feature_categories:
           type: array
-          example: database
+          example:
+          - database
           items:
             type: string
         table_size:
@@ -80704,7 +80710,7 @@ components:
       type: object
       properties:
         id:
-          type: string
+          type: integer
           example: 1
         plan:
           type: string
@@ -81215,17 +81221,20 @@ components:
           example: A simple license
         conditions:
           type: array
-          example: include-copyright
+          example:
+          - include-copyright
           items:
             type: string
         permissions:
           type: array
-          example: commercial-use
+          example:
+          - commercial-use
           items:
             type: string
         limitations:
           type: array
-          example: liability
+          example:
+          - liability
           items:
             type: string
         content:
@@ -81403,7 +81412,7 @@ components:
       type: object
       properties:
         id:
-          type: string
+          type: integer
           example: 1
         url:
           type: string
@@ -81441,7 +81450,7 @@ components:
         url_variables:
           type: array
           example:
-            token: secr3t
+          - token: secr3t
           items:
             type: object
         push_events_branch_filter:
@@ -81456,7 +81465,7 @@ components:
         custom_headers:
           type: array
           example:
-            X-Custom-Header: value
+          - X-Custom-Header: value
           items:
             type: object
         token_present:
@@ -81468,7 +81477,7 @@ components:
           description: Whether an HMAC signing token is configured
           example: false
         group_id:
-          type: string
+          type: integer
           example: 1
         issues_events:
           type: boolean
@@ -81508,7 +81517,7 @@ components:
       type: object
       properties:
         id:
-          type: string
+          type: integer
           example: 1
         url:
           type: string
@@ -81546,7 +81555,7 @@ components:
         url_variables:
           type: array
           example:
-            token: secr3t
+          - token: secr3t
           items:
             type: object
         push_events_branch_filter:
@@ -81561,7 +81570,7 @@ components:
         custom_headers:
           type: array
           example:
-            X-Custom-Header: value
+          - X-Custom-Header: value
           items:
             type: object
         token_present:
@@ -82169,7 +82178,7 @@ components:
           type: string
           example: Jenkins CI
         slug:
-          type: integer
+          type: string
           example: jenkins
         created_at:
           type: string
@@ -82301,8 +82310,7 @@ components:
           example: deploy
         wiki_page_meta_id:
           type: integer
-          example:
-            wiki_page_meta_id: 123
+          example: 123
         content:
           type: string
           example: Here is an instruction how to deploy this project.
@@ -82644,7 +82652,8 @@ components:
           "$ref": "#/components/schemas/APIEntitiesUserBasic"
         labels:
           type: array
-          example: bug
+          example:
+          - bug
           items:
             type: string
         milestone:
@@ -82902,7 +82911,8 @@ components:
           "$ref": "#/components/schemas/APIEntitiesUserBasic"
         labels:
           type: array
-          example: bug
+          example:
+          - bug
           items:
             type: string
         milestone:
@@ -82993,7 +83003,8 @@ components:
           "$ref": "#/components/schemas/APIEntitiesUserBasic"
         labels:
           type: array
-          example: bug
+          example:
+          - bug
           items:
             type: string
         milestone:
@@ -83110,7 +83121,8 @@ components:
           "$ref": "#/components/schemas/APIEntitiesUserBasic"
         labels:
           type: array
-          example: bug
+          example:
+          - bug
           items:
             type: string
         milestone:
@@ -83235,7 +83247,8 @@ components:
           "$ref": "#/components/schemas/APIEntitiesUserBasic"
         labels:
           type: array
-          example: bug
+          example:
+          - bug
           items:
             type: string
         milestone:
@@ -83352,7 +83365,8 @@ components:
           "$ref": "#/components/schemas/APIEntitiesUserBasic"
         labels:
           type: array
-          example: bug
+          example:
+          - bug
           items:
             type: string
         milestone:
@@ -84975,12 +84989,14 @@ components:
           example: main
         tag_list:
           type: array
-          example: tag
+          example:
+          - tag
           items:
             type: string
         topics:
           type: array
-          example: topic
+          example:
+          - topic
           items:
             type: string
         ssh_url_to_repo:
@@ -85053,12 +85069,14 @@ components:
           example: main
         tag_list:
           type: array
-          example: tag
+          example:
+          - tag
           items:
             type: string
         topics:
           type: array
-          example: topic
+          example:
+          - topic
           items:
             type: string
         ssh_url_to_repo:
@@ -85133,12 +85151,14 @@ components:
           example: main
         tag_list:
           type: array
-          example: tag
+          example:
+          - tag
           items:
             type: string
         topics:
           type: array
-          example: topic
+          example:
+          - topic
           items:
             type: string
         ssh_url_to_repo:
@@ -85532,12 +85552,14 @@ components:
           example: main
         tag_list:
           type: array
-          example: tag
+          example:
+          - tag
           items:
             type: string
         topics:
           type: array
-          example: topic
+          example:
+          - topic
           items:
             type: string
         ssh_url_to_repo:
@@ -86352,7 +86374,7 @@ components:
           type: boolean
         private_profile:
           type: boolean
-          example: :null
+          example: false
         commit_email:
           type: string
         preferred_language:
@@ -86474,7 +86496,7 @@ components:
           type: boolean
         private_profile:
           type: boolean
-          example: :null
+          example: false
         commit_email:
           type: string
         preferred_language:

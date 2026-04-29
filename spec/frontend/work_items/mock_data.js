@@ -1918,7 +1918,14 @@ export const mockWorkItemFeaturesData = ({ discussionLocked = false } = {}) => (
   },
   awardEmoji: { upvotes: 0, downvotes: 0 },
   milestone: { milestone: null },
-  startAndDueDate: { startDate: null, dueDate: null, rollUp: false, isFixed: false },
+  startAndDueDate: {
+    type: 'START_AND_DUE_DATE',
+    startDate: null,
+    dueDate: null,
+    rollUp: false,
+    isFixed: false,
+    __typename: 'WorkItemWidgetStartAndDueDate',
+  },
   timeTracking: { humanReadableAttributes: { timeEstimate: '' } },
   notes: { discussionLocked, __typename: 'WorkItemWidgetNotes' },
   development: { closingMergeRequests: { count: 0 } },
@@ -11328,6 +11335,7 @@ export const workItemsQueryResponseWithFeatures = {
                 milestone: null,
               },
               startAndDueDate: {
+                type: 'START_AND_DUE_DATE',
                 startDate: null,
                 dueDate: null,
                 rollUp: false,
@@ -11419,6 +11427,7 @@ export const workItemsQueryResponseWithFeatures = {
                 milestone: null,
               },
               startAndDueDate: {
+                type: 'START_AND_DUE_DATE',
                 startDate: null,
                 dueDate: null,
                 rollUp: false,

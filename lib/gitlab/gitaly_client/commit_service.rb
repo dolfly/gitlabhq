@@ -340,6 +340,7 @@ module Gitlab
         end
 
         request.author = encode_binary(params[:author]) if params[:author]
+        request.paths.push(encode_binary(params[:path])) if params[:path].present?
         request.before = GitalyClient.timestamp(params[:before]) if params[:before]
         request.after = GitalyClient.timestamp(params[:after]) if params[:after]
 
