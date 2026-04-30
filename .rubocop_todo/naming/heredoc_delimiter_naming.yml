@@ -21,8 +21,6 @@ Naming/HeredocDelimiterNaming:
     - 'spec/lib/gitlab/database/loose_foreign_keys_spec.rb'
     - 'spec/lib/gitlab/email/handler/service_desk_handler_spec.rb'
     - 'spec/lib/gitlab/file_hook_spec.rb'
-    - 'spec/lib/gitlab/form_builders/gitlab_ui_form_builder_spec.rb'
-    - 'spec/lib/gitlab/git_post_receive_spec.rb'
     - 'spec/lib/gitlab/github_import/importer/diff_note_importer_spec.rb'
     - 'spec/lib/gitlab/import_export/attributes_permitter_spec.rb'
     - 'spec/lib/gitlab/import_export/config_spec.rb'

@@ -23,7 +23,7 @@ RSpec.describe BulkImports::Common::Pipelines::EntityFinisher, feature_category:
     expect(BulkImports::FinishProjectImportWorker).to receive(:perform_async).with(entity.project_id)
 
     expect { subject.run }
-      .to change(entity, :status_name).to(:finished)
+      .to change { entity.status_name }.to(:finished)
   end
 
   context 'when entity is in a final finished or failed state' do
@@ -35,7 +35,7 @@ RSpec.describe BulkImports::Common::Pipelines::EntityFinisher, feature_category:
         subject = described_class.new(context)
 
         expect { subject.run }
-          .not_to change(entity, :status_name)
+          .not_to change { entity.status_name }
       end
     end
 

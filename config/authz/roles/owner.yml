@@ -134,7 +134,6 @@ group:
   - read_web_hook
   - register_group_runners
   - remove_group
-  - security_manager_access
   - set_emails_disabled
   - set_epic_created_at
   - set_epic_updated_at

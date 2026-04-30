@@ -7,6 +7,7 @@ import createMockApollo from 'helpers/mock_apollo_helper';
 import waitForPromises from 'helpers/wait_for_promises';
 import { createAlert } from '~/alert';
 import ReconciliationModal from '~/organizations/index/components/reconciliation/modal.vue';
+import SkeletonLoader from '~/organizations/index/components/reconciliation/skeleton_loader.vue';
 import organizationsForReconciliationQuery from '~/organizations/index/graphql/queries/organizations_for_reconciliation.query.graphql';
 import Step1 from '~/organizations/index/components/reconciliation/steps/step_1.vue';
 import Step2 from '~/organizations/index/components/reconciliation/steps/step_2.vue';
@@ -41,6 +42,7 @@ describe('OrganizationReconciliationModal', () => {
   });
 
   const findModal = () => wrapper.findComponent(GlModal);
+  const findSkeletonLoader = () => wrapper.findComponent(SkeletonLoader);
   const findStep1 = () => wrapper.findComponent(Step1);
   const findStep2 = () => wrapper.findComponent(Step2);
   const findStep3 = () => wrapper.findComponent(Step3);
@@ -87,20 +89,40 @@ describe('OrganizationReconciliationModal', () => {
     });
 
     describe('when modal is visible', () => {
-      beforeEach(async () => {
-        createComponent({ props: { visible: true } });
+      describe('while loading', () => {
+        beforeEach(() => {
+          createComponent({ props: { visible: true } });
+        });
 
-        await waitForPromises();
+        it('renders skeleton loader', () => {
+          expect(findSkeletonLoader().exists()).toBe(true);
+        });
+
+        it('does not render step component', () => {
+          expect(findStep1().exists()).toBe(false);
+        });
       });
 
-      it('fetches organizations', () => {
-        expect(successHandler).toHaveBeenCalled();
-      });
+      describe('when loaded', () => {
+        beforeEach(async () => {
+          createComponent({ props: { visible: true } });
 
-      it('passes organizations to step component', () => {
-        expect(findStep1().props('organizations')).toEqual(
-          organizationsForReconciliationResponse.data.organizations.nodes,
-        );
+          await waitForPromises();
+        });
+
+        it('fetches organizations', () => {
+          expect(successHandler).toHaveBeenCalled();
+        });
+
+        it('does not render skeleton loader', () => {
+          expect(findSkeletonLoader().exists()).toBe(false);
+        });
+
+        it('passes organizations to step component', () => {
+          expect(findStep1().props('organizations')).toEqual(
+            organizationsForReconciliationResponse.data.organizations.nodes,
+          );
+        });
       });
     });
 

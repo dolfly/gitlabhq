@@ -115,7 +115,6 @@ RSpec.shared_context 'ProjectPolicy context' do
 
   let(:base_security_manager_permissions) do
     %i[
-      security_manager_access
       access_security_and_compliance
       cancel_build
       create_build

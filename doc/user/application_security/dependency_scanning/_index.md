@@ -59,12 +59,12 @@ For details, see [Analyze dependencies for behaviors](experiment_libbehave_depen
 
 ## Comparison of scanning methods
 
-| Method                             | Status            | Trigger            | Best for                                                   |
-| ---------------------------------- | ----------------- | ------------------ | ---------------------------------------------------------- |
-| Dependency Scanning using SBOM     | GA                | Pipeline           | New projects, SBOM-first workflows                         |
-| Continuous Dependency Scanning     | GA                | Advisory DB update | Catching newly disclosed CVEs without re-running pipelines |
-| Dependency Scanning with Gemnasium | Deprecated (17.9) | Pipeline           | Existing projects pending migration                        |
-| Analyze dependencies for behaviors | Experiment        | Pipeline           | Detecting malicious package behavior                       |
+| Method                             | Status               | Trigger            | Best for                                                   |
+| ---------------------------------- | -------------------- | ------------------ | ---------------------------------------------------------- |
+| Dependency Scanning using SBOM     | Limited Availability | Pipeline           | New projects, SBOM-first workflows                         |
+| Continuous Dependency Scanning     | General Availability | Advisory DB update | Catching newly disclosed CVEs without re-running pipelines |
+| Dependency Scanning with Gemnasium | Deprecated (17.9)    | Pipeline           | Existing projects pending migration                        |
+| Analyze dependencies for behaviors | Experiment           | Pipeline           | Detecting malicious package behavior                       |
 
 ## Contributing to the vulnerability database
 

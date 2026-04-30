@@ -3,6 +3,7 @@ import { GlModal, GlSprintf } from '@gitlab/ui';
 import { s__ } from '~/locale';
 import { createAlert } from '~/alert';
 import organizationsForReconciliationQuery from '~/organizations/index/graphql/queries/organizations_for_reconciliation.query.graphql';
+import SkeletonLoader from './skeleton_loader.vue';
 import Step1 from './steps/step_1.vue';
 import Step2 from './steps/step_2.vue';
 import Step3 from './steps/step_3.vue';
@@ -16,6 +17,7 @@ export default {
   components: {
     GlModal,
     GlSprintf,
+    SkeletonLoader,
   },
   stepComponents: [Step1, Step2, Step3],
   model: {
@@ -51,6 +53,9 @@ export default {
     },
   },
   computed: {
+    loading() {
+      return this.$apollo.queries.organizations.loading;
+    },
     stepComponent() {
       return this.$options.stepComponents[this.currentStep - 1];
     },
@@ -93,10 +98,13 @@ export default {
     :visible="visible"
     @change="updateModalVisibility($event)"
   >
-    <gl-sprintf :message="$options.i18n.stepProgress">
-      <template #currentStep>{{ currentStep }}</template>
-      <template #totalSteps>{{ totalSteps }}</template>
-    </gl-sprintf>
-    <component :is="stepComponent" :organizations="organizations" @next="onNext" @prev="onPrev" />
+    <skeleton-loader v-if="loading" />
+    <template v-else>
+      <gl-sprintf :message="$options.i18n.stepProgress">
+        <template #currentStep>{{ currentStep }}</template>
+        <template #totalSteps>{{ totalSteps }}</template>
+      </gl-sprintf>
+      <component :is="stepComponent" :organizations="organizations" @next="onNext" @prev="onPrev" />
+    </template>
   </gl-modal>
 </template>

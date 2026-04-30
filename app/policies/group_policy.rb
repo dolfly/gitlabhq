@@ -162,8 +162,6 @@ class GroupPolicy < Namespaces::GroupProjectNamespaceSharedPolicy
   end
 
   rule { security_manager }.policy do
-    enable :security_manager_access
-
     enable(*Authz::Role.get(:security_manager).direct_permissions(:group))
   end
 

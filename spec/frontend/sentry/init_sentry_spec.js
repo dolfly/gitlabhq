@@ -1,5 +1,5 @@
 /* eslint-disable no-restricted-imports */
-import { captureException, addBreadcrumb, SDK_VERSION } from '@sentry/browser';
+import { captureException, captureMessage, addBreadcrumb, SDK_VERSION } from '@sentry/browser';
 import * as Sentry from '@sentry/browser';
 
 import { initSentry, isExternalOriginError, isServerUnavailableError } from '~/sentry/init_sentry';
@@ -124,6 +124,7 @@ describe('SentryConfig', () => {
         // eslint-disable-next-line no-underscore-dangle
         expect(window._Sentry).toEqual({
           captureException,
+          captureMessage,
           addBreadcrumb,
           SDK_VERSION,
         });

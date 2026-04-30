@@ -99,7 +99,6 @@ RSpec.shared_context 'GroupPolicy context' do
     (reporter_permissions + %i[
       read_group_all_available_runners
       read_runners
-      security_manager_access
     ]).uniq
   end
 
