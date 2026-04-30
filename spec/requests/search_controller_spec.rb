@@ -46,7 +46,6 @@ RSpec.describe SearchController, :with_current_organization, feature_category: :
       let(:params) { { search: 'foo', scope: 'issues' } }
       # some N+1 queries still exist
       # each issue runs an extra query for project routes
-      # +5 from configurable work item types (custom_types lookup per new root namespace)
       let(:threshold) { 25 }
 
       it_behaves_like 'an efficient database result'

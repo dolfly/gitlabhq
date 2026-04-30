@@ -56,10 +56,6 @@ module Boards
         params[:work_item_type_ids] ||= work_item_type_ids
       end
 
-      def should_include_task?
-        parent&.work_item_tasks_on_boards_feature_flag_enabled?
-      end
-
       def item_model
         Issue
       end

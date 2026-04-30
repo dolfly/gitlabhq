@@ -1363,10 +1363,14 @@ RSpec.describe WorkItems::TypesFramework::SystemDefined::Type, feature_category:
     let(:ticket_type) { build(:work_item_system_defined_type, :ticket) }
     let(:task_type) { build(:work_item_system_defined_type, :task) }
 
-    it 'returns true for issue, incident, ticket, and task types', :aggregate_failures do
-      [issue_type, incident_type, ticket_type, task_type].each do |type|
+    it 'returns true for issue, incident and ticket types', :aggregate_failures do
+      [issue_type, incident_type, ticket_type].each do |type|
         expect(type.filterable_board_view?).to be true
       end
+    end
+
+    it 'returns false for tasktypes' do
+      expect(task_type.filterable_board_view?).to be false
     end
   end
 end

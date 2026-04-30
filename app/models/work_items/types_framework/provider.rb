@@ -190,8 +190,23 @@ module WorkItems
       def tasks_on_boards?
         return false if namespace.nil?
 
-        namespace.try(:work_item_tasks_on_boards_feature_flag_enabled?) || false
+        # Resolve to the underlying Project/Group via resource_parent so the FF check works
+        # regardless of whether the Provider was initialized with a Project, Group, or
+        # Namespaces::ProjectNamespace. resource_parent returns nil for user namespaces and
+        # the Organization itself for organization-scoped namespaces, both of which correctly
+        # fall through to false here (no boards at those scopes).
+        #
+        # Skip the FF check for projects under user namespaces: there is no per-namespace
+        # feature flag gate for these projects (Project#work_item_tasks_on_boards_feature_flag_enabled?
+        # falls back to a global instance flag when group is nil), and user-rooted resources
+        # are treated as restricted across the rest of the Provider. We use `try` because
+        # root_ancestor can be an Organizations::Organization, which does not respond to
+        # owner_entity_name.
+        return false if root_ancestor.try(:owner_entity_name) == :user
+
+        resource_parent.try(:work_item_tasks_on_boards_feature_flag_enabled?) || false
       end
+      strong_memoize_attr :tasks_on_boards?
 
       def type_class
         WorkItems::TypesFramework::SystemDefined::Type

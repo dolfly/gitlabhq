@@ -1,17 +1,18 @@
 import { GlDrawer } from '@gitlab/ui';
 import { mount, shallowMount } from '@vue/test-utils';
 import Vue, { nextTick } from 'vue';
-// eslint-disable-next-line no-restricted-imports
-import Vuex from 'vuex';
+import { createTestingPinia } from '@pinia/testing';
+import { PiniaVuePlugin } from 'pinia';
 import { mockTracking, unmockTracking } from 'helpers/tracking_helper';
 import App from '~/whats_new/components/app.vue';
+import { useWhatsNew } from '~/whats_new/store';
 
-Vue.use(Vuex);
+Vue.use(PiniaVuePlugin);
 
 describe('App', () => {
   let wrapper;
+  let pinia;
   let store;
-  let actions;
   let trackingSpy;
 
   const withClose = jest.fn();
@@ -25,27 +26,10 @@ describe('App', () => {
       stateOverrides = {},
     } = options;
 
-    actions = {
-      openDrawer: jest.fn(),
-      closeDrawer: jest.fn(),
-      fetchItems: jest.fn(),
-      setReadArticles: jest.fn(),
-    };
-
-    store = new Vuex.Store({
-      actions,
-      state: {
-        open: false,
-        features: [],
-        fetching: false,
-        pageInfo: { nextPage: null },
-        readArticles: [],
-        ...stateOverrides,
-      },
-    });
+    Object.assign(store, stateOverrides);
 
     const mountOptions = {
-      store,
+      pinia,
       propsData: {
         versionDigest: 'version-digest',
         initialReadArticles: [1, 2],
@@ -82,6 +66,11 @@ describe('App', () => {
 
   const getDrawer = () => wrapper.findComponent(GlDrawer);
 
+  beforeEach(() => {
+    pinia = createTestingPinia();
+    store = useWhatsNew();
+  });
+
   afterEach(() => {
     if (trackingSpy) {
       unmockTracking();
@@ -105,7 +94,7 @@ describe('App', () => {
       });
 
       it('dispatches openDrawer and tracking calls when mounted', () => {
-        expect(actions.openDrawer).toHaveBeenCalledWith(expect.any(Object), 'version-digest');
+        expect(store.openDrawer).toHaveBeenCalledWith('version-digest');
         expect(trackingSpy).toHaveBeenCalledWith(undefined, 'click_whats_new_drawer', {
           label: 'namespace_id',
           property: 'navigation_top',
@@ -114,30 +103,28 @@ describe('App', () => {
       });
 
       it('sets readArticles from initialReadArticles', () => {
-        expect(actions.setReadArticles).toHaveBeenCalledWith(expect.any(Object), [1, 2]);
+        expect(store.setReadArticles).toHaveBeenCalledWith([1, 2]);
       });
 
       it('calls updateHelpMenuUnreadBadge when readArticles is updated', async () => {
-        store.state.readArticles = [1, 2, 3];
+        store.readArticles = [1, 2, 3];
 
         await nextTick();
 
         expect(updateHelpMenuUnreadBadge).toHaveBeenCalledWith(0);
       });
 
-      it('dispatches closeDrawer when clicking close', () => {
-        getDrawer().vm.$emit('close');
-        expect(actions.closeDrawer).toHaveBeenCalled();
+      it.each([
+        ['drawer close event', () => getDrawer().vm.$emit('close')],
+        ['backdrop click', () => getBackdrop().trigger('click')],
+      ])('calls closeDrawer and withClose on %s', (_, trigger) => {
+        trigger();
+        expect(store.closeDrawer).toHaveBeenCalled();
         expect(withClose).toHaveBeenCalled();
       });
 
-      it('dispatches closeDrawer when clicking the backdrop', () => {
-        getBackdrop().trigger('click');
-        expect(actions.closeDrawer).toHaveBeenCalled();
-      });
-
       it.each([true, false])('passes open property', async (openState) => {
-        store.state.open = openState;
+        store.open = openState;
 
         await nextTick();
 
@@ -145,7 +132,7 @@ describe('App', () => {
       });
 
       it('renders features when provided via ajax', () => {
-        expect(actions.fetchItems).toHaveBeenCalled();
+        expect(store.fetchItems).toHaveBeenCalled();
         expect(wrapper.find('[data-testid="toggle-feature-name"]').text()).toBe('Whats New Drawer');
       });
     });
@@ -165,157 +152,65 @@ describe('App', () => {
         document.body.dataset.namespaceId = 'namespace-840';
 
         let fetchCount = 0;
-        const fetchItemsMock = jest.fn().mockImplementation(() => {
+        store.fetchItems.mockImplementation(() => {
           fetchCount += 1;
           if (fetchCount < 3) {
-            store.state.pageInfo = { nextPage: fetchCount + 1 };
+            store.pageInfo = { nextPage: fetchCount + 1 };
           } else {
-            store.state.pageInfo = { nextPage: null };
+            store.pageInfo = { nextPage: null };
           }
           return Promise.resolve();
         });
 
-        actions = {
-          openDrawer: jest.fn(),
-          closeDrawer: jest.fn(),
-          fetchItems: fetchItemsMock,
-          setReadArticles: jest.fn(),
-        };
-
-        store = new Vuex.Store({
-          actions,
-          state: {
+        createWrapper({
+          stateOverrides: {
             open: true,
             features: [],
-            fetching: false,
             pageInfo: { nextPage: null },
-            readArticles: [],
           },
         });
 
-        wrapper = mount(App, {
-          store,
-          propsData: {
-            versionDigest: 'version-digest',
-            initialReadArticles: [],
-            mostRecentReleaseItemsCount: 3,
-            updateHelpMenuUnreadBadge,
-          },
-          attachTo: document.body,
-        });
-
         await nextTick();
         await nextTick();
         await nextTick();
         await nextTick();
 
-        expect(fetchItemsMock).toHaveBeenCalledTimes(3);
-        expect(fetchItemsMock).toHaveBeenNthCalledWith(1, expect.any(Object), {
+        expect(store.fetchItems).toHaveBeenCalledTimes(3);
+        expect(store.fetchItems).toHaveBeenNthCalledWith(1, {
           page: undefined,
           versionDigest: 'version-digest',
         });
-        expect(fetchItemsMock).toHaveBeenNthCalledWith(2, expect.any(Object), {
+        expect(store.fetchItems).toHaveBeenNthCalledWith(2, {
           page: 2,
           versionDigest: 'version-digest',
         });
-        expect(fetchItemsMock).toHaveBeenNthCalledWith(3, expect.any(Object), {
+        expect(store.fetchItems).toHaveBeenNthCalledWith(3, {
           page: 3,
           versionDigest: 'version-digest',
         });
-      });
-
-      it('stops fetching when fetchItems returns false', async () => {
-        document.body.dataset.page = 'test-page';
-        document.body.dataset.namespaceId = 'namespace-840';
-
-        let fetchCount = 0;
-        const fetchItemsMock = jest.fn().mockImplementation(() => {
-          fetchCount += 1;
-          if (fetchCount === 1) {
-            store.state.pageInfo = { nextPage: 2 };
-            return Promise.resolve();
-          }
-          return Promise.resolve(false);
-        });
-
-        actions = {
-          openDrawer: jest.fn(),
-          closeDrawer: jest.fn(),
-          fetchItems: fetchItemsMock,
-          setReadArticles: jest.fn(),
-        };
-
-        store = new Vuex.Store({
-          actions,
-          state: {
-            open: true,
-            features: [],
-            fetching: false,
-            pageInfo: { nextPage: null },
-            readArticles: [],
-          },
-        });
-
-        wrapper = mount(App, {
-          store,
-          propsData: {
-            versionDigest: 'version-digest',
-            initialReadArticles: [],
-            mostRecentReleaseItemsCount: 3,
-            updateHelpMenuUnreadBadge,
-          },
-          attachTo: document.body,
-        });
-
-        await nextTick();
-        await nextTick();
-        await nextTick();
-
-        expect(fetchItemsMock).toHaveBeenCalledTimes(2);
       });
 
       it('stops fetching when there is no next page', async () => {
         document.body.dataset.page = 'test-page';
         document.body.dataset.namespaceId = 'namespace-840';
 
-        const fetchItemsMock = jest.fn().mockImplementation(() => {
-          store.state.pageInfo = { nextPage: null };
+        store.fetchItems.mockImplementation(() => {
+          store.pageInfo = { nextPage: null };
           return Promise.resolve();
         });
 
-        actions = {
-          openDrawer: jest.fn(),
-          closeDrawer: jest.fn(),
-          fetchItems: fetchItemsMock,
-          setReadArticles: jest.fn(),
-        };
-
-        store = new Vuex.Store({
-          actions,
-          state: {
+        createWrapper({
+          stateOverrides: {
             open: true,
             features: [],
-            fetching: false,
             pageInfo: { nextPage: null },
-            readArticles: [],
           },
-        });
-
-        wrapper = mount(App, {
-          store,
-          propsData: {
-            versionDigest: 'version-digest',
-            initialReadArticles: [],
-            mostRecentReleaseItemsCount: 3,
-            updateHelpMenuUnreadBadge,
-          },
-          attachTo: document.body,
         });
 
         await nextTick();
         await nextTick();
 
-        expect(fetchItemsMock).toHaveBeenCalledTimes(1);
+        expect(store.fetchItems).toHaveBeenCalledTimes(1);
       });
     });
 
@@ -334,11 +229,11 @@ describe('App', () => {
 
         await nextTick();
 
-        actions.fetchItems.mockClear();
+        store.fetchItems.mockClear();
 
         wrapper.findComponent({ name: 'OtherUpdates' }).vm.$emit('load-more');
 
-        expect(actions.fetchItems).toHaveBeenCalledWith(expect.any(Object), {
+        expect(store.fetchItems).toHaveBeenCalledWith({
           page: 2,
           versionDigest: 'version-digest',
         });
@@ -358,11 +253,11 @@ describe('App', () => {
 
         await nextTick();
 
-        actions.fetchItems.mockClear();
+        store.fetchItems.mockClear();
 
         wrapper.findComponent({ name: 'OtherUpdates' }).vm.$emit('load-more');
 
-        expect(actions.fetchItems).not.toHaveBeenCalled();
+        expect(store.fetchItems).not.toHaveBeenCalled();
       });
     });
   });

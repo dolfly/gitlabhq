@@ -170,8 +170,7 @@ Specific upgrade notes for GitLab 18.
 
 > [!warning]
 > Do not upgrade to GitLab 18.11.0 or 18.11.1 if CI jobs rely on `CI_JOB_TOKEN`
-> to pull container images from internal or public projects. The fix ships in
-> GitLab 18.11.2 on 2026-05-13.
+> to pull container images from internal or public projects.
 
 A regression in GitLab 18.11.0 prevents CI jobs from pulling container images
 from internal or public projects using `CI_JOB_TOKEN`. Affected pipelines fail

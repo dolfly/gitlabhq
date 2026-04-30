@@ -1,10 +1,10 @@
 <script>
 import { GlButton } from '@gitlab/ui';
-// eslint-disable-next-line no-restricted-imports
-import { mapActions } from 'vuex';
+import { mapActions } from 'pinia';
 import axios from '~/lib/utils/axios_utils';
 import * as Sentry from '~/sentry/sentry_browser_wrapper';
 import { isLoggedIn } from '~/lib/utils/common_utils';
+import { useWhatsNew } from '../store';
 import Feature from './feature.vue';
 import SkeletonLoader from './skeleton_loader.vue';
 
@@ -57,7 +57,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['setReadArticles']),
+    ...mapActions(useWhatsNew, ['setReadArticles']),
     loadMore() {
       this.previousButtonCount = this.getArticleToggleButtons().length;
       this.$emit('load-more');

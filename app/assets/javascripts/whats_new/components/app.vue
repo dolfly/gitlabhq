@@ -1,10 +1,10 @@
 <script>
 import { GlDrawer } from '@gitlab/ui';
-// eslint-disable-next-line no-restricted-imports
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions } from 'pinia';
 import Tracking from '~/tracking';
 import { getContentWrapperHeight } from '~/lib/utils/dom_utils';
 import glFeatureFlagsMixin from '~/vue_shared/mixins/gl_feature_flags_mixin';
+import { useWhatsNew } from '../store';
 import OtherUpdates from './other_updates.vue';
 
 const trackingMixin = Tracking.mixin();
@@ -47,7 +47,7 @@ export default {
     },
   },
   computed: {
-    ...mapState(['open', 'features', 'pageInfo', 'fetching', 'readArticles']),
+    ...mapState(useWhatsNew, ['open', 'features', 'pageInfo', 'fetching', 'readArticles']),
     getDrawerHeaderHeight() {
       return getContentWrapperHeight();
     },
@@ -74,7 +74,7 @@ export default {
     });
   },
   methods: {
-    ...mapActions(['openDrawer', 'closeDrawer', 'fetchItems', 'setReadArticles']),
+    ...mapActions(useWhatsNew, ['openDrawer', 'closeDrawer', 'fetchItems', 'setReadArticles']),
     handleLoadMore() {
       const page = this.pageInfo.nextPage;
       if (page) {
@@ -90,11 +90,11 @@ export default {
 
       for (let i = 0; i < INITIAL_PAGES; i += 1) {
         // eslint-disable-next-line no-await-in-loop
-        const result = await this.fetchItems({
+        await this.fetchItems({
           page: i === 0 ? undefined : this.pageInfo.nextPage,
           versionDigest,
         });
-        if (result === false || !this.pageInfo.nextPage) break;
+        if (!this.pageInfo.nextPage) break;
       }
     },
     fetchFreshItems(page) {

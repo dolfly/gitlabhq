@@ -8616,7 +8616,7 @@ paths:
         example: k813f89485474661234z7109cve5709eFFFFFFFF
       - in: query
         name: same_file_name
-        description: The symbol file name
+        description: The symbol file name. Must match the 'file_name' parameter
         type: string
         required: true
       responses:
@@ -28919,7 +28919,7 @@ paths:
         example: k813f89485474661234z7109cve5709eFFFFFFFF
       - in: query
         name: same_file_name
-        description: The symbol file name
+        description: The symbol file name. Must match the 'file_name' parameter
         type: string
         required: true
       responses:

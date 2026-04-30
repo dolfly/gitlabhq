@@ -570,6 +570,16 @@ RSpec.describe WorkItems::TypesFramework::Provider, feature_category: :team_plan
       end
     end
 
+    context 'when initialized with a Project' do
+      let(:provider) { described_class.new(project) }
+
+      it 'resolves the FF check via resource_parent (the Project), not the ProjectNamespace' do
+        allow(project).to receive(:work_item_tasks_on_boards_feature_flag_enabled?).and_return(true)
+
+        expect(provider.send(:tasks_on_boards?)).to be(true)
+      end
+    end
+
     context 'when namespace does not respond to work_item_tasks_on_boards_feature_flag_enabled?' do
       let(:provider) { described_class.new(organization) }
 

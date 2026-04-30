@@ -120,7 +120,6 @@ export default {
     'app/assets/javascripts/vue_shared/components/projects_list/formatter.js',
     'app/assets/javascripts/vue_shared/components/source_viewer/plugins/utils/go_sum_linker.js',
     'app/assets/javascripts/vue_shared/components/source_viewer/plugins/utils/godeps_json_linker.js',
-    'app/assets/javascripts/whats_new/store/actions.js',
     'app/assets/javascripts/wikis/components/wiki_template.vue',
     'app/assets/javascripts/wikis/utils.js',
     'app/assets/javascripts/wikis/wiki_notes/components/wiki_comment_form.vue',

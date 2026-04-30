@@ -602,7 +602,8 @@ GEM
       dry-logic (~> 1.4)
       zeitwerk (~> 2.6)
     dumb_delegator (1.0.0)
-    duo_api (1.4.0)
+    duo_api (1.5.1)
+      base64 (>= 0.2.0)
     ed25519 (1.4.0)
     elasticsearch (7.17.11)
       elasticsearch-api (= 7.17.11)
@@ -2835,7 +2836,7 @@ CHECKSUMS
   dry-logic (1.6.0) sha256=da6fedbc0f90fc41f9b0cc7e6f05f5d529d1efaef6c8dcc8e0733f685745cea2
   dry-types (1.8.3) sha256=b5d97a45e0ed273131c0c3d5bc9f5633c2d1242e092ee47401ce7d5eab65c1bc
   dumb_delegator (1.0.0) sha256=ff5e411816d2d8ad8e260b269e712ae3839dddb0f9f8e18d3b1a3fe08f6d2e94
-  duo_api (1.4.0) sha256=06a6b406184e6e4b14af7389ac3990e667fb8509a1feba7de3af2f78d98c0877
+  duo_api (1.5.1) sha256=77ff891716970f07fb83d28a7562cbe364b6037fa84643dc67a6787e0db5ba9e
   ed25519 (1.4.0) sha256=16e97f5198689a154247169f3453ef4cfd3f7a47481fde0ae33206cdfdcac506
   elasticsearch (7.17.11) sha256=ed080f085d939f21d07f424ebcea95326e4bdb5f770a8f33aac699374f2ffc86
   elasticsearch-api (7.17.11) sha256=fed8f7b64493c97cf3984a33396a798204b54b8e1b01c5b6c099fa3fd4209107

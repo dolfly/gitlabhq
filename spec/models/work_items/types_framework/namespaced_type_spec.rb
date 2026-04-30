@@ -112,7 +112,6 @@ RSpec.describe WorkItems::TypesFramework::NamespacedType, feature_category: :tea
     context 'when tasks_on_boards is false' do
       it 'delegates to the wrapped type for task types' do
         task_type = build(:work_item_system_defined_type, :task)
-        allow(task_type).to receive(:filterable_board_view?).and_return(false)
         namespaced = described_class.new(task_type, tasks_on_boards: false)
 
         expect(namespaced.filterable_board_view?).to be(false)

@@ -46,7 +46,7 @@ module WorkItems
             end
 
             def filterable_board_view?
-              true
+              false
             end
 
             def configurable?

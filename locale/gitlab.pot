@@ -30575,6 +30575,9 @@ msgstr ""
 msgid "Failed to load"
 msgstr ""
 
+msgid "Failed to load What's new features. Refresh the page and try again."
+msgstr ""
+
 msgid "Failed to load additional diffs information. Try reloading the page."
 msgstr ""
 

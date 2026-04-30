@@ -86,10 +86,26 @@ RSpec.describe Boards::Issues::ListService, feature_category: :portfolio_managem
         end
 
         context 'when filtering by task type' do
-          it 'only returns the task type' do
-            params = { board_id: board.id, id: list1.id, issue_types: 'task' }
+          # Tasks are only filterable on boards when work_item_tasks_on_boards is enabled.
+          # The provider also short-circuits to false for user-namespaced projects, so the
+          # board's project must be group-owned for the FF check to apply.
+          let_it_be(:group_for_tasks) { create(:group) }
+          let_it_be(:task_project) { create(:project, :empty_repo, group: group_for_tasks) }
+          let_it_be(:task_board) { create(:board, project: task_project) }
+          let_it_be(:task_list) { create(:list, board: task_board) }
+          let_it_be(:task_only) do
+            create(:labeled_issue, :task, project: task_project, labels: [task_list.label])
+          end
 
-            expect(described_class.new(parent, user, params).execute).to eq [task]
+          before do
+            stub_feature_flags(work_item_tasks_on_boards: true)
+            task_project.add_developer(user)
+          end
+
+          it 'only returns the task type' do
+            params = { board_id: task_board.id, id: task_list.id, issue_types: 'task' }
+
+            expect(described_class.new(task_project, user, params).execute).to eq [task_only]
           end
         end
 

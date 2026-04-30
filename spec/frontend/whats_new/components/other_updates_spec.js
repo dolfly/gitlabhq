@@ -2,12 +2,13 @@ import { GlButton } from '@gitlab/ui';
 import { mount } from '@vue/test-utils';
 import Vue, { nextTick } from 'vue';
 import MockAdapter from 'axios-mock-adapter';
-// eslint-disable-next-line no-restricted-imports
-import Vuex from 'vuex';
+import { createTestingPinia } from '@pinia/testing';
+import { PiniaVuePlugin } from 'pinia';
 import * as Sentry from '~/sentry/sentry_browser_wrapper';
 import OtherUpdates from '~/whats_new/components/other_updates.vue';
 import Feature from '~/whats_new/components/feature.vue';
 import SkeletonLoader from '~/whats_new/components/skeleton_loader.vue';
+import { useWhatsNew } from '~/whats_new/store';
 import { isLoggedIn } from '~/lib/utils/common_utils';
 import axios from '~/lib/utils/axios_utils';
 import { HTTP_STATUS_BAD_REQUEST, HTTP_STATUS_OK } from '~/lib/utils/http_status';
@@ -15,16 +16,12 @@ import { HTTP_STATUS_BAD_REQUEST, HTTP_STATUS_OK } from '~/lib/utils/http_status
 jest.mock('~/sentry/sentry_browser_wrapper');
 jest.mock('~/lib/utils/common_utils');
 
-Vue.use(Vuex);
+Vue.use(PiniaVuePlugin);
 
 describe('OtherUpdates', () => {
   let wrapper;
-
-  const actions = {
-    setReadArticles: jest.fn(),
-  };
-
-  const store = new Vuex.Store({ actions });
+  let pinia;
+  let store;
 
   const defaultProps = {
     features: [],
@@ -37,13 +34,18 @@ describe('OtherUpdates', () => {
 
   const createWrapper = (props = {}) => {
     wrapper = mount(OtherUpdates, {
-      store,
+      pinia,
       propsData: {
         ...defaultProps,
         ...props,
       },
     });
   };
+
+  beforeEach(() => {
+    pinia = createTestingPinia();
+    store = useWhatsNew();
+  });
 
   const findLoadMoreButton = () => wrapper.find('[data-testid="load-more-button"]');
   const findLoadMoreGlButton = () => {
@@ -112,7 +114,7 @@ describe('OtherUpdates', () => {
 
         await axios.waitForAll();
 
-        expect(actions.setReadArticles).toHaveBeenCalledWith(expect.any(Object), [1]);
+        expect(store.setReadArticles).toHaveBeenCalledWith([1]);
       });
 
       it('calls Sentry when api call fails', async () => {
@@ -125,7 +127,7 @@ describe('OtherUpdates', () => {
 
         await axios.waitForAll();
 
-        expect(actions.setReadArticles).not.toHaveBeenCalled();
+        expect(store.setReadArticles).not.toHaveBeenCalled();
         expect(Sentry.captureException).toHaveBeenCalled();
       });
 
@@ -193,7 +195,7 @@ describe('OtherUpdates', () => {
 
       it('moves focus to first new item after loading completes', async () => {
         wrapper = mount(OtherUpdates, {
-          store,
+          pinia,
           propsData: {
             ...defaultProps,
             features: mockFeatures,
