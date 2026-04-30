@@ -30,7 +30,7 @@ RSpec.describe Labels::TransferService, feature_category: :team_planning do
         labeled_issue = create(:labeled_issue, project: project, labels: [label_1])
         labeled_merge_request = create(:labeled_merge_request, source_project: project, labels: [label_2])
 
-        expect { service.execute }.to change(project.labels, :count).by(2)
+        expect { service.execute }.to change { project.labels.count }.by(2)
         expect(labeled_issue.reload.labels).to contain_exactly(project.labels.find_by_title(label_1.title))
         expect(labeled_merge_request.reload.labels).to contain_exactly(project.labels.find_by_title(label_2.title))
       end
@@ -107,7 +107,7 @@ RSpec.describe Labels::TransferService, feature_category: :team_planning do
         labeled_issue = create(:labeled_issue, project: project, labels: [old_group_ancestor_label_1])
         labeled_merge_request = create(:labeled_merge_request, source_project: project, labels: [old_group_ancestor_label_2])
 
-        expect { service.execute }.not_to change(project.labels, :count)
+        expect { service.execute }.not_to change { project.labels.count }
         expect(labeled_issue.reload.labels).to contain_exactly(old_group_ancestor_label_1)
         expect(labeled_merge_request.reload.labels).to contain_exactly(old_group_ancestor_label_2)
       end

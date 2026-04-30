@@ -19,7 +19,7 @@ RSpec.describe Ci::CreatePipelineService, feature_category: :pipeline_compositio
 
   context 'when the variable is set' do
     let(:config) do
-      <<~EOS
+      <<~YAML
         variables:
           KUBERNETES_RUNNER: kubernetes
 
@@ -29,7 +29,7 @@ RSpec.describe Ci::CreatePipelineService, feature_category: :pipeline_compositio
             - $KUBERNETES_RUNNER
           script:
             - echo "Hello runner selector feature"
-      EOS
+      YAML
     end
 
     it 'uses the evaluated variable' do
@@ -40,7 +40,7 @@ RSpec.describe Ci::CreatePipelineService, feature_category: :pipeline_compositio
 
   context 'when the tag is composed by two variables' do
     let(:config) do
-      <<~EOS
+      <<~YAML
         variables:
           CLOUD_PROVIDER: aws
           KUBERNETES_RUNNER: kubernetes
@@ -52,7 +52,7 @@ RSpec.describe Ci::CreatePipelineService, feature_category: :pipeline_compositio
             - $CLOUD_PROVIDER-$KUBERNETES_RUNNER-$ENVIRONMENT_NAME
           script:
             - echo "Hello runner selector feature"
-      EOS
+      YAML
     end
 
     it 'uses the evaluated variables' do
@@ -63,14 +63,14 @@ RSpec.describe Ci::CreatePipelineService, feature_category: :pipeline_compositio
 
   context 'when the variable is not set' do
     let(:config) do
-      <<~EOS
+      <<~YAML
         job:
           tags:
             - docker
             - $KUBERNETES_RUNNER
           script:
             - echo "Hello runner selector feature"
-      EOS
+      YAML
     end
 
     it 'uses the variable as a regular string' do
@@ -81,14 +81,14 @@ RSpec.describe Ci::CreatePipelineService, feature_category: :pipeline_compositio
 
   context 'when the tag uses group variables' do
     let(:config) do
-      <<~EOS
+      <<~YAML
         job:
           tags:
             - docker
             - $RUNNER_TAG
           script:
             - echo "Hello runner selector feature"
-      EOS
+      YAML
     end
 
     it 'uses the evaluated variables' do
@@ -101,7 +101,7 @@ RSpec.describe Ci::CreatePipelineService, feature_category: :pipeline_compositio
     let_it_be(:project_variable) { create(:ci_variable, project: project, key: 'RUNNER_TAG', value: 'project') }
 
     let(:config) do
-      <<~EOS
+      <<~YAML
         variables:
           RUNNER_TAG: pipeline
         job:
@@ -110,7 +110,7 @@ RSpec.describe Ci::CreatePipelineService, feature_category: :pipeline_compositio
             - $RUNNER_TAG
           script:
             - echo "Hello runner selector feature"
-      EOS
+      YAML
     end
 
     it 'uses the project variable instead of group due to variable precedence' do
@@ -123,7 +123,7 @@ RSpec.describe Ci::CreatePipelineService, feature_category: :pipeline_compositio
     let(:tags) { pipeline.builds.flat_map(&:tag_list) }
 
     let(:config) do
-      <<~EOS
+      <<~YAML
         job:
           parallel:
             matrix:
@@ -133,7 +133,7 @@ RSpec.describe Ci::CreatePipelineService, feature_category: :pipeline_compositio
             - ${PROVIDER}-${STACK}
           script:
             - echo "Hello runner selector feature"
-      EOS
+      YAML
     end
 
     it 'uses the evaluated variables' do

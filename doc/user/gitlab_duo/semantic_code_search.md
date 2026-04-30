@@ -37,7 +37,7 @@ and [epic 20110](https://gitlab.com/groups/gitlab-org/-/epics/20110).
 
 ## Prerequisites
 
-- Access to the GitLab-operated [AI Gateway](../../administration/gitlab_duo/gateway.md).
+- Access to the [GitLab AI Gateway](../../administration/gitlab_duo/gateway.md).
 - These features turned on:
   - For GitLab.com, experiment features for your top-level group.
   - For GitLab Self-Managed, GitLab Duo experiment and beta features for the instance.
@@ -155,22 +155,21 @@ Connection options:
 | `connect_timeout`| integer | No       | `5`     | Connection timeout in seconds. |
 | `pool_size`      | integer | No       | `5`     | Connection pool size. |
 
-## Check indexing status
+## Check semantic code search status
 
 {{< history >}}
 
-- [Introduced](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/231457) in GitLab 19.0.
+- [Introduced](https://gitlab.com/gitlab-org/gitlab/-/work_items/596795) in GitLab 19.0.
 
 {{< /history >}}
 
 Prerequisites:
 
-- You must have administrator access to the instance.
+- Administrator access.
 
-To check the status of semantic code search,
-including indexing status, vector store connection details,
-repository statistics, and embedding queue sizes,
-run the following Rake task:
+To check the status of semantic code search, including indexing status,
+vector store connection details, repository statistics,
+and embedding queue sizes, run this Rake task:
 
 ```shell
 sudo gitlab-rake gitlab:semantic_search:code:info
@@ -182,8 +181,8 @@ To monitor status continuously, provide a watch interval in seconds:
 sudo gitlab-rake "gitlab:semantic_search:code:info[5]"
 ```
 
-The task refreshes the output at the specified interval.
-Press <kbd>Control</kbd>+<kbd>C</kbd> to stop.
+This task refreshes the output at the specified interval.
+To stop the task, press <kbd>Control</kbd>+<kbd>C</kbd>.
 
 ## Use semantic code search
 

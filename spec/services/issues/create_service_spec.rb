@@ -744,7 +744,7 @@ RSpec.describe Issues::CreateService, feature_category: :team_planning do
         end
 
         it 'creates an issue with the correct issue type' do
-          expect { result }.to change(Issue, :count).by(1)
+          expect { result }.to change { Issue.count }.by(1)
 
           created_issue = Issue.last
 

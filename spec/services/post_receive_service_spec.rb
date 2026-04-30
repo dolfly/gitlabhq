@@ -203,7 +203,7 @@ RSpec.describe PostReceiveService, feature_category: :source_code_management do
       end
 
       it 'creates a new merge request' do
-        expect { Sidekiq::Testing.fake! { subject } }.to change(MergeRequest, :count).by(1)
+        expect { Sidekiq::Testing.fake! { subject } }.to change { MergeRequest.count }.by(1)
       end
 
       it 'links to the newly created merge request' do

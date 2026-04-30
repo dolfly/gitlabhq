@@ -558,12 +558,12 @@ RSpec.describe Ci::CreatePipelineService, :clean_gitlab_redis_cache, feature_cat
       context 'when config has ports' do
         context 'in the main image' do
           let(:ci_yaml) do
-            <<-EOS
+            <<-YAML
               image:
                 name: image:1.0
                 ports:
                   - 80
-            EOS
+            YAML
           end
 
           it_behaves_like 'a failed pipeline'
@@ -571,7 +571,7 @@ RSpec.describe Ci::CreatePipelineService, :clean_gitlab_redis_cache, feature_cat
 
         context 'in the job image' do
           let(:ci_yaml) do
-            <<-EOS
+            <<-YAML
               image: image:1.0
 
               test:
@@ -580,7 +580,7 @@ RSpec.describe Ci::CreatePipelineService, :clean_gitlab_redis_cache, feature_cat
                   name: image:1.0
                   ports:
                     - 80
-            EOS
+            YAML
           end
 
           it_behaves_like 'a failed pipeline'
@@ -588,7 +588,7 @@ RSpec.describe Ci::CreatePipelineService, :clean_gitlab_redis_cache, feature_cat
 
         context 'in the service' do
           let(:ci_yaml) do
-            <<-EOS
+            <<-YAML
               image: image:1.0
 
               test:
@@ -598,7 +598,7 @@ RSpec.describe Ci::CreatePipelineService, :clean_gitlab_redis_cache, feature_cat
                   - name: test
                     ports:
                       - 80
-            EOS
+            YAML
           end
 
           it_behaves_like 'a failed pipeline'
@@ -1025,7 +1025,7 @@ RSpec.describe Ci::CreatePipelineService, :clean_gitlab_redis_cache, feature_cat
       end
 
       context 'when trigger belongs to no one' do
-        let(:user) {}
+        let(:user) { nil }
         let(:trigger) { create(:ci_trigger, project: project) }
 
         it 'does not create a pipeline', :aggregate_failures do

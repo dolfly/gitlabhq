@@ -51,11 +51,11 @@ RSpec.describe Ci::CreatePipelineService, feature_category: :pipeline_compositio
 
     context 'with a local file' do
       let(:config) do
-        <<~EOY
+        <<~YAML
         include: #{file_location}
         job:
           script: exit 0
-        EOY
+        YAML
       end
 
       it_behaves_like 'including the file'
@@ -63,14 +63,14 @@ RSpec.describe Ci::CreatePipelineService, feature_category: :pipeline_compositio
 
     context 'with a local file with rules with a project variable' do
       let(:config) do
-        <<~EOY
+        <<~YAML
         include:
           - local: #{file_location}
             rules:
               - if: $CI_PROJECT_ID == "#{project_id}"
         job:
           script: exit 0
-        EOY
+        YAML
       end
 
       context 'when the rules matches' do
@@ -88,14 +88,14 @@ RSpec.describe Ci::CreatePipelineService, feature_category: :pipeline_compositio
 
     context 'with a local file with rules with a predefined pipeline variable' do
       let(:config) do
-        <<~EOY
+        <<~YAML
         include:
           - local: #{file_location}
             rules:
               - if: $CI_PIPELINE_SOURCE == "#{pipeline_source}"
         job:
           script: exit 0
-        EOY
+        YAML
       end
 
       context 'when the rules matches' do
@@ -113,14 +113,14 @@ RSpec.describe Ci::CreatePipelineService, feature_category: :pipeline_compositio
 
     context 'with a local file with rules with a run pipeline variable' do
       let(:config) do
-        <<~EOY
+        <<~YAML
         include:
           - local: #{file_location}
             rules:
               - if: $MYVAR == "#{my_var}"
         job:
           script: exit 0
-        EOY
+        YAML
       end
 
       context 'when the rules matches' do

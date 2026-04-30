@@ -7,8 +7,8 @@ RSpec.describe Ci::StuckBuilds::DropPendingService, feature_category: :continuou
   let_it_be(:pipeline) { create(:ci_empty_pipeline) }
   let_it_be_with_reload(:job) { create(:ci_build, pipeline: pipeline) }
 
-  let(:created_at) {}
-  let(:updated_at) {}
+  let(:created_at) { nil }
+  let(:updated_at) { nil }
 
   subject(:service) { described_class.new }
 

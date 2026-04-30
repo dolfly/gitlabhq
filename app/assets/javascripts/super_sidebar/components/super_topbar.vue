@@ -180,7 +180,7 @@ export default {
       @dragover.prevent
     >
       <gl-icon name="search" class="gl-shrink-0" />
-      <span class="topbar-search-button-placeholder gl-min-w-[20vw] gl-truncate gl-text-left">{{
+      <span class="topbar-search-button-placeholder !gl-min-w-[20vw] gl-truncate gl-text-left">{{
         $options.i18n.searchBtnText
       }}</span>
       <kbd class="gl-mr-1 gl-hidden gl-shrink-0 gl-rounded-base gl-shadow-none md:gl-block">/</kbd>

@@ -217,7 +217,7 @@ RSpec.describe Issues::UpdateService, :mailer, :request_store, feature_category:
 
         it 'updates issue milestone when passing `milestone` param' do
           expect { update_issue({ milestone_id: milestone.id }) }
-            .to change(issue, :milestone).to(milestone).from(nil)
+            .to change { issue.milestone }.to(milestone).from(nil)
         end
 
         it "triggers 'issuableMilestoneUpdated'" do
@@ -395,7 +395,7 @@ RSpec.describe Issues::UpdateService, :mailer, :request_store, feature_category:
 
           it 'changed from an incident to an issue type' do
             expect { update_issue(issue_type: 'issue') }
-              .to change(issue, :issue_type).from('incident').to('issue')
+              .to change { issue.issue_type }.from('incident').to('issue')
               .and(change { issue.work_item_type.base_type }.from('incident').to('issue'))
           end
 
@@ -422,7 +422,7 @@ RSpec.describe Issues::UpdateService, :mailer, :request_store, feature_category:
             let(:user) { guest }
 
             it 'does nothing to the labels' do
-              expect { update_issue(issue_type: 'issue') }.not_to change(issue.labels, :count)
+              expect { update_issue(issue_type: 'issue') }.not_to change { issue.labels.count }
               expect(issue.reload.labels).to eq([])
             end
           end
@@ -504,7 +504,7 @@ RSpec.describe Issues::UpdateService, :mailer, :request_store, feature_category:
 
           it 'closes the issue' do
             expect { update_issue(opts) }
-              .to change(issue, :state).from('opened').to('closed')
+              .to change { issue.state }.from('opened').to('closed')
           end
 
           it_behaves_like 'update service that triggers GraphQL work_item_updated subscription' do
@@ -521,7 +521,7 @@ RSpec.describe Issues::UpdateService, :mailer, :request_store, feature_category:
 
           it 'reopens the issue' do
             expect { update_issue(opts) }
-              .to change(issue, :state).from('closed').to('opened')
+              .to change { issue.state }.from('closed').to('opened')
           end
 
           it_behaves_like 'update service that triggers GraphQL work_item_updated subscription' do
@@ -1407,7 +1407,7 @@ RSpec.describe Issues::UpdateService, :mailer, :request_store, feature_category:
           expect(project).not_to receive(:execute_hooks)
           expect(project).not_to receive(:execute_integrations)
 
-          expect { update_issue(opts) }.not_to change(IssuableSeverity, :count)
+          expect { update_issue(opts) }.not_to change { IssuableSeverity.count }
         end
       end
 
@@ -1418,7 +1418,7 @@ RSpec.describe Issues::UpdateService, :mailer, :request_store, feature_category:
           it_behaves_like 'updates the severity', 'low'
 
           it 'creates a new record' do
-            expect { update_issue(opts) }.to change(IssuableSeverity, :count).by(1)
+            expect { update_issue(opts) }.to change { IssuableSeverity.count }.by(1)
           end
 
           context 'with unsupported severity value' do
@@ -1466,7 +1466,7 @@ RSpec.describe Issues::UpdateService, :mailer, :request_store, feature_category:
           end
 
           it 'does not create a new record' do
-            expect { update_issue(opts) }.not_to change(IssuableSeverity, :count)
+            expect { update_issue(opts) }.not_to change { IssuableSeverity.count }
           end
 
           context 'with unsupported severity value' do
@@ -1555,7 +1555,7 @@ RSpec.describe Issues::UpdateService, :mailer, :request_store, feature_category:
 
         context 'without an escalation status record' do
           it 'creates a new record' do
-            expect { update_issue(opts) }.to change(::IncidentManagement::IssuableEscalationStatus, :count).by(1)
+            expect { update_issue(opts) }.to change { ::IncidentManagement::IssuableEscalationStatus.count }.by(1)
           end
 
           it_behaves_like 'updates the escalation status record', :acknowledged

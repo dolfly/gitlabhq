@@ -47,7 +47,7 @@ You can use exact match and regular expression modes to search for code in a gro
 
 Prerequisites:
 
-- Be an administrator of the instance.
+- Administrator access.
 
 To [enable exact code search](#enable-exact-code-search) in GitLab,
 you must have at least one Zoekt node connected to the instance.
@@ -68,8 +68,8 @@ The following installation methods are available for testing, not for production
 
 Prerequisites:
 
-- Be an administrator of the instance.
-- Zoekt is [installed](#install-zoekt).
+- Administrator access.
+- [Zoekt installed](#install-zoekt).
 
 To enable [exact code search](../../user/search/exact_code_search.md) from the GitLab UI:
 
@@ -89,14 +89,14 @@ To enable [exact code search](../../user/search/exact_code_search.md) from the G
 
 Prerequisites:
 
-- Be an administrator of the instance.
-- Zoekt is [installed](#install-zoekt).
+- Administrator access.
+- [Zoekt installed](#install-zoekt).
 
 You can manage [exact code search](../../user/search/exact_code_search.md) with Rake tasks.
 
 #### Enable indexing and search
 
-To enable indexing and search, run this task:
+To enable indexing and search, run this Rake task:
 
 ```shell
 gitlab-rake gitlab:zoekt:index
@@ -109,7 +109,7 @@ search becomes available when indices are ready.
 
 #### Disable indexing and search
 
-To disable indexing and search, run this task:
+To disable indexing and search, run this Rake task:
 
 ```shell
 gitlab-rake gitlab:zoekt:disable
@@ -119,13 +119,13 @@ This task disables both `zoekt_indexing_enabled` and `zoekt_search_enabled`.
 
 #### Pause and resume indexing
 
-To pause indexing (for example, during maintenance), run this task:
+To pause indexing (for example, during maintenance), run this Rake task:
 
 ```shell
 gitlab-rake gitlab:zoekt:pause_indexing
 ```
 
-To resume indexing, run this task:
+To resume indexing, run this Rake task:
 
 ```shell
 gitlab-rake gitlab:zoekt:resume_indexing
@@ -133,13 +133,13 @@ gitlab-rake gitlab:zoekt:resume_indexing
 
 #### Estimate storage requirements
 
-To estimate the storage required for your Zoekt nodes, run this task:
+To estimate the storage required for your Zoekt nodes, run this Rake task:
 
 ```shell
 sudo gitlab-rake gitlab:zoekt:estimate_storage
 ```
 
-For more information, see [estimate storage](#estimate-storage).
+For more information, see [estimate storage requirements](#estimate-requirements).
 
 ## Check indexing status
 
@@ -153,7 +153,7 @@ For more information, see [estimate storage](#estimate-storage).
 
 Prerequisites:
 
-- You must have administrator access to the instance.
+- Administrator access.
 
 Indexing performance depends on the CPU and memory limits on the Zoekt indexer nodes.
 To check indexing status:
@@ -168,7 +168,7 @@ Run this Rake task:
 gitlab-rake gitlab:zoekt:info
 ```
 
-To have the data refresh automatically every 10 seconds, run this task instead:
+To have the data refresh automatically every 10 seconds, run this Rake task instead:
 
 ```shell
 gitlab-rake "gitlab:zoekt:info[10]"
@@ -278,7 +278,7 @@ Node 2 - test-zoekt-hostname-2:
 
 Prerequisites:
 
-- You must have administrator access to the instance.
+- Administrator access.
 
 Run a health check to understand the status of your Zoekt infrastructure, including:
 
@@ -314,7 +314,7 @@ The output includes colored status indicators and shows:
 - The overall status including a combined health assessment: `HEALTHY`, `DEGRADED`, or `UNHEALTHY`
 - Recommendations for resolving issues
 
-## Perform force reindexing
+## Force reindex projects
 
 {{< history >}}
 
@@ -324,25 +324,24 @@ The output includes colored status indicators and shows:
 
 Prerequisites:
 
-- You must have administrator access to the instance.
+- Administrator access.
 
-Perform force reindexing for the range of projects.
-
-Run this Rake task:
+To force reindex a range of projects, run this Rake task:
 
 ```shell
 gitlab-rake gitlab:zoekt:reindex_projects ID_FROM=10 ID_TO=20
 ```
 
-Using the `ID_FROM` and `ID_TO` environment variables, you can force reindex a limited number of projects.
-To reindex just one project keep the `ID_FROM` and `ID_TO` equal to the project ID to be reindexed.
-To reindex all projects omit the environment variables.
+`ID_FROM` and `ID_TO` represent the range of project IDs.
+
+To force reindex only one project, use the same value for both `ID_FROM` and `ID_TO`.
+To force reindex all projects, do not use these environment variables.
 
 ## Pause indexing
 
 Prerequisites:
 
-- You must have administrator access to the instance.
+- Administrator access.
 
 To pause indexing for [exact code search](../../user/search/exact_code_search.md):
 
@@ -365,7 +364,7 @@ To resume indexing, clear the **Pause indexing for exact code search** checkbox.
 
 Prerequisites:
 
-- You must have administrator access to the instance.
+- Administrator access.
 
 You can index both existing and new root namespaces automatically.
 To index all root namespaces automatically:
@@ -398,7 +397,7 @@ When you disable this setting:
 
 Prerequisites:
 
-- You must have administrator access to the instance.
+- Administrator access.
 
 You can cache search results for better performance.
 This feature is enabled by default and caches results for five minutes.
@@ -421,7 +420,7 @@ To cache search results:
 
 Prerequisites:
 
-- You must have administrator access to the instance.
+- Administrator access.
 
 You can set the number of concurrent indexing tasks for a Zoekt node relative to its CPU capacity.
 
@@ -451,7 +450,7 @@ To set the number of concurrent indexing tasks:
 
 Prerequisites:
 
-- You must have administrator access to the instance.
+- Administrator access.
 
 You can define the probability that a project is
 force reindexed instead of incrementally indexed.
@@ -480,7 +479,7 @@ To define the probability of random force reindexing:
 
 Prerequisites:
 
-- You must have administrator access to the instance.
+- Administrator access.
 
 You can set the number of parallel processes per indexing task.
 
@@ -506,7 +505,7 @@ To set the number of parallel processes per indexing task:
 
 Prerequisites:
 
-- You must have administrator access to the instance.
+- Administrator access.
 
 You can set the number of namespaces per `RolloutWorker` job for initial indexing.
 The default value is `32`.
@@ -532,7 +531,7 @@ To set the number of namespaces per indexing rollout:
 
 Prerequisites:
 
-- You must have administrator access to the instance.
+- Administrator access.
 
 You can delete offline Zoekt nodes automatically after a specific period of time
 along with their related indices, repositories, and tasks.
@@ -559,7 +558,7 @@ To define when offline nodes are automatically deleted:
 
 Prerequisites:
 
-- You must have administrator access to the instance.
+- Administrator access.
 
 You can define the indexing timeout for a project.
 The default value is `30m` (30 minutes).
@@ -583,11 +582,10 @@ To define the indexing timeout for a project:
 
 Prerequisites:
 
-- You must have administrator access to the instance.
+- Administrator access.
 
 You can set the maximum number of files in a project that can be indexed.
-Projects with more files than this limit in the default branch are not indexed.
-
+Projects with more files than this limit on the default branch are not indexed.
 The default value is `500,000`.
 
 You can adjust this value based on the node's performance and workload.
@@ -609,13 +607,14 @@ To set the maximum number of files in a project to be indexed:
 
 Prerequisites:
 
-- You must have administrator access to the instance.
+- Administrator access.
 
 You can set the maximum size for a file to be indexed.
 The default value is `1MB`.
 
-Only filenames are indexed for files that exceed the specified size.
+For files that exceed the specified size, only filenames are indexed.
 You can search these files only by filename.
+
 To set maximum file size for indexing:
 
 1. In the upper-right corner, select **Admin**.
@@ -636,7 +635,7 @@ To set maximum file size for indexing:
 
 Prerequisites:
 
-- You must have administrator access to the instance.
+- Administrator access.
 
 You can set the maximum number of trigrams for a file to be indexed.
 The default value is `20,000`.
@@ -663,7 +662,7 @@ To set the maximum trigram count for indexing:
 
 Prerequisites:
 
-- You must have administrator access to the instance.
+- Administrator access.
 
 You can define the retry interval for namespaces that previously failed.
 The default value is `1d` (one day).
@@ -688,7 +687,7 @@ To define the retry interval for failed namespaces:
 
 Prerequisites:
 
-- You must have administrator access to the instance.
+- Administrator access.
 
 You can set the number of replicas per namespace.
 The default value is `1` (one replica per namespace).
@@ -716,7 +715,7 @@ To set the number of replicas per namespace:
 
 Prerequisites:
 
-- Be an administrator of the instance.
+- Administrator access.
 
 To run Zoekt on a different server than GitLab:
 
@@ -744,19 +743,18 @@ Adjust resources based on your specific workload characteristics, including:
 The webserver and indexer have different memory usage patterns.
 
 The webserver memory-maps index shards from disk into virtual memory.
-The operating system pages shard data in and out of physical memory as searches
-are served. Resident memory usage grows with the active working set.
+The operating system pages shard data in and out of physical memory as searches are served.
+Resident memory usage grows with the active working set.
 Nodes with larger indices or higher query volume require more webserver
 memory to avoid page thrashing and out-of-memory conditions.
 
-The indexer processes Git object data in memory when it builds or rebuilds
-indices. Memory usage spikes when indexing large repositories or when multiple
-tasks run in parallel. You can control peak indexer memory by adjusting the
-[number of parallel processes per indexing task](#set-the-number-of-parallel-processes-per-indexing-task)
-and the [indexing CPU to tasks multiplier](#set-concurrent-indexing-tasks).
+When the indexer builds or rebuilds indices, the indexer processes Git object data in memory.
+Memory usage spikes when large repositories are indexed or multiple tasks run in parallel.
+You can control peak indexer memory by adjusting the number of
+[parallel processes per indexing task](#set-the-number-of-parallel-processes-per-indexing-task)
+and [concurrent indexing tasks](#set-concurrent-indexing-tasks).
 
-On VM and bare metal deployments, the webserver and indexer share the same
-system memory.
+On VM and bare metal deployments, the webserver and indexer share the same system memory.
 
 ### Nodes
 
@@ -826,9 +824,9 @@ Zoekt storage requirements depend on the size of your Git repositories and your 
 Zoekt indexes only Git object data (source code and commit history).
 It does not index LFS files, CI/CD artifacts, packages, wikis, or other storage components.
 
-#### Estimate storage
+#### Estimate requirements
 
-To estimate storage requirements, run the Rake task:
+To estimate storage requirements, run this Rake task:
 
 ```shell
 sudo gitlab-rake gitlab:zoekt:estimate_storage
@@ -837,17 +835,18 @@ sudo gitlab-rake gitlab:zoekt:estimate_storage
 This task queries your GitLab database and outputs a storage estimate based on
 your current repository sizes and replica configuration.
 
-If you prefer to calculate manually, use:
+To calculate storage requirements manually, use these formulas instead:
 
 ```plaintext
 storage_per_replica = sum(repository_git_size) × buffer_factor
 total_cluster_storage = storage_per_replica × number_of_replicas
 ```
 
-Where `repository_git_size` is the Git object size for each repository.
-This value does not include LFS objects, wiki, artifacts, or packages.
-And `buffer_factor` is the headroom during initial indexing.
-It could be calculated as `Search::Zoekt::Index.global_buffer_factor` which is mostly `3` by default.
+`repository_git_size` is the Git object size for each repository.
+This value does not include LFS objects, wikis, artifacts, or packages.
+`buffer_factor` is the headroom during initial indexing.
+You can calculate this value as `Search::Zoekt::Index.global_buffer_factor`,
+which is mostly `3` by default.
 
 To view `repository_git_size`:
 
@@ -864,16 +863,16 @@ For example:
 
 GitLab reserves this buffer internally to ensure Zoekt has headroom during indexing.
 After initial indexing is complete, actual disk usage is typically closer to
-half the `repository_git_size` based on observed GitLab.com data.
+half the `repository_git_size` based on observed data on GitLab.com.
 Scale vertically or horizontally only when needed.
 
-You can view the current buffer factor in use by running:
+To view the current buffer factor, run this Rake task:
 
 ```shell
 sudo gitlab-rake gitlab:zoekt:info
 ```
 
-The output includes a `Storage buffer factor` line showing the dynamic value the planner is currently using.
+The output includes **Storage buffer factor**, which shows the dynamic value the planner is using.
 
 To monitor Zoekt node storage, see [check indexing status](#check-indexing-status).
 If namespaces are not indexed due to low disk space, add nodes or increase disk capacity.
@@ -894,7 +893,7 @@ to retrieve indexing tasks and send completion callbacks.
 
 This method uses `.gitlab_shell_secret` for signing and verification.
 Tokens are sent in the `Gitlab-Shell-Api-Request` header.
-Endpoints include:
+The following endpoints are available:
 
 - `GET /internal/search/zoekt/:uuid/heartbeat` for task retrieval
 - `POST /internal/search/zoekt/:uuid/callback` for status updates
