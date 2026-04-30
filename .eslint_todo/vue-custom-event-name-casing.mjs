@@ -113,8 +113,6 @@ export default {
     'app/assets/javascripts/pipeline_wizard/components/input_wrapper.vue',
     'app/assets/javascripts/projects/compare/components/repo_dropdown.vue',
     'app/assets/javascripts/projects/compare/components/revision_dropdown.vue',
-    'app/assets/javascripts/projects/new_v2/components/blank_project_form.vue',
-    'app/assets/javascripts/projects/new_v2/components/ci_cd_project_form.vue',
     'app/assets/javascripts/projects/new_v2/components/import_by_url_form.vue',
     'app/assets/javascripts/projects/new_v2/components/project_destination_select.vue',
     'app/assets/javascripts/projects/new_v2/components/project_name_validator.vue',

@@ -828,16 +828,18 @@ export default {
           ],
         });
 
-        tokens.push({
-          order: 14,
-          type: TOKEN_TYPE_MY_REACTION,
-          title: TOKEN_TITLE_MY_REACTION,
-          icon: 'thumb-up',
-          token: EmojiToken,
-          unique: true,
-          fetchEmojis: this.fetchEmojis,
-          recentSuggestionsStorageKey: `${this.rootPageFullPath}-issues-recent-tokens-my_reaction`,
-        });
+        if (this.autocompleteAwardEmojisPath) {
+          tokens.push({
+            order: 14,
+            type: TOKEN_TYPE_MY_REACTION,
+            title: TOKEN_TITLE_MY_REACTION,
+            icon: 'thumb-up',
+            token: EmojiToken,
+            unique: true,
+            fetchEmojis: this.fetchEmojis,
+            recentSuggestionsStorageKey: `${this.rootPageFullPath}-issues-recent-tokens-my_reaction`,
+          });
+        }
 
         tokens.push({
           order: 15,

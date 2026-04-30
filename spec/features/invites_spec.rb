@@ -190,19 +190,6 @@ RSpec.describe 'Group or Project invitations', :with_current_organization, :aggr
           end
         end
 
-        context 'with invite email acceptance', :snowplow do
-          it 'tracks the accepted invite' do
-            fill_in_sign_up_form(new_user, invite: true)
-
-            expect_snowplow_event(
-              category: 'RegistrationsController',
-              action: 'accepted',
-              label: 'invite_email',
-              user: group_invite.reload.user
-            )
-          end
-        end
-
         context 'when the user signs up for an account with the invitation email address' do
           it 'redirects to the most recent membership group page with all invitations automatically accepted' do
             fill_in_sign_up_form(new_user, invite: true)

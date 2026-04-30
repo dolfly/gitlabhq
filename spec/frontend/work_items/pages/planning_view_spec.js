@@ -1,4 +1,4 @@
-import Vue, { nextTick } from 'vue';
+import Vue, { computed, nextTick, ref } from 'vue';
 import VueApollo from 'vue-apollo';
 import VueRouter from 'vue-router';
 import MockAdapter from 'axios-mock-adapter';
@@ -988,6 +988,53 @@ describe('planning-view', () => {
           .map((token) => token.type);
 
         expect(tokens).toContain(TOKEN_TYPE_RELEASE);
+      });
+    });
+
+    describe('my reaction token', () => {
+      it('is not included when autocompleteAwardEmojisPath is not set', async () => {
+        mountComponent({ provide: { autocompleteAwardEmojisPath: undefined } });
+        await waitForPromises();
+
+        const tokens = findFilteredSearchBar()
+          .props('tokens')
+          .map((token) => token.type);
+
+        expect(tokens).not.toContain(TOKEN_TYPE_MY_REACTION);
+      });
+
+      it('is included when autocompleteAwardEmojisPath is set', async () => {
+        mountComponent();
+        await waitForPromises();
+
+        const tokens = findFilteredSearchBar()
+          .props('tokens')
+          .map((token) => token.type);
+
+        expect(tokens).toContain(TOKEN_TYPE_MY_REACTION);
+      });
+
+      it('updates when autocompleteAwardEmojisPath value changes', async () => {
+        const mockPath = ref(undefined);
+        const autocompleteAwardEmojisPath = computed(() => mockPath.value);
+        mountComponent({ provide: { autocompleteAwardEmojisPath } });
+        await waitForPromises();
+
+        let tokens = findFilteredSearchBar()
+          .props('tokens')
+          .map((token) => token.type);
+
+        expect(tokens).not.toContain(TOKEN_TYPE_MY_REACTION);
+
+        mockPath.value = 'some/fake/path';
+
+        await nextTick();
+
+        tokens = findFilteredSearchBar()
+          .props('tokens')
+          .map((token) => token.type);
+
+        expect(tokens).toContain(TOKEN_TYPE_MY_REACTION);
       });
     });
 
