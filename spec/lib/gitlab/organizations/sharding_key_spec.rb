@@ -24,11 +24,7 @@ RSpec.describe 'new tables missing sharding_key', feature_category: :organizatio
 
   # Specific tables can be temporarily exempt from this requirement. You must add an issue link in a comment next to
   # the table name to remove this once a decision has been made.
-  let(:allowed_to_be_missing_not_null) do
-    [
-      'keys.organization_id' # https://gitlab.com/gitlab-org/gitlab/-/issues/577246
-    ]
-  end
+  let(:allowed_to_be_missing_not_null) { [] }
 
   # Some reasons to exempt a table:
   #   1. It has no foreign key for performance reasons

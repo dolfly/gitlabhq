@@ -30,7 +30,6 @@ import {
   reloadOnMemberInvitationSuccess,
   markLocalStorageForQueuedAlert,
 } from '../utils/trigger_successful_invite_alert';
-import ModalConfetti from './confetti.vue';
 import MembersTokenSelect from './members_token_select.vue';
 import UserLimitNotification from './user_limit_notification.vue';
 
@@ -43,7 +42,6 @@ export default {
     GlIcon,
     InviteModalBase,
     MembersTokenSelect,
-    ModalConfetti,
     UserLimitNotification,
     ActiveTrialNotification: () =>
       import('ee_component/invite_members/components/active_trial_notification.vue'),
@@ -132,9 +130,6 @@ export default {
     };
   },
   computed: {
-    isCelebration() {
-      return this.mode === 'celebrate';
-    },
     modalTitle() {
       return this.$options.labels.modal[this.mode].title;
     },
@@ -408,17 +403,6 @@ export default {
     @reset="resetFields"
     @submit="sendInvite"
   >
-    <template #intro-text-before>
-      <div v-if="isCelebration" class="gl-p-4 gl-text-size-h1">
-        <gl-emoji data-name="tada" />
-      </div>
-    </template>
-    <template #intro-text-after>
-      <br />
-      <span v-if="isCelebration">{{ $options.labels.modal.celebrate.intro }} </span>
-      <modal-confetti v-if="isCelebration" />
-    </template>
-
     <template #alert>
       <div ref="alerts" tabindex="-1">
         <gl-alert
@@ -488,7 +472,7 @@ export default {
     </template>
 
     <template #active-trial-alert>
-      <active-trial-notification v-if="!isCelebration" :active-trial-dataset="activeTrialDataset" />
+      <active-trial-notification :active-trial-dataset="activeTrialDataset" />
     </template>
 
     <template #select="{ exceptionState, inputId }">

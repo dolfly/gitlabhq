@@ -300,14 +300,12 @@ export default {
     >
       <template #[$options.DEFAULT_SLOT]>
         <div class="gl-flex" data-testid="modal-base-intro-text">
-          <slot name="intro-text-before"></slot>
           <p>
             <gl-sprintf :message="introText">
               <template #strong="{ content }">
                 <strong>{{ content }}</strong>
               </template>
             </gl-sprintf>
-            <slot name="intro-text-after"></slot>
           </p>
         </div>
 

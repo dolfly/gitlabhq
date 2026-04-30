@@ -26,21 +26,12 @@ export const IMPORT_PROJECT_MEMBERS_MODAL_TRACKING_LABEL = 'project-members-page
 export const INVITE_GROUP_MODAL_TRACKING_CATEGORY = 'invite_group_modal';
 export const MEMBERS_MODAL_DEFAULT_TITLE = s__('InviteMembersModal|Invite members');
 export const MEMBERS_MODAL_ROLE_SELECT_LABEL = s__('InviteMembersModal|Role');
-export const MEMBERS_MODAL_CELEBRATE_TITLE = s__(
-  'InviteMembersModal|GitLab is better with colleagues!',
-);
-export const MEMBERS_MODAL_CELEBRATE_INTRO = s__(
-  'InviteMembersModal|How about inviting a colleague or two to join you?',
-);
 export const MEMBERS_TO_GROUP_DEFAULT_INTRO_TEXT = s__(
   "InviteMembersModal|You're inviting members to the %{strongStart}%{name}%{strongEnd} group.",
 );
 
 export const MEMBERS_TO_PROJECT_DEFAULT_INTRO_TEXT = s__(
   "InviteMembersModal|You're inviting members to the %{strongStart}%{name}%{strongEnd} project.",
-);
-export const MEMBERS_TO_PROJECT_CELEBRATE_INTRO_TEXT = s__(
-  "InviteMembersModal|Congratulations on creating your project, you're almost there!",
 );
 export const MEMBERS_SEARCH_FIELD = s__('InviteMembersModal|Username, name or email address');
 export const MEMBERS_PLACEHOLDER = s__(
@@ -110,10 +101,6 @@ export const MEMBER_MODAL_LABELS = {
     default: {
       title: MEMBERS_MODAL_DEFAULT_TITLE,
     },
-    celebrate: {
-      title: MEMBERS_MODAL_CELEBRATE_TITLE,
-      intro: MEMBERS_MODAL_CELEBRATE_INTRO,
-    },
   },
   toGroup: {
     default: {
@@ -123,9 +110,6 @@ export const MEMBER_MODAL_LABELS = {
   toProject: {
     default: {
       introText: MEMBERS_TO_PROJECT_DEFAULT_INTRO_TEXT,
-    },
-    celebrate: {
-      introText: MEMBERS_TO_PROJECT_CELEBRATE_INTRO_TEXT,
     },
   },
   searchField: MEMBERS_SEARCH_FIELD,
@@ -157,7 +141,6 @@ export const GROUP_MODAL_LABELS = {
 };
 
 export const ON_SHOW_TRACK_LABEL = 'over_limit_modal_viewed';
-export const ON_CELEBRATION_TRACK_LABEL = 'invite_celebration_modal';
 
 export const WARNING_ALERT_TITLE = s__(
   'InviteMembersModal|You only have space for %{count} more %{members} in %{name}',

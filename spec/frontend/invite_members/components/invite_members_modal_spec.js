@@ -8,18 +8,14 @@ import waitForPromises from 'helpers/wait_for_promises';
 import Api from '~/api';
 import InviteMembersModal from '~/invite_members/components/invite_members_modal.vue';
 import InviteModalBase from '~/invite_members/components/invite_modal_base.vue';
-import ModalConfetti from '~/invite_members/components/confetti.vue';
+
 import MembersTokenSelect from '~/invite_members/components/members_token_select.vue';
 import UserLimitNotification from '~/invite_members/components/user_limit_notification.vue';
 import {
-  MEMBERS_MODAL_CELEBRATE_INTRO,
-  MEMBERS_MODAL_CELEBRATE_TITLE,
   MEMBERS_MODAL_ROLE_SELECT_LABEL,
   MEMBERS_PLACEHOLDER,
-  MEMBERS_TO_PROJECT_CELEBRATE_INTRO_TEXT,
   EXPANDED_ERRORS,
   EMPTY_INVITES_ALERT_TEXT,
-  ON_CELEBRATION_TRACK_LABEL,
   INVITE_MEMBER_MODAL_TRACKING_CATEGORY,
   INVALID_FEEDBACK_MESSAGE_DEFAULT,
 } from '~/invite_members/constants';
@@ -50,7 +46,6 @@ import {
   user4,
   user5,
   user6,
-  GlEmoji,
 } from '../mock_data/member_modal';
 
 jest.mock('~/invite_members/utils/trigger_successful_invite_alert');
@@ -91,7 +86,6 @@ describe('InviteMembersModal', () => {
         GlModal: stubComponent(GlModal, {
           template: '<div><slot></slot><slot name="modal-footer"></slot></div>',
         }),
-        GlEmoji,
         ...stubs,
       },
       mocks: {
@@ -156,7 +150,6 @@ describe('InviteMembersModal', () => {
     findMembersFormGroup().attributes('invalid-feedback');
   const membersFormGroupDescription = () => findMembersFormGroup().attributes('description');
   const findMembersSelect = () => wrapper.findComponent(MembersTokenSelect);
-  const findCelebrationEmoji = () => wrapper.findComponent(GlEmoji);
   const triggerOpenModal = async ({ mode = 'default', source } = {}) => {
     eventHub.$emit('open-modal', { mode, source });
     await nextTick();
@@ -227,68 +220,14 @@ describe('InviteMembersModal', () => {
           createInviteMembersToProjectWrapper();
         });
 
-        it('renders the modal without confetti', () => {
-          expect(wrapper.findComponent(ModalConfetti).exists()).toBe(false);
-        });
-
         it('includes the correct invitee', () => {
           expect(findIntroText()).toBe("You're inviting members to the test name project.");
-          expect(findCelebrationEmoji().exists()).toBe(false);
         });
 
         describe('members form group description', () => {
           it('renders correct description', () => {
             createInviteMembersToProjectWrapper({ GlFormGroup });
             expect(membersFormGroupDescription()).toContain(MEMBERS_PLACEHOLDER);
-          });
-        });
-      });
-
-      describe('when inviting members with celebration', () => {
-        beforeEach(async () => {
-          createInviteMembersToProjectWrapper();
-          await triggerOpenModal({ mode: 'celebrate', source: ON_CELEBRATION_TRACK_LABEL });
-        });
-
-        it('renders the modal with confetti', () => {
-          expect(wrapper.findComponent(ModalConfetti).exists()).toBe(true);
-        });
-
-        it('renders the modal with the correct title', () => {
-          expect(findModal().props('title')).toBe(MEMBERS_MODAL_CELEBRATE_TITLE);
-        });
-
-        it('includes the correct celebration text and emoji', () => {
-          expect(findIntroText()).toBe(
-            `${MEMBERS_TO_PROJECT_CELEBRATE_INTRO_TEXT}  ${MEMBERS_MODAL_CELEBRATE_INTRO}`,
-          );
-          expect(findCelebrationEmoji().exists()).toBe(true);
-        });
-
-        describe('members form group description', () => {
-          it('renders correct description', async () => {
-            createInviteMembersToProjectWrapper({ GlFormGroup });
-            await triggerOpenModal({ mode: 'celebrate' });
-
-            expect(membersFormGroupDescription()).toContain(MEMBERS_PLACEHOLDER);
-          });
-        });
-
-        describe('tracking', () => {
-          it('tracks actions', async () => {
-            trackingSpy = mockTracking(undefined, wrapper.element, jest.spyOn);
-
-            await triggerOpenModal({ mode: 'celebrate', source: ON_CELEBRATION_TRACK_LABEL });
-
-            expectTracking('render', ON_CELEBRATION_TRACK_LABEL);
-
-            clickCancelButton();
-            expectTracking('click_cancel', ON_CELEBRATION_TRACK_LABEL);
-
-            findModal().vm.$emit('close');
-            expectTracking('click_x', ON_CELEBRATION_TRACK_LABEL);
-
-            unmockTracking();
           });
         });
       });

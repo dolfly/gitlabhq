@@ -28210,9 +28210,6 @@ msgstr ""
 msgid "Edit your most recent comment in a thread (from an empty textarea)"
 msgstr ""
 
-msgid "Edit your search and try again"
-msgstr ""
-
 msgid "Edit your search and try again."
 msgstr ""
 
@@ -35506,12 +35503,6 @@ msgstr ""
 msgid "Groups couldn't be loaded. Refresh the page to try again."
 msgstr ""
 
-msgid "GroupsEmptyState|A group is a collection of several projects"
-msgstr ""
-
-msgid "GroupsEmptyState|If you organize your projects under a group, it works like a folder. You can manage your group member's permissions and access to each project in the group."
-msgstr ""
-
 msgid "GroupsEmptyState|No groups found"
 msgstr ""
 
@@ -35644,22 +35635,7 @@ msgstr ""
 msgid "GroupsTree|Are you sure you want to leave \"%{fullName}\"?"
 msgstr ""
 
-msgid "GroupsTree|Delete"
-msgstr ""
-
-msgid "GroupsTree|Edit"
-msgstr ""
-
-msgid "GroupsTree|Failed to leave the group. Please make sure you are not the only owner."
-msgstr ""
-
 msgid "GroupsTree|Leave group"
-msgstr ""
-
-msgid "GroupsTree|Loading groups"
-msgstr ""
-
-msgid "GroupsTree|Options"
 msgstr ""
 
 msgid "GroupsTree|When you leave this group:"
@@ -38818,13 +38794,7 @@ msgstr ""
 msgid "InviteMembersModal|Close invite team members"
 msgstr ""
 
-msgid "InviteMembersModal|Congratulations on creating your project, you're almost there!"
-msgstr ""
-
 msgid "InviteMembersModal|During your trial, you can invite as many members to %{groupName} as you like. When the trial ends, you'll have a maximum of %{dashboardLimit} members on the Free tier. To get more members, %{linkStart}upgrade to a paid plan%{linkEnd}."
-msgstr ""
-
-msgid "InviteMembersModal|GitLab is better with colleagues!"
 msgstr ""
 
 msgid "InviteMembersModal|Grant temporary access"
@@ -38834,9 +38804,6 @@ msgid "InviteMembersModal|Group invite removed. It might take a few minutes for 
 msgstr ""
 
 msgid "InviteMembersModal|Group was successfully invited. It might take a few minutes for the changes to user access levels to take effect."
-msgstr ""
-
-msgid "InviteMembersModal|How about inviting a colleague or two to join you?"
 msgstr ""
 
 msgid "InviteMembersModal|Invite"
@@ -49414,11 +49381,6 @@ msgstr ""
 
 msgid "One and only one of [cn, filter] arguments is required"
 msgstr ""
-
-msgid "One more item"
-msgid_plural "%d more items"
-msgstr[0] ""
-msgstr[1] ""
 
 msgid "One or more arguments are invalid: %{args}."
 msgstr ""

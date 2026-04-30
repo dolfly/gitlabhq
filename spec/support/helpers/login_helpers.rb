@@ -44,7 +44,8 @@ module LoginHelpers
         create(user_or_role) # rubocop:disable Rails/SaveBang
       end
 
-    gitlab_sign_in_with(user, **kwargs)
+    submit_sign_in_form_for(user, **kwargs)
+    expect(page).not_to have_current_path(new_user_session_path)
 
     @current_user = user
   end
@@ -77,15 +78,16 @@ module LoginHelpers
     expect(page).to have_selector('[data-testid="alert-info"]', text: _('Admin mode is inactive.'))
   end
 
-  private
-
-  # Private: Login as the specified user
+  # Submit the login form as the specified user
+  # When using this helper, make sure to assert on the expected page state after signing in,
+  # e.g., that the user is redirected to the dashboard or an error is shown.
+  # If the expectation is to success upon sign-in use `gitlab_sign_in` instead.
   #
   # user - User instance to login with
   # remember - Whether or not to check "Remember me" (default: false)
   # two_factor_auth - If two-factor authentication is enabled (default: false)
   # password - password to attempt to login with (default: user.password)
-  def gitlab_sign_in_with(user, remember: false, two_factor_auth: false, password: nil, visit: true)
+  def submit_sign_in_form_for(user, remember: false, two_factor_auth: false, password: nil, visit: true)
     visit new_user_session_path if visit
 
     fill_in "user_login", with: user.email
@@ -99,17 +101,15 @@ module LoginHelpers
 
     check 'user_remember_me' if remember
 
-    wait_for_all_requests
-
     find('[data-testid="sign-in-button"]:enabled').click
 
-    if two_factor_auth
-      fill_in "user_otp_attempt", with: user.reload.current_otp
-      click_button "Verify code"
-    end
+    return unless two_factor_auth
 
-    page.has_no_current_path?(new_user_session_path, ignore_query: true)
+    fill_in "user_otp_attempt", with: user.reload.current_otp
+    click_button "Verify code"
   end
+
+  private
 
   def login_via(provider, user, uid, remember_me: false, additional_info: {})
     mock_auth_hash(provider, uid, user.email, additional_info: additional_info)

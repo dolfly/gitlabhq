@@ -22993,7 +22993,8 @@ CREATE TABLE keys (
     expiry_notification_delivered_at timestamp with time zone,
     before_expiry_notification_delivered_at timestamp with time zone,
     usage_type smallint DEFAULT 0 NOT NULL,
-    organization_id bigint
+    organization_id bigint,
+    CONSTRAINT check_8933ae4f38 CHECK ((organization_id IS NOT NULL))
 );
 
 CREATE SEQUENCE keys_id_seq
@@ -45245,6 +45246,8 @@ CREATE INDEX index_achievement_upload_states_on_verification_state ON achievemen
 
 CREATE INDEX index_achievement_upload_states_pending_verification ON achievement_upload_states USING btree (verified_at NULLS FIRST) WHERE (verification_state = 0);
 
+CREATE UNIQUE INDEX index_achievement_uploads_on_id ON achievement_uploads USING btree (id);
+
 CREATE UNIQUE INDEX "index_achievements_on_namespace_id_LOWER_name" ON achievements USING btree (namespace_id, lower(name));
 
 CREATE INDEX index_activation_metrics_on_namespace_id ON activation_metrics USING btree (namespace_id);
@@ -58161,9 +58164,6 @@ ALTER TABLE ONLY software_license_policies
 ALTER TABLE ONLY epics
     ADD CONSTRAINT fk_dccd3f98fc FOREIGN KEY (assignee_id) REFERENCES users(id) ON DELETE SET NULL;
 
-ALTER TABLE ONLY achievement_upload_states
-    ADD CONSTRAINT fk_dd96a3fb92 FOREIGN KEY (achievement_upload_id) REFERENCES uploads_archived(id) ON DELETE CASCADE;
-
 ALTER TABLE ONLY import_offline_configurations
     ADD CONSTRAINT fk_de42c075bd FOREIGN KEY (offline_export_id) REFERENCES import_offline_exports(id) ON DELETE CASCADE;
 
@@ -60533,6 +60533,9 @@ ALTER TABLE ONLY packages_debian_group_component_files
 
 ALTER TABLE ONLY incident_management_timeline_event_tags
     ADD CONSTRAINT fk_rails_dd5c91484e FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE;
+
+ALTER TABLE ONLY achievement_upload_states
+    ADD CONSTRAINT fk_rails_dd96a3fb92 FOREIGN KEY (achievement_upload_id) REFERENCES achievement_uploads(id) ON DELETE CASCADE;
 
 ALTER TABLE ONLY user_callouts
     ADD CONSTRAINT fk_rails_ddfdd80f3d FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE;

@@ -193,7 +193,7 @@ you must do an initial setup and perform ongoing maintenance.
 Initial setup:
 
 - Complete the offline environment requirements for
-  [dependency scanning (SBOM)](dependency_scanning_sbom/_index.md#offline-support).
+  [dependency scanning (SBOM)](dependency_scanning_sbom/_index.md#offline-environment).
 
 Ongoing maintenance:
 

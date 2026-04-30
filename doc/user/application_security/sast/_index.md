@@ -682,7 +682,7 @@ it by using [custom CI/CD variables](#available-cicd-variables).
 If your private Maven repository requires login credentials,
 you can use the `MAVEN_CLI_OPTS` CI/CD variable.
 
-For more information, see [how to use private Maven repositories](../dependency_scanning/_index.md#authenticate-with-a-private-maven-repository).
+For more information, see [how to use private Maven repositories](../dependency_scanning/legacy_dependency_scanning/_index.md#authenticate-with-a-private-maven-repository).
 
 ### Enabling Kubesec analyzer
 

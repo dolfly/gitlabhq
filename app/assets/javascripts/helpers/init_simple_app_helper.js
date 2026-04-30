@@ -35,7 +35,7 @@ const getApolloProvider = (apolloProviderOption) => {
  * converted from json and passed on to the component as a provide values.
  *
  * @param {string} selector css selector for where to build
- * @param {Vue.component} component The Vue compoment to be built as the root of the app
+ * @param {Vue.component} component The Vue component to be built as the root of the app
  * @param {{withApolloProvider: boolean|VueApollo}} options. extra options to be passed to the vue app
  *      withApolloProvider: if true, instantiates a default apolloProvider. Also accepts and instance of VueApollo
  * @param {{name: string}} Name of the app

@@ -34,7 +34,7 @@ RSpec.describe 'Admin Mode Login', :with_current_organization, feature_category:
 
       context 'using one-time code' do
         before do
-          gitlab_sign_in(user, remember: true) # This test checks that even when the user is remembered for sign-in, the user still needs to sign in for Admin mode.
+          submit_sign_in_form_for(user, remember: true) # This test checks that even when the user is remembered for sign-in, the user still needs to sign in for Admin mode.
           expect_main_sign_in_success(user.current_otp)
 
           enable_admin_mode!(user, use_ui: true, with_2fa: true)

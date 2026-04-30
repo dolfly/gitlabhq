@@ -17,7 +17,7 @@ When working with dependency scanning, you might encounter the following issues.
 ## Debug-level logging
 
 Debug-level logging can help when troubleshooting. For details, see
-[debug-level logging](../troubleshooting_application_security.md#turn-on-debug-level-logging).
+[debug-level logging](../../troubleshooting_application_security.md#turn-on-debug-level-logging).
 
 ## Run the analyzer in a local environment
 
@@ -52,7 +52,7 @@ Generally, the approach is the following:
 1. Define a dedicated converter job in your `.gitlab-ci.yml` file.
    Use a suitable Docker image, script, or both to facilitate the conversion.
 1. Let that job upload the converted, supported file as an artifact.
-1. Add [`dependencies: [<your-converter-job>]`](../../../ci/yaml/_index.md#dependencies)
+1. Add [`dependencies: [<your-converter-job>]`](../../../../ci/yaml/_index.md#dependencies)
    to your `dependency_scanning` job to make use of the converted definitions files.
 
 For example, Poetry projects that only have a `pyproject.toml`
@@ -75,14 +75,14 @@ gemnasium-python-dependency_scanning:
 ## Dependency scanning jobs are running unexpectedly
 
 The [dependency scanning CI template](https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Jobs/Dependency-Scanning.gitlab-ci.yml)
-uses the [`rules:exists`](../../../ci/yaml/_index.md#rulesexists)
+uses the [`rules:exists`](../../../../ci/yaml/_index.md#rulesexists)
 syntax. This directive is limited to 10000 checks and always returns `true` after reaching this
 number. Because of this, and depending on the number of files in your repository, a dependency
-scanning job might be triggered even if the scanner doesn't support your project. For more details about this limitation, see the [`rules:exists` documentation](../../../ci/yaml/_index.md#rulesexists).
+scanning job might be triggered even if the scanner doesn't support your project. For more details about this limitation, see the [`rules:exists` documentation](../../../../ci/yaml/_index.md#rulesexists).
 
 ## Error: `dependency_scanning is used for configuration only, and its script should not be executed`
 
-For information, see [application security testing troubleshooting](../troubleshooting_application_security.md#error-job-is-used-for-configuration-only-and-its-script-should-not-be-executed).
+For information, see [application security testing troubleshooting](../../troubleshooting_application_security.md#error-job-is-used-for-configuration-only-and-its-script-should-not-be-executed).
 
 ## Import multiple certificates for Java-based projects
 
@@ -354,7 +354,7 @@ Make the file executable by running `chmod +ux gradlew` locally and pushing it t
 
 ## Dependency scanning nebula lock creation fails due to unsupported Gradle version
 
-When attempting to create [dependency.lockfiles](dependency_scanning_sbom/_index.md#dependency-lock-plugin) with an unsupported Gradle version (9.0 or above) the following error occurs:
+When attempting to create [dependency.lockfiles](../dependency_scanning_sbom/_index.md#dependency-lock-plugin) with an unsupported Gradle version (9.0 or above) the following error occurs:
 
 ```plaintext
 FAILURE: Build failed with an exception.
@@ -369,9 +369,9 @@ Try downgrading your gradle build to Gradle 8.10.2.
 
 ## Dependency scanning scanner is no longer `Gemnasium`
 
-Historically, the scanner used by dependency scanning is `Gemnasium` and this is what user can see on the [vulnerability page](../vulnerabilities/_index.md).
+Historically, the scanner used by dependency scanning is `Gemnasium` and this is what user can see on the [vulnerability page](../../vulnerabilities/_index.md).
 
-With the roll out of [Dependency scanning by using SBOM](dependency_scanning_sbom/_index.md), the `Gemnasium` scanner is replaced by the built-in `GitLab SBoM Vulnerability Scanner`. This new scanner is no longer executed in a CI/CD job but rather within the GitLab platform. While the two scanners are expected to provide the same results, because the SBOM scan happens after the existing dependency scanning CI/CD job, existing vulnerabilities have their scanner value updated with the new `GitLab SBoM Vulnerability Scanner`.
+With the roll out of [Dependency scanning by using SBOM](../dependency_scanning_sbom/_index.md), the `Gemnasium` scanner is replaced by the built-in `GitLab SBoM Vulnerability Scanner`. This new scanner is no longer executed in a CI/CD job but rather within the GitLab platform. While the two scanners are expected to provide the same results, because the SBOM scan happens after the existing dependency scanning CI/CD job, existing vulnerabilities have their scanner value updated with the new `GitLab SBoM Vulnerability Scanner`.
 
 The `GitLab SBoM Vulnerability Scanner` is the only expected value for the GitLab
 built-in dependency scanning feature.
@@ -409,7 +409,7 @@ but no vulnerabilities are reported in the pipeline security tab.
 On GitLab 18.10 and later, the security tab displays the message: "SBOM report is missing required
 GitLab metadata properties needed for vulnerability scanning."
 
-This issue occurs when the SBOM is missing required [GitLab CycloneDX properties](../../../development/sec/cyclonedx_property_taxonomy.md).
+This issue occurs when the SBOM is missing required [GitLab CycloneDX properties](../../../../development/sec/cyclonedx_property_taxonomy.md).
 Without these properties, the vulnerability scanner cannot construct findings for the SBOM's
 components. The dependency list is still populated, but no vulnerabilities are reported.
 
@@ -431,7 +431,7 @@ To resolve this problem, choose one of the following approaches:
 - Upload each SBOM separately.
 
   Instead of merging, upload each SBOM as a separate
-  [`artifacts: reports: cyclonedx:`](../../../ci/yaml/artifacts_reports.md#artifactsreportscyclonedx) entry.
+  [`artifacts: reports: cyclonedx:`](../../../../ci/yaml/artifacts_reports.md#artifactsreportscyclonedx) entry.
   This preserves the GitLab-specific properties in each file.
 - Add properties to third-party SBOMs.
 
@@ -446,7 +446,7 @@ To resolve this problem, choose one of the following approaches:
   If your SBOM contains components from multiple lockfiles, set `input_file:path` on each
   component's `properties` array instead of in metadata, so each component points to its
   correct source file. For the full list of supported properties, see the
-  [GitLab CycloneDX property taxonomy](../../../development/sec/cyclonedx_property_taxonomy.md).
+  [GitLab CycloneDX property taxonomy](../../../../development/sec/cyclonedx_property_taxonomy.md).
 
 For more information, see [issue 542813](https://gitlab.com/gitlab-org/gitlab/-/work_items/542813)
 and [merge request 221549](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/221549).
@@ -458,7 +458,7 @@ even though they originate from different lockfiles.
 
 This issue occurs when the `gitlab:dependency_scanning:input_file:path` property is set in `metadata.properties`
 rather than per-component. Per the
-[property taxonomy](../../../development/sec/cyclonedx_property_taxonomy.md), metadata-level
+[property taxonomy](../../../../development/sec/cyclonedx_property_taxonomy.md), metadata-level
 properties apply to all objects in the document, so a single value overrides all components.
 
 To resolve this issue, set `input_file:path` on each component's `properties` array individually, not in the

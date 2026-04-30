@@ -223,7 +223,7 @@ extend its implementation to multiple projects and groups. For details, see
 [Enforce scanning on multiple projects](#enforce-scanning-on-multiple-projects).
 
 If you have unique requirements, dependency scanning with SBOM can be run in
-[offline environments](#offline-support).
+[offline environments](#offline-environment).
 
 ## Supported package types
 
@@ -938,7 +938,7 @@ The dependency scanning report follows the generic process for [security scannin
 - If the dependency scanning report is declared by a CI/CD job on a non-default branch: security findings are created,
   and can be seen in the [security tab of the pipeline view](../../detect/security_scanning_results.md) and MR security widget.
 
-## Offline support
+## Offline environment
 
 {{< details >}}
 

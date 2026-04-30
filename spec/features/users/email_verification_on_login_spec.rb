@@ -51,7 +51,7 @@ RSpec.describe 'Email Verification On Login', :with_current_organization, :clean
 
     it 'locks at MAXIMUM_ATTEMPTS' do
       perform_enqueued_jobs do
-        gitlab_sign_in(user, password: 'wrong_password')
+        submit_sign_in_form_for(user, password: 'wrong_password')
         expect(page).to have_content(_('Invalid login or password.'))
 
         user.reload
@@ -74,7 +74,7 @@ RSpec.describe 'Email Verification On Login', :with_current_organization, :clean
     describe 'login with valid credentials after account lock' do
       it 'triggers email verification process' do
         perform_enqueued_jobs do
-          gitlab_sign_in(user)
+          submit_sign_in_form_for(user)
           expect_verification_triggered(reason: 'new unlock token needed')
         end
       end
@@ -87,7 +87,8 @@ RSpec.describe 'Email Verification On Login', :with_current_organization, :clean
 
       it 'shows success page with redirect after verification' do
         perform_enqueued_jobs do
-          gitlab_sign_in(user)
+          submit_sign_in_form_for(user)
+
           code = expect_instructions_email_and_extract_code
           perform_verification_with_code(code)
           expect_successful_verification
@@ -114,7 +115,7 @@ RSpec.describe 'Email Verification On Login', :with_current_organization, :clean
         # Here we only verify the UI response when the limit is already exceeded.
         allow(Gitlab::ApplicationRateLimiter).to receive(:throttled?)
           .with(:user_sign_in, hash_including(scope: user)).and_return(true)
-        gitlab_sign_in(user)
+        submit_sign_in_form_for(user)
       end
 
       it 'shows an error message on on the login page' do
@@ -128,7 +129,9 @@ RSpec.describe 'Email Verification On Login', :with_current_organization, :clean
     describe 'resending a new code' do
       it 'resends a new code' do
         perform_enqueued_jobs do
-          gitlab_sign_in(user)
+          submit_sign_in_form_for(user)
+          expect(page).to have_content(s_('IdentityVerification|Help us protect your account'))
+
           code = expect_instructions_email_and_extract_code
           expect_log_message('Instructions Sent', reason: 'new unlock token needed')
 
@@ -147,7 +150,7 @@ RSpec.describe 'Email Verification On Login', :with_current_organization, :clean
         allow(Gitlab::ApplicationRateLimiter).to receive(:throttled?)
           .with(:email_verification_code_send, hash_including(scope: user)).and_return(false, true)
 
-        gitlab_sign_in(user)
+        submit_sign_in_form_for(user)
         expect(page).to have_button s_('IdentityVerification|Resend code')
         click_request_new_code_button
 
@@ -160,7 +163,9 @@ RSpec.describe 'Email Verification On Login', :with_current_organization, :clean
 
         it 'resends a new code' do
           perform_enqueued_jobs do
-            gitlab_sign_in(user)
+            submit_sign_in_form_for(user)
+            expect(page).to have_content(s_('IdentityVerification|Help us protect your account'))
+
             code_from_primary_email = expect_instructions_email_and_extract_code
             expect_log_message('Instructions Sent', reason: 'new unlock token needed')
 
@@ -181,13 +186,13 @@ RSpec.describe 'Email Verification On Login', :with_current_organization, :clean
     describe 'resending a new code when an existing code expires' do
       it 'resends a new code' do
         perform_enqueued_jobs do
-          gitlab_sign_in(user)
+          submit_sign_in_form_for(user)
           code = expect_instructions_email_and_extract_code
           token_valid_for = Users::EmailVerification::ValidateTokenService::TOKEN_VALID_FOR_MINUTES + 1
 
           # Signing in again prompts for the code and sends a new one when the current code is expired
           travel_to(token_valid_for.minutes.from_now) do
-            gitlab_sign_in(user)
+            submit_sign_in_form_for(user)
             expect(page).to have_current_path(new_user_session_path)
             expect(page).to have_content(s_('IdentityVerification|Help us protect your account'))
 
@@ -208,7 +213,7 @@ RSpec.describe 'Email Verification On Login', :with_current_organization, :clean
           .with(:email_verification, anything).and_return(true, false)
 
         perform_enqueued_jobs do
-          gitlab_sign_in(user)
+          submit_sign_in_form_for(user)
           code = expect_instructions_email_and_extract_code
 
           perform_verification_with_code('123456')
@@ -226,7 +231,7 @@ RSpec.describe 'Email Verification On Login', :with_current_organization, :clean
       end
 
       it 'verifies invalid codes' do
-        gitlab_sign_in(user)
+        submit_sign_in_form_for(user)
 
         # Verify an invalid code
         perform_verification_with_code('123456')
@@ -239,7 +244,7 @@ RSpec.describe 'Email Verification On Login', :with_current_organization, :clean
 
       it 'verifies expired codes' do
         perform_enqueued_jobs do
-          gitlab_sign_in(user)
+          submit_sign_in_form_for(user)
 
           # Expect an instructions email to be sent with a code
           code = expect_instructions_email_and_extract_code
@@ -261,7 +266,8 @@ RSpec.describe 'Email Verification On Login', :with_current_organization, :clean
       let(:email_verification_required) { false }
 
       it 'does not show email verification but does not allow sign in while lock is active' do
-        gitlab_sign_in(user)
+        submit_sign_in_form_for(user)
+
         expect(page).to have_current_path(new_user_session_path)
         expect(page).not_to have_content(s_('IdentityVerification|Help us protect your account'))
       end
@@ -299,14 +305,14 @@ RSpec.describe 'Email Verification On Login', :with_current_organization, :clean
       context 'with email_verification_required feature flag enabled' do
         it 'triggers email verification process' do
           perform_enqueued_jobs do
-            gitlab_sign_in(user)
+            submit_sign_in_form_for(user)
             expect_verification_triggered(reason: 'sign in from untrusted IP address')
           end
         end
 
         it 'shows success page with redirect after verification' do
           perform_enqueued_jobs do
-            gitlab_sign_in(user)
+            submit_sign_in_form_for(user)
             code = expect_instructions_email_and_extract_code
             perform_verification_with_code(code)
             expect_successful_verification
@@ -344,7 +350,7 @@ RSpec.describe 'Email Verification On Login', :with_current_organization, :clean
 
       it 'token still works as expected' do
         perform_enqueued_jobs do
-          gitlab_sign_in(user)
+          submit_sign_in_form_for(user)
           expect(page).to have_content(s_('IdentityVerification|Help us protect your account'))
           code = expect_instructions_email_and_extract_code
 
@@ -383,7 +389,7 @@ RSpec.describe 'Email Verification On Login', :with_current_organization, :clean
 
       it 'the unlock link still works' do
         perform_enqueued_jobs do
-          gitlab_sign_in(user, password: 'wrong_password')
+          submit_sign_in_form_for(user, password: 'wrong_password')
 
           # The user is locked and unlock instructions are sent
           expect(page).to have_content(_('Invalid login or password.'))
@@ -435,7 +441,7 @@ RSpec.describe 'Email Verification On Login', :with_current_organization, :clean
       let(:user) { create(:user, email_otp_required_after: yesterday) }
 
       it 'does not show skip for now button in email verification page' do
-        gitlab_sign_in(user)
+        submit_sign_in_form_for(user)
         expect_no_skip_for_now_button
       end
     end
@@ -448,7 +454,7 @@ RSpec.describe 'Email Verification On Login', :with_current_organization, :clean
       end
 
       it 'does not show skip for now button in email verification page' do
-        gitlab_sign_in(user)
+        submit_sign_in_form_for(user)
         expect_no_skip_for_now_button
       end
     end
@@ -459,7 +465,7 @@ RSpec.describe 'Email Verification On Login', :with_current_organization, :clean
       end
 
       it 'does not show skip for now button in email verification page' do
-        gitlab_sign_in(user)
+        submit_sign_in_form_for(user)
         expect_no_skip_for_now_button
       end
     end
@@ -473,7 +479,7 @@ RSpec.describe 'Email Verification On Login', :with_current_organization, :clean
       end
 
       it 'user can skip email verification and will be reminded of the email otp required date' do
-        gitlab_sign_in(user)
+        submit_sign_in_form_for(user)
 
         expect(page).to have_content(s_('IdentityVerification|Help us protect your account'))
         expect(page).to have_button(s_('IdentityVerification|Skip for now'))
@@ -487,7 +493,7 @@ RSpec.describe 'Email Verification On Login', :with_current_organization, :clean
 
       it 'user can still choose to complete the email verification' do
         perform_enqueued_jobs do
-          gitlab_sign_in(user)
+          submit_sign_in_form_for(user)
           code = expect_instructions_email_and_extract_code
           perform_verification_with_code(code)
           expect(page).to have_current_path(root_path)
@@ -530,7 +536,7 @@ RSpec.describe 'Email Verification On Login', :with_current_organization, :clean
   end
 
   def expect_no_duplicated_verification_email
-    gitlab_sign_in(user)
+    submit_sign_in_form_for(user)
     # First login triggers email
     wait_for('verification email delivered') do
       !ActionMailer::Base.deliveries.empty?
@@ -539,12 +545,13 @@ RSpec.describe 'Email Verification On Login', :with_current_organization, :clean
     expect(ActionMailer::Base.deliveries.size).to eq(1)
 
     ActionMailer::Base.deliveries.clear
-    gitlab_sign_in(user)
-    # Second login should not send another email
-    expect(ActionMailer::Base.deliveries.size).to eq(0)
+    submit_sign_in_form_for(user)
 
     expect(page).to have_current_path(new_user_session_path)
     expect(page).to have_content(s_('IdentityVerification|Help us protect your account'))
+
+    # Second login should not send another email
+    expect(ActionMailer::Base.deliveries.size).to eq(0)
   end
 
   def expect_log_message(event = nil, times = 1, reason: '', message: nil)

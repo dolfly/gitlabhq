@@ -201,7 +201,7 @@ file.
 For more information about overriding security jobs, see:
 
 - [Override SAST jobs](../sast/_index.md#override-sast-jobs).
-- [Overriding dependency scanning jobs](../dependency_scanning/_index.md#overriding-dependency-scanning-jobs).
+- [Overriding dependency scanning jobs](../dependency_scanning/dependency_scanning_sbom/_index.md#customizing-analyzer-behavior).
 - [Overriding container scanning jobs](../container_scanning/_index.md#overriding-the-container-scanning-template).
 - [Overriding secret detection jobs](../secret_detection/pipeline/configure.md).
 - [Overriding DAST jobs](../dast/browser/_index.md).
