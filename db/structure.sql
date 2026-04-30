@@ -45209,6 +45209,8 @@ CREATE INDEX index_abuse_report_upload_states_on_verification_state ON abuse_rep
 
 CREATE INDEX index_abuse_report_upload_states_pending_verification ON abuse_report_upload_states USING btree (verified_at NULLS FIRST) WHERE (verification_state = 0);
 
+CREATE UNIQUE INDEX index_abuse_report_uploads_on_id ON abuse_report_uploads USING btree (id);
+
 CREATE UNIQUE INDEX index_abuse_report_user_mentions_on_abuse_report_id_and_note_id ON abuse_report_user_mentions USING btree (abuse_report_id, note_id);
 
 CREATE INDEX index_abuse_report_user_mentions_on_note_id ON abuse_report_user_mentions USING btree (note_id);
@@ -46580,6 +46582,8 @@ CREATE INDEX index_description_versions_on_issue_id ON description_versions USIN
 CREATE INDEX index_description_versions_on_merge_request_id ON description_versions USING btree (merge_request_id) WHERE (merge_request_id IS NOT NULL);
 
 CREATE INDEX index_design_management_action_upload_states_on_namespace_id ON design_management_action_upload_states USING btree (namespace_id);
+
+CREATE UNIQUE INDEX index_design_management_action_uploads_on_id ON design_management_action_uploads USING btree (id);
 
 CREATE INDEX index_design_management_designs_issue_id_relative_position_id ON design_management_designs USING btree (issue_id, relative_position, id);
 
@@ -48857,6 +48861,8 @@ CREATE INDEX index_project_upload_states_on_verification_state ON project_upload
 
 CREATE INDEX index_project_upload_states_pending_verification ON project_upload_states USING btree (verified_at NULLS FIRST) WHERE (verification_state = 0);
 
+CREATE UNIQUE INDEX index_project_uploads_on_id ON project_uploads USING btree (id);
+
 CREATE UNIQUE INDEX index_project_user_callouts_feature ON user_project_callouts USING btree (user_id, feature_name, project_id);
 
 CREATE UNIQUE INDEX index_project_wiki_repositories_on_project_id ON project_wiki_repositories USING btree (project_id);
@@ -49912,6 +49918,8 @@ CREATE INDEX index_user_upload_states_on_verification_started ON user_upload_sta
 CREATE INDEX index_user_upload_states_on_verification_state ON user_upload_states USING btree (verification_state);
 
 CREATE INDEX index_user_upload_states_pending_verification ON user_upload_states USING btree (verified_at NULLS FIRST) WHERE (verification_state = 0);
+
+CREATE UNIQUE INDEX index_user_uploads_on_id ON user_uploads USING btree (id);
 
 CREATE INDEX index_users_for_active_billable_users ON users USING btree (id) WHERE (((state)::text = 'active'::text) AND (user_type = ANY (ARRAY[0, 6, 4, 13])) AND (user_type = ANY (ARRAY[0, 4, 5])));
 
@@ -56805,9 +56813,6 @@ ALTER TABLE ONLY resource_label_events
 ALTER TABLE ONLY user_achievements
     ADD CONSTRAINT fk_60b12fcda3 FOREIGN KEY (awarded_by_user_id) REFERENCES users(id) ON DELETE SET NULL;
 
-ALTER TABLE ONLY abuse_report_upload_states
-    ADD CONSTRAINT fk_6105b8ff69 FOREIGN KEY (abuse_report_upload_id) REFERENCES uploads_archived(id) ON DELETE CASCADE;
-
 ALTER TABLE ONLY merge_requests
     ADD CONSTRAINT fk_6149611a04 FOREIGN KEY (assignee_id) REFERENCES users(id) ON DELETE SET NULL;
 
@@ -57542,9 +57547,6 @@ ALTER TABLE ONLY ml_candidates
 
 ALTER TABLE ONLY subscription_add_on_purchases
     ADD CONSTRAINT fk_a1db288990 FOREIGN KEY (namespace_id) REFERENCES namespaces(id) ON DELETE CASCADE;
-
-ALTER TABLE ONLY project_upload_states
-    ADD CONSTRAINT fk_a21cb2b8a2 FOREIGN KEY (project_upload_id) REFERENCES uploads_archived(id) ON DELETE CASCADE;
 
 ALTER TABLE ONLY approval_policy_merge_request_bypass_events
     ADD CONSTRAINT fk_a24f768758 FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL;
@@ -58347,9 +58349,6 @@ ALTER TABLE ONLY cluster_agent_migrations
 ALTER TABLE ONLY import_export_upload_upload_states
     ADD CONSTRAINT fk_edcbc44d1e FOREIGN KEY (namespace_id) REFERENCES namespaces(id) ON DELETE CASCADE;
 
-ALTER TABLE ONLY user_upload_states
-    ADD CONSTRAINT fk_ee17d267b8 FOREIGN KEY (user_upload_id) REFERENCES uploads_archived(id) ON DELETE CASCADE;
-
 ALTER TABLE ONLY events
     ADD CONSTRAINT fk_eea90e3209 FOREIGN KEY (personal_namespace_id) REFERENCES namespaces(id) ON DELETE CASCADE;
 
@@ -58466,9 +58465,6 @@ ALTER TABLE ONLY group_upload_states
 
 ALTER TABLE ONLY abuse_report_user_mentions
     ADD CONSTRAINT fk_f4c2b15ef9 FOREIGN KEY (organization_id) REFERENCES organizations(id) ON DELETE CASCADE;
-
-ALTER TABLE ONLY design_management_action_upload_states
-    ADD CONSTRAINT fk_f51f732561 FOREIGN KEY (design_management_action_upload_id) REFERENCES uploads_archived(id) ON DELETE CASCADE;
 
 ALTER TABLE ONLY scan_result_policy_violations
     ADD CONSTRAINT fk_f53706dbdd FOREIGN KEY (scan_result_policy_id) REFERENCES scan_result_policies(id) ON DELETE CASCADE;
@@ -59505,6 +59501,9 @@ ALTER TABLE ONLY vulnerability_state_transitions
 ALTER TABLE ONLY user_highest_roles
     ADD CONSTRAINT fk_rails_60f6c325a6 FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE;
 
+ALTER TABLE ONLY abuse_report_upload_states
+    ADD CONSTRAINT fk_rails_6105b8ff69 FOREIGN KEY (abuse_report_upload_id) REFERENCES abuse_report_uploads(id) ON DELETE CASCADE;
+
 ALTER TABLE ONLY dependency_proxy_group_settings
     ADD CONSTRAINT fk_rails_616ddd680a FOREIGN KEY (group_id) REFERENCES namespaces(id) ON DELETE CASCADE;
 
@@ -60062,6 +60061,9 @@ ALTER TABLE ONLY virtual_registries_packages_maven_local_upstreams
 
 ALTER TABLE ONLY project_aliases
     ADD CONSTRAINT fk_rails_a1804f74a7 FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE;
+
+ALTER TABLE ONLY project_upload_states
+    ADD CONSTRAINT fk_rails_a21cb2b8a2 FOREIGN KEY (project_upload_id) REFERENCES project_uploads(id) ON DELETE CASCADE;
 
 ALTER TABLE ONLY dependency_proxy_packages_settings
     ADD CONSTRAINT fk_rails_a248d0c26f FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE;
@@ -60687,6 +60689,9 @@ ALTER TABLE ONLY packages_debian_group_distributions
 ALTER TABLE ONLY ci_daily_build_group_report_results
     ADD CONSTRAINT fk_rails_ee072d13b3_p FOREIGN KEY (partition_id, last_pipeline_id) REFERENCES p_ci_pipelines(partition_id, id) ON UPDATE CASCADE ON DELETE CASCADE;
 
+ALTER TABLE ONLY user_upload_states
+    ADD CONSTRAINT fk_rails_ee17d267b8 FOREIGN KEY (user_upload_id) REFERENCES user_uploads(id) ON DELETE CASCADE;
+
 ALTER TABLE ONLY import_source_users
     ADD CONSTRAINT fk_rails_ee30e569be FOREIGN KEY (namespace_id) REFERENCES namespaces(id) ON DELETE CASCADE;
 
@@ -60749,6 +60754,9 @@ ALTER TABLE ONLY design_management_designs_versions
 
 ALTER TABLE ONLY vulnerability_export_parts
     ADD CONSTRAINT fk_rails_f50ca1aabf FOREIGN KEY (vulnerability_export_id) REFERENCES vulnerability_exports(id) ON DELETE CASCADE;
+
+ALTER TABLE ONLY design_management_action_upload_states
+    ADD CONSTRAINT fk_rails_f51f732561 FOREIGN KEY (design_management_action_upload_id) REFERENCES design_management_action_uploads(id) ON DELETE CASCADE;
 
 ALTER TABLE ONLY resource_state_events
     ADD CONSTRAINT fk_rails_f5827a7ccd FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL;

@@ -5734,6 +5734,9 @@ msgstr ""
 msgid "AdminArea|Reporter"
 msgstr ""
 
+msgid "AdminArea|Security Manager"
+msgstr ""
+
 msgid "AdminArea|Start free trial"
 msgstr ""
 
@@ -9488,6 +9491,9 @@ msgid "AnalyticsDashboards|Dashboards created by GitLab"
 msgstr ""
 
 msgid "AnalyticsDashboards|Dashboards created by me"
+msgstr ""
+
+msgid "AnalyticsDashboards|Failed to load dashboard. Please try again."
 msgstr ""
 
 msgid "AnalyticsDashboards|Failed to load dashboards list. Please try again."
@@ -65401,6 +65407,9 @@ msgid "SecurityOrchestration|Excluded projects"
 msgstr ""
 
 msgid "SecurityOrchestration|Exit Code"
+msgstr ""
+
+msgid "SecurityOrchestration|Experimental feature. Only the four built-in security categories (Business impact, Application, Business unit, and Exposure) are supported. Custom categories are not supported."
 msgstr ""
 
 msgid "SecurityOrchestration|Explain why this is blocked..."

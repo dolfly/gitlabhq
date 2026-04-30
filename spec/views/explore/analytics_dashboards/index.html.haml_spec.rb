@@ -14,5 +14,6 @@ RSpec.describe 'explore/analytics_dashboards/index.html.haml', feature_category:
     render
 
     expect(rendered).to have_selector('#js-explore-analytics-dashboards')
+    expect(rendered).to have_selector('[data-explore-analytics-dashboards-path="/explore/analytics_dashboards"]')
   end
 end

@@ -2,13 +2,13 @@
 import { GlTabs, GlSearchBoxByType } from '@gitlab/ui';
 import { debounce } from 'lodash-es';
 import { DEFAULT_DEBOUNCE_AND_THROTTLE_MS } from '~/lib/utils/constants';
-import DashboardListTab from './dashboard_list_tab.vue';
+import DashboardListTab from '../components/dashboard_list_tab.vue';
 
 const DEFAULT_ACTIVE_TAB_INDEX = 2; // Defaults to the 'All' tab
 const MIN_SEARCH_TEXT_LENGTH = 3;
 
 export default {
-  name: 'AnalyticsDashboards',
+  name: 'ExploreAnalyticsDashboardsList',
   components: { DashboardListTab, GlTabs, GlSearchBoxByType },
   inject: ['currentUserId'],
   data() {

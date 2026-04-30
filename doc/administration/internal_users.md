@@ -84,4 +84,4 @@ Bot access has these limits:
   the root ancestor group.
 
 To set up Security Policy Bot access, see
-[scheduled pipeline execution policies](../user/application_security/policies/scheduled_pipeline_execution_policies.md#allow-security-policy-bot-access-to-private-cicd-configuration-projects).
+[scheduled pipeline execution policies](../user/application_security/policies/scheduled_pipeline_execution_policies.md#option-2-allow-security-policy-bot-access-to-private-projects).

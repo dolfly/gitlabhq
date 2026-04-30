@@ -2698,6 +2698,32 @@ RSpec.describe Ci::Pipeline, :mailer, factory_default: :keep, feature_category: 
       end
     end
 
+    describe 'TrackFirstPipelineSucceededWorker' do
+      before do
+        allow(PipelineMetricsWorker).to receive(:perform_async)
+      end
+
+      context 'when no first pipeline success has been recorded for the project' do
+        it 'enqueues TrackFirstPipelineSucceededWorker' do
+          expect(Ci::TrackFirstPipelineSucceededWorker).to receive(:perform_async).with(pipeline.id)
+
+          pipeline.succeed
+        end
+      end
+
+      context 'when a first pipeline success has already been recorded for the project' do
+        before do
+          create(:ci_project_metric, :with_first_pipeline_succeeded, project: project)
+        end
+
+        it 'does not enqueue TrackFirstPipelineSucceededWorker' do
+          expect(Ci::TrackFirstPipelineSucceededWorker).not_to receive(:perform_async)
+
+          pipeline.succeed
+        end
+      end
+    end
+
     describe 'merge on success' do
       let(:pipeline) { create(:ci_empty_pipeline, status: from_status) }
 

@@ -38,8 +38,8 @@ The following table lists the default model for each GitLab Duo feature.
 | Code Review Summary | Claude Sonnet 4 Vertex |
 | Code Review | Claude Sonnet 4.6 Vertex |
 | **Other GitLab Duo features** | |
-| Vulnerability Explanation | Claude Sonnet 4.5 Vertex |
-| Vulnerability Resolution | Claude Sonnet 4.5 |
+| Vulnerability Explanation | Claude Sonnet 4.6 Vertex |
+| Vulnerability Resolution | Claude Sonnet 4.6 Vertex |
 | Discussion Summary | Claude Sonnet 4.5 Vertex |
 | GitLab Duo for CLI | Claude Haiku 4.5 |
 

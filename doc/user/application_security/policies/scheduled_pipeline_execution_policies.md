@@ -244,41 +244,74 @@ pipeline_execution_schedule_policy:
 
 In this example, if all of the specified branches exist in the project, the policy creates four separate pipelines (one for each branch).
 
-## Requirements
+## Prerequisites
 
-To use scheduled pipeline execution policies:
+To use scheduled pipeline execution policies, your project must meet the following requirements:
 
-1. Store CI/CD configuration in your security policy project, public projects, or private projects that explicitly allow Security Policy Bot access.
-1. In your security policy project's **Settings** > **General** > **Visibility, project features, permissions** section, enable the **Grant security policy project access to CI/CD configuration** setting.
-1. Ensure your CI/CD configuration includes appropriate workflow rules for scheduled pipelines.
+- Your CI/CD configuration file is stored in one of the following locations:
+  - Your security policy project
+  - A public project
+  - A private project with access enabled (see [Enable access to CI/CD configuration files](#enable-access-to-cicd-configuration-files))
+- Your CI/CD configuration file must include appropriate workflow rules for scheduled pipelines.
 
-### Allow Security Policy Bot access to private CI/CD configuration projects
+## Enable access to CI/CD configuration files
 
-Use these steps when your policy `include:` references a private project:
+When your policy references CI/CD configuration files, the Security Policy Bot must have access to them.
+Files in public projects are accessible by default.
+For files in your security policy project or other private projects, enable access using one of the following options.
+
+### Option 1: Grant access to files in the security policy project
+
+If your CI/CD configuration files are stored in the security policy project itself, use this option.
+This setting applies to any user who triggers a pipeline with pipeline execution policies injected.
+
+1. In your security policy project, in the left sidebar, select **Settings** > **General**.
+1. Expand **Visibility, project features, permissions**.
+1. Turn on **Grant security policy project access to CI/CD configuration**.
+1. Select **Save changes**.
+
+### Option 2: Allow Security Policy Bot access to private projects
+
+If your policy `include:` value references a CI/CD configuration file stored in a private project
+other than the security policy project, use this option.
+This setting applies only to Security Policy Bot users and can be enabled on any project.
+
+1. Enable the `pipeline_execution_policy_bot_access` experiment in your security policy project.
+   In the `.gitlab/security-policies/policy.yml` file, add the following lines:
+
+   ```yaml
+   experiments:
+     pipeline_execution_policy_bot_access:
+       enabled: true
+   ```
+
+   > [!note]
+   > Your private project or one of its parent groups must be linked to this security policy project.
+   > If it is not already linked, you must [link the security policy project](enforcement/security_policy_projects.md#link-to-a-security-policy-project).
 
 1. In the private project that stores CI/CD files, in the left sidebar, select **Settings** >
    **General**.
 1. Expand **Visibility, project features, permissions**.
 1. In **Security policy bot access**, select
    **Allow security policy bots to access CI/CD configuration files in this project**.
-1. In **Allowed file patterns**, add one or more comma-separated glob patterns.
+1. In **Allowed file patterns**, add one or more glob patterns to specify the files that bots can access, separated by commas.
 1. Select **Save changes**.
 
-The allowed file patterns must match the `include:file` paths.
+The glob patterns for the allowed files must match the paths specified in the `include:file:` value. For example:
 
 - For `include:file: ci/security-scan.yml`, use `ci/**/*.yml` or `ci/security-scan.yml`.
 - For `include:file: policy-ci.yml`, use `*.yml` or `policy-ci.yml`.
-- For multiple directories, use multiple patterns, like `ci/**/*.yml, templates/**/*.yml`.
+- For multiple directories, use multiple patterns, separated by commas, like `ci/**/*.yml, templates/**/*.yml`.
 
-### Security Policy Bot User
+## Security Policy Bot User
 
 Scheduled pipelines are executed by the Security Policy Bot User, a dedicated system account that GitLab automatically creates for each project the security policy applies to.
 To ensure that policy execution remains isolated and secure, the bot user has the following security restrictions:
 
 - The bot user is a member of that specific project only. It cannot be added to groups or other projects.
 - The bot user can access files in the security policy project and public projects.
-- The bot user can access files in private projects only when those projects explicitly enable
-  **Security policy bot access** and the file path matches an allowed pattern.
+- The bot user can access files in private projects only if those projects explicitly enable
+  **Security policy bot access** and the file path matches the pattern specified in the project.
 
 Because the bot user is not a member of other projects, it cannot complete any of the following actions:
 

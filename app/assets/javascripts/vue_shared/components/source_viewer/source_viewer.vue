@@ -78,13 +78,9 @@ export default {
   computed: {
     blameInfo() {
       return this.blameData.reduce((result, blame, index) => {
-        if (shouldRender(this.blameData, index)) {
-          result.push({
-            ...blame,
-            blameOffset: calculateBlameOffset(blame.lineno, index),
-          });
-        }
-
+        if (!shouldRender(this.blameData, index)) return result;
+        const blameOffset = calculateBlameOffset(blame.lineno);
+        if (blameOffset !== null) result.push({ ...blame, blameOffset });
         return result;
       }, []);
     },
@@ -293,6 +289,7 @@ export default {
           :is-blame-active="showBlame"
           @appear="() => handleAppear(index)"
           @disappear="() => handleDisappear(index)"
+          @highlighted="blameData = [...blameData]"
         />
       </div>
     </div>

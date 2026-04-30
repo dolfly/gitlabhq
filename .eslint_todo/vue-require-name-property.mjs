@@ -1188,7 +1188,6 @@ export default {
     'ee/app/assets/javascripts/amazon_q_settings/components/disconnect_success_alert.vue',
     'ee/app/assets/javascripts/amazon_q_settings/components/disconnect_warning_modal.vue',
     'ee/app/assets/javascripts/amazon_q_settings/components/group_settings_app.vue',
-    'ee/app/assets/javascripts/analytics/analytics_dashboards/components/analytics_dashboards_breadcrumbs.vue',
     'ee/app/assets/javascripts/analytics/analytics_dashboards/components/filters/projects_filter.vue',
     'ee/app/assets/javascripts/analytics/code_review_analytics/components/app.vue',
     'ee/app/assets/javascripts/analytics/code_review_analytics/components/filter_bar.vue',

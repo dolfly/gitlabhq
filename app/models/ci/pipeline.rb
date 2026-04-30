@@ -309,7 +309,13 @@ module Ci
       end
 
       after_transition any => [:success] do |pipeline|
-        pipeline.run_after_commit { PipelineMetricsWorker.perform_async(pipeline.id) }
+        pipeline.run_after_commit do
+          PipelineMetricsWorker.perform_async(pipeline.id)
+
+          unless Ci::ProjectMetric.first_pipeline_success_recorded?(pipeline.project_id)
+            Ci::TrackFirstPipelineSucceededWorker.perform_async(pipeline.id)
+          end
+        end
       end
 
       after_transition any => UNLOCKABLE_STATUSES do |pipeline|

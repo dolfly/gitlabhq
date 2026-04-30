@@ -10,7 +10,7 @@ import DashboardsList from '~/vue_shared/components/dashboards_list/dashboards_l
 import EmptyState from '~/vue_shared/components/dashboards_list/empty_state.vue';
 import DashboardListTab from '~/explore/analytics_dashboards/components/dashboard_list_tab.vue';
 import getDashboardsQuery from '~/explore/analytics_dashboards/graphql/get_dashboards.query.graphql';
-import { mockDashboardsListResponse, mockEmptyDashboardsListResponse } from './mock_data';
+import { mockDashboardsListResponse, mockEmptyDashboardsListResponse } from '../mock_data';
 
 Vue.use(VueApollo);
 
@@ -39,6 +39,7 @@ describe('DashboardListTab', () => {
         },
         provide: {
           organizationId: 'gid://gitlab/Organizations::Organization/1',
+          exploreAnalyticsDashboardsPath: '/explore/analytics_dashboards',
         },
         apolloProvider: requestHandlers || mockResolvedQuery(),
       }),

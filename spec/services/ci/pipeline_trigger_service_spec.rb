@@ -152,7 +152,7 @@ RSpec.describe Ci::PipelineTriggerService, feature_category: :continuous_integra
           it_behaves_like 'detecting an unprocessable pipeline trigger'
         end
 
-        context 'when params have a non-existant ref' do
+        context 'when params have a non-existent ref' do
           let(:params) { { token: trigger.token, ref: 'invalid-ref', variables: nil } }
 
           it 'does not trigger a pipeline' do
@@ -163,7 +163,7 @@ RSpec.describe Ci::PipelineTriggerService, feature_category: :continuous_integra
         end
       end
 
-      context 'when params have a non-existant trigger token' do
+      context 'when params have a non-existent trigger token' do
         let(:params) { { token: 'invalid-token', ref: nil, variables: nil } }
 
         it 'does not trigger a pipeline' do
@@ -261,7 +261,7 @@ RSpec.describe Ci::PipelineTriggerService, feature_category: :continuous_integra
           it_behaves_like 'detecting an unprocessable pipeline trigger'
         end
 
-        context 'when params have a non-existant ref' do
+        context 'when params have a non-existent ref' do
           let(:params) { { token: job.token, ref: 'invalid-ref', variables: nil } }
 
           it 'does not trigger a job in the pipeline' do

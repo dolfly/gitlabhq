@@ -370,8 +370,6 @@ class ProjectPolicy < BasePolicy
   rule { guest & can?(:download_code) }.enable :build_download_code
   rule { guest & can?(:read_container_image) }.enable :build_read_container_image
 
-  rule { guest & ~public_project }.enable :read_grafana
-
   rule { ~forking_allowed }.prevent :fork_project
 
   rule { metrics_dashboard_disabled }.policy do

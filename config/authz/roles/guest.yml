@@ -35,6 +35,7 @@ project:
   - read_issue_board_list
   - read_iteration
   - read_label
+  - read_limit_alert
   - read_milestone
   - read_namespace
   - read_namespace_via_membership
@@ -67,11 +68,13 @@ group:
   - admin_issue_relation
   - award_emoji
   - delete_saved_view
+  - read_ai_catalog_item_consumer
   - read_epic_link_relation
   - read_epic_relation
   - read_group
   - read_group_release_stats
   - read_issue
+  - read_limit_alert
   - read_namespace
   - read_namespace_via_membership
   - read_note

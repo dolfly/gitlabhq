@@ -29,12 +29,6 @@ export default {
       required: true,
     },
   },
-  methods: {
-    dashboardUrl(slug) {
-      // NOTE: this should either be a URL or vue router redirect
-      return `/${slug}`;
-    },
-  },
   actions: {
     items: [
       {
@@ -89,12 +83,12 @@ export default {
     <template #head(actions)="column"
       ><span class="gl-sr-only">{{ column.label }}</span></template
     >
-    <template #cell(name)="{ item: { name, isStarred, description, slug } }">
+    <template #cell(name)="{ item: { name, isStarred, description, dashboardUrl } }">
       <dashboards-list-name-cell
         :name="name"
         :description="description"
         :is-starred="isStarred"
-        :dashboard-url="dashboardUrl(slug)"
+        :dashboard-url="dashboardUrl"
       />
     </template>
     <template #cell(createdBy)="{ item: { createdBy } }">

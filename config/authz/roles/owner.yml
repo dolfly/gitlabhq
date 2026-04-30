@@ -141,6 +141,7 @@ group:
   - set_issue_updated_at
   - set_note_created_at
   - set_show_diff_preview_in_email
+  - update_ai_domain_settings
   - update_approval_rule
   - update_default_branch_protection
   - update_enterprise_user

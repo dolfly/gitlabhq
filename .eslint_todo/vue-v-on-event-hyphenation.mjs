@@ -290,6 +290,7 @@ export default {
     'ee/app/assets/javascripts/usage_quotas/seats/components/subscription_seats.vue',
     'ee/app/assets/javascripts/usage_quotas/seats/components/subscription_user_list.vue',
     'ee/app/assets/javascripts/usage_quotas/usage_billing/components/usage_by_user_tab.vue',
+    'ee/app/assets/javascripts/usage_quotas/wallet_agnostic_credits_dashboard/index/components/users_list.vue',
     'ee/app/assets/javascripts/users/identity_verification/components/identity_verification_captcha.vue',
     'ee/app/assets/javascripts/users/identity_verification/components/wizard.vue',
     'ee/app/assets/javascripts/vue_merge_request_widget/widgets/security_reports/mr_widget_security_reports.vue',

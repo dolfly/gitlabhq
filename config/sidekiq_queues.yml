@@ -275,6 +275,8 @@
   - 1
 - - ci_slsa_publish_provenance
   - 1
+- - ci_track_first_pipeline_succeeded
+  - 1
 - - ci_track_pipeline_trigger_events
   - 1
 - - ci_unlock_pipelines_in_queue

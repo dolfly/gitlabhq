@@ -25,6 +25,7 @@ project:
   - manage_project_security_exclusions
   - read_any_audit_event
   - read_audit_event
+  - read_compliance_framework
   - read_on_demand_dast_scan
   - read_project_security_dashboard
   - read_project_security_exclusions

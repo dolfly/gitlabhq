@@ -3502,6 +3502,65 @@ Input type: `AiCatalogThirdPartyFlowUpdateInput`
 | <a id="mutation-aicatalogthirdpartyflowupdate-errors"></a>`errors` | [`[String!]!`](#string) | Errors encountered during the mutation. |
 | <a id="mutation-aicatalogthirdpartyflowupdate-item"></a>`item` | [`AiCatalogThirdPartyFlow`](#aicatalogthirdpartyflow) | Flow that was updated. |
 
+### `Mutation.aiDomainSettingsInstanceUpdate`
+
+{{< details >}}
+**Introduced** in GitLab 19.0.
+**Status**: Experiment.
+{{< /details >}}
+
+Adds or removes domains from the allowed or denied list for flows running in a sandboxed environment.
+
+Input type: `AiDomainSettingsInstanceUpdateInput`
+
+#### Arguments
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| <a id="mutation-aidomainsettingsinstanceupdate-action"></a>`action` | [`AiDomainSettingAction!`](#aidomainsettingaction) | Action to perform on the domain list. |
+| <a id="mutation-aidomainsettingsinstanceupdate-clientmutationid"></a>`clientMutationId` | [`String`](#string) | A unique identifier for the client performing the mutation. |
+| <a id="mutation-aidomainsettingsinstanceupdate-domainsettingtype"></a>`domainSettingType` | [`AiDomainSettingType!`](#aidomainsettingtype) | Type of domain setting to update. |
+| <a id="mutation-aidomainsettingsinstanceupdate-domains"></a>`domains` | [`[String!]!`](#string) | List of domains to add or remove. |
+
+#### Fields
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| <a id="mutation-aidomainsettingsinstanceupdate-addeddomains"></a>`addedDomains` | [`[String!]`](#string) | Domains that were added in the operation. |
+| <a id="mutation-aidomainsettingsinstanceupdate-clientmutationid"></a>`clientMutationId` | [`String`](#string) | A unique identifier for the client performing the mutation. |
+| <a id="mutation-aidomainsettingsinstanceupdate-errors"></a>`errors` | [`[String!]!`](#string) | Errors encountered during the mutation. |
+| <a id="mutation-aidomainsettingsinstanceupdate-removeddomains"></a>`removedDomains` | [`[String!]`](#string) | Domains that were removed in the operation. |
+
+### `Mutation.aiDomainSettingsNamespaceUpdate`
+
+{{< details >}}
+**Introduced** in GitLab 19.0.
+**Status**: Experiment.
+{{< /details >}}
+
+Adds or removes domains from the allowed or denied list for flows running in a sandboxed environment.
+
+Input type: `AiDomainSettingsNamespaceUpdateInput`
+
+#### Arguments
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| <a id="mutation-aidomainsettingsnamespaceupdate-action"></a>`action` | [`AiDomainSettingAction!`](#aidomainsettingaction) | Action to perform on the domain list. |
+| <a id="mutation-aidomainsettingsnamespaceupdate-clientmutationid"></a>`clientMutationId` | [`String`](#string) | A unique identifier for the client performing the mutation. |
+| <a id="mutation-aidomainsettingsnamespaceupdate-domainsettingtype"></a>`domainSettingType` | [`AiDomainSettingType!`](#aidomainsettingtype) | Type of domain setting to update. |
+| <a id="mutation-aidomainsettingsnamespaceupdate-domains"></a>`domains` | [`[String!]!`](#string) | List of domains to add or remove. |
+| <a id="mutation-aidomainsettingsnamespaceupdate-namespaceid"></a>`namespaceId` | [`NamespaceID!`](#namespaceid) | Global ID of the root namespace to update. |
+
+#### Fields
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| <a id="mutation-aidomainsettingsnamespaceupdate-addeddomains"></a>`addedDomains` | [`[String!]`](#string) | Domains that were added in the operation. |
+| <a id="mutation-aidomainsettingsnamespaceupdate-clientmutationid"></a>`clientMutationId` | [`String`](#string) | A unique identifier for the client performing the mutation. |
+| <a id="mutation-aidomainsettingsnamespaceupdate-errors"></a>`errors` | [`[String!]!`](#string) | Errors encountered during the mutation. |
+| <a id="mutation-aidomainsettingsnamespaceupdate-removeddomains"></a>`removedDomains` | [`[String!]`](#string) | Domains that were removed in the operation. |
+
 ### `Mutation.aiDuoWorkflowCreate`
 
 {{< details >}}
@@ -35773,6 +35832,7 @@ GitLab Duo Agent Platform session.
 | <a id="duoworkflow-status"></a>`status` | [`DuoWorkflowStatus`](#duoworkflowstatus) | Status of the session. |
 | <a id="duoworkflow-statusgroup"></a>`statusGroup` | [`DuoWorkflowStatusGroup`](#duoworkflowstatusgroup) | Status group of the flow session. |
 | <a id="duoworkflow-statusname"></a>`statusName` | [`String`](#string) | Status name of the session. |
+| <a id="duoworkflow-summary"></a>`summary` | [`String`](#string) | Summary of the session. |
 | <a id="duoworkflow-toolcallapprovals"></a>`toolCallApprovals` | [`JSON`](#json) | Tools approval per session policy. |
 | <a id="duoworkflow-updatedat"></a>`updatedAt` | [`Time!`](#time) | Timestamp of when the session was last updated. |
 | <a id="duoworkflow-userid"></a>`userId` | [`UserID!`](#userid) | ID of the user. |
@@ -56436,6 +56496,15 @@ Conversation type of the thread.
 | <a id="aiconversationsthreadsconversationtype-duo_chat_legacy"></a>`DUO_CHAT_LEGACY` | duo_chat_legacy thread. |
 | <a id="aiconversationsthreadsconversationtype-duo_code_review"></a>`DUO_CODE_REVIEW` | duo_code_review thread. |
 | <a id="aiconversationsthreadsconversationtype-duo_quick_chat"></a>`DUO_QUICK_CHAT` | duo_quick_chat thread. |
+
+### `AiDomainSettingAction`
+
+Action to perform on a domain setting list for AI features.
+
+| Value | Description |
+| ----- | ----------- |
+| <a id="aidomainsettingaction-add"></a>`ADD` | Add domains to the list. |
+| <a id="aidomainsettingaction-remove"></a>`REMOVE` | Remove domains from the list. |
 
 ### `AiDomainSettingType`
 

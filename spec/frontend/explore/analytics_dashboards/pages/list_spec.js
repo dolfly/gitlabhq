@@ -1,13 +1,13 @@
 import { GlTabs, GlSearchBoxByType } from '@gitlab/ui';
 import { shallowMountExtended } from 'helpers/vue_test_utils_helper';
-import ExploreAnalyticsDashboardsApp from '~/explore/analytics_dashboards/components/app.vue';
+import ExploreAnalyticsDashboardsList from '~/explore/analytics_dashboards/pages/list.vue';
 import DashboardListTab from '~/explore/analytics_dashboards/components/dashboard_list_tab.vue';
 
-describe('ExploreAnalyticsDashboardsApp', () => {
+describe('ExploreAnalyticsDashboardsList', () => {
   let wrapper;
 
   const createComponent = () => {
-    wrapper = shallowMountExtended(ExploreAnalyticsDashboardsApp, {
+    wrapper = shallowMountExtended(ExploreAnalyticsDashboardsList, {
       provide: {
         currentUserId: 'gid://gitlab/User/20',
       },
