@@ -27,7 +27,7 @@ module Layouts
 
     private
 
-    def top_bar_classes
+    def panel_header_bar_classes
       class_names('without-breadcrumbs': @page_breadcrumbs_in_top_bar_feature_flag)
     end
   end

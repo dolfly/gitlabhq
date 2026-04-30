@@ -79,6 +79,7 @@ export default {
       default: false,
     },
   },
+  emits: ['update'],
   data() {
     return {
       model: this.value,

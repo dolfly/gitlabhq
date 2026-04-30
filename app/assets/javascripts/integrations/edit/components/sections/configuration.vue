@@ -26,6 +26,7 @@ export default {
       default: false,
     },
   },
+  emits: ['update'],
   computed: {
     ...mapGetters(['currentKey']),
   },

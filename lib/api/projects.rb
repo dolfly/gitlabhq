@@ -266,6 +266,27 @@ module API
         params[:import_type] = 'git' if params[:import_url].present?
         params
       end
+
+      def enqueue_async_transfer(project, namespace)
+        service = ::Projects::TransferService.new(project, current_user)
+        result = service.schedule_async_transfer(namespace)
+
+        if result.success?
+          present_project project, with: Entities::Project, current_user: current_user
+        else
+          render_api_error!(result.message, 400)
+        end
+      end
+
+      def execute_sync_transfer(project, namespace)
+        result = ::Projects::TransferService.new(project, current_user).execute(namespace)
+
+        if result
+          present_project project, with: Entities::Project, current_user: current_user
+        else
+          render_api_error!("Failed to transfer project #{project.errors.messages}", 400)
+        end
+      end
     end
 
     resource :users, requirements: API::USER_REQUIREMENTS do
@@ -1081,12 +1102,11 @@ module API
         Gitlab::QueryLimiting.disable!('https://gitlab.com/gitlab-org/gitlab/-/issues/546376')
 
         namespace = find_namespace!(params[:namespace])
-        result = ::Projects::TransferService.new(user_project, current_user).execute(namespace)
 
-        if result
-          present_project user_project, with: Entities::Project, current_user: current_user
+        if Feature.enabled?(:groups_and_projects_async_transfer, user_project.root_ancestor)
+          enqueue_async_transfer(user_project, namespace)
         else
-          render_api_error!("Failed to transfer project #{user_project.errors.messages}", 400)
+          execute_sync_transfer(user_project, namespace)
         end
       end
 

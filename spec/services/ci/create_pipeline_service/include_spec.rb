@@ -190,7 +190,7 @@ RSpec.describe Ci::CreatePipelineService, feature_category: :pipeline_compositio
       end
     end
 
-    context 'with Gitaly timeout handling' do
+    context 'with Gitaly timeout handling', :clean_gitlab_redis_repository_cache do
       before do
         stub_const('Gitlab::Ci::Config::GITALY_TIMEOUT_SECONDS', 0.0001)
       end

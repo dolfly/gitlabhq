@@ -4,6 +4,7 @@ import { billingPlans, billingPlanNames } from '~/integrations/constants';
 import DynamicField from '~/integrations/edit/components/dynamic_field.vue';
 import IntegrationFormSection from '~/integrations/edit/components/integration_forms/section.vue';
 import IntegrationSectionConnection from '~/integrations/edit/components/sections/connection.vue';
+import IntegrationSectionJiraIssues from '~/integrations/edit/components/sections/jira_issues.vue';
 import SettingsSection from '~/vue_shared/components/settings/settings_section.vue';
 import { createStore } from '~/integrations/edit/store';
 import {
@@ -40,6 +41,7 @@ describe('Integration Form Section', () => {
       },
       stubs: {
         IntegrationSectionConnection,
+        IntegrationSectionJiraIssues,
         SettingsSection,
       },
     });
@@ -91,20 +93,20 @@ describe('Integration Form Section', () => {
   });
 
   describe('events proxy from the section', () => {
-    let section;
     const dummyPayload = 'foo';
 
-    beforeEach(() => {
-      section = findFieldsComponent();
-    });
-
     it('toggle-integration-active', () => {
-      section.vm.$emit('toggle-integration-active', dummyPayload);
+      findFieldsComponent().vm.$emit('toggle-integration-active', dummyPayload);
       expect(wrapper.emitted('toggle-integration-active')).toEqual([[dummyPayload]]);
     });
 
     it('request-jira-issue-types', () => {
-      section.vm.$emit('request-jira-issue-types', dummyPayload);
+      createComponent({
+        props: { section: mockSectionJiraIssues },
+      });
+      wrapper
+        .findComponent(IntegrationSectionJiraIssues)
+        .vm.$emit('request-jira-issue-types', dummyPayload);
       expect(wrapper.emitted('request-jira-issue-types')).toEqual([[dummyPayload]]);
     });
   });

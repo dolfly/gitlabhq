@@ -936,7 +936,6 @@ class MergeRequest < ApplicationRecord
   end
 
   def head_pipeline
-    return super if Feature.disabled?(:ci_partitionable_finder, project)
     return super unless head_pipeline_id
 
     association(:head_pipeline).target ||= Ci::Pipeline.find_by_id(head_pipeline_id)

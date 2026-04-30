@@ -1,7 +1,4 @@
 ---
-# This internal event is used to track cache operations (hit/miss/create) in CI/CD pipelines.
-#
-# See https://gitlab.com/gitlab-org/quality/analytics/team/-/issues/196
 description: CI cache operation (hit, miss, create) occurred
 internal_events: true
 action: glci_cache_operation
@@ -45,7 +42,10 @@ additional_properties:
     description: Pipeline trigger source (merge_request_event, push, schedule, etc.)
 product_group: development_analytics
 milestone: '18.3'
+milestone_removed: '19.0'
 introduced_by_url: https://gitlab.com/gitlab-org/gitlab/-/merge_requests/TBD
+removed_by_url: https://gitlab.com/gitlab-org/gitlab/-/merge_requests/233379
+status: removed
 tiers:
 - free
 - premium

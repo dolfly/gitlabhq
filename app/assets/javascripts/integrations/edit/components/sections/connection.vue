@@ -28,6 +28,7 @@ export default {
       default: false,
     },
   },
+  emits: ['toggle-integration-active'],
   computed: {
     ...mapGetters(['currentKey', 'propsSource']),
 

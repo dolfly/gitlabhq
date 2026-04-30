@@ -4042,18 +4042,6 @@ RSpec.describe MergeRequest, factory_default: :keep, feature_category: :code_rev
 
       expect(merge_request.association(:head_pipeline).loaded?).to eq(true)
     end
-
-    context 'when ci_partitionable_finder is disabled' do
-      before do
-        stub_feature_flags(ci_partitionable_finder: false)
-      end
-
-      it 'uses the default association behavior' do
-        merge_request.update_columns(head_pipeline_id: pipeline.id)
-
-        expect(merge_request.head_pipeline).to eq(pipeline)
-      end
-    end
   end
 
   describe '#update_head_pipeline' do

@@ -313,16 +313,6 @@
     }
   }
 
-  // All panels
-  .paneled-view.static-panel,
-  .paneled-view.contextual-panel,
-  .paneled-view.ai-panels .ai-panel
-  {
-    @media (forced-colors: active) {
-      border: 1px solid;
-    }
-  }
-
   // Contextual panel
   .paneled-view.contextual-panel {
     @apply gl-overflow-y-auto gl-flex-1 gl-rounded-lg gl-bg-default empty:gl-hidden gl-h-full;
@@ -391,22 +381,10 @@
   }
 
   // Panel header
-  .panel-header .top-bar-fixed,
   .work-item-detail-panel-header {
     @apply gl-bg-default gl-shadow-none gl-relative gl-px-4 lg:gl-px-5 #{!important};
     z-index: 99;
     border-bottom: 1px solid var(--super-sidebar-bg);
-  }
-
-  // Only display breadcrumb-free panel-header when it has action buttons or feedback badges
-  // See `page_breadcrumbs_in_top_bar` feature flag
-  .panel-header .top-bar-fixed.without-breadcrumbs {
-    display: none;
-
-    &:has(> .top-bar-container :is(.gl-badge, .gl-button)) {
-      display: flex;
-      justify-content: end;
-    }
   }
 
   .content-wrapper {
@@ -631,12 +609,6 @@
         padding-right: $right-sidebar-collapsed-width;
       }
     }
-  }
-
-  // Static and Contextual panels
-  .paneled-view.static-panel,
-  .paneled-view.contextual-panel {
-    @apply gl-overflow-clip gl-p-0 gl-rounded-[1rem];
   }
 
   // AI panel
@@ -870,13 +842,13 @@
     }
   }
 
-  .panel-header .top-bar-fixed,
+  .panel-header .panel-header-inner,
   .work-item-detail-panel-header,
   .ai-panel-header {
     border-bottom: 1px solid var(--theme-border-color);
   }
 
-  .top-bar-fixed,
+  .panel-header-inner,
   .static-panel,
   .contextual-panel,
   .ai-panel,

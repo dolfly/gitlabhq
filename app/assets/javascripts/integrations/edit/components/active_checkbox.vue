@@ -9,6 +9,7 @@ export default {
     GlFormGroup,
     GlFormCheckbox,
   },
+  emits: ['toggle-integration-active'],
   data() {
     return {
       activated: false,

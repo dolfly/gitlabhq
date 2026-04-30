@@ -64,6 +64,7 @@ export default {
       default: false,
     },
   },
+  emits: ['request-jira-issue-types'],
   data() {
     return {
       enableJiraIssues: this.initialEnableJiraIssues,

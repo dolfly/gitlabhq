@@ -1,7 +1,4 @@
 ---
-# This internal event is used in triage-ops to push failure categories on CI/CD pipeline failures.
-#
-# See https://gitlab.com/gitlab-org/quality/triage-ops/-/merge_requests/3436
 description: CI job failed in the gitlab.com/gitlab-org namespace
 internal_events: true
 action: glci_job_failed
@@ -17,7 +14,10 @@ additional_properties:
     description: failure category
 product_group: development_analytics
 milestone: '17.11'
+milestone_removed: '19.0'
 introduced_by_url: https://gitlab.com/gitlab-org/gitlab/-/merge_requests/187501
+removed_by_url: https://gitlab.com/gitlab-org/gitlab/-/merge_requests/233379
+status: removed
 tiers:
 - free
 - premium

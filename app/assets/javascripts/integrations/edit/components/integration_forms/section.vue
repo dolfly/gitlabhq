@@ -76,6 +76,7 @@ export default {
       required: true,
     },
   },
+  emits: ['request-jira-issue-types', 'toggle-integration-active'],
   computed: {
     ...mapGetters(['propsSource']),
   },

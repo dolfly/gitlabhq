@@ -131,6 +131,7 @@ RSpec.describe API::Ci::Runner, :clean_gitlab_redis_shared_state, feature_catego
             auth_fail_reason: 'job_token_expired',
             message: 'Job auth error'
           ))
+          allow(Gitlab::AppLogger).to receive(:info)
 
           travel_to(3.hours.from_now) do
             authorize_artifacts({ token: jwt_token }, headers)

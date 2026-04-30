@@ -148,7 +148,7 @@ and [configure a network policy](../environment_sandbox.md#configure-a-network-p
 (for example, firewall rules or network policies).
 
 To reduce job startup time by approximately 15-20 seconds, include the
-`@gitlab-org/duo-cli` npm package in your custom image. This skips the npm download step during flow startup.
+`@gitlab-org/duo-cli` npm package and the `glab` CLI in your custom image. This skips the download steps for these during flow startup.
 
 ### Configure setup scripts
 
@@ -178,7 +178,7 @@ These commands complete the following actions:
 
 ### Configure caching
 
-To configure caching to speed up subsequent flow runs, configure the `agent-config.yml` file to 
+To configure caching to speed up subsequent flow runs, configure the `agent-config.yml` file to
 preserve files and directories between executions. Caching can be useful for dependency folders like `node_modules` or Python virtual environments.
 
 #### Basic cache configuration

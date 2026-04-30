@@ -180,6 +180,29 @@ RSpec.describe Gitlab::Workhorse, feature_category: :gitaly do
         ).to_json
       }.deep_stringify_keys)
     end
+
+    context 'when base_sha is a blank ref (initial commit)' do
+      let(:diff_refs) { double(base_sha: Gitlab::Git::SHA1_BLANK_SHA, head_sha: 'head') }
+
+      it 'uses empty_tree_id as left_commit_id' do
+        key, command, params = decode_workhorse_header(subject)
+
+        expect(key).to eq('Gitlab-Workhorse-Send-Data')
+        expect(command).to eq('git-format-patch')
+        expect(params).to eq({
+          'GitalyServer' => {
+            'call_metadata' => features,
+            address: Gitlab::GitalyClient.address(project.repository_storage),
+            token: Gitlab::GitalyClient.token(project.repository_storage)
+          },
+          'RawPatchRequest' => Gitaly::RawPatchRequest.new(
+            repository: repository.gitaly_repository,
+            left_commit_id: repository.empty_tree_id,
+            right_commit_id: 'head'
+          ).to_json
+        }.deep_stringify_keys)
+      end
+    end
   end
 
   describe '.channel_websocket' do
@@ -242,6 +265,29 @@ RSpec.describe Gitlab::Workhorse, feature_category: :gitaly do
           right_commit_id: 'head'
         ).to_json
       }.deep_stringify_keys)
+    end
+
+    context 'when base_sha is a blank ref (initial commit)' do
+      let(:diff_refs) { double(base_sha: Gitlab::Git::SHA1_BLANK_SHA, head_sha: 'head') }
+
+      it 'uses empty_tree_id as left_commit_id' do
+        key, command, params = decode_workhorse_header(subject)
+
+        expect(key).to eq('Gitlab-Workhorse-Send-Data')
+        expect(command).to eq('git-diff')
+        expect(params).to eq({
+          'GitalyServer' => {
+            'call_metadata' => features,
+            address: Gitlab::GitalyClient.address(project.repository_storage),
+            token: Gitlab::GitalyClient.token(project.repository_storage)
+          },
+          'RawDiffRequest' => Gitaly::RawDiffRequest.new(
+            repository: repository.gitaly_repository,
+            left_commit_id: repository.empty_tree_id,
+            right_commit_id: 'head'
+          ).to_json
+        }.deep_stringify_keys)
+      end
     end
   end
 

@@ -342,6 +342,7 @@ RSpec.describe API::Ci::Runner, :clean_gitlab_redis_shared_state, feature_catego
             auth_fail_reason: 'job_dropped_token_expired',
             message: 'Job auth error'
           ))
+          allow(Gitlab::AppLogger).to receive(:info)
 
           travel_to(3.hours.from_now) do
             update_job(job.id, jwt_token, state: 'success')
@@ -355,6 +356,7 @@ RSpec.describe API::Ci::Runner, :clean_gitlab_redis_shared_state, feature_catego
               auth_fail_reason: 'job_token_expired',
               message: 'Job auth error'
             ))
+            allow(Gitlab::AppLogger).to receive(:info)
 
             travel_to(3.hours.from_now) do
               expect { update_job(job.id, jwt_token, state: 'success') }

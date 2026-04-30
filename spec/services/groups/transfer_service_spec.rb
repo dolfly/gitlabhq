@@ -1141,20 +1141,23 @@ RSpec.describe Groups::TransferService, :sidekiq_inline, feature_category: :grou
   end
 
   describe '#schedule_async_transfer' do
-    let_it_be_with_reload(:group) { create(:group, :public) }
+    let_it_be(:current_parent_group) { create(:group) }
     let_it_be(:new_parent_group) { create(:group, :public) }
+
+    let_it_be_with_reload(:group) { create(:group, :public, parent: current_parent_group) }
     let!(:new_parent_group_member) { create(:group_member, :owner, group: new_parent_group, user: user) }
 
     subject(:schedule) { transfer_service.schedule_async_transfer(new_parent_group) }
 
-    it 'returns true and enqueues the worker' do
+    it 'returns success response and enqueues the worker' do
       expect(Namespaces::Groups::TransferWorker).to receive(:perform_async).with(
         group.id,
         new_parent_group.id,
         user.id
       )
 
-      expect(schedule).to be true
+      expect(schedule).to be_success
+      expect(schedule.message).to eq('Group transfer has been queued. You will be notified when it completes.')
     end
 
     it 'transitions the group to transfer_scheduled' do
@@ -1186,7 +1189,8 @@ RSpec.describe Groups::TransferService, :sidekiq_inline, feature_category: :grou
           user.id
         )
 
-        expect(schedule).to be true
+        expect(schedule).to be_success
+        expect(schedule.message).to eq('Group transfer has been queued. You will be notified when it completes.')
       end
 
       it 'stores nil transfer_target_parent_id' do
@@ -1203,10 +1207,11 @@ RSpec.describe Groups::TransferService, :sidekiq_inline, feature_category: :grou
         group.update_column(:state, Group.states[:creation_in_progress])
       end
 
-      it 'returns false and does not enqueue the worker' do
+      it 'returns error response and does not enqueue the worker' do
         expect(Namespaces::Groups::TransferWorker).not_to receive(:perform_async)
 
-        expect(schedule).to be false
+        expect(schedule).to be_error
+        expect(schedule.message).to eq('Unable to initiate transfer. The group may already have a transfer in progress.')
       end
     end
 
@@ -1215,10 +1220,11 @@ RSpec.describe Groups::TransferService, :sidekiq_inline, feature_category: :grou
         group.schedule_transfer!(transition_user: user)
       end
 
-      it 'returns false and does not enqueue the worker' do
+      it 'returns error response and does not enqueue the worker' do
         expect(Namespaces::Groups::TransferWorker).not_to receive(:perform_async)
 
-        expect(schedule).to be false
+        expect(schedule).to be_error
+        expect(schedule.message).to eq('Unable to initiate transfer. The group may already have a transfer in progress.')
       end
     end
   end

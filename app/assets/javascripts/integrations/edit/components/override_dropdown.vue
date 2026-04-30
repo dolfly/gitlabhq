@@ -39,6 +39,7 @@ export default {
       required: true,
     },
   },
+  emits: ['change'],
   data() {
     const selectedValue = this.override ? 'custom' : 'default';
     return {

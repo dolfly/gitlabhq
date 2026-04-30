@@ -6592,12 +6592,13 @@ RSpec.describe API::Projects, :aggregate_failures, feature_category: :groups_and
     context 'when authenticated as owner' do
       let(:group) { create :group }
 
-      it 'transfers the project to the new namespace' do
+      it 'schedules async transfer and returns ok status' do
         group.add_owner(user)
 
         put api(path, user), params: { namespace: group.id }
 
         expect(response).to have_gitlab_http_status(:ok)
+        expect(project.project_namespace.reload.state).to eq('transfer_scheduled')
       end
 
       it 'fails when transferring to a non owned namespace' do
@@ -6630,6 +6631,21 @@ RSpec.describe API::Projects, :aggregate_failures, feature_category: :groups_and
           expect(response).to have_gitlab_http_status(:forbidden)
         end
       end
+
+      context 'when transfer cannot be scheduled' do
+        before do
+          group.add_owner(user)
+          project.project_namespace.schedule_transfer!(transition_user: user)
+        end
+
+        it 'returns error when already scheduled', :aggregate_failures do
+          put api(path, user), params: { namespace: group.id }
+
+          expect(response).to have_gitlab_http_status(:bad_request)
+          expect(json_response['message'])
+            .to eq('Unable to initiate transfer. The project may already have a transfer in progress.')
+        end
+      end
     end
 
     it_behaves_like 'authorizing granular token permissions', :transfer_project do
@@ -6645,18 +6661,37 @@ RSpec.describe API::Projects, :aggregate_failures, feature_category: :groups_and
       end
     end
 
-    context 'when authenticated as developer' do
+    context 'when groups_and_projects_async_transfer is disabled' do
       before do
-        group.add_developer(user)
+        stub_feature_flags(groups_and_projects_async_transfer: false)
       end
 
-      context 'target namespace allows developers to create projects' do
-        let(:group) { create(:group, project_creation_level: ::Gitlab::Access::DEVELOPER_PROJECT_ACCESS) }
+      context 'when authenticated as owner' do
+        let(:group) { create :group }
 
-        it 'fails transferring the project to the target namespace' do
+        it 'transfers the project to the new namespace synchronously' do
+          group.add_owner(user)
+
           put api(path, user), params: { namespace: group.id }
 
-          expect(response).to have_gitlab_http_status(:bad_request)
+          expect(response).to have_gitlab_http_status(:ok)
+          expect(project.project_namespace.reload.state).to eq('ancestor_inherited')
+        end
+      end
+
+      context 'when authenticated as developer' do
+        before do
+          group.add_developer(user)
+        end
+
+        context 'target namespace allows developers to create projects' do
+          let(:group) { create(:group, project_creation_level: ::Gitlab::Access::DEVELOPER_PROJECT_ACCESS) }
+
+          it 'fails transferring the project to the target namespace' do
+            put api(path, user), params: { namespace: group.id }
+
+            expect(response).to have_gitlab_http_status(:bad_request)
+          end
         end
       end
     end

@@ -29146,7 +29146,8 @@ ALTER SEQUENCE remote_mirrors_id_seq OWNED BY remote_mirrors.id;
 CREATE TABLE repository_languages (
     project_id bigint NOT NULL,
     programming_language_id bigint NOT NULL,
-    share double precision NOT NULL
+    share double precision NOT NULL,
+    language_id bigint
 );
 
 CREATE TABLE required_code_owners_sections (
@@ -49055,6 +49056,8 @@ CREATE INDEX index_releases_on_released_at ON releases USING btree (released_at)
 CREATE INDEX index_remote_mirrors_on_last_successful_update_at ON remote_mirrors USING btree (last_successful_update_at);
 
 CREATE INDEX index_remote_mirrors_on_project_id ON remote_mirrors USING btree (project_id);
+
+CREATE UNIQUE INDEX index_repository_languages_on_project_id_and_language_id ON repository_languages USING btree (project_id, language_id);
 
 CREATE INDEX index_required_code_owners_sections_on_protected_branch_id ON required_code_owners_sections USING btree (protected_branch_id);
 

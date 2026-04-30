@@ -937,7 +937,10 @@ RSpec.describe Projects::TransferService, feature_category: :groups_and_projects
         user.id
       )
 
-      expect(service.schedule_async_transfer(new_namespace)).to be true
+      result = service.schedule_async_transfer(new_namespace)
+
+      expect(result).to be_success
+      expect(result.message).to eq('Project transfer has been queued. You will be notified when it completes.')
 
       project_namespace = project.project_namespace.reload
       expect(project_namespace.state).to eq('transfer_scheduled')
@@ -949,11 +952,13 @@ RSpec.describe Projects::TransferService, feature_category: :groups_and_projects
         project.project_namespace.update_column(:state, Namespace.states[:creation_in_progress])
       end
 
-      it 'returns false with an error and does not enqueue the worker' do
+      it 'returns error response and does not enqueue the worker' do
         expect(Projects::TransferWorker).not_to receive(:perform_async)
 
-        expect(service.schedule_async_transfer(new_namespace)).to be false
-        expect(service.error).to eq('Unable to initiate transfer. The project may already have a transfer in progress.')
+        result = service.schedule_async_transfer(new_namespace)
+
+        expect(result).to be_error
+        expect(result.message).to eq('Unable to initiate transfer. The project may already have a transfer in progress.')
       end
     end
   end

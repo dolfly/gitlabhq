@@ -11,10 +11,6 @@ module Tooling
     class CacheLogParser; end
     class CacheEventBuilder; end
   end
-
-  module Events
-    class TrackPipelineEvents; end
-  end
 end
 # rubocop:enable Lint/EmptyClass
 
@@ -25,7 +21,6 @@ RSpec.describe 'scripts/cache_metrics', feature_category: :tooling do
   let(:mock_trace_downloader) { instance_double(Tooling::CiAnalytics::JobTraceDownloader) }
   let(:mock_bigquery_client) { instance_double(Tooling::CiAnalytics::BigQueryClient) }
   let(:mock_cache_event_builder) { instance_double(Tooling::CiAnalytics::CacheEventBuilder) }
-  let(:mock_events_tracker) { instance_double(Tooling::Events::TrackPipelineEvents) }
 
   let(:ci_env) do
     {
@@ -87,24 +82,6 @@ RSpec.describe 'scripts/cache_metrics', feature_category: :tooling do
     }
   end
 
-  let(:sample_internal_event_properties) do
-    {
-      label: 'hit',
-      property: 'ruby-gems',
-      value: 5.2,
-      extra_properties: {
-        cache_key: 'ruby-gems-test',
-        cache_operation: 'pull',
-        job_id: 12345,
-        pipeline_id: 67890,
-        ref: 'feature-branch',
-        operation_command: 'bundle install',
-        operation_duration_seconds: 3.5,
-        operation_success: true
-      }
-    }
-  end
-
   before do
     # Mock ENV variables needed by the script
     stub_env('CI_API_V4_URL', 'https://gitlab.com/api/v4')
@@ -114,7 +91,6 @@ RSpec.describe 'scripts/cache_metrics', feature_category: :tooling do
     allow(Tooling::CiAnalytics::JobTraceDownloader).to receive(:new).and_return(mock_trace_downloader)
     allow(Tooling::CiAnalytics::BigQueryClient).to receive(:new).and_return(mock_bigquery_client)
     allow(Tooling::CiAnalytics::CacheEventBuilder).to receive(:new).and_return(mock_cache_event_builder)
-    allow(Tooling::Events::TrackPipelineEvents).to receive(:new).and_return(mock_events_tracker)
 
     allow(Tooling::CiAnalytics::CacheLogParser).to receive(:extract_cache_events)
 
@@ -130,12 +106,8 @@ RSpec.describe 'scripts/cache_metrics', feature_category: :tooling do
       before do
         allow(mock_trace_downloader).to receive(:download_job_trace).and_return(sample_job_trace)
         allow(Tooling::CiAnalytics::CacheLogParser).to receive(:extract_cache_events).and_return(sample_cache_events)
-        allow(mock_cache_event_builder).to receive_messages(
-          build_bigquery_event: sample_bigquery_event,
-          build_internal_event_properties: sample_internal_event_properties
-        )
+        allow(mock_cache_event_builder).to receive(:build_bigquery_event).and_return(sample_bigquery_event)
         allow(mock_bigquery_client).to receive(:insert_cache_event)
-        allow(mock_events_tracker).to receive(:send_event)
       end
 
       it 'creates trace downloader with correct parameters' do
@@ -179,7 +151,6 @@ RSpec.describe 'scripts/cache_metrics', feature_category: :tooling do
 
         sample_cache_events.each do |cache_data|
           expect(mock_cache_event_builder).to have_received(:build_bigquery_event).with(cache_data)
-          expect(mock_cache_event_builder).to have_received(:build_internal_event_properties).with(cache_data)
         end
       end
 
@@ -187,22 +158,6 @@ RSpec.describe 'scripts/cache_metrics', feature_category: :tooling do
         Tooling::CiAnalytics::CacheMetrics.run
 
         expect(mock_bigquery_client).to have_received(:insert_cache_event).twice
-      end
-
-      it 'sends internal events with correct parameters' do
-        Tooling::CiAnalytics::CacheMetrics.run
-
-        expect(mock_events_tracker).to have_received(:send_event).with(
-          'glci_cache_operation',
-          label: 'hit',
-          property: 'ruby-gems',
-          value: 5.2,
-          extra_properties: hash_including(
-            cache_key: 'ruby-gems-test',
-            cache_operation: 'pull',
-            job_id: 12345
-          )
-        ).twice
       end
 
       it 'completes successfully' do
@@ -214,7 +169,6 @@ RSpec.describe 'scripts/cache_metrics', feature_category: :tooling do
       before do
         allow(mock_trace_downloader).to receive(:download_job_trace).and_return(nil)
         allow(mock_bigquery_client).to receive(:insert_cache_event)
-        allow(mock_events_tracker).to receive(:send_event)
       end
 
       it 'returns early without processing' do
@@ -222,7 +176,6 @@ RSpec.describe 'scripts/cache_metrics', feature_category: :tooling do
 
         expect(Tooling::CiAnalytics::CacheLogParser).not_to have_received(:extract_cache_events)
         expect(mock_bigquery_client).not_to have_received(:insert_cache_event)
-        expect(mock_events_tracker).not_to have_received(:send_event)
       end
     end
 
@@ -231,14 +184,12 @@ RSpec.describe 'scripts/cache_metrics', feature_category: :tooling do
         allow(mock_trace_downloader).to receive(:download_job_trace).and_return(sample_job_trace)
         allow(Tooling::CiAnalytics::CacheLogParser).to receive(:extract_cache_events).and_return([])
         allow(mock_bigquery_client).to receive(:insert_cache_event)
-        allow(mock_events_tracker).to receive(:send_event)
       end
 
       it 'returns early without processing events' do
         Tooling::CiAnalytics::CacheMetrics.run
 
         expect(mock_bigquery_client).not_to have_received(:insert_cache_event)
-        expect(mock_events_tracker).not_to have_received(:send_event)
       end
     end
 
@@ -267,12 +218,8 @@ RSpec.describe 'scripts/cache_metrics', feature_category: :tooling do
         )
         allow(mock_trace_downloader).to receive(:download_job_trace).and_return(sample_job_trace)
         allow(Tooling::CiAnalytics::CacheLogParser).to receive(:extract_cache_events).and_return(sample_cache_events)
-        allow(mock_cache_event_builder).to receive_messages(
-          build_bigquery_event: sample_bigquery_event,
-          build_internal_event_properties: sample_internal_event_properties
-        )
+        allow(mock_cache_event_builder).to receive(:build_bigquery_event).and_return(sample_bigquery_event)
         allow(mock_bigquery_client).to receive(:insert_cache_event)
-        allow(mock_events_tracker).to receive(:send_event)
       end
 
       it 'continues processing with nil job ID' do
@@ -313,19 +260,14 @@ RSpec.describe 'scripts/cache_metrics', feature_category: :tooling do
       before do
         allow(mock_trace_downloader).to receive(:download_job_trace).and_return(sample_job_trace)
         allow(Tooling::CiAnalytics::CacheLogParser).to receive(:extract_cache_events).and_return(complex_cache_events)
-        allow(mock_cache_event_builder).to receive_messages(
-          build_bigquery_event: sample_bigquery_event,
-          build_internal_event_properties: sample_internal_event_properties
-        )
+        allow(mock_cache_event_builder).to receive(:build_bigquery_event).and_return(sample_bigquery_event)
         allow(mock_bigquery_client).to receive(:insert_cache_event)
-        allow(mock_events_tracker).to receive(:send_event)
       end
 
       it 'processes complex cache scenarios correctly' do
         Tooling::CiAnalytics::CacheMetrics.run
 
         expect(mock_bigquery_client).to have_received(:insert_cache_event).twice
-        expect(mock_events_tracker).to have_received(:send_event).twice
       end
 
       it 'handles different cache types and operations' do
@@ -333,25 +275,20 @@ RSpec.describe 'scripts/cache_metrics', feature_category: :tooling do
 
         complex_cache_events.each do |cache_data|
           expect(mock_cache_event_builder).to have_received(:build_bigquery_event).with(cache_data)
-          expect(mock_cache_event_builder).to have_received(:build_internal_event_properties).with(cache_data)
         end
       end
     end
 
-    context 'when BigQuery fails but internal events succeed' do
+    context 'when BigQuery fails' do
       before do
         allow(mock_trace_downloader).to receive(:download_job_trace).and_return(sample_job_trace)
         sample_events = [sample_cache_events.first]
         allow(Tooling::CiAnalytics::CacheLogParser).to receive(:extract_cache_events).and_return(sample_events)
-        allow(mock_cache_event_builder).to receive_messages(
-          build_bigquery_event: sample_bigquery_event,
-          build_internal_event_properties: sample_internal_event_properties
-        )
+        allow(mock_cache_event_builder).to receive(:build_bigquery_event).and_return(sample_bigquery_event)
         allow(mock_bigquery_client).to receive(:insert_cache_event).and_raise(StandardError.new('BigQuery error'))
-        allow(mock_events_tracker).to receive(:send_event)
       end
 
-      it 'continues processing despite BigQuery errors' do
+      it 'handles errors gracefully' do
         expect { Tooling::CiAnalytics::CacheMetrics.run }.not_to raise_error
       end
     end
@@ -364,61 +301,6 @@ RSpec.describe 'scripts/cache_metrics', feature_category: :tooling do
 
     it 'responds to run class method' do
       expect(Tooling::CiAnalytics::CacheMetrics).to respond_to(:run)
-    end
-  end
-
-  describe 'extra_properties extraction' do
-    let(:mock_properties) do
-      {
-        label: 'hit',
-        property: 'ruby-gems',
-        value: 5.2,
-        extra_properties: {
-          cache_key: 'ruby-gems-test',
-          cache_operation: 'pull',
-          job_id: 12345,
-          pipeline_id: 67890,
-          ref: 'feature-branch',
-          operation_command: 'bundle install',
-          operation_duration_seconds: 3.5,
-          operation_success: true
-        }
-      }
-    end
-
-    before do
-      allow(mock_trace_downloader).to receive(:download_job_trace).and_return(sample_job_trace)
-      sample_events = [sample_cache_events.first]
-      allow(Tooling::CiAnalytics::CacheLogParser).to receive(:extract_cache_events).and_return(sample_events)
-      allow(mock_cache_event_builder).to receive_messages(
-        build_bigquery_event: sample_bigquery_event,
-        build_internal_event_properties: mock_properties
-      )
-      allow(mock_bigquery_client).to receive(:insert_cache_event)
-      allow(mock_events_tracker).to receive(:send_event)
-    end
-
-    it 'sends all extra_properties data' do
-      expected_extra_properties = {
-        cache_key: 'ruby-gems-test',
-        cache_operation: 'pull',
-        job_id: 12345,
-        pipeline_id: 67890,
-        ref: 'feature-branch',
-        operation_command: 'bundle install',
-        operation_duration_seconds: 3.5,
-        operation_success: true
-      }
-
-      Tooling::CiAnalytics::CacheMetrics.run
-
-      expect(mock_events_tracker).to have_received(:send_event).with(
-        'glci_cache_operation',
-        label: 'hit',
-        property: 'ruby-gems',
-        value: 5.2,
-        extra_properties: expected_extra_properties
-      )
     end
   end
 

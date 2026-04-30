@@ -492,7 +492,8 @@ RSpec.shared_examples 'graphql issue list request spec' do
       include_examples 'N+1 query check'
     end
 
-    context 'when requesting `merge_requests_count`' do
+    context 'when requesting `merge_requests_count`',
+      quarantine: 'https://gitlab.com/gitlab-org/gitlab/-/issues/448791' do
       let(:requested_fields) { 'mergeRequestsCount' }
 
       before do
@@ -515,7 +516,8 @@ RSpec.shared_examples 'graphql issue list request spec' do
       include_examples 'N+1 query check'
     end
 
-    context 'when requesting `closed_as_duplicate_of`' do
+    context 'when requesting `closed_as_duplicate_of`',
+      quarantine: 'https://gitlab.com/gitlab-org/gitlab/-/issues/448489' do
       let(:requested_fields) { 'closedAsDuplicateOf { id }' }
       let(:issue_a_dup) { create(:issue, project: issue_a.project) }
       let(:issue_b_dup) { create(:issue, project: issue_b.project) }
@@ -528,7 +530,8 @@ RSpec.shared_examples 'graphql issue list request spec' do
       include_examples 'N+1 query check'
     end
 
-    context 'when award emoji votes' do
+    context 'when award emoji votes',
+      quarantine: 'https://gitlab.com/gitlab-org/quality/test-failure-issues/-/issues/5996' do
       let(:requested_fields) { 'upvotes downvotes' }
 
       before do
@@ -553,7 +556,9 @@ RSpec.shared_examples 'graphql issue list request spec' do
         same_project_issue2.update!(labels: [project_labels, group_labels].flatten)
       end
 
-      include_examples 'N+1 query check', skip_cached: false
+      # threshold: 1 accounts for an additional project namespace lookup
+      # (find_namespaces_by_id) when loading the second issue
+      include_examples 'N+1 query check', skip_cached: false, threshold: 1
     end
   end
 
@@ -712,7 +717,8 @@ RSpec.shared_examples 'graphql issue list request spec' do
       QUERY
     end
 
-    context 'when the feature flag is disabled' do
+    context 'when the feature flag is disabled',
+      quarantine: 'https://gitlab.com/gitlab-org/quality/test-failure-issues/-/issues/17015' do
       before do
         stub_feature_flags(hide_incident_management_features: false)
       end
@@ -806,6 +812,8 @@ RSpec.shared_examples 'graphql issue list request spec' do
         label = create(:label, project: issue.project)
         issue.update!(labels: [label])
       end
+      # Warm up sign-in side effects so they don't pollute control vs. test runs
+      post_graphql(query, current_user: current_user)
     end
 
     def response_label_ids(response_data)
@@ -835,7 +843,8 @@ RSpec.shared_examples 'graphql issue list request spec' do
     end
   end
 
-  context 'when fetching assignees' do
+  context 'when fetching assignees',
+    quarantine: 'https://gitlab.com/gitlab-org/quality/test-failure-issues/-/issues/5837' do
     let(:fields) do
       <<~QUERY
         nodes {

@@ -3907,40 +3907,25 @@ RSpec.describe API::Groups, :with_current_organization, feature_category: :group
     end
 
     context 'when promoting a subgroup to a root group' do
-      shared_examples_for 'promotes the subgroup to a root group' do
-        it 'returns success', :aggregate_failures do
-          expect_log_keys(caller_id: "POST /api/:version/groups/:id/transfer",
-            route: "/api/:version/groups/:id/transfer",
-            root_namespace: group.path)
-
-          make_request(user)
-
-          expect(response).to have_gitlab_http_status(:created)
-          expect(json_response['parent_id']).to be_nil
-        end
-      end
-
       context 'when no group_id is specified' do
         let(:params) {}
 
-        it_behaves_like 'promotes the subgroup to a root group'
+        it 'schedules async transfer and returns success' do
+          make_request(user)
+
+          expect(response).to have_gitlab_http_status(:created)
+          expect(group.reload.state).to eq('transfer_scheduled')
+        end
       end
 
       context 'when group_id is specified as blank' do
         let(:params) { { group_id: '' } }
 
-        it_behaves_like 'promotes the subgroup to a root group'
-      end
-
-      context 'when the group is already a root group' do
-        let(:group) { create(:group) }
-        let(:params) { { group_id: '' } }
-
-        it 'returns error', :aggregate_failures do
+        it 'schedules async transfer and returns success' do
           make_request(user)
 
-          expect(response).to have_gitlab_http_status(:bad_request)
-          expect(json_response['message']).to eq('Transfer failed: Group is already a root group.')
+          expect(response).to have_gitlab_http_status(:created)
+          expect(group.reload.state).to eq('transfer_scheduled')
         end
       end
     end
@@ -3992,32 +3977,104 @@ RSpec.describe API::Groups, :with_current_organization, feature_category: :group
         end
       end
 
-      context 'when the transfer fails due to an error' do
+      it 'schedules async transfer and returns success' do
+        make_request(user)
+
+        expect(response).to have_gitlab_http_status(:created)
+        expect(group.reload.state).to eq('transfer_scheduled')
+      end
+
+      context 'when transfer cannot be scheduled' do
         before do
-          expect_next_instance_of(::Groups::TransferService) do |service|
-            expect(service).to receive(:proceed_to_transfer).and_raise(Gitlab::UpdatePathError, 'namespace directory cannot be moved')
-          end
+          group.schedule_transfer!(transition_user: user)
         end
 
-        it 'returns error', :aggregate_failures do
+        it 'returns error when already scheduled', :aggregate_failures do
           make_request(user)
 
           expect(response).to have_gitlab_http_status(:bad_request)
-          expect(json_response['message']).to eq('Transfer failed: namespace directory cannot be moved')
+          expect(json_response['message'])
+            .to eq('Unable to initiate transfer. The group may already have a transfer in progress.')
+        end
+      end
+    end
+
+    context 'when groups_and_projects_async_transfer is disabled' do
+      before do
+        stub_feature_flags(groups_and_projects_async_transfer: false)
+      end
+
+      context 'when promoting a subgroup to a root group' do
+        shared_examples_for 'promotes the subgroup to a root group' do
+          it 'returns success', :aggregate_failures do
+            expect_log_keys(caller_id: "POST /api/:version/groups/:id/transfer",
+              route: "/api/:version/groups/:id/transfer",
+              root_namespace: group.path)
+
+            make_request(user)
+
+            expect(response).to have_gitlab_http_status(:created)
+            expect(json_response['parent_id']).to be_nil
+            expect(group.reload.state).to eq('ancestor_inherited')
+          end
+        end
+
+        context 'when no group_id is specified' do
+          let(:params) {}
+
+          it_behaves_like 'promotes the subgroup to a root group'
+        end
+
+        context 'when group_id is specified as blank' do
+          let(:params) { { group_id: '' } }
+
+          it_behaves_like 'promotes the subgroup to a root group'
+        end
+
+        context 'when the group is already a root group' do
+          let(:group) { create(:group) }
+          let(:params) { { group_id: '' } }
+
+          it 'returns error', :aggregate_failures do
+            make_request(user)
+
+            expect(response).to have_gitlab_http_status(:bad_request)
+            expect(json_response['message']).to eq('Transfer failed: Group is already a root group.')
+          end
         end
       end
 
-      context 'when the transfer succceds' do
-        before do
-          # Added this to https://gitlab.com/gitlab-org/gitlab/-/work_items/595305
-          allow(Gitlab::QueryLimiting::Transaction).to receive(:threshold).and_return(106)
+      context 'when transferring a subgroup to a different group' do
+        let(:params) { { group_id: new_parent_group.id } }
+
+        context 'when the transfer fails due to an error' do
+          before do
+            expect_next_instance_of(::Groups::TransferService) do |service|
+              expect(service).to receive(:proceed_to_transfer).and_raise(Gitlab::UpdatePathError, 'namespace directory cannot be moved')
+            end
+          end
+
+          it 'returns error', :aggregate_failures do
+            make_request(user)
+
+            expect(response).to have_gitlab_http_status(:bad_request)
+            expect(json_response['message']).to eq('Transfer failed: namespace directory cannot be moved')
+          end
         end
 
-        it 'returns success', :aggregate_failures do
-          make_request(user)
+        context 'when the transfer succeeds' do
+          before do
+            # Added this to https://gitlab.com/gitlab-org/gitlab/-/work_items/595305
+            allow(Gitlab::QueryLimiting::Transaction).to receive(:threshold).and_return(106)
+          end
 
-          expect(response).to have_gitlab_http_status(:created)
-          expect(json_response['parent_id']).to eq(new_parent_group.id)
+          it 'returns success', :aggregate_failures do
+            make_request(user)
+
+            expect(response).to have_gitlab_http_status(:created)
+            expect(json_response['parent_id']).to eq(new_parent_group.id)
+            expect(group.reload.state).to eq('ancestor_inherited')
+          end
         end
       end
     end

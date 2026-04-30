@@ -281,7 +281,7 @@ RSpec.describe Ci::CreatePipelineService, feature_category: :pipeline_compositio
       end
     end
 
-    context 'when component include times out' do
+    context 'when component include times out', :clean_gitlab_redis_repository_cache do
       let(:component_path) do
         "#{Gitlab.config.gitlab.host}/#{components_project.full_path}/#{component_name}@#{component_version}"
       end

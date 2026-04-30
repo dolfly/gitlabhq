@@ -33,6 +33,7 @@ export default {
       default: false,
     },
   },
+  emits: ['reset', 'save', 'test'],
   computed: {
     ...mapGetters(['propsSource']),
     ...mapState(['customState']),

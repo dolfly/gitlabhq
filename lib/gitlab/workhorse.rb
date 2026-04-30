@@ -406,9 +406,17 @@ module Gitlab
       end
 
       def gitaly_diff_or_patch_hash(repository, diff_refs)
+        left_commit_id = diff_refs.base_sha
+
+        # If `base_sha` is a blank ref, it means the commit has no parent (e.g. the
+        # initial commit of a repository or the first commit on an orphaned branch).
+        # We use `empty_tree_id` so Gitaly can compute the diff against an empty tree
+        # instead of returning an empty response.
+        left_commit_id = repository.empty_tree_id if Gitlab::Git.blank_ref?(left_commit_id)
+
         {
           repository: repository.gitaly_repository,
-          left_commit_id: diff_refs.base_sha,
+          left_commit_id: left_commit_id,
           right_commit_id: diff_refs.head_sha
         }
       end

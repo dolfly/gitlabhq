@@ -16,6 +16,7 @@ export default {
       default: false,
     },
   },
+  emits: ['request-jira-issue-types'],
   computed: {
     ...mapGetters(['currentKey', 'propsSource']),
   },

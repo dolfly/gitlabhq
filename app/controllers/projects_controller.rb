@@ -418,11 +418,12 @@ class ProjectsController < Projects::ApplicationController
 
   def enqueue_async_transfer(namespace)
     service = ::Projects::TransferService.new(@project, current_user)
+    result = service.schedule_async_transfer(namespace)
 
-    if service.schedule_async_transfer(namespace)
-      flash[:notice] = s_("TransferProject|Project transfer has been queued. You will be notified when it completes.")
+    if result.success?
+      flash[:notice] = result.message
     else
-      flash[:alert] = service.error
+      flash[:alert] = result.message
     end
   end
 

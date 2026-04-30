@@ -262,6 +262,29 @@ module API
       def check_query_limit
         ::Gitlab::QueryLimiting.disable!('https://gitlab.com/gitlab-org/gitlab/-/issues/586401', new_threshold: 110)
       end
+
+      def enqueue_async_transfer(group, new_parent_group)
+        service = ::Groups::TransferService.new(group, current_user)
+        result = service.schedule_async_transfer(new_parent_group)
+
+        if result.success?
+          group.preload_shared_group_links
+          present group, with: Entities::GroupDetail, current_user: current_user
+        else
+          render_api_error!(result.message, 400)
+        end
+      end
+
+      def execute_sync_transfer(group, new_parent_group)
+        service = ::Groups::TransferService.new(group, current_user)
+
+        if service.execute(new_parent_group)
+          group.preload_shared_group_links
+          present group, with: Entities::GroupDetail, current_user: current_user
+        else
+          render_api_error!(service.error, 400)
+        end
+      end
     end
 
     resource :groups do
@@ -665,13 +688,10 @@ module API
 
         new_parent_group = find_group!(params[:group_id]) if params[:group_id].present?
 
-        service = ::Groups::TransferService.new(group, current_user)
-
-        if service.execute(new_parent_group)
-          group.preload_shared_group_links
-          present group, with: Entities::GroupDetail, current_user: current_user
+        if Feature.enabled?(:groups_and_projects_async_transfer, group.root_ancestor)
+          enqueue_async_transfer(group, new_parent_group)
         else
-          render_api_error!(service.error, 400)
+          execute_sync_transfer(group, new_parent_group)
         end
       end
 

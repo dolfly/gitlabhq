@@ -81,7 +81,7 @@ RSpec.describe 'Multiple work item updating from work items list', :js, feature_
 
       click_button 'Bulk edit'
       check 'Select all'
-      click_button 'Select milestone'
+      click_update_milestone_button
       select_listbox_item(milestone.title)
       click_update_issues_button
 
@@ -98,7 +98,7 @@ RSpec.describe 'Multiple work item updating from work items list', :js, feature_
 
       click_button 'Bulk edit'
       check 'Select all'
-      click_button 'Select milestone'
+      click_update_milestone_button
       select_listbox_item('No milestone')
       click_update_issues_button
 
@@ -136,6 +136,11 @@ RSpec.describe 'Multiple work item updating from work items list', :js, feature_
 
   def click_update_assignee_button
     click_button 'Select assignee'
+    wait_for_requests
+  end
+
+  def click_update_milestone_button
+    click_button 'Select milestone'
     wait_for_requests
   end
 

@@ -31,12 +31,12 @@ RSpec.describe Layouts::StaticPanelComponent, feature_category: :design_system d
     end
   end
 
-  describe '.top-bar-fixed' do
+  describe '.panel-header-inner' do
     context 'when page_breadcrumbs_in_top_bar_feature_flag is true' do
       it 'adds the without-breadcrumbs class' do
         render_inline described_class.new(page_breadcrumbs_in_top_bar_feature_flag: true)
 
-        expect(page).to have_css('.top-bar-fixed.without-breadcrumbs')
+        expect(page).to have_css('.panel-header-inner.without-breadcrumbs')
       end
     end
 
@@ -44,7 +44,7 @@ RSpec.describe Layouts::StaticPanelComponent, feature_category: :design_system d
       it 'does not add the without-breadcrumbs class' do
         render_inline described_class.new(page_breadcrumbs_in_top_bar_feature_flag: false)
 
-        expect(page).not_to have_css('.top-bar-fixed.without-breadcrumbs')
+        expect(page).not_to have_css('.panel-header-inner.without-breadcrumbs')
       end
     end
   end
@@ -63,7 +63,7 @@ RSpec.describe Layouts::StaticPanelComponent, feature_category: :design_system d
         c.with_header { 'Header content' }
       end
 
-      expect(page).to have_css('.top-bar-fixed', text: 'Header content')
+      expect(page).to have_css('.panel-header-inner', text: 'Header content')
     end
 
     it 'renders before_body slot before the container' do

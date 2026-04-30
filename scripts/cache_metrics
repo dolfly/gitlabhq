@@ -30,14 +30,12 @@
 #
 # RELATED FILES:
 # - tooling/lib/tooling/ci_analytics/* (parsing and BigQuery logic)
-# - config/events/glci_cache_operation.yml (internal event definition)
 # - GitLab issue: https://gitlab.com/gitlab-org/quality/analytics/team/-/issues/195
 
 require_relative '../tooling/lib/tooling/ci_analytics/big_query_client'
 require_relative '../tooling/lib/tooling/ci_analytics/job_trace_downloader'
 require_relative '../tooling/lib/tooling/ci_analytics/cache_log_parser'
 require_relative '../tooling/lib/tooling/ci_analytics/cache_event_builder'
-require_relative '../tooling/lib/tooling/events/track_pipeline_events'
 
 module Tooling
   module CiAnalytics
@@ -56,7 +54,6 @@ module Tooling
         )
 
         cache_event_builder = CacheEventBuilder.new(cache_metrics_ci_environment)
-        events_tracker = Events::TrackPipelineEvents.new
 
         job_trace = trace_downloader.download_job_trace(cache_metrics_ci_environment[:job_id])
         return unless job_trace
@@ -71,15 +68,6 @@ module Tooling
         cache_events.each do |cache_data|
           bigquery_event = cache_event_builder.build_bigquery_event(cache_data)
           bigquery_client.insert_cache_event(bigquery_event)
-
-          properties = cache_event_builder.build_internal_event_properties(cache_data)
-          events_tracker.send_event(
-            'glci_cache_operation',
-            label: properties[:label],
-            property: properties[:property],
-            value: properties[:value],
-            extra_properties: properties[:extra_properties]
-          )
         end
 
         puts "✅ Processed #{cache_events.length} cache events"

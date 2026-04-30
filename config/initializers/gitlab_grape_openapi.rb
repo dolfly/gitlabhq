@@ -5,7 +5,14 @@ Gitlab::GrapeOpenapi.configure do |config|
     title: 'GitLab REST API',
     description: 'GitLab REST API used to interact with a GitLab installation.',
     version: 'v4',
-    terms_of_service: 'https://about.gitlab.com/terms/'
+    terms_of_service: 'https://handbook.gitlab.com/handbook/legal/api-terms/',
+    license: {
+      name: 'CC BY-SA 4.0',
+      url: 'https://gitlab.com/gitlab-org/gitlab/-/blob/master/LICENSE',
+      'x-gitlab-description':
+        'The license applies to the OpenAPI specification document itself. ' \
+        'For terms governing use of the GitLab API, see the termsOfService field.'
+    }
   )
 
   config.api_prefix = "api"
