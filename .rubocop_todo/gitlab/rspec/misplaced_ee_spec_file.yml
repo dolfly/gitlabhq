@@ -115,7 +115,6 @@ Gitlab/RSpec/MisplacedEeSpecFile:
     - 'ee/spec/models/user_preference_spec.rb'
     - 'ee/spec/models/work_item_spec.rb'
     - 'ee/spec/models/work_items/rollupable_dates_spec.rb'
-    - 'ee/spec/models/work_items/type_spec.rb'
     - 'ee/spec/models/work_items/widgets/assignees_spec.rb'
     - 'ee/spec/models/work_items/widgets/start_and_due_date_spec.rb'
     - 'ee/spec/policies/ci/build_policy_spec.rb'

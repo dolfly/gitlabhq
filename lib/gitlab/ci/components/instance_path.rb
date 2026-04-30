@@ -40,11 +40,7 @@ module Gitlab
           instrument(:config_component_find_project) do
             next unless project_full_path
 
-            if ci_optimize_component_instance_path_enabled?
-              Gitlab::SafeRequestStore.fetch(cache_key('project', project_full_path.downcase)) do
-                Project.find_by_full_path(project_full_path, follow_redirects: true)
-              end
-            else
+            Gitlab::SafeRequestStore.fetch(cache_key('project', project_full_path.downcase)) do
               Project.find_by_full_path(project_full_path, follow_redirects: true)
             end
           end
@@ -55,11 +51,7 @@ module Gitlab
           return unless project
 
           instrument(:config_component_find_sha) do
-            if ci_optimize_component_instance_path_enabled?
-              Gitlab::SafeRequestStore.fetch(cache_key('sha', project.id, reference)) do
-                find_catalog_version&.sha || sha_by_released_tag || sha_by_ref
-              end
-            else
+            Gitlab::SafeRequestStore.fetch(cache_key('sha', project.id, reference)) do
               find_catalog_version&.sha || sha_by_released_tag || sha_by_ref
             end
           end
@@ -162,11 +154,7 @@ module Gitlab
 
         def access_allowed?(current_user)
           instrument(:config_component_check_access) do
-            if ci_optimize_component_instance_path_enabled?
-              Gitlab::SafeRequestStore.fetch(cache_key('access_allowed', project.id, current_user&.id)) do
-                Ability.allowed?(current_user, :download_code, project)
-              end
-            else
+            Gitlab::SafeRequestStore.fetch(cache_key('access_allowed', project.id, current_user&.id)) do
               Ability.allowed?(current_user, :download_code, project)
             end
           end
@@ -180,11 +168,7 @@ module Gitlab
           instrument(:config_component_find_catalog_version) do
             next unless project&.catalog_resource
 
-            if ci_optimize_component_instance_path_enabled?
-              Gitlab::SafeRequestStore.fetch(cache_key('catalog_version', project.id, reference)) do
-                fetch_catalog_version
-              end
-            else
+            Gitlab::SafeRequestStore.fetch(cache_key('catalog_version', project.id, reference)) do
               fetch_catalog_version
             end
           end
@@ -247,11 +231,6 @@ module Gitlab
 
           logger.instrument(operation, &block)
         end
-
-        def ci_optimize_component_instance_path_enabled?
-          ::Feature.enabled?(:ci_optimize_component_instance_path, Feature.current_request)
-        end
-        strong_memoize_attr :ci_optimize_component_instance_path_enabled?
       end
     end
   end

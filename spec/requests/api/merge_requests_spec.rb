@@ -3649,25 +3649,11 @@ RSpec.describe API::MergeRequests, :aggregate_failures, feature_category: :sourc
       end
 
       context 'when no pipeline exists' do
-        context 'when merge_immediately_when_no_pipeline feature flag is enabled' do
-          it 'merges immediately' do
-            put api("/projects/#{project.id}/merge_requests/#{merge_request.iid}/merge", user), params: params
+        it 'merges immediately' do
+          put api("/projects/#{project.id}/merge_requests/#{merge_request.iid}/merge", user), params: params
 
-            expect(response).to have_gitlab_http_status(:ok)
-            expect(json_response['state']).to eq('merged')
-          end
-        end
-
-        context 'when merge_immediately_when_no_pipeline feature flag is disabled' do
-          before do
-            stub_feature_flags(merge_immediately_when_no_pipeline: false)
-          end
-
-          it 'returns not allowed' do
-            put api("/projects/#{project.id}/merge_requests/#{merge_request.iid}/merge", user), params: params
-
-            expect(response).to have_gitlab_http_status(:method_not_allowed)
-          end
+          expect(response).to have_gitlab_http_status(:ok)
+          expect(json_response['state']).to eq('merged')
         end
       end
 
@@ -3678,28 +3664,12 @@ RSpec.describe API::MergeRequests, :aggregate_failures, feature_category: :sourc
           end
         end
 
-        context 'when merge_immediately_when_no_pipeline feature flag is enabled' do
-          it 'sets auto merge' do
-            put api("/projects/#{project.id}/merge_requests/#{merge_request.iid}/merge", user), params: params
+        it 'sets auto merge' do
+          put api("/projects/#{project.id}/merge_requests/#{merge_request.iid}/merge", user), params: params
 
-            expect(response).to have_gitlab_http_status(:ok)
-            expect(json_response['merge_when_pipeline_succeeds']).to eq(true)
-            expect(merge_request.reload.state).to eq('opened')
-          end
-        end
-
-        context 'when merge_immediately_when_no_pipeline feature flag is disabled' do
-          before do
-            stub_feature_flags(merge_immediately_when_no_pipeline: false)
-          end
-
-          it 'sets auto merge' do
-            put api("/projects/#{project.id}/merge_requests/#{merge_request.iid}/merge", user), params: params
-
-            expect(response).to have_gitlab_http_status(:ok)
-            expect(json_response['merge_when_pipeline_succeeds']).to eq(true)
-            expect(merge_request.reload.state).to eq('opened')
-          end
+          expect(response).to have_gitlab_http_status(:ok)
+          expect(json_response['merge_when_pipeline_succeeds']).to eq(true)
+          expect(merge_request.reload.state).to eq('opened')
         end
       end
 

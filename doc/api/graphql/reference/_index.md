@@ -29754,6 +29754,7 @@ Analyzer status (success/fail) for projects.
 | <a id="analyzerprojectstatustype-buildid"></a>`buildId` | [`JobID`](#jobid) | Build ID. |
 | <a id="analyzerprojectstatustype-lastcall"></a>`lastCall` | [`Time!`](#time) | Last time analyzer was called. |
 | <a id="analyzerprojectstatustype-projectid"></a>`projectId` | [`Int!`](#int) | Project ID. |
+| <a id="analyzerprojectstatustype-source"></a>`source` {{< icon name="warning-solid" >}} | [`AnalyzerSourceEnum`](#analyzersourceenum) | **Introduced** in GitLab 19.0. **Status**: Experiment. Source of the build associated with the analyzer status. |
 | <a id="analyzerprojectstatustype-status"></a>`status` | [`AnalyzerStatusEnum!`](#analyzerstatusenum) | Analyzer status. |
 | <a id="analyzerprojectstatustype-updatedat"></a>`updatedAt` | [`ISO8601DateTime!`](#iso8601datetime) | Timestamp of when the status was last updated. |
 
@@ -46862,11 +46863,13 @@ Represents a test run for a scheduled pipeline execution policy.
 | <a id="policyscope-excludingapplicationattributes"></a>`excludingApplicationAttributes` {{< icon name="warning-solid" >}} | [`SecurityAttributeConnection!`](#securityattributeconnection) | **Introduced** in GitLab 19.0. **Status**: Experiment. Application security attributes that the policy does not apply to. |
 | <a id="policyscope-excludingarchivedprojects"></a>`excludingArchivedProjects` | [`Boolean!`](#boolean) | Boolean indicating whether archived projects are excluded from the policy. |
 | <a id="policyscope-excludingbusinessimpactattributes"></a>`excludingBusinessImpactAttributes` {{< icon name="warning-solid" >}} | [`SecurityAttributeConnection!`](#securityattributeconnection) | **Introduced** in GitLab 18.11. **Status**: Experiment. Business Impact security attributes that the policy does not apply to. |
+| <a id="policyscope-excludingbusinessunitattributes"></a>`excludingBusinessUnitAttributes` {{< icon name="warning-solid" >}} | [`SecurityAttributeConnection!`](#securityattributeconnection) | **Introduced** in GitLab 19.1. **Status**: Experiment. Business Unit security attributes that the policy does not apply to. |
 | <a id="policyscope-excludinggroups"></a>`excludingGroups` | [`GroupConnection!`](#groupconnection) | Groups to which the policy should not be applied. (see [Connections](#connections)) |
 | <a id="policyscope-excludingpersonalprojects"></a>`excludingPersonalProjects` | [`Boolean!`](#boolean) | Boolean indicating whether personal projects are excluded from the policy. |
 | <a id="policyscope-excludingprojects"></a>`excludingProjects` | [`ProjectConnection!`](#projectconnection) | Projects to which the policy should not be applied. (see [Connections](#connections)) |
 | <a id="policyscope-includingapplicationattributes"></a>`includingApplicationAttributes` {{< icon name="warning-solid" >}} | [`SecurityAttributeConnection!`](#securityattributeconnection) | **Introduced** in GitLab 19.0. **Status**: Experiment. Application security attributes that the policy applies to. |
 | <a id="policyscope-includingbusinessimpactattributes"></a>`includingBusinessImpactAttributes` {{< icon name="warning-solid" >}} | [`SecurityAttributeConnection!`](#securityattributeconnection) | **Introduced** in GitLab 18.11. **Status**: Experiment. Business Impact security attributes that the policy applies to. |
+| <a id="policyscope-includingbusinessunitattributes"></a>`includingBusinessUnitAttributes` {{< icon name="warning-solid" >}} | [`SecurityAttributeConnection!`](#securityattributeconnection) | **Introduced** in GitLab 19.1. **Status**: Experiment. Business Unit security attributes that the policy applies to. |
 | <a id="policyscope-includinggroups"></a>`includingGroups` | [`GroupConnection!`](#groupconnection) | Groups to which the policy should be applied. (see [Connections](#connections)) |
 | <a id="policyscope-includingprojects"></a>`includingProjects` | [`ProjectConnection!`](#projectconnection) | Projects to which the policy should be applied. (see [Connections](#connections)) |
 | <a id="policyscope-matchmode"></a>`matchMode` {{< icon name="warning-solid" >}} | [`PolicyScopeMatchMode!`](#policyscopematchmode) | **Introduced** in GitLab 18.10. **Status**: Experiment. Specifies how multiple policy scope conditions are combined. |
@@ -56765,6 +56768,21 @@ Alert status values.
 | <a id="analyticsaggregationperiod-day"></a>`DAY` | Daily aggregation. |
 | <a id="analyticsaggregationperiod-month"></a>`MONTH` | Monthly aggregation. |
 | <a id="analyticsaggregationperiod-week"></a>`WEEK` | Weekly aggregation. |
+
+### `AnalyzerSourceEnum`
+
+Source of the build that ran the analyzer.
+
+| Value | Description |
+| ----- | ----------- |
+| <a id="analyzersourceenum-on_demand_dast_scan"></a>`ON_DEMAND_DAST_SCAN` | Job source is an on-demand DAST scan. |
+| <a id="analyzersourceenum-on_demand_dast_validation"></a>`ON_DEMAND_DAST_VALIDATION` | Job source is an on-demand DAST site profile validation. |
+| <a id="analyzersourceenum-pipeline_execution_policy"></a>`PIPELINE_EXECUTION_POLICY` | Job source is a pipeline execution policy. |
+| <a id="analyzersourceenum-pipeline_execution_policy_schedule"></a>`PIPELINE_EXECUTION_POLICY_SCHEDULE` | Job source is a scheduled pipeline execution policy. |
+| <a id="analyzersourceenum-scan_execution_policy"></a>`SCAN_EXECUTION_POLICY` | Job source is a scan execution policy. |
+| <a id="analyzersourceenum-security_orchestration_policy"></a>`SECURITY_ORCHESTRATION_POLICY` | Job source is a security orchestration policy. |
+| <a id="analyzersourceenum-security_scan_profiles"></a>`SECURITY_SCAN_PROFILES` | Job source is a security scan profile. |
+| <a id="analyzersourceenum-yml"></a>`YML` | Job source is defined or included in .gitlab-ci.yml. |
 
 ### `AnalyzerStatusEnum`
 

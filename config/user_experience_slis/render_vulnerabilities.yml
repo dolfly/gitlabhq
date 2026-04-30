@@ -1,4 +1,4 @@
 # yaml-language-server: $schema=https://gitlab.com/gitlab-org/ruby/gems/labkit-ruby/-/raw/master/config/user_experience_slis/schema.json
-description: "Triage and remediate a vulnerability"
+description: "Time it takes to return vulnerability data from GraphQL"
 feature_category: "vulnerability_management"
-urgency: "async_fast"
+urgency: "sync_fast"

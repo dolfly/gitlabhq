@@ -83,7 +83,9 @@ RSpec.describe Gitlab::Ci::Config::External::File::Remote, feature_category: :pi
         end
       end
 
-      it { is_expected.to be_falsy }
+      it 'raises HTTPTimeoutError' do
+        expect { valid? }.to raise_error(Gitlab::Ci::Config::External::Context::HTTPTimeoutError)
+      end
     end
 
     context 'when is not a yaml file' do
@@ -142,8 +144,8 @@ RSpec.describe Gitlab::Ci::Config::External::File::Remote, feature_category: :pi
         end
       end
 
-      it 'is falsy' do
-        expect(content).to be_falsy
+      it 'raises HTTPTimeoutError' do
+        expect { content }.to raise_error(Gitlab::Ci::Config::External::Context::HTTPTimeoutError)
       end
     end
 
@@ -262,7 +264,7 @@ RSpec.describe Gitlab::Ci::Config::External::File::Remote, feature_category: :pi
       end
 
       context 'when retryable errors fail after all retries' do
-        [SocketError, Timeout::Error, Gitlab::HTTP::Error].each do |error_class|
+        [SocketError, Gitlab::HTTP::Error].each do |error_class|
           context "when #{error_class.name} occurs on all attempts" do
             before do
               allow_next_instance_of(HTTParty::Request) do |instance|
@@ -271,6 +273,29 @@ RSpec.describe Gitlab::Ci::Config::External::File::Remote, feature_category: :pi
             end
 
             it_behaves_like 'fails after retrying with exponential backoff'
+          end
+        end
+
+        context 'when Timeout::Error occurs on all attempts' do
+          before do
+            allow_next_instance_of(HTTParty::Request) do |instance|
+              allow(instance).to receive(:perform).and_raise(Timeout::Error)
+            end
+            allow(remote_file).to receive(:sleep)
+          end
+
+          it 'raises HTTPTimeoutError' do
+            expect { content }.to raise_error(
+              Gitlab::Ci::Config::External::Context::HTTPTimeoutError,
+              "Remote file `https://gitlab.com/gitlab-org/gitlab-foss/blob/1234/.[MASKED]xxx.yml` " \
+                "could not be fetched after 3 attempts because of a timeout error!"
+            )
+          end
+
+          it 'waits between retries with exponential backoff' do
+            expect { content }.to raise_error(Gitlab::Ci::Config::External::Context::HTTPTimeoutError)
+            expect(remote_file).to have_received(:sleep).with(1).once
+            expect(remote_file).to have_received(:sleep).with(2).once
           end
         end
 
@@ -372,8 +397,11 @@ RSpec.describe Gitlab::Ci::Config::External::File::Remote, feature_category: :pi
         stub_full_request(location).to_timeout
       end
 
-      it 'returns error message about a timeout' do
-        expect(subject).to eq('Remote file `https://gitlab.com/gitlab-org/gitlab-foss/blob/1234/.[MASKED]xxx.yml` could not be fetched after 3 attempts because of a timeout error!')
+      it 'raises HTTPTimeoutError' do
+        expect { subject }.to raise_error(
+          Gitlab::Ci::Config::External::Context::HTTPTimeoutError,
+          'Remote file `https://gitlab.com/gitlab-org/gitlab-foss/blob/1234/.[MASKED]xxx.yml` could not be fetched after 3 attempts because of a timeout error!'
+        )
       end
     end
 
@@ -554,32 +582,36 @@ RSpec.describe Gitlab::Ci::Config::External::File::Remote, feature_category: :pi
     end
 
     context 'when HTTP request times out' do
-      it 'returns nil content' do
-        expect(content).to be_nil
-      end
-
-      it 'adds timeout error message' do
-        content
-        expect(remote_file.errors).to include(
+      it 'raises HTTPTimeoutError' do
+        expect { content }.to raise_error(
+          Gitlab::Ci::Config::External::Context::HTTPTimeoutError,
           "Remote file `https://gitlab.com/gitlab-org/gitlab-foss/blob/1234/.[MASKED]xxx.yml` " \
             "could not be fetched after 3 attempts because of a timeout error!"
         )
       end
 
-      it 'logs the timeout' do
-        expect(Gitlab::AppJsonLogger).to receive(:warn).with(
-          hash_including(
-            class: 'Gitlab::Ci::Config::External::File::Remote',
-            message: 'CI config HTTP request timed out',
-            project_id: project.id,
-            extra: hash_including(
-              open_timeout_s: 1,
-              read_timeout_s: 1
-            )
-          )
-        ).exactly(3).times
+      context 'when ci_config_http_timeout feature flag is enabled' do
+        before do
+          stub_feature_flags(ci_config_http_timeout: true)
+        end
 
-        content
+        it 'logs the timeout' do
+          allow(Gitlab::AppJsonLogger).to receive(:warn).and_call_original
+
+          expect { content }.to raise_error(Gitlab::Ci::Config::External::Context::HTTPTimeoutError)
+
+          expect(Gitlab::AppJsonLogger).to have_received(:warn).with(
+            hash_including(
+              class: 'Gitlab::Ci::Config::External::File::Remote',
+              message: 'CI config HTTP request timed out',
+              project_id: project.id,
+              extra: hash_including(
+                open_timeout_s: 1,
+                read_timeout_s: 1
+              )
+            )
+          ).once
+        end
       end
     end
 
@@ -588,16 +620,30 @@ RSpec.describe Gitlab::Ci::Config::External::File::Remote, feature_category: :pi
         stub_feature_flags(ci_config_http_timeout: false)
       end
 
-      it 'does not log the timeout' do
-        expect(Gitlab::AppJsonLogger).not_to receive(:warn).with(
-          hash_including(message: 'CI config HTTP request timed out')
-        )
+      it 'still logs the timeout' do
+        allow(Gitlab::AppJsonLogger).to receive(:warn).and_call_original
 
-        content
+        expect { content }.to raise_error(Gitlab::Ci::Config::External::Context::HTTPTimeoutError)
+
+        expect(Gitlab::AppJsonLogger).to have_received(:warn).with(
+          hash_including(
+            class: 'Gitlab::Ci::Config::External::File::Remote',
+            message: 'CI config HTTP request timed out',
+            project_id: project.id,
+            extra: hash_including(
+              open_timeout_s: nil,
+              read_timeout_s: nil
+            )
+          )
+        ).once
       end
 
-      it 'still returns nil content due to timeout' do
-        expect(content).to be_nil
+      it 'raises HTTPTimeoutError' do
+        expect { content }.to raise_error(
+          Gitlab::Ci::Config::External::Context::HTTPTimeoutError,
+          "Remote file `https://gitlab.com/gitlab-org/gitlab-foss/blob/1234/.[MASKED]xxx.yml` " \
+            "could not be fetched after 3 attempts because of a timeout error!"
+        )
       end
     end
   end

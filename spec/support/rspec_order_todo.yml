@@ -2469,7 +2469,6 @@
 - './spec/features/admin/admin_manage_applications_spec.rb'
 - './spec/features/admin/admin_mode/login_spec.rb'
 - './spec/features/admin/admin_mode/logout_spec.rb'
-- './spec/features/admin/admin_mode_spec.rb'
 - './spec/features/admin/admin_mode/workers_spec.rb'
 - './spec/features/admin/admin_projects_spec.rb'
 - './spec/features/admin/admin_search_settings_spec.rb'

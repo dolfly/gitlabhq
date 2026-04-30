@@ -414,16 +414,6 @@ RSpec.describe Gitlab::Ci::Components::InstancePath, feature_category: :pipeline
       let(:address) { "acme.com/#{project_path}/secret-detection@0.1.0" }
 
       it { is_expected.to eq '0.1.0' }
-
-      context 'when ci_optimize_component_instance_path is disabled' do
-        before do
-          stub_feature_flags(ci_optimize_component_instance_path: false)
-        end
-
-        it 'uses legacy fetch_catalog_version path' do
-          expect(matched_version).to eq '0.1.0'
-        end
-      end
     end
 
     context 'when using a partial semantic version' do
@@ -637,59 +627,6 @@ RSpec.describe Gitlab::Ci::Components::InstancePath, feature_category: :pipeline
 
         path1.fetch_content!(current_user: user)
         path2.fetch_content!(current_user: user)
-      end
-    end
-
-    context 'when ci_optimize_component_instance_path feature flag is disabled' do
-      before do
-        stub_feature_flags(ci_optimize_component_instance_path: false)
-      end
-
-      describe '#project' do
-        it 'does not use SafeRequestStore caching' do
-          path1 = described_class.new(address: address)
-          path2 = described_class.new(address: address)
-
-          expect(Project).to receive(:find_by_full_path).twice.and_call_original
-
-          path1.project
-          path2.project
-        end
-      end
-
-      describe '#sha' do
-        it 'does not use SafeRequestStore caching' do
-          path1 = described_class.new(address: address)
-          path2 = described_class.new(address: address)
-
-          expect(path1).to receive(:find_catalog_version).and_call_original
-          expect(path2).to receive(:find_catalog_version).and_call_original
-
-          path1.sha
-          path2.sha
-        end
-
-        it 'falls back to sha_by_released_tag when catalog version is not found' do
-          branch_address = "acme.com/#{project_path}/secret-detection@main"
-          path = described_class.new(address: branch_address)
-
-          expect(path).to receive(:find_catalog_version).and_return(nil)
-          expect(path).to receive(:sha_by_released_tag).and_call_original
-
-          path.sha
-        end
-      end
-
-      describe '#fetch_content!' do
-        it 'does not cache the access check in SafeRequestStore' do
-          path1 = described_class.new(address: address)
-          path2 = described_class.new(address: address)
-
-          expect(Ability).to receive(:allowed?).with(user, :download_code, project).twice.and_return(true)
-
-          path1.fetch_content!(current_user: user)
-          path2.fetch_content!(current_user: user)
-        end
       end
     end
   end

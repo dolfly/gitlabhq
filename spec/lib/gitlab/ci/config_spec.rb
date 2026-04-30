@@ -289,7 +289,7 @@ RSpec.describe Gitlab::Ci::Config, feature_category: :pipeline_composition do
 
       describe '.new' do
         it 'raises error' do
-          expect(Gitlab::ErrorTracking).to receive(:track_and_raise_for_dev_exception)
+          expect(Gitlab::ErrorTracking).to receive(:track_exception)
 
           expect { config }.to raise_error(
             described_class::ConfigError,
@@ -630,7 +630,7 @@ RSpec.describe Gitlab::Ci::Config, feature_category: :pipeline_composition do
       end
 
       it 'raises error TimeoutError' do
-        expect(Gitlab::ErrorTracking).to receive(:track_and_raise_for_dev_exception)
+        expect(Gitlab::ErrorTracking).to receive(:track_exception)
 
         expect { config }.to raise_error(
           described_class::ConfigError,

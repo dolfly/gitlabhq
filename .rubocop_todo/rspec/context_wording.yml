@@ -859,7 +859,6 @@ RSpec/ContextWording:
     - 'spec/features/admin/admin_hook_logs_spec.rb'
     - 'spec/features/admin/admin_hooks_spec.rb'
     - 'spec/features/admin/admin_mode/login_spec.rb'
-    - 'spec/features/admin/admin_mode_spec.rb'
     - 'spec/features/admin/admin_settings_spec.rb'
     - 'spec/features/admin/dashboard_spec.rb'
     - 'spec/features/admin/users/admin_impersonates_user_spec.rb'

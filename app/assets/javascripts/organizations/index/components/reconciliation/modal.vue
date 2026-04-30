@@ -1,6 +1,6 @@
 <script>
-import { GlModal, GlSprintf } from '@gitlab/ui';
-import { s__ } from '~/locale';
+import { GlButton, GlModal, GlSprintf } from '@gitlab/ui';
+import { s__, __ } from '~/locale';
 import { createAlert } from '~/alert';
 import organizationsForReconciliationQuery from '~/organizations/index/graphql/queries/organizations_for_reconciliation.query.graphql';
 import SkeletonLoader from './skeleton_loader.vue';
@@ -15,6 +15,7 @@ export default {
     errorMessage: s__('Organization|An error occurred fetching organizations. Please try again.'),
   },
   components: {
+    GlButton,
     GlModal,
     GlSprintf,
     SkeletonLoader,
@@ -68,6 +69,12 @@ export default {
     isLastStep() {
       return this.currentStep === this.totalSteps;
     },
+    prevButtonText() {
+      return this.isFirstStep ? __('Cancel') : __('Back');
+    },
+    nextButtonText() {
+      return this.isLastStep ? __('Confirm') : __('Continue');
+    },
   },
   methods: {
     updateModalVisibility(value) {
@@ -94,17 +101,23 @@ export default {
 <template>
   <gl-modal
     modal-id="organization-reconciliation-modal"
-    hide-footer
+    scrollable
     :visible="visible"
     @change="updateModalVisibility($event)"
   >
     <skeleton-loader v-if="loading" />
-    <template v-else>
+    <template v-if="!loading">
       <gl-sprintf :message="$options.i18n.stepProgress">
         <template #currentStep>{{ currentStep }}</template>
         <template #totalSteps>{{ totalSteps }}</template>
       </gl-sprintf>
-      <component :is="stepComponent" :organizations="organizations" @next="onNext" @prev="onPrev" />
+      <component :is="stepComponent" :organizations="organizations" />
+    </template>
+    <template v-if="!loading" #modal-footer>
+      <div class="gl-flex gl-w-full gl-justify-center gl-gap-3">
+        <gl-button @click="onPrev">{{ prevButtonText }}</gl-button>
+        <gl-button variant="confirm" @click="onNext">{{ nextButtonText }}</gl-button>
+      </div>
     </template>
   </gl-modal>
 </template>

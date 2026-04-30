@@ -59,22 +59,4 @@ describe('ReconciliationStep1', () => {
       expect(avatar.props('entityName')).toBe(mockOrganizations[0].name);
     });
   });
-
-  describe('events', () => {
-    beforeEach(() => {
-      createComponent();
-    });
-
-    it('emits next event', () => {
-      findBaseStep().vm.$emit('next');
-
-      expect(wrapper.emitted('next')).toHaveLength(1);
-    });
-
-    it('emits prev event', () => {
-      findBaseStep().vm.$emit('prev');
-
-      expect(wrapper.emitted('prev')).toHaveLength(1);
-    });
-  });
 });

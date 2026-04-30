@@ -249,7 +249,6 @@ Now that your server is set up, install GitLab:
    curl --location "https://packages.gitlab.com/install/repositories/gitlab/gitlab-ee/script.deb.sh" | sudo bash
    ```
 
-   To see the contents of the script, visit <https://packages.gitlab.com/gitlab/gitlab-ee/install>.
 1. Install the GitLab package. Provide a strong password with
    `GITLAB_ROOT_PASSWORD` and replace the `EXTERNAL_URL`
    with your own. Don't forget to include `https` in the URL, so that a Let's Encrypt

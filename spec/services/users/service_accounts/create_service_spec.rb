@@ -85,7 +85,9 @@ RSpec.describe Users::ServiceAccounts::CreateService, feature_category: :user_ma
           result = service.execute
 
           expect(result.status).to eq(:error)
-          expect(result.message).to eq(s_('ServiceAccount|No more seats are available to create Service Account User'))
+          expect(result.message).to eq(s_(
+          'ServiceAccount|This namespace either does not have an active subscription that can create service ' \
+            'accounts, or the subscription has reached its service account creation limit.'))
         end
       end
     end

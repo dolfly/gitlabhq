@@ -107,6 +107,7 @@ export default {
       :iid="mr.iid"
       :target-project-full-path="mr.targetProjectFullPath"
       :is-post-merge="isPostMerge"
+      :mr-id="mr.id"
     />
     <template #footer>
       <div v-if="mr.exposedArtifactsPath" class="js-exposed-artifacts">

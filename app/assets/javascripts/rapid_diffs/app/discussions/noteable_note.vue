@@ -242,6 +242,12 @@ export default {
         }"
       >
         <div
+          v-if="$scopedSlots.headline"
+          class="gl-border-b gl-border-section gl-px-4 gl-py-3 gl-text-subtle"
+        >
+          <slot name="headline"></slot>
+        </div>
+        <div
           class="gl-flex gl-flex-wrap gl-items-start gl-justify-between gl-gap-2 gl-px-4 gl-pt-2"
         >
           <note-header

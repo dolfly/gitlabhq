@@ -798,7 +798,6 @@ RSpec/FeatureCategory:
     - 'spec/features/admin/admin_appearance_spec.rb'
     - 'spec/features/admin/admin_browse_spam_logs_spec.rb'
     - 'spec/features/admin/admin_mode/step_up_auth_spec.rb'
-    - 'spec/features/admin/admin_mode_spec.rb'
     - 'spec/features/admin/admin_settings_spec.rb'
     - 'spec/features/admin/admin_system_info_spec.rb'
     - 'spec/features/admin/dashboard_spec.rb'

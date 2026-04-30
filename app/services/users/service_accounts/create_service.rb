@@ -61,7 +61,8 @@ module Users
       def error_messages
         {
           no_permission: s_('ServiceAccount|User does not have permission to create a service account.'),
-          no_seats: s_('ServiceAccount|No more seats are available to create Service Account User')
+          no_seats: s_('ServiceAccount|This namespace either does not have an active subscription that can create ' \
+            'service accounts, or the subscription has reached its service account creation limit.')
         }
       end
 

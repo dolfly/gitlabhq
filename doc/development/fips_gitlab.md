@@ -416,7 +416,7 @@ end
 ## Omnibus FIPS packages
 
 GitLab has a dedicated repository
-([`gitlab/gitlab-fips`](https://packages.gitlab.com/gitlab/gitlab-fips))
+([`gitlab/gitlab-fips`](https://packages.gitlab.com/ui/browse/gitlab/gitlab-fips))
 for builds of the Omnibus GitLab which are built with FIPS compliance.
 These GitLab builds are compiled to use the system OpenSSL, instead of
 the Omnibus-embedded version of OpenSSL. These packages are built for:
@@ -448,7 +448,7 @@ system for which FIPS Linux packages are available.
 
 ### Nightly Omnibus FIPS builds
 
-The Distribution team has created [nightly FIPS Omnibus builds](https://packages.gitlab.com/gitlab/nightly-fips-builds),
+The Distribution team has created [nightly FIPS Omnibus builds](https://packages.gitlab.com/ui/browse/gitlab/nightly-fips-builds),
 which can be used for testing purposes. These should never be used for production environments.
 
 ## Runner

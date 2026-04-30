@@ -2,17 +2,17 @@
 
 require 'spec_helper'
 
-RSpec.describe 'Admin mode', :js, feature_category: :shared do
+RSpec.describe 'Admin Mode Menu', :js, feature_category: :system_access do
   include MobileHelpers
   include StubENV
 
-  let(:admin) { create(:admin) }
+  let(:admin) { create(:admin, :with_namespace) }
 
   before do
     stub_env('IN_MEMORY_APPLICATION_SETTINGS', 'false')
   end
 
-  context 'application setting :admin_mode is enabled', :request_store do
+  context 'when application setting :admin_mode is enabled', :request_store do
     before do
       sign_in(admin)
     end
@@ -83,7 +83,7 @@ RSpec.describe 'Admin mode', :js, feature_category: :shared do
         expect(page).to have_current_path(user_settings_profile_path)
       end
 
-      context 'sidebar' do
+      context 'in sidebar' do
         it 'shows admin dashboard link' do
           visit root_dashboard_path
           expect(page).to have_link('Admin')
@@ -106,7 +106,7 @@ RSpec.describe 'Admin mode', :js, feature_category: :shared do
     end
   end
 
-  context 'application setting :admin_mode is disabled' do
+  context 'when application setting :admin_mode is disabled' do
     before do
       stub_application_setting(admin_mode: false)
       sign_in(admin)

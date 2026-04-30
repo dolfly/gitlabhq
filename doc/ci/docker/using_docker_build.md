@@ -444,7 +444,7 @@ Docker-in-Docker is the recommended configuration, but you should be aware of th
   To use `docker-compose` in your job scripts, follow the Docker Compose
   [installation instructions](https://docs.docker.com/compose/install/).
 - **Cache**: Each job runs in a new environment. Because every build gets its own instance of the Docker engine, concurrent jobs do not cause conflicts.
-  However, jobs can be slower because there's no caching of layers. See [Docker layer caching](#make-docker-in-docker-builds-faster-with-docker-layer-caching).
+  However, jobs can be slower because there's no caching of layers. See [Docker layer caching](#docker-layer-caching).
 - **Storage drivers**: By default, earlier versions of Docker use the `vfs` storage driver,
   which copies the file system for each job. Docker 17.09 and later use `--storage-driver overlay2`, which is
   the recommended storage driver. See [Using the OverlayFS driver](#use-the-overlayfs-driver) for details.
@@ -908,9 +908,10 @@ The `dind` service detects this configuration.
 
 When you use Docker-in-Docker, the [standard authentication methods](using_docker_images.md#access-an-image-from-a-private-container-registry) do not work, because a fresh Docker daemon is started with the service. You should [authenticate with registry](authenticate_registry.md).
 
-## Make Docker-in-Docker builds faster with Docker layer caching
+## Docker layer caching
 
-When using Docker-in-Docker, Docker downloads all layers of your image every time you create a build. You can [make your builds faster with Docker layer caching](docker_layer_caching.md).
+You can cache Docker layers to speed up your builds.
+For more information, see [Cache Docker layers in Docker-in-Docker builds](docker_layer_caching.md).
 
 ## Use the OverlayFS driver
 

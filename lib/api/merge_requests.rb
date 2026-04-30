@@ -134,8 +134,6 @@ module API
       end
 
       def pipeline_allows_merge?(merge_request)
-        return merge_request.diff_head_pipeline_success? unless Feature.enabled?(:merge_immediately_when_no_pipeline, merge_request.project)
-
         (!merge_request.pipeline_creating? && !merge_request.diff_head_pipeline) ||
           merge_request.diff_head_pipeline_success?
       end

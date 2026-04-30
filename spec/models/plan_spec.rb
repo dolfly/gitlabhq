@@ -27,7 +27,7 @@ RSpec.describe Plan, feature_category: :subscription_management do
       plan = described_class.new(name: 'default', title: 'Default')
       plan.save!
 
-      expect(plan.plan_name_uid).to eq('default')
+      expect(plan.plan_name_uid).to eq(Plan::PLAN_NAME_UID_LIST[:default])
     end
   end
 

@@ -145,7 +145,7 @@ module Types
 
       def unavailable_widgets_on_conversion(target:)
         source_type = object
-        target_type = GitlabSchema.find_by_gid(target).sync
+        target_type = ::WorkItems::TypesFramework::Provider.new(context[:resource_parent]).find_by_gid(target)
 
         return [] unless source_type && target_type
 

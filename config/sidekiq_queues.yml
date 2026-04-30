@@ -57,6 +57,8 @@
   - 1
 - - ai_duo_workflows_code_review_timeout
   - 1
+- - ai_duo_workflows_sync_session_artifact
+  - 1
 - - ai_duo_workflows_update_workflow_status_event
   - 1
 - - ai_messaging_callback
@@ -78,6 +80,8 @@
 - - anti_abuse_new_abuse_report
   - 1
 - - anti_abuse_spam_abuse_events
+  - 1
+- - app_config_cascade_built_in_project_templates_enabled
   - 1
 - - app_config_cascade_duo_features_enabled
   - 1
@@ -742,6 +746,8 @@
 - - ml_experiment_tracking_associate_ml_candidate_to_package
   - 1
 - - namespaces
+  - 1
+- - namespaces_cascade_built_in_project_templates_enabled
   - 1
 - - namespaces_cascade_duo_features_enabled
   - 1

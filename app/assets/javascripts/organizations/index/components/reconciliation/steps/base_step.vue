@@ -1,11 +1,9 @@
 <script>
-import { GlButton, GlIcon } from '@gitlab/ui';
-import { __ } from '~/locale';
+import { GlIcon } from '@gitlab/ui';
 
 export default {
   name: 'ReconciliationBaseStep',
   components: {
-    GlButton,
     GlIcon,
   },
   props: {
@@ -19,18 +17,7 @@ export default {
       required: false,
       default: '',
     },
-    nextButtonText: {
-      type: String,
-      required: false,
-      default: __('Continue'),
-    },
-    prevButtonText: {
-      type: String,
-      required: false,
-      default: __('Cancel'),
-    },
   },
-  emits: ['next', 'prev'],
 };
 </script>
 
@@ -39,7 +26,5 @@ export default {
     <gl-icon v-if="icon" :name="icon" />
     <h4 v-if="title">{{ title }}</h4>
     <slot></slot>
-    <gl-button @click="$emit('prev')">{{ prevButtonText }}</gl-button>
-    <gl-button variant="confirm" @click="$emit('next')">{{ nextButtonText }}</gl-button>
   </div>
 </template>

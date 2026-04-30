@@ -2701,6 +2701,9 @@ incompatible with personal access tokens.
 | `POST` | `/internal/observability/project/:id/write/metrics` | Workhorse verification |
 | `POST` | `/internal/observability/project/:id/write/traces` | Workhorse verification |
 | `GET` | `/internal/orbit/project/:project_id/info` | Orbit internal token |
+| `GET` | `/internal/orbit/project/:project_id/merge_request_diffs/:diff_id` | Orbit internal token |
+| `GET` | `/internal/orbit/project/:project_id/merge_request_diffs/:diff_id/raw_diffs` | Orbit internal token |
+| `GET` | `/internal/orbit/project/:project_id/merge_requests/:merge_request_iid/raw_diffs` | Orbit internal token |
 | `GET` | `/internal/orbit/project/:project_id/repository/archive` | Orbit internal token |
 | `GET` | `/internal/orbit/project/:project_id/repository/changed_paths` | Orbit internal token |
 | `GET` | `/internal/orbit/project/:project_id/repository/commits` | Orbit internal token |

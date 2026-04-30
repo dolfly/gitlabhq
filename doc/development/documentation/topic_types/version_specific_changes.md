@@ -120,9 +120,8 @@ number):
    is not in the upgrade notes, then there's nothing specific about that
    version to be aware of.
 
-   Find the patch releases in the GitLab package repository. For example,
-   to search for the latest GitLab X.2 Enterprise Edition version, go to
-   <https://packages.gitlab.com/app/gitlab/gitlab-ee/search?q=X.2>.
+   Find the patch releases in the GitLab package repository at
+   <https://packages.gitlab.com/ui/browse/gitlab/gitlab-ee>.
    ```
 
 1. Add a link to the new page under `doc/update/versions/_index.md`.

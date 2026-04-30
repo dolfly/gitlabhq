@@ -36,7 +36,7 @@ gem 'action_dispatch-draw_all',
 # Need by Rails
 gem 'drb', '~> 2.2', feature_category: :rails_platform
 
-gem 'bootsnap', '~> 1.23.0', require: false, feature_category: :rails_platform
+gem 'bootsnap', '~> 1.24.0', require: false, feature_category: :rails_platform
 
 gem 'ffi', '~> 1.17.3', feature_category: :shared # rubocop:todo Gemfile/MissingFeatureCategory -- https://gitlab.com/gitlab-org/gitlab/-/issues/581839
 
@@ -642,7 +642,7 @@ gem 'gitaly', '~> 18.10.0', feature_category: :gitaly
 gem 'gitlab-kas-grpc', '~> 18.5.0-rc4', feature_category: :deployment_management
 
 # Knowledge Graph GRPC protocol definitions
-gem 'gitlab-gkg-proto', '~> 0.34.0', feature_category: :knowledge_graph
+gem 'gitlab-gkg-proto', '~> 0.37.0', feature_category: :knowledge_graph
 
 gem 'grpc', '~> 1.80.0', feature_category: :shared # rubocop:todo Gemfile/MissingFeatureCategory -- https://gitlab.com/gitlab-org/gitlab/-/issues/581839
 

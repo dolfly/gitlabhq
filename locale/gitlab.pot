@@ -18086,6 +18086,9 @@ msgstr ""
 msgid "Compliance center"
 msgstr ""
 
+msgid "Compliance center is not available"
+msgstr ""
+
 msgid "Compliance frameworks"
 msgstr ""
 
@@ -44185,7 +44188,7 @@ msgstr ""
 msgid "MergeConflict|Edit inline"
 msgstr ""
 
-msgid "MergeConflict|Resolve with Duo"
+msgid "MergeConflict|Resolve with GitLab Duo"
 msgstr ""
 
 msgid "MergeConflict|Use GitLab Duo to automatically analyze and resolve merge conflicts"
@@ -46474,12 +46477,6 @@ msgid "New label"
 msgstr ""
 
 msgid "New list"
-msgstr ""
-
-msgid "New look"
-msgstr ""
-
-msgid "New look (Beta)"
 msgstr ""
 
 msgid "New merge request"
@@ -53329,6 +53326,9 @@ msgstr ""
 msgid "Pipeline|Creating pipeline."
 msgstr ""
 
+msgid "Pipeline|Creating pipeline..."
+msgstr ""
+
 msgid "Pipeline|Date"
 msgstr ""
 
@@ -57835,9 +57835,6 @@ msgid "Provide a number our sales team can use to call you."
 msgstr ""
 
 msgid "Provide feedback"
-msgstr ""
-
-msgid "Provide feedback on the experience"
 msgstr ""
 
 msgid "Provider"
@@ -69450,13 +69447,13 @@ msgstr ""
 msgid "ServiceAccount|Group with the provided ID not found."
 msgstr ""
 
-msgid "ServiceAccount|No more seats are available to create Service Account User"
-msgstr ""
-
 msgid "ServiceAccount|Project ID provided does not match the service account's project ID."
 msgstr ""
 
 msgid "ServiceAccount|Project with the provided ID not found."
+msgstr ""
+
+msgid "ServiceAccount|This namespace either does not have an active subscription that can create service accounts, or the subscription has reached its service account creation limit."
 msgstr ""
 
 msgid "ServiceAccount|User does not have permission to create a service account in this %{resource_type}."
@@ -73522,6 +73519,9 @@ msgstr ""
 msgid "The CSV export will be created in the background. Once finished, it will be sent to %{email} in an attachment."
 msgstr ""
 
+msgid "The Compliance center is only available for projects that belong to a group with an Ultimate license."
+msgstr ""
+
 msgid "The GitLab instance can be reached but the credentials stored in Amazon Q are not valid. Please disconnect and start over."
 msgstr ""
 
@@ -76781,6 +76781,9 @@ msgid "Tracing|shorter than"
 msgstr ""
 
 msgid "Tracing|value"
+msgstr ""
+
+msgid "Track compliance across your projects. Upgrade to GitLab Ultimate to access the Compliance center."
 msgstr ""
 
 msgid "Track groups of issues that share a theme, across projects and milestones"
@@ -82683,9 +82686,6 @@ msgid "Welcome!"
 msgstr ""
 
 msgid "Welcome, %{name}!"
-msgstr ""
-
-msgid "We’ve introduced improvements to issues and epics, such as the ability to view full details from lists and boards, new features, and a refreshed design. Have questions or thoughts on the changes?"
 msgstr ""
 
 msgid "What are some examples?"

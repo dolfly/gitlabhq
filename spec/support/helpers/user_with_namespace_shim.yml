@@ -303,7 +303,6 @@
 - spec/features/admin/admin_disables_two_factor_spec.rb
 - spec/features/admin/admin_groups_spec.rb
 - spec/features/admin/admin_mode/workers_spec.rb
-- spec/features/admin/admin_mode_spec.rb
 - spec/features/admin/admin_projects_spec.rb
 - spec/features/admin/users/admin_impersonates_user_spec.rb
 - spec/features/admin/users/admin_sees_unconfirmed_user_spec.rb

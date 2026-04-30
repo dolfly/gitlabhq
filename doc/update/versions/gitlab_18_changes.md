@@ -816,7 +816,7 @@ To fix this issue, you have a few options:
 - Disable FIPS on the host system.
 - Disable the auto-detection of a FIPS-based kernel in the GitLab Docker container.
   This can be done by setting the `OPENSSL_FORCE_FIPS_MODE=0` environment variable with GitLab 18.0.2 or higher.
-- Instead of using the GitLab Docker image, install a [native FIPS package](https://packages.gitlab.com/gitlab/gitlab-fips) on the host.
+- Instead of using the GitLab Docker image, install a [native FIPS package](https://packages.gitlab.com/ui/browse/gitlab/gitlab-fips) on the host.
 
 The last option is the recommended one to meet FIPS requirements. For
 legacy installations, the first two options can be used as a stopgap.

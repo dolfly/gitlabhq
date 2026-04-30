@@ -1,10 +1,11 @@
 import { shallowMount } from '@vue/test-utils';
 import Vue, { nextTick } from 'vue';
 import VueApollo from 'vue-apollo';
-import { GlModal, GlSprintf } from '@gitlab/ui';
+import { GlButton, GlSprintf, GlModal } from '@gitlab/ui';
 import organizationsForReconciliationResponse from 'test_fixtures/graphql/organizations/organizations_for_reconciliation.query.graphql.json';
 import createMockApollo from 'helpers/mock_apollo_helper';
 import waitForPromises from 'helpers/wait_for_promises';
+import { stubComponent, RENDER_ALL_SLOTS_TEMPLATE } from 'helpers/stub_component';
 import { createAlert } from '~/alert';
 import ReconciliationModal from '~/organizations/index/components/reconciliation/modal.vue';
 import SkeletonLoader from '~/organizations/index/components/reconciliation/skeleton_loader.vue';
@@ -22,6 +23,7 @@ describe('OrganizationReconciliationModal', () => {
   let mockApollo;
 
   const successHandler = jest.fn().mockResolvedValue(organizationsForReconciliationResponse);
+  const GlModalStub = stubComponent(GlModal, { template: RENDER_ALL_SLOTS_TEMPLATE });
 
   const createComponent = ({ props = {}, handler = successHandler } = {}) => {
     mockApollo = createMockApollo([[organizationsForReconciliationQuery, handler]]);
@@ -33,6 +35,7 @@ describe('OrganizationReconciliationModal', () => {
       },
       stubs: {
         GlSprintf,
+        GlModal: GlModalStub,
       },
     });
   };
@@ -46,6 +49,8 @@ describe('OrganizationReconciliationModal', () => {
   const findStep1 = () => wrapper.findComponent(Step1);
   const findStep2 = () => wrapper.findComponent(Step2);
   const findStep3 = () => wrapper.findComponent(Step3);
+  const findPrevButton = () => wrapper.findAllComponents(GlButton).at(0);
+  const findNextButton = () => wrapper.findAllComponents(GlButton).at(1);
 
   it('renders GlModal', () => {
     createComponent();
@@ -101,6 +106,10 @@ describe('OrganizationReconciliationModal', () => {
         it('does not render step component', () => {
           expect(findStep1().exists()).toBe(false);
         });
+
+        it('does not render footer buttons', () => {
+          expect(wrapper.findAllComponents(GlButton)).toHaveLength(0);
+        });
       });
 
       describe('when loaded', () => {
@@ -148,6 +157,25 @@ describe('OrganizationReconciliationModal', () => {
     });
   });
 
+  describe('footer buttons', () => {
+    beforeEach(() => {
+      createComponent();
+    });
+
+    it('renders prev and next buttons', () => {
+      expect(findPrevButton().exists()).toBe(true);
+      expect(findNextButton().exists()).toBe(true);
+    });
+
+    it('renders cancel text for prev button on first step', () => {
+      expect(findPrevButton().text()).toBe('Cancel');
+    });
+
+    it('renders continue text for next button', () => {
+      expect(findNextButton().text()).toBe('Continue');
+    });
+  });
+
   describe('step components', () => {
     describe('step 1', () => {
       beforeEach(() => {
@@ -162,15 +190,15 @@ describe('OrganizationReconciliationModal', () => {
         expect(findModal().text()).toContain('Step 1 / 3');
       });
 
-      it('next event advances to step 2', async () => {
-        findStep1().vm.$emit('next');
+      it('next button advances to step 2', async () => {
+        findNextButton().vm.$emit('click');
         await nextTick();
 
         expect(findStep2().exists()).toBe(true);
       });
 
-      it('prev event closes modal', async () => {
-        findStep1().vm.$emit('prev');
+      it('prev button closes modal', async () => {
+        findPrevButton().vm.$emit('click');
         await nextTick();
 
         expect(wrapper.emitted('change')).toEqual([[false]]);
@@ -181,7 +209,7 @@ describe('OrganizationReconciliationModal', () => {
       beforeEach(async () => {
         createComponent();
 
-        findStep1().vm.$emit('next');
+        findNextButton().vm.$emit('click');
         await nextTick();
       });
 
@@ -193,15 +221,19 @@ describe('OrganizationReconciliationModal', () => {
         expect(findModal().text()).toContain('Step 2 / 3');
       });
 
-      it('next event advances to step 3', async () => {
-        findStep2().vm.$emit('next');
+      it('renders back text for prev button', () => {
+        expect(findPrevButton().text()).toBe('Back');
+      });
+
+      it('next button advances to step 3', async () => {
+        findNextButton().vm.$emit('click');
         await nextTick();
 
         expect(wrapper.findComponent(Step3).exists()).toBe(true);
       });
 
-      it('prev event returns to step 1', async () => {
-        findStep2().vm.$emit('prev');
+      it('prev button returns to step 1', async () => {
+        findPrevButton().vm.$emit('click');
         await nextTick();
 
         expect(wrapper.findComponent(Step1).exists()).toBe(true);
@@ -212,10 +244,10 @@ describe('OrganizationReconciliationModal', () => {
       beforeEach(async () => {
         createComponent();
 
-        findStep1().vm.$emit('next');
+        findNextButton().vm.$emit('click');
         await nextTick();
 
-        findStep2().vm.$emit('next');
+        findNextButton().vm.$emit('click');
         await nextTick();
       });
 
@@ -227,15 +259,19 @@ describe('OrganizationReconciliationModal', () => {
         expect(findModal().text()).toContain('Step 3 / 3');
       });
 
-      it('next event does nothing and stays on step 3', async () => {
-        findStep3().vm.$emit('next');
+      it('renders confirm text for next button', () => {
+        expect(findNextButton().text()).toBe('Confirm');
+      });
+
+      it('next button does nothing and stays on step 3', async () => {
+        findNextButton().vm.$emit('click');
         await nextTick();
 
         expect(wrapper.findComponent(Step3).exists()).toBe(true);
       });
 
-      it('prev event returns to step 2', async () => {
-        findStep3().vm.$emit('prev');
+      it('prev button returns to step 2', async () => {
+        findPrevButton().vm.$emit('click');
         await nextTick();
 
         expect(wrapper.findComponent(Step2).exists()).toBe(true);

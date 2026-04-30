@@ -25,8 +25,8 @@ to learn about the minimum hardware requirements.
 
 Linux packages are available in our packages repository for:
 
-- [GitLab Enterprise Edition](https://packages.gitlab.com/gitlab/gitlab-ee).
-- [GitLab Community Edition](https://packages.gitlab.com/gitlab/gitlab-ce).
+- [GitLab Enterprise Edition](https://packages.gitlab.com/ui/browse/gitlab/gitlab-ee).
+- [GitLab Community Edition](https://packages.gitlab.com/ui/browse/gitlab/gitlab-ce).
 
 Check that the required GitLab version is available for your host operating system.
 

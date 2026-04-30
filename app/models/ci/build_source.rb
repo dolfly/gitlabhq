@@ -19,6 +19,8 @@ module Ci
     query_constraints :build_id, :partition_id
     partitionable scope: :job, partitioned: true
 
+    scope :for_build_id, ->(build_id) { where(build_id: build_id) }
+
     belongs_to :job, ->(job_name) { in_partition(job_name) },
       class_name: 'Ci::Processable', partition_foreign_key: :partition_id,
       foreign_key: :build_id,

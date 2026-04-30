@@ -206,7 +206,7 @@ RSpec.describe Ci::CreatePipelineService, feature_category: :pipeline_compositio
         end
 
         it 'fails with timeout error' do
-          expect(Gitlab::ErrorTracking).to receive(:track_and_raise_for_dev_exception)
+          expect(Gitlab::ErrorTracking).to receive(:track_exception).and_call_original
 
           expect(pipeline).to be_persisted
           expect(pipeline.error_messages.map(&:content)).to include(
@@ -249,7 +249,7 @@ RSpec.describe Ci::CreatePipelineService, feature_category: :pipeline_compositio
         end
 
         it 'fails with timeout error' do
-          expect(Gitlab::ErrorTracking).to receive(:track_and_raise_for_dev_exception)
+          expect(Gitlab::ErrorTracking).to receive(:track_exception).and_call_original
 
           expect(pipeline).to be_persisted
           expect(pipeline.error_messages.map(&:content)).to include(
@@ -319,7 +319,7 @@ RSpec.describe Ci::CreatePipelineService, feature_category: :pipeline_compositio
         end
 
         it 'fails with the cumulative fetch timeout error' do
-          expect(Gitlab::ErrorTracking).to receive(:track_and_raise_for_dev_exception)
+          expect(Gitlab::ErrorTracking).to receive(:track_exception).and_call_original
 
           expect(pipeline).to be_persisted
           expect(pipeline.error_messages.map(&:content)).to include(

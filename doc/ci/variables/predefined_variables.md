@@ -45,6 +45,7 @@ Predefined variables become available at three different phases of pipeline exec
 | `CI`                                            | Pre-pipeline | Available for all jobs executed in CI/CD. `true` when available. |
 | `CI_API_V4_URL`                                 | Pre-pipeline | The GitLab API v4 root URL. |
 | `CI_API_GRAPHQL_URL`                            | Pre-pipeline | The GitLab API GraphQL root URL. Introduced in GitLab 15.11. |
+| `CI_BUILD_NETWORK_NAME`                         | Job-only     | The name of the network that the job created. Available only with the Docker executor when [`FF_NETWORK_PER_BUILD`](https://docs.gitlab.com/runner/configuration/feature-flags/#available-feature-flags) is enabled. |
 | `CI_BUILDS_DIR`                                 | Job-only     | The top-level directory where builds are executed. |
 | `CI_COMMIT_AUTHOR`                              | Pre-pipeline | The author of the commit in `Name <email>` format. |
 | `CI_COMMIT_BEFORE_SHA`                          | Pre-pipeline | The previous latest commit present on a branch or tag. Is always `0000000000000000000000000000000000000000` for merge request pipelines, scheduled pipelines, the first commit in pipelines for branches or tags, or when manually running a pipeline. |

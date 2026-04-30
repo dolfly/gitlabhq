@@ -20,7 +20,6 @@ export default {
       required: true,
     },
   },
-  emits: ['next', 'prev'],
   methods: {
     getIdFromGraphQLId,
   },
@@ -28,11 +27,7 @@ export default {
 </script>
 
 <template>
-  <base-step
-    :title="s__('Organization|Activate your Organizations')"
-    @next="$emit('next')"
-    @prev="$emit('prev')"
-  >
+  <base-step :title="s__('Organization|Activate your Organizations')">
     <p>
       {{
         s__(

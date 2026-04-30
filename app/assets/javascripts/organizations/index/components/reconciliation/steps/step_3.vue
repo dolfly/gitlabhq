@@ -19,12 +19,11 @@ export default {
       required: true,
     },
   },
-  emits: ['next', 'prev'],
 };
 </script>
 
 <template>
-  <base-step @next="$emit('next')" @prev="$emit('prev')">
+  <base-step>
     <p>{{ $options.i18n.placeholder }}</p>
     <div data-testid="total-organizations" class="gl-my-3">
       <gl-sprintf :message="$options.i18n.totalOrganizations">

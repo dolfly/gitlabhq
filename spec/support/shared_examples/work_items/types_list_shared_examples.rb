@@ -6,7 +6,7 @@
 def filter_ee(types)
   return types if Gitlab.ee?
 
-  expected_types.difference(::WorkItems::Type::EE_BASE_TYPES)
+  expected_types.difference(%w[epic key_result objective requirement])
 end
 
 # rubocop:disabled Layout/LineLength -- in this case it's easier to read as a large table

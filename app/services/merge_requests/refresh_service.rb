@@ -200,8 +200,6 @@ module MergeRequests
     end
 
     def enqueue_auto_merge_for_unchecked(merge_requests)
-      return unless Feature.enabled?(:auto_merge_on_mark_as_unchecked, @project)
-
       auto_merge_mrs = merge_requests.select(&:auto_merge_enabled?)
       return if auto_merge_mrs.empty?
 
