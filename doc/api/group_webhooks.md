@@ -497,7 +497,7 @@ Example response:
 {{< history >}}
 
 - `name` and `description` attributes [introduced](https://gitlab.com/gitlab-org/gitlab/-/issues/460887) in GitLab 17.1.
-- `signing_token` attribute [introduced](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/231325) in GitLab 19.0 [with a flag](../administration/feature_flags/_index.md) named `webhook_signing_token`. Disabled by default.
+- `signing_token` attribute [introduced](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/231325) in GitLab 19.0 [with a flag](../administration/feature_flags/_index.md) named `webhook_signing_token`. Enabled by default.
 
 {{< /history >}}
 
@@ -601,7 +601,7 @@ Example response:
 {{< history >}}
 
 - `name` and `description` attributes [introduced](https://gitlab.com/gitlab-org/gitlab/-/issues/460887) in GitLab 17.1.
-- `signing_token` attribute [introduced](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/231325) in GitLab 19.0 [with a flag](../administration/feature_flags/_index.md) named `webhook_signing_token`. Disabled by default.
+- `signing_token` attribute [introduced](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/231325) in GitLab 19.0 [with a flag](../administration/feature_flags/_index.md) named `webhook_signing_token`. Enabled by default.
 
 {{< /history >}}
 

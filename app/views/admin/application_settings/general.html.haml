@@ -35,6 +35,7 @@
 
 = render ::Layouts::SettingsBlockComponent.new(_('Diff limits'),
   id: 'js-merge-request-settings',
+  testid: 'diff-limits-settings',
   expanded: expanded_by_default?) do |c|
   - c.with_description do
     = _('Set size limits for displaying diffs in the browser.')

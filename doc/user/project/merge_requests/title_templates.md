@@ -60,16 +60,19 @@ Title templates support the following variables:
 | `%{target_branch}`     | The name of the target branch.                                                                                 | `main`         |
 | `%{title_from_branch}` | The source branch name converted to a human-readable format. Hyphens and underscores are replaced with spaces. | `My feature branch` |
 | `%{first_commit_title}` | The subject (first line) of the first commit in the merge request.                                            | `Update README.md` |
+| `%{issue_id}`           | The IID of the issue linked through the source branch name (for example, `123` from `123-fix-bug`). Blank if no issue is detected. | `123` |
+| `%{issue_title}`        | The title of the issue linked through the source branch name. Blank if no issue is detected.                   | `Fix login bug` |
 
 ## Template examples
 
-| Template                                   | Result |
-|--------------------------------------------|--------|
-| `%{source_branch}`                         | `my-feature-branch` |
-| `%{title_from_branch}`                     | `My feature branch` |
-| `%{first_commit_title}`                    | `Update README.md` |
-| `Draft: %{title_from_branch}`              | `Draft: My feature branch` |
-| `[%{source_branch}] %{first_commit_title}` | `[my-feature-branch] Update README.md` |
+| Template                                          | Result |
+|---------------------------------------------------|--------|
+| `%{source_branch}`                                | `my-feature-branch` |
+| `%{title_from_branch}`                            | `My feature branch` |
+| `%{first_commit_title}`                           | `Update README.md` |
+| `Draft: %{title_from_branch}`                     | `Draft: My feature branch` |
+| `[%{source_branch}] %{first_commit_title}`        | `[my-feature-branch] Update README.md` |
+| `Resolve %{issue_id} "%{issue_title}"`            | `Resolve 123 "Fix login bug"` |
 
 ## Title template assignment
 

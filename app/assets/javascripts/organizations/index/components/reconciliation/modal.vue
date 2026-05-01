@@ -102,15 +102,18 @@ export default {
   <gl-modal
     modal-id="organization-reconciliation-modal"
     scrollable
+    body-class="!gl-px-11"
     :visible="visible"
     @change="updateModalVisibility($event)"
   >
     <skeleton-loader v-if="loading" />
     <template v-if="!loading">
-      <gl-sprintf :message="$options.i18n.stepProgress">
-        <template #currentStep>{{ currentStep }}</template>
-        <template #totalSteps>{{ totalSteps }}</template>
-      </gl-sprintf>
+      <div class="gl-text-center gl-font-bold">
+        <gl-sprintf :message="$options.i18n.stepProgress">
+          <template #currentStep>{{ currentStep }}</template>
+          <template #totalSteps>{{ totalSteps }}</template>
+        </gl-sprintf>
+      </div>
       <component :is="stepComponent" :organizations="organizations" />
     </template>
     <template v-if="!loading" #modal-footer>

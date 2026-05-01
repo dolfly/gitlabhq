@@ -164,4 +164,132 @@ RSpec.describe Projects::GraphsController, feature_category: :source_code_manage
       end
     end
   end
+
+  describe 'when gitaly is unavailable', feature_category: :source_code_management do
+    let(:params) do
+      {
+        namespace_id: project.namespace.to_param, project_id: project, id: 'master'
+      }
+    end
+
+    before do
+      allow(Gitlab::Git::Commit).to receive(:find)
+        .and_raise(Gitlab::Git::CommandError, 'Gitaly unavailable')
+    end
+
+    describe 'GET #show' do
+      context 'when graceful_gitaly_degradation is enabled' do
+        before do
+          stub_feature_flags(graceful_gitaly_degradation: true)
+        end
+
+        it 'returns 503' do
+          get :show, params: params
+
+          expect(response).to have_gitlab_http_status(:service_unavailable)
+        end
+
+        it 'sets @gitaly_unavailable' do
+          get :show, params: params
+
+          expect(assigns[:gitaly_unavailable]).to be(true)
+        end
+
+        context 'with JSON format' do
+          it 'returns 503 with JSON error' do
+            get :show, params: params.merge(format: :json)
+
+            expect(response).to have_gitlab_http_status(:service_unavailable)
+            expect(json_response['error']).to be_present
+          end
+        end
+      end
+
+      context 'when graceful_gitaly_degradation is disabled' do
+        before do
+          stub_feature_flags(graceful_gitaly_degradation: false)
+        end
+
+        it 'raises the error' do
+          expect do
+            get :show, params: params
+          end.to raise_error(Gitlab::Git::CommandError)
+        end
+      end
+    end
+
+    describe 'GET #charts' do
+      context 'when graceful_gitaly_degradation is enabled' do
+        before do
+          stub_feature_flags(graceful_gitaly_degradation: true)
+        end
+
+        it 'returns 503' do
+          get :charts, params: params
+
+          expect(response).to have_gitlab_http_status(:service_unavailable)
+        end
+
+        it 'sets @gitaly_unavailable' do
+          get :charts, params: params
+
+          expect(assigns[:gitaly_unavailable]).to be(true)
+        end
+      end
+
+      context 'when graceful_gitaly_degradation is disabled' do
+        before do
+          stub_feature_flags(graceful_gitaly_degradation: false)
+        end
+
+        it 'raises the error' do
+          expect do
+            get :charts, params: params
+          end.to raise_error(Gitlab::Git::CommandError)
+        end
+      end
+    end
+
+    context 'when Gitaly health check fails (Commit.find returns nil)' do
+      before do
+        # Simulate Gitlab::Git::Commit.find swallowing the error and returning nil
+        allow(Gitlab::Git::Commit).to receive(:find).and_return(nil)
+
+        # Simulate Gitaly health check failing
+        allow_next_instance_of(Gitlab::GitalyClient::HealthCheckService) do |service|
+          allow(service).to receive(:check).and_return({ success: false, message: 'Gitaly unavailable' })
+        end
+      end
+
+      context 'when graceful_gitaly_degradation is enabled' do
+        before do
+          stub_feature_flags(graceful_gitaly_degradation: true)
+        end
+
+        it 'returns 503' do
+          get :show, params: params
+
+          expect(response).to have_gitlab_http_status(:service_unavailable)
+        end
+
+        it 'sets @gitaly_unavailable' do
+          get :show, params: params
+
+          expect(assigns[:gitaly_unavailable]).to be(true)
+        end
+      end
+
+      context 'when graceful_gitaly_degradation is disabled' do
+        before do
+          stub_feature_flags(graceful_gitaly_degradation: false)
+        end
+
+        it 'raises the error' do
+          expect do
+            get :show, params: params
+          end.to raise_error(Gitlab::Git::CommandError)
+        end
+      end
+    end
+  end
 end

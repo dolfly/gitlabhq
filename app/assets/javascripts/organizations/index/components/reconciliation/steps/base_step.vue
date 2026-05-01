@@ -1,13 +1,8 @@
 <script>
-import { GlIcon } from '@gitlab/ui';
-
 export default {
   name: 'ReconciliationBaseStep',
-  components: {
-    GlIcon,
-  },
   props: {
-    icon: {
+    illustration: {
       type: String,
       required: false,
       default: '',
@@ -23,8 +18,13 @@ export default {
 
 <template>
   <div>
-    <gl-icon v-if="icon" :name="icon" />
-    <h4 v-if="title">{{ title }}</h4>
+    <div class="gl-mb-4 gl-text-center">
+      <img v-if="illustration" :src="illustration" aria-hidden="true" class="gl-my-4 gl-max-w-20" />
+      <h2 v-if="title" class="gl-heading-2">{{ title }}</h2>
+      <div class="gl-mx-auto gl-w-3/4">
+        <slot name="description"></slot>
+      </div>
+    </div>
     <slot></slot>
   </div>
 </template>

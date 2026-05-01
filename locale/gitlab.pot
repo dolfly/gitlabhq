@@ -25872,9 +25872,6 @@ msgstr ""
 msgid "Diff"
 msgstr ""
 
-msgid "Diff files surpassing this limit will be presented as 'too large' and won't be expandable."
-msgstr ""
-
 msgid "Diff limits"
 msgstr ""
 
@@ -25930,6 +25927,12 @@ msgid "Difference between start date and now"
 msgstr ""
 
 msgid "Different user's signature"
+msgstr ""
+
+msgid "Diffs with more files than this limit are shown as 'too large' and cannot be expanded."
+msgstr ""
+
+msgid "Diffs with more lines than this limit are shown as 'too large' and cannot be expanded."
 msgstr ""
 
 msgid "DiffsCompareBaseBranch|(HEAD)"
@@ -31220,6 +31223,9 @@ msgstr ""
 msgid "Files breadcrumb"
 msgstr ""
 
+msgid "Files larger than this limit are shown as 'too large' and cannot be expanded."
+msgstr ""
+
 msgid "Files with large changes are collapsed by default."
 msgstr ""
 
@@ -34585,6 +34591,12 @@ msgid "GraphViewType|Show dependencies"
 msgstr ""
 
 msgid "GraphViewType|Stage"
+msgstr ""
+
+msgid "Graphs|Unable to load contributor analytics"
+msgstr ""
+
+msgid "Graphs|Unable to load repository analytics"
 msgstr ""
 
 msgid "Gravatar"
@@ -42980,10 +42992,16 @@ msgstr ""
 msgid "Maximum description or comment content size (bytes)"
 msgstr ""
 
+msgid "Maximum diff commits per merge request"
+msgstr ""
+
 msgid "Maximum diff patch size"
 msgstr ""
 
 msgid "Maximum diff patch size (bytes)"
+msgstr ""
+
+msgid "Maximum diff versions per merge request"
 msgstr ""
 
 msgid "Maximum duration of a session. Restart GitLab to apply changes."
@@ -44099,6 +44117,12 @@ msgid "Merge requests awaiting your review."
 msgstr ""
 
 msgid "Merge requests can't be merged if the status checks did not succeed or are still running."
+msgstr ""
+
+msgid "Merge requests that reach this diff commits limit cannot be updated."
+msgstr ""
+
+msgid "Merge requests that reach this diff version limit cannot be updated."
 msgstr ""
 
 msgid "Merge requests you authored or are assigned to, without reviewers."
@@ -74872,6 +74896,9 @@ msgstr ""
 msgid "This group has no inactive access tokens."
 msgstr ""
 
+msgid "This group is %{strong_open}read-only%{strong_close}."
+msgstr ""
+
 msgid "This group is archived. Its subgroups, projects, and data are %{strong_open}read-only%{strong_close}."
 msgstr ""
 
@@ -75199,6 +75226,9 @@ msgid "This project is %{strongStart}NOT%{strongEnd} a fork, and has the followi
 msgstr ""
 
 msgid "This project is %{strongStart}NOT%{strongEnd} a fork. This process deletes the project repository and all related resources."
+msgstr ""
+
+msgid "This project is %{strong_open}read-only%{strong_close}."
 msgstr ""
 
 msgid "This project is archived and read-only. To resume pull mirroring, unarchive the project."
@@ -78103,6 +78133,11 @@ msgstr ""
 msgid "UsageBillingUserDetails|total credits used"
 msgstr ""
 
+msgid "UsageBilling|%d selected"
+msgid_plural "UsageBilling|%d selected"
+msgstr[0] ""
+msgstr[1] ""
+
 msgid "UsageBilling|%{percentage}%{percentSymbol} of credits used"
 msgstr ""
 
@@ -78110,9 +78145,6 @@ msgid "UsageBilling|%{poolCreditsRemaining} credit remaining"
 msgid_plural "UsageBilling|%{poolCreditsRemaining} credits remaining"
 msgstr[0] ""
 msgstr[1] ""
-
-msgid "UsageBilling|%{productsCount} selected"
-msgstr ""
 
 msgid "UsageBilling|(Trial)"
 msgstr ""

@@ -370,8 +370,6 @@ promote_to_epic
 provide_status_check_response
 provision_cloud_runner
 provision_gke_runner
-public_access
-public_user_access
 publish_status_page
 push_code_to_protected_branches
 push_to_delete_protected_branch

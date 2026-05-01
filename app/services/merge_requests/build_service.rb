@@ -285,7 +285,7 @@ module MergeRequests
     end
 
     def assign_title_from_template
-      merge_request.title ||= message_generator.new_mr_title(target_project.mr_default_title_template)
+      merge_request.title ||= message_generator.new_mr_title(target_project.mr_default_title_template, issue: issue)
     end
 
     def assign_title_and_description_from_commits

@@ -197,7 +197,9 @@ module Gitlab
       # rubocop:disable Gitlab/ModuleWithInstanceVariables -- @updates is already defined and part of
       # Gitlab::QuickActions::Dsl implementation
       def apply_type_commands(new_type, command)
-        @updates[:issue_type] = new_type.base_type
+        # `work_item_type` is the canonical param now (supports custom types).
+        # `issue_type` is intentionally not set here; the update service prefers
+        # `work_item_type` and only falls back to `issue_type` for legacy callers.
         @updates[:work_item_type] = new_type
 
         success_msg[command]

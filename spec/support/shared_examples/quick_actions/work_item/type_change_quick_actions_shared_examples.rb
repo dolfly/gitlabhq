@@ -6,12 +6,12 @@ RSpec.shared_examples 'quick actions that change work item type' do
   describe 'type command' do
     let(:command) { "/type #{new_type}" }
 
-    it 'populates :issue_type: and :work_item_type' do
+    it 'populates :work_item_type' do
       _, updates, message = service.execute(command, work_item)
 
       expect(message).to eq(_('Type changed successfully.'))
       expect(updates).to eq(
-        { issue_type: 'task', work_item_type: build(:work_item_system_defined_type, :task) }
+        { work_item_type: build(:work_item_system_defined_type, :task) }
       )
     end
 
@@ -56,12 +56,12 @@ RSpec.shared_examples 'quick actions that change work item type' do
       let(:new_type) { 'incident' }
       let(:unsupported_type) { 'task' }
 
-      it 'populates :issue_type: and :work_item_type' do
+      it 'populates :work_item_type' do
         _, updates, message = service.execute(command, work_item)
 
         expect(message).to eq(_('Promoted successfully.'))
         expect(updates).to eq(
-          { issue_type: 'incident', work_item_type: build(:work_item_system_defined_type, :incident) }
+          { work_item_type: build(:work_item_system_defined_type, :incident) }
         )
       end
 
@@ -74,12 +74,12 @@ RSpec.shared_examples 'quick actions that change work item type' do
       let(:new_type) { 'issue' }
       let(:unsupported_type) { 'incident' }
 
-      it 'populates :issue_type: and :work_item_type' do
+      it 'populates :work_item_type' do
         _, updates, message = service.execute(command, work_item)
 
         expect(message).to eq(_('Promoted successfully.'))
         expect(updates).to eq(
-          { issue_type: 'issue', work_item_type: build(:work_item_system_defined_type, :issue) }
+          { work_item_type: build(:work_item_system_defined_type, :issue) }
         )
       end
 

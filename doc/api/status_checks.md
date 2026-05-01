@@ -173,8 +173,7 @@ POST /projects/:id/merge_requests/:merge_request_iid/status_check_responses
 {{< /history >}}
 
 Retries the specified failed external status check for a single merge request. Even
-though the merge request hasn't changed, this endpoint resends the current state of
-merge request to the defined external service.
+though the merge request hasn't changed, this endpoint resends the current state of the merge request to the defined external service.
 
 ```plaintext
 POST /projects/:id/merge_requests/:merge_request_iid/status_checks/:external_status_check_id/retry

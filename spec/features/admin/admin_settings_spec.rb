@@ -147,6 +147,18 @@ RSpec.describe 'Admin updates settings', feature_category: :shared do
         expect(current_settings.max_import_size).to eq 15
       end
 
+      it 'change Diff limits settings' do
+        within_testid('diff-limits-settings') do
+          fill_in 'Maximum diff versions per merge request', with: 500
+          fill_in 'Maximum diff commits per merge request', with: 500_000
+          click_button 'Save changes'
+        end
+
+        expect(page).to have_content 'Application settings saved successfully'
+        expect(current_settings.diff_max_versions).to eq 500
+        expect(current_settings.diff_max_commits).to eq 500_000
+      end
+
       it 'change New users set to external', :js,
         quarantine: { issue: 'https://gitlab.com/gitlab-org/quality/test-failure-issues/-/issues/20325', type: 'flaky' } do
         user_internal_regex = find('#application_setting_user_default_internal_regex', visible: :all)

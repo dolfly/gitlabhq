@@ -1,4 +1,5 @@
 import { GlAvatarLabeled, GlCard } from '@gitlab/ui';
+import illustrationUrl from '@gitlab/svgs/dist/illustrations/empty-state/empty-organizations-add-md.svg?url';
 import organizationsForReconciliationResponse from 'test_fixtures/graphql/organizations/organizations_for_reconciliation.query.graphql.json';
 import { shallowMountExtended } from 'helpers/vue_test_utils_helper';
 import Step1 from '~/organizations/index/components/reconciliation/steps/step_1.vue';
@@ -20,6 +21,9 @@ describe('ReconciliationStep1', () => {
         organizations: mockOrganizations,
         ...props,
       },
+      stubs: {
+        BaseStep,
+      },
     });
   };
 
@@ -35,6 +39,10 @@ describe('ReconciliationStep1', () => {
 
     it('renders BaseStep with title', () => {
       expect(findBaseStep().props('title')).toBe('Activate your Organizations');
+    });
+
+    it('renders BaseStep with illustration', () => {
+      expect(findBaseStep().props('illustration')).toBe(illustrationUrl);
     });
 
     it('renders description text', () => {

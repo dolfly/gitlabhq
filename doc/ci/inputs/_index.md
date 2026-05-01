@@ -531,6 +531,11 @@ it defaults to `test`.
 
 ## Set input values
 
+You can set input values in your pipeline configuration or when you trigger a pipeline.
+
+After the pipeline starts, you cannot fetch any used input values. If a value is safe to expose,
+you can output the value in a job log for future reference, or save it in an artifact.
+
 ### For configuration added with `include`
 
 {{< history >}}

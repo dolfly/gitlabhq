@@ -28297,6 +28297,8 @@ CREATE TABLE project_security_settings (
     secret_push_protection_enabled boolean DEFAULT false,
     validity_checks_enabled boolean DEFAULT false NOT NULL,
     license_configuration_source smallint DEFAULT 0 NOT NULL,
+    cvs_for_container_scanning_enabled boolean DEFAULT true NOT NULL,
+    cvs_for_dependency_scanning_enabled boolean DEFAULT true NOT NULL,
     CONSTRAINT check_20a23efdb6 CHECK ((secret_push_protection_enabled IS NOT NULL))
 );
 
@@ -47816,6 +47818,8 @@ CREATE INDEX index_merge_requests_on_updated_by_id ON merge_requests USING btree
 CREATE UNIQUE INDEX index_merge_trains_on_merge_request_id ON merge_trains USING btree (merge_request_id);
 
 CREATE INDEX index_merge_trains_on_pipeline_id ON merge_trains USING btree (pipeline_id);
+
+CREATE INDEX index_merge_trains_on_updated_at_when_merging ON merge_trains USING btree (updated_at, id) WHERE (status = 4);
 
 CREATE INDEX index_merge_trains_on_user_id ON merge_trains USING btree (user_id);
 

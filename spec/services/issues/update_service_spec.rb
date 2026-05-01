@@ -427,6 +427,65 @@ RSpec.describe Issues::UpdateService, :mailer, :request_store, feature_category:
             end
           end
         end
+
+        context 'when passing the new work_item_type param' do
+          let(:incident_type) { build(:work_item_system_defined_type, :incident) }
+          let(:task_type) { build(:work_item_system_defined_type, :task) }
+          let(:issue_type) { build(:work_item_system_defined_type, :issue) }
+
+          it 'changes the work item type using the provided type object' do
+            expect { update_issue(work_item_type: incident_type) }
+              .to change { issue.reload.work_item_type_id }.to(incident_type.id)
+
+            expect(issue.work_item_type.base_type).to eq('incident')
+          end
+
+          it 'creates a system note about the type change' do
+            update_issue(work_item_type: incident_type)
+
+            expect(find_note('changed type from issue to incident')).not_to be_nil
+          end
+
+          it 'creates an escalation status when changing to incident' do
+            expect { update_issue(work_item_type: incident_type) }
+              .to change { issue.reload.incident_management_issuable_escalation_status }
+              .from(nil)
+              .to(a_kind_of(IncidentManagement::IssuableEscalationStatus))
+          end
+
+          context 'when both work_item_type and issue_type are passed' do
+            it 'prefers work_item_type over issue_type' do
+              # `issue_type: 'task'` would resolve to the task type via the legacy lookup,
+              # but `work_item_type: incident_type` must win.
+              expect { update_issue(work_item_type: incident_type, issue_type: 'task') }
+                .to change { issue.reload.work_item_type_id }.to(incident_type.id)
+
+              expect(issue.work_item_type.base_type).to eq('incident')
+            end
+          end
+
+          context 'when work_item_type matches the current type' do
+            it 'does not change the work item type' do
+              expect { update_issue(work_item_type: issue_type) }
+                .not_to change { issue.reload.work_item_type_id }
+            end
+
+            it 'does not create a system note about the type change' do
+              update_issue(work_item_type: issue_type)
+
+              expect(find_note('changed type from')).to be_nil
+            end
+          end
+
+          context 'when user does not have permission for the new type' do
+            let(:user) { guest }
+
+            it 'does not change the work item type' do
+              expect { update_issue(work_item_type: task_type) }
+                .not_to change { issue.reload.work_item_type_id }
+            end
+          end
+        end
       end
 
       it 'updates open issue counter for assignees when issue is reassigned' do

@@ -954,6 +954,51 @@ RSpec.describe Gitlab::MergeRequests::MessageGenerator, feature_category: :code_
       end
     end
 
+    context 'when template uses %{issue_id}' do
+      context 'when an issue is passed' do
+        let(:issue) { create(:issue, project: project, iid: 42) }
+
+        it 'returns the issue IID' do
+          expect(generator.new_mr_title('%{issue_id}', issue: issue)).to eq('42')
+        end
+      end
+
+      context 'when no issue is passed' do
+        it 'treats the placeholder as blank and returns nil' do
+          expect(generator.new_mr_title('%{issue_id}')).to be_nil
+        end
+
+        it 'removes the placeholder and keeps surrounding text' do
+          expect(generator.new_mr_title('%{issue_id} suffix')).to eq('suffix')
+        end
+      end
+    end
+
+    context 'when template uses %{issue_title}' do
+      context 'when an issue is passed' do
+        let(:issue) { create(:issue, project: project, title: 'Fix the login bug') }
+
+        it 'returns the issue title' do
+          expect(generator.new_mr_title('%{issue_title}', issue: issue)).to eq('Fix the login bug')
+        end
+      end
+
+      context 'when no issue is passed' do
+        it 'treats the placeholder as blank and returns nil' do
+          expect(generator.new_mr_title('%{issue_title}')).to be_nil
+        end
+      end
+    end
+
+    context 'when template combines %{issue_id} and %{issue_title}' do
+      let(:issue) { create(:issue, project: project, iid: 123, title: 'Fix the login bug') }
+
+      it 'renders both placeholders' do
+        expect(generator.new_mr_title('Resolve %{issue_id} "%{issue_title}"', issue: issue))
+          .to eq('Resolve 123 "Fix the login bug"')
+      end
+    end
+
     context 'when template uses %{first_commit}' do
       it 'treats the placeholder as disallowed and removes it' do
         expect(generator.new_mr_title('%{first_commit} suffix')).to eq('suffix')

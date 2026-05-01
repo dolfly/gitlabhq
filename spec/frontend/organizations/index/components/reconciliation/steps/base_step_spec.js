@@ -1,5 +1,4 @@
 import { shallowMount } from '@vue/test-utils';
-import { GlIcon } from '@gitlab/ui';
 import BaseStep from '~/organizations/index/components/reconciliation/steps/base_step.vue';
 
 describe('ReconciliationBaseStep', () => {
@@ -17,7 +16,7 @@ describe('ReconciliationBaseStep', () => {
     });
   };
 
-  const findIcon = () => wrapper.findComponent(GlIcon);
+  const findIllustration = () => wrapper.find('img');
 
   it('renders default slot content', () => {
     createComponent();
@@ -25,27 +24,33 @@ describe('ReconciliationBaseStep', () => {
     expect(wrapper.text()).toContain('Slot content');
   });
 
-  it('renders icon when provided', () => {
-    createComponent({ props: { icon: 'search' } });
+  it('renders description slot content', () => {
+    createComponent({ slots: { description: '<p>Description content</p>' } });
 
-    expect(findIcon().props('name')).toBe('search');
+    expect(wrapper.text()).toContain('Description content');
   });
 
-  it('does not render icon when not provided', () => {
+  it('renders illustration when provided', () => {
+    createComponent({ props: { illustration: '/path/to/illustration.svg' } });
+
+    expect(findIllustration().element.src).toBe('/path/to/illustration.svg');
+  });
+
+  it('does not render illustration when not provided', () => {
     createComponent();
 
-    expect(findIcon().exists()).toBe(false);
+    expect(findIllustration().exists()).toBe(false);
   });
 
   it('renders title when provided', () => {
     createComponent({ props: { title: 'Step title' } });
 
-    expect(wrapper.find('h4').text()).toBe('Step title');
+    expect(wrapper.find('h2').text()).toBe('Step title');
   });
 
   it('does not render title when not provided', () => {
     createComponent();
 
-    expect(wrapper.find('h4').exists()).toBe(false);
+    expect(wrapper.find('h2').exists()).toBe(false);
   });
 });
