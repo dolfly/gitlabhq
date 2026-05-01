@@ -102,6 +102,9 @@ This feature is in beta and is therefore subject to change as we gather feedback
 | Code Llama     | [Code-Llama 13b](https://huggingface.co/meta-llama/CodeLlama-13b-Instruct-hf) |
 | DeepSeek Coder | [DeepSeek Coder 33b Instruct](https://huggingface.co/deepseek-ai/deepseek-coder-33b-instruct) |
 | DeepSeek Coder | [DeepSeek Coder 33b Base](https://huggingface.co/deepseek-ai/deepseek-coder-33b-base) |
+| Kimi K2 | [Kimi K2.5](https://huggingface.co/moonshotai/Kimi-K2.5) |
+| Kimi K2 | [Kimi K2.6](https://huggingface.co/moonshotai/Kimi-K2.6) |
+| MiniMax | [MiniMax-M2.7](https://huggingface.co/MiniMaxAI/MiniMax-M2.7) |
 
 <!-- vale gitlab_base.Spelling = YES -->
 

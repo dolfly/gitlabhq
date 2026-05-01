@@ -243,6 +243,14 @@ offenses:
   deprecated_field: status_code
   standard_field: Labkit::Fields::HTTP_STATUS_CODE
 - logger_class: Gitlab::AppJsonLogger
+  callsite: app/models/concerns/ci/partitionable_finder.rb
+  deprecated_field: meta.remote_ip
+  standard_field: Labkit::Fields::REMOTE_IP
+- logger_class: Gitlab::AppJsonLogger
+  callsite: app/models/concerns/ci/partitionable_finder.rb
+  deprecated_field: meta.user
+  standard_field: Labkit::Fields::GL_USER_NAME
+- logger_class: Gitlab::AppJsonLogger
   callsite: app/models/concerns/counter_attribute.rb
   deprecated_field: meta.pipeline_id
   standard_field: Labkit::Fields::GL_PIPELINE_ID
