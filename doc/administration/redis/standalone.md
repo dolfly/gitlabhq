@@ -78,22 +78,15 @@ On the instance where GitLab is installed:
 
 ## Use Valkey instead of Redis
 
-{{< details >}}
-
-- Status: Beta
-
-{{< /details >}}
-
 {{< history >}}
 
 - [Introduced](https://gitlab.com/gitlab-org/omnibus-gitlab/-/merge_requests/9113) in GitLab 18.9 as a [beta](../../policy/development_stages_support.md#beta).
+- [Generally available](https://gitlab.com/gitlab-org/gitlab/-/work_items/585839) in GitLab 19.0.
 
 {{< /history >}}
 
 You can use [Valkey](https://valkey.io/) as a drop-in replacement for Redis.
 Valkey uses the same configuration options as Redis.
-
-Using Valkey instead of Redis is a [beta](../../policy/development_stages_support.md#beta) feature.
 
 To use Valkey instead of Redis on a standalone node:
 

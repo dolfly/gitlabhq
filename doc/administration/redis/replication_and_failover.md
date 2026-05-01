@@ -838,22 +838,15 @@ This setting can be used to prevent replication of a Redis node independently of
 
 ## Use Valkey instead of Redis
 
-{{< details >}}
-
-- Status: Beta
-
-{{< /details >}}
-
 {{< history >}}
 
 - [Introduced](https://gitlab.com/gitlab-org/omnibus-gitlab/-/merge_requests/9113) in GitLab 18.9 as a [beta](../../policy/development_stages_support.md#beta).
+- [Generally available](https://gitlab.com/gitlab-org/gitlab/-/work_items/585839) in GitLab 19.0.
 
 {{< /history >}}
 
 You can use [Valkey](https://valkey.io/) as a drop-in replacement for Redis in replication
 and failover setups. Valkey uses the same roles and configuration options as Redis.
-
-Using Valkey instead of Redis is a [beta](../../policy/development_stages_support.md#beta) feature.
 
 ### Configure Valkey primary and replica nodes
 

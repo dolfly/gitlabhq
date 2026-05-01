@@ -1,8 +1,9 @@
 import Vue from 'vue';
+import apolloProvider from '~/repository/graphql';
 import LastCommit from '~/repository/components/last_commit.vue';
 import { generateHistoryUrl } from '~/repository/utils/url_utility';
 
-export default function initLastCommitApp(router, apolloProvider) {
+export default function initLastCommitApp(router) {
   const lastCommitEl = document.getElementById('js-last-commit');
   if (!lastCommitEl) return null;
 

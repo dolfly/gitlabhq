@@ -4776,6 +4776,9 @@ msgstr ""
 msgid "Achievements"
 msgstr ""
 
+msgid "Achievements|%{accept_link} to show it on your profile. If you do not wish to accept, simply ignore this email."
+msgstr ""
+
 msgid "Achievements|%{namespace_full_path} awarded you the %{achievement_name} achievement"
 msgstr ""
 
@@ -4786,6 +4789,15 @@ msgid "Achievements|%{namespace_link} awarded you the %{bold_start}%{achievement
 msgstr ""
 
 msgid "Achievements|%{userCount} awarded users"
+msgstr ""
+
+msgid "Achievements|Accept"
+msgstr ""
+
+msgid "Achievements|Accept achievement"
+msgstr ""
+
+msgid "Achievements|Accept this achievement"
 msgstr ""
 
 msgid "Achievements|Achievement description cannot be longer than %{length} characters."
@@ -4807,6 +4819,9 @@ msgid "Achievements|Achievement name is required."
 msgstr ""
 
 msgid "Achievements|Achievements"
+msgstr ""
+
+msgid "Achievements|Are you sure you want to accept the %{bold_start}%{achievement_name}%{bold_end} achievement? It will be shown on your profile."
 msgstr ""
 
 msgid "Achievements|Are you sure you want to delete %{name}? This action cannot be undone."
@@ -4848,6 +4863,9 @@ msgstr ""
 msgid "Achievements|File is too large. Maximum file size is 200 KiB."
 msgstr ""
 
+msgid "Achievements|If you do not wish to accept, simply ignore this email."
+msgstr ""
+
 msgid "Achievements|More actions"
 msgstr ""
 
@@ -4863,10 +4881,7 @@ msgstr ""
 msgid "Achievements|There are currently no achievements."
 msgstr ""
 
-msgid "Achievements|View your achievements on your %{link_start}profile%{link_end}."
-msgstr ""
-
-msgid "Achievements|View your achievements on your profile."
+msgid "Achievements|To show this achievement on your profile, accept it: %{url}"
 msgstr ""
 
 msgid "Achievements|You're awarding users the %{achievementName} achievement"
@@ -85918,6 +85933,9 @@ msgid "You don’t have access to Productivity Analytics in this group"
 msgstr ""
 
 msgid "You don’t have access to Value Stream Analytics for this group"
+msgstr ""
+
+msgid "You have accepted the achievement. It will now appear on your profile."
 msgstr ""
 
 msgid "You have already reported this user"

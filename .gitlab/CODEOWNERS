@@ -45,6 +45,7 @@ Rakefile @gitlab-org/maintainers/rails-backend
 /haml_lint/ @gitlab-org/maintainers/rails-backend
 /keeps/ @gitlab-org/maintainers/rails-backend
 /lib/ @gitlab-org/maintainers/rails-backend
+/lib/gitlab/ci/templates/ @gitlab-org/maintainers/cicd-templates
 /log/ @gitlab-org/maintainers/rails-backend
 /metrics_server/ @gitlab-org/maintainers/rails-backend
 /rubocop/ @gitlab-org/maintainers/rails-backend
@@ -1717,9 +1718,6 @@ lib/gitlab/checks/
 /ee/app/views/projects/settings/ci_cd/
 /ee/lib/api/merge_trains.rb
 /ee/lib/ee/api/entities/merge_train.rb
-
-# CI/CD templates require approval from specific owners.
-/lib/gitlab/ci/templates/ @gitlab-org/maintainers/cicd-templates
 
 # Overrides for Verify. These files below require approval from teams outside Verify.
 /**/lib/**/ci/reports/**/ @gitlab-org/maintainers/rails-backend
