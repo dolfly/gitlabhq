@@ -289,6 +289,30 @@ active on the enterprise group and no seats are available, the user is set to
 pending approval instead of being reactivated. Their existing group and project
 memberships are preserved.
 
+### Hide email addresses for enterprise users
+
+{{< history >}}
+
+- [Introduced](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/197475) in GitLab 18.3.
+
+{{< /history >}}
+
+Group Owners can hide the public email address from profile pages for all enterprise users in their
+group. Owners can still [view email addresses from the members page](#view-the-email-addresses-for-an-enterprise-user).
+
+Prerequisites:
+
+- You must have the Owner role for a top-level group.
+- The group must have [domain verification](#manage-group-domains) configured.
+
+To hide email addresses for enterprise users:
+
+1. In the top bar, select **Search or go to** and find your group.
+1. In the left sidebar, select **Settings** > **General**.
+1. Expand **Permissions and group features**.
+1. Under **Enterprise users**, select the **Hide email address from public profile** checkbox.
+1. Select **Save changes**.
+
 ### Enable the Extension Marketplace for enterprise users
 
 {{< history >}}
@@ -316,7 +340,7 @@ To enable the Extension Marketplace for enterprise users:
 1. In the top bar, select **Search or go to** and find your group.
 1. In the left sidebar, select **Settings** > **General**.
 1. Expand **Permissions and group features**.
-1. Under **Web IDE and workspaces**, select the **Enable extension marketplace** checkbox.
+1. Under **Enterprise users**, select the **Enable extension marketplace** checkbox.
 1. Select **Save changes**.
 
 ## Troubleshooting

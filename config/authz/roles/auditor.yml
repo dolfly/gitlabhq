@@ -3,7 +3,7 @@ name: auditor
 description: Read-only access to all groups and projects. This is an instance-level
   user type, not a project or group membership role.
 inherits_from:
-  - public_authenticated
+- public_authenticated
 project:
   permissions: []
   raw_permissions:
@@ -24,6 +24,7 @@ project:
   - read_compliance_framework
   - read_compliance_violations_report
   - read_confidential_issues
+  - read_contribution_analytics
   - read_dependency
   - read_deployment
   - read_environment
@@ -93,7 +94,9 @@ group:
   - read_namespace_cluster_agent_mapping
   - read_package
   - read_package_within_public_registries
+  - read_placeholder_reassignment
   - read_protected_branch
+  - read_provisioned_user
   - read_runners
   - read_saml_user
   - read_saved_replies

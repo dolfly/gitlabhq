@@ -62,6 +62,7 @@ group:
   - read_group_security_dashboard
   - read_licenses
   - read_runners
+  - read_security_attribute
   - read_security_inventory
   - read_security_orchestration_policies
   - read_security_resource

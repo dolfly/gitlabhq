@@ -15,6 +15,7 @@ import (
 	"github.com/stretchr/testify/require"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
+	"google.golang.org/grpc/metadata"
 
 	gkgpb "gitlab.com/gitlab-org/orbit/knowledge-graph/clients/gkgpb"
 
@@ -431,4 +432,104 @@ func TestBuildQueryResponse(t *testing.T) {
 		require.Empty(t, resp.QueryType)
 		require.Equal(t, int32(0), resp.RowCount)
 	})
+}
+
+func TestBuildOutgoingContext(t *testing.T) {
+	t.Run("empty headers map returns context without metadata", func(t *testing.T) {
+		ctx := buildOutgoingContext(context.Background(), GkgServer{})
+		md, ok := metadata.FromOutgoingContext(ctx)
+		require.False(t, ok, "expected no outgoing metadata")
+		require.Empty(t, md)
+	})
+
+	t.Run("authorization header is forwarded verbatim", func(t *testing.T) {
+		ctx := buildOutgoingContext(context.Background(), GkgServer{
+			Headers: map[string]string{"authorization": "Bearer my-token"},
+		})
+		md, ok := metadata.FromOutgoingContext(ctx)
+		require.True(t, ok)
+		require.Equal(t, []string{"Bearer my-token"}, md.Get("authorization"))
+	})
+
+	t.Run("verbose logging headers are forwarded", func(t *testing.T) {
+		server := GkgServer{
+			Headers: map[string]string{
+				"x-gitlab-enabled-feature-flags":            "gkg_verbose_logs",
+				"x-gitlab-enabled-instance-verbose-ai-logs": "true",
+			},
+		}
+		ctx := buildOutgoingContext(context.Background(), server)
+		md, ok := metadata.FromOutgoingContext(ctx)
+		require.True(t, ok)
+		require.Equal(t, []string{"gkg_verbose_logs"}, md.Get("x-gitlab-enabled-feature-flags"))
+		require.Equal(t, []string{"true"}, md.Get("x-gitlab-enabled-instance-verbose-ai-logs"))
+	})
+
+	t.Run("authorization and verbose logging headers are both forwarded", func(t *testing.T) {
+		server := GkgServer{
+			Headers: map[string]string{
+				"authorization":                  "Bearer my-token",
+				"x-gitlab-enabled-feature-flags": "gkg_verbose_logs",
+			},
+		}
+		ctx := buildOutgoingContext(context.Background(), server)
+		md, ok := metadata.FromOutgoingContext(ctx)
+		require.True(t, ok)
+		require.Equal(t, []string{"Bearer my-token"}, md.Get("authorization"))
+		require.Equal(t, []string{"gkg_verbose_logs"}, md.Get("x-gitlab-enabled-feature-flags"))
+	})
+
+	t.Run("nil headers map returns context without metadata", func(t *testing.T) {
+		ctx := buildOutgoingContext(context.Background(), GkgServer{Headers: nil})
+		md, ok := metadata.FromOutgoingContext(ctx)
+		require.False(t, ok, "expected no outgoing metadata")
+		require.Empty(t, md)
+	})
+}
+
+func TestInjectHeaders(t *testing.T) {
+	const testAddress = "test-headers:50051"
+
+	var capturedMD metadata.MD
+
+	lis := startMockGKGServer(t, func(stream grpc.BidiStreamingServer[gkgpb.ExecuteQueryMessage, gkgpb.ExecuteQueryMessage]) error {
+		capturedMD, _ = metadata.FromIncomingContext(stream.Context())
+
+		if _, err := stream.Recv(); err != nil {
+			return err
+		}
+		return stream.Send(&gkgpb.ExecuteQueryMessage{
+			Content: &gkgpb.ExecuteQueryMessage_Result{
+				Result: &gkgpb.ExecuteQueryResult{
+					Content: &gkgpb.ExecuteQueryResult_ResultJson{
+						ResultJson: `{}`,
+					},
+				},
+			},
+		})
+	})
+	injectTestClient(t, lis, testAddress)
+
+	myAPI := newTestAPI(t, "http://unused.test")
+	sq := NewSendQuery(myAPI, "test-version")
+
+	sendData := buildSendData(t, sendQueryParams{
+		GkgServer: GkgServer{
+			Address: testAddress,
+			Headers: map[string]string{
+				"x-gitlab-enabled-feature-flags":            "gkg_verbose_logs",
+				"x-gitlab-enabled-instance-verbose-ai-logs": "true",
+			},
+		},
+		Query:  `{"match":{}}`,
+		Format: "raw",
+	})
+
+	recorder := httptest.NewRecorder()
+	req := httptest.NewRequest(http.MethodPost, "/api/v4/orbit/query", nil)
+	sq.Inject(recorder, req, sendData)
+
+	require.Equal(t, http.StatusOK, recorder.Code)
+	require.Equal(t, []string{"gkg_verbose_logs"}, capturedMD.Get("x-gitlab-enabled-feature-flags"))
+	require.Equal(t, []string{"true"}, capturedMD.Get("x-gitlab-enabled-instance-verbose-ai-logs"))
 }

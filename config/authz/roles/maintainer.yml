@@ -14,6 +14,7 @@ project:
   - admin_cicd_variables
   - admin_cluster
   - admin_container_image
+  - admin_dependency_proxy_packages_settings
   - admin_deployment
   - admin_environment
   - admin_feature_flags_client
@@ -216,6 +217,7 @@ group:
   - read_jobs_statistics
   - read_namespace_cluster_agent_mapping
   - read_protected_branch
+  - read_provisioned_user
   - read_runner_cloud_provisioning_info
   - read_runner_gke_provisioning_info
   - read_runner_usage

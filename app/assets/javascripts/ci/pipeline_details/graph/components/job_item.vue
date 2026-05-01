@@ -125,6 +125,7 @@ export default {
       default: true,
     },
   },
+  emits: ['pipeline-action-request-complete', 'set-skip-retry-modal'],
   data() {
     return {
       currentSkipModalValue: this.skipRetryModal,

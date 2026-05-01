@@ -46,6 +46,7 @@ export default {
       default: STAGE_VIEW,
     },
   },
+  emits: ['error', 'highlighted-jobs-change'],
   data() {
     return {
       links: [],

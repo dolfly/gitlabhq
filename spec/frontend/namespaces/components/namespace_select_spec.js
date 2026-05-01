@@ -4,7 +4,7 @@ import { shallowMountExtended } from 'helpers/vue_test_utils_helper';
 import { setHTMLFixture, resetHTMLFixture } from 'helpers/fixtures';
 import waitForPromises from 'helpers/wait_for_promises';
 import Api from '~/api';
-import NamespaceSelect from '~/pages/admin/projects/components/namespace_select.vue';
+import NamespaceSelect from '~/namespaces/components/namespace_select.vue';
 
 const TEST_USER_NAMESPACE = { id: 10, kind: 'user', full_path: 'Administrator' };
 const TEST_GROUP_NAMESPACE = { id: 20, kind: 'group', full_path: 'GitLab Org' };

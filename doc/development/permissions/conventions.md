@@ -27,12 +27,15 @@ Our goal is for all permissions to follow a consistent pattern: **`action_resour
 
 If you are introducing a new permission, prefer to use one of the following actions:
 
-| Action   | What it does                 | Example        |
-|----------|------------------------------|----------------|
-| `create` | Creates a new object         | `create_issue` |
-| `read`   | Views or retrieves an object | `read_project` |
-| `update` | Modifies an existing object  | `update_merge_request` |
-| `delete` | Removes an object            | `delete_issue` |
+| Action   | What it does                      | Example        |
+|----------|-----------------------------------|----------------|
+| `create` | Creates a new object              | `create_issue` |
+| `read`   | Views or retrieves an object      | `read_project` |
+| `update` | Modifies an existing object       | `update_merge_request` |
+| `delete` | Removes an object                 | `delete_issue` |
+| `toggle` | Flips a boolean setting on or off | `toggle_secret_push_protection` |
+
+Use `toggle` when a permission authorizes flipping a boolean setting in either direction. The same permission grants the ability to both enable and disable the setting. Prefer `toggle_<resource>` over `enable_<resource>` or `disable_<resource>` for symmetric on/off operations. For irreversible or one-way actions, use a specific domain verb instead, as described in [When to introduce new actions](#when-to-introduce-new-actions).
 
 We recognize that this set of actions is limited and not applicable to every feature. Actions are [situationally allowed from outside this set](#when-to-introduce-new-actions), but require approval from the [Authorization team](https://handbook.gitlab.com/handbook/engineering/development/sec/govern/authorization/#group-members).
 

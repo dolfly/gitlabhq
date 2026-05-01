@@ -113,7 +113,7 @@ export function initMrPage(createRapidDiffsApp) {
   startCodeReviewMessaging({ signalBus: diffsEventHub });
 
   const changesCountBadge = document.querySelector('.js-changes-tab-count');
-  const commitsCountBadge = document.querySelector('.js-commits-count .gl-badge-content');
+  const commitsCountBadge = document.querySelector('.js-commits-count');
   diffsEventHub.$on(EVT_MR_DIFF_GENERATED, (mergeRequestDiffGenerated) => {
     const { diffStatsSummary: { fileCount = null } = {}, commitCount } = mergeRequestDiffGenerated;
 

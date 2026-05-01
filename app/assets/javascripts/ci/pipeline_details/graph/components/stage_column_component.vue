@@ -73,6 +73,7 @@ export default {
       required: true,
     },
   },
+  emits: ['job-hover', 'refresh-pipeline-graph', 'set-skip-retry-modal', 'update-measurements'],
   jobClasses: ['gl-w-full', 'gl-p-3', 'gl-border-0', '!gl-rounded-base', 'pipeline-job-action'],
   data() {
     return {

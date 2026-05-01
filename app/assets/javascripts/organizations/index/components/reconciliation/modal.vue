@@ -94,6 +94,9 @@ export default {
         this.currentStep -= 1;
       }
     },
+    onUpdate(updatedOrganizations) {
+      this.organizations = updatedOrganizations;
+    },
   },
 };
 </script>
@@ -114,7 +117,7 @@ export default {
           <template #totalSteps>{{ totalSteps }}</template>
         </gl-sprintf>
       </div>
-      <component :is="stepComponent" :organizations="organizations" />
+      <component :is="stepComponent" :organizations="organizations" @update="onUpdate" />
     </template>
     <template v-if="!loading" #modal-footer>
       <div class="gl-flex gl-w-full gl-justify-center gl-gap-3">

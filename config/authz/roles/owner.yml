@@ -19,6 +19,7 @@ project:
   - change_namespace
   - change_visibility_level
   - clone_project_configuration
+  - create_container_registry_protection_immutable_tag_rule
   - create_group_link
   - delete_group_link
   - destroy_issue
@@ -86,6 +87,7 @@ group:
   - change_visibility_level
   - create_deploy_token
   - create_group_link
+  - create_placeholder_reassignment
   - create_runners
   - create_service_account
   - create_subgroup
@@ -124,6 +126,7 @@ group:
   - read_group_saml_identity
   - read_group_scim_identity
   - read_member_access_request
+  - read_placeholder_reassignment
   - read_resource_access_tokens
   - read_runners
   - read_runners_registration_token

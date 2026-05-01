@@ -288,7 +288,6 @@ Style/GuardClause:
     - 'ee/lib/gitlab/insights/validators/params_validator.rb'
     - 'ee/lib/omni_auth/strategies/group_saml.rb'
     - 'ee/spec/support/ci/minutes_helpers.rb'
-    - 'lib/api/commits.rb'
     - 'lib/api/feature_flags.rb'
     - 'lib/api/helpers.rb'
     - 'lib/api/helpers/packages/conan/api_helpers.rb'

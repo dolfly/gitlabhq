@@ -102,9 +102,7 @@ func (sq *SendQuery) Inject(w http.ResponseWriter, r *http.Request, sendData str
 		return
 	}
 
-	if params.GkgServer.JWT != "" {
-		ctx = metadata.NewOutgoingContext(ctx, metadata.Pairs("authorization", "Bearer "+params.GkgServer.JWT))
-	}
+	ctx = buildOutgoingContext(ctx, params.GkgServer)
 
 	stream, err := client.ExecuteQuery(ctx)
 	if err != nil {
@@ -335,4 +333,19 @@ func gkgErrorToHTTPStatus(code string) int {
 	default:
 		return http.StatusBadRequest
 	}
+}
+
+// buildOutgoingContext attaches per-call gRPC metadata to ctx from the
+// generic Headers map. All entries are forwarded verbatim; callers are
+// responsible for populating the map with the correct header names and
+// values (e.g. "authorization", "x-gitlab-enabled-feature-flags", …).
+func buildOutgoingContext(ctx context.Context, server GkgServer) context.Context {
+	if len(server.Headers) == 0 {
+		return ctx
+	}
+	var pairs []string
+	for k, v := range server.Headers {
+		pairs = append(pairs, k, v)
+	}
+	return metadata.NewOutgoingContext(ctx, metadata.Pairs(pairs...))
 }

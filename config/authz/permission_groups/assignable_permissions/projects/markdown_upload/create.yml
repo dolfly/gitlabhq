@@ -3,5 +3,6 @@ name: create_markdown_upload
 description: Grants the ability to create markdown uploads
 boundaries:
   - project
+  - group
 permissions:
   - create_markdown_upload

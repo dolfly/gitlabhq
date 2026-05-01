@@ -13,6 +13,13 @@ import organizationsForReconciliationQuery from '~/organizations/index/graphql/q
 import Step1 from '~/organizations/index/components/reconciliation/steps/step_1.vue';
 import Step2 from '~/organizations/index/components/reconciliation/steps/step_2.vue';
 import Step3 from '~/organizations/index/components/reconciliation/steps/step_3.vue';
+import {
+  mockOrganizations,
+  organizationWithGroupsIndex,
+  organizationWithGroups,
+  organizationWithoutGroupsIndex,
+  organizationWithoutGroups,
+} from './mock_data';
 
 jest.mock('~/alert');
 
@@ -128,9 +135,7 @@ describe('OrganizationReconciliationModal', () => {
         });
 
         it('passes organizations to step component', () => {
-          expect(findStep1().props('organizations')).toEqual(
-            organizationsForReconciliationResponse.data.organizations.nodes,
-          );
+          expect(findStep1().props('organizations')).toEqual(mockOrganizations);
         });
       });
     });
@@ -207,7 +212,9 @@ describe('OrganizationReconciliationModal', () => {
 
     describe('step 2', () => {
       beforeEach(async () => {
-        createComponent();
+        createComponent({ props: { visible: true } });
+
+        await waitForPromises();
 
         findNextButton().vm.$emit('click');
         await nextTick();
@@ -237,6 +244,37 @@ describe('OrganizationReconciliationModal', () => {
         await nextTick();
 
         expect(wrapper.findComponent(Step1).exists()).toBe(true);
+      });
+
+      describe('when update event is fired', () => {
+        it('updates organizations prop', async () => {
+          expect(findStep2().props('organizations')).toEqual(mockOrganizations);
+
+          const groupToMoveIndex = 0;
+          const groupToMove = organizationWithGroups.groups.nodes[groupToMoveIndex];
+
+          const updatedOrganizations = mockOrganizations
+            .toSpliced(organizationWithGroupsIndex, 1, {
+              ...organizationWithGroups,
+              groups: {
+                ...organizationWithGroups.groups,
+                nodes: organizationWithGroups.groups.nodes.toSpliced(groupToMoveIndex, 1),
+              },
+            })
+            .toSpliced(organizationWithoutGroupsIndex, 1, {
+              ...organizationWithoutGroups,
+              groups: {
+                ...organizationWithoutGroups.groups,
+                nodes: [groupToMove],
+              },
+            });
+
+          findStep2().vm.$emit('update', updatedOrganizations);
+
+          await nextTick();
+
+          expect(findStep2().props('organizations')).toEqual(updatedOrganizations);
+        });
       });
     });
 

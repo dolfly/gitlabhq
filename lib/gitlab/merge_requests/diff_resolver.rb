@@ -28,7 +28,7 @@ module Gitlab
       end
 
       def latest_diff_id?
-        merge_request.merge_request_diff&.id == diff_id.to_i
+        merge_request.latest_merge_request_diff_id == diff_id.to_i
       end
 
       def commit

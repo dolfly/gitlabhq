@@ -304,6 +304,14 @@ class ProjectPolicy < BasePolicy
     Gitlab.config.packages.enabled
   end
 
+  condition(:dependency_proxy_enabled) do
+    ::Gitlab.config.dependency_proxy.enabled
+  end
+
+  condition(:dependency_proxy_for_packages_available) do
+    @subject.licensed_feature_available?(:dependency_proxy_for_packages)
+  end
+
   condition :terraform_state_disabled do
     !Gitlab.config.terraform_state.enabled
   end
@@ -451,6 +459,7 @@ class ProjectPolicy < BasePolicy
   end
 
   rule { packages_disabled }.policy do
+    prevent :admin_dependency_proxy_packages_settings
     prevent :read_package
     prevent :create_package
     prevent :update_package
@@ -837,6 +846,10 @@ class ProjectPolicy < BasePolicy
   rule { packages_enabled & can?(:admin_package) }.policy do
     enable :view_package_registry_project_settings
   end
+
+  rule { ~packages_enabled }.prevent :admin_dependency_proxy_packages_settings
+  rule { ~dependency_proxy_enabled }.prevent :admin_dependency_proxy_packages_settings
+  rule { ~dependency_proxy_for_packages_available }.prevent :admin_dependency_proxy_packages_settings
 
   rule { can?(:read_project) }.policy do
     enable :read_incident_management_timeline_event_tag

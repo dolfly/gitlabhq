@@ -369,7 +369,6 @@ Style/IfUnlessModifier:
     - 'lib/api/ci/pipeline_schedules.rb'
     - 'lib/api/ci/runner.rb'
     - 'lib/api/ci/runners.rb'
-    - 'lib/api/commits.rb'
     - 'lib/api/debian_project_packages.rb'
     - 'lib/api/deployments.rb'
     - 'lib/api/discussions.rb'

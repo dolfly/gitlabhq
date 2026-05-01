@@ -16022,6 +16022,38 @@ Input type: `UpdateVirtualRegistriesSettingInput`
 | <a id="mutation-updatevirtualregistriessetting-errors"></a>`errors` | [`[String!]!`](#string) | Errors encountered during the mutation. |
 | <a id="mutation-updatevirtualregistriessetting-virtualregistriessetting"></a>`virtualRegistriesSetting` | [`VirtualRegistriesSetting`](#virtualregistriessetting) | Virtual registries settings after mutation. |
 
+### `Mutation.uploadCreate`
+
+{{< details >}}
+**Introduced** in GitLab 19.0.
+**Status**: Experiment.
+{{< /details >}}
+
+Creates an upload (uploads a file to a project or group for use in Markdown).
+
+Input type: `UploadCreateInput`
+
+#### Arguments
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| <a id="mutation-uploadcreate-clientmutationid"></a>`clientMutationId` | [`String`](#string) | A unique identifier for the client performing the mutation. |
+| <a id="mutation-uploadcreate-file"></a>`file` | [`Upload!`](#upload) | File to upload. |
+| <a id="mutation-uploadcreate-grouppath"></a>`groupPath` | [`ID`](#id) | Full path of the group with which the resource is associated. |
+| <a id="mutation-uploadcreate-projectpath"></a>`projectPath` | [`ID`](#id) | Full path of the project with which the resource is associated. |
+
+#### Fields
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| <a id="mutation-uploadcreate-alt"></a>`alt` | [`String`](#string) | Alt text for the uploaded file. Usually the name of the file. |
+| <a id="mutation-uploadcreate-clientmutationid"></a>`clientMutationId` | [`String`](#string) | A unique identifier for the client performing the mutation. |
+| <a id="mutation-uploadcreate-errors"></a>`errors` | [`[String!]!`](#string) | Errors encountered during the mutation. |
+| <a id="mutation-uploadcreate-fullpath"></a>`fullPath` | [`String`](#string) | Full path to the file. |
+| <a id="mutation-uploadcreate-markdown"></a>`markdown` | [`String`](#string) | Markdown-formatted link to the file. |
+| <a id="mutation-uploadcreate-upload"></a>`upload` | [`FileUpload`](#fileupload) | Uploaded file. |
+| <a id="mutation-uploadcreate-url"></a>`url` | [`String`](#string) | URL to access the file. |
+
 ### `Mutation.uploadDelete`
 
 Deletes an upload.

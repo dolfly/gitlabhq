@@ -65,6 +65,7 @@ export default {
       required: true,
     },
   },
+  emits: ['error', 'refresh-pipeline-graph', 'set-skip-retry-modal'],
   pipelineTypeConstants: {
     DOWNSTREAM,
     UPSTREAM,

@@ -56,6 +56,14 @@ export default {
       required: true,
     },
   },
+  emits: [
+    'downstream-hovered',
+    'error',
+    'pipeline-expand-toggle',
+    'refresh-pipeline-graph',
+    'scroll-container',
+    'set-skip-retry-modal',
+  ],
   data() {
     return {
       currentPipeline: null,

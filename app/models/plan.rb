@@ -26,12 +26,12 @@ class Plan < ApplicationRecord
     early_adopter: 12
   }.freeze
 
-  PLAN_NAME_UIDS = PLAN_NAME_UID_LIST.transform_keys(&:to_s).freeze
+  enum :plan_name_uid, PLAN_NAME_UID_LIST
 
-  attribute :plan_name_uid, :integer
-
-  validates :plan_name_uid, presence: true, on: :create
-  validate :validate_plan_name_uid_uniqueness, on: :create
+  validates :plan_name_uid,
+    presence: true,
+    uniqueness: true,
+    on: :create
 
   before_validation :set_plan_name_uid
 
@@ -53,7 +53,7 @@ class Plan < ApplicationRecord
   end
 
   def self.uids_for_names(names)
-    names.filter_map { |name| PLAN_NAME_UIDS[name] }
+    names.filter_map { |name| plan_name_uids[name] }
   end
 
   # rubocop: disable Database/AvoidUsingPluckWithoutLimit -- This method is prepared for manual usage in
@@ -91,14 +91,8 @@ class Plan < ApplicationRecord
   def set_plan_name_uid
     return unless name.present?
 
-    uid_value = PLAN_NAME_UIDS[name]
+    uid_value = self.class.plan_name_uids[name]
     self.plan_name_uid = uid_value if uid_value
-  end
-
-  def validate_plan_name_uid_uniqueness
-    return if plan_name_uid.blank?
-
-    errors.add(:plan_name_uid, :taken) if self.class.where(plan_name_uid: plan_name_uid).exists?
   end
 end
 

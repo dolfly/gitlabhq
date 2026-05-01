@@ -7163,7 +7163,60 @@ paths:
       tags:
       - groups
       operationId: getApiV4GroupsIdIssuesStatistics
+  "/api/v4/groups/{id}/uploads/authorize":
+    post:
+      summary: Workhorse authorize the file upload
+      description: This feature was introduced in GitLab 19.0
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        type: integer
+        format: int32
+        required: true
+      responses:
+        '200':
+          description: Workhorse authorize the file upload
+        '404':
+          description: Not found
+      tags:
+      - groups
+      operationId: postApiV4GroupsIdUploadsAuthorize
   "/api/v4/groups/{id}/uploads":
+    post:
+      summary: Upload a file to a group
+      description: Uploads a file to the specified group. Returns a markdown-formatted
+        link to the file.
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        type: integer
+        format: int32
+        required: true
+      - name: postApiV4GroupsIdUploads
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/postApiV4GroupsIdUploads"
+      responses:
+        '201':
+          description: Upload a file to a group
+          schema:
+            "$ref": "#/definitions/API_Entities_GroupUpload"
+        '400':
+          description: Bad request
+        '404':
+          description: Not found
+      tags:
+      - groups
+      operationId: postApiV4GroupsIdUploads
     get:
       description: Get the list of uploads of a group
       produces:
@@ -7263,7 +7316,7 @@ paths:
       operationId: deleteApiV4GroupsIdUploadsUploadId
   "/api/v4/groups/{id}/uploads/{secret}/{filename}":
     get:
-      description: Download a single project upload by secret and filename
+      description: Download a single group upload by secret and filename
       produces:
       - application/json
       parameters:
@@ -7284,7 +7337,7 @@ paths:
         required: true
       responses:
         '200':
-          description: Download a single project upload by secret and filename
+          description: Download a single group upload by secret and filename
           schema:
             type: file
         '403':
@@ -54480,6 +54533,41 @@ definitions:
     - start_date
     - due_date
     - web_url
+  postApiV4GroupsIdUploads:
+    type: object
+    properties:
+      file:
+        type: file
+        description: The file to upload
+    required:
+    - file
+    description: Upload a file to a group
+  API_Entities_GroupUpload:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        description: The ID of the file
+      alt:
+        type: string
+        description: The name of the file
+      url:
+        type: string
+        description: The URL to access the file
+      full_path:
+        type: string
+        description: The full path to the file
+      markdown:
+        type: string
+        description: A markdown-formatted link to the file.
+    required:
+    - id
+    - alt
+    - url
+    - full_path
+    - markdown
+    description: API_Entities_GroupUpload model
   API_Entities_MarkdownUploadAdmin:
     type: object
     properties:

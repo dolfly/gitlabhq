@@ -29,6 +29,7 @@ project:
   - create_container_image
   - create_coverage_fuzzing_corpus
   - create_deployment
+  - create_duo_workflow_for_ci
   - create_environment
   - create_external_issue_link
   - create_feature_flag
@@ -48,6 +49,7 @@ project:
   - destroy_feature_flag
   - destroy_release
   - destroy_saved_replies
+  - duo_workflow
   - edit_on_demand_dast_scan
   - enable_continuous_vulnerability_scans
   - execute_ai_catalog_item
@@ -121,6 +123,7 @@ group:
   - admin_merge_request
   - create_custom_dashboard
   - create_custom_emoji
+  - create_duo_workflow_for_ci
   - create_observability_access_request
   - create_package
   - create_saved_replies
@@ -129,6 +132,7 @@ group:
   - delete_custom_dashboard
   - delete_o11y_settings
   - destroy_saved_replies
+  - duo_workflow
   - read_ai_catalog_flow
   - read_ai_catalog_third_party_flow
   - read_ai_foundational_flow

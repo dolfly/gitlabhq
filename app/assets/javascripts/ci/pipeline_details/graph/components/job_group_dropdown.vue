@@ -50,6 +50,7 @@ export default {
       default: '',
     },
   },
+  emits: ['pipeline-action-request-complete'],
   jobItemTypes: {
     jobDropdown: JOB_DROPDOWN,
   },

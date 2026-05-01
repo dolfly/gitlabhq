@@ -1659,6 +1659,7 @@ Grants the ability to create, delete, and read Markdown uploads.
 | Action | Access | Method | Path |
 | ------ | ------ | ------ | ---- |
 | Create | Project | `POST` | `/projects/:id/uploads` |
+| Create | Group | `POST` | `/groups/:id/uploads` |
 | Delete | Project | `DELETE` | `/projects/:id/uploads/:upload_id` |
 | Delete | Project | `DELETE` | `/projects/:id/uploads/:secret/:filename` |
 | Delete | Group | `DELETE` | `/groups/:id/uploads/:upload_id` |
@@ -2642,6 +2643,7 @@ incompatible with personal access tokens.
 | `POST` | `/groups/:id/-/packages/npm/-/npm/v1/security/advisories/bulk` | External registry redirect |
 | `POST` | `/groups/:id/-/packages/npm/-/npm/v1/security/audits/quick` | External registry redirect |
 | `POST` | `/groups/:id/placeholder_reassignments/authorize` | Workhorse pre-authorization |
+| `POST` | `/groups/:id/uploads/authorize` | Workhorse pre-authorization |
 | `POST` | `/groups/import/authorize` | Workhorse pre-authorization |
 | `GET` | `/internal/agents/agentk/agent_info` | Kubernetes agent JWT |
 | `GET` | `/internal/agents/agentw/agent_info` | Kubernetes agent JWT |

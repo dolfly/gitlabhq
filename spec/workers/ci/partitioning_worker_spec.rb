@@ -54,18 +54,6 @@ RSpec.describe Ci::PartitioningWorker, feature_category: :ci_scaling do
 
         perform
       end
-
-      context 'when FF `ci_archive_old_partitions` is disabled' do
-        before do
-          stub_feature_flags(ci_archive_old_partitions: false)
-        end
-
-        it 'does not call archive service' do
-          expect(Ci::Partitions::ArchiveService).not_to receive(:new)
-
-          perform
-        end
-      end
     end
   end
 end

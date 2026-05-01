@@ -612,7 +612,6 @@ export default {
     'app/assets/javascripts/packages_and_registries/shared/components/publish_message.vue',
     'app/assets/javascripts/packages_and_registries/shared/components/tags_loader.vue',
     'app/assets/javascripts/pages/admin/application_settings/general/components/signup_checkbox.vue',
-    'app/assets/javascripts/pages/admin/projects/components/namespace_select.vue',
     'app/assets/javascripts/pages/groups/new/components/app.vue',
     'app/assets/javascripts/pages/groups/new/components/create_group_description_details.vue',
     'app/assets/javascripts/pages/import/bitbucket_server/status/components/bitbucket_server_status_table.vue',

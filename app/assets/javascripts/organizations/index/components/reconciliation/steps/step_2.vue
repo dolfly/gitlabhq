@@ -1,17 +1,27 @@
 <script>
-import { GlSprintf } from '@gitlab/ui';
-import { s__ } from '~/locale';
+import { GlAvatarLabeled, GlCard, GlIcon, GlTooltipDirective } from '@gitlab/ui';
+import Draggable from '~/lib/utils/vue3compat/draggable_compat.vue';
+import { AVATAR_SHAPE_OPTION_RECT } from '~/vue_shared/constants';
+import { VISIBILITY_TYPE_ICON, GROUP_VISIBILITY_TYPE } from '~/visibility_level/constants';
+import { getIdFromGraphQLId } from '~/graphql_shared/utils';
+import { numberToMetricPrefix } from '~/lib/utils/number_utils';
+import ListItemStat from '~/vue_shared/components/resource_lists/list_item_stat.vue';
 import BaseStep from './base_step.vue';
 
 export default {
   name: 'ReconciliationStep2',
-  i18n: {
-    placeholder: s__('Organization|Step 2 placeholder'),
-    totalOrganizations: s__('Organization|Total Organizations: %{count}'),
+  AVATAR_SHAPE_OPTION_RECT,
+  draggableGroupName: 'organizationGroups',
+  directives: {
+    GlTooltip: GlTooltipDirective,
   },
   components: {
     BaseStep,
-    GlSprintf,
+    GlCard,
+    GlAvatarLabeled,
+    GlIcon,
+    ListItemStat,
+    Draggable,
   },
   props: {
     organizations: {
@@ -19,16 +29,139 @@ export default {
       required: true,
     },
   },
+  emits: ['update'],
+  data() {
+    return {
+      pendingChanges: {},
+    };
+  },
+  methods: {
+    getIdFromGraphQLId,
+    numberToMetricPrefix,
+    visibilityIcon(visibility) {
+      return VISIBILITY_TYPE_ICON[visibility];
+    },
+    visibilityTooltip(visibility) {
+      return GROUP_VISIBILITY_TYPE[visibility];
+    },
+    onDraggableInput(changedOrganization, groups) {
+      this.pendingChanges[changedOrganization.id] = groups;
+    },
+    onDraggableEnd() {
+      const updatedOrganizations = this.organizations.map((organization) => {
+        const pendingChange = this.pendingChanges[organization.id];
+
+        if (!pendingChange) {
+          return organization;
+        }
+
+        return {
+          ...organization,
+          groups: {
+            ...organization.groups,
+            nodes: pendingChange,
+          },
+        };
+      });
+
+      this.pendingChanges = {};
+
+      this.$emit('update', updatedOrganizations);
+    },
+  },
 };
 </script>
 
 <template>
-  <base-step>
-    <p>{{ $options.i18n.placeholder }}</p>
-    <div data-testid="total-organizations" class="gl-my-3">
-      <gl-sprintf :message="$options.i18n.totalOrganizations">
-        <template #count>{{ organizations.length }}</template>
-      </gl-sprintf>
+  <base-step :title="s__('Organization|Assign top-level groups')">
+    <template #description>
+      <p>
+        {{
+          s__(
+            'Organization|Drag groups between Organizations to set up your structure. Most companies only need one.',
+          )
+        }}
+      </p>
+    </template>
+
+    <div class="gl-p-2">
+      <div class="-gl-m-2 gl-flex gl-flex-wrap gl-pb-4">
+        <div
+          v-for="organization in organizations"
+          :key="organization.id"
+          class="gl-w-1/2 gl-p-2 first:gl-ml-auto last:gl-mr-auto @lg:gl-w-1/3"
+        >
+          <gl-card class="gl-h-full" body-class="gl-bg-transparent">
+            <template #header>
+              <gl-avatar-labeled
+                class="gl-flex"
+                :label="organization.name"
+                :entity-id="getIdFromGraphQLId(organization.id)"
+                :entity-name="organization.name"
+                :shape="$options.AVATAR_SHAPE_OPTION_RECT"
+                :size="32"
+                :src="organization.avatarUrl"
+              />
+            </template>
+            <div class="gl-relative gl-h-full">
+              <draggable
+                class="organizations-reconciliation-draggable gl-flex gl-min-h-11 gl-flex-col gl-gap-4"
+                chosen-class="organizations-reconciliation-draggable-chosen"
+                :value="organization.groups.nodes"
+                :group="$options.draggableGroupName"
+                item-key="id"
+                :fallback-on-body="true"
+                :force-fallback="true"
+                @input="onDraggableInput(organization, $event)"
+                @end="onDraggableEnd"
+              >
+                <div
+                  v-for="group in organization.groups.nodes"
+                  :key="group.id"
+                  class="gl-select-none gl-rounded-xl gl-bg-default gl-p-4 hover:gl-cursor-grab hover:gl-shadow-md"
+                  data-testid="organization-group"
+                >
+                  <div class="gl-flex gl-items-center gl-gap-3">
+                    <gl-icon class="gl-shrink-0" variant="subtle" name="group" />
+                    <div class="gl-break-anywhere">
+                      <span class="gl-font-bold">{{ group.fullName }}</span
+                      ><gl-icon
+                        v-gl-tooltip="visibilityTooltip(group.visibility)"
+                        :name="visibilityIcon(group.visibility)"
+                        class="gl-ml-2"
+                        variant="subtle"
+                        data-testid="group-visibility"
+                      />
+                    </div>
+                  </div>
+                  <div class="gl-mt-3 gl-flex gl-items-center gl-gap-x-3 gl-pl-6">
+                    <list-item-stat
+                      :tooltip-text="__('Subgroups')"
+                      icon-name="subgroup"
+                      :stat="numberToMetricPrefix(group.descendantGroupsCount)"
+                    />
+                    <list-item-stat
+                      :tooltip-text="__('Projects')"
+                      icon-name="project"
+                      :stat="numberToMetricPrefix(group.projectsCount)"
+                    />
+                    <list-item-stat
+                      :tooltip-text="__('Direct members')"
+                      icon-name="users"
+                      :stat="numberToMetricPrefix(group.groupMembersCount)"
+                    />
+                  </div>
+                </div>
+              </draggable>
+              <div
+                class="organizations-reconciliation-draggable-empty-state gl-border-secondary gl-pointer-events-none gl-absolute gl-flex gl-h-11 gl-w-full gl-items-center gl-justify-center gl-rounded-md gl-border-dashed gl-border-strong"
+              >
+                <p class="gl-m-0 gl-text-secondary">{{ s__('Organization|Drop groups here') }}</p>
+              </div>
+            </div>
+          </gl-card>
+        </div>
+      </div>
     </div>
   </base-step>
 </template>

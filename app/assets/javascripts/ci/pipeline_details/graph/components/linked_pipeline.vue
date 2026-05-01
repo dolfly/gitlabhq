@@ -55,6 +55,13 @@ export default {
       required: true,
     },
   },
+  emits: [
+    'downstream-hovered',
+    'error',
+    'pipeline-clicked',
+    'pipeline-expand-toggle',
+    'refresh-pipeline-graph',
+  ],
   data() {
     return {
       hasActionTooltip: false,

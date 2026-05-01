@@ -207,6 +207,7 @@ Gitlab/BoundedContexts:
     - 'app/graphql/mutations/timelogs/base.rb'
     - 'app/graphql/mutations/timelogs/create.rb'
     - 'app/graphql/mutations/timelogs/delete.rb'
+    - 'app/graphql/mutations/uploads/create.rb'
     - 'app/graphql/mutations/uploads/delete.rb'
     - 'app/graphql/mutations/user_callouts/create.rb'
     - 'app/graphql/mutations/user_preferences/update.rb'

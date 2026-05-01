@@ -40679,7 +40679,53 @@ paths:
         required: true
         schema: {}
         in: path
+  "/api/v4/groups/{id}/uploads/authorize":
+    post:
+      operationId: postApiV4GroupsIdUploadsAuthorize
+      summary: Workhorse authorize the file upload
+      description: This feature was introduced in GitLab 19.0
+      tags:
+      - Groups
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not found
+      parameters:
+      - name: id
+        required: true
+        schema: {}
+        in: path
   "/api/v4/groups/{id}/uploads":
+    post:
+      operationId: postApiV4GroupsIdUploads
+      summary: Upload a file to a group
+      description: Uploads a file to the specified group. Returns a markdown-formatted
+        link to the file.
+      tags:
+      - Groups
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/APIEntitiesGroupUpload"
+        '400':
+          description: Bad request
+        '404':
+          description: Not found
+      parameters:
+      - name: id
+        required: true
+        schema: {}
+        in: path
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              "$ref": "#/components/schemas/RequestBody_4f329622643f"
     get:
       operationId: getApiV4GroupsIdUploads
       summary: Get the list of uploads of a group
@@ -40771,7 +40817,7 @@ paths:
   "/api/v4/groups/{id}/uploads/{secret}/{filename}":
     get:
       operationId: getApiV4GroupsIdUploadsSecretFilename
-      summary: Download a single project upload by secret and filename
+      summary: Download a single group upload by secret and filename
       tags:
       - Groups
       responses:
@@ -76739,6 +76785,24 @@ components:
           type: string
         access_level:
           type: string
+    APIEntitiesGroupUpload:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The ID of the file
+        alt:
+          type: string
+          description: The name of the file
+        url:
+          type: string
+          description: The URL to access the file
+        full_path:
+          type: string
+          description: The full path to the file
+        markdown:
+          type: string
+          description: A markdown-formatted link to the file.
     APIEntitiesMarkdownUploadAdmin:
       type: object
       properties:
@@ -101938,6 +102002,16 @@ components:
           type: string
           format: binary
           description: The attachment file to be uploaded
+          nullable: true
+      required:
+      - file
+    RequestBody_4f329622643f:
+      type: object
+      properties:
+        file:
+          type: string
+          format: binary
+          description: The file to upload
           nullable: true
       required:
       - file

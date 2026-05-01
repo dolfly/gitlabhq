@@ -157,7 +157,7 @@ module API
           authorize!(:cancel_build, build)
 
           if params[:force]
-            authorize!(:maintainer_access, build)
+            authorize!(:force_cancel_build, build)
             build.force_cancel
           else
             build.cancel

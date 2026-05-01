@@ -30820,6 +30820,9 @@ msgstr ""
 msgid "Failed to update the organization user"
 msgstr ""
 
+msgid "Failed to upload file."
+msgstr ""
+
 msgid "Failed to upload object map file"
 msgstr ""
 
@@ -50419,6 +50422,9 @@ msgstr ""
 msgid "Organization|An error occurred updating your organization. Please try again."
 msgstr ""
 
+msgid "Organization|Assign top-level groups"
+msgstr ""
+
 msgid "Organization|Change organization URL"
 msgstr ""
 
@@ -50438,6 +50444,12 @@ msgid "Organization|Create organization"
 msgstr ""
 
 msgid "Organization|Current organization"
+msgstr ""
+
+msgid "Organization|Drag groups between Organizations to set up your structure. Most companies only need one."
+msgstr ""
+
+msgid "Organization|Drop groups here"
 msgstr ""
 
 msgid "Organization|Get started with organizations"
@@ -50583,9 +50595,6 @@ msgid "Organization|Select an organization"
 msgstr ""
 
 msgid "Organization|Step %{currentStep} / %{totalSteps}"
-msgstr ""
-
-msgid "Organization|Step 2 placeholder"
 msgstr ""
 
 msgid "Organization|Step 3 placeholder"
@@ -78350,6 +78359,9 @@ msgid "UsageBilling|Shared pool of credits available to all users in the subscri
 msgstr ""
 
 msgid "UsageBilling|Sorting by total credits used displays only users with prior credit usage."
+msgstr ""
+
+msgid "UsageBilling|This dashboard displays usage of all GitLab Duo Agent Platform features, including non-billable beta and experiment features. For billable usage only, view the %{linkStart}dashboard in Customers Portal%{linkEnd}."
 msgstr ""
 
 msgid "UsageBilling|This dashboard may not display all current subscription data. For complete visibility, please upgrade to the latest version of GitLab or visit the %{linkStart}Customer Portal%{linkEnd}."

@@ -31,7 +31,7 @@ RSpec.describe Gitlab::MergeRequests::DiffResolver, feature_category: :code_revi
 
   let_it_be(:head_diff) { create(:merge_request_diff, :merge_head, merge_request: merge_request) }
   let(:params) { {} }
-  let(:diff_resolver) { described_class.new(merge_request.reload, params) }
+  let(:diff_resolver) { described_class.new(merge_request, params) }
 
   describe '#resolve' do
     let(:diffable_merge_ref?) { false }
@@ -125,12 +125,12 @@ RSpec.describe Gitlab::MergeRequests::DiffResolver, feature_category: :code_revi
         end
       end
 
-      context 'when merge_request_diff is nil and diff_id is present' do
+      context 'when latest_merge_request_diff is nil and diff_id is present' do
         let(:params) { { diff_id: base_diff_2.id } }
         let(:diffable_merge_ref?) { true }
 
         before do
-          allow(merge_request).to receive(:merge_request_diff).and_return(nil)
+          allow(merge_request).to receive(:latest_merge_request_diff_id).and_return(nil)
         end
 
         it 'returns the requested diff instead of raising' do

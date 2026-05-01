@@ -1,16 +1,10 @@
 import { GlAvatarLabeled, GlCard } from '@gitlab/ui';
 import illustrationUrl from '@gitlab/svgs/dist/illustrations/empty-state/empty-organizations-add-md.svg?url';
-import organizationsForReconciliationResponse from 'test_fixtures/graphql/organizations/organizations_for_reconciliation.query.graphql.json';
 import { shallowMountExtended } from 'helpers/vue_test_utils_helper';
 import Step1 from '~/organizations/index/components/reconciliation/steps/step_1.vue';
 import BaseStep from '~/organizations/index/components/reconciliation/steps/base_step.vue';
 import HelpPageLink from '~/vue_shared/components/help_page_link/help_page_link.vue';
-
-const {
-  data: {
-    organizations: { nodes: mockOrganizations },
-  },
-} = organizationsForReconciliationResponse;
+import { mockOrganizations } from '../mock_data';
 
 describe('ReconciliationStep1', () => {
   let wrapper;

@@ -19280,6 +19280,7 @@ CREATE TABLE dast_profiles_tags (
     project_id bigint,
     tag_name text,
     CONSTRAINT check_b1aa92f799 CHECK ((project_id IS NOT NULL)),
+    CONSTRAINT check_tag_name_not_null CHECK ((tag_name IS NOT NULL)),
     CONSTRAINT dast_profiles_tags_tag_name_length CHECK ((char_length(tag_name) <= 1024))
 );
 

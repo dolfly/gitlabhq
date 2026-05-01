@@ -11,7 +11,12 @@ module RapidDiffs
     end
 
     expose :selected do |merge_request_diff|
-      next merge_request_diff.id == current_merge_request_diff.id if current_merge_request_diff.present?
+      if current_merge_request_diff.present?
+        next true if current_merge_request_diff.merge_head? && latest_or_merge_head?(merge_request_diff)
+
+        next merge_request_diff.id == current_merge_request_diff.id
+      end
+
       next true if latest_or_merge_head?(merge_request_diff)
 
       false

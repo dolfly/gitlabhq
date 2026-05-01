@@ -27,7 +27,9 @@ project:
   - export_work_items
   - read_ai_catalog_item
   - read_ai_catalog_item_consumer
+  - read_ai_agents
   - read_analytics
+  - read_contribution_analytics
   - read_cycle_analytics
   - read_insights
   - read_issue
@@ -36,6 +38,7 @@ project:
   - read_iteration
   - read_label
   - read_limit_alert
+  - read_member_role
   - read_milestone
   - read_namespace
   - read_namespace_via_membership

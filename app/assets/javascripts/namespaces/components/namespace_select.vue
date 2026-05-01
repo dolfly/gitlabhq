@@ -6,6 +6,7 @@ import { DEFAULT_DEBOUNCE_AND_THROTTLE_MS } from '~/lib/utils/constants';
 import { __ } from '~/locale';
 
 export default {
+  name: 'NamespaceSelect',
   i18n: {
     headerText: __('Namespaces'),
     searchPlaceholder: __('Search for Namespace'),
@@ -36,6 +37,7 @@ export default {
       default: null,
     },
   },
+  emits: ['setNamespace'],
   data() {
     return {
       namespaceOptions: [],
