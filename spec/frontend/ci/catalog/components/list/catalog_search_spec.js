@@ -1,6 +1,7 @@
-import { GlSearchBoxByClick, GlSorting } from '@gitlab/ui';
+import { GlFilteredSearch, GlSorting } from '@gitlab/ui';
 import { shallowMountExtended } from 'helpers/vue_test_utils_helper';
 import CatalogSearch from '~/ci/catalog/components/list/catalog_search.vue';
+import VerificationLevelToken from '~/ci/catalog/components/tokens/verification_level_token.vue';
 import {
   SORT_ASC,
   SORT_DESC,
@@ -12,12 +13,14 @@ import {
 describe('CatalogSearch', () => {
   let wrapper;
 
-  const findSearchBar = () => wrapper.findComponent(GlSearchBoxByClick);
+  const findFilteredSearch = () => wrapper.findComponent(GlFilteredSearch);
   const findSorting = () => wrapper.findComponent(GlSorting);
   const findAllSortingItems = () => findSorting().props('sortOptions');
 
-  const createComponent = () => {
-    wrapper = shallowMountExtended(CatalogSearch);
+  const createComponent = (props = {}) => {
+    wrapper = shallowMountExtended(CatalogSearch, {
+      propsData: props,
+    });
   };
 
   describe('default UI', () => {
@@ -25,8 +28,19 @@ describe('CatalogSearch', () => {
       createComponent();
     });
 
-    it('renders the search bar', () => {
-      expect(findSearchBar().exists()).toBe(true);
+    it('renders the filtered search', () => {
+      expect(findFilteredSearch().exists()).toBe(true);
+    });
+
+    it('configures the verification level token', () => {
+      const tokens = findFilteredSearch().props('availableTokens');
+
+      expect(tokens).toHaveLength(1);
+      expect(tokens[0]).toMatchObject({
+        type: 'verificationLevel',
+        token: VerificationLevelToken,
+        unique: true,
+      });
     });
 
     it('adds sorting options', () => {
@@ -40,51 +54,61 @@ describe('CatalogSearch', () => {
     });
   });
 
+  describe('filtered search value', () => {
+    it('sets an empty value by default', () => {
+      createComponent();
+
+      expect(findFilteredSearch().props('value')).toEqual([]);
+    });
+
+    it('includes the initial search term', () => {
+      createComponent({ initialSearchTerm: 'test' });
+
+      expect(findFilteredSearch().props('value')).toEqual(['test']);
+    });
+
+    it('includes the initial verification level', () => {
+      createComponent({ initialVerificationLevel: 'GITLAB_MAINTAINED' });
+
+      expect(findFilteredSearch().props('value')).toEqual([
+        {
+          type: 'verificationLevel',
+          value: { data: 'GITLAB_MAINTAINED', operator: '=' },
+        },
+      ]);
+    });
+
+    it('includes both search term and verification level', () => {
+      createComponent({
+        initialSearchTerm: 'test',
+        initialVerificationLevel: 'GITLAB_MAINTAINED',
+      });
+
+      expect(findFilteredSearch().props('value')).toEqual([
+        {
+          type: 'verificationLevel',
+          value: { data: 'GITLAB_MAINTAINED', operator: '=' },
+        },
+        'test',
+      ]);
+    });
+  });
+
   describe('search', () => {
     beforeEach(() => {
       createComponent();
     });
 
-    it('passes down the search value to the search component', async () => {
-      const newSearchTerm = 'cat';
+    it.each`
+      description                                       | filters                                                                                 | expected
+      ${'with search term on submit'}                   | ${['dog']}                                                                              | ${{ searchTerm: 'dog', verificationLevel: null }}
+      ${'with empty search term when cleared'}          | ${[]}                                                                                   | ${{ searchTerm: null, verificationLevel: null }}
+      ${'with verification level'}                      | ${[{ type: 'verificationLevel', value: { data: 'GITLAB_MAINTAINED', operator: '=' } }]} | ${{ searchTerm: null, verificationLevel: 'GITLAB_MAINTAINED' }}
+      ${'with both search term and verification level'} | ${['cat', { type: 'verificationLevel', value: { data: 'UNVERIFIED', operator: '=' } }]} | ${{ searchTerm: 'cat', verificationLevel: 'UNVERIFIED' }}
+    `('emits update-filters $description', ({ filters, expected }) => {
+      findFilteredSearch().vm.$emit('submit', filters);
 
-      expect(findSearchBar().props().value).toBe('');
-
-      await findSearchBar().vm.$emit('input', newSearchTerm);
-
-      expect(findSearchBar().props().value).toBe(newSearchTerm);
-    });
-
-    it('does not submit only when typing', async () => {
-      expect(wrapper.emitted('update-search-term')).toBeUndefined();
-
-      await findSearchBar().vm.$emit('input', 'new');
-
-      expect(wrapper.emitted('update-search-term')).toBeUndefined();
-    });
-
-    describe('when submitting the search', () => {
-      const newSearchTerm = 'dog';
-
-      beforeEach(async () => {
-        await findSearchBar().vm.$emit('input', newSearchTerm);
-        await findSearchBar().vm.$emit('submit');
-      });
-
-      it('emits the event up with the new payload', () => {
-        expect(wrapper.emitted('update-search-term')).toEqual([[newSearchTerm]]);
-      });
-    });
-
-    describe('when clearing the search', () => {
-      beforeEach(async () => {
-        await findSearchBar().vm.$emit('input', 'new');
-        await findSearchBar().vm.$emit('clear');
-      });
-
-      it('emits an update event with an empty string payload', () => {
-        expect(wrapper.emitted('update-search-term')).toEqual([['']]);
-      });
+      expect(wrapper.emitted('update-filters')).toEqual([[expected]]);
     });
   });
 

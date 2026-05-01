@@ -4,7 +4,7 @@
   "type": "object",
   "additionalProperties": false,
   "properties": {
-    "enabled": {
+    "mcp_server_enabled": {
       "type": "boolean",
       "description": "Whether the GitLab MCP server is enabled for this instance"
     }

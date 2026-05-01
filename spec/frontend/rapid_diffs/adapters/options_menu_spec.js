@@ -81,7 +81,7 @@ describe('Diff File Options Menu Adapter', () => {
     expect(get('vueButton')).not.toBeNull();
     /*
      * This button being replaced also means this replacement can only
-     * happen once (desireable!), so testing that it's no longer present is good
+     * happen once (desirable!), so testing that it's no longer present is good
      */
     expect(get('serverButton')).toBeNull();
     // Wait for Vue 3 to complete child component rendering and focus

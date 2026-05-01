@@ -2,8 +2,6 @@
 
 module Achievements
   class UserAchievement < ApplicationRecord
-    include SafelyChangeColumnDefault
-
     belongs_to :achievement, inverse_of: :user_achievements, optional: false
     belongs_to :user, inverse_of: :user_achievements, optional: false
 
@@ -34,8 +32,6 @@ module Achievements
       reorder(keyset_order)
     }
     scope :order_by_id_asc, -> { order(id: :asc) }
-
-    columns_changing_default :show_on_profile
 
     validates :show_on_profile, inclusion: { in: [false, true] }
 

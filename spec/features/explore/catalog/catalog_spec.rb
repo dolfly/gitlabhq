@@ -3,6 +3,7 @@
 require 'spec_helper'
 
 RSpec.describe 'CI/CD Catalog', :js, feature_category: :pipeline_composition do
+  include GlFilteredSearchHelpers
   let_it_be(:namespace) { create(:group) }
   let_it_be(:user) { create(:user) }
   let_it_be(:public_projects_with_components) do
@@ -138,8 +139,10 @@ RSpec.describe 'CI/CD Catalog', :js, feature_category: :pipeline_composition do
       let(:project_name) { public_projects_with_components[0].name }
 
       before do
-        find('input[data-testid="catalog-search-bar"]').send_keys project_name
-        find('input[data-testid="catalog-search-bar"]').send_keys :enter
+        within_testid('catalog-search-bar') do
+          find('input').set(project_name)
+          click_button 'Search'
+        end
         wait_for_requests
       end
 

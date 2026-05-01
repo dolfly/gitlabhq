@@ -493,7 +493,6 @@ RSpec/ReceiveMessages:
     - 'spec/views/layouts/profile.html.haml_spec.rb'
     - 'spec/views/members/access_denied_mailer/email.html.haml_spec.rb'
     - 'spec/views/members/access_denied_mailer/email.text.erb_spec.rb'
-    - 'spec/views/projects/_issue.html.haml_spec.rb'
     - 'spec/views/projects/commit/_commit_box.html.haml_spec.rb'
     - 'spec/views/projects/commit/show.html.haml_spec.rb'
     - 'spec/views/projects/commits/show.html.haml_spec.rb'

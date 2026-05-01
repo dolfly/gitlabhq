@@ -48,7 +48,7 @@ module Banzai
       #   For example, "%{project_path}" will yield a replacement value like
       #   "gitlab-org/gitlab".  Percent-encoding this would yield
       #   "gitlab-org%2Fgitlab", which -- depending on the target service -- may not
-      #   be desireable.  We may use `uri_encode: false` to allow substitutions like
+      #   be desirable.  We may use `uri_encode: false` to allow substitutions like
       #   "http://%{gitlab_server}/%{project_path}" to work as expected.
       #
       #   On the other hand, "%{project_title}" and other free text-like inputs should

@@ -80,8 +80,7 @@ RSpec.describe 'Users (JavaScript fixtures)', feature_category: :user_profile do
       end
 
       it "graphql/get_user_achievements_with_avatar_and_description_response.json" do
-        create(:user_achievement, user: user, achievement: achievement_with_avatar_and_description,
-          show_on_profile: true)
+        create(:user_achievement, user: user, achievement: achievement_with_avatar_and_description)
 
         post_graphql(query, current_user: user, variables: { id: user.to_global_id })
 
@@ -89,7 +88,7 @@ RSpec.describe 'Users (JavaScript fixtures)', feature_category: :user_profile do
       end
 
       it "graphql/get_user_achievements_without_avatar_or_description_response.json" do
-        create(:user_achievement, user: user, achievement: multiple_achievement, show_on_profile: true)
+        create(:user_achievement, user: user, achievement: multiple_achievement)
 
         post_graphql(query, current_user: user, variables: { id: user.to_global_id })
 
@@ -97,7 +96,7 @@ RSpec.describe 'Users (JavaScript fixtures)', feature_category: :user_profile do
       end
 
       it 'graphql/get_user_achievements_from_private_group.json' do
-        create(:user_achievement, user: user, achievement: achievement_from_private_group, show_on_profile: true)
+        create(:user_achievement, user: user, achievement: achievement_from_private_group)
 
         post_graphql(query, current_user: user, variables: { id: user.to_global_id })
 
@@ -108,7 +107,7 @@ RSpec.describe 'Users (JavaScript fixtures)', feature_category: :user_profile do
         [
           multiple_achievement, multiple_achievement, achievement_with_avatar_and_description, *achievements
         ].each do |achievement|
-          create(:user_achievement, user: user, achievement: achievement, show_on_profile: true)
+          create(:user_achievement, user: user, achievement: achievement)
         end
 
         post_graphql(query, current_user: user, variables: { id: user.to_global_id })
@@ -123,7 +122,7 @@ RSpec.describe 'Users (JavaScript fixtures)', feature_category: :user_profile do
           name: 'Relative Root Test',
           description: 'Testing relative root handling'
         )
-        create(:user_achievement, user: user, achievement: achievement, show_on_profile: true)
+        create(:user_achievement, user: user, achievement: achievement)
 
         # generate fixture while temporarily setting relative_url_root so
         # GraphQL resolvers produce paths that include the relative root

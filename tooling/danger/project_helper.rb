@@ -109,11 +109,11 @@ module Tooling
 
         %r{\Alib/gitlab/ci/templates} => :ci_template,
 
-        %r{\A((ee|jh)/)?spec/features/} => :test,
-        %r{\A((ee|jh)/)?spec/contracts/} => :test,
-        %r{\A((ee|jh)/)?spec/support/shared_examples/features/} => :test,
-        %r{\A((ee|jh)/)?spec/support/shared_contexts/features/} => :test,
-        %r{\A((ee|jh)/)?spec/support/helpers/features/} => :test,
+        %r{\A((ee|jh)/)?spec/features/} => [:test, :backend],
+        %r{\A((ee|jh)/)?spec/contracts/} => [:test, :backend],
+        %r{\A((ee|jh)/)?spec/support/shared_examples/features/} => [:test, :backend],
+        %r{\A((ee|jh)/)?spec/support/shared_contexts/features/} => [:test, :backend],
+        %r{\A((ee|jh)/)?spec/support/helpers/features/} => [:test, :backend],
 
         %r{\A((spec/)?lib/generators/gitlab/usage_metric_)} => [:analytics_instrumentation],
         %r{\A((ee|jh)/)?lib/gitlab/usage_data_counters/.*\.yml\z} => [:analytics_instrumentation],

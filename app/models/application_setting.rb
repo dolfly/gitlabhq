@@ -777,7 +777,7 @@ class ApplicationSetting < ApplicationRecord
   validates :diff_limits, json_schema: { filename: "application_setting_diff_limits" }
 
   jsonb_accessor :mcp_server_settings,
-    enabled: [:boolean, { default: true }]
+    mcp_server_enabled: [:boolean, { default: true }]
 
   validates :mcp_server_settings, json_schema: { filename: "application_setting_mcp_server_settings" }
 

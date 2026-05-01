@@ -8,7 +8,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestStartLoggingValidFormats(t *testing.T) {
+func TestConfigureLoggingV2ValidFormats(t *testing.T) {
 	tests := []struct {
 		format string
 	}{
@@ -20,7 +20,36 @@ func TestStartLoggingValidFormats(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.format, func(t *testing.T) {
-			closer, err := startLogging("", tt.format)
+			logger, closer, err := configureLoggingV2("", tt.format)
+			require.NoError(t, err)
+			require.NotNil(t, logger)
+			require.NotNil(t, closer)
+			defer closer.Close()
+		})
+	}
+}
+
+func TestConfigureLoggingV2UnknownFormat(t *testing.T) {
+	logger, closer, err := configureLoggingV2("", "unknown-format")
+	require.Error(t, err)
+	require.Nil(t, logger)
+	require.Nil(t, closer)
+	require.Contains(t, err.Error(), "unrecognized format value")
+}
+
+func TestConfigureLoggingV1ValidFormats(t *testing.T) {
+	tests := []struct {
+		format string
+	}{
+		{format: jsonLogFormat},
+		{format: textLogFormat},
+		{format: structuredFormat},
+		{format: noneLogType},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.format, func(t *testing.T) {
+			closer, err := configureLoggingV1("", tt.format)
 			require.NoError(t, err)
 			require.NotNil(t, closer)
 			defer closer.Close()
@@ -28,8 +57,8 @@ func TestStartLoggingValidFormats(t *testing.T) {
 	}
 }
 
-func TestStartLoggingUnknownFormat(t *testing.T) {
-	closer, err := startLogging("", "unknown-format")
+func TestConfigureLoggingV1UnknownFormat(t *testing.T) {
+	closer, err := configureLoggingV1("", "unknown-format")
 	require.Error(t, err)
 	require.Nil(t, closer)
 	require.Contains(t, err.Error(), "unknown logFormat")

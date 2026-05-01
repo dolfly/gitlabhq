@@ -4776,9 +4776,6 @@ msgstr ""
 msgid "Achievements"
 msgstr ""
 
-msgid "Achievements|%{accept_link} to show it on your profile. If you do not wish to accept, simply ignore this email."
-msgstr ""
-
 msgid "Achievements|%{namespace_full_path} awarded you the %{achievement_name} achievement"
 msgstr ""
 
@@ -4789,15 +4786,6 @@ msgid "Achievements|%{namespace_link} awarded you the %{bold_start}%{achievement
 msgstr ""
 
 msgid "Achievements|%{userCount} awarded users"
-msgstr ""
-
-msgid "Achievements|Accept"
-msgstr ""
-
-msgid "Achievements|Accept achievement"
-msgstr ""
-
-msgid "Achievements|Accept this achievement"
 msgstr ""
 
 msgid "Achievements|Achievement description cannot be longer than %{length} characters."
@@ -4819,9 +4807,6 @@ msgid "Achievements|Achievement name is required."
 msgstr ""
 
 msgid "Achievements|Achievements"
-msgstr ""
-
-msgid "Achievements|Are you sure you want to accept the %{bold_start}%{achievement_name}%{bold_end} achievement? It will be shown on your profile."
 msgstr ""
 
 msgid "Achievements|Are you sure you want to delete %{name}? This action cannot be undone."
@@ -4863,9 +4848,6 @@ msgstr ""
 msgid "Achievements|File is too large. Maximum file size is 200 KiB."
 msgstr ""
 
-msgid "Achievements|If you do not wish to accept, simply ignore this email."
-msgstr ""
-
 msgid "Achievements|More actions"
 msgstr ""
 
@@ -4881,7 +4863,10 @@ msgstr ""
 msgid "Achievements|There are currently no achievements."
 msgstr ""
 
-msgid "Achievements|To show this achievement on your profile, accept it: %{url}"
+msgid "Achievements|View your achievements on your %{link_start}profile%{link_end}."
+msgstr ""
+
+msgid "Achievements|View your achievements on your profile."
 msgstr ""
 
 msgid "Achievements|You're awarding users the %{achievementName} achievement"
@@ -15449,6 +15434,9 @@ msgstr ""
 msgid "CiCatalog|Unreleased"
 msgstr ""
 
+msgid "CiCatalog|Unverified"
+msgstr ""
+
 msgid "CiCatalog|Up to date"
 msgstr ""
 
@@ -15456,6 +15444,9 @@ msgid "CiCatalog|Usage statistics"
 msgstr ""
 
 msgid "CiCatalog|Use the 'release' keyword in a CI/CD job to publish to the CI/CD Catalog."
+msgstr ""
+
+msgid "CiCatalog|Verification level"
 msgstr ""
 
 msgid "CiCatalog|Verified creator"
@@ -39293,9 +39284,6 @@ msgstr ""
 msgid "Issues assigned to current user"
 msgstr ""
 
-msgid "Issues can be bugs, tasks or ideas to be discussed. Also, issues are searchable and filterable."
-msgstr ""
-
 msgid "Issues closed"
 msgstr ""
 
@@ -39987,9 +39975,6 @@ msgstr ""
 msgid "JiraService| on branch %{branch_link}"
 msgstr ""
 
-msgid "JiraService|%{jira_docs_link_start}Enable the Jira integration%{jira_docs_link_end} to view your Jira issues in GitLab."
-msgstr ""
-
 msgid "JiraService|%{user_link} mentioned this issue in %{entity_link} of %{project_link}%{branch}:{quote}%{entity_message}{quote}"
 msgstr ""
 
@@ -40174,9 +40159,6 @@ msgid "JiraService|Set a custom final state by using transition IDs. %{linkStart
 msgstr ""
 
 msgid "JiraService|Sign in to GitLab to get started."
-msgstr ""
-
-msgid "JiraService|This feature requires a Premium plan."
 msgstr ""
 
 msgid "JiraService|Transition Jira issues to their final state:"
@@ -62844,6 +62826,9 @@ msgstr ""
 msgid "Search must be at least %{searchMinimumLength} characters."
 msgstr ""
 
+msgid "Search or filter catalog…"
+msgstr ""
+
 msgid "Search or filter commits"
 msgstr ""
 
@@ -73597,12 +73582,6 @@ msgstr ""
 msgid "The ID of the application."
 msgstr ""
 
-msgid "The Issue Tracker is the place to add things that need to be improved or solved in a project"
-msgstr ""
-
-msgid "The Issue Tracker is the place to add things that need to be improved or solved in a project. You can register or sign in to create issues for this project."
-msgstr ""
-
 msgid "The Kroki server that will be used to generate diagrams."
 msgstr ""
 
@@ -74320,9 +74299,6 @@ msgstr ""
 msgid "There are no custom project templates set up for this GitLab instance. They are enabled from GitLab's Admin area. Contact your GitLab instance administrator to setup custom project templates."
 msgstr ""
 
-msgid "There are no issues to show"
-msgstr ""
-
 msgid "There are no issues with the selected labels"
 msgstr ""
 
@@ -75014,9 +74990,6 @@ msgid "This issue is currently blocked by the following issues:"
 msgstr ""
 
 msgid "This issue is hidden because its author has been banned."
-msgstr ""
-
-msgid "This issue is in a child epic of the filtered epic"
 msgstr ""
 
 msgid "This item belongs to a descendant of the filtered parent."
@@ -75950,9 +75923,6 @@ msgid "To get started, please enter your Gitea host URL and a %{link_to_personal
 msgstr ""
 
 msgid "To get started, use the link below to confirm your account."
-msgstr ""
-
-msgid "To keep this project going, create a new issue"
 msgstr ""
 
 msgid "To keep this project going, create a new merge request"
@@ -85935,9 +85905,6 @@ msgstr ""
 msgid "You don’t have access to Value Stream Analytics for this group"
 msgstr ""
 
-msgid "You have accepted the achievement. It will now appear on your profile."
-msgstr ""
-
 msgid "You have already reported this user"
 msgstr ""
 
@@ -87606,9 +87573,6 @@ msgid "could not read private key, is the passphrase correct?"
 msgstr ""
 
 msgid "created %{issuable_created} by %{author}"
-msgstr ""
-
-msgid "created %{timeAgoString} by %{email} via %{user}"
 msgstr ""
 
 msgid "created %{timeAgo}"

@@ -658,19 +658,6 @@ module ProjectsHelper
     end
   end
 
-  def hidden_issue_icon(issue)
-    return unless issue_hidden?(issue)
-
-    hidden_resource_icon(issue)
-  end
-
-  def issue_css_classes(issue)
-    classes = ["issue"]
-    classes << "closed" if issue.closed?
-    classes << "gl-cursor-grab" if @sort == 'relative_position'
-    classes.join(' ')
-  end
-
   def dashboard_projects_app_data
     {
       initial_sort: group_project_list_sort_by,

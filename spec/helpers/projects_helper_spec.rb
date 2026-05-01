@@ -1770,31 +1770,6 @@ RSpec.describe ProjectsHelper, feature_category: :source_code_management do
     it_behaves_like 'returns visibility level content_tag'
   end
 
-  describe '#hidden_issue_icon' do
-    let_it_be(:mock_svg) { '<svg></svg>'.html_safe }
-
-    before do
-      allow(helper).to receive(:hidden_resource_icon).with(resource).and_return(mock_svg)
-    end
-
-    context 'when issue is hidden' do
-      let_it_be(:banned_user) { build(:user, :banned) }
-      let_it_be(:resource) { build(:issue, author: banned_user) }
-
-      it 'returns icon with tooltip' do
-        expect(helper.hidden_issue_icon(resource)).to eq(mock_svg)
-      end
-    end
-
-    context 'when issue is not hidden' do
-      let_it_be(:resource) { build(:issue) }
-
-      it 'returns `nil`' do
-        expect(helper.hidden_issue_icon(resource)).to be_nil
-      end
-    end
-  end
-
   describe '#show_invalid_gpg_key_message?' do
     subject { helper.show_invalid_gpg_key_message?(project) }
 
