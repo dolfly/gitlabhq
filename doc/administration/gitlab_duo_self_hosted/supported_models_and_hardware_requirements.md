@@ -105,6 +105,7 @@ This feature is in beta and is therefore subject to change as we gather feedback
 | Kimi K2 | [Kimi K2.5](https://huggingface.co/moonshotai/Kimi-K2.5) |
 | Kimi K2 | [Kimi K2.6](https://huggingface.co/moonshotai/Kimi-K2.6) |
 | MiniMax | [MiniMax-M2.7](https://huggingface.co/MiniMaxAI/MiniMax-M2.7) |
+| GLM | [GLM-5.1-FP8](https://huggingface.co/zai-org/GLM-5.1-FP8) |
 
 <!-- vale gitlab_base.Spelling = YES -->
 

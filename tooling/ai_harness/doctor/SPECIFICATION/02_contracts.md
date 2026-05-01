@@ -363,3 +363,21 @@ would otherwise pass silently if the gitignore entry exists but the file
 is tracked.
 
 These files in a gitignored or `.git/info/exclude`'d state are acceptable.
+
+**Allowed exceptions within forbidden patterns:**
+
+Files listed in `tooling/ai_harness/doctor/allowed_committed_files.yml`
+are intentionally committed as project content and are NOT flagged as
+forbidden. The check loads the allowlist from YAML at runtime so future
+entries can be added without code changes.
+
+The YAML uses prefix matching: an entry matches any tracked path that
+begins with the entry string. This supports both exact-file paths
+(e.g. `.claude/skills/foo/SKILL.md`) and directory prefixes
+(e.g. `.claude/skills/foo/`).
+
+Each entry should be preceded by a YAML comment explaining the reason
+for the exception.
+
+Initial entries:
+- `.claude/skills/gitlab-coding-principles/SKILL.md` (added in !234174)

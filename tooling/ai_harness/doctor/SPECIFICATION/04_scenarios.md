@@ -272,9 +272,26 @@ be non-rooted to match at all directory levels.
 **When:** `scripts/ai_harness/doctor`
 **Then:** Forbidden files check shows `FAIL` with the file path, exit code 1
 
-### forbidden: .claude/skills/ file committed
+### forbidden: file in allowlist YAML is allowed
 
-**Given:** `.claude/skills/my-skill.md` is tracked by git
+**Given:** A file matching an entry in `allowed_committed_files.yml` is
+tracked by git
+**When:** `scripts/ai_harness/doctor`
+**Then:** Forbidden files check shows `OK` — the file is intentionally
+committed project content.
+
+### forbidden: allowed and personal files mixed
+
+**Given:** Both an allowlisted file and a non-allowlisted forbidden file
+are tracked by git
+**When:** `scripts/ai_harness/doctor`
+**Then:** Forbidden files check shows `FAIL` listing only the
+non-allowlisted file.
+
+### forbidden: file outside allowlist YAML is committed
+
+**Given:** A `.claude/skills/` file not in `allowed_committed_files.yml`
+is tracked by git
 **When:** `scripts/ai_harness/doctor`
 **Then:** Forbidden files check shows `FAIL`, exit code 1
 

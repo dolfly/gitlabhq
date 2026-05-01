@@ -4,7 +4,6 @@ import (
 	"context"
 	"flag"
 	"fmt"
-	"log/slog"
 	"net"
 	"net/http"
 	_ "net/http/pprof" // nolint:gosec
@@ -189,22 +188,11 @@ func initializePprof(listenerAddress string, errors chan error) (*http.Server, e
 
 // run() lets us use normal Go error handling; there is no log.Fatal in run().
 func run(boot bootConfig, cfg config.Config) error {
-	// Set global labkit v1 logrus logger
-	// NOTE: To be removed after all log call sites are modified to use
-	//	 labkit v2 logger
-	v1LogFileCloser, err := configureLoggingV1(boot.logFile, boot.logFormat)
+	closer, err := startLogging(boot.logFile, boot.logFormat)
 	if err != nil {
 		return err
 	}
-	defer v1LogFileCloser.Close() //nolint:errcheck
-
-	// Configure labkit v2 slog logger
-	v2Logger, v2LogFileCloser, err := configureLoggingV2(boot.logFile, boot.logFormat)
-	if err != nil {
-		return err
-	}
-	defer v2LogFileCloser.Close() //nolint:errcheck
-	slog.SetDefault(v2Logger)
+	defer closer.Close() //nolint:errcheck
 
 	tracing.Initialize(tracing.WithServiceName("gitlab-workhorse"))
 	log.WithField("version", Version).WithField("build_time", BuildTime).Print("Starting")

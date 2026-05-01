@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'open3'
+require 'yaml'
 
 # rubocop:disable Gitlab/NoCodeCoverageComment -- see check_parity.rb for explanation
 # of :nocov: on rightward assignment lines (SimpleCov #1033).
@@ -29,6 +30,15 @@ module AiHarness
             .gitlab/duo/chat-rules.md
             .gitlab/duo/mcp.json
           ].freeze
+
+          ALLOWED_FILE_PATH = File.expand_path(
+            '../../allowed_committed_files.yml', __dir__
+          ).freeze
+
+          # @return [Array<String>] frozen list of allowed prefix strings loaded from YAML.
+          def self.allowed_prefixes
+            @allowed_prefixes ||= load_allowed_prefixes
+          end
 
           # @param context [Hash] the ROP chain context
           # @return [Hash]
@@ -60,11 +70,17 @@ module AiHarness
               raise "git ls-files failed (exit #{status.exitstatus}): #{stderr.strip} in #{CHECK_NAME}"
             end
 
-            output.split("\n").reject(&:empty?)
+            output.split("\n").reject(&:empty?).reject do |f|
+              allowed_prefixes.any? { |prefix| f.start_with?(prefix) }
+            end
           end
 
-          private_class_method :find_tracked_forbidden_files
-          private_constant :CHECK_NAME, :FORBIDDEN_PATTERNS
+          def self.load_allowed_prefixes
+            YAML.safe_load_file(ALLOWED_FILE_PATH).fetch('allowed_committed_files').freeze
+          end
+
+          private_class_method :find_tracked_forbidden_files, :load_allowed_prefixes
+          private_constant :CHECK_NAME, :FORBIDDEN_PATTERNS, :ALLOWED_FILE_PATH
         end
       end
     end

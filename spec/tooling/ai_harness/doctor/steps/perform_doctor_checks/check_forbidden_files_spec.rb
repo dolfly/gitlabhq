@@ -39,7 +39,35 @@ RSpec.describe AiHarness::Doctor::Steps::PerformDoctorChecks::CheckForbiddenFile
       end
     end
 
-    context 'when .claude/skills/ file is committed' do
+    context 'when an allowed file from the YAML allowlist is committed' do
+      before do
+        add_tracked_file(described_class.allowed_prefixes.first)
+      end
+
+      it 'reports OK (intentionally committed project content)' do
+        result = described_class.check(context)
+
+        expect(result[:results].last[:status]).to eq('OK')
+      end
+    end
+
+    context 'when allowed and forbidden files are both committed' do
+      before do
+        add_tracked_file(described_class.allowed_prefixes.first)
+        add_tracked_file('.claude/skills/my-personal-skill.md')
+      end
+
+      it 'reports FAIL only for the non-allowlisted file' do
+        result = described_class.check(context)
+
+        check = result[:results].last
+        expect(check[:status]).to eq('FAIL')
+        expect(check[:details].join).to include('my-personal-skill.md')
+        expect(check[:details].join).not_to include(described_class.allowed_prefixes.first)
+      end
+    end
+
+    context 'when a file outside the YAML allowlist is committed' do
       before do
         add_tracked_file('.claude/skills/my-skill.md')
       end
@@ -207,6 +235,23 @@ RSpec.describe AiHarness::Doctor::Steps::PerformDoctorChecks::CheckForbiddenFile
       expect { described_class.check(bad_context) }.to raise_error(
         RuntimeError, /git ls-files failed.*cannot change to/
       )
+    end
+  end
+
+  describe '.allowed_prefixes' do
+    subject(:allowed_prefixes) { described_class.allowed_prefixes }
+
+    it 'loads a non-empty list from YAML' do
+      expect(allowed_prefixes).to be_an(Array)
+      expect(allowed_prefixes).not_to be_empty
+    end
+
+    it 'is frozen' do
+      expect(allowed_prefixes).to be_frozen
+    end
+
+    it 'contains only strings' do
+      expect(allowed_prefixes).to all(be_a(String))
     end
   end
 
