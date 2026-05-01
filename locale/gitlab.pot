@@ -7699,7 +7699,7 @@ msgstr ""
 msgid "AiPowered|Amazon Q Setup"
 msgstr ""
 
-msgid "AiPowered|An error occurred while loading Duo settings. Please try again."
+msgid "AiPowered|An error occurred while loading GitLab Duo settings. Please try again."
 msgstr ""
 
 msgid "AiPowered|Assign models to AI-native features."

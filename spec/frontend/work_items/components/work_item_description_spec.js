@@ -725,6 +725,32 @@ describe('WorkItemDescription', () => {
       expect(findConflictsAlert().exists()).toBe(false);
     });
 
+    it('does not overwrite descriptionText on subsequent workItem cache updates during create flow', async () => {
+      const workItemResponseHandler = jest
+        .fn()
+        .mockResolvedValueOnce(workItemByIidResponseFactory())
+        .mockResolvedValueOnce(
+          workItemByIidResponseFactory({
+            description: 'stale description from cache update',
+          }),
+        );
+      await createComponent({
+        workItemId: newWorkItemId(workItemQueryResponse.data.workItem.workItemType.name),
+        isEditing: true,
+        workItemResponseHandler,
+      });
+
+      editDescription('user typed text');
+      await nextTick();
+
+      // Trigger a refetch of the work item data to simulate a cache update
+      // (e.g. from each keystroke writing to the resolver).
+      await wrapper.vm.$apollo.queries.workItem.refetch();
+      await waitForPromises();
+
+      expect(findMarkdownEditor().props('value')).toBe('user typed text');
+    });
+
     it('does not show conflict warning when redirecting from issues edit page', async () => {
       jest.spyOn(urlUtility, 'updateHistory');
 

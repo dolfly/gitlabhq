@@ -21,7 +21,7 @@ title: Commits
 
 The **Commits** list displays the commit history for your repository. Use it to browse
 code changes, view commit details, and verify commit signatures. Commits are grouped by
-day, and you can filter the list by author, commit message, or Git revision.
+day, and you can filter the list by author, commit message, date, or Git revision.
 
 The list shows:
 
@@ -85,8 +85,19 @@ You are directed to the [repository](../_index.md) page at that specific revisio
 
 ## Filter and search commits
 
-Use the search bar to filter the commit history by author or commit message. You can
+Use the search bar to filter the commit history by author, commit message, or date. You can
 combine multiple filters at the same time.
+
+### Filter by date
+
+To filter commits by date:
+
+1. In the top bar, select **Search or go to** and find your project.
+1. In the left sidebar, select **Code** > **Commits**.
+1. In the search bar, select **Committed after** or **Committed before** from the filter dropdown list.
+1. Enter a date.
+
+To view commits for a specific date range, use both filters together.
 
 ### Filter by author
 

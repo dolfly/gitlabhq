@@ -263,97 +263,15 @@ This error occurs when GitLab Duo Agent Platform is unable to start Code Review 
 
 Try to restart the review. If the error persists, contact your administrator.
 
-### Run the GitLab Duo configuration diagnostic script
+### Configuration diagnostic script
 
-If you cannot identify the cause of a Code Review Flow issue from the error codes above,
-run a diagnostic script to check your GitLab Duo configuration. The script checks the full
-configuration chain required for Code Review Flow, including checks that apply to all
-GitLab Duo Agent Platform features. The script inspects:
+If you cannot identify the cause of a Code Review Flow issue from the documented error codes, you
+can run a diagnostic script to check your GitLab Duo configuration.
 
-- License validity and plan.
-- Instance-level GitLab Duo settings.
-- CI/CD runners with the `gitlab--duo` tag.
-- Namespace and project GitLab Duo settings.
-- Foundational flows and their service accounts.
-- Code Review Flow availability and automatic review settings.
+The script checks the full configuration chain required for Code Review Flow, including checks that
+apply to all GitLab Duo Agent Platform features.
 
-> [!warning]
-> This script reads configuration data only and does not modify any settings.
-> The output may contain internal configuration details.
-> Sanitize the output before sharing it with support.
-
-Prerequisites:
-
-- GitLab 18.8 or later
-
-To run the diagnostics script in GitLab 19.0 or later:
-
-- Run the built in `gitlab:duo:verify_setup` [Rake task](../../../../administration/raketasks/_index.md) .
-
-  For example:
-
-  ```shell
-  sudo gitlab-rake "gitlab:duo:verify_setup[<group/project>]"
-  ```
-
-To run the diagnostics script in GitLab 18.8-18.11:
-
-1. Download [`verify_setup.rb`](https://gitlab.com/gitlab-org/gitlab/-/raw/master/ee/lib/gitlab/duo/administration/verify_setup.rb).
-
-1. Run the script. Replace `<group/project>` with the full path to the project,
-   for example `my-group/my-project`:
-
-{{< tabs >}}
-
-{{< tab title="Linux package (Omnibus)" >}}
-
-Copy the file to your GitLab server, then run:
-
-```shell
-sudo gitlab-rails runner "load '/tmp/verify_setup.rb'; Gitlab::Duo::Administration::VerifySetup.new('<group/project>').execute"
-```
-
-{{< /tab >}}
-
-{{< tab title="Docker" >}}
-
-Copy the file into the container, then run:
-
-```shell
-docker cp verify_setup.rb <container-id>:/tmp/verify_setup.rb
-docker exec -it <container-id> gitlab-rails runner \
-  "load '/tmp/verify_setup.rb'; Gitlab::Duo::Administration::VerifySetup.new('<group/project>').execute"
-```
-
-{{< /tab >}}
-
-{{< tab title="Self-compiled (source)" >}}
-
-Copy the file to your GitLab server, then run the following script from the GitLab application directory:
-
-```shell
-sudo -u git bundle exec rails runner \
-  "load '/tmp/verify_setup.rb'; Gitlab::Duo::Administration::VerifySetup.new('<group/project>').execute"
-```
-
-{{< /tab >}}
-
-{{< tab title="Helm chart (Kubernetes)" >}}
-
-Copy the file into the toolbox pod, then run:
-
-```shell
-# Find the toolbox pod
-kubectl get pods --namespace <namespace> -lapp=toolbox
-
-kubectl cp verify_setup.rb <namespace>/<toolbox-pod-name>:/tmp/verify_setup.rb
-kubectl exec -it <toolbox-pod-name> -- gitlab-rails runner \
-  "load '/tmp/verify_setup.rb'; Gitlab::Duo::Administration::VerifySetup.new('<group/project>').execute"
-```
-
-{{< /tab >}}
-
-{{< /tabs >}}
+For more information, see [run the configuration diagnostic script](../../troubleshooting.md#run-the-configuration-diagnostic-script).
 
 ## Related topics
 

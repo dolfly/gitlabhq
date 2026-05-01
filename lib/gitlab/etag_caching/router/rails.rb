@@ -92,6 +92,12 @@ module Gitlab
             :realtime_changes
           ],
           [
+            %r{#{RESERVED_WORDS_PREFIX}/import/bitbucket_server/realtime_changes\.json\z},
+            'realtime_changes_import_bitbucket_server',
+            ::Import::BitbucketServerController,
+            :realtime_changes
+          ],
+          [
             %r{#{RESERVED_WORDS_PREFIX}/merge_requests/\d+/cached_widget\.json\z},
             'merge_request_widget',
             ::Projects::MergeRequests::ContentController,

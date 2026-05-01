@@ -32,11 +32,11 @@ The below reflects the current retention periods of GitLab AI model
 [Sub-Processors](https://about.gitlab.com/privacy/subprocessors/#third-party-sub-processors):
 
 For GitLab Duo requests, GitLab has a zero-day data retention policy
-with Anthropic, Fireworks AI, AWS, and Google.
+with Fireworks AI, AWS, and Google.
 
 These vendors discard model input and output data immediately after the output is
 provided and do not store input and output data for abuse monitoring. The exception
-to this is when Fireworks AI, Anthropic, and VertexAI prompt caching is enabled for
+to this is when Fireworks AI, and VertexAI prompt caching is enabled for
 Code Suggestions and GitLab Duo Agentic Chat.
 
 > [!note]

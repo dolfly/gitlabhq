@@ -1777,7 +1777,6 @@ export default {
     'ee/app/assets/javascripts/status_checks/components/shared_modal.vue',
     'ee/app/assets/javascripts/status_checks/components/status_check_form.vue',
     'ee/app/assets/javascripts/status_checks/components/status_checks.vue',
-    'ee/app/assets/javascripts/status_page_settings/components/settings_form.vue',
     'ee/app/assets/javascripts/tracing/details/tracing_chart.vue',
     'ee/app/assets/javascripts/tracing/details/tracing_details.vue',
     'ee/app/assets/javascripts/tracing/details/tracing_drawer.vue',

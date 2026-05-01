@@ -422,6 +422,91 @@ describe('Create work item component', () => {
         fullPath: 'other-namespace/path',
       });
     });
+
+    describe('preserves draft data across namespace changes', () => {
+      const setupGroupForm = async () => {
+        createComponent({
+          props: { isGroup: true },
+          provide: { hasEpicsFeature: true },
+        });
+        await resolveAll();
+      };
+
+      it('includes the typed title in the create mutation after namespace change', async () => {
+        await setupGroupForm();
+
+        await updateWorkItemTitle('Preserved title');
+        findGroupProjectSelector().vm.$emit('selectNamespace', 'other-namespace/path');
+        await nextTick();
+        await resolveAll();
+
+        await submitCreateForm();
+
+        expect(createWorkItemSuccessHandler).toHaveBeenCalledWith({
+          input: expect.objectContaining({ title: 'Preserved title' }),
+          useWorkItemFeatures: false,
+        });
+      });
+
+      it('includes the typed description in the create mutation after namespace change', async () => {
+        await setupGroupForm();
+
+        findDescriptionWidget().vm.$emit('updateDraft', 'Preserved description');
+        await nextTick();
+        await waitForPromises();
+
+        findGroupProjectSelector().vm.$emit('selectNamespace', 'other-namespace/path');
+        await nextTick();
+        await resolveAll();
+
+        await updateWorkItemTitle();
+        await submitCreateForm();
+
+        expect(createWorkItemSuccessHandler).toHaveBeenCalledWith({
+          input: expect.objectContaining({
+            descriptionWidget: { description: 'Preserved description' },
+          }),
+          useWorkItemFeatures: false,
+        });
+      });
+    });
+
+    describe('isNamespaceTypeGroup propagation to widgets', () => {
+      it.each`
+        scenario              | namespaceObject                                         | expectedIsGroup
+        ${'Group typename'}   | ${{ fullPath: 'other-group', __typename: 'Group' }}     | ${true}
+        ${'Project typename'} | ${{ fullPath: 'other-project', __typename: 'Project' }} | ${false}
+      `(
+        'sets is-group=$expectedIsGroup on child widgets when a namespace with $scenario is selected',
+        async ({ namespaceObject, expectedIsGroup }) => {
+          createComponent({
+            props: { isGroup: true },
+            provide: { hasEpicsFeature: true },
+          });
+          await resolveAll();
+
+          findGroupProjectSelector().vm.$emit(
+            'selectNamespace',
+            namespaceObject.fullPath,
+            namespaceObject,
+          );
+          await nextTick();
+          await resolveAll();
+
+          expect(findAssigneesWidget().props('isGroup')).toBe(expectedIsGroup);
+        },
+      );
+
+      it('falls back to isGroup prop when no namespace object is emitted', async () => {
+        createComponent({
+          props: { isGroup: true },
+          provide: { hasEpicsFeature: true },
+        });
+        await resolveAll();
+
+        expect(findAssigneesWidget().props('isGroup')).toBe(true);
+      });
+    });
   });
 
   describe('Work item types dropdown', () => {

@@ -105,6 +105,51 @@ To create push rules for the instance:
 1. Follow the previous steps to allow **Commit author's email** and **Branch name**.
 1. Select **Save push rules**.
 
+## Error: `SSL certificate OpenSSL verify result: unable to get local issuer certificate (20)`
+
+On GitLab Self-Managed instances that use custom or self-signed CA certificates, this message might display when GitLab Duo Workflow jobs fail during
+the initial `git clone` (the `get_sources` phase).
+
+This happens because GitLab Duo Workflow jobs set `GIT_CONFIG_GLOBAL=/dev/null` and `GIT_CONFIG_NOSYSTEM=1`
+to harden the agent sandbox. These variables prevent Git from reading system and global configuration files.
+This breaks the runner's mechanism for injecting CA certificate paths during `get_sources`.
+
+CI/CD jobs that do not execute flows are not affected. This issue is specific to workload pipelines for GitLab Duo Workflow.
+
+To resolve this issue, in the [`config.toml`](https://docs.gitlab.com/runner/configuration/advanced-configuration/) file, set the `GIT_SSL_CAINFO` environment variable at the runner level,
+and mount the CA certificate into the container:
+
+```toml
+[[runners]]
+  environment = ["GIT_SSL_CAINFO=/etc/gitlab-runner/certs/ca.crt"]
+  [runners.docker]
+    volumes = ["/path/to/your/ca-bundle.crt:/etc/gitlab-runner/certs/ca.crt:ro"]
+```
+
+Replace `/path/to/your/ca-bundle.crt` with the path to your CA certificate bundle on the runner host.
+The file must be a PEM-formatted CA bundle that contains your root CA and any intermediate certificates.
+
+You might expect to set this as a CI/CD variable, but custom CI/CD variables are
+[not available](flows/execution_variables.md#custom-cicd-variables) in GitLab Duo Workflow jobs.
+You must use the runner's `config.toml` `environment` directive instead.
+
+To connect GitLab Duo CLI to your GitLab instance over a custom CA, add `NODE_EXTRA_CA_CERTS`
+to the same `environment` line:
+
+```toml
+[[runners]]
+  environment = [
+    "GIT_SSL_CAINFO=/etc/gitlab-runner/certs/ca.crt",
+    "NODE_EXTRA_CA_CERTS=/etc/gitlab-runner/certs/ca.crt"
+  ]
+  [runners.docker]
+    volumes = ["/path/to/your/ca-bundle.crt:/etc/gitlab-runner/certs/ca.crt:ro"]
+```
+
+If the GitLab Duo CLI runs in the Anthropic Sandbox Runtime (SRT), runner `environment` variables might not reach it. If TLS errors persist after this change, in your `agent-config.yml`, in the `setup_script`, set `NODE_EXTRA_CA_CERTS` instead. The `setup_script` runs inside the container and is not filtered by the sandbox.
+
+The `GIT_SSL_CAINFO` variable addresses Git operations that occur before the GitLab Duo CLI starts. For GitLab Duo CLI certificate configuration, see [custom SSL certificates](../gitlab_duo_cli/_index.md#custom-ssl-certificates).
+
 ## Troubleshooting in your IDE
 
 If you encounter an issue while working with the GitLab Duo Agent Platform in your IDE, start by
@@ -121,3 +166,110 @@ For further support, see the troubleshooting page for your extension and IDE:
 - [GitLab for VS Code](../../editor_extensions/visual_studio_code/troubleshooting.md#gitlab-duo)
 - [GitLab Duo plugin for JetBrains IDEs](../../editor_extensions/jetbrains_ide/jetbrains_troubleshooting.md)
 - [GitLab for Visual Studio](../../editor_extensions/visual_studio/visual_studio_troubleshooting.md)
+
+## Run the configuration diagnostic script
+
+If you cannot identify the cause of a GitLab Duo Agent Platform issue from the related
+feature documentation, run the diagnostic script to check your configuration.
+
+The script checks the full configuration chain required for GitLab Duo Agent Platform features:
+
+- License validity and plan.
+- Instance-level GitLab Duo settings.
+- CI/CD runners with the `gitlab--duo` tag.
+- Namespace and project GitLab Duo settings.
+- Foundational flows and their service accounts.
+- Feature availability, such as Code Review Flow availability and automatic review settings.
+
+> [!warning]
+> This script reads configuration data only and does not modify any settings.
+> The output may contain internal configuration details.
+> Sanitize the output before sharing it with support.
+
+Prerequisites:
+
+- GitLab 18.8 or later
+
+To run the diagnostic script in GitLab 19.0 or later:
+
+- Run the built-in `gitlab:duo:verify_setup` [Rake task](../../administration/raketasks/_index.md).
+  Replace `<group/project>` with the full path to the project, for example `gitlab-org/gitlab`.
+
+  For example:
+
+  ```shell
+  sudo gitlab-rake "gitlab:duo:verify_setup[<group/project>]"
+  ```
+
+To run the diagnostic script in GitLab 18.8 to GitLab 18.11:
+
+{{< tabs >}}
+
+{{< tab title="Linux package (Omnibus)" >}}
+
+1. Download [`verify_setup.rb`](https://gitlab.com/gitlab-org/gitlab/-/raw/master/ee/lib/gitlab/duo/administration/verify_setup.rb).
+1. Copy the `verify_setup.rb` file to your GitLab server.
+1. Run the script.
+   Replace `<group/project>` with the full path to the project, for example `gitlab-org/gitlab`.
+
+   ```shell
+   sudo gitlab-rails runner "load '/tmp/verify_setup.rb'; Gitlab::Duo::Administration::VerifySetup.new('<group/project>').execute"
+   ```
+
+{{< /tab >}}
+
+{{< tab title="Docker" >}}
+
+1. Download [`verify_setup.rb`](https://gitlab.com/gitlab-org/gitlab/-/raw/master/ee/lib/gitlab/duo/administration/verify_setup.rb).
+1. Copy the `verify_setup.rb` file into the container.
+1. Run the script.
+   Replace `<group/project>` with the full path to the project, for example `gitlab-org/gitlab`.
+
+   ```shell
+   docker cp verify_setup.rb <container-id>:/tmp/verify_setup.rb
+   docker exec -it <container-id> gitlab-rails runner \
+   "load '/tmp/verify_setup.rb'; Gitlab::Duo::Administration::VerifySetup.new('<group/project>').execute"
+   ```
+
+{{< /tab >}}
+
+{{< tab title="Self-compiled (source)" >}}
+
+1. Download [`verify_setup.rb`](https://gitlab.com/gitlab-org/gitlab/-/raw/master/ee/lib/gitlab/duo/administration/verify_setup.rb).
+1. Copy the `verify_setup.rb` file to your GitLab server.
+1. Run the script from the GitLab application directory.
+   Replace `<group/project>` with the full path to the project, for example `gitlab-org/gitlab`.
+
+   ```shell
+   sudo -u git bundle exec rails runner \
+   "load '/tmp/verify_setup.rb'; Gitlab::Duo::Administration::VerifySetup.new('<group/project>').execute"
+   ```
+
+{{< /tab >}}
+
+{{< tab title="Helm chart (Kubernetes)" >}}
+
+1. Download [`verify_setup.rb`](https://gitlab.com/gitlab-org/gitlab/-/raw/master/ee/lib/gitlab/duo/administration/verify_setup.rb).
+1. Copy the `verify_setup.rb` file into the toolbox pod.
+1. Run the script.
+   Replace `<group/project>` with the full path to the project, for example `gitlab-org/gitlab`.
+
+   ```shell
+   # Find the toolbox pod
+   kubectl get pods --namespace <namespace> -lapp=toolbox
+
+   kubectl cp verify_setup.rb <namespace>/<toolbox-pod-name>:/tmp/verify_setup.rb
+   kubectl exec -it <toolbox-pod-name> -- gitlab-rails runner \
+   "load '/tmp/verify_setup.rb'; Gitlab::Duo::Administration::VerifySetup.new('<group/project>').execute"
+   ```
+
+{{< /tab >}}
+
+{{< /tabs >}}
+
+## Related topics
+
+- [Troubleshooting GitLab Duo Agentic Chat](../gitlab_duo_chat/troubleshooting.md)
+- [Troubleshooting Code Review Flow](flows/foundational_flows/code_review.md#troubleshooting)
+- [Troubleshooting GitLab MCP clients](../gitlab_duo/model_context_protocol/mcp_clients.md#troubleshooting)
+- [Troubleshooting the GitLab MCP Server](../gitlab_duo/model_context_protocol/mcp_server_troubleshooting.md)

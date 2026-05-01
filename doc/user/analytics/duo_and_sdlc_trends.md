@@ -220,6 +220,7 @@ The user metrics tables display usage of different GitLab Duo features by indivi
 - **GitLab Duo Code Review usage by user**: Number of code reviews requested as the merge request author from GitLab Duo, and number of reactions (:thumbsup: and :thumbsdown:) to code review comments.
 - **GitLab Duo Root Cause Analysis usage by user**: Number of troubleshooting requests from GitLab Duo.
 - **GitLab Duo usage by user**: Number of GitLab Duo events made by the user.
+- **Flows usage by user**: Number of times a user triggers a specific flow.
 
 ## View GitLab Duo and SDLC trends
 

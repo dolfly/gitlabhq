@@ -278,6 +278,17 @@ module Gitlab
         rate_limit_value(value)
       end
 
+      # Returns the threshold value for a given rate limit key, resolving any
+      # Proc against the current application settings.
+      #
+      # @param key [Symbol] Key attribute registered in `.rate_limits`
+      # @return [Integer] The resolved threshold; 0 when the key disables itself.
+      def threshold(key)
+        value = rate_limit_value_by_key(key, :threshold)
+
+        rate_limit_value(value)
+      end
+
       private
 
       def _throttled?(key, scope:, strategy:, threshold: nil, interval: nil, users_allowlist: nil, peek: false)
@@ -292,6 +303,16 @@ module Gitlab
         interval_value = interval || interval(key)
 
         return false if interval_value == 0
+
+        # The labkit adapter only handles the plain IncrementPerAction strategy
+        # without peek; per-resource and resource-usage strategies and peek
+        # callers stay on the legacy path.
+        labkit_decision = nil
+        if !peek && strategy.is_a?(IncrementPerAction) &&
+            LabkitAdapter.shadow_or_enforce?(key, threshold_override: threshold, interval_override: interval)
+          labkit_decision = LabkitAdapter.run!(key, scope: scope)
+          return labkit_decision if LabkitAdapter.enforce?(key)
+        end
 
         # `period_key` is based on the current time and interval so when time passes to the next interval
         # the key changes and the rate limit count starts again from 0.
@@ -312,13 +333,11 @@ module Gitlab
 
         report_metrics(key, value, threshold_value, peek)
 
-        value > threshold_value
-      end
+        legacy_decision = value > threshold_value
 
-      def threshold(key)
-        value = rate_limit_value_by_key(key, :threshold)
+        LabkitAdapter.record_divergence(key, labkit_decision, legacy_decision) unless labkit_decision.nil?
 
-        rate_limit_value(value)
+        legacy_decision
       end
 
       def rate_limit_value(value)

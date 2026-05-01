@@ -156,6 +156,7 @@ export default {
       markdownPaths: {},
       enableEditFromRedirect: getParameterByName('edit') === 'true',
       isCancellingEdit: false,
+      hasInitializedDescriptionText: false,
     };
   },
   apollo: {
@@ -177,7 +178,15 @@ export default {
       result() {
         if (this.isEditing) {
           if (this.createFlow || this.enableEditFromRedirect) {
-            this.startEditing();
+            // Only initialize descriptionText from cache/draft on the first
+            // result while editing. Subsequent cache updates (e.g., from
+            // each keystroke writing to the resolver) must not overwrite
+            // descriptionText because that races with active user typing
+            // and produces ghost characters.
+            if (!this.hasInitializedDescriptionText) {
+              this.hasInitializedDescriptionText = true;
+              this.startEditing();
+            }
           } else {
             this.checkForConflicts();
           }
@@ -301,7 +310,7 @@ export default {
         : findDescriptionWidget(this.workItem);
       return {
         ...descriptionWidget,
-        description: descriptionWidget?.description || '',
+        description: descriptionWidget?.description || this.description || '',
       };
     },
     workItemType() {
@@ -429,6 +438,7 @@ export default {
     async startEditing() {
       this.isEditing = true;
       this.wasEdited = true;
+      this.hasInitializedDescriptionText = true;
 
       if (this.createFlow || this.enableEditFromRedirect) {
         const draftWidgets = JSON.parse(getDraft(this.workItemWidgetsAutoSaveKey));

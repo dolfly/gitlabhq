@@ -216,7 +216,7 @@ class GroupPolicy < Namespaces::GroupProjectNamespaceSharedPolicy
   end
 
   rule { has_projects }.policy do
-    enable :read_group
+    enable(*Authz::Role.get(:descendant_project_member).direct_permissions(:group))
   end
 
   rule { can?(:read_group) }.policy do
