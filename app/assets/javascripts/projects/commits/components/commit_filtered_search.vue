@@ -6,9 +6,14 @@ import {
   TOKEN_TYPE_MESSAGE,
   TOKEN_TITLE_MESSAGE,
   OPERATORS_IS,
+  TOKEN_TYPE_COMMITTED_AFTER,
+  TOKEN_TYPE_COMMITTED_BEFORE,
+  TOKEN_TITLE_COMMITTED_AFTER,
+  TOKEN_TITLE_COMMITTED_BEFORE,
 } from '~/vue_shared/components/filtered_search_bar/constants';
 import FilteredSearchBar from '~/vue_shared/components/filtered_search_bar/filtered_search_bar_root.vue';
 import UserToken from '~/vue_shared/components/filtered_search_bar/tokens/user_token.vue';
+import DateToken from '~/vue_shared/components/filtered_search_bar/tokens/date_token.vue';
 import { convertToGraphQLId } from '~/graphql_shared/utils';
 import { TYPENAME_USER } from '~/graphql_shared/constants';
 
@@ -47,6 +52,22 @@ export default {
           title: TOKEN_TITLE_MESSAGE,
           icon: 'comment',
           token: GlFilteredSearchToken,
+          operators: OPERATORS_IS,
+          unique: true,
+        },
+        {
+          type: TOKEN_TYPE_COMMITTED_AFTER,
+          title: TOKEN_TITLE_COMMITTED_AFTER,
+          icon: 'calendar',
+          token: DateToken,
+          operators: OPERATORS_IS,
+          unique: true,
+        },
+        {
+          type: TOKEN_TYPE_COMMITTED_BEFORE,
+          title: TOKEN_TITLE_COMMITTED_BEFORE,
+          icon: 'calendar',
+          token: DateToken,
           operators: OPERATORS_IS,
           unique: true,
         },

@@ -30,7 +30,10 @@ module Gitlab
             def expand_wildcard_paths(location)
               return location unless location[:local].include?('*')
 
-              paths = context.project.repository.search_files_by_wildcard_path(location[:local], context.sha)
+              # Remove leading slashes to match repository path format, consistent
+              # with how File::Local normalizes paths in its initializer.
+              normalized_path = Gitlab::Utils.remove_leading_slashes(location[:local])
+              paths = context.project.repository.search_files_by_wildcard_path(normalized_path, context.sha)
 
               paths.filter_map do |path|
                 next if context.expandset.any? do |f|

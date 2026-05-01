@@ -13,6 +13,10 @@ import CommitListItem from '~/projects/commits/components/commit_list_item.vue';
 import PageSizeSelector from '~/vue_shared/components/page_size_selector.vue';
 import commitsQuery from '~/projects/commits/graphql/queries/commits.query.graphql';
 import {
+  TOKEN_TYPE_COMMITTED_AFTER,
+  TOKEN_TYPE_COMMITTED_BEFORE,
+} from '~/vue_shared/components/filtered_search_bar/constants';
+import {
   mockCommitsNodes,
   mockCommitsQueryResponse,
   mockCommitsQueryResponseWithNextPage,
@@ -317,6 +321,55 @@ describe('CommitListApp', () => {
       );
     });
 
+    it('refetches commits with committed-after filter when filter is applied', async () => {
+      commitsQueryHandler.mockClear();
+
+      findCommitHeader().vm.$emit('filter', [
+        { type: TOKEN_TYPE_COMMITTED_AFTER, value: { data: '2025-01-01' } },
+      ]);
+      await waitForPromises();
+
+      expect(commitsQueryHandler).toHaveBeenCalledWith(
+        expect.objectContaining({
+          committedAfter: '2025-01-01',
+          committedBefore: null,
+        }),
+      );
+    });
+
+    it('refetches commits with committed-before filter when filter is applied', async () => {
+      commitsQueryHandler.mockClear();
+
+      findCommitHeader().vm.$emit('filter', [
+        { type: TOKEN_TYPE_COMMITTED_BEFORE, value: { data: '2025-12-31' } },
+      ]);
+      await waitForPromises();
+
+      expect(commitsQueryHandler).toHaveBeenCalledWith(
+        expect.objectContaining({
+          committedAfter: null,
+          committedBefore: '2025-12-31',
+        }),
+      );
+    });
+
+    it('refetches commits with date range filters when both are applied', async () => {
+      commitsQueryHandler.mockClear();
+
+      findCommitHeader().vm.$emit('filter', [
+        { type: TOKEN_TYPE_COMMITTED_AFTER, value: { data: '2025-01-01' } },
+        { type: TOKEN_TYPE_COMMITTED_BEFORE, value: { data: '2025-12-31' } },
+      ]);
+      await waitForPromises();
+
+      expect(commitsQueryHandler).toHaveBeenCalledWith(
+        expect.objectContaining({
+          committedAfter: '2025-01-01',
+          committedBefore: '2025-12-31',
+        }),
+      );
+    });
+
     it('clears filters when empty filter array is passed', async () => {
       findCommitHeader().vm.$emit('filter', [{ type: 'author', value: { data: 'Administrator' } }]);
       await waitForPromises();
@@ -383,6 +436,49 @@ describe('CommitListApp', () => {
       expect(trackEventSpy).toHaveBeenCalledWith(
         'filter_commit_list',
         { label: 'author,message' },
+        undefined,
+      );
+    });
+
+    it('tracks filter event with committed-after label', () => {
+      const { trackEventSpy } = bindInternalEventDocument(wrapper.element);
+
+      findCommitHeader().vm.$emit('filter', [
+        { type: TOKEN_TYPE_COMMITTED_AFTER, value: { data: '2025-01-01' } },
+      ]);
+
+      expect(trackEventSpy).toHaveBeenCalledWith(
+        'filter_commit_list',
+        { label: 'committed-after' },
+        undefined,
+      );
+    });
+
+    it('tracks filter event with committed-before label', () => {
+      const { trackEventSpy } = bindInternalEventDocument(wrapper.element);
+
+      findCommitHeader().vm.$emit('filter', [
+        { type: TOKEN_TYPE_COMMITTED_BEFORE, value: { data: '2025-12-31' } },
+      ]);
+
+      expect(trackEventSpy).toHaveBeenCalledWith(
+        'filter_commit_list',
+        { label: 'committed-before' },
+        undefined,
+      );
+    });
+
+    it('tracks filter event with date range labels when both date filters are applied', () => {
+      const { trackEventSpy } = bindInternalEventDocument(wrapper.element);
+
+      findCommitHeader().vm.$emit('filter', [
+        { type: TOKEN_TYPE_COMMITTED_AFTER, value: { data: '2025-01-01' } },
+        { type: TOKEN_TYPE_COMMITTED_BEFORE, value: { data: '2025-12-31' } },
+      ]);
+
+      expect(trackEventSpy).toHaveBeenCalledWith(
+        'filter_commit_list',
+        { label: 'committed-after,committed-before' },
         undefined,
       );
     });

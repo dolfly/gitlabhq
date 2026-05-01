@@ -1,4 +1,4 @@
-import { GlButton, GlAttributeList } from '@gitlab/ui';
+import { GlAttributeList } from '@gitlab/ui';
 import { MountingPortal } from 'portal-vue';
 import CrudComponent from '~/vue_shared/components/crud_component.vue';
 import DynamicPanel from '~/vue_shared/components/dynamic_panel.vue';
@@ -28,7 +28,7 @@ describe('PersonalAccessTokenDrawer', () => {
   };
 
   const findMountingPortal = () => wrapper.findComponent(MountingPortal);
-  const findCloseButton = () => wrapper.findAllComponents(GlButton).at(0);
+  const findDynamicPanel = () => wrapper.findComponent(DynamicPanel);
   const findAttributeList = () => wrapper.findComponent(GlAttributeList);
   const findRotateButton = () => wrapper.findByTestId('rotate-token');
   const findRevokeButton = () => wrapper.findByTestId('revoke-token');
@@ -63,8 +63,8 @@ describe('PersonalAccessTokenDrawer', () => {
     expect(findMountingPortal().exists()).toBe(true);
   });
 
-  it('emits a close event when the close button is clicked', () => {
-    findCloseButton().vm.$emit('click');
+  it('emits a close event when dynamic panel emits a close event', () => {
+    findDynamicPanel().vm.$emit('close');
 
     expect(wrapper.emitted('close')).toHaveLength(1);
   });

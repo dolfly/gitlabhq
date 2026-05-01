@@ -8,8 +8,13 @@ import {
   TOKEN_TYPE_MESSAGE,
   TOKEN_TITLE_MESSAGE,
   OPERATORS_IS,
+  TOKEN_TYPE_COMMITTED_AFTER,
+  TOKEN_TYPE_COMMITTED_BEFORE,
+  TOKEN_TITLE_COMMITTED_AFTER,
+  TOKEN_TITLE_COMMITTED_BEFORE,
 } from '~/vue_shared/components/filtered_search_bar/constants';
 import UserToken from '~/vue_shared/components/filtered_search_bar/tokens/user_token.vue';
+import DateToken from '~/vue_shared/components/filtered_search_bar/tokens/date_token.vue';
 
 describe('CommitFilteredSearch', () => {
   let wrapper;
@@ -67,6 +72,22 @@ describe('CommitFilteredSearch', () => {
             operators: OPERATORS_IS,
             unique: true,
           },
+          {
+            type: TOKEN_TYPE_COMMITTED_AFTER,
+            title: TOKEN_TITLE_COMMITTED_AFTER,
+            icon: 'calendar',
+            token: DateToken,
+            operators: OPERATORS_IS,
+            unique: true,
+          },
+          {
+            type: TOKEN_TYPE_COMMITTED_BEFORE,
+            title: TOKEN_TITLE_COMMITTED_BEFORE,
+            icon: 'calendar',
+            token: DateToken,
+            operators: OPERATORS_IS,
+            unique: true,
+          },
         ],
         initialFilterValue: [],
         searchInputPlaceholder: 'Search or filter results...',
@@ -98,6 +119,33 @@ describe('CommitFilteredSearch', () => {
       const filterTokens = [
         { type: TOKEN_TYPE_AUTHOR, value: { data: 'author1' } },
         { type: TOKEN_TYPE_MESSAGE, value: { data: 'fix bug' } },
+      ];
+
+      findFilteredSearchBar().vm.$emit('onFilter', filterTokens);
+
+      expect(wrapper.emitted('filter')).toEqual([[filterTokens]]);
+    });
+
+    it('emits filter event with committed-after token when FilteredSearchBar emits onFilter', () => {
+      const filterTokens = [{ type: TOKEN_TYPE_COMMITTED_AFTER, value: { data: '2025-01-01' } }];
+
+      findFilteredSearchBar().vm.$emit('onFilter', filterTokens);
+
+      expect(wrapper.emitted('filter')).toEqual([[filterTokens]]);
+    });
+
+    it('emits filter event with committed-before token when FilteredSearchBar emits onFilter', () => {
+      const filterTokens = [{ type: TOKEN_TYPE_COMMITTED_BEFORE, value: { data: '2025-12-31' } }];
+
+      findFilteredSearchBar().vm.$emit('onFilter', filterTokens);
+
+      expect(wrapper.emitted('filter')).toEqual([[filterTokens]]);
+    });
+
+    it('emits filter event with date range tokens when FilteredSearchBar emits onFilter', () => {
+      const filterTokens = [
+        { type: TOKEN_TYPE_COMMITTED_AFTER, value: { data: '2025-01-01' } },
+        { type: TOKEN_TYPE_COMMITTED_BEFORE, value: { data: '2025-12-31' } },
       ];
 
       findFilteredSearchBar().vm.$emit('onFilter', filterTokens);

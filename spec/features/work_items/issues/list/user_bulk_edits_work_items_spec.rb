@@ -41,8 +41,7 @@ RSpec.describe 'Multiple work item updating from work items list', :js, feature_
   end
 
   context 'assignee' do
-    it 'updates to current user',
-      quarantine: 'https://gitlab.com/gitlab-org/quality/test-failure-issues/-/issues/16772' do
+    it 'updates to current user' do
       visit project_work_items_path(project)
 
       click_button 'Bulk edit'
@@ -52,9 +51,7 @@ RSpec.describe 'Multiple work item updating from work items list', :js, feature_
 
       click_update_issues_button
 
-      page.within('.issue .controls') do
-        expect(find('.author-link')['href']).to have_content(user.website_url)
-      end
+      expect(find('.issue:first-of-type')).to have_link "Assigned to #{user.name}"
     end
 
     it 'updates to unassigned' do

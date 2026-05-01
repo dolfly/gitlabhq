@@ -25335,6 +25335,43 @@ The edge type for [`Project`](#project).
 | <a id="projectedge-cursor"></a>`cursor` | [`String!`](#string) | A cursor for use in pagination. |
 | <a id="projectedge-node"></a>`node` | [`Project`](#project) | The item at the end of the edge. |
 
+#### `ProjectImportExportRelationExportUploadUploadRegistryConnection`
+
+The connection type for [`ProjectImportExportRelationExportUploadUploadRegistry`](#projectimportexportrelationexportuploaduploadregistry).
+
+##### Fields
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| <a id="projectimportexportrelationexportuploaduploadregistryconnection-edges"></a>`edges` | [`[ProjectImportExportRelationExportUploadUploadRegistryEdge]`](#projectimportexportrelationexportuploaduploadregistryedge) | A list of edges. |
+| <a id="projectimportexportrelationexportuploaduploadregistryconnection-nodes"></a>`nodes` | [`[ProjectImportExportRelationExportUploadUploadRegistry]`](#projectimportexportrelationexportuploaduploadregistry) | A list of nodes. |
+| <a id="projectimportexportrelationexportuploaduploadregistryconnection-pageinfo"></a>`pageInfo` | [`PageInfo!`](#pageinfo) | Information to aid in pagination. |
+
+##### Fields with arguments
+
+###### `ProjectImportExportRelationExportUploadUploadRegistryConnection.count`
+
+Limited count of collection. Returns limit + 1 for counts greater than the limit.
+
+Returns [`Int!`](#int).
+
+Arguments:
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| <a id="projectimportexportrelationexportuploaduploadregistryconnection-count-limit"></a>`limit` | [`Int`](#int) | Limit value to be applied to the count query. Default is 1000. |
+
+#### `ProjectImportExportRelationExportUploadUploadRegistryEdge`
+
+The edge type for [`ProjectImportExportRelationExportUploadUploadRegistry`](#projectimportexportrelationexportuploaduploadregistry).
+
+##### Fields
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| <a id="projectimportexportrelationexportuploaduploadregistryedge-cursor"></a>`cursor` | [`String!`](#string) | A cursor for use in pagination. |
+| <a id="projectimportexportrelationexportuploaduploadregistryedge-node"></a>`node` | [`ProjectImportExportRelationExportUploadUploadRegistry`](#projectimportexportrelationexportuploaduploadregistry) | The item at the end of the edge. |
+
 #### `ProjectInterfaceConnection`
 
 The connection type for [`ProjectInterface`](#projectinterface).
@@ -37305,6 +37342,31 @@ four standard [pagination arguments](#pagination-arguments):
 | <a id="geonode-pipelineartifactregistries-replicationstate"></a>`replicationState` | [`ReplicationStateEnum`](#replicationstateenum) | Filters registries by their replication state. |
 | <a id="geonode-pipelineartifactregistries-sort"></a>`sort` | [`GeoRegistrySort`](#georegistrysort) | Sort registries by given criteria. |
 | <a id="geonode-pipelineartifactregistries-verificationstate"></a>`verificationState` | [`VerificationStateEnum`](#verificationstateenum) | Filters registries by their verification state. |
+
+##### `GeoNode.projectImportExportRelationExportUploadUploadRegistries`
+
+{{< details >}}
+**Introduced** in GitLab 19.0.
+**Status**: Experiment.
+{{< /details >}}
+
+Find Relation Export File Upload registries on this Geo node. Ignored if `geo_project_import_export_relation_export_upload_upload_replication` feature flag is disabled.
+
+Returns [`ProjectImportExportRelationExportUploadUploadRegistryConnection`](#projectimportexportrelationexportuploaduploadregistryconnection).
+
+This field returns a [connection](#connections). It accepts the
+four standard [pagination arguments](#pagination-arguments):
+`before: String`, `after: String`, `first: Int`, and `last: Int`.
+
+###### Arguments
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| <a id="geonode-projectimportexportrelationexportuploaduploadregistries-ids"></a>`ids` | [`[GeoProjectImportExportRelationExportUploadUploadRegistryID!]`](#geoprojectimportexportrelationexportuploaduploadregistryid) | Filters registries by their ID. |
+| <a id="geonode-projectimportexportrelationexportuploaduploadregistries-keyword"></a>`keyword` {{< icon name="warning-solid" >}} | [`String`](#string) | **Deprecated** in GitLab 17.9. A keyword search feature on Geo registries will not be built in the UI due to poor search UX and performance. |
+| <a id="geonode-projectimportexportrelationexportuploaduploadregistries-replicationstate"></a>`replicationState` | [`ReplicationStateEnum`](#replicationstateenum) | Filters registries by their replication state. |
+| <a id="geonode-projectimportexportrelationexportuploaduploadregistries-sort"></a>`sort` | [`GeoRegistrySort`](#georegistrysort) | Sort registries by given criteria. |
+| <a id="geonode-projectimportexportrelationexportuploaduploadregistries-verificationstate"></a>`verificationState` | [`VerificationStateEnum`](#verificationstateenum) | Filters registries by their verification state. |
 
 ##### `GeoNode.projectRepositoryRegistries`
 
@@ -49937,6 +49999,36 @@ four standard [pagination arguments](#pagination-arguments):
 | ---- | ---- | ----------- |
 | <a id="projecthook-webhookevents-timestamprange"></a>`timestampRange` | [`TimestampRange`](#timestamprange) | Filter for webhook events within a range of timestamps. Defaults to events within the last seven days. |
 
+### `ProjectImportExportRelationExportUploadUploadRegistry`
+
+Represents the Geo replication and verification state of a relation export file upload project_import_export_relation_export_upload_upload.
+
+#### Fields
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| <a id="projectimportexportrelationexportuploaduploadregistry-checksummismatch"></a>`checksumMismatch` | [`Boolean`](#boolean) | Indicate if the checksums of the ProjectImportExportRelationExportUploadUploadRegistry do not match on the primary and secondary. |
+| <a id="projectimportexportrelationexportuploaduploadregistry-createdat"></a>`createdAt` | [`Time`](#time) | Timestamp when the ProjectImportExportRelationExportUploadUploadRegistry was created. |
+| <a id="projectimportexportrelationexportuploaduploadregistry-datamanagementdetailspath"></a>`dataManagementDetailsPath` | [`String`](#string) | Path to the data management view for this ProjectImportExportRelationExportUploadUploadRegistry. |
+| <a id="projectimportexportrelationexportuploaduploadregistry-forcetoredownload"></a>`forceToRedownload` {{< icon name="warning-solid" >}} | [`Boolean`](#boolean) | **Deprecated** in GitLab 17.10. Removed from registry tables in the database in favor of the newer reusable framework. |
+| <a id="projectimportexportrelationexportuploaduploadregistry-id"></a>`id` | [`ID!`](#id) | ID of the ProjectImportExportRelationExportUploadUploadRegistry. |
+| <a id="projectimportexportrelationexportuploaduploadregistry-lastsyncfailure"></a>`lastSyncFailure` | [`String`](#string) | Error message during sync of the ProjectImportExportRelationExportUploadUploadRegistry. |
+| <a id="projectimportexportrelationexportuploaduploadregistry-lastsyncedat"></a>`lastSyncedAt` | [`Time`](#time) | Timestamp of the most recent successful sync of the ProjectImportExportRelationExportUploadUploadRegistry. |
+| <a id="projectimportexportrelationexportuploaduploadregistry-missingonprimary"></a>`missingOnPrimary` | [`Boolean`](#boolean) | Indicate if the ProjectImportExportRelationExportUploadUploadRegistry is missing on primary. |
+| <a id="projectimportexportrelationexportuploaduploadregistry-modelrecordid"></a>`modelRecordId` | [`Int`](#int) | ID of the ProjectImportExportRelationExportUploadUploadRegistry's model record. |
+| <a id="projectimportexportrelationexportuploaduploadregistry-projectimportexportrelationexportuploaduploadid"></a>`projectImportExportRelationExportUploadUploadId` | [`ID!`](#id) | ID of the Relation Export File Upload. |
+| <a id="projectimportexportrelationexportuploaduploadregistry-retryat"></a>`retryAt` | [`Time`](#time) | Timestamp after which the ProjectImportExportRelationExportUploadUploadRegistry is resynced. |
+| <a id="projectimportexportrelationexportuploaduploadregistry-retrycount"></a>`retryCount` | [`Int`](#int) | Number of consecutive failed sync attempts of the ProjectImportExportRelationExportUploadUploadRegistry. |
+| <a id="projectimportexportrelationexportuploaduploadregistry-state"></a>`state` | [`RegistryState`](#registrystate) | Sync state of the ProjectImportExportRelationExportUploadUploadRegistry. |
+| <a id="projectimportexportrelationexportuploaduploadregistry-verificationchecksum"></a>`verificationChecksum` | [`String`](#string) | The local checksum of the ProjectImportExportRelationExportUploadUploadRegistry. |
+| <a id="projectimportexportrelationexportuploaduploadregistry-verificationchecksummismatched"></a>`verificationChecksumMismatched` | [`String`](#string) | The expected checksum of the ProjectImportExportRelationExportUploadUploadRegistry in case of mismatch. |
+| <a id="projectimportexportrelationexportuploaduploadregistry-verificationfailure"></a>`verificationFailure` | [`String`](#string) | Error message during verification of the ProjectImportExportRelationExportUploadUploadRegistry. |
+| <a id="projectimportexportrelationexportuploaduploadregistry-verificationretryat"></a>`verificationRetryAt` | [`Time`](#time) | Timestamp after which the ProjectImportExportRelationExportUploadUploadRegistry is reverified. |
+| <a id="projectimportexportrelationexportuploaduploadregistry-verificationretrycount"></a>`verificationRetryCount` | [`Int`](#int) | Number of consecutive failed verification attempts of the ProjectImportExportRelationExportUploadUploadRegistry. |
+| <a id="projectimportexportrelationexportuploaduploadregistry-verificationstartedat"></a>`verificationStartedAt` | [`Time`](#time) | Timestamp when the verification of ProjectImportExportRelationExportUploadUploadRegistry started. |
+| <a id="projectimportexportrelationexportuploaduploadregistry-verificationstate"></a>`verificationState` | [`VerificationStateEnum`](#verificationstateenum) | Verification state of the ProjectImportExportRelationExportUploadUploadRegistry. |
+| <a id="projectimportexportrelationexportuploaduploadregistry-verifiedat"></a>`verifiedAt` | [`Time`](#time) | Timestamp of the most recent successful verification of the ProjectImportExportRelationExportUploadUploadRegistry. |
+
 ### `ProjectMember`
 
 Represents a Project Membership.
@@ -58390,6 +58482,7 @@ Geo registry class.
 | <a id="georegistryclass-package_file_registry"></a>`PACKAGE_FILE_REGISTRY` | Geo::PackageFileRegistry registry class. |
 | <a id="georegistryclass-pages_deployment_registry"></a>`PAGES_DEPLOYMENT_REGISTRY` | Geo::PagesDeploymentRegistry registry class. |
 | <a id="georegistryclass-pipeline_artifact_registry"></a>`PIPELINE_ARTIFACT_REGISTRY` | Geo::PipelineArtifactRegistry registry class. |
+| <a id="georegistryclass-project_import_export_relation_export_upload_upload_registry"></a>`PROJECT_IMPORT_EXPORT_RELATION_EXPORT_UPLOAD_UPLOAD_REGISTRY` | Geo::ProjectImportExportRelationExportUploadUploadRegistry registry class. |
 | <a id="georegistryclass-project_repository_registry"></a>`PROJECT_REPOSITORY_REGISTRY` | Geo::ProjectRepositoryRegistry registry class. |
 | <a id="georegistryclass-project_upload_registry"></a>`PROJECT_UPLOAD_REGISTRY` | Geo::ProjectUploadRegistry registry class. |
 | <a id="georegistryclass-project_wiki_repository_registry"></a>`PROJECT_WIKI_REPOSITORY_REGISTRY` | Geo::ProjectWikiRepositoryRegistry registry class. |
@@ -62315,6 +62408,12 @@ A `GeoPipelineArtifactRegistryID` is a global ID. It is encoded as a string.
 
 An example `GeoPipelineArtifactRegistryID` is: `"gid://gitlab/Geo::PipelineArtifactRegistry/1"`.
 
+### `GeoProjectImportExportRelationExportUploadUploadRegistryID`
+
+A `GeoProjectImportExportRelationExportUploadUploadRegistryID` is a global ID. It is encoded as a string.
+
+An example `GeoProjectImportExportRelationExportUploadUploadRegistryID` is: `"gid://gitlab/Geo::ProjectImportExportRelationExportUploadUploadRegistry/1"`.
+
 ### `GeoProjectRepositoryRegistryID`
 
 A `GeoProjectRepositoryRegistryID` is a global ID. It is encoded as a string.
@@ -63353,6 +63452,7 @@ One of:
 - [`PackagesNugetSymbolRegistry`](#packagesnugetsymbolregistry)
 - [`PagesDeploymentRegistry`](#pagesdeploymentregistry)
 - [`PipelineArtifactRegistry`](#pipelineartifactregistry)
+- [`ProjectImportExportRelationExportUploadUploadRegistry`](#projectimportexportrelationexportuploaduploadregistry)
 - [`ProjectRepositoryRegistry`](#projectrepositoryregistry)
 - [`ProjectUploadRegistry`](#projectuploadregistry)
 - [`ProjectWikiRepositoryRegistry`](#projectwikirepositoryregistry)

@@ -66,6 +66,25 @@ RSpec.describe Gitlab::Ci::Config::External::Mapper::LocationExpander, feature_c
         )
       end
 
+      context 'when wildcard paths have a leading slash' do
+        let(:locations) do
+          [
+            { local: '/builds/*.yml' },
+            { local: 'tests.yml' }
+          ]
+        end
+
+        it 'strips the leading slash and returns expanded locations' do
+          is_expected.to eq(
+            [
+              { local: 'builds/1.yml' },
+              { local: 'builds/2.yml' },
+              { local: 'tests.yml' }
+            ]
+          )
+        end
+      end
+
       context 'when wildcard paths include additional keys' do
         let(:locations) do
           [

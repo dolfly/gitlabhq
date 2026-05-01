@@ -8,7 +8,10 @@ import {
   TOKEN_TYPE_AUTHOR,
   TOKEN_TYPE_MESSAGE,
   FILTERED_SEARCH_TERM,
+  TOKEN_TYPE_COMMITTED_AFTER,
+  TOKEN_TYPE_COMMITTED_BEFORE,
 } from '~/vue_shared/components/filtered_search_bar/constants';
+
 import PageSizeSelector from '~/vue_shared/components/page_size_selector.vue';
 import { performanceMarkAndMeasure } from '~/performance/utils';
 import {
@@ -45,6 +48,8 @@ export default {
       pageInfo: {},
       authorFilter: null,
       messageFilter: null,
+      committedAfterFilter: null,
+      committedBeforeFilter: null,
       pageSize: DEFAULT_PAGE_SIZE,
       cursors: [],
       currentCursor: null,
@@ -62,6 +67,8 @@ export default {
           after: this.currentCursor,
           author: this.authorFilter,
           query: this.messageFilter,
+          committedAfter: this.committedAfterFilter,
+          committedBefore: this.committedBeforeFilter,
         };
       },
       watchLoading(isLoading) {
@@ -151,9 +158,16 @@ export default {
         [TOKEN_TYPE_AUTHOR]: 'authorFilter',
         [TOKEN_TYPE_MESSAGE]: 'messageFilter',
         [FILTERED_SEARCH_TERM]: 'messageFilter',
+        [TOKEN_TYPE_COMMITTED_AFTER]: 'committedAfterFilter',
+        [TOKEN_TYPE_COMMITTED_BEFORE]: 'committedBeforeFilter',
       };
 
-      const result = { authorFilter: null, messageFilter: null };
+      const result = {
+        authorFilter: null,
+        messageFilter: null,
+        committedAfterFilter: null,
+        committedBeforeFilter: null,
+      };
 
       filters.forEach((filter) => {
         const key = filterMap[filter.type];
@@ -165,6 +179,8 @@ export default {
       const activeFilters = [];
       if (result.authorFilter) activeFilters.push('author');
       if (result.messageFilter) activeFilters.push('message');
+      if (result.committedAfterFilter) activeFilters.push('committed-after');
+      if (result.committedBeforeFilter) activeFilters.push('committed-before');
       this.trackEvent('filter_commit_list', { label: activeFilters.join(',') || 'none' });
 
       Object.assign(this, result);

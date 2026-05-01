@@ -415,7 +415,7 @@ RSpec.describe 'User browses commits', feature_category: :source_code_management
             expect(page).to have_selector('.gl-filtered-search-suggestion-list')
 
             hints = page.find_all('.gl-filtered-search-suggestion-list > li')
-            expect(hints.length).to eq(2)
+            expect(hints.length).to eq(4)
             expect(hints[0]).to have_content('Author')
             expect(hints[1]).to have_content('Message')
           end

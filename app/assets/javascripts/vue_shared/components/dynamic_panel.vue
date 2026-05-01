@@ -1,14 +1,10 @@
 <script>
-import { GlButton, GlTooltipDirective } from '@gitlab/ui';
-import { __ } from '~/locale';
+import PanelActions from './panel_actions.vue';
 
 export default {
   name: 'DynamicPanel',
   components: {
-    GlButton,
-  },
-  directives: {
-    GlTooltip: GlTooltipDirective,
+    PanelActions,
   },
   provide() {
     return { panelHeadingTag: 'h2' };
@@ -23,10 +19,6 @@ export default {
       default: null,
     },
   },
-  i18n: {
-    openTooltipText: __('Open in full page'),
-    closePanelText: __('Close panel'),
-  },
   emits: ['close'],
 };
 </script>
@@ -38,17 +30,10 @@ export default {
         <slot name="header">
           <span class="panel-header-inner-text">{{ header }}</span>
         </slot>
-        <div class="panel-header-inner-actions">
-          <gl-button
-            v-gl-tooltip.bottom
-            category="tertiary"
-            icon="close"
-            size="small"
-            :aria-label="$options.i18n.closePanelText"
-            :title="$options.i18n.closePanelText"
-            @click="$emit('close')"
-          />
-        </div>
+
+        <panel-actions @close="$emit('close')">
+          <slot name="actions"></slot>
+        </panel-actions>
       </div>
     </div>
     <div class="panel-content">
