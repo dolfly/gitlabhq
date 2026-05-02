@@ -29,10 +29,8 @@ RSpec.describe 'Groups > Members > Request access', feature_category: :groups_an
     it 'user can request access to a group', :js do
       visit group_path(group)
 
-      perform_enqueued_jobs do
-        more_actions_dropdown.click
-        request_access
-      end
+      more_actions_dropdown.click
+      request_access
 
       more_actions_dropdown.click
 
@@ -43,10 +41,8 @@ RSpec.describe 'Groups > Members > Request access', feature_category: :groups_an
     it 'user does not see private projects', :js do
       visit group_path(group)
 
-      perform_enqueued_jobs do
-        more_actions_dropdown.click
-        request_access
-      end
+      more_actions_dropdown.click
+      request_access
 
       expect(page).not_to have_content project.name
     end
@@ -54,10 +50,8 @@ RSpec.describe 'Groups > Members > Request access', feature_category: :groups_an
     it 'user does not see group in the Dashboard > Groups page', :js do
       visit group_path(group)
 
-      perform_enqueued_jobs do
-        more_actions_dropdown.click
-        request_access
-      end
+      more_actions_dropdown.click
+      request_access
 
       visit dashboard_groups_path
 

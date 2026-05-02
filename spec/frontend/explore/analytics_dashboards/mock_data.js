@@ -53,6 +53,7 @@ export const mockCustomDashboard = {
   },
   createdAt: '2026-03-25T04:38:01Z',
   updatedAt: '2026-03-25T04:38:01Z',
+  system: false,
   __typename: 'CustomDashboard',
 };
 

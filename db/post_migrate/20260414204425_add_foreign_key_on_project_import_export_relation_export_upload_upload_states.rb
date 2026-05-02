@@ -6,18 +6,10 @@ class AddForeignKeyOnProjectImportExportRelationExportUploadUploadStates < Gitla
   milestone '19.0'
 
   def up
-    add_concurrent_foreign_key :project_import_export_relation_export_upload_upload_states,
-      :project_import_export_relation_export_upload_uploads,
-      column: :project_import_export_relation_export_upload_upload_id,
-      on_delete: :cascade,
-      reverse_lock_order: true
+    # no-op to address https://gitlab.com/gitlab-com/gl-infra/production/-/work_items/2195
   end
 
   def down
-    with_lock_retries do
-      remove_foreign_key_if_exists :project_import_export_relation_export_upload_upload_states,
-        column: :project_import_export_relation_export_upload_upload_id,
-        reverse_lock_order: true
-    end
+    # no-op to address https://gitlab.com/gitlab-com/gl-infra/production/-/work_items/2195
   end
 end

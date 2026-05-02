@@ -30,10 +30,8 @@ RSpec.describe 'Projects > Members > User requests access', :js, feature_categor
     it 'user can request access to a project' do
       visit project_path(project)
 
-      perform_enqueued_jobs do
-        more_actions_dropdown.click
-        request_access
-      end
+      more_actions_dropdown.click
+      request_access
 
       more_actions_dropdown.click
       expect(page).to have_content 'Withdraw access request'

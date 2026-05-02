@@ -7,11 +7,7 @@ describe('ExploreAnalyticsDashboardsList', () => {
   let wrapper;
 
   const createComponent = () => {
-    wrapper = shallowMountExtended(ExploreAnalyticsDashboardsList, {
-      provide: {
-        currentUserId: 'gid://gitlab/User/20',
-      },
-    });
+    wrapper = shallowMountExtended(ExploreAnalyticsDashboardsList);
   };
 
   const findTabs = () => wrapper.findComponent(GlTabs);
@@ -41,32 +37,24 @@ describe('ExploreAnalyticsDashboardsList', () => {
       createComponent();
     });
 
-    it('renders the "Created by me" tab with currentUserId', () => {
+    it('renders the "Created by me" tab with USER scope', () => {
       const tabs = findDashboardListTabs();
-      expect(tabs.at(0).props('createdById')).toBe('gid://gitlab/User/20');
+      expect(tabs.at(0).props('scope')).toBe('USER');
     });
 
-    it('renders the "Created by GitLab" tab without createdById filter', () => {
+    it('renders the "Created by GitLab" tab with GITLAB scope', () => {
       const tabs = findDashboardListTabs();
-      expect(tabs.at(1).props('createdById')).toEqual('');
+      expect(tabs.at(1).props('scope')).toBe('GITLAB');
     });
 
-    it('renders the "Created by GitLab" tab with a placeholder search filter', () => {
+    it('renders the "All" tab without scope filter', () => {
       const tabs = findDashboardListTabs();
-      expect(tabs.at(1).props('search')).toEqual('created by gitlab (placeholder)');
-    });
-
-    it('renders the "All" tab without createdById filter', () => {
-      const tabs = findDashboardListTabs();
-      expect(tabs.at(2).props('createdById')).toEqual('');
+      expect(tabs.at(2).props('scope')).toBeNull();
     });
   });
 
   describe('search functionality', () => {
-    // The `Created by GitLab` tab is not yet implemented, so exclude it from
-    // the search tests for the time being.
-    const findSearchableTabs = () =>
-      findDashboardListTabs().wrappers.filter((_, index) => index !== 1);
+    const findAllTabs = () => findDashboardListTabs().wrappers;
 
     beforeEach(() => {
       createComponent();
@@ -75,7 +63,7 @@ describe('ExploreAnalyticsDashboardsList', () => {
     it('does not pass search text to tabs when less than 3 characters', async () => {
       await findSearchBox().vm.$emit('input', 'ab');
 
-      const tabs = findSearchableTabs();
+      const tabs = findAllTabs();
       tabs.forEach((tab) => {
         expect(tab.props('search')).toBe('');
       });
@@ -84,7 +72,7 @@ describe('ExploreAnalyticsDashboardsList', () => {
     it('passes search text to tabs when 3 or more characters', async () => {
       await findSearchBox().vm.$emit('input', 'test');
 
-      const tabs = findSearchableTabs();
+      const tabs = findAllTabs();
       tabs.forEach((tab) => {
         expect(tab.props('search')).toBe('test');
       });
@@ -93,14 +81,14 @@ describe('ExploreAnalyticsDashboardsList', () => {
     it('clears search text when input is cleared', async () => {
       await findSearchBox().vm.$emit('input', 'test');
 
-      let tabs = findSearchableTabs();
+      let tabs = findAllTabs();
       tabs.forEach((tab) => {
         expect(tab.props('search')).toBe('test');
       });
 
       await findSearchBox().vm.$emit('input', '');
 
-      tabs = findSearchableTabs();
+      tabs = findAllTabs();
       tabs.forEach((tab) => {
         expect(tab.props('search')).toBe('');
       });

@@ -8,7 +8,9 @@ excluded_directories:
   - data         # release posts, deprecations, owned via catch-all
   - file_hooks   # only contains .gitkeep
   - fixtures     # test fixture data, owned via catch-all
+  - .agents      # Agent skills (load-principles), owned via catch-all
   - .ai          # AI configuration, owned via catch-all
+  - .claude      # Auto-generated Claude Code skill from .ai/principles/, owned via catch-all
   - .devfile     # devfile configuration
   - .github      # GitHub-specific configuration
   - .lefthook    # Lefthook configuration

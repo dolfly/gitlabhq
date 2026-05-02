@@ -970,7 +970,7 @@ Returns [`CustomDashboard`](#customdashboard).
 
 Find custom dashboards for an organization.
 
-Returns [`CustomDashboardConnection`](#customdashboardconnection).
+Returns [`CustomDashboardInterfaceConnection`](#customdashboardinterfaceconnection).
 
 This field returns a [connection](#connections). It accepts the
 four standard [pagination arguments](#pagination-arguments):
@@ -983,6 +983,7 @@ four standard [pagination arguments](#pagination-arguments):
 | <a id="query-customdashboards-createdbyid"></a>`createdById` | [`UserID`](#userid) | Filter by dashboard creator. |
 | <a id="query-customdashboards-namespaceid"></a>`namespaceId` | [`NamespaceID`](#namespaceid) | Filter by namespace. |
 | <a id="query-customdashboards-organizationid"></a>`organizationId` | [`OrganizationsOrganizationID!`](#organizationsorganizationid) | Organization ID to filter dashboards. |
+| <a id="query-customdashboards-scope"></a>`scope` | [`CustomDashboardScope`](#customdashboardscope) | Filter dashboards by scope. |
 | <a id="query-customdashboards-search"></a>`search` | [`String`](#string) | Filter dashboards by name. |
 
 ### `Query.customField`
@@ -21068,28 +21069,28 @@ The edge type for [`CoverageFuzzingCorpus`](#coveragefuzzingcorpus).
 | <a id="coveragefuzzingcorpusedge-cursor"></a>`cursor` | [`String!`](#string) | A cursor for use in pagination. |
 | <a id="coveragefuzzingcorpusedge-node"></a>`node` | [`CoverageFuzzingCorpus`](#coveragefuzzingcorpus) | The item at the end of the edge. |
 
-#### `CustomDashboardConnection`
+#### `CustomDashboardInterfaceConnection`
 
-The connection type for [`CustomDashboard`](#customdashboard).
-
-##### Fields
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| <a id="customdashboardconnection-edges"></a>`edges` | [`[CustomDashboardEdge]`](#customdashboardedge) | A list of edges. |
-| <a id="customdashboardconnection-nodes"></a>`nodes` | [`[CustomDashboard]`](#customdashboard) | A list of nodes. |
-| <a id="customdashboardconnection-pageinfo"></a>`pageInfo` | [`PageInfo!`](#pageinfo) | Information to aid in pagination. |
-
-#### `CustomDashboardEdge`
-
-The edge type for [`CustomDashboard`](#customdashboard).
+The connection type for [`CustomDashboardInterface`](#customdashboardinterface).
 
 ##### Fields
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| <a id="customdashboardedge-cursor"></a>`cursor` | [`String!`](#string) | A cursor for use in pagination. |
-| <a id="customdashboardedge-node"></a>`node` | [`CustomDashboard`](#customdashboard) | The item at the end of the edge. |
+| <a id="customdashboardinterfaceconnection-edges"></a>`edges` | [`[CustomDashboardInterfaceEdge]`](#customdashboardinterfaceedge) | A list of edges. |
+| <a id="customdashboardinterfaceconnection-nodes"></a>`nodes` | [`[CustomDashboardInterface]`](#customdashboardinterface) | A list of nodes. |
+| <a id="customdashboardinterfaceconnection-pageinfo"></a>`pageInfo` | [`PageInfo!`](#pageinfo) | Information to aid in pagination. |
+
+#### `CustomDashboardInterfaceEdge`
+
+The edge type for [`CustomDashboardInterface`](#customdashboardinterface).
+
+##### Fields
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| <a id="customdashboardinterfaceedge-cursor"></a>`cursor` | [`String!`](#string) | A cursor for use in pagination. |
+| <a id="customdashboardinterfaceedge-node"></a>`node` | [`CustomDashboardInterface`](#customdashboardinterface) | The item at the end of the edge. |
 
 #### `CustomEmojiConnection`
 
@@ -25366,43 +25367,6 @@ The edge type for [`Project`](#project).
 | ---- | ---- | ----------- |
 | <a id="projectedge-cursor"></a>`cursor` | [`String!`](#string) | A cursor for use in pagination. |
 | <a id="projectedge-node"></a>`node` | [`Project`](#project) | The item at the end of the edge. |
-
-#### `ProjectImportExportRelationExportUploadUploadRegistryConnection`
-
-The connection type for [`ProjectImportExportRelationExportUploadUploadRegistry`](#projectimportexportrelationexportuploaduploadregistry).
-
-##### Fields
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| <a id="projectimportexportrelationexportuploaduploadregistryconnection-edges"></a>`edges` | [`[ProjectImportExportRelationExportUploadUploadRegistryEdge]`](#projectimportexportrelationexportuploaduploadregistryedge) | A list of edges. |
-| <a id="projectimportexportrelationexportuploaduploadregistryconnection-nodes"></a>`nodes` | [`[ProjectImportExportRelationExportUploadUploadRegistry]`](#projectimportexportrelationexportuploaduploadregistry) | A list of nodes. |
-| <a id="projectimportexportrelationexportuploaduploadregistryconnection-pageinfo"></a>`pageInfo` | [`PageInfo!`](#pageinfo) | Information to aid in pagination. |
-
-##### Fields with arguments
-
-###### `ProjectImportExportRelationExportUploadUploadRegistryConnection.count`
-
-Limited count of collection. Returns limit + 1 for counts greater than the limit.
-
-Returns [`Int!`](#int).
-
-Arguments:
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| <a id="projectimportexportrelationexportuploaduploadregistryconnection-count-limit"></a>`limit` | [`Int`](#int) | Limit value to be applied to the count query. Default is 1000. |
-
-#### `ProjectImportExportRelationExportUploadUploadRegistryEdge`
-
-The edge type for [`ProjectImportExportRelationExportUploadUploadRegistry`](#projectimportexportrelationexportuploaduploadregistry).
-
-##### Fields
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| <a id="projectimportexportrelationexportuploaduploadregistryedge-cursor"></a>`cursor` | [`String!`](#string) | A cursor for use in pagination. |
-| <a id="projectimportexportrelationexportuploaduploadregistryedge-node"></a>`node` | [`ProjectImportExportRelationExportUploadUploadRegistry`](#projectimportexportrelationexportuploaduploadregistry) | The item at the end of the edge. |
 
 #### `ProjectInterfaceConnection`
 
@@ -34386,15 +34350,16 @@ Customizable analytics dashboard.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | <a id="customdashboard-config"></a>`config` | [`JSON!`](#json) | Dashboard layout and widget configuration. |
-| <a id="customdashboard-createdat"></a>`createdAt` | [`Time!`](#time) | Timestamp when the dashboard was created. |
+| <a id="customdashboard-createdat"></a>`createdAt` | [`Time`](#time) | Timestamp when the dashboard was created. |
 | <a id="customdashboard-createdby"></a>`createdBy` | [`UserCore`](#usercore) | User who created the dashboard. |
 | <a id="customdashboard-description"></a>`description` | [`String`](#string) | Optional summary or purpose of the dashboard. |
-| <a id="customdashboard-id"></a>`id` | [`AnalyticsCustomDashboardsDashboardID!`](#analyticscustomdashboardsdashboardid) | Global ID of the custom dashboard. |
+| <a id="customdashboard-id"></a>`id` | [`ID!`](#id) | Global ID of the custom dashboard. |
 | <a id="customdashboard-lockversion"></a>`lockVersion` | [`Int!`](#int) | Version used for optimistic concurrency control. |
 | <a id="customdashboard-name"></a>`name` | [`String!`](#string) | Display name of the dashboard. |
 | <a id="customdashboard-namespace"></a>`namespace` | [`Namespace`](#namespace) | Namespace scope of the dashboard, if any. |
 | <a id="customdashboard-organization"></a>`organization` | [`Organization!`](#organization) | Organization that owns the dashboard. |
 | <a id="customdashboard-project"></a>`project` | [`Project`](#project) | Project scope of the dashboard, if any. |
+| <a id="customdashboard-system"></a>`system` | [`Boolean!`](#boolean) | Whether the dashboard is a built-in GitLab dashboard. |
 | <a id="customdashboard-updatedat"></a>`updatedAt` | [`Time!`](#time) | Timestamp when the dashboard was last updated. |
 | <a id="customdashboard-updatedby"></a>`updatedBy` | [`UserCore`](#usercore) | User who last updated the dashboard. |
 
@@ -34452,6 +34417,21 @@ Represents a custom field select option.
 | ---- | ---- | ----------- |
 | <a id="customfieldselectoption-id"></a>`id` | [`IssuablesCustomFieldSelectOptionID!`](#issuablescustomfieldselectoptionid) | Global ID of the custom field select option. |
 | <a id="customfieldselectoption-value"></a>`value` | [`String!`](#string) | Value of the custom field select option. |
+
+### `CustomSystemDashboard`
+
+GitLab built-in analytics dashboard (read-only).
+
+#### Fields
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| <a id="customsystemdashboard-config"></a>`config` | [`JSON!`](#json) | Dashboard layout and widget configuration. |
+| <a id="customsystemdashboard-createdat"></a>`createdAt` | [`Time`](#time) | Timestamp when the dashboard was created. |
+| <a id="customsystemdashboard-description"></a>`description` | [`String`](#string) | Optional summary or purpose of the dashboard. |
+| <a id="customsystemdashboard-id"></a>`id` | [`ID!`](#id) | Global ID of the dashboard. |
+| <a id="customsystemdashboard-name"></a>`name` | [`String!`](#string) | Display name of the dashboard. |
+| <a id="customsystemdashboard-system"></a>`system` | [`Boolean!`](#boolean) | Whether the dashboard is a built-in GitLab dashboard. |
 
 ### `CustomerRelationsContact`
 
@@ -37374,31 +37354,6 @@ four standard [pagination arguments](#pagination-arguments):
 | <a id="geonode-pipelineartifactregistries-replicationstate"></a>`replicationState` | [`ReplicationStateEnum`](#replicationstateenum) | Filters registries by their replication state. |
 | <a id="geonode-pipelineartifactregistries-sort"></a>`sort` | [`GeoRegistrySort`](#georegistrysort) | Sort registries by given criteria. |
 | <a id="geonode-pipelineartifactregistries-verificationstate"></a>`verificationState` | [`VerificationStateEnum`](#verificationstateenum) | Filters registries by their verification state. |
-
-##### `GeoNode.projectImportExportRelationExportUploadUploadRegistries`
-
-{{< details >}}
-**Introduced** in GitLab 19.0.
-**Status**: Experiment.
-{{< /details >}}
-
-Find Relation Export File Upload registries on this Geo node. Ignored if `geo_project_import_export_relation_export_upload_upload_replication` feature flag is disabled.
-
-Returns [`ProjectImportExportRelationExportUploadUploadRegistryConnection`](#projectimportexportrelationexportuploaduploadregistryconnection).
-
-This field returns a [connection](#connections). It accepts the
-four standard [pagination arguments](#pagination-arguments):
-`before: String`, `after: String`, `first: Int`, and `last: Int`.
-
-###### Arguments
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| <a id="geonode-projectimportexportrelationexportuploaduploadregistries-ids"></a>`ids` | [`[GeoProjectImportExportRelationExportUploadUploadRegistryID!]`](#geoprojectimportexportrelationexportuploaduploadregistryid) | Filters registries by their ID. |
-| <a id="geonode-projectimportexportrelationexportuploaduploadregistries-keyword"></a>`keyword` {{< icon name="warning-solid" >}} | [`String`](#string) | **Deprecated** in GitLab 17.9. A keyword search feature on Geo registries will not be built in the UI due to poor search UX and performance. |
-| <a id="geonode-projectimportexportrelationexportuploaduploadregistries-replicationstate"></a>`replicationState` | [`ReplicationStateEnum`](#replicationstateenum) | Filters registries by their replication state. |
-| <a id="geonode-projectimportexportrelationexportuploaduploadregistries-sort"></a>`sort` | [`GeoRegistrySort`](#georegistrysort) | Sort registries by given criteria. |
-| <a id="geonode-projectimportexportrelationexportuploaduploadregistries-verificationstate"></a>`verificationState` | [`VerificationStateEnum`](#verificationstateenum) | Filters registries by their verification state. |
 
 ##### `GeoNode.projectRepositoryRegistries`
 
@@ -50031,36 +49986,6 @@ four standard [pagination arguments](#pagination-arguments):
 | ---- | ---- | ----------- |
 | <a id="projecthook-webhookevents-timestamprange"></a>`timestampRange` | [`TimestampRange`](#timestamprange) | Filter for webhook events within a range of timestamps. Defaults to events within the last seven days. |
 
-### `ProjectImportExportRelationExportUploadUploadRegistry`
-
-Represents the Geo replication and verification state of a relation export file upload project_import_export_relation_export_upload_upload.
-
-#### Fields
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| <a id="projectimportexportrelationexportuploaduploadregistry-checksummismatch"></a>`checksumMismatch` | [`Boolean`](#boolean) | Indicate if the checksums of the ProjectImportExportRelationExportUploadUploadRegistry do not match on the primary and secondary. |
-| <a id="projectimportexportrelationexportuploaduploadregistry-createdat"></a>`createdAt` | [`Time`](#time) | Timestamp when the ProjectImportExportRelationExportUploadUploadRegistry was created. |
-| <a id="projectimportexportrelationexportuploaduploadregistry-datamanagementdetailspath"></a>`dataManagementDetailsPath` | [`String`](#string) | Path to the data management view for this ProjectImportExportRelationExportUploadUploadRegistry. |
-| <a id="projectimportexportrelationexportuploaduploadregistry-forcetoredownload"></a>`forceToRedownload` {{< icon name="warning-solid" >}} | [`Boolean`](#boolean) | **Deprecated** in GitLab 17.10. Removed from registry tables in the database in favor of the newer reusable framework. |
-| <a id="projectimportexportrelationexportuploaduploadregistry-id"></a>`id` | [`ID!`](#id) | ID of the ProjectImportExportRelationExportUploadUploadRegistry. |
-| <a id="projectimportexportrelationexportuploaduploadregistry-lastsyncfailure"></a>`lastSyncFailure` | [`String`](#string) | Error message during sync of the ProjectImportExportRelationExportUploadUploadRegistry. |
-| <a id="projectimportexportrelationexportuploaduploadregistry-lastsyncedat"></a>`lastSyncedAt` | [`Time`](#time) | Timestamp of the most recent successful sync of the ProjectImportExportRelationExportUploadUploadRegistry. |
-| <a id="projectimportexportrelationexportuploaduploadregistry-missingonprimary"></a>`missingOnPrimary` | [`Boolean`](#boolean) | Indicate if the ProjectImportExportRelationExportUploadUploadRegistry is missing on primary. |
-| <a id="projectimportexportrelationexportuploaduploadregistry-modelrecordid"></a>`modelRecordId` | [`Int`](#int) | ID of the ProjectImportExportRelationExportUploadUploadRegistry's model record. |
-| <a id="projectimportexportrelationexportuploaduploadregistry-projectimportexportrelationexportuploaduploadid"></a>`projectImportExportRelationExportUploadUploadId` | [`ID!`](#id) | ID of the Relation Export File Upload. |
-| <a id="projectimportexportrelationexportuploaduploadregistry-retryat"></a>`retryAt` | [`Time`](#time) | Timestamp after which the ProjectImportExportRelationExportUploadUploadRegistry is resynced. |
-| <a id="projectimportexportrelationexportuploaduploadregistry-retrycount"></a>`retryCount` | [`Int`](#int) | Number of consecutive failed sync attempts of the ProjectImportExportRelationExportUploadUploadRegistry. |
-| <a id="projectimportexportrelationexportuploaduploadregistry-state"></a>`state` | [`RegistryState`](#registrystate) | Sync state of the ProjectImportExportRelationExportUploadUploadRegistry. |
-| <a id="projectimportexportrelationexportuploaduploadregistry-verificationchecksum"></a>`verificationChecksum` | [`String`](#string) | The local checksum of the ProjectImportExportRelationExportUploadUploadRegistry. |
-| <a id="projectimportexportrelationexportuploaduploadregistry-verificationchecksummismatched"></a>`verificationChecksumMismatched` | [`String`](#string) | The expected checksum of the ProjectImportExportRelationExportUploadUploadRegistry in case of mismatch. |
-| <a id="projectimportexportrelationexportuploaduploadregistry-verificationfailure"></a>`verificationFailure` | [`String`](#string) | Error message during verification of the ProjectImportExportRelationExportUploadUploadRegistry. |
-| <a id="projectimportexportrelationexportuploaduploadregistry-verificationretryat"></a>`verificationRetryAt` | [`Time`](#time) | Timestamp after which the ProjectImportExportRelationExportUploadUploadRegistry is reverified. |
-| <a id="projectimportexportrelationexportuploaduploadregistry-verificationretrycount"></a>`verificationRetryCount` | [`Int`](#int) | Number of consecutive failed verification attempts of the ProjectImportExportRelationExportUploadUploadRegistry. |
-| <a id="projectimportexportrelationexportuploaduploadregistry-verificationstartedat"></a>`verificationStartedAt` | [`Time`](#time) | Timestamp when the verification of ProjectImportExportRelationExportUploadUploadRegistry started. |
-| <a id="projectimportexportrelationexportuploaduploadregistry-verificationstate"></a>`verificationState` | [`VerificationStateEnum`](#verificationstateenum) | Verification state of the ProjectImportExportRelationExportUploadUploadRegistry. |
-| <a id="projectimportexportrelationexportuploaduploadregistry-verifiedat"></a>`verifiedAt` | [`Time`](#time) | Timestamp of the most recent successful verification of the ProjectImportExportRelationExportUploadUploadRegistry. |
-
 ### `ProjectMember`
 
 Represents a Project Membership.
@@ -57919,6 +57844,16 @@ Grid height display mode for the dashboard.
 | <a id="customdashboardgridheight-compact"></a>`COMPACT` | Compact grid height. |
 | <a id="customdashboardgridheight-default"></a>`DEFAULT` | Default grid height. |
 
+### `CustomDashboardScope`
+
+Scope filter for custom dashboards.
+
+| Value | Description |
+| ----- | ----------- |
+| <a id="customdashboardscope-all"></a>`ALL` | Return all dashboards. |
+| <a id="customdashboardscope-gitlab"></a>`GITLAB` | Return only GitLab-provided system dashboards. |
+| <a id="customdashboardscope-user"></a>`USER` | Return only user-created dashboards. |
+
 ### `CustomDashboardStatus`
 
 Maturity status of the dashboard.
@@ -58514,7 +58449,6 @@ Geo registry class.
 | <a id="georegistryclass-package_file_registry"></a>`PACKAGE_FILE_REGISTRY` | Geo::PackageFileRegistry registry class. |
 | <a id="georegistryclass-pages_deployment_registry"></a>`PAGES_DEPLOYMENT_REGISTRY` | Geo::PagesDeploymentRegistry registry class. |
 | <a id="georegistryclass-pipeline_artifact_registry"></a>`PIPELINE_ARTIFACT_REGISTRY` | Geo::PipelineArtifactRegistry registry class. |
-| <a id="georegistryclass-project_import_export_relation_export_upload_upload_registry"></a>`PROJECT_IMPORT_EXPORT_RELATION_EXPORT_UPLOAD_UPLOAD_REGISTRY` | Geo::ProjectImportExportRelationExportUploadUploadRegistry registry class. |
 | <a id="georegistryclass-project_repository_registry"></a>`PROJECT_REPOSITORY_REGISTRY` | Geo::ProjectRepositoryRegistry registry class. |
 | <a id="georegistryclass-project_upload_registry"></a>`PROJECT_UPLOAD_REGISTRY` | Geo::ProjectUploadRegistry registry class. |
 | <a id="georegistryclass-project_wiki_repository_registry"></a>`PROJECT_WIKI_REPOSITORY_REGISTRY` | Geo::ProjectWikiRepositoryRegistry registry class. |
@@ -62440,12 +62374,6 @@ A `GeoPipelineArtifactRegistryID` is a global ID. It is encoded as a string.
 
 An example `GeoPipelineArtifactRegistryID` is: `"gid://gitlab/Geo::PipelineArtifactRegistry/1"`.
 
-### `GeoProjectImportExportRelationExportUploadUploadRegistryID`
-
-A `GeoProjectImportExportRelationExportUploadUploadRegistryID` is a global ID. It is encoded as a string.
-
-An example `GeoProjectImportExportRelationExportUploadUploadRegistryID` is: `"gid://gitlab/Geo::ProjectImportExportRelationExportUploadUploadRegistry/1"`.
-
 ### `GeoProjectRepositoryRegistryID`
 
 A `GeoProjectRepositoryRegistryID` is a global ID. It is encoded as a string.
@@ -63484,7 +63412,6 @@ One of:
 - [`PackagesNugetSymbolRegistry`](#packagesnugetsymbolregistry)
 - [`PagesDeploymentRegistry`](#pagesdeploymentregistry)
 - [`PipelineArtifactRegistry`](#pipelineartifactregistry)
-- [`ProjectImportExportRelationExportUploadUploadRegistry`](#projectimportexportrelationexportuploaduploadregistry)
 - [`ProjectRepositoryRegistry`](#projectrepositoryregistry)
 - [`ProjectUploadRegistry`](#projectuploadregistry)
 - [`ProjectWikiRepositoryRegistry`](#projectwikirepositoryregistry)
@@ -63902,6 +63829,24 @@ Arguments:
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | <a id="currentusertodos-currentusertodos-state"></a>`state` | [`TodoStateEnum`](#todostateenum) | State of the to-do items. |
+
+#### `CustomDashboardInterface`
+
+Implementations:
+
+- [`CustomDashboard`](#customdashboard)
+- [`CustomSystemDashboard`](#customsystemdashboard)
+
+##### Fields
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| <a id="customdashboardinterface-config"></a>`config` | [`JSON!`](#json) | Dashboard layout and widget configuration. |
+| <a id="customdashboardinterface-createdat"></a>`createdAt` | [`Time`](#time) | Timestamp when the dashboard was created. |
+| <a id="customdashboardinterface-description"></a>`description` | [`String`](#string) | Optional summary or purpose of the dashboard. |
+| <a id="customdashboardinterface-id"></a>`id` | [`ID!`](#id) | Global ID of the dashboard. |
+| <a id="customdashboardinterface-name"></a>`name` | [`String!`](#string) | Display name of the dashboard. |
+| <a id="customdashboardinterface-system"></a>`system` | [`Boolean!`](#boolean) | Whether the dashboard is a built-in GitLab dashboard. |
 
 #### `CustomRoleInterface`
 

@@ -7732,6 +7732,9 @@ msgstr ""
 msgid "AiPowered|Change configuration"
 msgstr ""
 
+msgid "AiPowered|Change governance"
+msgstr ""
+
 msgid "AiPowered|Chat conversations expire:"
 msgstr ""
 
@@ -7763,6 +7766,9 @@ msgid "AiPowered|Container registry for foundational flow images. Leave blank to
 msgstr ""
 
 msgid "AiPowered|Control AI access to your data or external networks."
+msgstr ""
+
+msgid "AiPowered|Control how your AI-powered features are used."
 msgstr ""
 
 msgid "AiPowered|Control whether AI-powered features are available."
@@ -7868,6 +7874,9 @@ msgid "AiPowered|GitLab Duo availability"
 msgstr ""
 
 msgid "AiPowered|GitLab Duo with Amazon Q"
+msgstr ""
+
+msgid "AiPowered|Governance"
 msgstr ""
 
 msgid "AiPowered|Have access to"
@@ -32506,12 +32515,6 @@ msgid "Geo|Registry ID: %{id}"
 msgstr ""
 
 msgid "Geo|Registry information"
-msgstr ""
-
-msgid "Geo|Relation Export File Upload"
-msgstr ""
-
-msgid "Geo|Relation Export File Uploads"
 msgstr ""
 
 msgid "Geo|Remove %{siteType} site"

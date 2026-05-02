@@ -212,7 +212,7 @@ describe('DashboardListTab', () => {
     });
   });
 
-  describe('createdById prop is reflected in the dashboards request', () => {
+  describe('scope prop is reflected in the dashboards request', () => {
     let mockQueryHandler;
 
     beforeEach(async () => {
@@ -221,22 +221,22 @@ describe('DashboardListTab', () => {
 
       createComponent({
         requestHandlers: apolloProvider,
-        props: { createdById: 'gid://gitlab/User/1' },
+        props: { scope: 'USER' },
       });
 
       await waitForPromises();
     });
 
-    it('includes the createdById prop in the query variables', () => {
+    it('includes the scope prop in the query variables', () => {
       expect(mockQueryHandler).toHaveBeenCalledWith(
         expect.objectContaining({
-          createdById: 'gid://gitlab/User/1',
+          scope: 'USER',
         }),
       );
     });
   });
 
-  describe('when createdById is not provided', () => {
+  describe('when scope is not provided', () => {
     let mockQueryHandler;
 
     beforeEach(async () => {
@@ -245,16 +245,16 @@ describe('DashboardListTab', () => {
 
       createComponent({
         requestHandlers: apolloProvider,
-        props: { createdById: '' },
+        props: { scope: null },
       });
 
       await waitForPromises();
     });
 
-    it('passes undefined for createdById in the query variables', () => {
+    it('passes undefined for scope in the query variables', () => {
       expect(mockQueryHandler).toHaveBeenCalledWith(
         expect.objectContaining({
-          createdById: undefined,
+          scope: undefined,
         }),
       );
     });

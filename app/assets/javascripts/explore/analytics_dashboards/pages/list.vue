@@ -10,7 +10,6 @@ const MIN_SEARCH_TEXT_LENGTH = 3;
 export default {
   name: 'ExploreAnalyticsDashboardsList',
   components: { DashboardListTab, GlTabs, GlSearchBoxByType },
-  inject: ['currentUserId'],
   data() {
     return { searchText: '', activeTabIndex: DEFAULT_ACTIVE_TAB_INDEX };
   },
@@ -31,13 +30,14 @@ export default {
     <dashboard-list-tab
       :title="s__('AnalyticsDashboards|Created by me')"
       :sr-text="s__('AnalyticsDashboards|Dashboards created by me')"
-      :created-by-id="currentUserId"
+      scope="USER"
       :search="searchText"
     />
     <dashboard-list-tab
       :title="s__('AnalyticsDashboards|Created by GitLab')"
       :sr-text="s__('AnalyticsDashboards|Dashboards created by GitLab')"
-      search="created by gitlab (placeholder)"
+      scope="GITLAB"
+      :search="searchText"
     />
     <dashboard-list-tab
       :title="s__('AnalyticsDashboards|All')"

@@ -93,7 +93,6 @@ group:
   - create_subgroup
   - delete_enterprise_user
   - delete_group_link
-  - delete_namespace_ban
   - delete_secrets_permission
   - delete_service_account
   - delete_subgroup
@@ -144,6 +143,7 @@ group:
   - set_issue_updated_at
   - set_note_created_at
   - set_show_diff_preview_in_email
+  - unban_group_member
   - update_ai_domain_settings
   - update_approval_rule
   - update_default_branch_protection

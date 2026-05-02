@@ -74,6 +74,10 @@
     "MergeRequest",
     "WorkItemWidgetCurrentUserTodos"
   ],
+  "CustomDashboardInterface": [
+    "CustomDashboard",
+    "CustomSystemDashboard"
+  ],
   "CustomRoleInterface": [
     "AdminMemberRole",
     "MemberRole"
@@ -274,7 +278,6 @@
     "PackagesNugetSymbolRegistry",
     "PagesDeploymentRegistry",
     "PipelineArtifactRegistry",
-    "ProjectImportExportRelationExportUploadUploadRegistry",
     "ProjectRepositoryRegistry",
     "ProjectUploadRegistry",
     "ProjectWikiRepositoryRegistry",

@@ -4,22 +4,10 @@ class AddPiereUploadUploadStatesProjectIdShardingKeyTrigger < Gitlab::Database::
   milestone '19.0'
 
   def up
-    install_sharding_key_assignment_trigger(
-      table: :project_import_export_relation_export_upload_upload_states,
-      sharding_key: :project_id,
-      parent_table: :project_import_export_relation_export_upload_uploads,
-      parent_sharding_key: :project_id,
-      foreign_key: :project_import_export_relation_export_upload_upload_id
-    )
+    # no-op to address https://gitlab.com/gitlab-com/gl-infra/production/-/work_items/21955
   end
 
   def down
-    remove_sharding_key_assignment_trigger(
-      table: :project_import_export_relation_export_upload_upload_states,
-      sharding_key: :project_id,
-      parent_table: :project_import_export_relation_export_upload_uploads,
-      parent_sharding_key: :project_id,
-      foreign_key: :project_import_export_relation_export_upload_upload_id
-    )
+    # no-op to address https://gitlab.com/gitlab-com/gl-infra/production/-/work_items/21955
   end
 end

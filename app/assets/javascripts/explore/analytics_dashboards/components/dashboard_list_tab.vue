@@ -22,10 +22,10 @@ export default {
       type: String,
       required: true,
     },
-    createdById: {
+    scope: {
       type: String,
       required: false,
-      default: '',
+      default: null,
     },
     search: {
       type: String,
@@ -68,7 +68,7 @@ export default {
         return {
           organizationId: this.organizationId,
           search: this.search,
-          createdById: this.createdById || undefined,
+          scope: this.scope || undefined,
         };
       },
       update({ customDashboards }) {
