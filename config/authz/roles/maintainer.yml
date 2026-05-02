@@ -133,6 +133,7 @@ project:
   - read_member_access_request
   - read_namespace_cluster_agent_mapping
   - read_pages
+  - read_product_analytics_settings
   - read_project_component_usages
   - read_project_secrets_manager
   - read_project_security_exclusions
