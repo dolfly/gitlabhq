@@ -48,16 +48,23 @@ To view or edit merge request approval settings for a single project:
 
 ### Cascade settings from the instance or top-level group
 
-To simplify the management of approval rule settings, configure the approval rules
-at the broadest possible level. Rules created:
+To simplify the management of approval rule settings, configure them as broadly as possible.
+Settings configured:
 
 - [For your instance](../../../../administration/merge_requests_approvals.md) apply to all groups
-  and projects on an instance.
-- On a [top-level group](../../../group/manage.md#group-merge-request-approval-settings) apply to all subgroups
-  and projects.
+  and projects on the instance.
+- For a [top-level group](../../../group/manage.md#group-merge-request-approval-settings) apply to
+  its subgroups and projects.
 
-If a group or project inherits settings, you can't change them in the inheriting group or project.
-You must change the settings where they originated: the top-level group or instance.
+How a setting cascades depends on where it's configured:
+
+- A setting configured for your instance locks the equivalent setting for all groups and projects.
+  You cannot change the inherited setting in a group or project.
+- A setting configured for a top-level group cascades to its subgroups and projects:
+  - When a prevention setting is enabled for a group, the equivalent project setting is
+    locked. Project Maintainers cannot change it.
+  - When a prevention setting is disabled for a group, project Maintainers can configure it
+    for individual projects.
 
 ## Prevent approval by merge request creator
 
@@ -125,8 +132,13 @@ on merge requests, you can disable this setting:
    select **Prevent editing approval rules in merge requests**.
 1. Select **Save changes**.
 
-This change affects all open merge requests.
-
+> [!note]
+> This setting has a different scope at each level. For a project or group, it prevents approval
+> rule overrides per merge request. The approval rules list in project settings remains editable.
+> To also prevent project Maintainers from editing the approval rules list, an administrator must
+> enable
+> [**Prevent editing approval rules in projects and merge requests**](../../../../administration/merge_requests_approvals.md)
+> for your instance.
 When you change this field, it can affect all open merge requests depending on the setting:
 
 - If users could edit approval rules previously, and you disable this behavior,

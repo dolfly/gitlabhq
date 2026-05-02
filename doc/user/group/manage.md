@@ -774,9 +774,13 @@ To enable this setting:
 
 {{< /details >}}
 
-Group approval settings manage [project merge request approval settings](../project/merge_requests/approvals/settings.md)
-for all projects in a top-level group. These settings [cascade to all projects](../project/merge_requests/approvals/settings.md#cascade-settings-from-the-instance-or-top-level-group)
-that belong to the group.
+Group approval settings define the defaults for
+[project merge request approval settings](../project/merge_requests/approvals/settings.md)
+in a top-level group's subgroups and projects. When you enable a prevention setting for a group,
+the equivalent project setting is locked and project Maintainers cannot change it. When a
+prevention setting is left disabled, project Maintainers can configure it for individual projects.
+For more information, see
+[cascade settings from the instance or top-level group](../project/merge_requests/approvals/settings.md#cascade-settings-from-the-instance-or-top-level-group).
 
 To view the merge request approval settings for a group:
 

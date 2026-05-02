@@ -26,7 +26,9 @@ These merge request approval settings can be set for the entire instance:
 - **Prevent approvals by users who add commits**. Prevents project maintainers from allowing users
   to approve merge requests if they have submitted any commits to the source branch.
 - **Prevent editing approval rules in projects and merge requests**. Prevents users from modifying
-  the approvers list in project settings or in individual merge requests.
+  the approvers list in project settings or in individual merge requests. Unlike the equivalent
+  group and project settings, which only prevent overrides on individual merge requests, this
+  instance setting also locks the approval rules list in project settings.
 
 The following are also affected by rules for the entire instance:
 
