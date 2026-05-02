@@ -275,6 +275,20 @@ end
 The lambda runs in the context of the job instance, so it can access
 instance methods and job arguments.
 
+> [!note]
+> The `each_sub_batch` block must return an integer for `affected_rows`
+> metrics to be recorded. Methods like `delete_all` return an integer by
+> default. If you add logic after the deletion, return the count
+> explicitly:
+>
+> ```ruby
+> each_sub_batch do |sub_batch|
+>   deleted = sub_batch.delete_all
+>   do_something_else
+>   deleted
+> end
+> ```
+
 By default, recurring operations resume from the previous worker's
 `max_cursor`. Use `reset_cursor!` to start from `MIN(column)` instead.
 This prevents skipping rows that become eligible between runs

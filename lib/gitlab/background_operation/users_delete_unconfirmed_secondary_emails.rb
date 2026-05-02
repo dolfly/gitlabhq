@@ -16,8 +16,9 @@ module Gitlab
           next if ids.empty?
 
           emails = ::Email.where(id: ids).to_a if cells_claims_enabled? # rubocop:disable CodeReuse/ActiveRecord -- need Email records for claims metadata
-          sub_batch.delete_all
+          deleted = sub_batch.delete_all
           schedule_bulk_claims_destroy(emails) if cells_claims_enabled?
+          deleted
         end
       end
 

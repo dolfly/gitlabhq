@@ -12,7 +12,9 @@ module Gitlab
 
       def perform
         each_sub_batch do |sub_batch|
-          ::Environment.id_in(sub_batch.select(:id)).find_each(&:destroy) # rubocop:disable CodeReuse/ActiveRecord -- Need actual model for fast_destroy callbacks
+          count = 0
+          ::Environment.id_in(sub_batch.select(:id)).find_each { |env| count += 1 if env.destroy }
+          count
         end
       end
     end
