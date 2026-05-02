@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe 'Group step-up authentication', :with_current_organization, :js, feature_category: :system_access do
+RSpec.describe 'Group step-up authentication', :with_current_organization, :js, feature_category: :system_access, quarantine: { issue: 'https://gitlab.com/gitlab-org/quality/test-failure-issues/-/work_items/42459', type: :flaky } do
   let_it_be(:provider_oidc_extern_uid) { 'oidc_user_uid' }
   let_it_be(:provider_oidc) { 'openid_connect' }
   let_it_be_with_reload(:group) { create(:group) }

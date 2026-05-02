@@ -264,11 +264,9 @@ To apply a filter to the whole dashboard:
 
 - [Introduced](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/224664) in GitLab 18.10 [with a flag](../../../administration/feature_flags/_index.md) named `new_security_dashboard_pdf_export`. Disabled by default.
 - [Enabled on GitLab.com, GitLab Self-Managed, and GitLab Dedicated](https://gitlab.com/gitlab-org/gitlab/-/issues/589201) in GitLab 18.11.
+- [Generally available](https://gitlab.com/gitlab-org/gitlab/-/issues/589201) in GitLab 19.0. Feature flag `new_security_dashboard_pdf_export` removed.
 
 {{< /history >}}
-
-> [!flag]
-> The availability of this feature is controlled by a feature flag. For more information, see the history.
 
 You can export the security dashboard as a PDF for use in reports and presentations. The export captures the current state of all of the charts and panels in the dashboard, including any active filters.
 
