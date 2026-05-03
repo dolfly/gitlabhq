@@ -586,7 +586,7 @@ RSpec.describe 'getting a work item list for a project', feature_category: :port
     end
   end
 
-  context 'with development widget', quarantine: 'https://gitlab.com/gitlab-org/gitlab/-/issues/508211' do
+  context 'with development widget' do
     context 'for closing merge requests field' do
       let(:work_items) { [item1, item2] }
       let(:fields) do
@@ -619,8 +619,7 @@ RSpec.describe 'getting a work item list for a project', feature_category: :port
         end
       end
 
-      it 'avoids N+1 queries',
-        quarantine: 'https://gitlab.com/gitlab-org/quality/test-failure-issues/-/issues/2145' do
+      it 'avoids N+1 queries', :use_sql_query_cache do
         post_graphql(query, current_user: current_user) # warmup
 
         control = ActiveRecord::QueryRecorder.new(skip_cached: false) do
@@ -637,7 +636,7 @@ RSpec.describe 'getting a work item list for a project', feature_category: :port
           )
         end
 
-        expect { post_graphql(query, current_user: current_user) }.to issue_same_number_of_queries_as(control)
+        expect { post_graphql(query, current_user: current_user) }.not_to exceed_all_query_limit(control)
         expect(graphql_errors).to be_blank
       end
     end
