@@ -334,7 +334,7 @@ export default {
       this.tag = '';
 
       const transformed = CopyAsGFM.transformGFMSelection(documentFragment);
-      const area = this.$el.parentNode.querySelector('textarea');
+      const area = this.$el.parentNode.querySelector('textarea.js-gfm-input');
 
       CopyAsGFM.nodeToGFM(transformed)
         .then((gfm) => {
@@ -343,7 +343,7 @@ export default {
         .catch(() => {});
     },
     getCurrentTextArea() {
-      return this.$el.closest('.md-area')?.querySelector('textarea');
+      return this.$el.closest('.md-area')?.querySelector('textarea.js-gfm-input');
     },
     insertIntoTextarea(text) {
       const textArea = this.getCurrentTextArea();
@@ -399,7 +399,7 @@ export default {
       this.insertIntoTextarea(savedReply);
 
       setTimeout(() => {
-        this.$el.closest('.md-area')?.querySelector('textarea')?.focus();
+        this.$el.closest('.md-area')?.querySelector('textarea.js-gfm-input')?.focus();
       }, 500);
     },
     findAndReplace_show(_, form) {
@@ -682,7 +682,7 @@ export default {
       await this.findAndReplace_highlightMatchingText(this.findAndReplace.find);
     },
     skipToInput() {
-      this.$el.closest('.md-area')?.querySelector('textarea')?.focus();
+      this.$el.closest('.md-area')?.querySelector('textarea.js-gfm-input')?.focus();
     },
   },
   shortcuts: {

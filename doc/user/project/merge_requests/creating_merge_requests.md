@@ -170,6 +170,12 @@ to the description of the merge request. In most cases, this looks like `Closes 
 where `ID` is the ID of the issue or task. If your project is configured with a
 closing pattern, the issue or task closes when the merge request merges.
 
+> [!note]
+> Work items linked with closing patterns (like `Closes #123`) or mentioned with
+> keywords (like `Related to #456`) appear automatically in the **Work items** widget in the
+> merge request sidebar. For more information, see
+> [work items in merge requests](../../work_items/_index.md#work-items-in-merge-requests).
+
 ## From the Web Editor
 
 You can create merge requests with the [Web Editor](../repository/web_editor.md) when you:

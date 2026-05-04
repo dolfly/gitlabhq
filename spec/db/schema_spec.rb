@@ -33,6 +33,7 @@ RSpec.describe 'Database schema',
       ai_code_suggestion_events: %w[user_id],
       ai_duo_chat_events: %w[user_id],
       ai_troubleshoot_job_events: %w[user_id job_id],
+      ai_audit_events: %w[author_id workflow_id cloud_event_id],
       ai_usage_events: %w[user_id],
       ai_events_counts: %w[user_id namespace_id],
       application_settings: %w[performance_bar_allowed_group_id slack_app_id snowplow_app_id eks_account_id

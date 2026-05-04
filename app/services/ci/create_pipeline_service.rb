@@ -74,6 +74,9 @@ module Ci
       @command_logger = Gitlab::Ci::Pipeline::CommandLogger.new
       @pipeline = Ci::Pipeline.new
 
+      return ServiceResponse.error(message: "Missing project parameter", payload: @pipeline) if project.nil?
+      return ServiceResponse.error(message: "Missing user parameter", payload: @pipeline) if current_user.nil?
+
       validate_options!(options)
 
       @command = Gitlab::Ci::Pipeline::Chain::Command.new(

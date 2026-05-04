@@ -12,7 +12,7 @@ RSpec.describe Ci::CreatePipelineService, :clean_gitlab_redis_cache, feature_cat
   let(:ref_name) { 'refs/heads/master' }
 
   before do
-    project.update!(ci_pipeline_variables_minimum_override_role: :maintainer)
+    project&.update!(ci_pipeline_variables_minimum_override_role: :maintainer)
     stub_ci_pipeline_to_return_yaml_file
   end
 
@@ -1981,6 +1981,34 @@ RSpec.describe Ci::CreatePipelineService, :clean_gitlab_redis_cache, feature_cat
 
       it 'does not write to p_ci_builds_execution_configs' do
         expect { execute_service }.to not_change { Ci::BuildExecutionConfig.count }
+      end
+    end
+
+    describe 'service instantiated without base relations' do
+      let(:service) { described_class.new(project, user) }
+
+      context 'without project' do
+        let(:project) { nil }
+
+        it 'does not create a pipeline' do
+          response = service.execute(:push)
+
+          expect(response).to be_error
+          expect(response).to have_attributes(message: "Missing project parameter", payload: kind_of(Ci::Pipeline))
+          expect(response.payload).not_to be_persisted
+        end
+      end
+
+      context 'without user' do
+        let(:user) { nil }
+
+        it 'does not create a pipeline' do
+          response = service.execute(:push)
+
+          expect(response).to be_error
+          expect(response).to have_attributes(message: "Missing user parameter", payload: kind_of(Ci::Pipeline))
+          expect(response.payload).not_to be_persisted
+        end
       end
     end
   end

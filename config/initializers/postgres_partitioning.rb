@@ -89,7 +89,8 @@ Gitlab::Application.config.to_prepare do
         Ai::ActiveContext::Code::EnabledNamespace,
         Ai::ActiveContext::Code::Repository,
         Ai::DuoWorkflows::Checkpoint,
-        Analytics::KnowledgeGraph::CodeIndexingTask
+        Analytics::KnowledgeGraph::CodeIndexingTask,
+        AuditEvents::AiAuditEvent
       ])
   else
     Gitlab::Database::Partitioning.register_tables(

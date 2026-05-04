@@ -185,6 +185,12 @@ RSpec.describe ::RapidDiffs::MergeRequestPresenter, feature_category: :code_revi
 
       it { is_expected.not_to include('diff_id') }
     end
+
+    context 'when only_context_commits is set' do
+      let(:request_params) { { only_context_commits: 'true' } }
+
+      it { is_expected.to end_with('only_context_commits=true') }
+    end
   end
 
   describe '#diffs_stats_endpoint' do

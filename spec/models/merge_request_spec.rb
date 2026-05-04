@@ -8748,13 +8748,13 @@ RSpec.describe MergeRequest, factory_default: :keep, feature_category: :code_rev
       context 'when context_commits_diff is not empty' do
         before do
           allow(context_commits_diff).to receive(:empty?).and_return(false)
-          allow(context_commits_diff).to receive(:diffs).and_return(diffs)
+          allow(context_commits_diff).to receive(:first_diffs_slice).and_return(diffs)
         end
 
         it 'returns diff files from context_commits_diff' do
           result = merge_request.first_diffs_slice(limit, only_context_commits: true)
 
-          expect(result).to eq(diff_files)
+          expect(result).to eq(diffs)
         end
       end
 
@@ -9571,6 +9571,44 @@ RSpec.describe MergeRequest, factory_default: :keep, feature_category: :code_rev
     it 'returns all checks flattened in tier order' do
       expected = described_class.mergeable_state_checks_by_tier.values.flatten
       expect(described_class.mergeable_state_checks).to eq(expected)
+    end
+  end
+
+  describe '#show_context_commits_diff?' do
+    let_it_be(:project) { create(:project, :repository) }
+    let_it_be(:merge_request) { create(:merge_request, target_project: project, source_project: project) }
+    let(:context_commits_diff) { instance_double(ContextCommitsDiff) }
+
+    before do
+      allow(merge_request).to receive(:context_commits_diff).and_return(context_commits_diff)
+    end
+
+    context 'when context_commits_diff is not empty' do
+      before do
+        allow(context_commits_diff).to receive(:empty?).and_return(false)
+      end
+
+      it 'returns true' do
+        expect(merge_request.show_context_commits_diff?(only_context_commits: true))
+          .to be_truthy
+      end
+    end
+
+    context 'when context_commits_diff is empty' do
+      before do
+        allow(context_commits_diff).to receive(:empty?).and_return(true)
+      end
+
+      it 'returns false' do
+        expect(merge_request.show_context_commits_diff?(only_context_commits: true))
+          .to be_falsey
+      end
+    end
+
+    context 'when only_context_commits is not set' do
+      it 'returns false' do
+        expect(merge_request.show_context_commits_diff?({})).to be_falsey
+      end
     end
   end
 end

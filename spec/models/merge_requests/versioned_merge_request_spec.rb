@@ -41,6 +41,28 @@ RSpec.describe MergeRequests::VersionedMergeRequest, feature_category: :code_rev
       end
     end
 
+    context 'when show_context_commits_diff? is true' do
+      let(:show_context_commits_diff?) { true }
+      let(:diffs) { instance_double(Gitlab::Diff::FileCollection::Compare) }
+      let(:context_commits_diff) { instance_double(ContextCommitsDiff) }
+
+      before do
+        allow(merge_request)
+          .to receive_messages(
+            show_context_commits_diff?: show_context_commits_diff?,
+            context_commits_diff: context_commits_diff
+          )
+
+        allow(context_commits_diff).to receive(:diffs).and_return(diffs)
+      end
+
+      it 'delegates to context_commits_diff' do
+        versioned.diffs(diff_options)
+
+        expect(context_commits_diff).to have_received(:diffs).with(diff_options)
+      end
+    end
+
     context 'when compare is not present' do
       let(:diff_version) { instance_double(Gitlab::MergeRequests::DiffResolver) }
       let(:resolved_diff) { merge_request_diff }
@@ -105,6 +127,25 @@ RSpec.describe MergeRequests::VersionedMergeRequest, feature_category: :code_rev
       end
 
       it 'delegates to the merge request' do
+        expect(versioned.diff_stats).to eq(diff_stats_result)
+      end
+    end
+
+    context 'when show_context_commits_diff? is true' do
+      let(:show_context_commits_diff?) { true }
+      let(:context_commits_diff) { instance_double(ContextCommitsDiff) }
+
+      before do
+        allow(merge_request)
+          .to receive_messages(
+            show_context_commits_diff?: show_context_commits_diff?,
+            context_commits_diff: context_commits_diff
+          )
+
+        allow(context_commits_diff).to receive(:diff_stats).and_return(diff_stats_result)
+      end
+
+      it 'delegates to context_commits_diff' do
         expect(versioned.diff_stats).to eq(diff_stats_result)
       end
     end

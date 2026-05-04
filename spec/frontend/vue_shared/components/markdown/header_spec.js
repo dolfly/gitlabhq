@@ -177,7 +177,9 @@ describe('Markdown field header component', () => {
 
   describe('markdown table button', () => {
     beforeEach(() => {
-      setHTMLFixture('<div class="md-area"><textarea></textarea><div id="root"></div></div>');
+      setHTMLFixture(
+        '<div class="md-area"><textarea class="js-gfm-input"></textarea><div id="root"></div></div>',
+      );
 
       wrapper = mountExtended(HeaderComponent, {
         attachTo: '#root',
@@ -210,6 +212,71 @@ describe('Markdown field header component', () => {
         cursorOffset: 0,
         wrap: false,
       });
+    });
+  });
+
+  describe('with multiple textareas (immersive mode regression)', () => {
+    let titleTextarea;
+    let contentTextarea;
+
+    beforeEach(() => {
+      // Simulate immersive mode where a title textarea appears before the content textarea
+      setHTMLFixture(`
+        <div class="md-area">
+          <textarea id="title" class="wiki-title"></textarea>
+          <textarea id="content" class="js-gfm-input"></textarea>
+          <div id="root"></div>
+        </div>
+      `);
+
+      titleTextarea = document.getElementById('title');
+      contentTextarea = document.getElementById('content');
+      titleTextarea.value = 'My Title';
+      contentTextarea.value = 'My content';
+
+      wrapper = mountExtended(HeaderComponent, {
+        attachTo: '#root',
+        propsData: {
+          previewMarkdown: false,
+        },
+        stubs: { GlToggle },
+        provide: {
+          glFeatures: {
+            findAndReplace: true,
+          },
+        },
+      });
+    });
+
+    afterEach(() => {
+      resetHTMLFixture();
+    });
+
+    it('targets the content textarea with js-gfm-input, not the first textarea', async () => {
+      const tableButton = findToolbarTableButton();
+      const button = tableButton.findComponent({ ref: 'table-1-1' });
+
+      await button.trigger('click');
+
+      expect(updateText).toHaveBeenCalledWith({
+        textArea: contentTextarea,
+        tag: expect.stringContaining('header'),
+        cursorOffset: 0,
+        wrap: false,
+      });
+
+      // Verify title textarea was not modified
+      expect(titleTextarea.value).toBe('My Title');
+    });
+
+    it('focuses the content textarea when "Skip to input" is clicked', async () => {
+      const skipButton = wrapper.findByTestId('skip-to-input');
+      const focusSpy = jest.spyOn(contentTextarea, 'focus');
+
+      await skipButton.trigger('click');
+
+      expect(focusSpy).toHaveBeenCalled();
+      expect(document.activeElement).toBe(contentTextarea);
     });
   });
 
@@ -307,7 +374,9 @@ describe('Markdown field header component', () => {
 
   describe('when selecting a saved reply from the comment templates dropdown', () => {
     beforeEach(() => {
-      setHTMLFixture('<div class="md-area"><textarea></textarea><div id="root"></div></div>');
+      setHTMLFixture(
+        '<div class="md-area"><textarea class="js-gfm-input"></textarea><div id="root"></div></div>',
+      );
     });
 
     afterEach(() => {
@@ -358,6 +427,7 @@ describe('Markdown field header component', () => {
       const root = document.createElement('div');
       const textarea = document.createElement('textarea');
       textarea.value = 'lorem ipsum dolor sit amet lorem <img src="prompt">';
+      textarea.classList.add('js-gfm-input');
       field.classList = 'js-vue-markdown-field';
       form.classList = 'md-area';
       form.appendChild(textarea);

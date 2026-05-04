@@ -133,7 +133,8 @@ class WebHookService
         "idempotency_key" => idempotency_key
       }.compact
 
-      WebHookWorker.perform_async(hook.id, data.deep_stringify_keys, hook_name.to_s, params)
+      normalized_data = Gitlab::WebHooks.normalize_dates(data.deep_stringify_keys)
+      WebHookWorker.perform_async(hook.id, normalized_data, hook_name.to_s, params)
     end
   end
 
@@ -318,7 +319,8 @@ class WebHookService
     return data unless hook.custom_webhook_template.present?
 
     start_time = Gitlab::Metrics::System.monotonic_time
-    rendered_template = render_custom_template(hook.custom_webhook_template, data.deep_stringify_keys)
+    stringified = Gitlab::WebHooks.normalize_dates(data.deep_stringify_keys)
+    rendered_template = render_custom_template(hook.custom_webhook_template, stringified)
     duration = Gitlab::Metrics::System.monotonic_time - start_time
 
     Gitlab::AppLogger.info(

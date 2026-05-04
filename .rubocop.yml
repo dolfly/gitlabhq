@@ -930,6 +930,12 @@ API/GrapeArrayMissingCoerce:
     - 'lib/**/api/**/*.rb'
     - 'ee/**/api/**/*.rb'
 
+API/AccessLevelStringType:
+  Enabled: true
+  Include:
+    - 'lib/**/api/**/*.rb'
+    - 'ee/lib/**/api/**/*.rb'
+
 API/ClassLevelAllowAccessWithScope:
   Enabled: true
   Include:

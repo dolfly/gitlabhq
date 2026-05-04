@@ -33,7 +33,7 @@ module API
         optional :owned, type: Boolean, default: false, desc: 'Limit by owned by authenticated user'
         optional :order_by, type: String, values: %w[name path id similarity], default: 'name', desc: 'Order by name, path, id or similarity if searching'
         optional :sort, type: String, values: %w[asc desc], default: 'asc', desc: 'Sort by asc (ascending) or desc (descending)'
-        optional :min_access_level, type: Integer, values: Gitlab::Access.all_values, desc: 'Minimum access level of authenticated user'
+        optional :min_access_level, type: Integer, values: Gitlab::Access.all_values, desc: 'Minimum access level of authenticated user' # rubocop:disable API/AccessLevelStringType -- Introduced before the cop
         optional :top_level_only, type: Boolean, desc: 'Only include top-level groups'
         optional :marked_for_deletion_on, type: Date, desc: 'Return groups that are marked for deletion on this date'
         optional :active, type: Boolean, desc: 'Limit by groups that are not archived and not marked for deletion'
@@ -483,7 +483,7 @@ module API
         optional :skip_groups, type: Array[Integer], coerce_with: ::API::Validations::Types::CommaSeparatedToIntegerArray.coerce, desc: 'Array of group ids to exclude from list'
         optional :visibility, type: String, values: Gitlab::VisibilityLevel.string_values, desc: 'Limit by visibility'
         optional :search, type: String, desc: 'Search for a specific group'
-        optional :min_access_level, type: Integer, values: Gitlab::Access.all_values, desc: 'Minimum access level of authenticated user'
+        optional :min_access_level, type: Integer, values: Gitlab::Access.all_values, desc: 'Minimum access level of authenticated user' # rubocop:disable API/AccessLevelStringType -- Introduced before the cop
         optional :order_by, type: String, values: %w[name path id similarity], default: 'name', desc: 'Order by name, path, id or similarity if searching'
         optional :sort, type: String, values: %w[asc desc], default: 'asc', desc: 'Sort by asc (ascending) or desc (descending)'
 
@@ -508,7 +508,7 @@ module API
       params do
         optional :relation, type: Array[String], coerce_with: ::API::Validations::Types::CommaSeparatedToArray.coerce, values: %w[direct inherited], desc: 'Include group relations'
         optional :search, type: String, desc: 'Search for a specific group'
-        optional :min_access_level, type: Integer, values: Gitlab::Access.all_values, desc: 'Minimum access level of authenticated user'
+        optional :min_access_level, type: Integer, values: Gitlab::Access.all_values, desc: 'Minimum access level of authenticated user' # rubocop:disable API/AccessLevelStringType -- Introduced before the cop
 
         use :pagination
         use :with_custom_attributes
@@ -546,7 +546,7 @@ module API
         optional :with_shared, type: Boolean, default: true, desc: 'Include projects shared to this group'
         optional :include_subgroups, type: Boolean, default: false, desc: 'Includes projects in subgroups of this group'
         optional :include_ancestor_groups, type: Boolean, default: false, desc: 'Includes projects in ancestors of this group'
-        optional :min_access_level, type: Integer, values: Gitlab::Access.all_values, desc: 'Limit by minimum access level of authenticated user on projects'
+        optional :min_access_level, type: Integer, values: Gitlab::Access.all_values, desc: 'Limit by minimum access level of authenticated user on projects' # rubocop:disable API/AccessLevelStringType -- Introduced before the cop
 
         use :pagination
         use :with_custom_attributes
@@ -587,7 +587,7 @@ module API
         optional :starred, type: Boolean, default: false, desc: 'Limit by starred status'
         optional :with_issues_enabled, type: Boolean, default: false, desc: 'Limit by enabled issues feature'
         optional :with_merge_requests_enabled, type: Boolean, default: false, desc: 'Limit by enabled merge requests feature'
-        optional :min_access_level, type: Integer, values: Gitlab::Access.all_values, desc: 'Limit by minimum access level of authenticated user on projects'
+        optional :min_access_level, type: Integer, values: Gitlab::Access.all_values, desc: 'Limit by minimum access level of authenticated user on projects' # rubocop:disable API/AccessLevelStringType -- Introduced before the cop
 
         use :pagination
         use :with_custom_attributes

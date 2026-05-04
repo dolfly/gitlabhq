@@ -80,9 +80,55 @@ describe('Issue Due Date component', () => {
     wrapper = createComponent({ date, closed });
 
     expect(findIcon(wrapper).props()).toMatchObject({
-      variant: 'subtle',
+      variant: 'current',
       name: 'calendar',
     });
+  });
+
+  it('should contain the approaching icon when due date is within 6 days', () => {
+    date.setDate(date.getDate() + 3);
+    wrapper = createComponent({ date });
+
+    expect(findIcon(wrapper).props()).toMatchObject({
+      variant: 'warning',
+      name: 'calendar-due',
+    });
+  });
+
+  it('classifies today as approaching, not overdue', () => {
+    wrapper = createComponent();
+
+    expect(findIcon(wrapper).props()).toMatchObject({
+      variant: 'warning',
+      name: 'calendar-due',
+    });
+  });
+
+  it('should not contain the approaching icon when due date is exactly 7 days away', () => {
+    date.setDate(date.getDate() + 7);
+    wrapper = createComponent({ date });
+
+    expect(findIcon(wrapper).props()).toMatchObject({
+      variant: 'current',
+      name: 'calendar',
+    });
+  });
+
+  it('should not contain the approaching icon when issue is closed', () => {
+    date.setDate(date.getDate() + 3);
+    wrapper = createComponent({ date, closed: true });
+
+    expect(findIcon(wrapper).props()).toMatchObject({
+      variant: 'current',
+      name: 'calendar',
+    });
+  });
+
+  it('includes "due soon" text in tooltip when approaching', () => {
+    date.setDate(date.getDate() + 3);
+    wrapper = createComponent({ date });
+
+    expect(wrapper.text()).toContain('due soon');
   });
 
   it('renders date range when start date is provided', () => {

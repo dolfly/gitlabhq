@@ -3,6 +3,7 @@ import { GlIcon } from '@gitlab/ui';
 import dateFormat from '~/lib/dateformat';
 import {
   getDayDifference,
+  getDueDateStatus,
   getTimeago,
   humanTimeframe,
   localeDateFormat,
@@ -64,8 +65,8 @@ export default {
 
       return this.standardDateFormat;
     },
-    iconName() {
-      return this.isOverdue ? 'calendar-overdue' : 'calendar';
+    dueDateStatus() {
+      return getDueDateStatus(this.date, !this.closed);
     },
     issueDueDate() {
       return newDate(this.date);
@@ -73,9 +74,6 @@ export default {
     timeDifference() {
       const today = new Date();
       return getDayDifference(today, this.issueDueDate);
-    },
-    isOverdue() {
-      return !this.closed && this.timeDifference < 0;
     },
     standardDateFormat() {
       if (this.startDate) {
@@ -114,7 +112,7 @@ export default {
     :aria-label="createAriaLabel()"
   >
     <template #icon>
-      <gl-icon :variant="isOverdue ? 'danger' : 'subtle'" :name="iconName" />
+      <gl-icon :variant="dueDateStatus.iconVariant" :name="dueDateStatus.iconName" />
     </template>
     <template #title>
       <time datetime="date" class="board-card-info-text gl-text-sm">{{ body }}</time>
@@ -123,7 +121,7 @@ export default {
       <span class="gl-font-bold">{{ __('Due date') }}</span>
       <br />
       <span>{{ title }}</span>
-      <div v-if="isOverdue">({{ __('overdue') }})</div>
+      <div v-if="dueDateStatus.statusLabel">({{ dueDateStatus.statusLabel }})</div>
     </template>
   </work-item-attribute>
 </template>

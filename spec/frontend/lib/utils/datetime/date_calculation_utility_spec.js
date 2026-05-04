@@ -1,5 +1,6 @@
 import timezoneMock from 'timezone-mock';
 import {
+  APPROACHING_DUE_DATE_THRESHOLD_DAYS,
   approximateDuration,
   calculateRemainingMilliseconds,
   cloneDate,
@@ -19,6 +20,7 @@ import {
   getDateInPast,
   getDatesInRange,
   getDayDifference,
+  getDueDateStatus,
   getMonthsBetweenDates,
   getStartOfDay,
   getStartOfWeek,
@@ -1007,5 +1009,93 @@ describe('daysToSeconds', () => {
     expect(daysToSeconds(2.5)).toBe(216000);
     expect(daysToSeconds(3)).toBe(259200);
     expect(daysToSeconds(5)).toBe(432000);
+  });
+});
+
+describe('getDueDateStatus', () => {
+  it('exports the approaching threshold as seven days', () => {
+    expect(APPROACHING_DUE_DATE_THRESHOLD_DAYS).toBe(7);
+  });
+
+  describe('when no due date is given', () => {
+    it.each([null, undefined, ''])('returns a neutral status for %p', (dueDate) => {
+      expect(getDueDateStatus(dueDate, true)).toMatchObject({
+        isOverdue: false,
+        isApproaching: false,
+        iconName: 'calendar',
+        iconVariant: 'current',
+        statusLabel: null,
+      });
+    });
+  });
+
+  describe('when the item is closed', () => {
+    it('returns a neutral status regardless of date', () => {
+      expect(getDueDateStatus('2020-06-01', false)).toMatchObject({
+        isOverdue: false,
+        isApproaching: false,
+        iconName: 'calendar',
+        iconVariant: 'current',
+        statusLabel: null,
+      });
+    });
+  });
+
+  describe('when the due date is in the past', () => {
+    it('classifies as overdue', () => {
+      expect(getDueDateStatus('2020-07-05', true)).toMatchObject({
+        isOverdue: true,
+        isApproaching: false,
+        iconName: 'calendar-overdue',
+        iconVariant: 'danger',
+        statusLabel: 'overdue',
+      });
+    });
+  });
+
+  describe('when the due date is approaching', () => {
+    it('classifies today as approaching, not overdue', () => {
+      expect(getDueDateStatus('2020-07-06', true)).toMatchObject({
+        isOverdue: false,
+        isApproaching: true,
+        iconName: 'calendar-due',
+        iconVariant: 'warning',
+        statusLabel: 'due soon',
+      });
+    });
+
+    it('classifies a date six days out as approaching', () => {
+      expect(getDueDateStatus('2020-07-12', true)).toMatchObject({
+        isOverdue: false,
+        isApproaching: true,
+        iconName: 'calendar-due',
+        iconVariant: 'warning',
+        statusLabel: 'due soon',
+      });
+    });
+  });
+
+  describe('when the due date is on the boundary', () => {
+    it('does not classify a date exactly seven days away as approaching', () => {
+      expect(getDueDateStatus('2020-07-13', true)).toMatchObject({
+        isOverdue: false,
+        isApproaching: false,
+        iconName: 'calendar',
+        iconVariant: 'current',
+        statusLabel: null,
+      });
+    });
+  });
+
+  describe('when the due date is well in the future', () => {
+    it('returns a neutral status', () => {
+      expect(getDueDateStatus('2021-01-01', true)).toMatchObject({
+        isOverdue: false,
+        isApproaching: false,
+        iconName: 'calendar',
+        iconVariant: 'current',
+        statusLabel: null,
+      });
+    });
   });
 });

@@ -5765,6 +5765,22 @@ RETURN OLD;
 END
 $$;
 
+CREATE TABLE ai_audit_events (
+    id bigint NOT NULL,
+    created_at timestamp with time zone NOT NULL,
+    cloud_event_id uuid NOT NULL,
+    author_id bigint NOT NULL,
+    project_id bigint,
+    namespace_id bigint,
+    event_name text NOT NULL,
+    ip_address inet,
+    workflow_id bigint,
+    details text,
+    CONSTRAINT check_3e009d5357 CHECK ((char_length(event_name) <= 255)),
+    CONSTRAINT check_547b01c40f CHECK ((num_nonnulls(namespace_id, project_id) = 1))
+)
+PARTITION BY RANGE (created_at);
+
 CREATE TABLE ai_events_counts (
     id bigint NOT NULL,
     events_date date NOT NULL,
@@ -13313,6 +13329,15 @@ CREATE SEQUENCE ai_agents_id_seq
     CACHE 1;
 
 ALTER SEQUENCE ai_agents_id_seq OWNED BY ai_agents.id;
+
+CREATE SEQUENCE ai_audit_events_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+ALTER SEQUENCE ai_audit_events_id_seq OWNED BY ai_audit_events.id;
 
 CREATE TABLE ai_catalog_item_consumers (
     id bigint NOT NULL,
@@ -35519,6 +35544,8 @@ ALTER TABLE ONLY ai_agent_versions ALTER COLUMN id SET DEFAULT nextval('ai_agent
 
 ALTER TABLE ONLY ai_agents ALTER COLUMN id SET DEFAULT nextval('ai_agents_id_seq'::regclass);
 
+ALTER TABLE ONLY ai_audit_events ALTER COLUMN id SET DEFAULT nextval('ai_audit_events_id_seq'::regclass);
+
 ALTER TABLE ONLY ai_catalog_item_consumers ALTER COLUMN id SET DEFAULT nextval('ai_catalog_item_consumers_id_seq'::regclass);
 
 ALTER TABLE ONLY ai_catalog_item_stars ALTER COLUMN id SET DEFAULT nextval('ai_catalog_item_stars_id_seq'::regclass);
@@ -38445,6 +38472,9 @@ ALTER TABLE ONLY ai_agent_versions
 
 ALTER TABLE ONLY ai_agents
     ADD CONSTRAINT ai_agents_pkey PRIMARY KEY (id);
+
+ALTER TABLE ONLY ai_audit_events
+    ADD CONSTRAINT ai_audit_events_pkey PRIMARY KEY (id, created_at);
 
 ALTER TABLE ONLY ai_catalog_item_consumers
     ADD CONSTRAINT ai_catalog_item_consumers_pkey PRIMARY KEY (id);
@@ -44309,6 +44339,14 @@ CREATE INDEX idx_abuse_reports_user_id_status_and_category ON abuse_reports USIN
 CREATE INDEX idx_addon_purchases_on_last_refreshed_at_desc_nulls_last ON subscription_add_on_purchases USING btree (last_assigned_users_refreshed_at DESC NULLS LAST);
 
 CREATE INDEX idx_ai_active_context_code_enabled_namespaces_namespace_id ON ONLY p_ai_active_context_code_enabled_namespaces USING btree (namespace_id);
+
+CREATE UNIQUE INDEX idx_ai_audit_events_on_cloud_event_id_created_at_unique ON ONLY ai_audit_events USING btree (cloud_event_id, created_at);
+
+CREATE INDEX idx_ai_audit_events_on_namespace_id_created_at ON ONLY ai_audit_events USING btree (namespace_id, created_at DESC);
+
+CREATE INDEX idx_ai_audit_events_on_project_id_created_at ON ONLY ai_audit_events USING btree (project_id, created_at DESC);
+
+CREATE INDEX idx_ai_audit_events_on_workflow_id ON ONLY ai_audit_events USING btree (workflow_id);
 
 CREATE INDEX idx_ai_catalog_item_stars_on_organization_id ON ai_catalog_item_stars USING btree (organization_id);
 
@@ -59433,6 +59471,9 @@ ALTER TABLE ONLY ml_model_version_metadata
 ALTER TABLE ONLY protected_environment_deploy_access_levels
     ADD CONSTRAINT fk_rails_5b9f6970fe FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE;
 
+ALTER TABLE ai_audit_events
+    ADD CONSTRAINT fk_rails_5bd1b97338 FOREIGN KEY (namespace_id) REFERENCES namespaces(id) ON DELETE CASCADE;
+
 ALTER TABLE ONLY protected_branch_unprotect_access_levels
     ADD CONSTRAINT fk_rails_5be1abfc25 FOREIGN KEY (group_id) REFERENCES namespaces(id) ON DELETE CASCADE;
 
@@ -59855,6 +59896,9 @@ ALTER TABLE ONLY service_desk_custom_email_credentials
 
 ALTER TABLE ONLY software_license_policies
     ADD CONSTRAINT fk_rails_87b2247ce5 FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE;
+
+ALTER TABLE ai_audit_events
+    ADD CONSTRAINT fk_rails_87b788d365 FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE;
 
 ALTER TABLE ONLY arkose_sessions
     ADD CONSTRAINT fk_rails_87ceb2456f FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE;

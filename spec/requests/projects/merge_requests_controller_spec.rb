@@ -26,6 +26,27 @@ RSpec.describe Projects::MergeRequestsController, feature_category: :source_code
     merge_request.create_merge_request_diff
   end
 
+  let_it_be(:sha1) { "33f3729a45c02fc67d00adb1b8bca394b0e761d9" }
+  let_it_be(:sha2) { "ae73cb07c9eeaf35924a10f713b364d32b2dd34f" }
+
+  let_it_be(:context_commit_1) do
+    create(
+      :merge_request_context_commit,
+      merge_request: merge_request,
+      sha: sha1,
+      committed_date: project.commit_by(oid: sha1).committed_date
+    )
+  end
+
+  let_it_be(:context_commit_2) do
+    create(
+      :merge_request_context_commit,
+      merge_request: merge_request,
+      sha: sha2,
+      committed_date: project.commit_by(oid: sha2).committed_date
+    )
+  end
+
   describe 'GET #show' do
     let_it_be(:group) { create(:group) }
     let_it_be(:user) { create(:user) }
@@ -346,6 +367,20 @@ RSpec.describe Projects::MergeRequestsController, feature_category: :source_code
         end
       end
 
+      context 'when only_context_commits is true' do
+        let(:params) { { only_context_commits: true } }
+
+        it 'shows context commit diffs' do
+          context_diff_files = merge_request.context_commits_diff.diffs.diff_files
+          context_file_hashes = context_diff_files.to_a.map(&:file_hash)
+
+          get diffs_project_merge_request_path(project, merge_request, params.merge(rapid_diffs: 'true'))
+
+          expect(response.body.scan('<diff-file ').size).to eq(4)
+          expect(response.body).to include(*context_file_hashes)
+        end
+      end
+
       context 'internal events tracking' do
         subject(:action) { get diffs_project_merge_request_path(project, merge_request, rapid_diffs: true) }
 
@@ -474,6 +509,12 @@ RSpec.describe Projects::MergeRequestsController, feature_category: :source_code
 
       include_examples 'diff files metadata'
     end
+
+    context 'when only_context_commits is true' do
+      let(:additional_params) { { only_context_commits: true } }
+
+      include_examples 'diff files metadata'
+    end
   end
 
   describe 'GET #diffs_stats' do
@@ -555,6 +596,20 @@ RSpec.describe Projects::MergeRequestsController, feature_category: :source_code
             added_lines: 1,
             removed_lines: 0,
             diffs_count: 1
+          }
+        end
+      end
+    end
+
+    context 'when only_context_commits is true' do
+      let(:additional_params) { { only_context_commits: true } }
+
+      it_behaves_like 'diffs stats' do
+        let(:expected_stats) do
+          {
+            added_lines: 21,
+            removed_lines: 23,
+            diffs_count: 4
           }
         end
       end

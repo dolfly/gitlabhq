@@ -589,6 +589,28 @@ RSpec.describe WebHookService, :request_store, :clean_gitlab_redis_shared_state,
               .once
           end
         end
+
+        context 'when the payload contains raw Time/Date values (test-mode sync path)' do
+          let(:time) { Time.utc(2026, 4, 23, 12, 30, 45, 123_000) }
+          let(:date) { Date.new(2026, 4, 23) }
+          let(:data) { { object_attributes: { created_at: time, due_on: date } } }
+
+          before do
+            project_hook.custom_webhook_template =
+              '{"created_at":"{{object_attributes.created_at}}","due_on":"{{object_attributes.due_on}}"}'
+          end
+
+          it 'serializes Time and Date to ISO 8601 strings so the docs-compliant template yields valid JSON' do
+            service_instance.execute
+
+            expect(WebMock).to have_requested(:post, stubbed_hostname(project_hook.url))
+              .with(
+                headers: headers,
+                body: '{"created_at":"2026-04-23T12:30:45.123Z","due_on":"2026-04-23"}'
+              )
+              .once
+          end
+        end
       end
 
       context 'when template is invalid' do
@@ -1236,6 +1258,32 @@ RSpec.describe WebHookService, :request_store, :clean_gitlab_redis_shared_state,
             'meta.project' => project_hook.project.full_path,
             'meta.root_namespace' => project.root_ancestor.path,
             'meta.related_class' => 'ProjectHook'
+          )
+        end
+
+        service_instance.async_execute
+      end
+    end
+
+    context 'when the payload contains Time/Date values' do
+      let(:time) { Time.utc(2026, 4, 23, 12, 30, 45, 123_000) }
+      let(:date) { Date.new(2026, 4, 23) }
+      let(:data) do
+        {
+          object_attributes: { created_at: time, due_on: date },
+          builds: [{ name: 'rspec', started_at: time, finished_at: nil }]
+        }
+      end
+
+      around do |example|
+        Time.use_zone('UTC') { example.run }
+      end
+
+      it 'enqueues the worker with dates serialized to ISO 8601 strings' do
+        expect(WebHookWorker).to receive(:perform_async) do |_hook_id, payload, *|
+          expect(payload).to eq(
+            'object_attributes' => { 'created_at' => '2026-04-23T12:30:45.123Z', 'due_on' => '2026-04-23' },
+            'builds' => [{ 'name' => 'rspec', 'started_at' => '2026-04-23T12:30:45.123Z', 'finished_at' => nil }]
           )
         end
 

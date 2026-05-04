@@ -110,12 +110,14 @@ module API
             documentation: {
               example: '2026-02-14T17:26:19.810Z'
             }
+          # rubocop:disable API/AccessLevelStringType -- Introduced before the cop
           optional :access_level,
             type: Integer,
             values: ALLOWED_RESOURCE_ACCESS_LEVELS.values,
             default: Gitlab::Access::MAINTAINER,
             desc: "The access level of the token in the #{source_type}",
             documentation: { example: 40 }
+          # rubocop:enable API/AccessLevelStringType
         end
         route_setting :authorization, permissions: :create_resource_access_token, boundary_type: source_type.to_sym
         post ':id/access_tokens' do

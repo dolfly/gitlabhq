@@ -209,6 +209,27 @@ Your preference is saved and remembered across all your sessions and devices.
 You can reference work items in GitLab Flavored Markdown fields with `[work_item:123]`.
 For more information, see [GitLab-specific references](../markdown.md#gitlab-specific-references).
 
+## Work items in merge requests
+
+{{< history >}}
+
+- [Introduced](https://gitlab.com/groups/gitlab-org/plan-stage/-/work_items/456) in GitLab 18.11 [with a feature flag](../../administration/feature_flags/_index.md) named `mr_related_work_items`. Disabled by default.
+- [Generally available](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/233554) in GitLab 19.0. Feature flag `mr_related_work_items` removed.
+
+{{< /history >}}
+
+When you reference a work item in a merge request description, it appears automatically in
+the **Work items** widget in the merge request sidebar. The widget groups work items into two categories:
+
+- **Closing**: Work items linked with a
+  [closing pattern](../project/issues/managing_issues.md#closing-issues-automatically),
+  such as `Closes #123`. These work items close automatically when the MR merges.
+- **Mentioned**: Work items referenced in the description but not linked with a closing pattern,
+  such as `Related to #456`. These work items are not closed when the MR merges.
+
+If the widget contains more than two work items, it collapses by default. Select the widget
+header to expand it. Select any work item to open it in a drawer.
+
 ## Related topics
 
 - [Linked issues](../project/issues/related_issues.md)
