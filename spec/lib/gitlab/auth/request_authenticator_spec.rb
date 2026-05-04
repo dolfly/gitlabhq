@@ -312,6 +312,30 @@ RSpec.describe Gitlab::Auth::RequestAuthenticator, feature_category: :system_acc
       expect(subject.find_sessionless_user(:api)).to be_blank
     end
 
+    context 'with :editor_extension format' do
+      let_it_be(:pat_user) { create(:user) }
+      let_it_be(:personal_access_token) { create(:personal_access_token, user: pat_user) }
+
+      let_it_be(:oauth_user) { create(:user) }
+      let_it_be(:oauth_access_token) { create(:oauth_access_token, resource_owner: oauth_user) }
+
+      it 'returns user from a personal access token' do
+        env['HTTP_PRIVATE_TOKEN'] = personal_access_token.token
+
+        expect(subject.find_sessionless_user(:editor_extension)).to eq pat_user
+      end
+
+      it 'returns user from an OAuth token' do
+        env['HTTP_AUTHORIZATION'] = "Bearer #{oauth_access_token.plaintext_token}"
+
+        expect(subject.find_sessionless_user(:editor_extension)).to eq oauth_user
+      end
+
+      it 'returns nil if no access token provided' do
+        expect(subject.find_sessionless_user(:editor_extension)).to be_nil
+      end
+    end
+
     context 'dependency proxy' do
       let_it_be(:dependency_proxy_user) { create(:user) }
 

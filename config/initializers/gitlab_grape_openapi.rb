@@ -148,7 +148,6 @@ Gitlab::GrapeOpenapi.configure do |config|
     'GitlabSubscriptions::API::Internal::API',
     'API::Internal::SecretsManager',
     'API::Internal::Observability',
-    'API::Internal::Ai::XRay::Scan',
     'API::Internal::Search::Zoekt',
     'API::Internal::Ci::JobRouter',
     'API::Internal::AppSec::Dast::SiteValidations',

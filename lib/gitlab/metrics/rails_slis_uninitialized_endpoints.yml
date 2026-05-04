@@ -297,7 +297,6 @@
 - "POST /api/:version/groups/:id/tokens/revoke"
 - "POST /api/:version/import/github/cancel"
 - "POST /api/:version/import/github/gists"
-- "POST /api/:version/internal/jobs/:id/x_ray/dependencies"
 - "POST /api/:version/internal/shellhorse/git_audit_event"
 - "POST /api/:version/internal/suggested_reviewers/tokens"
 - "POST /api/:version/internal/two_factor_config"

@@ -24611,6 +24611,8 @@ CREATE TABLE namespace_settings (
     duo_custom_agents_enabled boolean,
     lock_duo_custom_agents_enabled boolean DEFAULT false NOT NULL,
     mcp_server_enabled boolean,
+    duo_external_agents_enabled boolean,
+    lock_duo_external_agents_enabled boolean DEFAULT false NOT NULL,
     CONSTRAINT check_0ba93c78c7 CHECK ((char_length(default_branch_name) <= 255)),
     CONSTRAINT check_d9644d516f CHECK ((char_length(step_up_auth_required_oauth_provider) <= 255)),
     CONSTRAINT check_namespace_settings_security_policies_is_hash CHECK ((jsonb_typeof(security_policies) = 'object'::text)),

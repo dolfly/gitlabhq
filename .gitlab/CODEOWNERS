@@ -15,6 +15,7 @@
 # All maintainer groups can approve /scripts/ and /.gitlab/
 # https://gitlab.com/gitlab-org/gitlab/-/work_items/594402#note_3249020797
 /scripts/ @gitlab-org/maintainers/frontend @gitlab-org/maintainers/database @gl-dx/maintainers @gl-dx/tooling-maintainers @gitlab-org/delivery @gitlab-org/maintainers/cicd-templates @gitlab-org/tw-leadership @gitlab-org/maintainers/kas-version-maintainers @gitlab-org/maintainers/rails-backend
+/tooling/ @gitlab-org/maintainers/frontend @gitlab-org/maintainers/database @gl-dx/maintainers @gl-dx/tooling-maintainers @gitlab-org/delivery @gitlab-org/maintainers/cicd-templates @gitlab-org/tw-leadership @gitlab-org/maintainers/kas-version-maintainers @gitlab-org/maintainers/rails-backend
 /.gitlab/ @gitlab-org/maintainers/frontend @gitlab-org/maintainers/database @gl-dx/maintainers @gl-dx/tooling-maintainers @gitlab-org/delivery @gitlab-org/maintainers/cicd-templates @gitlab-org/tw-leadership @gitlab-org/maintainers/kas-version-maintainers @gitlab-org/maintainers/rails-backend
 
 # Workhorse

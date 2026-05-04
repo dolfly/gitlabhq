@@ -101,7 +101,6 @@ RSpec/ReceiveMessages:
     - 'ee/spec/requests/api/graphql/mutations/audit_events/instance/google_cloud_logging_configurations/update_spec.rb'
     - 'ee/spec/requests/api/graphql/mutations/security/configuration/project_security_exclusion_delete_spec.rb'
     - 'ee/spec/requests/api/graphql/mutations/work_items/update_spec.rb'
-    - 'ee/spec/requests/api/internal/ai/x_ray/scan_spec.rb'
     - 'ee/spec/requests/api/internal/observability_spec.rb'
     - 'ee/spec/requests/api/project_mirror_spec.rb'
     - 'ee/spec/requests/api/vulnerabilities_spec.rb'

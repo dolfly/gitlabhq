@@ -920,6 +920,36 @@ You can configure this in either of the following ways:
 
 This configuration ensures the AI Gateway can properly cache HuggingFace models while respecting the OpenShift security constraints. The exact directory you choose may depend on your specific OpenShift configuration and security policies.
 
+### Tokenizer cache shadowed by a volume mount
+
+The precached tokenizer files in the AI Gateway image
+might be shadowed by a volume mount if:
+
+- Code completion requests return a `500` error.
+- AI Gateway logs show an `OSError` from `transformers/utils/hub.py`
+  attempting to download `Salesforce/codegen2-16B` from `huggingface.co`.
+
+The self-hosted AI Gateway image (`self-hosted-vX.Y.Z-ee`) sets
+`HF_HUB_OFFLINE=true` and precaches the tokenizer at build time,
+so no network access to `huggingface.co` should occur at runtime.
+If network access occurs, an empty directory in your Helm values
+might be mounted over `/home/aigateway/.hf`, overwriting the cached files.
+
+Do not try to resolve this issue by granting egress access to `huggingface.co`.
+Instead, to diagnose the issue, run the following in the AI Gateway pod:
+
+```shell
+ls -la /home/aigateway/.hf/hub/ 2>/dev/null || echo "NO_CACHE_DIR"
+env | grep -E '^(HF_|TRANSFORMERS_)'
+```
+
+If the cache directory is missing or empty, do the following:
+
+1. Check your `values.yaml` for any `volumeMounts` that targets
+   `/home/aigateway/.hf` or the path set by `HF_HOME`.
+1. Remove or remap the mount to a directory that does not overlap
+   with the image's built-in cache.
+
 ### Self-signed certificate error
 
 A `[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain` error is logged by the AI Gateway

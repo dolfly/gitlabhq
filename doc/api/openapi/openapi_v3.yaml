@@ -16949,7 +16949,7 @@ paths:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/RequestBody_d06b27b59ee0"
+              "$ref": "#/components/schemas/RequestBody_02a2c6e64d09"
   "/api/v4/projects/{id}/issues/{eventable_id}/resource_state_events":
     get:
       operationId: getApiV4ProjectsIdIssuesEventableIdResourceStateEvents
@@ -64711,7 +64711,7 @@ paths:
         content:
           multipart/form-data:
             schema:
-              "$ref": "#/components/schemas/RequestBody_9281812d7f1d"
+              "$ref": "#/components/schemas/RequestBody_59635af79df9"
   "/api/v4/groups/{id}":
     put:
       operationId: putApiV4GroupsId
@@ -64741,7 +64741,7 @@ paths:
         content:
           multipart/form-data:
             schema:
-              "$ref": "#/components/schemas/RequestBody_ca7f1922beea"
+              "$ref": "#/components/schemas/RequestBody_f009da6ade92"
     get:
       operationId: getApiV4GroupsId
       summary: Get a single group, with containing projects.
@@ -74494,6 +74494,10 @@ components:
           type: boolean
         duo_custom_flows_availability:
           type: string
+        duo_external_agents_enabled:
+          type: boolean
+        duo_external_agents_availability:
+          type: string
         tool_approval_for_session_enabled:
           type: string
         tool_approval_for_session_availability:
@@ -74711,6 +74715,8 @@ components:
         lock_duo_custom_agents_enabled:
           type: boolean
         lock_duo_custom_flows_enabled:
+          type: boolean
+        lock_duo_external_agents_enabled:
           type: boolean
         duo_workflows_default_image_registry:
           type: string
@@ -91987,7 +91993,7 @@ components:
           nullable: true
       required:
       - avatar
-    RequestBody_d06b27b59ee0:
+    RequestBody_02a2c6e64d09:
       type: object
       properties:
         admin_mode:
@@ -93183,6 +93189,15 @@ components:
           description: Indicates if the custom flows enabled setting is enforced for
             all groups
           nullable: true
+        duo_external_agents_enabled:
+          type: boolean
+          description: Indicates whether external agents are allowed for this instance
+          nullable: true
+        lock_duo_external_agents_enabled:
+          type: boolean
+          description: Indicates if the external agents enabled setting is enforced
+            for all groups
+          nullable: true
         duo_remote_flows_enabled:
           type: boolean
           description: Indicates whether GitLab Duo remote flows are enabled for the
@@ -94135,6 +94150,9 @@ components:
           type: string
           nullable: true
         duo_custom_flows_availability:
+          type: string
+          nullable: true
+        duo_external_agents_availability:
           type: string
           nullable: true
         tool_approval_for_session_enabled:
@@ -107707,7 +107725,7 @@ components:
           example:
             environment: production
           nullable: true
-    RequestBody_9281812d7f1d:
+    RequestBody_59635af79df9:
       type: object
       properties:
         name:
@@ -107928,6 +107946,10 @@ components:
           type: boolean
           description: Enable GitLab Duo custom flows for this group
           nullable: true
+        duo_external_agents_availability:
+          type: boolean
+          description: Enable GitLab Duo external agents for this group
+          nullable: true
         tool_approval_for_session_availability:
           type: string
           enum:
@@ -108039,7 +108061,7 @@ components:
       required:
       - name
       - path
-    RequestBody_ca7f1922beea:
+    RequestBody_f009da6ade92:
       type: object
       properties:
         name:
@@ -108260,6 +108282,10 @@ components:
         duo_custom_flows_availability:
           type: boolean
           description: Enable GitLab Duo custom flows for this group
+          nullable: true
+        duo_external_agents_availability:
+          type: boolean
+          description: Enable GitLab Duo external agents for this group
           nullable: true
         tool_approval_for_session_availability:
           type: string

@@ -49216,6 +49216,9 @@ definitions:
       duo_custom_flows_availability:
         type: boolean
         description: Enable GitLab Duo custom flows for this group
+      duo_external_agents_availability:
+        type: boolean
+        description: Enable GitLab Duo external agents for this group
       tool_approval_for_session_availability:
         type: string
         description: Tool approval for session availability. One of `default_on`,
@@ -49504,6 +49507,9 @@ definitions:
       duo_custom_flows_availability:
         type: boolean
         description: Enable GitLab Duo custom flows for this group
+      duo_external_agents_availability:
+        type: boolean
+        description: Enable GitLab Duo external agents for this group
       tool_approval_for_session_availability:
         type: string
         description: Tool approval for session availability. One of `default_on`,

@@ -93,19 +93,20 @@ This feature is in beta and is therefore subject to change as we gather feedback
 - Not all GitLab Duo features are guaranteed to work optimally with every compatible model.
 - Response quality, speed, and performance overall might vary significantly based on your model choice.
 
-| Model family | Model |
-|-------------|-------|
-| General | Any model compatible with the [OpenAI API specification](https://platform.openai.com/docs/api-reference) |
+| Model family   | Model |
+|----------------|-------|
+| General        | Any model compatible with the [OpenAI API specification](https://platform.openai.com/docs/api-reference) |
 | CodeGemma      | [CodeGemma 2b](https://huggingface.co/google/codegemma-2b) |
 | CodeGemma      | [CodeGemma 7b-it](https://huggingface.co/google/codegemma-7b-it) |
 | CodeGemma      | [CodeGemma 7b-code](https://huggingface.co/google/codegemma-7b) |
 | Code Llama     | [Code-Llama 13b](https://huggingface.co/meta-llama/CodeLlama-13b-Instruct-hf) |
 | DeepSeek Coder | [DeepSeek Coder 33b Instruct](https://huggingface.co/deepseek-ai/deepseek-coder-33b-instruct) |
 | DeepSeek Coder | [DeepSeek Coder 33b Base](https://huggingface.co/deepseek-ai/deepseek-coder-33b-base) |
-| Kimi K2 | [Kimi K2.5](https://huggingface.co/moonshotai/Kimi-K2.5) |
-| Kimi K2 | [Kimi K2.6](https://huggingface.co/moonshotai/Kimi-K2.6) |
-| MiniMax | [MiniMax-M2.7](https://huggingface.co/MiniMaxAI/MiniMax-M2.7) |
-| GLM | [GLM-5.1-FP8](https://huggingface.co/zai-org/GLM-5.1-FP8) |
+| Devstral 2     | [Devstral 2 123B](https://huggingface.co/mistralai/Devstral-2-123B-Instruct-2512) |
+| GLM            | [GLM-5.1-FP8](https://huggingface.co/zai-org/GLM-5.1-FP8) |
+| Kimi K2        | [Kimi K2.5](https://huggingface.co/moonshotai/Kimi-K2.5) |
+| Kimi K2        | [Kimi K2.6](https://huggingface.co/moonshotai/Kimi-K2.6) |
+| MiniMax        | [MiniMax-M2.7](https://huggingface.co/MiniMaxAI/MiniMax-M2.7) |
 
 <!-- vale gitlab_base.Spelling = YES -->
 

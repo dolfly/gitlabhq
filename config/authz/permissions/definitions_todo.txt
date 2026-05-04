@@ -17,7 +17,6 @@ access_security_scans_api
 access_summarize_new_merge_request
 access_summarize_review
 access_workspaces_feature
-access_x_ray_on_instance
 activate_group_member
 add_catalog_resource
 add_cluster

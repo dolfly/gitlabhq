@@ -375,6 +375,8 @@ module ApplicationSettingImplementation
         lock_duo_custom_agents_enabled: false,
         duo_custom_flows_enabled: true,
         lock_duo_custom_flows_enabled: false,
+        duo_external_agents_enabled: true,
+        lock_duo_external_agents_enabled: false,
         pipeline_limit_per_user: 0,
         background_operations_max_jobs: 10
       }.tap do |hsh|
