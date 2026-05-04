@@ -51,8 +51,7 @@ distilled_at_sha: 6fa778d4124d3a159928c1360de15a5b99eed36a
 
 ### Transaction Guidelines
 
-- Use `ApplicationRecord.transaction` instead of `ActiveRecord::Base.transaction`
-- Use `Model.transaction` (not `ApplicationRecord.transaction`) when all records in the block belong to the same database table/connection
+- Use `Model.transaction` when all records in the block belong to the same database table/connection; use `ApplicationRecord.transaction` (not `ActiveRecord::Base.transaction`) only when the model is not known or records span multiple models
 - DO NOT use `ApplicationRecord.transaction` for models on a different database (for example, `Ci::*` models on `CiDatabase`) — statements will not be rolled back
 - Keep transaction blocks as short as possible to minimize lock contention
 - DO NOT perform external network requests (Sidekiq jobs, emails, HTTP calls, different-connection DB statements), file system operations, long CPU-intensive computation, or `sleep(n)` inside a transaction block

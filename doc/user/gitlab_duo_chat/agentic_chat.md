@@ -2,6 +2,7 @@
 stage: AI-powered
 group: Duo Chat
 info: To determine the technical writer assigned to the Stage/Group associated with this page, see <https://handbook.gitlab.com/handbook/product/ux/technical-writing/#assignments>
+description: Use GitLab Duo Agentic Chat to answer complex questions and create or edit files autonomously.
 title: GitLab Duo Agentic Chat
 ---
 

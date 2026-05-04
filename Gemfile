@@ -581,11 +581,6 @@ group :test do
 
   gem 'graphlyte', '~> 1.0.0', feature_category: :shared # rubocop:todo Gemfile/MissingFeatureCategory -- https://gitlab.com/gitlab-org/gitlab/-/issues/581839
 
-  # Upload CI metrics to a GCP BigQuery instance
-  #
-  # We only use this gem in CI.
-  gem 'google-cloud-bigquery', '~> 1.0', feature_category: :tooling
-
   gem 'shoulda-matchers', '~> 6.4.0', require: false, feature_category: :shared # rubocop:todo Gemfile/MissingFeatureCategory -- https://gitlab.com/gitlab-org/gitlab/-/issues/581839
   gem 'email_spec', '~> 2.3.0', feature_category: :shared # rubocop:todo Gemfile/MissingFeatureCategory -- https://gitlab.com/gitlab-org/gitlab/-/issues/581839
   gem 'webmock', '~> 3.26.0', feature_category: :shared # rubocop:todo Gemfile/MissingFeatureCategory -- https://gitlab.com/gitlab-org/gitlab/-/issues/581839

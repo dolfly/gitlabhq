@@ -41,14 +41,6 @@
     NODE_ENV: "production"
     GITLAB_ALLOW_SEPARATE_CI_DATABASE: "true"
 
-.cache-analytics:
-  after_script:
-    - |
-      source scripts/utils.sh
-      section_start "cache-analytics" "Uploading cache metrics"
-      bundle exec ruby scripts/cache_metrics || true
-      section_end "cache-analytics"
-
 .redis-services:
   services:
     - name: ${REGISTRY_HOST}/${REGISTRY_GROUP}/gitlab-build-images:redis-cluster-${REDIS_CLUSTER_VERSION}
@@ -480,14 +472,12 @@
   cache: !reference [.ruby-gems-cache]
 
 .ruby-cache-pull-push:
-  extends: .cache-analytics
   cache:
     key: !reference [.ruby-gems-cache, key]
     paths: !reference [.ruby-gems-cache, paths]
     policy: pull-push
 
 .setup-test-env-cache:
-  extends: .cache-analytics
   cache:
     - !reference [.ruby-gems-cache]
     - *gitaly-binaries-cache
@@ -495,7 +485,6 @@
     - *zoekt-elasticsearch-indexer-cache  # gitlab-ci has a limit of max 4 caches, so these binaries are cached together
 
 .static-analysis-cache:
-  extends: .cache-analytics
   cache:
     - !reference [.ruby-gems-cache]
     - *node-modules-cache
@@ -536,8 +525,6 @@
     policy: pull-push
 
 .assets-compile-cache:
-  extends:
-    - .cache-analytics
   cache:
     - !reference [.ruby-gems-cache]
     - *node-modules-cache

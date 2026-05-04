@@ -152,6 +152,17 @@ describe('CommitListApp', () => {
         expect(timeElement.text()).toBe(expectedDateText[index]);
       });
     });
+
+    it('renders the raw day string when the authored date is outside the JS Date range', async () => {
+      const outOfRangeDay = '+292278994-08-17T07:12:55+00:00';
+      groupCommitsByDay.mockReturnValue([{ day: outOfRangeDay, commits: [mockCommitsNodes[0]] }]);
+      createComponent();
+      await waitForPromises();
+
+      const timeElements = findTimeElements();
+      expect(timeElements.at(0).attributes('datetime')).toBe(outOfRangeDay);
+      expect(timeElements.at(0).text()).toBe(outOfRangeDay);
+    });
   });
 
   describe('commit list items', () => {

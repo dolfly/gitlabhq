@@ -22,8 +22,30 @@ RSpec.describe Mcp::Tools::WorkItems::GetSavedViewWorkItemsTool, feature_categor
         expect(keys).to include(
           'assigneeUsernames', 'assigneeWildcardId', 'authorUsername',
           'confidential', 'labelName', 'milestoneTitle', 'milestoneWildcardId',
-          'myReactionEmoji', 'types', 'state', 'not', 'or'
+          'myReactionEmoji', 'types', 'state', 'not', 'or',
+          'closedAfter', 'closedBefore', 'createdAfter', 'createdBefore',
+          'dueAfter', 'dueBefore', 'updatedAfter', 'updatedBefore',
+          'subscribed', 'releaseTag', 'releaseTagWildcardId',
+          'crmContactId', 'crmOrganizationId'
         )
+      end
+
+      it 'includes correct types for date range and CRM/release filters' do
+        type_map = described_class.filter_definitions.to_h { |f| [f[:key], f[:type]] }
+
+        expect(type_map['closedAfter']).to eq('Time')
+        expect(type_map['closedBefore']).to eq('Time')
+        expect(type_map['createdAfter']).to eq('Time')
+        expect(type_map['createdBefore']).to eq('Time')
+        expect(type_map['dueAfter']).to eq('Time')
+        expect(type_map['dueBefore']).to eq('Time')
+        expect(type_map['updatedAfter']).to eq('Time')
+        expect(type_map['updatedBefore']).to eq('Time')
+        expect(type_map['subscribed']).to eq('SubscriptionStatus')
+        expect(type_map['releaseTag']).to eq('[String!]')
+        expect(type_map['releaseTagWildcardId']).to eq('ReleaseTagWildcardId')
+        expect(type_map['crmContactId']).to eq('String')
+        expect(type_map['crmOrganizationId']).to eq('String')
       end
 
       it 'includes type information for each filter' do
@@ -276,6 +298,118 @@ RSpec.describe Mcp::Tools::WorkItems::GetSavedViewWorkItemsTool, feature_categor
 
         expect(variables[:firstPageSize]).to eq(50)
         expect(variables[:afterCursor]).to eq('cursor123')
+      end
+    end
+
+    context 'with date range filters' do
+      let(:params) do
+        {
+          group_id: group.id.to_s,
+          filters: {
+            'closedAfter' => '2026-01-01T00:00:00Z',
+            'closedBefore' => '2026-02-01T00:00:00Z',
+            'createdAfter' => '2026-01-01T00:00:00Z',
+            'createdBefore' => '2026-02-01T00:00:00Z',
+            'dueAfter' => '2026-01-01T00:00:00Z',
+            'dueBefore' => '2026-02-01T00:00:00Z',
+            'updatedAfter' => '2026-01-01T00:00:00Z',
+            'updatedBefore' => '2026-02-01T00:00:00Z'
+          },
+          sort: nil
+        }
+      end
+
+      it 'maps all date range filters to GraphQL variables' do
+        variables = tool.build_variables
+
+        expect(variables[:closedAfter]).to eq('2026-01-01T00:00:00Z')
+        expect(variables[:closedBefore]).to eq('2026-02-01T00:00:00Z')
+        expect(variables[:createdAfter]).to eq('2026-01-01T00:00:00Z')
+        expect(variables[:createdBefore]).to eq('2026-02-01T00:00:00Z')
+        expect(variables[:dueAfter]).to eq('2026-01-01T00:00:00Z')
+        expect(variables[:dueBefore]).to eq('2026-02-01T00:00:00Z')
+        expect(variables[:updatedAfter]).to eq('2026-01-01T00:00:00Z')
+        expect(variables[:updatedBefore]).to eq('2026-02-01T00:00:00Z')
+      end
+
+      it 'does not report date range filters as unsupported' do
+        tool.build_variables
+
+        expect(tool.unsupported_filters).to be_empty
+      end
+    end
+
+    context 'with subscribed filter' do
+      let(:params) do
+        {
+          group_id: group.id.to_s,
+          filters: { 'subscribed' => 'EXPLICITLY_SUBSCRIBED' },
+          sort: nil
+        }
+      end
+
+      it 'maps subscribed filter to GraphQL variables' do
+        variables = tool.build_variables
+
+        expect(variables[:subscribed]).to eq('EXPLICITLY_SUBSCRIBED')
+      end
+
+      it 'does not report subscribed as unsupported' do
+        tool.build_variables
+
+        expect(tool.unsupported_filters).not_to include('subscribed')
+      end
+    end
+
+    context 'with release filters' do
+      let(:params) do
+        {
+          group_id: group.id.to_s,
+          filters: {
+            'releaseTag' => %w[v1.0 v1.1],
+            'releaseTagWildcardId' => 'NONE'
+          },
+          sort: nil
+        }
+      end
+
+      it 'maps release filters to GraphQL variables' do
+        variables = tool.build_variables
+
+        expect(variables[:releaseTag]).to eq(%w[v1.0 v1.1])
+        expect(variables[:releaseTagWildcardId]).to eq('NONE')
+      end
+
+      it 'does not report release filters as unsupported' do
+        tool.build_variables
+
+        expect(tool.unsupported_filters).not_to include('releaseTag', 'releaseTagWildcardId')
+      end
+    end
+
+    context 'with CRM filters' do
+      let(:params) do
+        {
+          group_id: group.id.to_s,
+          filters: {
+            'crmContactId' => 'gid://gitlab/CustomerRelations::Contact/1',
+            'crmOrganizationId' => 'gid://gitlab/CustomerRelations::Organization/2'
+          },
+          sort: nil
+        }
+      end
+
+      it 'maps CRM filters to GraphQL variables' do
+        variables = tool.build_variables
+
+        expect(variables[:crmContactId]).to eq('gid://gitlab/CustomerRelations::Contact/1')
+        expect(variables[:crmOrganizationId]).to eq('gid://gitlab/CustomerRelations::Organization/2')
+      end
+
+      it 'does not report CRM filters as unsupported' do
+        tool.build_variables
+
+        expect(tool.unsupported_filters).not_to include('crmContactId', 'crmOrganizationId')
       end
     end
   end

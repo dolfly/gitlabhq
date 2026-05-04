@@ -324,6 +324,9 @@ duplicate IDs across partitions. To solve this we enforce that only the database
 can set the ID values and use a sequence to generate them because sequences are
 guaranteed to generate unique values.
 
+> [!note]
+> This step is only required when the table needs to expose the ID externally.
+
 For example:
 
 ```ruby
@@ -364,3 +367,15 @@ end
 ```
 
 Depending on the model, it might be safer to use a [change management issue](https://gitlab.com/gitlab-com/gl-infra/production/-/issues/16387).
+
+Also update the following:
+
+- `config/gitlab_loose_foreign_keys.yml`: Repoint all related tables to the partitioned table.
+- [GitLab exporter](https://gitlab.com/gitlab-org/ruby/gems/gitlab-exporter): Replace all references to the original table with the partitioned table.
+
+### Step 11 - Move the first partition into the dynamic schema
+
+The first partition lives in the `public` schema. Move it into the
+`gitlab_partitions_dynamic` schema so all partitions are managed consistently.
+
+For an example, see [merge request 191330](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/191330).

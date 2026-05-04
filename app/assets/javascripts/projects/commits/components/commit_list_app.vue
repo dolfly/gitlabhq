@@ -1,7 +1,7 @@
 <script>
 import { GlIcon, GlKeysetPagination, GlLoadingIcon } from '@gitlab/ui';
 import { InternalEvents } from '~/tracking';
-import { localeDateFormat } from '~/lib/utils/datetime_utility';
+import { isValidDate, localeDateFormat, newDate } from '~/lib/utils/datetime_utility';
 import { createAlert } from '~/alert';
 import { s__ } from '~/locale';
 import {
@@ -147,7 +147,8 @@ export default {
   },
   methods: {
     getFormattedDate(dateTime) {
-      return localeDateFormat.asDate.format(new Date(dateTime));
+      const date = newDate(dateTime);
+      return isValidDate(date) ? localeDateFormat.asDate.format(date) : dateTime;
     },
     handleRefChange(newRef) {
       this.currentRef = newRef;

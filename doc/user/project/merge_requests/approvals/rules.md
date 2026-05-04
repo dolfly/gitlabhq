@@ -114,7 +114,7 @@ To enforce multiple approval rules on a merge request, add multiple default appr
 When an [eligible approver](#eligible-approvers) approves a merge request, it
 reduces the number of approvals left (the **Approvals** column) for all rules that the approver belongs to:
 
-![Merge request approvals widget](img/mr_approvals_widget_v16_0.png)
+![The approvals widget displaying Code Owners rules with eligible approvers, requirements, and approval status.](img/mr_approvals_widget_v16_0.png)
 
 <i class="fa-youtube-play" aria-hidden="true"></i>
 For an overview, see the [multiple approvers](https://www.youtube.com/watch?v=8JQJ5821FrA) video.
@@ -251,7 +251,7 @@ complete, the security approval rules are checked to determine if the security a
 In case the scanners in the pipeline identify an issue and security approvals are required, a bot comment is generated
 on the merge request to indicate which steps are needed to proceed.
 
-![Security Approvals](img/security_approvals_v15_0.png)
+![The Security Approvals section displaying a policy rule that requires one approval when a scanner finds vulnerabilities.](img/security_approvals_v15_0.png)
 
 These policies are both created and edited in the [security policy editor](../../../application_security/policies/_index.md#policy-editor).
 

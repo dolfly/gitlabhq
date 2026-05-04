@@ -1,4 +1,4 @@
-import { toISODateFormat } from '~/lib/utils/datetime_utility';
+import { isValidDate, newDate, toISODateFormat } from '~/lib/utils/datetime_utility';
 
 /**
  * Groups commits by their authored date (day).
@@ -11,7 +11,9 @@ export function groupCommitsByDay(commits) {
   const groupedMap = new Map();
 
   for (const commit of commits) {
-    const day = toISODateFormat(new Date(commit.authoredDate));
+    // Git permits commit timestamps with years outside JS Date's ±275,760 range
+    const date = newDate(commit.authoredDate);
+    const day = isValidDate(date) ? toISODateFormat(date) : commit.authoredDate;
 
     if (!groupedMap.has(day)) groupedMap.set(day, { day, commits: [] });
 

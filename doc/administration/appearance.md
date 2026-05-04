@@ -35,7 +35,7 @@ The homepage button is located in the upper-left corner of the left sidebar.
 Replace the default GitLab logo {{< icon name="tanuki" >}} with any image.
 
 - The file should be less than 1 MB.
-- The image should be 24 pixels high. Images more than 24 px high will be resized.
+- The image should be 24 pixels high. Images more than 24 pixels high are automatically resized.
 
 To customize your homepage icon image:
 
@@ -105,7 +105,9 @@ By default, the system header and footer text is white text on an orange backgro
 
 ## Customize your sign-in and register pages
 
+<!-- vale gitlab_base.OxfordComma = NO -->
 Customize the title, description, and logo on the sign-in and register page. By default, the register page logo is located on the left of the page, between the title and the description.
+<!-- vale gitlab_base.OxfordComma = YES -->
 
 To customize your sign-in and register page titles or descriptions:
 
@@ -118,7 +120,7 @@ To customize your sign-in and register page titles or descriptions:
 To customize the logo on your sign-in and register pages:
 
 - The file should be less than 1 MB.
-- The image should be 128 pixels high. Images more than 128 px high will be resized.
+- The image should be 128 pixels high. Images more than 128 pixels high are automatically resized.
 
 1. In the upper-right corner, select **Admin**.
 1. In the left sidebar, select **Settings** > **Appearance**.

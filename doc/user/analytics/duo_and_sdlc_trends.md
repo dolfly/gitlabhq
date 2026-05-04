@@ -52,8 +52,6 @@ see [GitLab Duo add-ons](../../subscriptions/subscription-add-ons.md).
 To learn more about GitLab Duo and SDLC trends, see the blog post
 [Developing GitLab Duo: AI impact analytics dashboard measures the ROI of AI](https://about.gitlab.com/blog/developing-gitlab-duo-ai-impact-analytics-dashboard-measures-the-roi-of-ai/).
 
-For a click-through demo, see the [GitLab Duo and SDLC trends product tour](https://gitlab.navattic.com/ai-impact).
-
 <i class="fa-youtube-play" aria-hidden="true"></i>
 For an overview, see [GitLab Duo AI Impact Dashboard](https://youtu.be/FxSWX64aUOE?si=7Yfc6xHm63c3BRwn).
 <!-- Video published on 2025-03-06 -->

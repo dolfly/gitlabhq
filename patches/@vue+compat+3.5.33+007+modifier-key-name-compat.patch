@@ -2,7 +2,7 @@ diff --git a/node_modules/@vue/compat/dist/vue.cjs.js b/node_modules/@vue/compat
 index aaaaaaa..bbbbbbb 100644
 --- a/node_modules/@vue/compat/dist/vue.cjs.js
 +++ b/node_modules/@vue/compat/dist/vue.cjs.js
-@@ -6513,7 +6513,7 @@
+@@ -6529,7 +6529,7 @@
    const configKeyCodes = config.keyCodes || {};
    const mappedKeyCode = configKeyCodes[key] || builtInKeyCode;
    if (builtInKeyName && eventKeyName && !configKeyCodes[key]) {
@@ -11,7 +11,7 @@ index aaaaaaa..bbbbbbb 100644
    } else if (mappedKeyCode) {
      return isKeyNotMatch(mappedKeyCode, eventKeyCode);
    } else if (eventKeyName) {
-@@ -6524,9 +6524,14 @@
+@@ -6540,9 +6540,14 @@
  function normalizeKeyForComparison(key) {
    return typeof key === "string" ? key.toLowerCase() : key;
  }
@@ -31,7 +31,7 @@ diff --git a/node_modules/@vue/compat/dist/vue.esm-bundler.js b/node_modules/@vu
 index aaaaaaa..bbbbbbb 100644
 --- a/node_modules/@vue/compat/dist/vue.esm-bundler.js
 +++ b/node_modules/@vue/compat/dist/vue.esm-bundler.js
-@@ -6493,7 +6493,7 @@
+@@ -6509,7 +6509,7 @@
    const configKeyCodes = config.keyCodes || {};
    const mappedKeyCode = configKeyCodes[key] || builtInKeyCode;
    if (builtInKeyName && eventKeyName && !configKeyCodes[key]) {
@@ -40,7 +40,7 @@ index aaaaaaa..bbbbbbb 100644
    } else if (mappedKeyCode) {
      return isKeyNotMatch(mappedKeyCode, eventKeyCode);
    } else if (eventKeyName) {
-@@ -6504,9 +6504,14 @@
+@@ -6520,9 +6520,14 @@
  function normalizeKeyForComparison(key) {
    return typeof key === "string" ? key.toLowerCase() : key;
  }
@@ -60,7 +60,7 @@ diff --git a/node_modules/@vue/compat/dist/vue.runtime.esm-bundler.js b/node_mod
 index aaaaaaa..bbbbbbb 100644
 --- a/node_modules/@vue/compat/dist/vue.runtime.esm-bundler.js
 +++ b/node_modules/@vue/compat/dist/vue.runtime.esm-bundler.js
-@@ -6420,7 +6420,7 @@
+@@ -6436,7 +6436,7 @@
    const configKeyCodes = config.keyCodes || {};
    const mappedKeyCode = configKeyCodes[key] || builtInKeyCode;
    if (builtInKeyName && eventKeyName && !configKeyCodes[key]) {
@@ -69,7 +69,7 @@ index aaaaaaa..bbbbbbb 100644
    } else if (mappedKeyCode) {
      return isKeyNotMatch(mappedKeyCode, eventKeyCode);
    } else if (eventKeyName) {
-@@ -6431,9 +6431,14 @@
+@@ -6447,9 +6447,14 @@
  function normalizeKeyForComparison(key) {
    return typeof key === "string" ? key.toLowerCase() : key;
  }

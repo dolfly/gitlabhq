@@ -2,6 +2,7 @@
 stage: AI-powered
 group: Agent Foundations
 info: To determine the technical writer assigned to the Stage/Group associated with this page, see <https://handbook.gitlab.com/handbook/product/ux/technical-writing/#assignments>
+description: Understand common security threats in agentic systems, including prompt injection, and how to mitigate them to protect your agents and flows.
 title: Security threats in agentic systems
 ---
 
