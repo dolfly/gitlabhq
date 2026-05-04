@@ -13,7 +13,10 @@ module Ci
 
       def initialize(pipeline)
         @pipeline = pipeline
-        @collection = AtomicProcessingService::StatusCollection.new(pipeline)
+        @observe_processing_delay = Feature.enabled?(:ci_observe_job_processing_delay, :current_request)
+        @collection = AtomicProcessingService::StatusCollection.new(
+          pipeline, observe_processing_delay: @observe_processing_delay
+        )
       end
 
       def execute
@@ -120,9 +123,12 @@ module Ci
           Ci::ProcessBuildService.new(project, subject.user)
             .execute(subject, previous_status)
         end
+
+        observe_processing_delay(job) if @observe_processing_delay
+
         # update internal representation of job
         # to make the status change of job to be taken into account during further processing
-        @collection.set_job_status(job.id, job.status, job.lock_version)
+        @collection.set_job_status(job.id, job.status, job.lock_version, job.finished_at)
       end
 
       def status_of_previous_jobs(job)
@@ -133,6 +139,18 @@ module Ci
           # job uses Stages, get status of prior stage
           @collection.status_of_jobs_prior_to_stage(job.stage_idx.to_i)
         end
+      end
+
+      def observe_processing_delay(job)
+        ready_at = if job.scheduling_type_dag?
+                     @collection.max_finished_at_of_jobs(job.aggregated_needs_names.to_a)
+                   else
+                     @collection.max_finished_at_prior_to_stage(job.stage_idx.to_i)
+                   end
+
+        ready_at ||= pipeline.created_at
+
+        Labkit::UserExperienceSli.observed(:ci_job_processing_delay, start_time: ready_at)
       end
 
       # Gets the jobs that changed from stopped to alive status since the initial status collection

@@ -5376,6 +5376,12 @@ msgstr ""
 msgid "Added %{label_references} %{label_text}."
 msgstr ""
 
+msgid "Added %{target_name}"
+msgstr ""
+
+msgid "Added %{target_name} as %{role}"
+msgstr ""
+
 msgid "Added %{target} as a linked item blocked by this %{item_type}."
 msgstr ""
 
@@ -36265,6 +36271,9 @@ msgstr ""
 msgid "HomePageProjectsWidget|Your projects are not available. Please refresh the page to try again."
 msgstr ""
 
+msgid "HomePageRecentlyViewedWidget|Issues, merge requests, and wiki pages you visit will appear here."
+msgstr ""
+
 msgid "HomePageRecentlyViewedWidget|Your recently viewed items are not available. Please refresh the page to try again."
 msgstr ""
 
@@ -39279,9 +39288,6 @@ msgid "Issues Completed"
 msgstr ""
 
 msgid "Issues and merge requests"
-msgstr ""
-
-msgid "Issues and merge requests you visit will appear here."
 msgstr ""
 
 msgid "Issues are being rebalanced at the moment, so manual reordering is disabled."
@@ -89480,6 +89486,9 @@ msgid "with expiry changing from %{old_expiry} to %{new_expiry}"
 msgstr ""
 
 msgid "with expiry remaining unchanged at %{old_expiry}"
+msgstr ""
+
+msgid "with expiry: %{expiry}"
 msgstr ""
 
 msgid "yaml invalid"

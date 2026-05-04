@@ -1297,6 +1297,107 @@ RSpec.describe Ci::PipelineProcessing::AtomicProcessingService, feature_category
       end
     end
 
+    describe 'processing delay observation', :sidekiq_inline do
+      context 'with stage-based jobs' do
+        before do
+          create_build('build', stage_idx: 0)
+          create_build('test', stage_idx: 1)
+        end
+
+        it 'observes delay for jobs whose prior stage has completed' do
+          expect(Labkit::UserExperienceSli).to receive(:observed)
+            .with(:ci_job_processing_delay, start_time: an_instance_of(ActiveSupport::TimeWithZone))
+            .at_least(:twice)
+
+          process_pipeline
+          succeed_pending
+        end
+      end
+
+      context 'with DAG jobs' do
+        let!(:build_job) { create_build('build', stage_idx: 0) }
+        let!(:test_job) { create_build('test', stage_idx: 1, scheduling_type: :dag) }
+
+        before do
+          create(:ci_build_need, build: test_job, name: 'build')
+        end
+
+        it 'observes delay for DAG jobs whose needs are met' do
+          expect(Labkit::UserExperienceSli).to receive(:observed)
+            .with(:ci_job_processing_delay, start_time: an_instance_of(ActiveSupport::TimeWithZone))
+            .at_least(:twice)
+
+          process_pipeline
+          succeed_pending
+        end
+      end
+
+      context 'with first stage jobs that have no prior dependencies' do
+        before do
+          create_build('build', stage_idx: 0)
+        end
+
+        it 'observes delay using pipeline created_at as the baseline' do
+          expect(Labkit::UserExperienceSli).to receive(:observed)
+            .with(:ci_job_processing_delay, start_time: pipeline.created_at)
+
+          process_pipeline
+        end
+      end
+
+      context 'with a manual job' do
+        before do
+          create_build('build', stage_idx: 0)
+          create_build('manual-action', stage_idx: 1, when: 'manual')
+        end
+
+        it 'observes delay when the manual job is processed out of created status' do
+          expect(Labkit::UserExperienceSli).to receive(:observed)
+            .with(:ci_job_processing_delay, start_time: an_instance_of(ActiveSupport::TimeWithZone))
+            .at_least(:twice)
+
+          process_pipeline
+          succeed_pending
+
+          expect(builds.find_by(name: 'manual-action').status).to eq('manual')
+        end
+      end
+
+      context 'with a delayed job' do
+        before do
+          create_build('build', stage_idx: 0)
+          create_build('delayed-job', stage_idx: 1, **delayed_options)
+          allow(Ci::BuildScheduleWorker).to receive(:perform_at)
+        end
+
+        it 'observes delay when the delayed job is processed out of created status' do
+          expect(Labkit::UserExperienceSli).to receive(:observed)
+            .with(:ci_job_processing_delay, start_time: an_instance_of(ActiveSupport::TimeWithZone))
+            .at_least(:twice)
+
+          process_pipeline
+          succeed_pending
+
+          expect(pipeline.all_jobs.find_by(name: 'delayed-job').status).to eq('scheduled')
+        end
+      end
+
+      context 'when ci_observe_job_processing_delay feature flag is disabled' do
+        before do
+          stub_feature_flags(ci_observe_job_processing_delay: false)
+          create_build('build', stage_idx: 0)
+          create_build('test', stage_idx: 1)
+        end
+
+        it 'does not observe any delay' do
+          expect(Labkit::UserExperienceSli).not_to receive(:observed)
+
+          process_pipeline
+          succeed_pending
+        end
+      end
+    end
+
     describe 'deployments creation' do
       let(:config) do
         <<-YAML
