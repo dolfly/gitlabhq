@@ -371,3 +371,28 @@ instructions:
         use `find('[data-testid="card"] h3', text: title).ancestor('[data-testid="card"]')` to
         leverage CSS child selectors and walk back to the parent element.
       - Reference: https://gitlab.com/gitlab-org/gitlab/-/raw/master/doc/development/testing_guide/best_practices.md
+
+  - name: View Templates
+    fileFilters:
+      - "app/views/**/*"
+      - "ee/app/views/**/*"
+    instructions: |
+      Views are responsible for presentation only. Flag any logic that belongs in a controller, service, or model:
+      1. No database queries in views.
+         Remind: "Move all data retrieval into the controller or a presenter and pass the result as an instance variable. Queries in views bypass caching layers, are invisible to query analysis tools, and make N+1 problems hard to detect."
+      2. No complex business logic — no conditionals that evaluate model state beyond simple `nil?` / `present?` / boolean attribute checks, no service object instantiation, and no multi-step computations.
+         Remind: "Extract this logic into a helper, presenter, or ViewComponent."
+      - Reference: https://gitlab.com/gitlab-org/gitlab/-/blob/master/doc/development/reusing_abstractions.md#views
+
+  - name: View Specs
+    fileFilters:
+      - "spec/views/**/*_spec.rb"
+      - "ee/spec/views/**/*_spec.rb"
+    instructions: |
+      View specs should verify rendered HTML output, not re-test backend logic. Flag specs that overstep this boundary:
+      1. No `ActiveRecord::QueryRecorder` or `exceed_query_limit` assertions. Query performance is a backend concern tested at the request/controller layer, not in view specs.
+      2. No `create(...)` factory calls (enforced by rule `RSpec/FactoryBot/AvoidCreate`) unless the spec genuinely cannot work with `build_stubbed`. If `create` is present, ask: "Does this spec need a persisted record, or can `build_stubbed` provide the same rendering result?"
+      3. No deep service-object mocking chains (e.g., `receive_message_chain`). If the view requires a service to be stubbed with chained calls, the view is doing too much — flag the view itself, not just the spec.
+      4. Keep setup proportional to the assertion. A spec that assigns five instance variables and stubs three helper methods to assert a single `have_css` is a signal that the view has too many responsibilities.
+      5. Assertions should target rendered output (`have_content`, `have_css`, `have_selector`, `have_link`) — not internal Ruby state or return values of view helper methods.
+      - Reference: https://gitlab.com/gitlab-org/gitlab/-/blob/master/doc/development/testing_guide/best_practices.md#view-specs

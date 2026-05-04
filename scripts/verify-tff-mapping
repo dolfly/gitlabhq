@@ -287,15 +287,6 @@ tests = [
     expected: ['spec/lib/gitlab/tracking/event_definition_validator_validate_all_spec.rb']
   },
   {
-    explanation: 'Snowplow schema maps to event validation spec',
-    changed_file: 'config/events/schema.json',
-    expected: %w[
-      spec/lib/gitlab/tracking/event_definition_validator_validate_all_spec.rb
-      spec/support_specs/matchers/internal_events_matchers_spec.rb
-    ]
-  },
-
-  {
     explanation: 'Internal Events application logic maps to internal events tooling',
     changed_file: 'lib/gitlab/internal_events.rb',
     expected: %w[

@@ -63,6 +63,8 @@ Rakefile @gitlab-org/maintainers/rails-backend
 /public/ @gitlab-org/maintainers/rails-backend @gitlab-org/maintainers/frontend
 /app/views/**/*.erb @gitlab-org/maintainers/rails-backend @gitlab-org/maintainers/frontend
 /ee/app/views/**/*.erb @gitlab-org/maintainers/rails-backend @gitlab-org/maintainers/frontend
+/spec/views/ @gitlab-org/maintainers/rails-backend @gitlab-org/maintainers/frontend
+/ee/spec/views/ @gitlab-org/maintainers/rails-backend @gitlab-org/maintainers/frontend
 
 # Frontend
 *.scss @gitlab-org/maintainers/frontend

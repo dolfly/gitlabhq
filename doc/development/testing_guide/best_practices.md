@@ -638,6 +638,29 @@ firefox coverage/index.html
 
 Use the coverage reports to ensure your tests cover 100% of your code.
 
+### View specs
+
+View specs in `spec/views/` and `ee/spec/views/` verify rendered HTML output.
+They must not re-test backend logic or database behavior.
+
+Assertions must target rendered output using matchers such as `have_content`, `have_css`,
+`have_selector`, and `have_link`.
+Do not assert on internal Ruby state or return values of view helper methods.
+
+Setup must use `build_stubbed` instead of `create` unless the spec genuinely requires
+persisted state.
+Use `assign` to pass instance variables and `allow(view).to receive(...)` to stub helper methods.
+Keep setup proportional to what is being asserted.
+A spec that assigns many instance variables and stubs several helpers to assert a single element
+is a signal that the view has too many responsibilities.
+
+**Do not** include the following in view specs:
+
+- `ActiveRecord::QueryRecorder` or `exceed_query_limit` assertions.
+  Query performance belongs in request or controller specs, not view specs.
+- Deep service-object mocking chains such as `receive_message_chain`.
+  If a view requires this kind of stubbing, the view itself contains too much logic.
+
 ### System / Feature tests
 
 > [!note]
