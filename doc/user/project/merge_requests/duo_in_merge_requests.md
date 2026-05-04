@@ -85,11 +85,11 @@ If the user has a GitLab Duo Pro Enterprise seat, GitLab Duo Core Review runs. I
 
 When Code Review Flow runs, credit usage is attributed to the initiating user.
 
-| Review trigger                      | Initiating user                         |
-|-------------------------------------|-----------------------------------------|
-| Review requested manually           | The user who requests the review.       |
-| Review triggered automatically      | The user who authors the merge request. |
-| Draft merge request marked as ready | The user who marks the merge request as ready.     |
+| Review trigger                          | Initiating user                      |
+|-----------------------------------------|--------------------------------------|
+| Review requested manually               | The user who requests the review.    |
+| Merge request created (not a draft)     | The merge request author.            |
+| Draft merge request marked as ready     | The merge request author.            |
 
 Because the review feature is based on the initiating user's add-on, both features can run in the
 same project.

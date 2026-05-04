@@ -132,7 +132,7 @@ RSpec.describe Gitlab::Ci::Config::Entry::Retry do
 
         # Those values are documented at `doc/ci/yaml/README.md`. If any of
         # those values gets invalid, documentation must be updated. To make
-        # sure this is catched, check explicitly that all of the documented
+        # sure this is caught, check explicitly that all of the documented
         # values are valid. If they are not it means the documentation and this
         # array must be updated.
         retry_when_in_documentation = %w[

@@ -2614,6 +2614,9 @@ msgstr ""
 msgid "AICatalog|All project members will be able to use it."
 msgstr ""
 
+msgid "AICatalog|Already enabled"
+msgstr ""
+
 msgid "AICatalog|An agent or flow can only be enabled once per group or project"
 msgstr ""
 
@@ -24043,6 +24046,30 @@ msgid "Date range must be shorter than %{max_range} days."
 msgstr ""
 
 msgid "Date updated"
+msgstr ""
+
+msgid "DateRangeFilter|Custom"
+msgstr ""
+
+msgid "DateRangeFilter|Date ranges"
+msgstr ""
+
+msgid "DateRangeFilter|From"
+msgstr ""
+
+msgid "DateRangeFilter|Last 30 days"
+msgstr ""
+
+msgid "DateRangeFilter|Last 7 days"
+msgstr ""
+
+msgid "DateRangeFilter|Last month"
+msgstr ""
+
+msgid "DateRangeFilter|This month"
+msgstr ""
+
+msgid "DateRangeFilter|To"
 msgstr ""
 
 msgid "DateRange|%{start_date}–%{end_date}"
@@ -49420,6 +49447,9 @@ msgstr ""
 msgid "Onboarding|Select a template"
 msgstr ""
 
+msgid "Onboarding|Set up your profile"
+msgstr ""
+
 msgid "Onboarding|Skip"
 msgstr ""
 
@@ -50476,6 +50506,9 @@ msgstr ""
 msgid "Organization|Help improve Organizations"
 msgstr ""
 
+msgid "Organization|Here's your final structure. Activate when you're happy with it."
+msgstr ""
+
 msgid "Organization|If you proceed with this change you will lose your owner permissions for this organization, including access to this page."
 msgstr ""
 
@@ -50554,6 +50587,9 @@ msgstr ""
 msgid "Organization|Organization successfully created."
 msgstr ""
 
+msgid "Organization|Organization summary"
+msgstr ""
+
 msgid "Organization|Organization user details"
 msgstr ""
 
@@ -50615,13 +50651,10 @@ msgstr ""
 msgid "Organization|Step %{currentStep} / %{totalSteps}"
 msgstr ""
 
-msgid "Organization|Step 3 placeholder"
-msgstr ""
-
 msgid "Organization|Switch organizations"
 msgstr ""
 
-msgid "Organization|Total Organizations: %{count}"
+msgid "Organization|These Organizations will be deleted"
 msgstr ""
 
 msgid "Organization|Unable to fetch organizations. Reload the page to try again."
@@ -50643,6 +50676,9 @@ msgid "Organization|You don't have any groups yet."
 msgstr ""
 
 msgid "Organization|You don't have any projects yet."
+msgstr ""
+
+msgid "Organization|Your new structure"
 msgstr ""
 
 msgid "Organization|my-organization"
@@ -78236,6 +78272,9 @@ msgid "UsageBilling|Daily average"
 msgstr ""
 
 msgid "UsageBilling|Date"
+msgstr ""
+
+msgid "UsageBilling|Date range"
 msgstr ""
 
 msgid "UsageBilling|Date/Time"

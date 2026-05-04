@@ -27,8 +27,7 @@ module Gitlab
             filename: filename
           )
         rescue Psych::SyntaxError => e
-          if Feature.enabled?(:ci_yaml_syntax_error_normalization, Feature.current_request) &&
-              html_content?(config)
+          if html_content?(config)
             message = e.file ? "(#{e.file}): Invalid configuration format" : 'Invalid configuration format'
             raise Loader::FormatError, message
           end

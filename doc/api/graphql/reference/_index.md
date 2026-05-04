@@ -47263,6 +47263,23 @@ Returns [`AiCatalogItem`](#aicatalogitem).
 | <a id="project-aicatalogitem-id"></a>`id` | [`AiCatalogItemID!`](#aicatalogitemid) | Global ID of the catalog item to find. |
 | <a id="project-aicatalogitem-showsoftdeleted"></a>`showSoftDeleted` | [`Boolean`](#boolean) | Whether to show the item if it has been soft-deleted. Defaults to `false`. |
 
+##### `Project.aiCatalogItemConsumerForItem`
+
+{{< details >}}
+**Introduced** in GitLab 19.0.
+**Status**: Experiment.
+{{< /details >}}
+
+AI Catalog item configuration for the given item in the project.
+
+Returns [`AiCatalogItemConsumer`](#aicatalogitemconsumer).
+
+###### Arguments
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| <a id="project-aicatalogitemconsumerforitem-id"></a>`id` | [`AiCatalogItemID!`](#aicatalogitemid) | Global ID of the catalog item to return the configuration of. |
+
 ##### `Project.aiCatalogItems`
 
 {{< details >}}

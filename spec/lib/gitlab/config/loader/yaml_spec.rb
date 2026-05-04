@@ -302,12 +302,8 @@ RSpec.describe Gitlab::Config::Loader::Yaml, feature_category: :pipeline_composi
       HTML
     end
 
-    context 'when content is HTML and feature flag is enabled' do
+    context 'when content is HTML' do
       let(:yml) { html_content }
-
-      before do
-        stub_feature_flags(ci_yaml_syntax_error_normalization: true)
-      end
 
       it 'raises FormatError with a normalized message' do
         expect { loader }.to raise_error(
@@ -325,21 +321,6 @@ RSpec.describe Gitlab::Config::Loader::Yaml, feature_category: :pipeline_composi
             '(templates/ci-template.yml): Invalid configuration format'
           )
         end
-      end
-    end
-
-    context 'when content is HTML and feature flag is disabled' do
-      let(:yml) { html_content }
-
-      before do
-        stub_feature_flags(ci_yaml_syntax_error_normalization: false)
-      end
-
-      it 'raises FormatError with the original Psych error message' do
-        expect { loader }.to raise_error(
-          Gitlab::Config::Loader::FormatError,
-          /mapping values are not allowed in this context/
-        )
       end
     end
 

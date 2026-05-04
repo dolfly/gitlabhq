@@ -105,7 +105,7 @@ export default {
   <gl-modal
     modal-id="organization-reconciliation-modal"
     scrollable
-    body-class="!gl-px-11"
+    body-class="gl-max-w-xl gl-w-full gl-mx-auto"
     :visible="visible"
     @change="updateModalVisibility($event)"
   >

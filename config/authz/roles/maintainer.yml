@@ -172,6 +172,7 @@ project:
 group:
   permissions: []
   raw_permissions:
+  - access_security_and_compliance
   - add_cluster
   - admin_achievement
   - admin_ai_catalog_item_consumer
@@ -225,6 +226,7 @@ group:
   - read_runners
   - read_secrets_manager
   - read_secrets_permission
+  - read_security_configuration
   - start_trial
   - update_cluster
   - update_protected_branch
