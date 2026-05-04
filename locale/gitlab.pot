@@ -48422,6 +48422,12 @@ msgstr ""
 msgid "Observability|Endpoint details"
 msgstr ""
 
+msgid "Observability|Enter full screen"
+msgstr ""
+
+msgid "Observability|Entered full screen mode"
+msgstr ""
+
 msgid "Observability|Example curl command (Non-TLS)"
 msgstr ""
 
@@ -48435,6 +48441,12 @@ msgid "Observability|Exception tracking and error monitoring with detailed stack
 msgstr ""
 
 msgid "Observability|Exceptions"
+msgstr ""
+
+msgid "Observability|Exit full screen"
+msgstr ""
+
+msgid "Observability|Exited full screen mode"
 msgstr ""
 
 msgid "Observability|Experience the power of GitLab Observability with real-time dashboards and comprehensive monitoring capabilities."
@@ -48921,9 +48933,6 @@ msgid "OfflineTransfer|Export failed. You do not have permission to export the f
 msgstr ""
 
 msgid "OfflineTransfer|Import"
-msgstr ""
-
-msgid "OfflineTransfer|Object storage request responded with status %{status}"
 msgstr ""
 
 msgid "OfflineTransfer|Offline transfer"

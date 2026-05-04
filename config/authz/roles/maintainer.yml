@@ -228,3 +228,4 @@ group:
   - start_trial
   - update_cluster
   - update_protected_branch
+  - update_secret_detection_validity_check

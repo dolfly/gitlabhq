@@ -43,15 +43,8 @@ module Import
           Import::Offline::ExportWorker.perform_async(offline_export.id)
 
           ServiceResponse.success(payload: offline_export)
-        rescue ActiveRecord::RecordInvalid => e
+        rescue Import::Clients::ObjectStorage::ConnectionError, ActiveRecord::RecordInvalid => e
           service_error(e.message)
-        rescue Excon::Error, StandardError => e
-          # Providing a nonexistent AWS S3 bucket results in a NoMethodError caused by an excon error.
-          # Check if error's cause is an excon error for a more useful error to the user
-          raise e unless e.is_a?(Excon::Error) || e.cause.is_a?(Excon::Error)
-
-          # Excon errors may be long and contain sensitive information depending on provider implementation
-          service_error(s_('OfflineTransfer|Unable to access object storage bucket.'))
         end
 
         private

@@ -17,6 +17,8 @@ module Import
         s3_compatible: 'AWS'
       }.with_indifferent_access.freeze
 
+      FOG_ERRORS = [Fog::Errors::Error, Excon::Error].freeze
+
       def initialize(provider:, bucket:, credentials:)
         @provider = provider
         @bucket = bucket
@@ -28,44 +30,39 @@ module Import
       end
 
       def test_connection!
-        status = storage.head_bucket(bucket).status
-
-        return if status == 200
-
-        raise ConnectionError, format(
-          s_('OfflineTransfer|Object storage request responded with status %{status}'), status: status
-        )
+        wrapped_object_storage_errors(ConnectionError, s_('OfflineTransfer|Unable to access object storage bucket.')) do
+          storage.head_bucket(bucket).status == 200
+        end
       end
 
       def store_file(object_key, local_path)
         check_for_path_traversal!(local_path)
         validate_file_exists!(local_path)
 
-        directory = storage.directories.new(key: bucket)
-
-        File.open(local_path, 'rb') do |file|
-          directory.files.create(
-            key: object_key,
-            body: file,
-            multipart_chunk_size: MULTIPART_THRESHOLD
-          )
+        wrapped_object_storage_errors(UploadError, 'Object storage upload failed',
+          extra_log_context: { object_key: object_key, local_path: local_path }) do
+          directory = storage.directories.new(key: bucket)
+          File.open(local_path, 'rb') do |file|
+            directory.files.create(
+              key: object_key,
+              body: file,
+              multipart_chunk_size: MULTIPART_THRESHOLD
+            )
+          end
+          true
         end
-
-        true
-      rescue Fog::Errors::Error, Excon::Error => e
-        track_and_raise_upload_exception(e, object_key, local_path: local_path)
       end
 
-      def stream(object_key)
-        directory = storage.directories.new(key: bucket)
+      def stream(object_key, &block)
+        wrapped_object_storage_errors(DownloadError, 'Object storage download failed',
+          extra_log_context: { object_key: object_key }) do
+          directory = storage.directories.new(key: bucket)
+          file = directory.files.get(object_key, &block)
 
-        file = directory.files.get(object_key) do |chunk, remaining, total|
-          yield chunk, remaining, total
+          raise DownloadError, "Object not found" unless file
+
+          true
         end
-
-        raise DownloadError, "Object not found" unless file
-      rescue Fog::Errors::Error, Excon::Error => e
-        track_and_raise_download_exception(e, object_key)
       end
 
       private
@@ -90,26 +87,28 @@ module Import
         Gitlab::PathTraversal.check_path_traversal!(local_path)
       end
 
-      def track_and_raise_upload_exception(exception, object_key, extra = {})
-        track_exception(exception, object_key, extra)
-
-        raise UploadError, 'Object storage upload failed'
+      def base_log_context
+        { provider: provider, bucket: bucket }
       end
 
-      def track_and_raise_download_exception(exception, object_key, extra = {})
-        track_exception(exception, object_key, extra)
+      def wrapped_object_storage_errors(error_class, message, extra_log_context: {})
+        result = yield
+        raise error_class, message unless result
 
-        raise DownloadError, 'Object storage download failed'
-      end
+        result
+      rescue *FOG_ERRORS => e
+        Gitlab::ErrorTracking.track_exception(e, **base_log_context, **extra_log_context)
+        raise error_class, message
+      rescue NoMethodError => e
+        # Fog currently mishandles redirects, resulting in a NoMethodError when
+        # parsing the response body from AWS. If the cause here is an ExconError,
+        # we treat it as a failed connection.
+        if e.cause.is_a?(Excon::Error)
+          Gitlab::ErrorTracking.track_exception(e, **base_log_context, **extra_log_context)
+          raise error_class, s_('OfflineTransfer|Unable to access object storage bucket.')
+        end
 
-      def track_exception(exception, object_key, extra = {})
-        log_params = {
-          provider: provider,
-          bucket: bucket,
-          object_key: object_key
-        }.merge(extra)
-
-        Gitlab::ErrorTracking.track_exception(exception, **log_params)
+        raise e
       end
     end
   end

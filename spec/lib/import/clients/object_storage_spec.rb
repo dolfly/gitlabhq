@@ -66,10 +66,87 @@ RSpec.describe Import::Clients::ObjectStorage, feature_category: :importers do
     context 'when the object storage bucket responds with a status other than 200' do
       let(:http_status) { 302 }
 
-      it 'raises an error' do
+      it 'raises ConnectionError' do
         expect { client.test_connection! }.to raise_error(
-          described_class::ConnectionError, "Object storage request responded with status #{http_status}"
+          described_class::ConnectionError, 'Unable to access object storage bucket.'
         )
+      end
+    end
+
+    context 'when Excon raises an error' do
+      let(:http_status) { 200 }
+
+      before do
+        allow_next_instance_of(Fog::Storage) do |storage|
+          allow(storage).to receive(:head_bucket).and_raise(Excon::Error, 'socket timeout')
+        end
+      end
+
+      it 'raises ConnectionError' do
+        expect { client.test_connection! }.to raise_error(
+          described_class::ConnectionError, 'Unable to access object storage bucket.'
+        )
+      end
+    end
+
+    context 'when Fog raises an error' do
+      let(:http_status) { 200 }
+
+      before do
+        allow_next_instance_of(Fog::Storage) do |storage|
+          allow(storage).to receive(:head_bucket).and_raise(Fog::Errors::Error, 'connection refused')
+        end
+      end
+
+      it 'raises ConnectionError' do
+        expect { client.test_connection! }.to raise_error(
+          described_class::ConnectionError, 'Unable to access object storage bucket.'
+        )
+      end
+    end
+
+    context 'when a NoMethodError is raised with an Excon::Error cause' do
+      let(:http_status) { 200 }
+      let(:excon_error) { Excon::Error.new('redirect') }
+      let(:no_method_error) do
+        NoMethodError.new('undefined method').tap do |e|
+          allow(e).to receive(:cause).and_return(excon_error)
+        end
+      end
+
+      before do
+        allow_next_instance_of(Fog::Storage) do |storage|
+          allow(storage).to receive(:head_bucket).and_raise(no_method_error)
+        end
+      end
+
+      it 'tracks the exception and raises ConnectionError' do
+        expect(Gitlab::ErrorTracking).to receive(:track_exception).with(
+          no_method_error,
+          provider: provider,
+          bucket: bucket
+        )
+
+        expect { client.test_connection! }.to raise_error(
+          described_class::ConnectionError, 'Unable to access object storage bucket.'
+        )
+      end
+    end
+
+    context 'when a NoMethodError is raised with a non-Excon cause' do
+      let(:http_status) { 200 }
+      let(:no_method_error) { NoMethodError.new('undefined method `foo`') }
+
+      before do
+        allow_next_instance_of(Fog::Storage) do |storage|
+          allow(storage).to receive(:head_bucket).and_raise(no_method_error)
+        end
+      end
+
+      it 're-raises the original NoMethodError' do
+        expect(Gitlab::ErrorTracking).not_to receive(:track_exception)
+
+        expect { client.test_connection! }.to raise_error(no_method_error)
       end
     end
   end

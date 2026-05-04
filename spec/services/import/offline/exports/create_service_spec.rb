@@ -219,32 +219,14 @@ RSpec.describe Import::Offline::Exports::CreateService, :aggregate_failures, fea
     end
 
     context 'when an unexpected error is raised' do
-      let(:raise_error_with_cause_proc) do
-        proc do
-          raise original_error
-        rescue StandardError
-          raise NoMethodError, 'undefined method caused by a connection error'
-        end
-      end
-
       before do
         allow_next_instance_of(Fog::Storage) do |storage|
-          allow(storage).to receive(:head_bucket).and_invoke(raise_error_with_cause_proc)
+          allow(storage).to receive(:head_bucket).and_raise(StandardError, 'unexpected')
         end
       end
 
-      context 'and the error was caused by an expected error when testing connection to the bucket' do
-        let(:original_error) { Excon::Error::BadRequest.new('Bad request') }
-
-        it_behaves_like 'an error response', error: 'Unable to access object storage bucket.'
-      end
-
-      context 'and the error is not caused by an expected error' do
-        let(:original_error) { StandardError.new('unexpected') }
-
-        it 'does not catch the error' do
-          expect { result }.to raise_error(NoMethodError)
-        end
+      it 'does not catch the error' do
+        expect { result }.to raise_error(StandardError, 'unexpected')
       end
     end
 

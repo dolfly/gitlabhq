@@ -24353,6 +24353,7 @@ CREATE TABLE namespace_ai_settings (
     allow_project_extension boolean DEFAULT true NOT NULL,
     allowed_domains text[] DEFAULT '{}'::text[] NOT NULL,
     denied_domains text[] DEFAULT '{}'::text[] NOT NULL,
+    ai_catalog_restricted_to_group_hierarchy boolean DEFAULT false NOT NULL,
     CONSTRAINT check_namespace_ai_settings_feature_settings_is_hash CHECK ((jsonb_typeof(feature_settings) = 'object'::text))
 );
 

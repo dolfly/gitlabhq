@@ -27,7 +27,7 @@ describe('FailedJobsList component', () => {
   const defaultProps = {
     graphqlResourceEtag: 'api/graphql',
     isMaximumJobLimitReached: false,
-    pipelineIid: 1,
+    pipelineIid: 'gid://gitlab/Pipeline/1',
     pipelinePath: 'namespace/project/pipeline',
     projectPath: 'namespace/project/',
   };

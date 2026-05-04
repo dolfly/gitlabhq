@@ -880,6 +880,7 @@ Audit event types belong to the following product categories.
 
 | Type name | Event triggered when | Saved to database | Introduced in | Scope |
 |:----------|:---------------------|:------------------|:--------------|:------|
+| [`ai_catalog_restricted_to_group_hierarchy_updated`](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/233902) | In a group, the AI Catalog restricted to group hierarchy setting is changed | {{< yes >}} | GitLab [19.0](https://gitlab.com/gitlab-org/gitlab/-/work_items/594617) | Group |
 | [`create_ai_catalog_agent`](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/212259) | A user creates an AI Catalog agent. | {{< yes >}} | GitLab [18.6](https://gitlab.com/gitlab-org/gitlab/-/issues/566901) | Project |
 | [`create_ai_catalog_flow`](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/212539) | A user creates an AI Catalog flow. | {{< yes >}} | GitLab [18.6](https://gitlab.com/gitlab-org/gitlab/-/issues/566901) | Project |
 | [`create_ai_catalog_mcp_server`](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/227051) | A user creates an AI Catalog MCP server. | {{< yes >}} | GitLab [18.11](https://gitlab.com/gitlab-org/gitlab/-/work_items/590708) | Instance |
