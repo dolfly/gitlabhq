@@ -47,7 +47,38 @@ RSpec.describe PersonalAccessTokens::RotateService, feature_category: :system_ac
       let(:user) { token.user }
       let(:namespace) { token.user.namespace }
       let(:project) { nil }
+      let(:additional_properties) { { type: 'legacy', creation_source: PersonalAccessToken::CREATION_SOURCE_UNKNOWN } }
       subject(:track_event) { response }
+    end
+
+    it 'tracks type and creation_source' do
+      expect { response }.to trigger_internal_events('rotate_pat')
+        .with(user: token.user, namespace: token.user.namespace,
+          additional_properties: { type: 'legacy', creation_source: PersonalAccessToken::CREATION_SOURCE_UNKNOWN })
+    end
+
+    context 'when creation_source is specified' do
+      subject(:response) do
+        described_class.new(token.user, token, nil, creation_source: PersonalAccessToken::CREATION_SOURCE_API).execute
+      end
+
+      it 'tracks the specified creation_source' do
+        expect { response }.to trigger_internal_events('rotate_pat')
+          .with(user: token.user, namespace: token.user.namespace,
+            additional_properties: { type: 'legacy', creation_source: PersonalAccessToken::CREATION_SOURCE_API })
+      end
+    end
+
+    context 'when rotating a granular token' do
+      let_it_be(:token, reload: true) do
+        create(:granular_pat, user: current_user, expires_at: Time.zone.today + 30.days)
+      end
+
+      it 'tracks type as granular' do
+        expect { response }.to trigger_internal_events('rotate_pat')
+          .with(user: token.user, namespace: token.user.namespace,
+            additional_properties: { type: 'granular', creation_source: PersonalAccessToken::CREATION_SOURCE_UNKNOWN })
+      end
     end
 
     it 'revokes the previous token' do

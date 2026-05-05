@@ -813,8 +813,13 @@ rspec-predictive:pipeline-generate:
   extends:
     - .rails:rules:rspec-predictive:pipeline-generate
   stage: prepare
-  needs: ["detect-tests", "retrieve-tests-metadata"]
+  needs:
+    - job: "detect-tests"
+    - job: "retrieve-tests-metadata"
+    - job: "detect-system-tests-duo-experiment"
+      optional: true
   script:
+    - scripts/prepare_predictive_system_pipeline.rb
     - |
       scripts/generate_rspec_pipeline.rb \
         -t "${GLCI_PREDICTIVE_RSPEC_PIPELINE_TEMPLATE_YML}" \
@@ -840,6 +845,11 @@ rspec-predictive:pipeline-generate:
     paths:
       - "${GLCI_PREDICTIVE_RSPEC_PIPELINE_TEMPLATE_YML}.yml"
       - "${GLCI_PREDICTIVE_RSPEC_PIPELINE_TEMPLATE_YML}-ee.yml"
+      - "${GLCI_PREDICTIVE_RSPEC_MATCHING_TESTS_FOSS_PATH}"
+      - "${GLCI_PREDICTIVE_RSPEC_MATCHING_TESTS_EE_PATH}"
+      - "${GLCI_PREDICTIVE_RSPEC_MATCHING_TESTS_FOSS_PATH}.orig"
+      - "${GLCI_PREDICTIVE_RSPEC_MATCHING_TESTS_EE_PATH}.orig"
+      - "${GLCI_PREDICTIVE_RSPEC_SYSTEM_FULL_PIPELINE_YML}"
 
 rspec:predictive:trigger:
   extends:
@@ -909,6 +919,32 @@ rspec-ee:predictive:trigger single-db-ci-connection:
         job: rspec-predictive:pipeline-generate
   variables:
     PIPELINE_NAME: 'rspec-ee:predictive single-db-ci-connection'
+
+rspec:predictive:system-full:trigger:
+  extends:
+    - .rails:rules:rspec-predictive:system-full:trigger
+  stage: test
+  needs:
+    - job: "setup-test-env"
+      artifacts: false
+    - job: "retrieve-tests-metadata"
+      artifacts: false
+    - job: "compile-test-assets"
+      artifacts: false
+    - job: "rspec-predictive:pipeline-generate"
+      artifacts: true
+  variables:
+    PARENT_PIPELINE_ID: $CI_PIPELINE_ID
+    GIT_STRATEGY: $GIT_STRATEGY
+    PIPELINE_NAME: 'rspec:predictive system (full)'
+  trigger:
+    strategy: depend
+    forward:
+      yaml_variables: true
+      pipeline_variables: true
+    include:
+      - artifact: "${GLCI_PREDICTIVE_RSPEC_SYSTEM_FULL_PIPELINE_YML}"
+        job: rspec-predictive:pipeline-generate
 
 rspec-ee migration pg17:
   extends:
@@ -1110,6 +1146,8 @@ rspec-ee system pg17 duo_workflow_service:
   parallel: 4
   rules:
     - !reference [".rails:rules:triggered-by-aigw-project", rules]
+    - !reference [".rails:rules:only-run-system-if-medium-runners-available", rules]
+    - !reference [".allow-on-tier-2", rules]  # always run on tier-2; not included in predictive child pipeline
     - !reference ['.rails:rules:ee-only-system', rules]
 
 # Integration tests with Elasticsearch and PG production versions

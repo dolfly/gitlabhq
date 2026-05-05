@@ -97,7 +97,7 @@ Before upgrading to GitLab 18.6, review the following:
 Before upgrading to GitLab 18.5, review the following:
 
 - [18.5.4] - [Commits and Files API size and rate limits](#commits-and-files-api-size-and-rate-limits)
-- [18.5.2] - [Geo log cursor migration fix](#geo-log-cursor-migration-fix) (Geo)
+- [18.5.0 - 18.5.1] - [Geo log cursor migration fix](#geo-log-cursor-migration-fix) (Geo)
 - [18.5.0] - [Finalize design management designs backfill](#finalize-design-management-designs-backfill)
 - [18.5.0] - [NGINX routing changes cause 404 errors](#nginx-routing-changes-cause-404-errors) (Linux package)
 
@@ -106,11 +106,10 @@ Before upgrading to GitLab 18.5, review the following:
 Before upgrading to GitLab 18.4, review the following:
 
 - [18.4.6] - [Commits and Files API size and rate limits](#commits-and-files-api-size-and-rate-limits)
-- [18.4.4] - [Geo log cursor migration fix](#geo-log-cursor-migration-fix) (Geo)
-- [18.4.2] - [Batched background migration nil error](#batched-background-migration-nil-error)
-- [18.4.2] - [Geo replication TypeError fix](#geo-replication-typeerror-fix) (Geo)
+- [18.4.2 - 18.4.3] - [Batched background migration nil error](#batched-background-migration-nil-error)
 - [18.4.1] - [JSON input limits for denial of service prevention](#json-input-limits-for-denial-of-service-prevention)
-- [18.4.0] - [Geo replication TypeError bug](#geo-replication-typeerror-bug) (Geo)
+- [18.4.0 - 18.4.3] - [Geo log cursor migration fix](#geo-log-cursor-migration-fix) (Geo)
+- [18.4.0 - 18.4.1] - [Geo replication TypeError](#geo-replication-typeerror) (Geo)
 
 ### Upgrade to 18.3
 
@@ -119,7 +118,7 @@ Before upgrading to GitLab 18.3, review the following:
 - [18.3.3] - [JSON input limits for denial of service prevention](#json-input-limits-for-denial-of-service-prevention)
 - [18.3.0] - [LdapAddOnSeatSyncWorker removes Duo seats](#ldapaddonseatsyncworker-removes-duo-seats)
 - [18.3.0] - [Geo Rake check fix](#geo-rake-check-fix) (Geo)
-- [18.3.0] - [Geo Pages filename fix](#geo-pages-filename-fix) (Geo)
+- [18.3.0 - 18.3.2] - [Geo Pages filename fix](#geo-pages-filename-fix) (Geo)
 
 ### Upgrade to 18.2
 
@@ -127,18 +126,18 @@ Before upgrading to GitLab 18.2, review the following:
 
 - [18.2.7] - [JSON input limits for denial of service prevention](#json-input-limits-for-denial-of-service-prevention)
 - [18.2.0] - [Zero-downtime upgrade push errors between 18.1 and 18.2](#zero-downtime-upgrade-push-errors-between-181-and-182)
-- [18.2.0] - [Geo VerificationStateBackfillService `ci_job_artifact_states`](#geo-verificationstatebackfillservice-ci_job_artifact_states) (Geo)
-- [18.2.0] - [Geo Pages filename fix](#geo-pages-filename-fix) (Geo)
+- [18.2.0 - 18.2.1] - [Geo VerificationStateBackfillService `ci_job_artifact_states`](#geo-verificationstatebackfillservice-ci_job_artifact_states) (Geo)
+- [18.2.0 - 18.2.6] - [Geo Pages filename fix](#geo-pages-filename-fix) (Geo)
 
 ### Upgrade to 18.1
 
 Before upgrading to GitLab 18.1, review the following:
 
 - [18.1.0] - [Elasticsearch `strict_dynamic_mapping_exception`](#elasticsearch-strict_dynamic_mapping_exception)
-- [18.1.0] - [PostgreSQL `ci_job_artifacts` error](#postgresql-ci_job_artifacts-error)
+- [18.1.0 - 18.1.1] - [PostgreSQL `ci_job_artifacts` error](#postgresql-ci_job_artifacts-error)
 - [18.1.0] - [Merge request almost ready bug](#merge-request-almost-ready-bug)
 - [18.1.0] - [Geo HTTP 500 proxy errors](#geo-http-500-proxy-errors) (Geo)
-- [18.1.0] - [Geo VerificationStateBackfillService `ci_job_artifact_states`](#geo-verificationstatebackfillservice-ci_job_artifact_states) (Geo)
+- [18.1.0 - 18.1.3] - [Geo VerificationStateBackfillService `ci_job_artifact_states`](#geo-verificationstatebackfillservice-ci_job_artifact_states) (Geo)
 - [18.1.0] - [Geo Pages filename fix](#geo-pages-filename-fix) (Geo)
 
 ### Upgrade to 18.0
@@ -149,9 +148,9 @@ Before upgrading to GitLab 18.0, review the following:
 - [18.0.0] - [`pg_dump` binary compatibility](#pg_dump-binary-compatibility)
 - [18.0.0] - [Pipeline failures during zero-downtime upgrades from 17.11](#pipeline-failures-during-zero-downtime-upgrades-from-1711)
 - [18.0.0] - [Migrate Gitaly configuration from `git_data_dirs` to storage](#migrate-gitaly-configuration-from-git_data_dirs-to-storage) (Linux package)
-- [18.0.0] - [Geo CE to EE revert migration errors](#geo-ce-to-ee-revert-migration-errors) (Geo)
-- [18.0.0] - [Geo HTTP 500 proxy errors](#geo-http-500-proxy-errors) (Geo)
-- [18.0.0] - [Geo VerificationStateBackfillService `ci_job_artifact_states`](#geo-verificationstatebackfillservice-ci_job_artifact_states) (Geo)
+- [18.0.0 - 18.0.1] - [Geo CE to EE revert migration errors](#geo-ce-to-ee-revert-migration-errors) (Geo)
+- [18.0.0 - 18.0.2] - [Geo HTTP 500 proxy errors](#geo-http-500-proxy-errors) (Geo)
+- [18.0.0 - 18.0.5] - [Geo VerificationStateBackfillService `ci_job_artifact_states`](#geo-verificationstatebackfillservice-ci_job_artifact_states) (Geo)
 - [18.0.0] - [PRNG is not seeded error on Docker installations](#prng-is-not-seeded-error-on-docker-installations) (Docker)
 - [17.11.0] - [Bitnami PostgreSQL and Redis image deprecation](#bitnami-postgresql-and-redis-image-deprecation) (Helm chart)
 
@@ -541,7 +540,7 @@ Upgrades to `18.4.2` or `18.4.3` might fail with a `no implicit conversion of ni
 
 To resolve this issue, upgrade to the latest patch release or use the [workaround in issue 578938](https://gitlab.com/gitlab-org/gitlab/-/issues/578938#workaround).
 
-### Geo replication TypeError fix
+### Geo replication TypeError
 
 {{< details >}}
 
@@ -550,10 +549,13 @@ To resolve this issue, upgrade to the latest patch release or use the [workaroun
 {{< /details >}}
 
 - Affects: Geo
-- Affected versions: 18.4.2
+- Affected versions:
 
-The Geo [bug](https://gitlab.com/gitlab-org/gitlab/-/issues/571455) that causes replication events to fail with the error message `no implicit conversion of String into
-Array (TypeError)` is fixed.
+  | Release | Affected patch releases | Fixed patch level |
+  |---------|-------------------------|-------------------|
+  | 18.4    | 18.4.0 - 18.4.1         | 18.4.2            |
+
+In secondary Geo sites, [a bug](https://gitlab.com/gitlab-org/gitlab/-/issues/571455) causes replication events to fail with the error message `no implicit conversion of String into Array (TypeError)`. Redundancies such as re-verification ensure eventual consistency, but RPO is significantly increased.
 
 ### JSON input limits for denial of service prevention
 
@@ -569,19 +571,6 @@ Array (TypeError)` is fixed.
 GitLab 18.4.1, 18.3.3, and 18.2.7 introduced limits on JSON inputs to prevent denial of service attacks.
 GitLab responds to HTTP requests that exceed these limits with a `400 Bad Request` status.
 For more information, see [HTTP request limits](../../administration/instance_limits.md#http-request-limits).
-
-### Geo replication TypeError bug
-
-{{< details >}}
-
-- Tier: Premium, Ultimate
-
-{{< /details >}}
-
-- Affects: Geo
-- Affected versions: 18.4.0, 18.4.1
-
-In secondary Geo sites, [a bug](https://gitlab.com/gitlab-org/gitlab/-/issues/571455) causes replication events to fail with the error message `no implicit conversion of String into Array (TypeError)`. Redundancies such as re-verification ensure eventual consistency, but RPO is significantly increased.
 
 ### LdapAddOnSeatSyncWorker removes Duo seats
 
@@ -618,10 +607,11 @@ The [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/545533) that caused `r
 
   | Release | Affected patch levels  | Fixed patch level |
   |---------|------------------------|-------------------|
+  | 18.3    | 18.3.0 - 18.3.2        | 18.3.3            |
   | 18.2    | 18.2.0 - 18.2.6        | 18.2.7            |
   | 18.1    | 18.1.0 and later       | Not fixed in 18.1 |
 
-GitLab 18.2.7 and later includes a fix for [issue 559196](https://gitlab.com/gitlab-org/gitlab/-/issues/559196), where Geo verification could fail for Pages deployments with long filenames. The fix prevents filename trimming on Geo secondary sites to maintain consistency during replication and verification.
+GitLab 18.3.3 and 18.2.7 and later include a fix for [issue 559196](https://gitlab.com/gitlab-org/gitlab/-/issues/559196), where Geo verification could fail for Pages deployments with long filenames. The fix prevents filename trimming on Geo secondary sites to maintain consistency during replication and verification.
 
 ### Zero-downtime upgrade push errors between 18.1 and 18.2
 

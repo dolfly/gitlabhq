@@ -53,9 +53,33 @@ RSpec.describe PersonalAccessTokens::CreateService, feature_category: :system_ac
   shared_examples_for 'tracks the creation event' do
     it 'tracks the creation event' do
       expect { execute }.to trigger_internal_events('create_pat')
-        .with(user: user, additional_properties: { type: 'legacy', scopes: params[:scopes].join(', ') })
+        .with(
+          user: user,
+          additional_properties: {
+            type: 'legacy',
+            scopes: params[:scopes].join(', '),
+            creation_source: PersonalAccessToken::CREATION_SOURCE_UNKNOWN
+          }
+        )
         .and increment_usage_metrics('counts.count_total_personal_access_token_created_legacy')
         .and not_increment_usage_metrics('counts.count_total_personal_access_token_created_granular')
+    end
+
+    context 'when creation_source is specified' do
+      let(:service) do
+        described_class.new(current_user: current_user, target_user: user, organization_id: organization.id,
+          params: params.merge(creation_source: PersonalAccessToken::CREATION_SOURCE_API), concatenate_errors: false)
+      end
+
+      it 'tracks the specified creation_source' do
+        expect { execute }.to trigger_internal_events('create_pat')
+          .with(user: user,
+            additional_properties: {
+              type: 'legacy',
+              scopes: params[:scopes].join(', '),
+              creation_source: PersonalAccessToken::CREATION_SOURCE_API
+            })
+      end
     end
   end
 

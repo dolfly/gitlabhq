@@ -53,7 +53,7 @@ module UserSettings
         current_user: current_user,
         target_user: current_user,
         organization_id: Current.organization.id,
-        params: personal_access_token_params,
+        params: personal_access_token_params.merge(creation_source: PersonalAccessToken::CREATION_SOURCE_UI),
         concatenate_errors: false
       ).execute
 

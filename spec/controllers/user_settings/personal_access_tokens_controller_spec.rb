@@ -68,6 +68,14 @@ RSpec.describe UserSettings::PersonalAccessTokensController, feature_category: :
       end
     end
 
+    it 'passes creation_source ui to the service' do
+      expect(::PersonalAccessTokens::CreateService).to receive(:new)
+        .with(hash_including(params: hash_including(creation_source: PersonalAccessToken::CREATION_SOURCE_UI)))
+        .and_call_original
+
+      create_token
+    end
+
     context 'when personal access tokens are disabled' do
       before do
         allow(::Gitlab::CurrentSettings).to receive_messages(personal_access_tokens_disabled?: true)

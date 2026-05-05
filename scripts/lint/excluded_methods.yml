@@ -61,6 +61,7 @@ ee/app/models/concerns/geo/verifiable_replicator.rb:
   - consume_event_checksum_succeeded: Called by Gitlab::Geo::Replicator#consume
 app/models/work_items/types_framework/provider.rb:
   - by_ids_with_widget_definition_preload: Deprecated method for old WorkItems::Type model; scheduled for removal in https://gitlab.com/gitlab-org/gitlab/-/issues/581931
+  - by_base_types_ordered_by_name: Public method on Provider, tested in specs. Temporarily unused but will be used in follow-up work
 ee/app/helpers/ee/projects_helper.rb:
   - show_duo_otel_button?: Will be used in follow-up MR for OTel generation with duo
 ee/app/models/security/scan_profile_project_status.rb:
@@ -69,9 +70,9 @@ app/models/work_item.rb:
   - descendant_ids_for: will be used in follow-up MR
 ee/app/models/concerns/security/pipeline_execution_policy_bot_access.rb:
   - allows_pipeline_execution_policy_bot_access?: Will be called from CI config file access integration in a follow-up MR
-app/models/work_items/types_framework/provider.rb:
-  - by_base_types_ordered_by_name: Public method on Provider, tested in specs. Temporarily unused but will be used in follow-up work
 ee/app/models/ai/catalog/item.rb:
   - starred_by?: Will be used in follow-up MR adding GraphQL mutation for starring AI catalog items
 ee/app/models/ee/application_setting.rb:
   - advanced_search_indexing_paused?: Will be used in follow-up MR !229833 for dedicated pause indexing
+app/models/ci/catalog/components_project.rb:
+  - fetch_component: Pre-existing unused method from base branch (593966-msw-infrastructure-ai-catalog)

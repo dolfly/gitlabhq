@@ -5438,6 +5438,14 @@ RSpec.describe API::Users, :with_current_organization, :aggregate_failures, feat
       expect(json_response['message']).to eq('403 Forbidden')
     end
 
+    it 'passes creation_source api to the service' do
+      expect(::PersonalAccessTokens::CreateService).to receive(:new)
+        .with(hash_including(params: hash_including(creation_source: PersonalAccessToken::CREATION_SOURCE_API)))
+        .and_call_original
+
+      post api(path, admin, admin_mode: true), params: params
+    end
+
     it 'creates a personal access token when authenticated as admin' do
       post api(path, admin, admin_mode: true), params: params
 
@@ -5496,6 +5504,14 @@ RSpec.describe API::Users, :with_current_organization, :aggregate_failures, feat
 
       expect(response).to have_gitlab_http_status(:bad_request)
       expect(json_response['error']).to eq('name is missing, scopes is missing')
+    end
+
+    it 'passes creation_source api to the service' do
+      expect(::PersonalAccessTokens::CreateService).to receive(:new)
+        .with(hash_including(params: hash_including(creation_source: PersonalAccessToken::CREATION_SOURCE_API)))
+        .and_call_original
+
+      post api(path, user), params: params.merge(scopes: ['k8s_proxy'])
     end
 
     it_behaves_like 'authorizing granular token permissions', :create_personal_access_token do

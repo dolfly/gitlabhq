@@ -127,6 +127,7 @@ module API
             current_user,
             resource,
             declared(params, include_missing: false)
+            .merge(creation_source: PersonalAccessToken::CREATION_SOURCE_API)
           ).execute
 
           if token_response.success?

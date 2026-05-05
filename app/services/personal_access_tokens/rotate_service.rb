@@ -136,7 +136,11 @@ module PersonalAccessTokens
         "rotate_pat",
         user: target_user,
         namespace: target_user.namespace,
-        project: nil
+        project: nil,
+        additional_properties: {
+          type: token.granular? ? 'granular' : 'legacy',
+          creation_source: params[:creation_source] || PersonalAccessToken::CREATION_SOURCE_UNKNOWN
+        }
       )
     end
   end

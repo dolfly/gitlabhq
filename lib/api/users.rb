@@ -1180,7 +1180,7 @@ module API
           end
           post feature_category: :system_access do
             response = ::PersonalAccessTokens::CreateService.new(
-              current_user: current_user, target_user: target_user, organization_id: Current.organization.id, params: declared_params(include_missing: false)
+              current_user: current_user, target_user: target_user, organization_id: Current.organization.id, params: declared_params(include_missing: false).merge(creation_source: PersonalAccessToken::CREATION_SOURCE_API)
             ).execute
 
             if response.success?
@@ -1696,7 +1696,7 @@ module API
         route_setting :authorization, permissions: :create_personal_access_token, boundary_type: :user
         post feature_category: :system_access do
           response = ::PersonalAccessTokens::CreateService.new(
-            current_user: current_user, target_user: current_user, params: declared_params(include_missing: false), organization_id: Current.organization.id
+            current_user: current_user, target_user: current_user, params: declared_params(include_missing: false).merge(creation_source: PersonalAccessToken::CREATION_SOURCE_API), organization_id: Current.organization.id
           ).execute
 
           if response.success?

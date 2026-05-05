@@ -2521,6 +2521,14 @@
     - <<: *if-merge-request
       changes: *code-backstage-spec-patterns
 
+.rails:rules:rspec-predictive:system-full:trigger:
+  rules:
+    - <<: *if-not-canonical-namespace
+      when: never
+    - !reference [".prevent-tier-1", rules]
+    - !reference [".prevent-tier-3-and-above", rules]
+    - !reference [".rails:rules:rspec-predictive", rules]
+
 # Inverse rules compared to .rails:rules:single-db
 #
 # See CI specs in spec/dot_gitlab_ci/rules_spec.rb for details.
@@ -2644,6 +2652,15 @@
       when: never
     - !reference [".rails:rules:only-run-system-if-medium-runners-available", rules]
     - if: '$ENABLE_RSPEC_SYSTEM == "true"'
+    - <<: *if-merge-request-labels-run-all-rspec
+    # tier-2: run full suite for high-risk patterns
+    - <<: *if-merge-request-tier-2
+      changes: *core-backend-patterns
+    - <<: *if-merge-request-tier-2
+      changes: *workhorse-patterns
+    - <<: *if-security-merge-request  # security fork: no full system pipeline available, run normally
+    - <<: *if-merge-request-tier-2
+      when: never
     - !reference [".rails:rules:system-default-rules", rules]
     - <<: *if-default-refs
       changes: *code-backstage-patterns
@@ -2716,12 +2733,7 @@
   rules:
     - <<: *if-not-ee
       when: never
-    - <<: *if-fork-merge-request
-      when: never
-    - !reference [".rails:rules:only-run-system-if-medium-runners-available", rules]
-    - !reference [".rails:rules:system-default-rules", rules]
-    - <<: *if-default-refs
-      changes: *code-backstage-patterns
+    - !reference [".rails:rules:ee-and-foss-system", rules]
 
 .rails:rules:db:check-schema:
   rules:
@@ -3601,6 +3613,33 @@
       when: never
     - <<: *if-merge-request-tier-1
       when: never
+
+.allow-on-tier-3:
+  rules:
+    - <<: *if-merge-request-tier-3
+
+.prevent-on-full-system-changes:
+  rules:
+    - <<: *if-merge-request
+      changes: *core-backend-patterns
+      when: never
+    - <<: *if-merge-request
+      changes: *workhorse-patterns
+      when: never
+
+.prevent-run-all-rspec:
+  rules:
+    - <<: *if-merge-request-labels-run-all-rspec
+      when: never
+
+.prevent-spec-only:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_EVENT_TYPE != "merge_train" && $CI_MERGE_REQUEST_LABELS =~ /pipeline:spec-only/'
+      when: never
+
+.allow-on-tier-2:
+  rules:
+    - <<: *if-merge-request-tier-2
 
 .prevent-tier-2-and-below:
   rules:

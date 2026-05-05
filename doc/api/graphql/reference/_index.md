@@ -45515,6 +45515,7 @@ Active period time range for on-call rotation.
 | <a id="organization-visibility"></a>`visibility` | [`String`](#string) | Visibility level of the organization. |
 | <a id="organization-webpath"></a>`webPath` {{< icon name="warning-solid" >}} | [`String!`](#string) | **Introduced** in GitLab 19.0. **Status**: Experiment. Web path of the organization. |
 | <a id="organization-weburl"></a>`webUrl` {{< icon name="warning-solid" >}} | [`String!`](#string) | **Introduced** in GitLab 16.6. **Status**: Experiment. Web URL of the organization. |
+| <a id="organization-workitemsettings"></a>`workItemSettings` {{< icon name="warning-solid" >}} | [`WorkItemSettings`](#workitemsettings) | **Introduced** in GitLab 19.0. **Status**: Experiment. Work item settings for the organization. |
 
 #### Fields with arguments
 

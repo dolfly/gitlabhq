@@ -80,7 +80,11 @@ module PersonalAccessTokens
       track_internal_event(
         'create_pat',
         user: token.user,
-        additional_properties: { type: 'legacy', scopes: scopes }
+        additional_properties: {
+          type: 'legacy',
+          scopes: scopes,
+          creation_source: params[:creation_source] || PersonalAccessToken::CREATION_SOURCE_UNKNOWN
+        }
       )
     end
   end
