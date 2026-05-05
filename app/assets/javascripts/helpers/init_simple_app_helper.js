@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import VueApollo from 'vue-apollo';
+import VueRouter from 'vue-router';
 import createDefaultClient from '~/lib/graphql';
 
 /**
@@ -25,6 +26,10 @@ const getApolloProvider = (apolloProviderOption) => {
   return undefined;
 };
 
+const registerVueRouter = () => {
+  Vue.use(VueRouter);
+};
+
 /**
  * Initializes a component as a simple vue app, passing the necessary props. If the element
  * has a data attribute named `data-view-model`, the content of that attributed will be
@@ -38,6 +43,9 @@ const getApolloProvider = (apolloProviderOption) => {
  * @param {Vue.component} component The Vue component to be built as the root of the app
  * @param {{withApolloProvider: boolean|VueApollo}} options. extra options to be passed to the vue app
  *      withApolloProvider: if true, instantiates a default apolloProvider. Also accepts and instance of VueApollo
+ *      withVueRouter: if true, registers Vue Router as a Vue plugin. Use when the root component (or any of
+ *        its descendants) declares its own router via the `router` option, or uses `<router-view>`,
+ *        `<router-link>`, `$route`, or `$router`.
  * @param {{name: string}} Name of the app
 
  *
@@ -68,12 +76,16 @@ const getApolloProvider = (apolloProviderOption) => {
 export const initSimpleApp = (
   selector,
   component,
-  { withApolloProvider, name, additionalProvide = {} } = {},
+  { withApolloProvider, withVueRouter = false, name, additionalProvide = {} } = {},
 ) => {
   const element = document.querySelector(selector);
 
   if (!element) {
     return null;
+  }
+
+  if (withVueRouter) {
+    registerVueRouter();
   }
 
   const apolloProvider = getApolloProvider(withApolloProvider);

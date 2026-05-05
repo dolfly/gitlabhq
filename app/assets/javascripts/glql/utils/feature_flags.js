@@ -7,7 +7,12 @@ export const glqlTypescriptFeatureFlagEnabled = () => {
   return Boolean(gon.features?.glqlTypescript);
 };
 
+export const glqlCodeSuggestionAnalyticsAggregationEnabled = () => {
+  return Boolean(gon.features?.glqlCodeSuggestionAnalyticsAggregation);
+};
+
 export const glqlFeatureFlags = () => ({
   glqlWorkItems: true,
   glqlTypescript: glqlTypescriptFeatureFlagEnabled(),
+  glqlCodeSuggestions: glqlCodeSuggestionAnalyticsAggregationEnabled(),
 });

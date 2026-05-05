@@ -2636,6 +2636,22 @@
       when: never
     - !reference [".rails:rules:clickhouse-changes", rules]
 
+.rails:rules:clickhouse-system-changes:
+  rules:
+    - <<: *if-fork-merge-request
+      when: never
+    - !reference [".rails:rules:only-run-system-if-medium-runners-available", rules]
+    - if: '$ENABLE_RSPEC_SYSTEM == "true"'
+    - !reference [".rails:rules:ee-and-foss-default-rules", rules]
+    - <<: *if-default-refs
+      changes: *backend-patterns
+
+.rails:rules:ee-only-clickhouse-system-changes:
+  rules:
+    - <<: *if-not-ee
+      when: never
+    - !reference [".rails:rules:clickhouse-system-changes", rules]
+
 .rails:rules:ee-and-foss-integration:
   rules:
     - <<: *if-fork-merge-request
@@ -2770,6 +2786,11 @@
     - if: '$START_AS_IF_FOSS == "true"'
     - !reference [".rails:rules:ee-and-foss-system", rules]
     - !reference ['.rails:rules:ee-and-foss-background-migration', rules]
+
+.rails:rules:artifact-collector-part-c:
+  rules:
+    - if: '$START_AS_IF_FOSS == "true"'
+    - !reference [".rails:rules:clickhouse-system-changes", rules]
 
 .rails:rules:artifact-collector-part-b:
   rules:

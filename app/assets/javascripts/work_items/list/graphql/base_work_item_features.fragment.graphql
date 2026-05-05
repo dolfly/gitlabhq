@@ -1,3 +1,4 @@
+#import "~/graphql_shared/fragments/label.fragment.graphql"
 #import "~/work_items/graphql/milestone.fragment.graphql"
 
 fragment BaseWorkItemFeatures on WorkItemFeatures {
@@ -92,6 +93,14 @@ fragment BaseWorkItemFeatures on WorkItemFeatures {
     linkedResources {
       nodes {
         url
+      }
+    }
+  }
+  labels {
+    allowsScopedLabels
+    labels {
+      nodes {
+        ...Label
       }
     }
   }

@@ -37,6 +37,7 @@ export default {
       config: undefined,
       variables: undefined,
       fields: undefined,
+      mode: undefined,
       error: undefined,
     };
   },
@@ -63,6 +64,7 @@ export default {
       this.config = undefined;
       this.variables = undefined;
       this.fields = undefined;
+      this.mode = undefined;
       this.error = undefined;
     },
 
@@ -75,6 +77,7 @@ export default {
           'config',
           'variables',
           'fields',
+          'mode',
           'error',
           'loading',
           'hasNextPage',
@@ -96,15 +99,21 @@ export default {
       this.emitChange();
 
       try {
-        const { query, config, variables, fields } = await parse(this.glqlQuery);
+        const { query, config, variables, fields, mode } = await parse(this.glqlQuery);
 
         this.query = query;
         this.config = config;
         this.variables = variables;
         this.fields = fields;
+        this.mode = mode;
 
         this.setVariable('limit', this.config.limit ?? DEFAULT_PAGE_SIZE);
-        this.data = await transform(await execute(this.query, this.variables), this.config);
+
+        const executionResult = await execute(this.query, this.variables);
+        this.data = await transform(executionResult, {
+          fields: this.fields,
+          mode: this.mode,
+        });
 
         this.trackRender();
       } catch (error) {
@@ -123,7 +132,11 @@ export default {
         this.loading = true;
         this.emitChange();
 
-        const data = await transform(await execute(this.query, this.variables), this.config);
+        const executionResult = await execute(this.query, this.variables);
+        const data = await transform(executionResult, {
+          fields: this.fields,
+          mode: this.mode,
+        });
         this.data = {
           ...this.data,
           pageInfo: data.pageInfo,

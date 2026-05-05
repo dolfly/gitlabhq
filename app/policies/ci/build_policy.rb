@@ -18,7 +18,6 @@ module Ci
       :read_build_trace,
       :read_ci_minutes_limited_summary,
       :read_job_artifacts,
-      :read_manual_variables,
       :read_web_ide_terminal,
       :troubleshoot_job_with_ai,
       :update_web_ide_terminal
@@ -89,11 +88,6 @@ module Ci
     condition(:project_developer) do
       can?(:developer_access, @subject.project)
     end
-
-    condition(:explicit_member) { @subject.project.member?(@user) }
-
-    rule { public_project & project_developer }.enable :read_manual_variables
-    rule { ~public_project & explicit_member }.enable :read_manual_variables
 
     condition(:project_maintainer) do
       can?(:maintainer_access, @subject.project)

@@ -56,7 +56,6 @@ describe('parse', () => {
 {
   "config": {
     "display": "list",
-    "fields": "title",
   },
   "fields": [
     {
@@ -65,6 +64,7 @@ describe('parse', () => {
       "name": "title",
     },
   ],
+  "mode": "standard",
   "query": "query GLQL($before: String, $after: String, $limit: Int) {
   project(fullPath: "gitlab-org/gitlab") {
     workItems(assigneeUsernames: "root", before: $before, after: $after, first: $limit) {
@@ -137,6 +137,7 @@ assignee = currentUser()`),
       "name": "dueDate",
     },
   ],
+  "mode": "standard",
   "query": "query GLQL($before: String, $after: String, $limit: Int) {
   project(fullPath: "gitlab-org/gitlab") {
     workItems(assigneeUsernames: "root", before: $before, after: $after, first: $limit) {
@@ -230,6 +231,7 @@ query: assignee = currentUser()
       "name": "dueDate",
     },
   ],
+  "mode": "standard",
   "query": "query GLQL($before: String, $after: String, $limit: Int) {
   project(fullPath: "gitlab-org/gitlab") {
     workItems(assigneeUsernames: "root", before: $before, after: $after, first: $limit) {
@@ -298,15 +300,6 @@ describe('parseYAMLConfig', () => {
 
     expect(parseYAMLConfig(frontmatter)).toEqual({
       fields: 'title, assignees, dueDate',
-      display: 'list',
-    });
-  });
-
-  it('returns default fields if none are provided', () => {
-    const frontmatter = 'display: list';
-
-    expect(parseYAMLConfig(frontmatter)).toEqual({
-      fields: 'title',
       display: 'list',
     });
   });

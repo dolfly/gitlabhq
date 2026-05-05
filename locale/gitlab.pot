@@ -38263,6 +38263,9 @@ msgstr ""
 msgid "Insights|Some items are not visible because the project was filtered out in the insights.yml file (see the projects.only config in the YAML file or the enabled project features (issues, merge requests) in the project settings)."
 msgstr ""
 
+msgid "Insights|The Insights configuration file (.gitlab/insights.yml) is not valid. Please correct it to load your insights."
+msgstr ""
+
 msgid "Insights|This project is filtered out in the insights.yml file (see the projects.only config for more information)."
 msgstr ""
 
@@ -53161,9 +53164,6 @@ msgid "Pipelines|Start with a pre-built and customizable CI/CD component."
 msgstr ""
 
 msgid "Pipelines|Take advantage of simple, scalable pipelines and CI/CD-enabled features. You can view integration results, security scans, tests, code coverage and more directly in merge requests!"
-msgstr ""
-
-msgid "Pipelines|Tanuki AI icon"
 msgstr ""
 
 msgid "Pipelines|The %{namespace_link} namespace has %{current_balance} / %{total} (%{percentage}%%) shared runner compute minutes remaining. For more details, see %{link_start}usage statistics%{link_end}."

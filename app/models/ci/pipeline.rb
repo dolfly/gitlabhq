@@ -516,6 +516,7 @@ module Ci
     scope :created_after, ->(time) { where(arel_table[:created_at].gt(time)) }
     scope :created_on_or_after, ->(time) { where(arel_table[:created_at].gteq(time)) }
     scope :created_before, ->(time) { where(arel_table[:created_at].lt(time)) }
+    scope :finished_after, ->(time) { where(arel_table[:finished_at].gt(time)) }
     scope :created_before_id, ->(id) { where(arel_table[:id].lt(id)) }
     scope :before_pipeline, ->(pipeline) { created_before_id(pipeline.id).outside_pipeline_family(pipeline) }
     scope :with_pipeline_source, ->(source) { where(source: source) }

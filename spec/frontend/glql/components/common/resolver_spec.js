@@ -27,6 +27,7 @@ const MOCK_PARSE_OUTPUT = {
     before: { value: null, type: 'String' },
   },
   fields: MOCK_FIELDS,
+  mode: 'standard',
 };
 
 describe('Resolver', () => {

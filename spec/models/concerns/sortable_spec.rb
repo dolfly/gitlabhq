@@ -127,7 +127,7 @@ RSpec.describe Sortable do
       expect(ordered_group_names('id_desc')).to eq(%w[bbb BB AAA aa])
     end
 
-    it 'sorts groups by name via case-insensitive comparision' do
+    it 'sorts groups by name via case-insensitive comparison' do
       expect(ordered_group_names('name_asc')).to eq(%w[aa AAA BB bbb])
       expect(ordered_group_names('name_desc')).to eq(%w[bbb BB AAA aa])
     end

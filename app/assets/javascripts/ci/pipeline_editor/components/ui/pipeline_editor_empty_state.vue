@@ -32,7 +32,7 @@ export default {
       v-else
       :title="__('Get up and running with GitLab CI/CD')"
       :svg-path="$options.emptyStateIllustrationPath"
-      :svg-height="100"
+      :svg-height="144"
       content-class="gl-max-w-full"
     >
       <template #description>
@@ -41,18 +41,12 @@ export default {
     </gl-empty-state>
     <div class="gl-w-max-full gl-flex gl-flex-wrap gl-items-stretch gl-justify-center gl-gap-5">
       <duo-analyze-card v-if="glAbilities.accessDuoAgenticChat" />
-      <gl-card
-        class="gl-w-[250px] gl-max-w-[500px] gl-overflow-hidden gl-bg-default gl-shadow-[0_4px_12px_var(--gl-color-alpha-dark-8),0_0_1px_var(--gl-color-alpha-dark-24)]"
-        header-class="gl-border-bottom-none gl-pt-5 gl-pb-3"
-        body-class="gl-flex gl-flex-col gl-items-center gl-justify-center gl-bg-default gl-text-center gl-pt-0 gl-pb-6"
-      >
+      <gl-card class="gl-min-h-[128px] gl-w-[310px] gl-max-w-[500px]">
         <template #header>
-          <span class="gl-block gl-text-center gl-font-bold">{{
-            s__('Pipelines|Use a CI/CD component')
-          }}</span>
+          <h2 class="gl-heading-scale-300 gl-mb-0">{{ s__('Pipelines|Use a CI/CD component') }}</h2>
         </template>
         <template #default>
-          <p class="gl-h-11">
+          <p>
             {{ s__('Pipelines|Start with a pre-built and customizable CI/CD component.') }}
           </p>
           <gl-button class="gl-mt-3" :href="ciCatalogPath" data-testid="browse-catalog-button">
@@ -60,18 +54,12 @@ export default {
           </gl-button>
         </template>
       </gl-card>
-      <gl-card
-        class="gl-w-[250px] gl-max-w-[500px] gl-bg-default gl-shadow-[0_4px_12px_var(--gl-color-alpha-dark-8),0_0_1px_var(--gl-color-alpha-dark-24)]"
-        header-class="gl-border-bottom-none gl-pt-5 gl-pb-3"
-        body-class="gl-flex gl-flex-col gl-items-center gl-justify-center gl-text-center gl-pt-0 gl-pb-6"
-      >
+      <gl-card class="gl-min-h-[128px] gl-w-[310px] gl-max-w-[500px]">
         <template #header>
-          <span class="gl-block gl-text-center gl-font-bold">{{
-            s__('Pipelines|Write your own')
-          }}</span>
+          <h2 class="gl-heading-scale-300 gl-mb-0">{{ s__('Pipelines|Write your own') }}</h2>
         </template>
         <template #default>
-          <p class="gl-h-11">
+          <p>
             {{
               s__('Pipelines|Write your own CI/CD configuration by hand, starting from scratch.')
             }}

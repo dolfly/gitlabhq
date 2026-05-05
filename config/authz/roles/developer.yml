@@ -95,6 +95,7 @@ project:
   - resolve_note
   - retry_failed_status_checks
   - retry_job
+  - trigger_ai_flow
   - trigger_amazon_q
   - unschedule_job
   - update_alert_management_alert

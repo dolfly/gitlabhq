@@ -30,23 +30,29 @@ This table lists the default model for each feature in the Agent Platform.
 This table lists the models you can select for features
 in the Agent Platform.
 
-| Model | GitLab Duo Agentic Chat | All other agents |
-|-------|--------------|------------------|
-| Claude Sonnet 4 | {{< yes >}} | {{< yes >}} |
-| Claude Sonnet 4 Vertex | {{< yes >}} | {{< yes >}} |
-| Claude Sonnet 4.5 | {{< yes >}} | {{< yes >}} |
-| Claude Sonnet 4.5 Vertex | {{< yes >}} | {{< yes >}} |
-| Claude Sonnet 4.6 | {{< yes >}} | {{< yes >}} |
-| Claude Haiku 4.5 | {{< yes >}} | {{< yes >}} |
-| Claude Opus 4.5 | {{< yes >}} | {{< yes >}} |
-| Claude Opus 4.6 | {{< yes >}} | {{< yes >}} |
-| Claude Opus 4.7 | {{< yes >}} | {{< yes >}} |
-| GPT-5 | {{< yes >}} | {{< yes >}} |
-| GPT-5 Codex | {{< yes >}} | {{< yes >}} |
-| GPT-5.2 Codex | {{< yes >}} | {{< yes >}} |
-| GPT-5.3 Codex | {{< yes >}} | {{< yes >}} |
-| GPT-5 Mini | {{< yes >}} | {{< yes >}} |
-| GPT-5.2 | {{< yes >}} | {{< yes >}} |
+| Model                | GitLab Duo Agentic Chat | All other agents |
+|----------------------|-------------------------|------------------|
+| Claude Sonnet 4      | {{< yes >}}             | {{< yes >}}      |
+| Claude Sonnet 4.5    | {{< yes >}}             | {{< yes >}}      |
+| Claude Sonnet 4.6    | {{< yes >}}             | {{< yes >}}      |
+| Claude Haiku 4.5     | {{< yes >}}             | {{< yes >}}      |
+| Claude Opus 4.5      | {{< yes >}}             | {{< yes >}}      |
+| Claude Opus 4.6      | {{< yes >}}             | {{< yes >}}      |
+| Claude Opus 4.7      | {{< yes >}}             | {{< yes >}}      |
+| GPT-5                | {{< yes >}}             | {{< yes >}}      |
+| GPT-5.1              | {{< yes >}}             | {{< yes >}}      |
+| GPT-5.2              | {{< yes >}}             | {{< yes >}}      |
+| GPT-5.5 <sup>1</sup> | {{< yes >}}             | {{< yes >}}      |
+| GPT-5 Codex          | {{< yes >}}             | {{< yes >}}      |
+| GPT-5.2 Codex        | {{< yes >}}             | {{< yes >}}      |
+| GPT-5.3 Codex        | {{< yes >}}             | {{< yes >}}      |
+| GPT-5 Mini           | {{< yes >}}             | {{< yes >}}      |
+| GPT-5.4 Mini         | {{< yes >}}             | {{< yes >}}      |
+| GPT-5.4 Nano         | {{< yes >}}             | {{< yes >}}      |
+
+**Footnotes**:
+
+1. This model is subject to [limited vendor-side data retention](../gitlab_duo/data_usage.md#data-retention).
 
 ## Select a model for a feature
 

@@ -12,7 +12,7 @@ RSpec.shared_examples 'embedded views (GLQL)' do
   def submit_glql_view(title:, glql_lines:)
     stub_feature_flags(glql_load_on_click: false)
     refresh
-    wait_for_all_requests
+    expect(page).to have_field('Title')
 
     fill_in 'Title', with: title
 
@@ -21,7 +21,8 @@ RSpec.shared_examples 'embedded views (GLQL)' do
     glql_lines.each { |line| textarea.send_keys "#{line}\n" }
     textarea.send_keys "```"
     textarea.send_keys [modifier_key, :enter]
-    wait_for_all_requests
+
+    expect(page).to have_css("[data-testid='glql-facade']")
   end
 
   context 'with a simple query displaying a table of issues' do

@@ -129,33 +129,29 @@ export function createDataSource({
   filterOnBackend = false,
   isWorkItemsView,
 }) {
-  const fetchData = async ({ prefixCommand, query }) => {
+  const fetchData = async ({ query }) => {
     try {
       const queryOptions = filterOnBackend ? { params: { search: query } } : {};
-
-      // We only want to fetch autocomplete data over the network
-      // if it is not available locally in Apollo Cache for Work Items.
-      // eg; `/unassign` shows list of currently assigned users (available locally)
-      //     Same is the case with `/unlabel` and `/unlink`.
-      if (isWorkItemsView && COMMANDS_WITH_LOCAL_DATA.includes(prefixCommand)) return [];
-
       return source ? (await axios.get(source, queryOptions)).data : [];
     } catch {
       return [];
     }
   };
 
-  const cacheTimeoutFn = ({ prefixCommand }) => {
-    const timeKey = cache ? 0 : Math.floor(Date.now() / 1e4);
-    return `${prefixCommand}-${timeKey}`;
-  };
+  const cacheTimeoutFn = () => (cache ? 0 : Math.floor(Date.now() / 1e4));
   const memoizedFetchData = memoize(fetchData, cacheTimeoutFn);
 
   return {
     search: async (prefixCommand = '', query) => {
-      let results = filterOnBackend
-        ? await fetchData({ prefixCommand, query })
-        : await memoizedFetchData({ prefixCommand, query });
+      let results = [];
+
+      // We only want to fetch autocomplete data over the network
+      // if it is not available locally in Apollo Cache for Work Items.
+      // eg; `/unassign` shows list of currently assigned users (available locally)
+      //     Same is the case with `/unlabel` and `/unlink`.
+      if (!isWorkItemsView || !COMMANDS_WITH_LOCAL_DATA.includes(prefixCommand)) {
+        results = filterOnBackend ? await fetchData({ query }) : await memoizedFetchData({ query });
+      }
 
       results = results.map(mapper);
       if (filter) results = filter(results, query);

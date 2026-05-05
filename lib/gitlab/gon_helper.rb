@@ -108,6 +108,7 @@ module Gitlab
       push_frontend_feature_flag(:glql_typescript, current_user, type: :wip)
       push_frontend_feature_flag(:editor_sticky_table_headers, current_user)
       push_frontend_feature_flag(:explore_analytics_dashboards, current_user)
+      push_frontend_feature_flag(:glql_code_suggestion_analytics_aggregation, current_user, type: :gitlab_com_derisk)
 
       push_force_frontend_feature_flag(:security_manager_role_enabled, Gitlab::Security::SecurityManagerConfig.enabled?)
     end

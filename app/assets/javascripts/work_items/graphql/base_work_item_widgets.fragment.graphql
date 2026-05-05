@@ -80,7 +80,7 @@ fragment BaseWorkItemWidgets on WorkItemWidget {
       ...WorkItemParentFields
     }
   }
-  ... on WorkItemWidgetLabels {
+  ... on WorkItemWidgetLabels @skip(if: $useWorkItemFeatures) {
     labels {
       nodes {
         ...Label

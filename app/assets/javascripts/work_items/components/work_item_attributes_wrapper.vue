@@ -10,7 +10,6 @@ import {
   WIDGET_TYPE_HEALTH_STATUS,
   WIDGET_TYPE_HIERARCHY,
   WIDGET_TYPE_ITERATION,
-  WIDGET_TYPE_LABELS,
   WIDGET_TYPE_MILESTONE,
   WIDGET_TYPE_PARTICIPANTS,
   WIDGET_TYPE_PROGRESS,
@@ -26,6 +25,7 @@ import {
   findAssigneesWidget,
   findCrmContactsWidget,
   findHierarchyWidgetDefinition,
+  findLabelsWidget,
   findStartAndDueDateWidget,
 } from '../utils';
 import workItemParticipantsQuery from '../graphql/work_item_participants.query.graphql';
@@ -156,7 +156,7 @@ export default {
       return findAssigneesWidget(this.workItem);
     },
     workItemLabels() {
-      return this.isWidgetPresent(WIDGET_TYPE_LABELS);
+      return findLabelsWidget(this.workItem);
     },
     workItemStatus() {
       return this.isWidgetPresent(WIDGET_TYPE_STATUS);

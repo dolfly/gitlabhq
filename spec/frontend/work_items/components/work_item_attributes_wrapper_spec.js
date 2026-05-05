@@ -154,6 +154,22 @@ describe('WorkItemAttributesWrapper component', () => {
 
       expect(findWorkItemLabels().exists()).toBe(true);
     });
+
+    it('renders when features.labels is present', () => {
+      createComponent({
+        workItem: {
+          ...workItemResponseFactory({ labelsWidgetPresent: false }).data.workItem,
+          features: {
+            labels: {
+              allowsScopedLabels: false,
+              labels: { nodes: [] },
+            },
+          },
+        },
+      });
+
+      expect(findWorkItemLabels().exists()).toBe(true);
+    });
   });
 
   describe('dates widget', () => {

@@ -253,6 +253,21 @@ describe('createDataSource', () => {
     const results = await dataSource.search('', 'b');
     expect(results).toEqual([]);
   });
+
+  it('memoizes fetch across different prefixCommand and query values', async () => {
+    mock.onGet('/source').reply(HTTP_STATUS_OK, [{ name: 'rebase' }]);
+
+    const dataSource = createDataSource({
+      source: '/source',
+      searchFields: ['name'],
+    });
+
+    await dataSource.search('/r', 'r');
+    await dataSource.search('/re', 're');
+    await dataSource.search('/rel', 'rel');
+
+    expect(mock.history.get).toHaveLength(1);
+  });
 });
 
 describe('AutocompleteHelper', () => {

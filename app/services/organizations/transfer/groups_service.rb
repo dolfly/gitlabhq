@@ -75,12 +75,21 @@ module Organizations
           project_relation.each_batch(of: BATCH_SIZE) do |batch|
             schedule_pool_repository_disconnections(batch)
           end
+
+          transfer_fork_networks(project_relation.select(:id))
+
           project_relation.update_all(
             organization_id: new_organization.id,
             visibility_level: Arel.sql('LEAST(?, visibility_level)', new_organization.visibility_level)
           )
         end
       end
+
+      # rubocop:disable CodeReuse/ActiveRecord -- used only in this service
+      def transfer_fork_networks(project_ids)
+        ForkNetwork.where(root_project_id: project_ids).update_all(organization_id: new_organization.id)
+      end
+      # rubocop:enable CodeReuse/ActiveRecord
 
       # rubocop:disable CodeReuse/ActiveRecord -- used only in this service
       def schedule_pool_repository_disconnections(batch)

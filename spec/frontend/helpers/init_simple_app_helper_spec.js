@@ -1,6 +1,7 @@
 import VueApollo from 'vue-apollo';
+import VueRouter from 'vue-router';
 import { createWrapper } from '@vue/test-utils';
-import { defineComponent, h } from 'vue';
+import Vue, { defineComponent, h } from 'vue';
 import { setHTMLFixture, resetHTMLFixture } from 'helpers/fixtures';
 import { initSimpleApp } from '~/helpers/init_simple_app_helper';
 import createDefaultClient from '~/lib/graphql';
@@ -116,6 +117,30 @@ describe('helpers/init_simple_app_helper/initSimpleApp', () => {
           initMock('<div id="mount-here"></div>', { name: 'CoolAppRoot' });
 
           expect(wrapper.vm.$options.name).toBe('CoolAppRoot');
+        });
+      });
+    });
+
+    describe('withVueRouter', () => {
+      let vueUseSpy;
+
+      beforeEach(() => {
+        vueUseSpy = jest.spyOn(Vue, 'use');
+      });
+
+      describe('if false (default), Vue Router is not registered', () => {
+        it('does not call Vue.use with VueRouter', () => {
+          initMock('<div id="mount-here"></div>');
+
+          expect(vueUseSpy).not.toHaveBeenCalledWith(VueRouter);
+        });
+      });
+
+      describe('if true, registers Vue Router', () => {
+        it('calls Vue.use with VueRouter', () => {
+          initMock('<div id="mount-here"></div>', { withVueRouter: true });
+
+          expect(vueUseSpy).toHaveBeenCalledWith(VueRouter);
         });
       });
     });

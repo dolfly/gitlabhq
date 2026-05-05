@@ -41,7 +41,6 @@ RSpec.describe 'organization transfer support tracking', :aggregate_failures, fe
       dependency_list_export_part_uploads
       dependency_list_export_parts
       dependency_list_export_uploads
-      fork_networks
       group_upload_states
       import_failures
       import_offline_configurations

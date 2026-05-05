@@ -551,7 +551,7 @@ The system will compare your merge request’s security results against the late
 
 - Tier: Ultimate
 - Offering: GitLab.com, GitLab Self-Managed, GitLab Dedicated
-- Links: [Documentation](../../user/application_security/detect/security_scanning_results.md#change-status-or-severity) | [Related issue](https://gitlab.com/gitlab-org/gitlab/-/issues/554078)
+- Links: [Documentation](../../user/application_security/detect/security_scanning_results.md#change-status) | [Related issue](https://gitlab.com/gitlab-org/gitlab/-/issues/554078)
 
 {{< /details >}}
 

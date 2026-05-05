@@ -113,6 +113,7 @@ export const findIterationWidget = (workItem) =>
   workItem?.widgets?.find((widget) => widget.type === WIDGET_TYPE_ITERATION);
 
 export const findLabelsWidget = (workItem) =>
+  workItem?.features?.labels ||
   workItem?.widgets?.find((widget) => widget.type === WIDGET_TYPE_LABELS);
 
 export const findLinkedItemsWidget = (workItem) =>

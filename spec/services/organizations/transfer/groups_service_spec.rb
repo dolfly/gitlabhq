@@ -880,6 +880,16 @@ RSpec.describe Organizations::Transfer::GroupsService, :aggregate_failures, feat
         end
       end
 
+      context "with fork network records" do
+        let_it_be_with_refind(:fork_network) do
+          create(:fork_network, root_project: project)
+        end
+
+        it_behaves_like "rolls back organization_id updates" do
+          let(:records) { [fork_network] }
+        end
+      end
+
       context "with visibility level changes that would have been made" do
         let_it_be(:new_organization) { create(:organization, visibility_level: Gitlab::VisibilityLevel::PRIVATE) }
         let_it_be_with_refind(:public_subgroup) do
@@ -919,6 +929,74 @@ RSpec.describe Organizations::Transfer::GroupsService, :aggregate_failures, feat
 
       it 'does not publish a GroupTransferredEvent' do
         expect { service.execute }.not_to publish_event(Organizations::GroupTransferredEvent)
+      end
+    end
+
+    context 'when transferring fork networks' do
+      let_it_be_with_refind(:project_with_fork_network) do
+        create(:project, namespace: group, organization: old_organization)
+      end
+
+      let_it_be_with_refind(:fork_network) do
+        create(:fork_network, root_project: project_with_fork_network)
+      end
+
+      it 'updates fork_network organization_id when root_project is in transferred group' do
+        expect { service.execute }.to change { fork_network.reload.organization_id }
+          .from(old_organization.id).to(new_organization.id)
+      end
+
+      it 'keeps fork_network valid after transfer' do
+        service.execute
+
+        expect(fork_network.reload).to be_valid
+      end
+
+      context 'when fork network root_project is in a subgroup' do
+        let_it_be_with_refind(:subgroup) { create(:group, parent: group, organization: old_organization) }
+        let_it_be_with_refind(:subgroup_project) do
+          create(:project, namespace: subgroup, organization: old_organization)
+        end
+
+        let_it_be_with_refind(:subgroup_fork_network) do
+          create(:fork_network, root_project: subgroup_project)
+        end
+
+        it 'updates fork_network organization_id for projects in subgroups' do
+          expect { service.execute }.to change { subgroup_fork_network.reload.organization_id }
+            .from(old_organization.id).to(new_organization.id)
+        end
+      end
+
+      context 'when fork network root_project is NOT in the transferred group' do
+        let_it_be(:other_group) { create(:group, organization: old_organization) }
+        let_it_be_with_refind(:other_project) do
+          create(:project, namespace: other_group, organization: old_organization)
+        end
+
+        let_it_be_with_refind(:other_fork_network) do
+          create(:fork_network, root_project: other_project)
+        end
+
+        it 'does not update fork_network organization_id' do
+          expect { service.execute }.not_to change { other_fork_network.reload.organization_id }
+        end
+      end
+
+      context 'when no projects have fork networks' do
+        let_it_be_with_refind(:project_without_fork_network) do
+          create(:project, namespace: group, organization: old_organization)
+        end
+
+        before do
+          ForkNetwork.delete_all
+        end
+
+        it 'completes transfer successfully' do
+          expect { service.execute }.not_to raise_error
+          expect(group.reload.organization_id).to eq(new_organization.id)
+          expect(project_without_fork_network.reload.organization_id).to eq(new_organization.id)
+        end
       end
     end
 

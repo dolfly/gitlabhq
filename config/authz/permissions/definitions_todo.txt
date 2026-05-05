@@ -498,7 +498,6 @@ read_job_artifacts
 read_jobs_statistics
 read_licenses
 read_limit_alert
-read_manual_variables
 read_member_access_request
 read_merge_request_closing_issue
 read_merge_request_iid
@@ -649,7 +648,6 @@ start_trial
 summarize_comments
 take_ownership_pipeline_schedule
 transfer_projects
-trigger_ai_flow
 trigger_amazon_q
 troubleshoot_job_with_ai
 unlink

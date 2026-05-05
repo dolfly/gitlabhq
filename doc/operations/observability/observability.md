@@ -48,10 +48,13 @@ GitLab Observability is available and free for all tiers. [Share feedback or req
 1. View your first trace.
 1. Debug a slow request.
 
-<!-- TODO: Replace with actual 5-minute quickstart video
-<i class="fa-youtube-play" aria-hidden="true"></i>
-**Watch:** [5-Minute GitLab Observability Setup](VIDEO_URL_HERE)
--->
+<div class="video-fallback">
+  Watch: <a href="https://www.youtube.com/watch?v=lZtgor6chMs">GitLab Observability setup</a>.
+</div>
+<figure class="video-container">
+  <iframe src="https://www.youtube-nocookie.com/embed/lZtgor6chMs" frameborder="0" allowfullscreen> </iframe>
+</figure>
+<!-- Video published on 2026-05-04 -->
 
 ## Real-world usage
 
@@ -62,13 +65,10 @@ GitLab Observability is being used by teams worldwide to monitor their applicati
 For a usage demonstration, see [How to Debug Production Issues with GitLab Observability](VIDEO_URL).
 -->
 
-<!-- TODO: Replace with actual anonymous usage statistics -->
-Our users are actively monitoring their systems with GitLab Observability:
+Our users are actively monitoring their systems with GitLab Observability on GitLab.com (as of the week of April 21, 2026):
 
-- 500,000+ traces processed daily.
-- 2,500+ services actively monitored.
-- 50 TB of telemetry data ingested per month.
-- 60% average reduction in MTTR reported by early adopters.
+- More than 57 million traces processed daily.
+- More than 3,000 services actively monitored.
 
 ## Key features
 

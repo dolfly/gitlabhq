@@ -160,7 +160,7 @@ export default {
             // Only include items which aren't already part of history
             if (!knownItems.includes(itemString)) {
               historyItems.push(sanitizedItem);
-              // We're storing string for comparision as doing direct object compare
+              // We're storing string for comparison as doing direct object compare
               // won't work due to object reference not being the same.
               knownItems.push(itemString);
             }

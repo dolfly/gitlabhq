@@ -73056,9 +73056,13 @@ components:
         user_id:
           type: string
         tags:
-          "$ref": "#/components/schemas/APIEntitiesMlMlflowKeyValue"
+          type: array
+          items:
+            "$ref": "#/components/schemas/APIEntitiesMlMlflowKeyValue"
         latest_versions:
-          "$ref": "#/components/schemas/APIEntitiesMlMlflowModelVersion"
+          type: array
+          items:
+            "$ref": "#/components/schemas/APIEntitiesMlMlflowModelVersion"
     APIEntitiesMlMlflowUpdateRun:
       type: object
       properties:
@@ -73074,17 +73078,21 @@ components:
         experiment_id:
           type: string
         start_time:
-          type: string
+          type: integer
+          description: Unix timestamp in milliseconds
         end_time:
-          type: string
+          type: integer
+          description: Unix timestamp in milliseconds
         run_name:
           type: string
         status:
           type: string
+          example: FINISHED
         artifact_uri:
           type: string
         lifecycle_stage:
           type: string
+          example: active
         user_id:
           type: string
     APIEntitiesMlMlflowRun:
@@ -73093,7 +73101,7 @@ components:
         info:
           "$ref": "#/components/schemas/APIEntitiesMlMlflowRunInfo"
         data:
-          type: string
+          type: object
     APIEntitiesMlMlflowGetDownload:
       type: object
       properties:
@@ -73115,6 +73123,7 @@ components:
           type: string
         current_stage:
           type: string
+          example: development
         description:
           type: string
         source:
@@ -73123,10 +73132,13 @@ components:
           type: string
         status:
           type: string
+          example: READY
         status_message:
           type: string
         tags:
-          "$ref": "#/components/schemas/APIEntitiesMlMlflowKeyValue"
+          type: array
+          items:
+            "$ref": "#/components/schemas/APIEntitiesMlMlflowKeyValue"
         run_link:
           type: string
         aliases:
@@ -73139,11 +73151,12 @@ components:
         key:
           type: string
         value:
-          type: string
+          type: number
         timestamp:
-          type: string
+          type: integer
+          description: Unix timestamp in milliseconds
         step:
-          type: string
+          type: integer
     APIEntitiesMlMlflowGetMetricHistory:
       type: object
       properties:
@@ -73158,11 +73171,14 @@ components:
       properties:
         experiment_id:
           type: string
+          example: '1'
     APIEntitiesMlMlflowListExperiment:
       type: object
       properties:
         experiments:
-          "$ref": "#/components/schemas/APIEntitiesMlMlflowExperiment"
+          type: array
+          items:
+            "$ref": "#/components/schemas/APIEntitiesMlMlflowExperiment"
     APIEntitiesMlMlflowKeyValue:
       type: object
       properties:
@@ -73175,14 +73191,19 @@ components:
       properties:
         experiment_id:
           type: string
+          example: '1'
         name:
           type: string
+          example: my_experiment
         lifecycle_stage:
           type: string
+          example: active
         artifact_location:
           type: string
         tags:
-          "$ref": "#/components/schemas/APIEntitiesMlMlflowKeyValue"
+          type: array
+          items:
+            "$ref": "#/components/schemas/APIEntitiesMlMlflowKeyValue"
     APIEntitiesMlMlflowGetExperiment:
       type: object
       properties:
@@ -76141,7 +76162,7 @@ components:
           example: my-app-1.5-20181107.152550-1.jar
         size:
           type: integer
-          example: '2421'
+          example: 2421
         file_md5:
           type: string
           example: 58e6a45a629910c6ff99145a688971ac
@@ -76369,9 +76390,10 @@ components:
           example: 1.3.0.17
         resources:
           type: array
-          example: '{ "@id": "https://gitlab.com/api/v4/projects/1/packages/nuget/query",
-            "@type": "SearchQueryService", "comment": "Filter and search for packages
-            by keyword."}'
+          example:
+          - "@id": https://gitlab.com/api/v4/projects/1/packages/nuget/query
+            "@type": SearchQueryService
+            comment: Filter and search for packages by keyword.
           items:
             type: object
     APIEntitiesNpmPackage:
@@ -76382,23 +76404,24 @@ components:
           example: my_package
         versions:
           type: object
-          example: |-
-            {
-                             "1.0.0": {
-                               "name": "my_package",
-                               "version": "1.0.0",
-                               "dist": { "shasum": "12345", "tarball": "https://..." }
-                             }
-                           }
+          example:
+            1.0.0:
+              name: my_package
+              version: 1.0.0
+              dist:
+                shasum: '12345'
+                tarball: https://...
         dist-tags:
           type: object
-          example: '{ "latest":"1.0.1" }'
+          example:
+            latest: 1.0.1
     APIEntitiesNpmPackageTag:
       type: object
       properties:
         dist_tags:
           type: object
-          example: '{ "latest":"1.0.1" }'
+          example:
+            latest: 1.0.1
     APIEntitiesNamespaceExistence:
       type: object
       properties:
@@ -76690,8 +76713,10 @@ components:
           example: https://gitlab.com/gitlab-org/gitlab/-/raw/e52d6d0246d7375291850e61f0abc101fbda9dc2/.gitlab/ci/build-images.gitlab-ci.yml
         extra:
           type: object
-          example: '{ "job_name": "test", "project": "gitlab-org/gitlab", "ref": "master"
-            }'
+          example:
+            job_name: test
+            project: gitlab-org/gitlab
+            ref: master
         context_project:
           type: string
           example: gitlab-org/gitlab
@@ -76705,12 +76730,14 @@ components:
           type: boolean
         errors:
           type: array
-          example: variables config should be a hash of key value pairs
+          example:
+          - variables config should be a hash of key value pairs
           items:
             type: string
         warnings:
           type: array
-          example: jobs:job may allow multiple pipelines ...
+          example:
+          - jobs:job may allow multiple pipelines ...
           items:
             type: string
         merged_yaml:
@@ -76720,12 +76747,16 @@ components:
                       :script: echo 2\n:test:\n  :stage: test\n  :script: echo 1\n
         includes:
           type: array
-          example: '{ "blob": "https://gitlab.com/root/example-project/-/blob/...'
+          example:
+          - blob: https://gitlab.com/root/example-project/-/blob/...
           items:
             "$ref": "#/components/schemas/APIEntitiesCiLintResultInclude"
         jobs:
           type: array
-          example: '{ "name": "test: .... }'
+          example:
+          - name: test
+            script:
+            - ls
           items:
             type: object
     APIEntitiesIssuableMetricImage:
@@ -78619,8 +78650,10 @@ components:
       properties:
         files:
           type: object
-          example: '{ "files" : { "conan_sources.tgz" : { }, "conanmanifest.txt" :
-            { }, "conanfile.py" : { } } }'
+          example:
+            conan_sources.tgz: {}
+            conanmanifest.txt: {}
+            conanfile.py: {}
     APIEntitiesPackagesConanRecipeRevisions:
       type: object
       properties:
@@ -78649,33 +78682,36 @@ components:
       properties:
         upload_urls:
           type: object
-          example: '{ "conan_package.tgz": "https://gitlab.example.com/api/v4/packages/conan/v1/files/my-package/1.0/my-group+my-project/stable/0/package/103f6067a947f366ef91fc1b7da351c588d1827f/0/conan_package.tgz"
-            }'
+          example:
+            conan_package.tgz: https://gitlab.example.com/api/v4/packages/conan/v1/files/my-package/1.0/my-group+my-project/stable/0/package/103f6067a947f366ef91fc1b7da351c588d1827f/0/conan_package.tgz
     APIEntitiesPackagesConanRecipeManifest:
       type: object
       properties:
         recipe_urls:
           type: object
-          example: '{ "conan_sources.tgz": "https://gitlab.example.com/api/v4/packages/conan/v1/files/my-package/1.0/my-group+my-project/stable/0/export/conan_sources.tgz"
-            }'
+          example:
+            conan_sources.tgz: https://gitlab.example.com/api/v4/packages/conan/v1/files/my-package/1.0/my-group+my-project/stable/0/export/conan_sources.tgz
     APIEntitiesPackagesConanPackageManifest:
       type: object
       properties:
         package_urls:
           type: object
-          example: '{ "conan_package.tgz": "https://gitlab.example.com/api/v4/packages/conan/v1/files/my-package/1.0/my-group+my-project/stable/packages/103f6067a947f366ef91fc1b7da351c588d1827f/0/conan_package.tgz"'
+          example:
+            conan_package.tgz: https://gitlab.example.com/api/v4/packages/conan/v1/files/my-package/1.0/my-group+my-project/stable/packages/103f6067a947f366ef91fc1b7da351c588d1827f/0/conan_package.tgz
     APIEntitiesPackagesConanRecipeSnapshot:
       type: object
       properties:
         recipe_snapshot:
           type: object
-          example: '{ "conan_sources.tgz": "eadf19b33f4c3c7e113faabf26e76277" }'
+          example:
+            conan_sources.tgz: eadf19b33f4c3c7e113faabf26e76277
     APIEntitiesPackagesConanPackageSnapshot:
       type: object
       properties:
         package_snapshot:
           type: object
-          example: '{ "conan_package.tgz": "749b29bdf72587081ca03ec033ee59dc" }'
+          example:
+            conan_package.tgz: 749b29bdf72587081ca03ec033ee59dc
     APIEntitiesCommitStatus:
       type: object
       properties:
@@ -79067,7 +79103,7 @@ components:
           type: string
           example: 'Failure/Error: is_expected.to eq(3)'
         recent_failures:
-          type: string
+          type: object
           example:
             count: 3
             base_branch: develop
@@ -79156,13 +79192,12 @@ components:
           example: "/test-group/test-project/-/pipelines/287"
         illustration:
           type: object
-          example: |
-            {
-              "image": "illustrations/empty-state/empty-job-not-triggered-md.svg",
-              "size": "",
-              "title": "This job has not been triggered yet",
-              "content": "This job depends on upstream jobs that need to succeed in order for this job to be triggered"
-            }
+          example:
+            image: illustrations/empty-state/empty-job-not-triggered-md.svg
+            size: ''
+            title: This job has not been triggered yet
+            content: This job depends on upstream jobs that need to succeed in order
+              for this job to be triggered
         favicon:
           type: string
           example: "/assets/ci_favicons/favicon_status_success.png"
@@ -80019,7 +80054,8 @@ components:
           example: '2017-07-26T11:08:53.000+02:00'
         parent_ids:
           type: array
-          example: 2a4b78934375d7f53875269ffd4f45fd83a84ebe
+          example:
+          - 2a4b78934375d7f53875269ffd4f45fd83a84ebe
           items:
             type: string
         title:
@@ -80050,11 +80086,14 @@ components:
           example: '2012-05-28T04:42:42-07:00'
         trailers:
           type: object
-          example: '{ "Merged-By": "Jane Doe janedoe@gitlab.com" }'
+          example:
+            Merged-By: Jane Doe janedoe@gitlab.com
         extended_trailers:
           type: object
-          example: '{ "Signed-off-by": ["John Doe <johndoe@gitlab.com>", "Jane Doe
-            <janedoe@gitlab.com>"] }'
+          example:
+            Signed-off-by:
+            - John Doe <johndoe@gitlab.com>
+            - Jane Doe <janedoe@gitlab.com>
         web_url:
           type: string
           example: https://gitlab.example.com/janedoe/gitlab-foss/-/commit/ed899a2f4b50b4370feeea94676502b42383c746
@@ -80268,9 +80307,17 @@ components:
           example: 5242880
         limits_history:
           type: object
-          example: |-
-            {"enforcement_limit"=>[{"timestamp"=>1686909124, "user_id"=>1, "username"=>"x", "value"=>5}],
-                               "notification_limit"=>[{"timestamp"=>1686909124, "user_id"=>2, "username"=>"y", "value"=>7}]}
+          example:
+            enforcement_limit:
+            - timestamp: 1686909124
+              user_id: 1
+              username: x
+              value: 5
+            notification_limit:
+            - timestamp: 1686909124
+              user_id: 2
+              username: "y"
+              value: 7
         maven_max_file_size:
           type: integer
           example: 3221225472
@@ -81241,9 +81288,11 @@ components:
           example: add.rb
         files:
           type: array
-          example: e0d123e5f316bef78bfdf5a008837577
+          example:
+          - path: file.txt
+            raw_url: https://gitlab.example.com/.../raw
           items:
-            type: string
+            type: object
         imported:
           type: boolean
           example: false
@@ -81297,9 +81346,11 @@ components:
           example: add.rb
         files:
           type: array
-          example: e0d123e5f316bef78bfdf5a008837577
+          example:
+          - path: file.txt
+            raw_url: https://gitlab.example.com/.../raw
           items:
-            type: string
+            type: object
         imported:
           type: boolean
           example: false
@@ -81353,9 +81404,11 @@ components:
           example: add.rb
         files:
           type: array
-          example: e0d123e5f316bef78bfdf5a008837577
+          example:
+          - path: file.txt
+            raw_url: https://gitlab.example.com/.../raw
           items:
-            type: string
+            type: object
         imported:
           type: boolean
           example: false
@@ -81538,7 +81591,7 @@ components:
           description: Whether an HMAC signing token is configured
           example: false
         project_id:
-          type: string
+          type: integer
           example: 1
         issues_events:
           type: boolean
@@ -84907,7 +84960,8 @@ components:
           example: '2017-07-26T11:08:53.000+02:00'
         parent_ids:
           type: array
-          example: 2a4b78934375d7f53875269ffd4f45fd83a84ebe
+          example:
+          - 2a4b78934375d7f53875269ffd4f45fd83a84ebe
           items:
             type: string
         title:
@@ -84938,11 +84992,14 @@ components:
           example: '2012-05-28T04:42:42-07:00'
         trailers:
           type: object
-          example: '{ "Merged-By": "Jane Doe janedoe@gitlab.com" }'
+          example:
+            Merged-By: Jane Doe janedoe@gitlab.com
         extended_trailers:
           type: object
-          example: '{ "Signed-off-by": ["John Doe <johndoe@gitlab.com>", "Jane Doe
-            <janedoe@gitlab.com>"] }'
+          example:
+            Signed-off-by:
+            - John Doe <johndoe@gitlab.com>
+            - Jane Doe <janedoe@gitlab.com>
         web_url:
           type: string
           example: https://gitlab.example.com/janedoe/gitlab-foss/-/commit/ed899a2f4b50b4370feeea94676502b42383c746

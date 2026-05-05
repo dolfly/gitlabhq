@@ -9,6 +9,7 @@ import {
   WIDGET_TYPE_NOTES,
   WIDGET_TYPE_ERROR_TRACKING,
   WIDGET_TYPE_CRM_CONTACTS,
+  WIDGET_TYPE_LABELS,
   WIDGET_TYPE_LINKED_RESOURCES,
   WIDGET_TYPE_HIERARCHY,
   WIDGET_TYPE_LINKED_ITEMS,
@@ -44,6 +45,7 @@ import {
   findNotesWidget,
   findOpenChildItemsCountsByType,
   findCrmContactsWidget,
+  findLabelsWidget,
   findLinkedResourcesWidget,
   findStartAndDueDateWidget,
   formatLabelForListbox,
@@ -1288,6 +1290,37 @@ describe('findStartAndDueDateWidget', () => {
 
   it('returns undefined when neither exists', () => {
     expect(findStartAndDueDateWidget({ widgets: [] })).toBeUndefined();
+  });
+});
+
+describe('findLabelsWidget', () => {
+  const labelsWidget = {
+    type: WIDGET_TYPE_LABELS,
+    allowsScopedLabels: false,
+    labels: { nodes: [{ id: 'gid://gitlab/Label/1', title: 'bug' }] },
+  };
+  const featuresLabels = {
+    allowsScopedLabels: true,
+    labels: { nodes: [{ id: 'gid://gitlab/Label/2', title: 'feature' }] },
+  };
+
+  it('returns features.labels when present', () => {
+    const workItem = {
+      features: { labels: featuresLabels },
+      widgets: [labelsWidget],
+    };
+
+    expect(findLabelsWidget(workItem)).toBe(featuresLabels);
+  });
+
+  it('falls back to widgets when features not present', () => {
+    const workItem = { widgets: [labelsWidget] };
+
+    expect(findLabelsWidget(workItem)).toBe(labelsWidget);
+  });
+
+  it('returns undefined when neither exists', () => {
+    expect(findLabelsWidget({ widgets: [] })).toBeUndefined();
   });
 });
 

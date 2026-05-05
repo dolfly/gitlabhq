@@ -8,7 +8,11 @@ module API
         snippet_files.first || snippet.file_name
       end
       expose :files, documentation: {
-        is_array: true, example: 'e0d123e5f316bef78bfdf5a008837577'
+        type: 'object',
+        is_array: true, example: [{
+          path: 'file.txt',
+          raw_url: 'https://gitlab.example.com/.../raw'
+        }]
       } do |snippet, options|
         snippet_files.map do |file|
           {

@@ -794,6 +794,19 @@ RSpec.describe Ci::Pipeline, :mailer, factory_default: :keep, feature_category: 
     end
   end
 
+  context 'with finished filters' do
+    let_it_be(:old_pipeline) { create(:ci_pipeline, finished_at: 1.week.ago) }
+    let_it_be(:new_pipeline) { create(:ci_pipeline, finished_at: 1.hour.ago) }
+
+    describe '.finished_after' do
+      subject { described_class.finished_after(1.day.ago) }
+
+      it 'returns the pipeline finished after the given time' do
+        is_expected.to contain_exactly(new_pipeline)
+      end
+    end
+  end
+
   describe '.for_sha' do
     subject { described_class.for_sha(sha) }
 

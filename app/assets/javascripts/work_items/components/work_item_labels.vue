@@ -289,6 +289,7 @@ export default {
                   removeLabelIds,
                 },
               },
+              useWorkItemFeatures: Boolean(this.glFeatures?.workItemFeaturesField),
             },
           });
 

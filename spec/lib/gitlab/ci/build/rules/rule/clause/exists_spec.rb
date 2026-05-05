@@ -104,7 +104,7 @@ RSpec.describe Gitlab::Ci::Build::Rules::Rule::Clause::Exists, feature_category:
         end
       end
 
-      context 'when the pattern comparision limit is reached' do
+      context 'when the pattern comparison limit is reached' do
         let_it_be(:project) { create(:project, :repository) }
         let(:globs) { ['*definitely_not_a_matching_glob*'] }
 

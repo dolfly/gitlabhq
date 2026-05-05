@@ -1926,6 +1926,11 @@ export const mockWorkItemFeaturesData = ({ discussionLocked = false } = {}) => (
     isFixed: false,
     __typename: 'WorkItemWidgetStartAndDueDate',
   },
+  labels: {
+    allowsScopedLabels: false,
+    labels: { nodes: [], __typename: 'LabelConnection' },
+    __typename: 'WorkItemWidgetLabels',
+  },
   timeTracking: { humanReadableAttributes: { timeEstimate: '' } },
   notes: { discussionLocked, __typename: 'WorkItemWidgetNotes' },
   development: { closingMergeRequests: { count: 0 } },
@@ -11341,6 +11346,12 @@ export const workItemsQueryResponseWithFeatures = {
                 rollUp: false,
                 isFixed: false,
               },
+              labels: {
+                allowsScopedLabels: false,
+                labels: {
+                  nodes: mockLabels,
+                },
+              },
               timeTracking: {
                 humanReadableAttributes: {
                   timeEstimate: '',
@@ -11432,6 +11443,12 @@ export const workItemsQueryResponseWithFeatures = {
                 dueDate: null,
                 rollUp: false,
                 isFixed: false,
+              },
+              labels: {
+                allowsScopedLabels: false,
+                labels: {
+                  nodes: [],
+                },
               },
               timeTracking: {
                 humanReadableAttributes: {

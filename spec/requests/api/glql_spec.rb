@@ -352,6 +352,44 @@ RSpec.describe API::Glql, feature_category: :custom_dashboards_foundation do
         expect(json_response['success']).to be(true)
       end
     end
+
+    context 'with analytics mode for code suggestions' do
+      let(:params) do
+        { glql_yaml: <<~YAML }
+          query: type = CodeSuggestion and language = "ruby"
+          mode: "analytics"
+          dimensions: "language"
+          metrics: "totalCount, acceptanceRate"
+          project: "#{project.full_path}"
+        YAML
+      end
+
+      context 'when the feature flag is disabled' do
+        before do
+          stub_feature_flags(glql_code_suggestion_analytics_aggregation: false)
+        end
+
+        it 'returns an error' do
+          glql_request
+
+          expect(response).to have_gitlab_http_status(:bad_request)
+          expect(json_response['error'])
+            .to include('code suggestions` requires the `glqlCodeSuggestions` feature flag to be enabled')
+        end
+      end
+
+      context 'when the feature flag is enabled' do
+        before do
+          stub_feature_flags(glql_code_suggestion_analytics_aggregation: project)
+        end
+
+        it 'returns an error because the analytics schema is not available in FOSS' do
+          glql_request
+
+          expect(response).to have_gitlab_http_status(:bad_request)
+        end
+      end
+    end
   end
 
   private

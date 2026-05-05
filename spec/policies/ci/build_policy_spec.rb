@@ -14,7 +14,6 @@ RSpec.describe Ci::BuildPolicy, feature_category: :continuous_integration do
       read_build_trace
       read_ci_minutes_limited_summary
       read_job_artifacts
-      read_manual_variables
       read_web_ide_terminal
       troubleshoot_job_with_ai
       update_web_ide_terminal
@@ -171,76 +170,32 @@ RSpec.describe Ci::BuildPolicy, feature_category: :continuous_integration do
   end
 
   describe ':read_manual_variables' do
-    context 'when project is public' do
-      let_it_be(:project) { create(:project, :public) }
-      let_it_be(:user) { create(:user) }
+    subject { policy }
 
-      context 'when user is at least a developer' do
-        before_all do
-          project.add_developer(user)
-        end
+    let_it_be(:project, freeze: true) { create(:project) }
 
-        it 'is allowed' do
-          expect(policy).to be_allowed :read_manual_variables
-        end
-      end
+    context 'when user is at least a reporter' do
+      let_it_be(:user) { create(:user, reporter_of: project) }
 
-      context 'when user is a developer or below' do
-        before_all do
-          project.add_guest(user)
-        end
-
-        it 'is not allowed' do
-          expect(policy).not_to be_allowed :read_manual_variables
-        end
-      end
+      it { expect_allowed(:read_manual_variables) }
     end
 
-    context 'when project is internal' do
-      let_it_be(:project) { create(:project, :internal) }
+    context 'when user is a planner' do
+      let_it_be(:user) { create(:user, planner_of: project) }
 
-      context 'when user is an explicit member of the project' do
-        let_it_be(:user) { create(:user) }
-
-        before_all do
-          project.add_guest(user)
-        end
-
-        it 'is allowed' do
-          expect(policy).to be_allowed :read_manual_variables
-        end
-      end
-
-      context 'when user is not a member of the project but has implicit guest access' do
-        let(:user) { create(:user) }
-
-        it 'is not allowed' do
-          expect(policy).not_to be_allowed :read_manual_variables
-        end
-      end
+      it { expect_disallowed(:read_manual_variables) }
     end
 
-    context 'when project is private' do
-      let_it_be(:project) { create(:project, :private) }
-      let_it_be(:user) { create(:user) }
+    context 'when user is a guest' do
+      let_it_be(:user) { create(:user, guest_of: project) }
 
-      context 'when user is a guest and a member of the project' do
-        before_all do
-          project.add_guest(user)
-        end
+      it { expect_disallowed(:read_manual_variables) }
+    end
 
-        it 'is allowed' do
-          expect(policy).to be_allowed :read_manual_variables
-        end
-      end
+    context 'when user is not a member of the project' do
+      let(:user) { create(:user) }
 
-      context 'when user is not a member of the project' do
-        let(:user) { create(:user) }
-
-        it 'is not allowed' do
-          expect(policy).not_to be_allowed :read_manual_variables
-        end
-      end
+      it { expect_disallowed(:read_manual_variables) }
     end
   end
 
