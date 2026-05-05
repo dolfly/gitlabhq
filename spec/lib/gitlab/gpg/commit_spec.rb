@@ -277,6 +277,75 @@ RSpec.describe Gitlab::Gpg::Commit, feature_category: :source_code_management do
 
           it_behaves_like 'returns the cached signature on second call'
         end
+
+        context 'signing key has been revoked' do
+          before do
+            revoked_signature = instance_double(GPGME::Signature, fingerprint: GpgHelpers::User1.fingerprint,
+              valid?: false, revoked_key?: true)
+            allow(GPGME::Crypto).to receive(:new).and_return(crypto)
+            allow(crypto).to receive(:verify).and_yield(revoked_signature)
+          end
+
+          it 'returns a revoked_key signature' do
+            expect(described_class.new(commit).signature).to have_attributes(
+              commit_sha: commit_sha,
+              project: project,
+              gpg_key: gpg_key,
+              gpg_key_primary_keyid: GpgHelpers::User1.primary_keyid,
+              gpg_key_user_name: GpgHelpers::User1.names.first,
+              gpg_key_user_email: GpgHelpers::User1.emails.first,
+              verification_status: 'revoked_key'
+            )
+          end
+
+          it_behaves_like 'returns the cached signature on second call'
+        end
+
+        context 'signing key has expired' do
+          before do
+            expired_key_signature = instance_double(GPGME::Signature, fingerprint: GpgHelpers::User1.fingerprint,
+              valid?: false, revoked_key?: false, expired_key?: true)
+            allow(GPGME::Crypto).to receive(:new).and_return(crypto)
+            allow(crypto).to receive(:verify).and_yield(expired_key_signature)
+          end
+
+          it 'returns an expired_key signature' do
+            expect(described_class.new(commit).signature).to have_attributes(
+              commit_sha: commit_sha,
+              project: project,
+              gpg_key: gpg_key,
+              gpg_key_primary_keyid: GpgHelpers::User1.primary_keyid,
+              gpg_key_user_name: GpgHelpers::User1.names.first,
+              gpg_key_user_email: GpgHelpers::User1.emails.first,
+              verification_status: 'expired_key'
+            )
+          end
+
+          it_behaves_like 'returns the cached signature on second call'
+        end
+
+        context 'signature is invalid but key is neither revoked nor expired' do
+          before do
+            invalid_signature = instance_double(GPGME::Signature, fingerprint: GpgHelpers::User1.fingerprint,
+              valid?: false, revoked_key?: false, expired_key?: false)
+            allow(GPGME::Crypto).to receive(:new).and_return(crypto)
+            allow(crypto).to receive(:verify).and_yield(invalid_signature)
+          end
+
+          it 'returns an unverified signature' do
+            expect(described_class.new(commit).signature).to have_attributes(
+              commit_sha: commit_sha,
+              project: project,
+              gpg_key: gpg_key,
+              gpg_key_primary_keyid: GpgHelpers::User1.primary_keyid,
+              gpg_key_user_name: GpgHelpers::User1.names.first,
+              gpg_key_user_email: GpgHelpers::User1.emails.first,
+              verification_status: 'unverified'
+            )
+          end
+
+          it_behaves_like 'returns the cached signature on second call'
+        end
       end
 
       context 'user does not match the key uid' do

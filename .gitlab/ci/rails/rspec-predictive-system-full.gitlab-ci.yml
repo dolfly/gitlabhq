@@ -34,7 +34,6 @@ dont-interrupt-me:
   needs:
     - pipeline: $PARENT_PIPELINE_ID
       job: clone-gitlab-repo
-      optional: true
     - pipeline: $PARENT_PIPELINE_ID
       job: setup-test-env
     - pipeline: $PARENT_PIPELINE_ID

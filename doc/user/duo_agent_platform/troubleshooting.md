@@ -108,14 +108,14 @@ To create push rules for the instance:
 
 ## Error: `SSL certificate OpenSSL verify result: unable to get local issuer certificate (20)`
 
-On GitLab Self-Managed instances that use custom or self-signed CA certificates, this message might display when GitLab Duo Workflow jobs fail during
+On GitLab Self-Managed instances that use custom or self-signed CA certificates, this message might display when GitLab Duo Agent Platform jobs fail during
 the initial `git clone` (the `get_sources` phase).
 
-This happens because GitLab Duo Workflow jobs set `GIT_CONFIG_GLOBAL=/dev/null` and `GIT_CONFIG_NOSYSTEM=1`
+This happens because GitLab Duo Agent Platform jobs set `GIT_CONFIG_GLOBAL=/dev/null` and `GIT_CONFIG_NOSYSTEM=1`
 to harden the agent sandbox. These variables prevent Git from reading system and global configuration files.
 This breaks the runner's mechanism for injecting CA certificate paths during `get_sources`.
 
-CI/CD jobs that do not execute flows are not affected. This issue is specific to workload pipelines for GitLab Duo Workflow.
+CI/CD jobs that do not execute flows are not affected. This issue is specific to workload pipelines for the GitLab Duo Agent Platform.
 
 To resolve this issue, in the [`config.toml`](https://docs.gitlab.com/runner/configuration/advanced-configuration/) file, set the `GIT_SSL_CAINFO` environment variable at the runner level,
 and mount the CA certificate into the container:
@@ -131,7 +131,7 @@ Replace `/path/to/your/ca-bundle.crt` with the path to your CA certificate bundl
 The file must be a PEM-formatted CA bundle that contains your root CA and any intermediate certificates.
 
 You might expect to set this as a CI/CD variable, but custom CI/CD variables are
-[not available](flows/execution_variables.md#custom-cicd-variables) in GitLab Duo Workflow jobs.
+[not available](flows/execution_variables.md#custom-cicd-variables) in GitLab Duo Agent Platform jobs.
 You must use the runner's `config.toml` `environment` directive instead.
 
 To connect GitLab Duo CLI to your GitLab instance over a custom CA, add `NODE_EXTRA_CA_CERTS`

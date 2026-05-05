@@ -61208,6 +61208,7 @@ Verification status of a GPG, X.509 or SSH signature for a commit.
 
 | Value | Description |
 | ----- | ----------- |
+| <a id="verificationstatus-expired_key"></a>`EXPIRED_KEY` | expired_key verification status. |
 | <a id="verificationstatus-multiple_signatures"></a>`MULTIPLE_SIGNATURES` | multiple_signatures verification status. |
 | <a id="verificationstatus-other_user"></a>`OTHER_USER` | other_user verification status. |
 | <a id="verificationstatus-revoked_key"></a>`REVOKED_KEY` | revoked_key verification status. |

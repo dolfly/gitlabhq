@@ -17807,6 +17807,9 @@ msgstr ""
 msgid "CommitMessage|Add %{file_name}"
 msgstr ""
 
+msgid "CommitSignature|This commit was signed with a key that has expired."
+msgstr ""
+
 msgid "CommitSignature|This commit was signed with a key that was revoked."
 msgstr ""
 
