@@ -800,7 +800,7 @@ RSpec.describe Snippet, feature_category: :source_code_management do
 
     context 'when a snippet repository entry does not exist' do
       it 'creates a new entry' do
-        expect { subject }.to change(snippet, :snippet_repository)
+        expect { subject }.to change { snippet.snippet_repository }
       end
 
       it 'tracks the snippet storage location' do
@@ -819,7 +819,7 @@ RSpec.describe Snippet, feature_category: :source_code_management do
       let(:shard_name) { 'bar' }
 
       it 'does not create a new entry in the database' do
-        expect { subject }.not_to change(snippet, :snippet_repository)
+        expect { subject }.not_to change { snippet.snippet_repository }
       end
 
       it 'updates the snippet storage location' do
@@ -860,7 +860,7 @@ RSpec.describe Snippet, feature_category: :source_code_management do
     it 'tracks snippet repository' do
       expect do
         subject
-      end.to change(SnippetRepository, :count).by(1)
+      end.to change { SnippetRepository.count }.by(1)
     end
 
     it 'sets same shard in snippet repository as in the repository storage' do
@@ -887,7 +887,7 @@ RSpec.describe Snippet, feature_category: :source_code_management do
         it 'does not create a new snippet repository' do
           expect do
             snippet.create_repository
-          end.not_to change(SnippetRepository, :count)
+          end.not_to change { SnippetRepository.count }
         end
       end
 
@@ -898,7 +898,7 @@ RSpec.describe Snippet, feature_category: :source_code_management do
 
           expect do
             snippet.create_repository
-          end.to change(SnippetRepository, :count).by(1)
+          end.to change { SnippetRepository.count }.by(1)
         end
       end
     end

@@ -31596,7 +31596,7 @@ Condition node in rule expression tree.
 | <a id="ciinputscondition-children"></a>`children` | [`[CiInputsCondition!]`](#ciinputscondition) | Child conditions for AND/OR nodes. |
 | <a id="ciinputscondition-field"></a>`field` | [`String`](#string) | Input field name for comparison nodes. |
 | <a id="ciinputscondition-operator"></a>`operator` | [`String!`](#string) | Operator type: equals, not_equals, AND, OR. |
-| <a id="ciinputscondition-value"></a>`value` | [`String`](#string) | Expected value for comparison nodes. |
+| <a id="ciinputscondition-value"></a>`value` | [`CiInputsValue`](#ciinputsvalue) | Expected value for comparison nodes. |
 
 ### `CiInputsField`
 

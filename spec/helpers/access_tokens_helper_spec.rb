@@ -121,7 +121,9 @@ RSpec.describe AccessTokensHelper, feature_category: :system_access do
     it 'returns expected hash' do
       expect(helper.expires_at_field_data).to eq({
         min_date: 1.day.from_now.iso8601,
-        max_date: 400.days.from_now.iso8601
+        max_date: 400.days.from_now.iso8601,
+        max_expiration_days: 400,
+        pat_expiration_required: 'true'
       })
     end
 
@@ -130,10 +132,12 @@ RSpec.describe AccessTokensHelper, feature_category: :system_access do
         stub_application_setting(require_personal_access_token_expiry: false)
       end
 
-      it 'returns an empty hash' do
+      it 'returns expected hash' do
         expect(helper.expires_at_field_data).to eq({
           min_date: 1.day.from_now.iso8601,
-          max_date: nil
+          max_date: nil,
+          max_expiration_days: nil,
+          pat_expiration_required: 'false'
         })
       end
     end

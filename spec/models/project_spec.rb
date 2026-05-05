@@ -1072,7 +1072,7 @@ RSpec.describe Project, factory_default: :keep, feature_category: :groups_and_pr
       let(:project) { build(:project, last_activity_at: last_activity_at) }
 
       it 'uses supplied timestamp' do
-        expect { project.valid? }.not_to change(project, :last_activity_at)
+        expect { project.valid? }.not_to change { project.last_activity_at }
       end
     end
 
@@ -1086,7 +1086,7 @@ RSpec.describe Project, factory_default: :keep, feature_category: :groups_and_pr
 
         it 'sets last_activity_at to the current time' do
           freeze_time do
-            expect { project.valid? }.to change(project, :last_activity_at).to(Time.current)
+            expect { project.valid? }.to change { project.last_activity_at }.to(Time.current)
           end
         end
       end
@@ -1096,7 +1096,7 @@ RSpec.describe Project, factory_default: :keep, feature_category: :groups_and_pr
 
         it 'sets last_activity_at to the current time' do
           freeze_time do
-            expect { project.valid? }.to change(project, :last_activity_at).from(nil).to(Time.current)
+            expect { project.valid? }.to change { project.last_activity_at }.from(nil).to(Time.current)
           end
         end
       end
@@ -1109,7 +1109,7 @@ RSpec.describe Project, factory_default: :keep, feature_category: :groups_and_pr
         end
 
         it 'sets last_activity_at to created_at' do
-          expect { project.valid? }.to change(project, :last_activity_at).from(nil).to(project.created_at)
+          expect { project.valid? }.to change { project.last_activity_at }.from(nil).to(project.created_at)
         end
       end
     end
@@ -4235,7 +4235,7 @@ RSpec.describe Project, factory_default: :keep, feature_category: :groups_and_pr
         end
 
         it 'creates a new entry' do
-          expect { project.track_project_repository }.to change(project, :project_repository)
+          expect { project.track_project_repository }.to change { project.project_repository }
         end
 
         it 'tracks the project storage location' do
@@ -4252,7 +4252,7 @@ RSpec.describe Project, factory_default: :keep, feature_category: :groups_and_pr
           let(:project) { create(:project) }
 
           it 'does not create a project_repository record' do
-            expect { project.track_project_repository }.not_to change(project, :project_repository)
+            expect { project.track_project_repository }.not_to change { project.project_repository }
             expect(project.project_repository).to be_nil
           end
         end
@@ -4280,7 +4280,7 @@ RSpec.describe Project, factory_default: :keep, feature_category: :groups_and_pr
         let!(:shard) { create(:shard, name: 'foo') }
 
         it 'does not create a new entry in the database' do
-          expect { project.track_project_repository }.not_to change(project, :project_repository)
+          expect { project.track_project_repository }.not_to change { project.project_repository }
         end
 
         it 'updates the project storage location' do
@@ -7324,7 +7324,7 @@ RSpec.describe Project, factory_default: :keep, feature_category: :groups_and_pr
     describe 'project_repository tracking' do
       context 'when the project does not have a git repository' do
         it 'does not create a project_repository record' do
-          expect { project.after_import }.not_to change(ProjectRepository, :count)
+          expect { project.after_import }.not_to change { ProjectRepository.count }
         end
       end
 
@@ -7332,7 +7332,7 @@ RSpec.describe Project, factory_default: :keep, feature_category: :groups_and_pr
         let_it_be(:project_with_repo) { create(:project, :test_repo) }
 
         it 'creates a project_repository record' do
-          expect { project_with_repo.after_import }.to change(ProjectRepository, :count).by(1)
+          expect { project_with_repo.after_import }.to change { ProjectRepository.count }.by(1)
         end
       end
     end
@@ -9235,11 +9235,11 @@ RSpec.describe Project, factory_default: :keep, feature_category: :groups_and_pr
       end
 
       it 'lfs_objects_projects associations are deleted along with project' do
-        expect { project.delete }.to change(LfsObjectsProject, :count).by(-2)
+        expect { project.delete }.to change { LfsObjectsProject.count }.by(-2)
       end
 
       it 'lfs_objects associations are unchanged when the assicated project is removed' do
-        expect { project.delete }.not_to change(LfsObject, :count)
+        expect { project.delete }.not_to change { LfsObject.count }
       end
     end
 
@@ -10091,7 +10091,7 @@ RSpec.describe Project, factory_default: :keep, feature_category: :groups_and_pr
       it 'creates a projects_sync_event record' do
         expect do
           project.update!(namespace_id: new_namespace1.id)
-        end.to change(Projects::SyncEvent, :count).by(1)
+        end.to change { Projects::SyncEvent.count }.by(1)
 
         expect(project.sync_events.count).to eq(2)
       end
@@ -10107,7 +10107,7 @@ RSpec.describe Project, factory_default: :keep, feature_category: :groups_and_pr
       it 'creates a projects_sync_event record' do
         expect do
           project.update!(name: 'hello')
-        end.not_to change(Projects::SyncEvent, :count)
+        end.not_to change { Projects::SyncEvent.count }
       end
     end
 
@@ -10119,7 +10119,7 @@ RSpec.describe Project, factory_default: :keep, feature_category: :groups_and_pr
               project.update!(namespace_id: new_namespace1.id)
               project.update!(namespace_id: new_namespace2.id)
             end
-          end.to change(Projects::SyncEvent, :count).by(2)
+          end.to change { Projects::SyncEvent.count }.by(2)
 
           expect(project.sync_events.count).to eq(3)
         end
@@ -10132,7 +10132,7 @@ RSpec.describe Project, factory_default: :keep, feature_category: :groups_and_pr
               project.update!(namespace_id: new_namespace1.id)
               project.update!(namespace_id: new_namespace1.id)
             end
-          end.to change(Projects::SyncEvent, :count).by(1)
+          end.to change { Projects::SyncEvent.count }.by(1)
 
           expect(project.sync_events.count).to eq(2)
         end

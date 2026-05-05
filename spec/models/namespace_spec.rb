@@ -1522,18 +1522,18 @@ RSpec.describe Namespace, feature_category: :groups_and_projects do
     it 'creates a Namespaces::SyncEvent using triggers' do
       Namespaces::SyncEvent.delete_all
 
-      expect { namespace1.update!(parent: namespace2) }.to change(namespace1.sync_events, :count).by(1)
+      expect { namespace1.update!(parent: namespace2) }.to change { namespace1.sync_events.count }.by(1)
     end
 
     it 'creates sync_events using database trigger on the table' do
       namespace1.save!
       namespace2.save!
 
-      expect { Group.update_all(traversal_ids: [-1]) }.to change(Namespaces::SyncEvent, :count).by(2)
+      expect { Group.update_all(traversal_ids: [-1]) }.to change { Namespaces::SyncEvent.count }.by(2)
     end
 
     it 'does not create sync_events using database trigger on the table when only the parent_id has changed' do
-      expect { Group.update_all(parent_id: -1) }.not_to change(Namespaces::SyncEvent, :count)
+      expect { Group.update_all(parent_id: -1) }.not_to change { Namespaces::SyncEvent.count }
     end
 
     it 'triggers the callback sync_traversal_ids on the namespace' do
@@ -3179,7 +3179,7 @@ RSpec.describe Namespace, feature_category: :groups_and_projects do
       it 'creates a namespaces_sync_event record' do
         expect do
           namespace.update!(parent_id: new_namespace1.id)
-        end.to change(Namespaces::SyncEvent, :count).by(1)
+        end.to change { Namespaces::SyncEvent.count }.by(1)
 
         expect(namespace.sync_events.count).to eq(2)
       end
@@ -3193,7 +3193,7 @@ RSpec.describe Namespace, feature_category: :groups_and_projects do
 
         expect do
           namespace.update!(parent_id: new_namespace1.id)
-        end.to change(Namespaces::SyncEvent, :count).by(5)
+        end.to change { Namespaces::SyncEvent.count }.by(5)
 
         expected_ids = [namespace.id] + children_namespaces.map(&:id) + grand_children_namespaces.map(&:id)
         expect(Namespaces::SyncEvent.pluck(:namespace_id)).to match_array(expected_ids)
@@ -3210,7 +3210,7 @@ RSpec.describe Namespace, feature_category: :groups_and_projects do
       it 'creates a namespaces_sync_event record' do
         expect do
           namespace.update!(name: 'hello')
-        end.not_to change(Namespaces::SyncEvent, :count)
+        end.not_to change { Namespaces::SyncEvent.count }
       end
     end
 
@@ -3222,7 +3222,7 @@ RSpec.describe Namespace, feature_category: :groups_and_projects do
               namespace.update!(parent_id: new_namespace1.id)
               namespace.update!(parent_id: new_namespace2.id)
             end
-          end.to change(Namespaces::SyncEvent, :count).by(2)
+          end.to change { Namespaces::SyncEvent.count }.by(2)
 
           expect(namespace.sync_events.count).to eq(3)
         end
@@ -3235,7 +3235,7 @@ RSpec.describe Namespace, feature_category: :groups_and_projects do
               namespace.update!(parent_id: new_namespace1.id)
               namespace.update!(parent_id: new_namespace1.id)
             end
-          end.to change(Namespaces::SyncEvent, :count).by(1)
+          end.to change { Namespaces::SyncEvent.count }.by(1)
 
           expect(namespace.sync_events.count).to eq(2)
         end

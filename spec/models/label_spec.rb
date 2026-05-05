@@ -355,7 +355,7 @@ RSpec.describe Label, feature_category: :team_planning, factory_default: :keep d
     describe '#prioritize!' do
       context 'when label is not prioritized' do
         it 'creates a label priority' do
-          expect { label.prioritize!(project, 1) }.to change(label.priorities, :count).by(1)
+          expect { label.prioritize!(project, 1) }.to change { label.priorities.count }.by(1)
         end
 
         it 'sets label priority' do
@@ -369,7 +369,7 @@ RSpec.describe Label, feature_category: :team_planning, factory_default: :keep d
         let!(:priority) { create(:label_priority, project: project, label: label, priority: 0) }
 
         it 'does not create a label priority' do
-          expect { label.prioritize!(project, 1) }.not_to change(label.priorities, :count)
+          expect { label.prioritize!(project, 1) }.not_to change { label.priorities.count }
         end
 
         it 'updates label priority' do
@@ -383,7 +383,7 @@ RSpec.describe Label, feature_category: :team_planning, factory_default: :keep d
         subject(:label) { create(:label, :archived, project: project) }
 
         it 'does not create label priority' do
-          expect { label.prioritize!(project, 1) }.not_to change(label.priorities, :count)
+          expect { label.prioritize!(project, 1) }.not_to change { label.priorities.count }
         end
       end
     end
@@ -392,7 +392,7 @@ RSpec.describe Label, feature_category: :team_planning, factory_default: :keep d
       it 'removes label priority' do
         create(:label_priority, project: project, label: label, priority: 0)
 
-        expect { label.unprioritize!(project) }.to change(label.priorities, :count).by(-1)
+        expect { label.unprioritize!(project) }.to change { label.priorities.count }.by(-1)
       end
 
       context 'when archiving label' do
@@ -400,7 +400,7 @@ RSpec.describe Label, feature_category: :team_planning, factory_default: :keep d
           create(:label_priority, project: project, label: label, priority: 0)
 
           label.archived = true
-          expect { label.save! }.to change(label.priorities, :count).by(-1)
+          expect { label.save! }.to change { label.priorities.count }.by(-1)
         end
 
         it 'does not unprioritize other labels' do
@@ -408,7 +408,7 @@ RSpec.describe Label, feature_category: :team_planning, factory_default: :keep d
           create(:label_priority, project: project, label: other_label, priority: 0)
 
           label.archived = true
-          expect { label.save! }.not_to change(other_label.priorities, :count)
+          expect { label.save! }.not_to change { other_label.priorities.count }
         end
 
         it 'does not trigger the callbacks when not archived' do

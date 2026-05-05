@@ -863,7 +863,7 @@ and private projects.
 ### Create and update environments
 
 - You must have the Developer, Maintainer, or Owner role to create a new environment, or update an existing unprotected environment.
-- If an existing environment is protected and you don't have access to it, you cannot update the environment.
+- For [Protected environments](protected_environments.md), you must be in the **Allowed to deploy** list.
 
 ### Stop and delete environments
 

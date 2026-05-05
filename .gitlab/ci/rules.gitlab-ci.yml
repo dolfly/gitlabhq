@@ -87,7 +87,7 @@
   if: '($CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_EVENT_TYPE != "merge_train") && $CI_MERGE_REQUEST_LABELS =~ /devops::fulfillment/'
 
 .if-automated-merge-request: &if-automated-merge-request
-  if: '($CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_EVENT_TYPE != "merge_train") && ($CI_MERGE_REQUEST_SOURCE_BRANCH_NAME == "release-tools/update-gitaly" || $CI_MERGE_REQUEST_TARGET_BRANCH_NAME =~ /stable-(ee|jh)$/)'
+  if: '($CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_EVENT_TYPE != "merge_train") && ($CI_MERGE_REQUEST_SOURCE_BRANCH_NAME == "release-tools/update-gitaly" || $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME == "release-tools/update-gitlab-pages" || $CI_MERGE_REQUEST_TARGET_BRANCH_NAME =~ /stable-(ee|jh)$/)'
 
 .if-merge-request-targeting-stable-branch: &if-merge-request-targeting-stable-branch
   if: '($CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_EVENT_TYPE != "merge_train") && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME =~ /^[\d-]+-stable(-ee|-jh)?$/'
@@ -310,6 +310,9 @@
 .gitaly-patterns: &gitaly-patterns
   - "GITALY_SERVER_VERSION"
   - "lib/gitlab/setup_helper.rb"
+
+.gitlab-pages-patterns: &gitlab-pages-patterns
+  - "GITLAB_PAGES_VERSION"
 
 # versions of all these components can affect cloud native deployment
 .cng-dependency-patterns: &cng-dependency-patterns
@@ -2039,6 +2042,9 @@
     # Run tests automatically for MRs that touch GITALY_SERVER_VERSION
     - <<: *if-merge-request
       changes: *gitaly-patterns
+    # Run tests automatically for MRs that touch GITLAB_PAGES_VERSION
+    - <<: *if-merge-request
+      changes: *gitlab-pages-patterns
     - <<: *if-merge-request
       # Certain components trigger a rebuild of the e2e GDK image so we want to test it too
       changes: *gdk-component-patterns
@@ -2083,6 +2089,9 @@
     # Run tests automatically for MRs that touch GITALY_SERVER_VERSION
     - <<: *if-merge-request
       changes: *gitaly-patterns
+    # Run tests automatically for MRs that touch GITLAB_PAGES_VERSION
+    - <<: *if-merge-request
+      changes: *gitlab-pages-patterns
 
 .qa:rules:e2e-blocking-base-after:
   rules:

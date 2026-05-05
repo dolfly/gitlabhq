@@ -1282,7 +1282,7 @@ RSpec.describe Note, feature_category: :team_planning do
     it 'clears a blank line code before validation' do
       note = build(:note, line_code: ' ')
 
-      expect { note.valid? }.to change(note, :line_code).to(nil)
+      expect { note.valid? }.to change { note.line_code }.to(nil)
     end
   end
 

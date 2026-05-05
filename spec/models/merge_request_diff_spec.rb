@@ -518,7 +518,7 @@ RSpec.describe MergeRequestDiff, feature_category: :code_review_workflow do
       let(:project_id) { nil }
 
       it do
-        expect { subject }.to change(diff, :project_id).from(nil).to(merge_request.target_project_id)
+        expect { subject }.to change { diff.project_id }.from(nil).to(merge_request.target_project_id)
       end
     end
 
@@ -526,7 +526,7 @@ RSpec.describe MergeRequestDiff, feature_category: :code_review_workflow do
       let(:project_id) { create(:project, :stubbed_repository).id }
 
       it do
-        expect { subject }.not_to change(diff, :project_id)
+        expect { subject }.not_to change { diff.project_id }
       end
     end
   end
@@ -605,7 +605,7 @@ RSpec.describe MergeRequestDiff, feature_category: :code_review_workflow do
         .with('merge_request_diff_files', anything)
         .and_raise(ActiveRecord::Rollback)
 
-      expect { diff.migrate_files_to_external_storage! }.not_to change(diff, :merge_request_diff_files)
+      expect { diff.migrate_files_to_external_storage! }.not_to change { diff.merge_request_diff_files }
 
       diff.reload
 

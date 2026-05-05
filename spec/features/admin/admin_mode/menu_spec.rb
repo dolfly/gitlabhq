@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe 'Admin Mode Menu', :js, feature_category: :system_access do
+RSpec.describe 'Admin mode menu', :js, feature_category: :system_access do
   include MobileHelpers
   include StubENV
 

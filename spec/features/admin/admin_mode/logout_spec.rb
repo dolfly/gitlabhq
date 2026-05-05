@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe 'Admin Mode Logout', :js, feature_category: :system_access do
+RSpec.describe 'Admin mode logout', :js, feature_category: :system_access do
   include TermsHelper
   include UserLoginHelper
 
@@ -10,14 +10,12 @@ RSpec.describe 'Admin Mode Logout', :js, feature_category: :system_access do
   let(:current_organization) { user.organization }
 
   before do
-    gitlab_sign_in(user)
+    sign_in(user)
     enable_admin_mode!(user, use_ui: true)
-    visit admin_root_path
   end
 
   context 'when leaving the admin mode' do
-    it 'removes admin mode and redirects to root page',
-      quarantine: { issue: 'https://gitlab.com/gitlab-org/quality/test-failure-issues/-/work_items/42405' } do
+    it 'removes admin mode and redirects to root page' do
       leave_admin_mode
 
       expect(page).to have_current_path root_path, ignore_query: true
@@ -32,8 +30,7 @@ RSpec.describe 'Admin Mode Logout', :js, feature_category: :system_access do
         allow(Gitlab::Database).to receive(:read_only?).and_return(true)
       end
 
-      it 'removes admin mode and redirects to root page',
-        quarantine: { issue: 'https://gitlab.com/gitlab-org/quality/test-failure-issues/-/work_items/42405' } do
+      it 'removes admin mode and redirects to root page' do
         leave_admin_mode
 
         expect(page).to have_current_path root_path, ignore_query: true

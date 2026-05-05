@@ -26,8 +26,9 @@ appropriate privileges can deploy to it, keeping the environment safe.
 > [!note]
 > GitLab administrators can use all environments, including protected environments.
 
-To protect, update, or unprotect an environment, you need to have at least the
-Maintainer role.
+To protect or unprotect an environment, you need at least the Maintainer role.
+Additionally, to update environment attributes such as `external_url`, `tier`, or `description`,
+you must also be in the **Allowed to deploy** list.
 
 ## Protecting environments
 
@@ -169,9 +170,11 @@ To add deployment-only access:
 
 Maintainers can:
 
-- Update existing protected environments at any time by changing the access in the
-  **Allowed to Deploy** dropdown list.
-- Unprotect a protected environment by selecting the **Unprotect** button for that environment.
+- Update protection settings, including the **Allowed to deploy** list and approval rules, at any time.
+- Unprotect a protected environment by selecting **Unprotect** for that environment.
+
+To update environment attributes such as `external_url`, `tier`, or `description` on a protected
+environment, the user must also be in the **Allowed to deploy** list.
 
 After an environment is unprotected, all access entries are deleted and must
 be re-entered if the environment is re-protected.

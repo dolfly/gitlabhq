@@ -198,7 +198,7 @@ RSpec.describe WebHookLog, :freeze_time, feature_category: :webhooks do
       it 'deletes min(batch_size, total) records' do
         deleted = [batch_size, 3].min
 
-        expect { subject }.to change(described_class, :count).by(-deleted)
+        expect { subject }.to change { described_class.count }.by(-deleted)
       end
     end
 

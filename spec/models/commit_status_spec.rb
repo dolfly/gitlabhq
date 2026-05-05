@@ -1027,14 +1027,14 @@ RSpec.describe CommitStatus, feature_category: :continuous_integration do
       let(:status) { build(:commit_status, pipeline: pipeline, partition_id: nil) }
 
       it 'copies the partition_id from pipeline' do
-        expect { status.valid? }.to change(status, :partition_id).to(123)
+        expect { status.valid? }.to change { status.partition_id }.to(123)
       end
 
       context 'when it is already set' do
         let(:status) { build(:commit_status, pipeline: pipeline, partition_id: 125) }
 
         it 'does not change the partition_id value' do
-          expect { status.valid? }.not_to change(status, :partition_id)
+          expect { status.valid? }.not_to change { status.partition_id }
         end
       end
     end
@@ -1049,7 +1049,7 @@ RSpec.describe CommitStatus, feature_category: :continuous_integration do
       it { is_expected.to validate_presence_of(:partition_id) }
 
       it 'does not change the partition_id value' do
-        expect { status.valid? }.not_to change(status, :partition_id)
+        expect { status.valid? }.not_to change { status.partition_id }
       end
     end
   end

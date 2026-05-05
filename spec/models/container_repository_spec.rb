@@ -800,10 +800,10 @@ RSpec.describe ContainerRepository, :aggregate_failures, feature_category: :cont
     subject { repository.set_delete_ongoing_status }
 
     it 'updates deletion status attributes' do
-      expect { subject }.to change(repository, :status).from(nil).to('delete_ongoing')
-                              .and change(repository, :delete_started_at).from(nil).to(Time.zone.now)
-                              .and change(repository, :status_updated_at).from(nil).to(Time.zone.now)
-                              .and change(repository, :next_delete_attempt_at).to(nil)
+      expect { subject }.to change { repository.status }.from(nil).to('delete_ongoing')
+                              .and change { repository.delete_started_at }.from(nil).to(Time.zone.now)
+                              .and change { repository.status_updated_at }.from(nil).to(Time.zone.now)
+                              .and change { repository.next_delete_attempt_at }.to(nil)
     end
   end
 
@@ -833,10 +833,10 @@ RSpec.describe ContainerRepository, :aggregate_failures, feature_category: :cont
       end
 
       it 'updates delete attributes' do
-        expect { subject }.to change(repository, :status).from('delete_ongoing').to('delete_scheduled')
-                                .and change(repository, :delete_started_at).to(nil)
-                                .and change(repository, :failed_deletion_count).from(current_failed_count).to(new_failed_count)
-                                .and change(repository, :next_delete_attempt_at).to(minutes_delay.minute.from_now)
+        expect { subject }.to change { repository.status }.from('delete_ongoing').to('delete_scheduled')
+                                .and change { repository.delete_started_at }.to(nil)
+                                .and change { repository.failed_deletion_count }.from(current_failed_count).to(new_failed_count)
+                                .and change { repository.next_delete_attempt_at }.to(minutes_delay.minute.from_now)
 
         expect(repository.status_updated_at).to eq(Time.zone.now)
       end
@@ -849,9 +849,9 @@ RSpec.describe ContainerRepository, :aggregate_failures, feature_category: :cont
     subject { repository.set_delete_failed_status }
 
     it 'updates delete attributes' do
-      expect { subject }.to change(repository, :status).from('delete_ongoing').to('delete_failed')
-                              .and change(repository, :delete_started_at).to(nil)
-                              .and change(repository, :status_updated_at).to(Time.zone.now)
+      expect { subject }.to change { repository.status }.from('delete_ongoing').to('delete_failed')
+                              .and change { repository.delete_started_at }.to(nil)
+                              .and change { repository.status_updated_at }.to(Time.zone.now)
     end
   end
 
@@ -861,7 +861,7 @@ RSpec.describe ContainerRepository, :aggregate_failures, feature_category: :cont
     %i[delete_scheduled delete_ongoing delete_failed].each do |status|
       context "when status is updated to #{status}" do
         it 'updates status_changed_at' do
-          expect { repository.update!(status: status) }.to change(repository, :status_updated_at).from(nil).to(Time.zone.now)
+          expect { repository.update!(status: status) }.to change { repository.status_updated_at }.from(nil).to(Time.zone.now)
         end
       end
     end
@@ -870,7 +870,7 @@ RSpec.describe ContainerRepository, :aggregate_failures, feature_category: :cont
       it 'does not update status_changed_at' do
         repository.name = 'different-image'
 
-        expect { repository.save! }.not_to change(repository, :status_updated_at)
+        expect { repository.save! }.not_to change { repository.status_updated_at }
       end
     end
   end

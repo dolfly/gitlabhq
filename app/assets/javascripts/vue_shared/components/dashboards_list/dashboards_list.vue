@@ -1,4 +1,5 @@
 <script>
+import GITLAB_LOGO_SVG_URL from '@gitlab/svgs/dist/illustrations/gitlab_logo.svg?url';
 import {
   GlTable,
   GlAvatarLabeled,
@@ -76,6 +77,10 @@ export default {
       label: __('Actions'),
     },
   ],
+  createdByGitLab: {
+    avatarUrl: GITLAB_LOGO_SVG_URL,
+    label: __('GitLab'),
+  },
 };
 </script>
 <template>
@@ -91,8 +96,16 @@ export default {
         :dashboard-url="dashboardUrl"
       />
     </template>
-    <template #cell(createdBy)="{ item: { createdBy } }">
-      <gl-avatar-link target="_blank" :href="createdBy.webPath">
+    <template #cell(createdBy)="{ item: { createdBy, system } }">
+      <gl-avatar-labeled
+        v-if="system"
+        :src="$options.createdByGitLab.avatarUrl"
+        :size="$options.avatarSize"
+        :label="$options.createdByGitLab.label"
+        shape="circle"
+        fallback-on-error
+      />
+      <gl-avatar-link v-else target="_blank" :href="createdBy.webPath">
         <gl-avatar-labeled
           :src="createdBy.avatarUrl"
           :size="$options.avatarSize"

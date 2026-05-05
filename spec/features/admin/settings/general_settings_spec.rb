@@ -5,7 +5,6 @@ require 'spec_helper'
 RSpec.describe 'Admin updates general settings', feature_category: :settings do
   include StubENV
   include TermsHelper
-  include UsageDataHelpers
   include Features::SettingsHelpers
 
   let_it_be(:admin) { create(:admin) }

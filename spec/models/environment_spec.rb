@@ -1198,7 +1198,7 @@ RSpec.describe Environment, :use_clean_rails_memory_store_caching, feature_categ
     let(:environment) { create(:environment, :auto_stoppable) }
 
     it 'nullifies the auto_stop_at' do
-      expect { subject }.to change(environment, :auto_stop_at).from(Time).to(nil)
+      expect { subject }.to change { environment.auto_stop_at }.from(Time).to(nil)
     end
   end
 

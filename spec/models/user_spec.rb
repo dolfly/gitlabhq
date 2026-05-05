@@ -2679,13 +2679,13 @@ RSpec.describe User, :with_current_organization, feature_category: :user_profile
         it 'sets :unconfirmed_email' do
           expect do
             user.tap { |u| u.update!(email: new_email) }.reload
-          end.to change(user, :unconfirmed_email).to(new_email)
+          end.to change { user.unconfirmed_email }.to(new_email)
         end
 
         it 'does not change notification_email or notification_email_or_default before email is confirmed' do
           expect do
             user.tap { |u| u.update!(email: new_email) }.reload
-          end.not_to change(user, :notification_email_or_default)
+          end.not_to change { user.notification_email_or_default }
 
           expect(user.notification_email).to be_nil
         end
@@ -2695,7 +2695,7 @@ RSpec.describe User, :with_current_organization, feature_category: :user_profile
 
           expect do
             user.tap(&:confirm).reload
-          end.to change(user, :notification_email_or_default).to eq(new_email)
+          end.to change { user.notification_email_or_default }.to eq(new_email)
 
           expect(user.notification_email).to be_nil
         end
@@ -2713,7 +2713,7 @@ RSpec.describe User, :with_current_organization, feature_category: :user_profile
         it 'does not change notification_email to email before email is confirmed' do
           expect do
             user.tap { |u| u.update!(email: new_email) }.reload
-          end.not_to change(user, :notification_email)
+          end.not_to change { user.notification_email }
         end
 
         it 'does not change notification_email to email once confirmed' do
@@ -2721,7 +2721,7 @@ RSpec.describe User, :with_current_organization, feature_category: :user_profile
 
           expect do
             user.tap(&:confirm).reload
-          end.not_to change(user, :notification_email)
+          end.not_to change { user.notification_email }
         end
       end
     end
@@ -7829,7 +7829,7 @@ RSpec.describe User, :with_current_organization, feature_category: :user_profile
       let(:user) { build(:user) }
 
       it 'leaves the namespace untouched' do
-        expect { assign_personal_namespace }.not_to change(user, :namespace)
+        expect { assign_personal_namespace }.not_to change { user.namespace }
       end
 
       it 'returns the personal namespace' do
@@ -8518,13 +8518,13 @@ RSpec.describe User, :with_current_organization, feature_category: :user_profile
     let_it_be_with_reload(:user) { create(:user, failed_attempts: 0) }
 
     it 'logs failed sign-in attempts' do
-      expect { user.increment_failed_attempts! }.to change(user, :failed_attempts).from(0).to(1)
+      expect { user.increment_failed_attempts! }.to change { user.failed_attempts }.from(0).to(1)
     end
 
     it 'does not log failed sign-in attempts when in a GitLab read-only instance' do
       allow(Gitlab::Database).to receive(:read_only?) { true }
 
-      expect { user.increment_failed_attempts! }.not_to change(user, :failed_attempts)
+      expect { user.increment_failed_attempts! }.not_to change { user.failed_attempts }
     end
 
     context 'with service_accounts' do
@@ -9451,7 +9451,7 @@ RSpec.describe User, :with_current_organization, feature_category: :user_profile
 
         expect(UpdateHighestRoleWorker).to receive(:perform_in).and_call_original
 
-        expect { subject }.to change(UpdateHighestRoleWorker.jobs, :size).by(1)
+        expect { subject }.to change { UpdateHighestRoleWorker.jobs.size }.by(1)
       end
     end
 

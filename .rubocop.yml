@@ -843,6 +843,11 @@ RSpec/AvoidTestProf:
     - 'ee/spec/lib/gitlab/background_migration/**/*.rb'
     - 'ee/spec/lib/ee/gitlab/background_migration/**/*.rb'
 
+RSpec/AvoidWaitForRequests:
+  Enabled: true
+  Include:
+    - '{,ee/,jh/}spec/**/*.rb'
+
 RSpec/AvoidConditionalStatements:
   Enabled: true
   Include:
