@@ -4302,6 +4302,16 @@
   :idempotent: true
   :tags: []
   :queue_namespace:
+- :name: import_offline_imports_schedule_import
+  :worker_name: Import::Offline::Imports::ScheduleImportWorker
+  :feature_category: :importers
+  :has_external_dependencies: true
+  :urgency: :low
+  :resource_boundary: :unknown
+  :weight: 1
+  :idempotent: true
+  :tags: []
+  :queue_namespace:
 - :name: import_reassign_placeholder_user_records
   :worker_name: Import::ReassignPlaceholderUserRecordsWorker
   :feature_category: :importers

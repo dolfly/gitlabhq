@@ -7,6 +7,12 @@ RSpec.describe Import::Offline::ObjectKeyBuilder, feature_category: :importers d
 
   subject(:builder) { described_class.new(configuration) }
 
+  describe '#metadata_object_key' do
+    it 'returns the metadata object key' do
+      expect(builder.metadata_object_key).to eq("#{configuration.export_prefix}/metadata.json.gz")
+    end
+  end
+
   describe '#download_object_key' do
     let(:entity_source_full_path) { 'group/subgroup/project' }
     let(:entity_prefix) { 'group_123' }

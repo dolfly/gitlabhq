@@ -17,8 +17,7 @@ RSpec.describe Types::WorkItems::Widgets::CurrentUserTodosType, feature_category
 
   describe 'fields with :ai_workflows scope' do
     it 'includes :ai_workflows scope for the currentUserTodos field' do
-      field = described_class.fields['currentUserTodos']
-      expect(field.instance_variable_get(:@scopes)).to include(:ai_workflows)
+      expect(described_class.fields['currentUserTodos']).to include_graphql_scopes(:ai_workflows)
     end
   end
 end

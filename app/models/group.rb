@@ -793,6 +793,10 @@ class Group < Namespace
     all_owners.size == 1 && all_owners.first.user_id == user.id
   end
 
+  def service_accounts
+    provisioned_users.service_account
+  end
+
   # Excludes non-direct owners for top-level group
   # Excludes project_bots
   # Excludes service accounts

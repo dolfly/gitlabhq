@@ -269,7 +269,6 @@ class Project < ApplicationRecord
   has_one :pushover_integration, class_name: 'Integrations::Pushover'
   has_one :redmine_integration, class_name: 'Integrations::Redmine'
   has_one :slack_integration, class_name: 'Integrations::Slack'
-  has_one :slack_slash_commands_integration, class_name: 'Integrations::SlackSlashCommands'
   has_one :squash_tm_integration, class_name: 'Integrations::SquashTm'
   has_one :teamcity_integration, class_name: 'Integrations::Teamcity'
   has_one :telegram_integration, class_name: 'Integrations::Telegram'
@@ -939,8 +938,6 @@ class Project < ApplicationRecord
   scope :with_shared_runners_enabled, -> { where(shared_runners_enabled: true) }
   # .with_slack_integration can generate poorly performing queries. It is intended only for UsagePing.
   scope :with_slack_integration, -> { joins(:slack_integration) }
-  # .with_slack_slash_commands_integration can generate poorly performing queries. It is intended only for UsagePing.
-  scope :with_slack_slash_commands_integration, -> { joins(:slack_slash_commands_integration) }
 
   scope :include_topics, -> { includes(:topics, :project_topics) }
 
@@ -1469,6 +1466,10 @@ class Project < ApplicationRecord
 
   def jenkins_integration_active?
     !!jenkins_integration&.active?
+  end
+
+  def service_accounts
+    provisioned_users.service_account
   end
 
   def personal_namespace_holder?(user)

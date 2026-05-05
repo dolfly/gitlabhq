@@ -247,6 +247,11 @@ regular GitLab backup to ensure secrets can be restored after a failure.
 
 For detailed backup and restore procedures specific to OpenBao, see the [OpenBao backup documentation](https://docs.gitlab.com/charts/charts/openbao/#back-up-openbao).
 
+## Recovery key management
+
+For information about managing the OpenBao recovery key, including storing, viewing, and using it
+to generate a root token, see [recovery key management](recovery_key.md).
+
 ## High availability
 
 OpenBao uses a single active node architecture. One node handles all requests,

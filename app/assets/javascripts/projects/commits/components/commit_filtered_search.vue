@@ -23,10 +23,17 @@ export default {
     FilteredSearchBar,
   },
   inject: ['projectFullPath'],
+  props: {
+    initialFilterTokens: {
+      type: Array,
+      required: false,
+      default: () => [],
+    },
+  },
   emits: ['filter'],
   data() {
     return {
-      filterTokens: [],
+      filterTokens: [...this.initialFilterTokens],
     };
   },
   computed: {
@@ -87,6 +94,14 @@ export default {
       ];
     },
   },
+  watch: {
+    initialFilterTokens: {
+      handler(newTokens) {
+        this.filterTokens = [...newTokens];
+      },
+      deep: true,
+    },
+  },
 };
 </script>
 
@@ -98,6 +113,7 @@ export default {
     :search-input-placeholder="__('Search or filter results...')"
     recent-searches-storage-key="commits"
     show-friendly-text
+    sync-filter-and-sort
     terms-as-tokens
     @onFilter="$emit('filter', $event)"
   />

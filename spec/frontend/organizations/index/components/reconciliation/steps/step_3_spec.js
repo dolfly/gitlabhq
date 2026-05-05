@@ -2,6 +2,7 @@ import { GlAvatarLabeled, GlCard } from '@gitlab/ui';
 import { shallowMountExtended } from 'helpers/vue_test_utils_helper';
 import Step3 from '~/organizations/index/components/reconciliation/steps/step_3.vue';
 import BaseStep from '~/organizations/index/components/reconciliation/steps/base_step.vue';
+import { DEFAULT_ORGANIZATION_ID } from '~/organizations/shared/constants';
 import OrganizationGroupCard from '~/organizations/index/components/reconciliation/organization_group_card.vue';
 import {
   mockOrganizations,
@@ -149,6 +150,21 @@ describe('ReconciliationStep3', () => {
 
     it('does render deleted section', () => {
       expect(findDeletedSection().exists()).toBe(true);
+    });
+  });
+
+  describe('default organization', () => {
+    const defaultOrg = {
+      id: `gid://gitlab/Organizations::Organization/${DEFAULT_ORGANIZATION_ID}`,
+      name: 'Default',
+      avatarUrl: null,
+      groups: { nodes: [] },
+    };
+
+    it('excludes the default organization from the deleted organizations list', () => {
+      createComponent({ props: { organizations: [defaultOrg] } });
+
+      expect(findDeletedSection().exists()).toBe(false);
     });
   });
 });

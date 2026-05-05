@@ -52,6 +52,7 @@ for your client.
 | Personal access token | `Private-Token` | Paste token as-is, or define an environment variable to hold the token |
 | Deploy token          | `Deploy-Token`  | Paste token as-is, or define an environment variable to hold the token |
 | CI Job token          | `Job-Token`     | `${CI_JOB_TOKEN}`                                                      |
+| OAuth token           | `Authorization` | Prefix the token with `Bearer` (for example, `Bearer <oauth_token>`)  |
 
 > [!note]
 > The `<name>` field must be named to match the token you chose.
@@ -86,6 +87,7 @@ Add the following section to your
 | Personal access token | `Private-Token` | Paste token as-is, or define an environment variable to hold the token |
 | Deploy token          | `Deploy-Token`  | Paste token as-is, or define an environment variable to hold the token |
 | CI Job token          | `Job-Token`     | `System.getenv("CI_JOB_TOKEN")`                                        |
+| OAuth token           | `Authorization` | Prefix the token with `Bearer` (for example, `Bearer <oauth_token>`)  |
 
 > [!note]
 > The `<name>` field must be named to match the token you chose.

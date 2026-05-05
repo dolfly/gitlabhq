@@ -706,7 +706,7 @@ module Gitlab
           dbname = ApplicationRecord.database.database_name
           user = ApplicationRecord.database.username
 
-          raise <<-EOF
+          raise <<-TEXT
 Your database user is not allowed to create, drop, or execute triggers on the
 table #{table}.
 
@@ -717,7 +717,7 @@ database (#{dbname}) using a super user and running:
 
 This query will grant the user super user permissions, ensuring you don't run
 into similar problems in the future (e.g. when new tables are created).
-          EOF
+          TEXT
         end
       end
 
@@ -741,14 +741,14 @@ into similar problems in the future (e.g. when new tables are created).
 
       # Note this should only be used with very small tables
       def backfill_iids(table)
-        sql = <<-END
+        sql = <<-SQL
           UPDATE #{table}
           SET iid = #{table}_with_calculated_iid.iid_num
           FROM (
             SELECT id, ROW_NUMBER() OVER (PARTITION BY project_id ORDER BY id ASC) AS iid_num FROM #{table}
           ) AS #{table}_with_calculated_iid
           WHERE #{table}.id = #{table}_with_calculated_iid.id
-        END
+        SQL
 
         execute(sql)
       end

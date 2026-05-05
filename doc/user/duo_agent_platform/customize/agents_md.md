@@ -33,20 +33,20 @@ details are available for GitLab Duo Agent Platform and any other AI tool that s
 
 Specify `AGENTS.md` files for GitLab Duo to use with:
 
-- GitLab Duo Chat in your local environment.
+- GitLab Duo Chat in the GitLab UI and your local environment.
 - Foundational and custom flows, excluding Code Review Flow.
 
 ## How GitLab Duo uses `AGENTS.md` files
 
 You can create `AGENTS.md` files at multiple levels, depending on how you use GitLab Duo:
 
-| Level                                                           | Agentic Chat in the GitLab UI | Editor extensions | GitLab Duo CLI |
+| Level                                                           | GitLab UI | Editor extensions | GitLab Duo CLI |
 |-----------------------------------------------------------------|--------------------------|------------------|--------------|
 | User-level: Apply to all of your projects and workspaces        | {{< no >}}  |  {{< yes >}}    | {{< yes >}} |
 | Workspace-level: Apply only to a specific project or workspace  | {{< yes >}} | {{< yes >}}         | {{< yes >}} |
 | Subdirectory-level: Apply only to a specific project within a monorepo or within a project with distinct components | {{< no >}} | {{< yes >}} | {{< yes >}} |
 
-GitLab Duo Chat combines available instructions from user-level and workspace-level `AGENTS.md`
+GitLab Duo combines available instructions from user-level and workspace-level `AGENTS.md`
 files for all conversations. If a task requires working with files in a directory that contains an
 additional `AGENTS.md` file, Chat applies those instructions as well.
 

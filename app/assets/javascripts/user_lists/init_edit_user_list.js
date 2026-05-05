@@ -1,10 +1,7 @@
 import Vue from 'vue';
-// eslint-disable-next-line no-restricted-imports
-import Vuex from 'vuex';
+import { pinia } from '~/pinia/instance';
 import EditUserList from './components/edit_user_list.vue';
-import createStore from './store/edit';
-
-Vue.use(Vuex);
+import { useEditUserList } from './store/edit';
 
 export const initEditUserList = () => {
   const el = document.getElementById('js-edit-user-list');
@@ -13,12 +10,14 @@ export const initEditUserList = () => {
     return null;
   }
 
-  const { userListsDocsPath } = el.dataset;
+  const { userListsDocsPath, projectId, userListIid } = el.dataset;
+
+  useEditUserList(pinia).$patch({ projectId, userListIid });
 
   return new Vue({
     el,
     name: 'FeatureFlagsEditUserListRoot',
-    store: createStore(el.dataset),
+    pinia,
     provide: { userListsDocsPath },
     render(h) {
       return h(EditUserList, {});

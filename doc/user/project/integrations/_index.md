@@ -205,7 +205,6 @@ None of these integrations have integration hooks.
 | [Mattermost slash commands](mattermost_slash_commands.md)    | Run slash commands from a Mattermost chat environment.                                   | {{< no >}} |
 | [Pipeline status emails](pipeline_status_emails.md)          | Send the pipeline status to a list of recipients by email.                               | {{< no >}} |
 | [Pivotal Tracker](pivotal_tracker.md)                        | Add commit messages as comments to Pivotal Tracker stories.                              | {{< no >}} |
-| [Slack slash commands](slack_slash_commands.md)              | Run slash commands from a Slack chat environment.                                        | {{< no >}} |
 | [Squash TM](squash_tm.md)                                    | Update Squash TM requirements when GitLab issues are modified.                           | {{< yes >}} |
 
 ## Project webhooks

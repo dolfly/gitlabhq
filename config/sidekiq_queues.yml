@@ -593,6 +593,8 @@
   - 1
 - - import_offline_export
   - 1
+- - import_offline_imports_schedule_import
+  - 1
 - - import_reassign_placeholder_user_records
   - 1
 - - import_refresh_import_jid

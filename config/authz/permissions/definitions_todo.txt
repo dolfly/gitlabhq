@@ -356,7 +356,6 @@ metrics_dashboard
 modify_approvers_rules
 modify_merge_request_author_setting
 modify_merge_request_committer_setting
-modify_product_analytics_settings
 modify_security_policy
 modify_value_stream_dashboard_settings
 move_design

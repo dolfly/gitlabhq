@@ -47,6 +47,18 @@ the skill and uses it to complete the task.
 
 You can also manually direct GitLab Duo to use a skill by name, file path, or slash command.
 
+GitLab Duo supports the following types of skills:
+
+| Level                                                              | GitLab UI | Editor extensions | GitLab Duo CLI |
+|--------------------------------------------------------------------|-------------------------------|-------------------|----------------|
+| User-level: Apply to all of your projects and IDE workspaces       | {{< no >}}                    | {{< no >}}        | {{< yes >}}    |
+| Workspace-level: Apply only to a specific project or IDE workspace | {{< yes >}} <sup>1</sup>                   | {{< yes >}}       | {{< yes >}}    |
+
+**Footnotes**:
+
+1. In the GitLab UI, only foundational and custom flows, excluding Code Review, support workspace-level skills. 
+   GitLab Duo Chat in the GitLab UI does not support skills.
+
 ## Use Agent Skills with GitLab Duo
 
 > [!note]
@@ -62,8 +74,8 @@ You can also manually direct GitLab Duo to use a skill by name, file path, or sl
     - [GitLab Duo CLI](../../gitlab_duo_cli/_index.md#set-up-the-gitlab-duo-cli) 8.73.0 or later.
   - For user-level skills:
     - [GitLab Duo CLI](../../gitlab_duo_cli/_index.md#set-up-the-gitlab-duo-cli) 8.83.0 or later.
-- For custom flows, update the flow's configuration file to access the `workspace_agent_skills`
-  context passed from the executor:
+- For workspace-level skills with custom flows, update the flow's configuration file to access the
+  `workspace_agent_skills` context passed from the executor:
 
   ```yaml
   components:

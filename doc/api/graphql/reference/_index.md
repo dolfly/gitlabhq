@@ -60701,7 +60701,6 @@ State of a Sentry error.
 | <a id="servicetype-pushover_service"></a>`PUSHOVER_SERVICE` | Pushover integration. |
 | <a id="servicetype-redmine_service"></a>`REDMINE_SERVICE` | Redmine integration. |
 | <a id="servicetype-slack_service"></a>`SLACK_SERVICE` | Slack notifications integration. |
-| <a id="servicetype-slack_slash_commands_service"></a>`SLACK_SLASH_COMMANDS_SERVICE` | Slack slash commands integration. |
 | <a id="servicetype-squash_tm_service"></a>`SQUASH_TM_SERVICE` | Squash TM integration. |
 | <a id="servicetype-teamcity_service"></a>`TEAMCITY_SERVICE` | JetBrains TeamCity integration. |
 | <a id="servicetype-telegram_service"></a>`TELEGRAM_SERVICE` | Telegram integration. |

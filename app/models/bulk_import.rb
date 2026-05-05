@@ -14,7 +14,7 @@ class BulkImport < ApplicationRecord
   belongs_to :organization, class_name: 'Organizations::Organization'
 
   has_one :configuration, class_name: 'BulkImports::Configuration'
-  has_one :offline_configuration, class_name: 'Import::Offline::Configuration'
+  has_one :offline_configuration, class_name: 'Import::Offline::Configuration', inverse_of: :bulk_import
   has_many :entities, class_name: 'BulkImports::Entity'
 
   validates :source_type, :status, presence: true

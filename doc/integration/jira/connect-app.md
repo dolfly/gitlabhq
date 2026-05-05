@@ -318,9 +318,14 @@ If you installed the GitLab for Jira Cloud app from the
   The Forge app uses the same app identifier, so you do not have to migrate any data.
 - You do not have to change your GitLab configuration.
 
-If you [installed the GitLab for Jira Cloud app manually](../../administration/settings/jira_cloud_app.md#install-the-gitlab-for-jira-cloud-app-manually),
-the migration to Forge also affects your installation.
-This installation method is based on Atlassian Connect.
+If you previously installed the GitLab for Jira Cloud app manually with the Connect-based
+**App descriptor URL** workflow, you must reinstall the app using the Forge-based method.
+Atlassian [disabled Connect-based private installs on 2026-03-31](https://www.atlassian.com/blog/developer/announcing-connect-end-of-support-timeline-and-next-steps),
+so the previous workflow no longer works. To reinstall, follow the
+[Forge-based manual install instructions](../../administration/settings/jira_cloud_app.md#install-the-gitlab-for-jira-cloud-app-manually),
+which publish a private copy of the
+[GitLab for Jira Cloud Forge app](https://gitlab.com/gitlab-org/gitlab-jira-forge) under your own
+Atlassian developer account.
 
 For more information about the transition from Connect to Forge, see
 [the Atlassian guide on how to adopt Forge](https://developer.atlassian.com/platform/adopting-forge-from-connect/how-to-adopt/).

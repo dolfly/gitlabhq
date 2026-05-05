@@ -108,10 +108,9 @@ For the GitLab for Slack app:
 - You can replace `<project>` with a project full path or
   [create a project alias](#create-a-project-alias) for slash commands.
 
-If you use [Slack slash commands](slack_slash_commands.md) or
-[Mattermost slash commands](mattermost_slash_commands.md) instead:
+If you use [Mattermost slash commands](mattermost_slash_commands.md) instead:
 
-- Replace `/gitlab` with the trigger name you've configured for these integrations.
+- Replace `/gitlab` with the trigger name you've configured for the integration.
 - Remove `<project>`.
 
 The following slash commands are available for GitLab:

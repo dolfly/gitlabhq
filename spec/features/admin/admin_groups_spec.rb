@@ -320,6 +320,8 @@ RSpec.describe 'Admin Groups', :with_current_organization, feature_category: :gr
 
       wait_for_all_requests
 
+      expect(page).to have_content(format(_('You left the "%{group_name}" group.'), group_name: group.name))
+
       visit group_group_members_path(group)
 
       expect(page).to have_content('No results found')

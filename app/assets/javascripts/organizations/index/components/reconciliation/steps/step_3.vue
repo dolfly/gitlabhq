@@ -2,6 +2,7 @@
 import { GlAvatarLabeled, GlCard } from '@gitlab/ui';
 import { AVATAR_SHAPE_OPTION_RECT } from '~/vue_shared/constants';
 import { getIdFromGraphQLId } from '~/graphql_shared/utils';
+import { DEFAULT_ORGANIZATION_ID } from '~/organizations/shared/constants';
 import OrganizationGroupCard from '../organization_group_card.vue';
 import BaseStep from './base_step.vue';
 
@@ -25,7 +26,10 @@ export default {
       return this.organizations.filter((org) => org.groups.nodes.length > 0);
     },
     deletedOrganizations() {
-      return this.organizations.filter((org) => org.groups.nodes.length === 0);
+      return this.organizations.filter(
+        (org) =>
+          org.groups.nodes.length === 0 && getIdFromGraphQLId(org.id) !== DEFAULT_ORGANIZATION_ID,
+      );
     },
   },
   methods: {

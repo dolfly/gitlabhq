@@ -8,6 +8,7 @@ import {
   TOKEN_TYPE_MESSAGE,
   TOKEN_TITLE_MESSAGE,
   OPERATORS_IS,
+  OPERATOR_IS,
   TOKEN_TYPE_COMMITTED_AFTER,
   TOKEN_TYPE_COMMITTED_BEFORE,
   TOKEN_TITLE_COMMITTED_AFTER,
@@ -23,12 +24,13 @@ describe('CommitFilteredSearch', () => {
     projectFullPath: 'gitlab-org/gitlab',
   };
 
-  const createComponent = (provide = {}) => {
+  const createComponent = (provide = {}, props = {}) => {
     wrapper = shallowMountExtended(CommitFilteredSearch, {
       provide: {
         ...defaultProvide,
         ...provide,
       },
+      propsData: props,
     });
   };
 
@@ -93,6 +95,7 @@ describe('CommitFilteredSearch', () => {
         searchInputPlaceholder: 'Search or filter results...',
         recentSearchesStorageKey: 'commits',
         showFriendlyText: true,
+        syncFilterAndSort: true,
         termsAsTokens: true,
       });
     });
@@ -151,6 +154,64 @@ describe('CommitFilteredSearch', () => {
       findFilteredSearchBar().vm.$emit('onFilter', filterTokens);
 
       expect(wrapper.emitted('filter')).toEqual([[filterTokens]]);
+    });
+  });
+
+  describe('with initial filter tokens', () => {
+    it('initializes filterTokens from prop', () => {
+      const initialTokens = [
+        { type: TOKEN_TYPE_AUTHOR, value: { data: 'admin', operator: OPERATOR_IS } },
+      ];
+
+      createComponent({}, { initialFilterTokens: initialTokens });
+
+      expect(findFilteredSearchBar().props('initialFilterValue')).toEqual(initialTokens);
+    });
+
+    it('initializes filterTokens with multiple tokens from prop', () => {
+      const initialTokens = [
+        { type: TOKEN_TYPE_AUTHOR, value: { data: 'admin', operator: OPERATOR_IS } },
+        { type: TOKEN_TYPE_MESSAGE, value: { data: 'fix bug', operator: OPERATOR_IS } },
+      ];
+
+      createComponent({}, { initialFilterTokens: initialTokens });
+
+      expect(findFilteredSearchBar().props('initialFilterValue')).toEqual(initialTokens);
+    });
+
+    it('initializes with empty array when no initialFilterTokens prop is provided', () => {
+      createComponent();
+
+      expect(findFilteredSearchBar().props('initialFilterValue')).toEqual([]);
+    });
+
+    it('updates filterTokens when initialFilterTokens prop changes', async () => {
+      const initialTokens = [
+        { type: TOKEN_TYPE_AUTHOR, value: { data: 'admin', operator: OPERATOR_IS } },
+      ];
+
+      createComponent({}, { initialFilterTokens: initialTokens });
+
+      expect(findFilteredSearchBar().props('initialFilterValue')).toEqual(initialTokens);
+
+      const newTokens = [
+        { type: TOKEN_TYPE_MESSAGE, value: { data: 'refactor', operator: OPERATOR_IS } },
+      ];
+
+      await wrapper.setProps({ initialFilterTokens: newTokens });
+
+      expect(findFilteredSearchBar().props('initialFilterValue')).toEqual(newTokens);
+    });
+
+    it('creates a copy of initialFilterTokens to avoid mutation', () => {
+      const initialTokens = [
+        { type: TOKEN_TYPE_AUTHOR, value: { data: 'admin', operator: OPERATOR_IS } },
+      ];
+
+      createComponent({}, { initialFilterTokens: initialTokens });
+
+      expect(wrapper.vm.filterTokens).not.toBe(initialTokens);
+      expect(wrapper.vm.filterTokens).toEqual(initialTokens);
     });
   });
 });

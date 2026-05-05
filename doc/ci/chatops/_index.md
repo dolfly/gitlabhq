@@ -26,7 +26,6 @@ You can trigger ChatOps with the [`run` slash command](../../user/project/integr
 The following integrations are available:
 
 - [GitLab for Slack app](../../user/project/integrations/gitlab_slack_application.md) (recommended for Slack)
-- [Slack slash commands](../../user/project/integrations/slack_slash_commands.md)
 - [Mattermost slash commands](../../user/project/integrations/mattermost_slash_commands.md)
 
 ## ChatOps workflow and CI/CD configuration
@@ -130,5 +129,4 @@ ChatOps schedules a pipeline that contains only the specified job.
 - [A repository of common ChatOps scripts](https://gitlab.com/gitlab-com/chatops)
   that GitLab uses to interact with GitLab.com
 - [GitLab for Slack app](../../user/project/integrations/gitlab_slack_application.md)
-- [Slack slash commands](../../user/project/integrations/slack_slash_commands.md)
 - [Mattermost slash commands](../../user/project/integrations/mattermost_slash_commands.md)

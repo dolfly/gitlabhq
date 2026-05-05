@@ -113,6 +113,9 @@ RSpec.describe 'new tables missing sharding_key', feature_category: :organizatio
       "ci_runners" => "https://gitlab.com/gitlab-org/gitlab/-/issues/525293",
       "customer_relations_contacts" => "https://gitlab.com/gitlab-org/gitlab/-/issues/549029",
       "design_management_action_uploads" => "https://gitlab.com/gitlab-org/gitlab/-/issues/398199",
+      # Cell-local table; organization_id is a plain ID column for namespace path resolution, not a sharding key.
+      # No FK or LFK is intended - orphaned tasks are handled by the task service.
+      "group_secrets_manager_maintenance_tasks" => "https://gitlab.com/gitlab-org/gitlab/-/work_items/597219",
       "import_export_upload_uploads" => "https://gitlab.com/gitlab-org/gitlab/-/issues/398199",
       "instance_type_ci_runner_machines" => "https://gitlab.com/gitlab-org/gitlab/-/issues/525293",
       "instance_type_ci_runners" => "https://gitlab.com/gitlab-org/gitlab/-/issues/525293",

@@ -390,6 +390,7 @@ module API
       mount ::API::GroupBoards
       mount ::API::GroupLabels
       mount ::API::GroupMilestones
+      mount ::API::GroupServiceAccounts
       mount ::API::Labels
       mount ::API::Mcp::Base # MCP uses JSON-RPC for base protocol, omit from OpenAPI V2 documentation for REST API
       mount ::API::Notes
@@ -397,10 +398,12 @@ module API
       mount ::API::ProjectEvents
       mount ::API::ProjectMilestones
       mount ::API::ProjectRepositoryStorageMoves
+      mount ::API::ProjectServiceAccounts
       mount ::API::ProtectedTags
       mount ::API::ResourceAccessTokens
       mount ::API::ResourceLabelEvents
       mount ::API::ResourceStateEvents
+      mount ::API::ServiceAccounts
       mount ::API::Settings
       mount ::API::SidekiqMetrics
       mount ::API::SnippetRepositoryStorageMoves

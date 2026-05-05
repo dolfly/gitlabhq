@@ -552,11 +552,10 @@ jest-msw-integration:
     - yarn jest:msw-integration --ci --passWithNoTests --forceExit
   needs:
     # it's ok to wait for the repo artifact as we're waiting for the fixtures (which wait for the repo artifact) anyway
+    - !reference [.frontend-test-base, needs]
     - !reference [.repo-from-artifacts, needs]
     - !reference [.with-fixtures-needs, needs]
     - !reference [.with-graphql-schema-dump-needs, needs]
-    - job: compile-fe-islands
-      optional: true
 
 jest-msw-integration vue3:
   extends:

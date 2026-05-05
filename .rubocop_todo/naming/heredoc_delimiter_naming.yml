@@ -1,14 +1,6 @@
 ---
 Naming/HeredocDelimiterNaming:
   Exclude:
-    - 'ee/db/geo/migrate/20180322062741_migrate_ci_job_artifacts_to_separate_registry.rb'
-    - 'ee/db/geo/migrate/20191010204941_migrate_lfs_objects_to_separate_registry.rb'
-    - 'ee/lib/api/elasticsearch_indexed_namespaces.rb'
-    - 'lib/api/metadata.rb'
-    - 'lib/feature/shared.rb'
-    - 'lib/gitlab/cache/import/caching.rb'
-    - 'lib/gitlab/conflict/file_collection.rb'
-    - 'lib/gitlab/database/migration_helpers.rb'
     - 'lib/gitlab/database/migration_helpers/v2.rb'
     - 'lib/gitlab/exclusive_lease.rb'
     - 'lib/tasks/gitlab/docs/compile_deprecations.rake'

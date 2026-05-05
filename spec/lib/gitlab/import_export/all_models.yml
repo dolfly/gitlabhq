@@ -630,7 +630,6 @@ project:
 - pipelines_email_integration
 - mattermost_slash_commands_integration
 - matrix_integration
-- slack_slash_commands_integration
 - harbor_integration
 - irker_integration
 - packagist_integration

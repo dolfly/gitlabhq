@@ -18,20 +18,20 @@ module Feature
         optional: false,
         rollout_issue: true,
         can_be_default_enabled: false,
-        example: <<~EOS
+        example: <<~RUBY
           Feature.enabled?(:my_feature_flag, project, type: :gitlab_com_derisk)
           push_frontend_feature_flag(:my_feature_flag, project)
-        EOS
+        RUBY
       },
       wip: {
         description: 'Used to hide unfinished code from anyone',
         optional: false,
         rollout_issue: false,
         can_be_default_enabled: false,
-        example: <<~EOS
+        example: <<~RUBY
           Feature.enabled?(:my_feature_flag, project, type: :wip)
           push_frontend_feature_flag(:my_feature_flag, project)
-        EOS
+        RUBY
       },
       beta: {
         description: "Use when we aren't confident about scaling/supporting a feature, " \
@@ -39,39 +39,39 @@ module Feature
         optional: false,
         rollout_issue: true,
         can_be_default_enabled: true,
-        example: <<~EOS
+        example: <<~RUBY
           Feature.enabled?(:my_feature_flag, project, type: :beta)
           push_frontend_feature_flag(:my_feature_flag, project)
-        EOS
+        RUBY
       },
       ops: {
         description: "Long-lived feature flags that control operational aspects of GitLab's behavior",
         optional: false,
         rollout_issue: true,
         can_be_default_enabled: true,
-        example: <<~EOS
+        example: <<~RUBY
           Feature.enabled?(:my_ops_flag, type: :ops)
           push_frontend_feature_flag(:my_ops_flag, project, type: :ops)
-        EOS
+        RUBY
       },
       experiment: {
         description: 'Short lived, used specifically to run A/B/n experiments.',
         optional: true,
         rollout_issue: true,
         can_be_default_enabled: false,
-        example: <<~EOS
+        example: <<~RUBY
           experiment(:my_experiment, project: project, actor: current_user) { ...variant code... }
-        EOS
+        RUBY
       },
       worker: {
         description: "Feature flags for controlling Sidekiq workers behavior (e.g. deferring jobs)",
         optional: true,
         rollout_issue: false,
         can_be_default_enabled: false,
-        example: <<~EOS
+        example: <<~RUBY
           Feature.enabled?(:"defer_sidekiq_jobs:AuthorizedProjectsWorker", type: :worker,
             default_enabled_if_undefined: false)
-        EOS
+        RUBY
       },
       undefined: {
         description: "Feature flags that are undefined in GitLab codebase (should not be used)",

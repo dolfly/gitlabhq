@@ -21534,6 +21534,26 @@ CREATE SEQUENCE group_secret_rotation_infos_id_seq
 
 ALTER SEQUENCE group_secret_rotation_infos_id_seq OWNED BY group_secret_rotation_infos.id;
 
+CREATE TABLE group_secrets_manager_maintenance_tasks (
+    id bigint NOT NULL,
+    user_id bigint NOT NULL,
+    group_id bigint NOT NULL,
+    root_namespace_id bigint NOT NULL,
+    organization_id bigint NOT NULL,
+    last_processed_at timestamp with time zone,
+    action smallint NOT NULL,
+    retry_count smallint DEFAULT 0 NOT NULL
+);
+
+CREATE SEQUENCE group_secrets_manager_maintenance_tasks_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+ALTER SEQUENCE group_secrets_manager_maintenance_tasks_id_seq OWNED BY group_secrets_manager_maintenance_tasks.id;
+
 CREATE TABLE group_secrets_managers (
     id bigint NOT NULL,
     created_at timestamp with time zone NOT NULL,
@@ -28246,7 +28266,13 @@ CREATE TABLE project_secrets_manager_maintenance_tasks (
     action smallint NOT NULL,
     retry_count smallint DEFAULT 0 NOT NULL,
     organization_id bigint,
-    CONSTRAINT check_45ce4a99c6 CHECK ((organization_id IS NOT NULL))
+    project_id bigint,
+    root_namespace_id bigint,
+    parent_group_id bigint,
+    CONSTRAINT check_45ce4a99c6 CHECK ((organization_id IS NOT NULL)),
+    CONSTRAINT check_76326d1035 CHECK ((project_id IS NOT NULL)),
+    CONSTRAINT check_9ccf54455e CHECK ((root_namespace_id IS NOT NULL)),
+    CONSTRAINT check_db6a86fc4d CHECK ((parent_group_id IS NOT NULL))
 );
 
 CREATE SEQUENCE project_secrets_manager_maintenance_tasks_id_seq
@@ -28317,6 +28343,7 @@ CREATE TABLE project_security_settings (
     license_configuration_source smallint DEFAULT 0 NOT NULL,
     cvs_for_container_scanning_enabled boolean DEFAULT true NOT NULL,
     cvs_for_dependency_scanning_enabled boolean DEFAULT true NOT NULL,
+    license_scanning_for_cyclonedx_enabled boolean DEFAULT true NOT NULL,
     CONSTRAINT check_20a23efdb6 CHECK ((secret_push_protection_enabled IS NOT NULL))
 );
 
@@ -36130,6 +36157,8 @@ ALTER TABLE ONLY group_scim_identities ALTER COLUMN id SET DEFAULT nextval('grou
 
 ALTER TABLE ONLY group_secret_rotation_infos ALTER COLUMN id SET DEFAULT nextval('group_secret_rotation_infos_id_seq'::regclass);
 
+ALTER TABLE ONLY group_secrets_manager_maintenance_tasks ALTER COLUMN id SET DEFAULT nextval('group_secrets_manager_maintenance_tasks_id_seq'::regclass);
+
 ALTER TABLE ONLY group_secrets_managers ALTER COLUMN id SET DEFAULT nextval('group_secrets_managers_id_seq'::regclass);
 
 ALTER TABLE ONLY group_security_exclusions ALTER COLUMN id SET DEFAULT nextval('group_security_exclusions_id_seq'::regclass);
@@ -39690,6 +39719,9 @@ ALTER TABLE ONLY group_scim_identities
 
 ALTER TABLE ONLY group_secret_rotation_infos
     ADD CONSTRAINT group_secret_rotation_infos_pkey PRIMARY KEY (id);
+
+ALTER TABLE ONLY group_secrets_manager_maintenance_tasks
+    ADD CONSTRAINT group_secrets_manager_maintenance_tasks_pkey PRIMARY KEY (id);
 
 ALTER TABLE ONLY group_secrets_managers
     ADD CONSTRAINT group_secrets_managers_pkey PRIMARY KEY (id);
@@ -44599,6 +44631,12 @@ CREATE INDEX index_ci_runners_on_token_expires_at_desc_and_id_desc ON ONLY ci_ru
 
 CREATE INDEX idx_group_type_ci_runners_on_token_expires_at_desc_and_id_desc ON group_type_ci_runners USING btree (token_expires_at DESC, id DESC);
 
+CREATE INDEX idx_gsm_maintenance_tasks_on_last_processed_at ON group_secrets_manager_maintenance_tasks USING btree (last_processed_at);
+
+CREATE INDEX idx_gsm_maintenance_tasks_on_organization_id ON group_secrets_manager_maintenance_tasks USING btree (organization_id);
+
+CREATE INDEX idx_gsm_maintenance_tasks_on_root_namespace_id ON group_secrets_manager_maintenance_tasks USING btree (root_namespace_id);
+
 CREATE INDEX idx_headers_instance_external_audit_event_destination_id ON instance_audit_events_streaming_headers USING btree (instance_external_audit_event_destination_id);
 
 CREATE INDEX idx_hosted_runner_usage_on_namespace_billing_month ON ci_gitlab_hosted_runner_monthly_usages USING btree (root_namespace_id, billing_month);
@@ -44951,7 +44989,11 @@ CREATE INDEX idx_protected_branch_merge_access_levels_protected_branch_proje ON 
 
 CREATE INDEX idx_psm_maintenance_tasks_on_organization_id ON project_secrets_manager_maintenance_tasks USING btree (organization_id);
 
+CREATE INDEX idx_psm_maintenance_tasks_on_parent_group_id ON project_secrets_manager_maintenance_tasks USING btree (parent_group_id);
+
 CREATE INDEX idx_psm_maintenance_tasks_on_processed_at_retry_count ON project_secrets_manager_maintenance_tasks USING btree (last_processed_at, retry_count);
+
+CREATE INDEX idx_psm_maintenance_tasks_on_root_namespace_id ON project_secrets_manager_maintenance_tasks USING btree (root_namespace_id);
 
 CREATE INDEX idx_reminder_frequency_on_work_item_progresses ON work_item_progresses USING btree (reminder_frequency);
 
@@ -46989,7 +47031,7 @@ CREATE UNIQUE INDEX index_gpg_keys_on_primary_keyid ON gpg_keys USING btree (pri
 
 CREATE INDEX index_gpg_keys_on_user_id ON gpg_keys USING btree (user_id);
 
-CREATE UNIQUE INDEX index_gpg_signatures_on_commit_sha ON gpg_signatures USING btree (commit_sha);
+CREATE UNIQUE INDEX index_gpg_signatures_on_commit_sha_and_project_id ON gpg_signatures USING btree (commit_sha, project_id);
 
 CREATE INDEX index_gpg_signatures_on_gpg_key_id_and_id ON gpg_signatures USING btree (gpg_key_id, id);
 
@@ -47994,6 +48036,8 @@ CREATE INDEX index_namespace_settings_on_namespace_id_where_archived_true ON nam
 CREATE UNIQUE INDEX index_namespace_statistics_on_namespace_id ON namespace_statistics USING btree (namespace_id);
 
 CREATE INDEX index_namespace_template_settings_on_file_template_project_id ON namespace_template_settings USING btree (file_template_project_id);
+
+CREATE UNIQUE INDEX index_namespace_uploads_on_id ON namespace_uploads USING btree (id);
 
 CREATE UNIQUE INDEX index_namespaces_name_parent_id_type ON namespaces USING btree (name, parent_id, type);
 
@@ -50891,6 +50935,8 @@ CREATE UNIQUE INDEX uniq_compliance_statuses_requirement_project_id ON project_r
 
 CREATE UNIQUE INDEX uniq_google_cloud_logging_configuration_namespace_id_and_name ON audit_events_google_cloud_logging_configurations USING btree (namespace_id, name);
 
+CREATE UNIQUE INDEX uniq_gsm_maintenance_tasks_on_group_id ON group_secrets_manager_maintenance_tasks USING btree (group_id);
+
 CREATE UNIQUE INDEX uniq_idx_ai_active_context_collections_on_connection_id_name ON ai_active_context_collections USING btree (connection_id, name);
 
 CREATE UNIQUE INDEX uniq_idx_audit_events_aws_configs_stream_dests ON audit_events_amazon_s3_configurations USING btree (stream_destination_id) WHERE (stream_destination_id IS NOT NULL);
@@ -50942,6 +50988,8 @@ CREATE UNIQUE INDEX uniq_pkgs_debian_project_distributions_project_id_and_codena
 CREATE UNIQUE INDEX uniq_pkgs_debian_project_distributions_project_id_and_suite ON packages_debian_project_distributions USING btree (project_id, suite);
 
 CREATE INDEX uniq_preference_by_user_namespace_and_work_item_type ON work_item_type_user_preferences USING btree (user_id, namespace_id, work_item_type_id);
+
+CREATE UNIQUE INDEX uniq_psm_maintenance_tasks_on_project_id ON project_secrets_manager_maintenance_tasks USING btree (project_id);
 
 CREATE UNIQUE INDEX uniq_psm_maintenance_tasks_on_psm_id_and_action ON project_secrets_manager_maintenance_tasks USING btree (project_secrets_manager_id, action);
 
@@ -58476,9 +58524,6 @@ ALTER TABLE ONLY duo_workflow_session_artifacts
 ALTER TABLE ONLY user_group_member_roles
     ADD CONSTRAINT fk_f3b8fc5e4e FOREIGN KEY (shared_with_group_id) REFERENCES namespaces(id) ON DELETE CASCADE;
 
-ALTER TABLE ONLY group_upload_states
-    ADD CONSTRAINT fk_f47be2f726 FOREIGN KEY (group_upload_id) REFERENCES uploads_archived(id) ON DELETE CASCADE;
-
 ALTER TABLE ONLY abuse_report_user_mentions
     ADD CONSTRAINT fk_f4c2b15ef9 FOREIGN KEY (organization_id) REFERENCES organizations(id) ON DELETE CASCADE;
 
@@ -60767,6 +60812,9 @@ ALTER TABLE incident_management_pending_alert_escalations
 
 ALTER TABLE ONLY board_group_recent_visits
     ADD CONSTRAINT fk_rails_f410736518 FOREIGN KEY (group_id) REFERENCES namespaces(id) ON DELETE CASCADE;
+
+ALTER TABLE ONLY group_upload_states
+    ADD CONSTRAINT fk_rails_f47be2f726 FOREIGN KEY (group_upload_id) REFERENCES namespace_uploads(id) ON DELETE CASCADE;
 
 ALTER TABLE ONLY incident_management_issuable_escalation_statuses
     ADD CONSTRAINT fk_rails_f4c811fd28 FOREIGN KEY (issue_id) REFERENCES issues(id) ON DELETE CASCADE;

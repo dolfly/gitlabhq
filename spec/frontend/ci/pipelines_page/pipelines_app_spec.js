@@ -1,6 +1,6 @@
 import { GlCollapsibleListbox, GlEmptyState, GlLoadingIcon, GlKeysetPagination } from '@gitlab/ui';
 import { createMockSubscription } from 'mock-apollo-client';
-import Vue from 'vue';
+import Vue, { nextTick } from 'vue';
 import VueApollo from 'vue-apollo';
 import Visibility from 'visibilityjs';
 import { createAlert } from '~/alert';
@@ -953,6 +953,40 @@ describe('Pipelines App', () => {
 
       expect(successDynamicHandler).not.toHaveBeenCalled();
       expect(singlePipelineHandler).not.toHaveBeenCalled();
+    });
+
+    it('refreshes statuses when coming back to a tab', async () => {
+      let changeCallback;
+
+      jest.spyOn(Visibility, 'change').mockImplementation((cb) => {
+        changeCallback = cb;
+      });
+      jest.spyOn(Visibility, 'hidden').mockReturnValue(true);
+
+      createComponent({
+        requestHandlers: [
+          [getPipelinesQuery, successDynamicHandler],
+          [getAllPipelinesCountQuery, countHandler],
+        ],
+      });
+
+      await waitForPromises();
+
+      successDynamicHandler.mockClear();
+      countHandler.mockClear();
+
+      // Simulate tab becoming visible
+      jest.spyOn(Visibility, 'hidden').mockReturnValue(false);
+      changeCallback();
+
+      await nextTick();
+
+      expect(findLoadingIcon().exists()).toBe(false);
+
+      await waitForPromises();
+
+      expect(successDynamicHandler).toHaveBeenCalledTimes(1);
+      expect(countHandler).toHaveBeenCalledTimes(1);
     });
 
     it('does not fetch new pipelines when there are active filters', async () => {

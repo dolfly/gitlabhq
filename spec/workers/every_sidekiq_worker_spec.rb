@@ -527,7 +527,8 @@ RSpec.describe 'Every Sidekiq worker', feature_category: :sidekiq do
         'AuditEvents::AuditEventStreamingWorker' => 3,
         'Vulnerabilities::TriggerFalsePositiveDetectionWorkflowWorker' => 10,
         'Vulnerabilities::TriggerResolutionWorkflowWorker' => 10,
-        'Vulnerabilities::TriggerSecretDetectionFalsePositiveDetectionWorkflowWorker' => 10
+        'Vulnerabilities::TriggerSecretDetectionFalsePositiveDetectionWorkflowWorker' => 10,
+        'Import::Offline::Imports::ScheduleImportWorker' => 3
       }.merge(extra_retry_exceptions)
     end
 

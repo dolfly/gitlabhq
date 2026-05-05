@@ -20,6 +20,12 @@ module Import
         @configuration = configuration
       end
 
+      def metadata_object_key
+        [configuration.export_prefix, 'metadata.json.gz'].join(
+          ::Import::Clients::ObjectStorage::PREFIX_SEPARATOR
+        )
+      end
+
       def download_object_key(relation:, extension:, entity_source_full_path:, batch_number: nil)
         entity_prefix = configuration.entity_prefix_for_path(entity_source_full_path)
 

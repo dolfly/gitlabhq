@@ -11362,9 +11362,6 @@ msgstr ""
 msgid "Autocomplete hint"
 msgstr ""
 
-msgid "Autocomplete usage hint"
-msgstr ""
-
 msgid "Automate"
 msgstr ""
 
@@ -17637,9 +17634,6 @@ msgstr ""
 msgid "Comma-separated list of recipient email addresses."
 msgstr ""
 
-msgid "Command"
-msgstr ""
-
 msgid "Command '%{command}' must have one of the supported command types: %{supported_types}"
 msgstr ""
 
@@ -21349,12 +21343,6 @@ msgstr ""
 msgid "Copy URL"
 msgstr ""
 
-msgid "Copy autocomplete description"
-msgstr ""
-
-msgid "Copy autocomplete usage hint"
-msgstr ""
-
 msgid "Copy branch name"
 msgstr ""
 
@@ -21380,12 +21368,6 @@ msgid "Copy commit SHA %{sha}"
 msgstr ""
 
 msgid "Copy contents"
-msgstr ""
-
-msgid "Copy customize name"
-msgstr ""
-
-msgid "Copy descriptive label"
 msgstr ""
 
 msgid "Copy environment"
@@ -22489,13 +22471,7 @@ msgstr ""
 msgid "Customize how FogBugz email addresses and usernames are imported into GitLab. In the next step, you'll be able to select the projects you want to import."
 msgstr ""
 
-msgid "Customize icon"
-msgstr ""
-
 msgid "Customize language and region related settings."
-msgstr ""
-
-msgid "Customize name"
 msgstr ""
 
 msgid "Customize your pipeline configuration."
@@ -25428,9 +25404,6 @@ msgstr ""
 msgid "Descriptions"
 msgstr ""
 
-msgid "Descriptive label"
-msgstr ""
-
 msgid "Deselect all"
 msgstr ""
 
@@ -26427,9 +26400,6 @@ msgid "Download directory"
 msgstr ""
 
 msgid "Download export"
-msgstr ""
-
-msgid "Download image"
 msgstr ""
 
 msgid "Download one of the files below to see all changes."
@@ -28067,6 +28037,12 @@ msgid "DuoWorkflowSettings|Scan and log results, but do not block requests."
 msgstr ""
 
 msgid "DuoWorkflowSettings|Turn off scanning entirely. No prompt data is sent to third-party services."
+msgstr ""
+
+msgid "Duo|Select a project to keep shared custom instructions for the Code Review flow."
+msgstr ""
+
+msgid "Duo|Template project for Code Review custom instructions"
 msgstr ""
 
 msgid "Duplicate entries found for compliance controls for the requirement."
@@ -35361,6 +35337,12 @@ msgstr ""
 msgid "GroupSettings|Disabled"
 msgstr ""
 
+msgid "GroupSettings|Duo template project does not belong to this group"
+msgstr ""
+
+msgid "GroupSettings|Duo template project is invalid or not accessible"
+msgstr ""
+
 msgid "GroupSettings|Emails are not encrypted. Concerned administrators may want to disable diff previews."
 msgstr ""
 
@@ -38638,12 +38620,6 @@ msgid "Integrations|There are no exclusions"
 msgstr ""
 
 msgid "Integrations|There are no projects using custom settings"
-msgstr ""
-
-msgid "Integrations|This integration is deprecated and replaced with the %{linkStart}GitLab for Slack app%{linkEnd}. Contact your GitLab administrator for help."
-msgstr ""
-
-msgid "Integrations|This integration is deprecated. Install the %{linkStart}GitLab for Slack app%{linkEnd} instead."
 msgstr ""
 
 msgid "Integrations|This integration, and inheriting projects were reset."
@@ -48992,6 +48968,9 @@ msgstr ""
 msgid "OfflineTransfer|Import"
 msgstr ""
 
+msgid "OfflineTransfer|Invalid source version"
+msgstr ""
+
 msgid "OfflineTransfer|Offline transfer"
 msgstr ""
 
@@ -49014,6 +48993,9 @@ msgid "OfflineTransfer|Start export"
 msgstr ""
 
 msgid "OfflineTransfer|Unable to access object storage bucket."
+msgstr ""
+
+msgid "OfflineTransfer|Unsupported GitLab version. The minimum supported version is '%{version}'."
 msgstr ""
 
 msgid "Oh no!"
@@ -52064,9 +52046,6 @@ msgid "Percentage"
 msgstr ""
 
 msgid "Perform advanced options such as changing path, transferring, exporting, or deleting the group."
-msgstr ""
-
-msgid "Perform common operations on GitLab project"
 msgstr ""
 
 msgid "Performance optimization"
@@ -70788,12 +70767,6 @@ msgstr ""
 msgid "SlackIntegration|Slack app not enabled on GitLab instance"
 msgstr ""
 
-msgid "SlackIntegration|Slack slash commands integration is deprecated"
-msgstr ""
-
-msgid "SlackIntegration|Slack slash commands integration will be removed in GitLab 19.0. To run common GitLab operations from Slack, use the GitLab for Slack app instead."
-msgstr ""
-
 msgid "SlackIntegration|Step 1: Create your GitLab for Slack app"
 msgstr ""
 
@@ -70861,24 +70834,6 @@ msgid "SlackModal|If you change the project, you'll lose any text entered in the
 msgstr ""
 
 msgid "SlackModal|If you've entered some text, consider saving it somewhere to avoid losing any content."
-msgstr ""
-
-msgid "SlackService|1. %{slash_command_link_start}Add a slash command%{slash_command_link_end} in your Slack team using this information:"
-msgstr ""
-
-msgid "SlackService|2. Paste the token from Slack in the %{strong_open}Token%{strong_close} field below."
-msgstr ""
-
-msgid "SlackService|3. Select the %{strong_open}Active%{strong_close} checkbox, select %{strong_open}Save changes%{strong_close}, and start using slash commands in Slack!"
-msgstr ""
-
-msgid "SlackService|After setup, get a list of available Slack slash commands by entering"
-msgstr ""
-
-msgid "SlackService|Fill in the word that works best for your team."
-msgstr ""
-
-msgid "SlackService|Perform common operations in this project by entering slash commands in Slack."
 msgstr ""
 
 msgid "Slack|%{asterisk}Channel notifications%{asterisk}"
@@ -72596,9 +72551,6 @@ msgstr ""
 msgid "Suggestions must all be on the same branch."
 msgstr ""
 
-msgid "Suggestions:"
-msgstr ""
-
 msgid "Suite"
 msgstr ""
 
@@ -73702,9 +73654,6 @@ msgid "The Pivotal Tracker token."
 msgstr ""
 
 msgid "The Pumble webhook (for example, `https://api.pumble.com/workspaces/x/...`)."
-msgstr ""
-
-msgid "The Slack token."
 msgstr ""
 
 msgid "The Snowplow cookie domain."
@@ -76105,9 +76054,6 @@ msgid "To see this project's operational details, contact an owner of group %{gr
 msgstr ""
 
 msgid "To set up SAML authentication for your group through an identity provider like Azure, Okta, Onelogin, Ping Identity, or your custom SAML 2.0 provider:"
-msgstr ""
-
-msgid "To set up this integration:"
 msgstr ""
 
 msgid "To specify the notification level per project of a group you belong to, visit the project page and change the notification level there."

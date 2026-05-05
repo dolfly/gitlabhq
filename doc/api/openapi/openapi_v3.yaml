@@ -1717,911 +1717,6 @@ paths:
         schema:
           type: integer
         in: path
-  "/api/v4/projects/{id}/service_accounts":
-    post:
-      operationId: postApiV4ProjectsIdServiceAccounts
-      summary: Create a project service account
-      description: Creates a service account in the specified project
-      tags:
-      - Service accounts
-      responses:
-        '201':
-          description: Created
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/APIEntitiesServiceAccount"
-        '400':
-          description: 400 Bad request
-        '401':
-          description: 401 Unauthorized
-        '403':
-          description: 403 Forbidden
-        '404':
-          description: 404 Project not found
-      parameters:
-      - name: id
-        required: true
-        description: The ID or URL-encoded path of the project
-        schema:
-          oneOf:
-          - type: string
-          - type: integer
-        in: path
-      requestBody:
-        required: false
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/RequestBody_4d6a710f0d2d"
-    get:
-      operationId: getApiV4ProjectsIdServiceAccounts
-      summary: List all project service accounts
-      description: Lists all service accounts for a specified project
-      tags:
-      - Service accounts
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/APIEntitiesServiceAccount"
-        '400':
-          description: 400 Bad request
-        '401':
-          description: 401 Unauthorized
-        '403':
-          description: 403 Forbidden
-        '404':
-          description: 404 Project not found
-      parameters:
-      - name: id
-        required: true
-        description: The ID or URL-encoded path of the project
-        schema:
-          oneOf:
-          - type: string
-          - type: integer
-        in: path
-      - name: page
-        required: false
-        description: Current page number
-        schema:
-          type: integer
-          default: 1
-          nullable: true
-        in: query
-        example: 1
-      - name: per_page
-        required: false
-        description: Number of items per page
-        schema:
-          type: integer
-          default: 20
-          nullable: true
-        in: query
-        example: 20
-      - name: order_by
-        required: false
-        description: Attribute to sort by
-        schema:
-          type: string
-          enum:
-          - id
-          - username
-          default: id
-          nullable: true
-        in: query
-      - name: sort
-        required: false
-        description: Order of sorting
-        schema:
-          type: string
-          enum:
-          - asc
-          - desc
-          default: desc
-          nullable: true
-        in: query
-  "/api/v4/projects/{id}/service_accounts/{user_id}":
-    delete:
-      operationId: deleteApiV4ProjectsIdServiceAccountsUserId
-      summary: Delete a project service account
-      description: |-
-        Deletes a service account from a specified project.
-                    Available only for project Owners or Maintainers, and administrators.
-      tags:
-      - Service accounts
-      responses:
-        '204':
-          description: No Content
-        '400':
-          description: 400 Bad request
-        '401':
-          description: 401 Unauthorized
-        '403':
-          description: 403 Forbidden
-        '404':
-          description: 404 Project not found
-      parameters:
-      - name: id
-        required: true
-        description: The ID or URL-encoded path of the project
-        schema:
-          oneOf:
-          - type: string
-          - type: integer
-        in: path
-      - name: user_id
-        required: true
-        description: The ID of the service account
-        schema:
-          type: integer
-        in: path
-      - name: hard_delete
-        required: false
-        description: Whether to remove a user's contributions
-        schema:
-          type: boolean
-          nullable: true
-        in: query
-    patch:
-      operationId: patchApiV4ProjectsIdServiceAccountsUserId
-      summary: Update a project service account
-      description: Update a specified project service account.
-      tags:
-      - Service accounts
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/APIEntitiesServiceAccount"
-        '400':
-          description: 400 Bad request
-        '401':
-          description: 401 Unauthorized
-        '403':
-          description: 403 Forbidden
-        '404':
-          description: 404 User not found
-      parameters:
-      - name: id
-        required: true
-        description: The ID or URL-encoded path of the project
-        schema:
-          oneOf:
-          - type: string
-          - type: integer
-        in: path
-      - name: user_id
-        required: true
-        description: The ID of the service account
-        schema:
-          type: integer
-        in: path
-      requestBody:
-        required: false
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/RequestBody_4d6a710f0d2d"
-  "/api/v4/projects/{id}/service_accounts/{user_id}/personal_access_tokens":
-    get:
-      operationId: getApiV4ProjectsIdServiceAccountsUserIdPersonalAccessTokens
-      summary: List all personal access tokens for a project service account
-      description: Lists all personal access tokens for a specified project service
-        account
-      tags:
-      - Access tokens
-      - Service accounts
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/APIEntitiesPersonalAccessToken"
-        '400':
-          description: Bad Request
-        '401':
-          description: 401 Unauthorized
-        '404':
-          description: 404 Project Not Found
-        '403':
-          description: Forbidden
-      parameters:
-      - name: id
-        required: true
-        description: The ID or URL-encoded path of the project
-        schema:
-          oneOf:
-          - type: string
-          - type: integer
-        in: path
-      - name: revoked
-        required: false
-        description: Filter tokens where revoked state matches parameter
-        schema:
-          type: boolean
-          nullable: true
-        in: query
-        example: false
-      - name: state
-        required: false
-        description: Filter tokens which are either active or not
-        schema:
-          type: string
-          enum:
-          - active
-          - inactive
-          nullable: true
-        in: query
-        example: active
-      - name: created_before
-        required: false
-        description: Filter tokens which were created before given datetime
-        schema:
-          type: string
-          format: date-time
-          nullable: true
-        in: query
-        example: '2022-01-01'
-      - name: created_after
-        required: false
-        description: Filter tokens which were created after given datetime
-        schema:
-          type: string
-          format: date-time
-          nullable: true
-        in: query
-        example: '2021-01-01'
-      - name: last_used_before
-        required: false
-        description: Filter tokens which were used before given datetime
-        schema:
-          type: string
-          format: date-time
-          nullable: true
-        in: query
-        example: '2021-01-01'
-      - name: last_used_after
-        required: false
-        description: Filter tokens which were used after given datetime
-        schema:
-          type: string
-          format: date-time
-          nullable: true
-        in: query
-        example: '2022-01-01'
-      - name: expires_before
-        required: false
-        description: Filter tokens which expire before given datetime
-        schema:
-          type: string
-          format: date
-          nullable: true
-        in: query
-        example: '2022-01-01'
-      - name: expires_after
-        required: false
-        description: Filter tokens which expire after given datetime
-        schema:
-          type: string
-          format: date
-          nullable: true
-        in: query
-        example: '2021-01-01'
-      - name: search
-        required: false
-        description: Filters tokens by name
-        schema:
-          type: string
-          nullable: true
-        in: query
-        example: token
-      - name: sort
-        required: false
-        description: Sort tokens
-        schema:
-          type: string
-          nullable: true
-        in: query
-        example: created_at_desc
-      - name: page
-        required: false
-        description: Current page number
-        schema:
-          type: integer
-          default: 1
-          nullable: true
-        in: query
-        example: 1
-      - name: per_page
-        required: false
-        description: Number of items per page
-        schema:
-          type: integer
-          default: 20
-          nullable: true
-        in: query
-        example: 20
-      - name: user_id
-        required: true
-        schema: {}
-        in: path
-    post:
-      operationId: postApiV4ProjectsIdServiceAccountsUserIdPersonalAccessTokens
-      summary: Create a personal access token for a project service account.
-      description: |-
-        Creates a personal access token for a specified project service account.
-                      Available only for project Owners or Maintainers.
-      tags:
-      - Access tokens
-      - Service accounts
-      responses:
-        '201':
-          description: Created
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/APIEntitiesPersonalAccessTokenWithToken"
-        '404':
-          description: Not Found
-        '400':
-          description: Bad Request
-      parameters:
-      - name: id
-        required: true
-        description: The ID or URL-encoded path of the project
-        schema:
-          oneOf:
-          - type: string
-          - type: integer
-        in: path
-      - name: user_id
-        required: true
-        schema: {}
-        in: path
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/RequestBody_ee836c0c3c1a"
-  "/api/v4/projects/{id}/service_accounts/{user_id}/personal_access_tokens/{token_id}":
-    delete:
-      operationId: deleteApiV4ProjectsIdServiceAccountsUserIdPersonalAccessTokensTokenId
-      summary: Revoke a personal access token for a project service account
-      description: Revokes a specified personal access token for a project service
-        account.
-      tags:
-      - Access tokens
-      - Service accounts
-      responses:
-        '204':
-          description: No Content
-        '400':
-          description: Bad Request
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '404':
-          description: Not Found
-      parameters:
-      - name: id
-        required: true
-        description: The ID or URL-encoded path of the project
-        schema:
-          oneOf:
-          - type: string
-          - type: integer
-        in: path
-      - name: user_id
-        required: true
-        schema: {}
-        in: path
-      - name: token_id
-        required: true
-        schema: {}
-        in: path
-  "/api/v4/projects/{id}/service_accounts/{user_id}/personal_access_tokens/{token_id}/rotate":
-    post:
-      operationId: postApiV4ProjectsIdServiceAccountsUserIdPersonalAccessTokensTokenIdRotate
-      summary: Rotate a personal access token for a project service account
-      description: Rotates a specified personal access token for a project service
-        account.
-      tags:
-      - Access tokens
-      - Service accounts
-      responses:
-        '201':
-          description: Created
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/APIEntitiesPersonalAccessTokenWithToken"
-        '404':
-          description: Not Found
-        '400':
-          description: Bad Request
-      parameters:
-      - name: id
-        required: true
-        description: The ID or URL-encoded path of the project
-        schema:
-          oneOf:
-          - type: string
-          - type: integer
-        in: path
-      - name: user_id
-        required: true
-        schema: {}
-        in: path
-      - name: token_id
-        required: true
-        schema: {}
-        in: path
-      requestBody:
-        required: false
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/RequestBody_8c8c40f4e9bd"
-  "/api/v4/groups/{id}/service_accounts":
-    post:
-      operationId: postApiV4GroupsIdServiceAccounts
-      summary: Create a group service account
-      description: Creates a service account in the specified group
-      tags:
-      - Service accounts
-      responses:
-        '201':
-          description: Created
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/APIEntitiesServiceAccount"
-        '400':
-          description: 400 Bad request
-        '401':
-          description: 401 Unauthorized
-        '403':
-          description: 403 Forbidden
-        '404':
-          description: 404 Group not found
-      parameters:
-      - name: id
-        required: true
-        description: The ID or URL-encoded path of the group
-        schema:
-          oneOf:
-          - type: string
-          - type: integer
-        in: path
-      requestBody:
-        required: false
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/RequestBody_4d6a710f0d2d"
-    get:
-      operationId: getApiV4GroupsIdServiceAccounts
-      summary: List all group service accounts
-      description: Lists all service accounts for a specified group
-      tags:
-      - Service accounts
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/APIEntitiesServiceAccount"
-        '400':
-          description: 400 Bad request
-        '401':
-          description: 401 Unauthorized
-        '403':
-          description: 403 Forbidden
-        '404':
-          description: 404 Group not found
-      parameters:
-      - name: id
-        required: true
-        description: The ID or URL-encoded path of the group
-        schema:
-          oneOf:
-          - type: string
-          - type: integer
-        in: path
-      - name: page
-        required: false
-        description: Current page number
-        schema:
-          type: integer
-          default: 1
-          nullable: true
-        in: query
-        example: 1
-      - name: per_page
-        required: false
-        description: Number of items per page
-        schema:
-          type: integer
-          default: 20
-          nullable: true
-        in: query
-        example: 20
-      - name: order_by
-        required: false
-        description: Attribute to sort by
-        schema:
-          type: string
-          enum:
-          - id
-          - username
-          default: id
-          nullable: true
-        in: query
-      - name: sort
-        required: false
-        description: Order of sorting
-        schema:
-          type: string
-          enum:
-          - asc
-          - desc
-          default: desc
-          nullable: true
-        in: query
-  "/api/v4/groups/{id}/service_accounts/{user_id}":
-    delete:
-      operationId: deleteApiV4GroupsIdServiceAccountsUserId
-      summary: Delete a group service account.
-      description: Deletes a service account from a specified group. Available only
-        for group owners and admins.
-      tags:
-      - Service accounts
-      responses:
-        '204':
-          description: No Content
-        '400':
-          description: 400 Bad request
-        '401':
-          description: 401 Unauthorized
-        '403':
-          description: 403 Forbidden
-        '404':
-          description: 404 Group not found
-      parameters:
-      - name: id
-        required: true
-        description: The ID or URL-encoded path of the group
-        schema:
-          oneOf:
-          - type: string
-          - type: integer
-        in: path
-      - name: user_id
-        required: true
-        description: The ID of the service account
-        schema:
-          type: integer
-        in: path
-      - name: hard_delete
-        required: false
-        description: Whether to remove a user's contributions
-        schema:
-          type: boolean
-          nullable: true
-        in: query
-    patch:
-      operationId: patchApiV4GroupsIdServiceAccountsUserId
-      summary: Update a group service account
-      description: Update a specified group service account.
-      tags:
-      - Service accounts
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/APIEntitiesServiceAccount"
-        '400':
-          description: 400 Bad request
-        '401':
-          description: 401 Unauthorized
-        '403':
-          description: 403 Forbidden
-        '404':
-          description: 404 User not found
-      parameters:
-      - name: id
-        required: true
-        description: The ID or URL-encoded path of the group
-        schema:
-          oneOf:
-          - type: string
-          - type: integer
-        in: path
-      - name: user_id
-        required: true
-        description: The ID of the service account
-        schema:
-          type: integer
-        in: path
-      requestBody:
-        required: false
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/RequestBody_4d6a710f0d2d"
-  "/api/v4/groups/{id}/service_accounts/{user_id}/personal_access_tokens":
-    get:
-      operationId: getApiV4GroupsIdServiceAccountsUserIdPersonalAccessTokens
-      summary: List all personal access tokens for a group service account
-      description: Lists all personal access tokens for a specified group service
-        account
-      tags:
-      - Access tokens
-      - Service accounts
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/APIEntitiesPersonalAccessToken"
-        '400':
-          description: Bad Request
-        '401':
-          description: 401 Unauthorized
-        '404':
-          description: 404 Group Not Found
-        '403':
-          description: Forbidden
-      parameters:
-      - name: id
-        required: true
-        description: The ID or URL-encoded path of the group
-        schema:
-          oneOf:
-          - type: string
-          - type: integer
-        in: path
-      - name: revoked
-        required: false
-        description: Filter tokens where revoked state matches parameter
-        schema:
-          type: boolean
-          nullable: true
-        in: query
-        example: false
-      - name: state
-        required: false
-        description: Filter tokens which are either active or not
-        schema:
-          type: string
-          enum:
-          - active
-          - inactive
-          nullable: true
-        in: query
-        example: active
-      - name: created_before
-        required: false
-        description: Filter tokens which were created before given datetime
-        schema:
-          type: string
-          format: date-time
-          nullable: true
-        in: query
-        example: '2022-01-01'
-      - name: created_after
-        required: false
-        description: Filter tokens which were created after given datetime
-        schema:
-          type: string
-          format: date-time
-          nullable: true
-        in: query
-        example: '2021-01-01'
-      - name: last_used_before
-        required: false
-        description: Filter tokens which were used before given datetime
-        schema:
-          type: string
-          format: date-time
-          nullable: true
-        in: query
-        example: '2021-01-01'
-      - name: last_used_after
-        required: false
-        description: Filter tokens which were used after given datetime
-        schema:
-          type: string
-          format: date-time
-          nullable: true
-        in: query
-        example: '2022-01-01'
-      - name: expires_before
-        required: false
-        description: Filter tokens which expire before given datetime
-        schema:
-          type: string
-          format: date
-          nullable: true
-        in: query
-        example: '2022-01-01'
-      - name: expires_after
-        required: false
-        description: Filter tokens which expire after given datetime
-        schema:
-          type: string
-          format: date
-          nullable: true
-        in: query
-        example: '2021-01-01'
-      - name: search
-        required: false
-        description: Filters tokens by name
-        schema:
-          type: string
-          nullable: true
-        in: query
-        example: token
-      - name: sort
-        required: false
-        description: Sort tokens
-        schema:
-          type: string
-          nullable: true
-        in: query
-        example: created_at_desc
-      - name: page
-        required: false
-        description: Current page number
-        schema:
-          type: integer
-          default: 1
-          nullable: true
-        in: query
-        example: 1
-      - name: per_page
-        required: false
-        description: Number of items per page
-        schema:
-          type: integer
-          default: 20
-          nullable: true
-        in: query
-        example: 20
-      - name: user_id
-        required: true
-        schema: {}
-        in: path
-    post:
-      operationId: postApiV4GroupsIdServiceAccountsUserIdPersonalAccessTokens
-      summary: Create a personal access token for a group service account.
-      description: |-
-        Creates a personal access token for a specified group service account.
-                      Requires the group Owner role. This feature was introduced in GitLab 16.1.
-      tags:
-      - Access tokens
-      - Service accounts
-      responses:
-        '201':
-          description: Created
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/APIEntitiesPersonalAccessTokenWithToken"
-        '404':
-          description: Not Found
-        '400':
-          description: Bad Request
-      parameters:
-      - name: id
-        required: true
-        description: The ID or URL-encoded path of the group
-        schema:
-          oneOf:
-          - type: string
-          - type: integer
-        in: path
-      - name: user_id
-        required: true
-        schema: {}
-        in: path
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/RequestBody_ee836c0c3c1a"
-  "/api/v4/groups/{id}/service_accounts/{user_id}/personal_access_tokens/{token_id}":
-    delete:
-      operationId: deleteApiV4GroupsIdServiceAccountsUserIdPersonalAccessTokensTokenId
-      summary: Revoke a personal access token for a group service account
-      description: Revokes a specified personal access token for a group service account.
-      tags:
-      - Access tokens
-      - Service accounts
-      responses:
-        '204':
-          description: No Content
-        '400':
-          description: Bad Request
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '404':
-          description: Not Found
-      parameters:
-      - name: id
-        required: true
-        description: The ID or URL-encoded path of the group
-        schema:
-          oneOf:
-          - type: string
-          - type: integer
-        in: path
-      - name: user_id
-        required: true
-        schema: {}
-        in: path
-      - name: token_id
-        required: true
-        schema: {}
-        in: path
-  "/api/v4/groups/{id}/service_accounts/{user_id}/personal_access_tokens/{token_id}/rotate":
-    post:
-      operationId: postApiV4GroupsIdServiceAccountsUserIdPersonalAccessTokensTokenIdRotate
-      summary: Rotate personal access token for group service account
-      description: Rotates a specified personal access token for a group service account.
-      tags:
-      - Access tokens
-      - Service accounts
-      responses:
-        '201':
-          description: Created
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/APIEntitiesPersonalAccessTokenWithToken"
-        '404':
-          description: Not Found
-        '400':
-          description: Bad Request
-      parameters:
-      - name: id
-        required: true
-        description: The ID or URL-encoded path of the group
-        schema:
-          oneOf:
-          - type: string
-          - type: integer
-        in: path
-      - name: user_id
-        required: true
-        schema: {}
-        in: path
-      - name: token_id
-        required: true
-        schema: {}
-        in: path
-      requestBody:
-        required: false
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/RequestBody_8c8c40f4e9bd"
   "/api/v4/projects/{id}/dependency_list_exports":
     post:
       operationId: postApiV4ProjectsIdDependencyListExports
@@ -5643,126 +4738,6 @@ paths:
         required: true
         schema: {}
         in: path
-  "/api/v4/service_accounts":
-    post:
-      operationId: postApiV4ServiceAccounts
-      summary: Create a service account user. Available only for instance admins.
-      tags:
-      - Service accounts
-      responses:
-        '201':
-          description: Created
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/APIEntitiesServiceAccount"
-        '400':
-          description: 400 Bad request
-        '401':
-          description: 401 Unauthorized
-        '403':
-          description: 403 Forbidden
-      requestBody:
-        required: false
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/RequestBody_4d6a710f0d2d"
-    get:
-      operationId: getApiV4ServiceAccounts
-      summary: Get list of service account users. Available only for instance admins
-      description: Get list of service account users
-      tags:
-      - Service accounts
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/APIEntitiesServiceAccount"
-        '400':
-          description: 400 Bad request
-        '401':
-          description: 401 Unauthorized
-        '403':
-          description: 403 Forbidden
-      parameters:
-      - name: page
-        required: false
-        description: Current page number
-        schema:
-          type: integer
-          default: 1
-          nullable: true
-        in: query
-        example: 1
-      - name: per_page
-        required: false
-        description: Number of items per page
-        schema:
-          type: integer
-          default: 20
-          nullable: true
-        in: query
-        example: 20
-      - name: order_by
-        required: false
-        description: Attribute to sort by
-        schema:
-          type: string
-          enum:
-          - id
-          - username
-          default: id
-          nullable: true
-        in: query
-      - name: sort
-        required: false
-        description: Order of sorting
-        schema:
-          type: string
-          enum:
-          - asc
-          - desc
-          default: desc
-          nullable: true
-        in: query
-  "/api/v4/service_accounts/{user_id}":
-    patch:
-      operationId: patchApiV4ServiceAccountsUserId
-      summary: Update a service account user. Available only for instance admins.
-      description: Update a service account user
-      tags:
-      - Service accounts
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/APIEntitiesServiceAccount"
-        '400':
-          description: 400 Bad request
-        '401':
-          description: 401 Unauthorized
-        '403':
-          description: 403 Forbidden
-        '404':
-          description: 404 Not found
-      parameters:
-      - name: user_id
-        required: true
-        description: The ID of the service account user
-        schema:
-          type: integer
-        in: path
-      requestBody:
-        required: false
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/RequestBody_4d6a710f0d2d"
   "/api/v4/groups/{id}/manage/personal_access_tokens":
     get:
       operationId: getApiV4GroupsIdManagePersonalAccessTokens
@@ -16950,6 +15925,126 @@ paths:
           application/json:
             schema:
               "$ref": "#/components/schemas/RequestBody_02a2c6e64d09"
+  "/api/v4/service_accounts":
+    post:
+      operationId: postApiV4ServiceAccounts
+      summary: Create a service account user. Available only for instance admins.
+      tags:
+      - Service accounts
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/APIEntitiesServiceAccount"
+        '400':
+          description: 400 Bad request
+        '401':
+          description: 401 Unauthorized
+        '403':
+          description: 403 Forbidden
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/RequestBody_4d6a710f0d2d"
+    get:
+      operationId: getApiV4ServiceAccounts
+      summary: Get list of service account users. Available only for instance admins
+      description: Get list of service account users
+      tags:
+      - Service accounts
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/APIEntitiesServiceAccount"
+        '400':
+          description: 400 Bad request
+        '401':
+          description: 401 Unauthorized
+        '403':
+          description: 403 Forbidden
+      parameters:
+      - name: page
+        required: false
+        description: Current page number
+        schema:
+          type: integer
+          default: 1
+          nullable: true
+        in: query
+        example: 1
+      - name: per_page
+        required: false
+        description: Number of items per page
+        schema:
+          type: integer
+          default: 20
+          nullable: true
+        in: query
+        example: 20
+      - name: order_by
+        required: false
+        description: Attribute to sort by
+        schema:
+          type: string
+          enum:
+          - id
+          - username
+          default: id
+          nullable: true
+        in: query
+      - name: sort
+        required: false
+        description: Order of sorting
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+          default: desc
+          nullable: true
+        in: query
+  "/api/v4/service_accounts/{user_id}":
+    patch:
+      operationId: patchApiV4ServiceAccountsUserId
+      summary: Update a service account user. Available only for instance admins.
+      description: Update a service account user
+      tags:
+      - Service accounts
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/APIEntitiesServiceAccount"
+        '400':
+          description: 400 Bad request
+        '401':
+          description: 401 Unauthorized
+        '403':
+          description: 403 Forbidden
+        '404':
+          description: 404 Not found
+      parameters:
+      - name: user_id
+        required: true
+        description: The ID of the service account user
+        schema:
+          type: integer
+        in: path
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/RequestBody_4d6a710f0d2d"
   "/api/v4/projects/{id}/issues/{eventable_id}/resource_state_events":
     get:
       operationId: getApiV4ProjectsIdIssuesEventableIdResourceStateEvents
@@ -17472,6 +16567,460 @@ paths:
           - type: integer
           - type: string
         in: path
+  "/api/v4/projects/{id}/service_accounts":
+    post:
+      operationId: postApiV4ProjectsIdServiceAccounts
+      summary: Create a project service account
+      description: Creates a service account in the specified project
+      tags:
+      - Service accounts
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/APIEntitiesServiceAccount"
+        '400':
+          description: 400 Bad request
+        '401':
+          description: 401 Unauthorized
+        '403':
+          description: 403 Forbidden
+        '404':
+          description: 404 Project not found
+      parameters:
+      - name: id
+        required: true
+        description: The ID or URL-encoded path of the project
+        schema:
+          oneOf:
+          - type: string
+          - type: integer
+        in: path
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/RequestBody_4d6a710f0d2d"
+    get:
+      operationId: getApiV4ProjectsIdServiceAccounts
+      summary: List all project service accounts
+      description: Lists all service accounts for a specified project
+      tags:
+      - Service accounts
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/APIEntitiesServiceAccount"
+        '400':
+          description: 400 Bad request
+        '401':
+          description: 401 Unauthorized
+        '403':
+          description: 403 Forbidden
+        '404':
+          description: 404 Project not found
+      parameters:
+      - name: id
+        required: true
+        description: The ID or URL-encoded path of the project
+        schema:
+          oneOf:
+          - type: string
+          - type: integer
+        in: path
+      - name: page
+        required: false
+        description: Current page number
+        schema:
+          type: integer
+          default: 1
+          nullable: true
+        in: query
+        example: 1
+      - name: per_page
+        required: false
+        description: Number of items per page
+        schema:
+          type: integer
+          default: 20
+          nullable: true
+        in: query
+        example: 20
+      - name: order_by
+        required: false
+        description: Attribute to sort by
+        schema:
+          type: string
+          enum:
+          - id
+          - username
+          default: id
+          nullable: true
+        in: query
+      - name: sort
+        required: false
+        description: Order of sorting
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+          default: desc
+          nullable: true
+        in: query
+  "/api/v4/projects/{id}/service_accounts/{user_id}":
+    delete:
+      operationId: deleteApiV4ProjectsIdServiceAccountsUserId
+      summary: Delete a project service account
+      description: |-
+        Deletes a service account from a specified project.
+                    Available only for project Owners or Maintainers, and administrators.
+      tags:
+      - Service accounts
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: 400 Bad request
+        '401':
+          description: 401 Unauthorized
+        '403':
+          description: 403 Forbidden
+        '404':
+          description: 404 Project not found
+      parameters:
+      - name: id
+        required: true
+        description: The ID or URL-encoded path of the project
+        schema:
+          oneOf:
+          - type: string
+          - type: integer
+        in: path
+      - name: user_id
+        required: true
+        description: The ID of the service account
+        schema:
+          type: integer
+        in: path
+      - name: hard_delete
+        required: false
+        description: Whether to remove a user's contributions
+        schema:
+          type: boolean
+          nullable: true
+        in: query
+    patch:
+      operationId: patchApiV4ProjectsIdServiceAccountsUserId
+      summary: Update a project service account
+      description: Update a specified project service account.
+      tags:
+      - Service accounts
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/APIEntitiesServiceAccount"
+        '400':
+          description: 400 Bad request
+        '401':
+          description: 401 Unauthorized
+        '403':
+          description: 403 Forbidden
+        '404':
+          description: 404 User not found
+      parameters:
+      - name: id
+        required: true
+        description: The ID or URL-encoded path of the project
+        schema:
+          oneOf:
+          - type: string
+          - type: integer
+        in: path
+      - name: user_id
+        required: true
+        description: The ID of the service account
+        schema:
+          type: integer
+        in: path
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/RequestBody_4d6a710f0d2d"
+  "/api/v4/projects/{id}/service_accounts/{user_id}/personal_access_tokens":
+    get:
+      operationId: getApiV4ProjectsIdServiceAccountsUserIdPersonalAccessTokens
+      summary: List all personal access tokens for a project service account
+      description: Lists all personal access tokens for a specified project service
+        account
+      tags:
+      - Access tokens
+      - Service accounts
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/APIEntitiesPersonalAccessToken"
+        '400':
+          description: Bad Request
+        '401':
+          description: 401 Unauthorized
+        '404':
+          description: 404 Project Not Found
+        '403':
+          description: Forbidden
+      parameters:
+      - name: id
+        required: true
+        description: The ID or URL-encoded path of the project
+        schema:
+          oneOf:
+          - type: string
+          - type: integer
+        in: path
+      - name: revoked
+        required: false
+        description: Filter tokens where revoked state matches parameter
+        schema:
+          type: boolean
+          nullable: true
+        in: query
+        example: false
+      - name: state
+        required: false
+        description: Filter tokens which are either active or not
+        schema:
+          type: string
+          enum:
+          - active
+          - inactive
+          nullable: true
+        in: query
+        example: active
+      - name: created_before
+        required: false
+        description: Filter tokens which were created before given datetime
+        schema:
+          type: string
+          format: date-time
+          nullable: true
+        in: query
+        example: '2022-01-01'
+      - name: created_after
+        required: false
+        description: Filter tokens which were created after given datetime
+        schema:
+          type: string
+          format: date-time
+          nullable: true
+        in: query
+        example: '2021-01-01'
+      - name: last_used_before
+        required: false
+        description: Filter tokens which were used before given datetime
+        schema:
+          type: string
+          format: date-time
+          nullable: true
+        in: query
+        example: '2021-01-01'
+      - name: last_used_after
+        required: false
+        description: Filter tokens which were used after given datetime
+        schema:
+          type: string
+          format: date-time
+          nullable: true
+        in: query
+        example: '2022-01-01'
+      - name: expires_before
+        required: false
+        description: Filter tokens which expire before given datetime
+        schema:
+          type: string
+          format: date
+          nullable: true
+        in: query
+        example: '2022-01-01'
+      - name: expires_after
+        required: false
+        description: Filter tokens which expire after given datetime
+        schema:
+          type: string
+          format: date
+          nullable: true
+        in: query
+        example: '2021-01-01'
+      - name: search
+        required: false
+        description: Filters tokens by name
+        schema:
+          type: string
+          nullable: true
+        in: query
+        example: token
+      - name: sort
+        required: false
+        description: Sort tokens
+        schema:
+          type: string
+          nullable: true
+        in: query
+        example: created_at_desc
+      - name: page
+        required: false
+        description: Current page number
+        schema:
+          type: integer
+          default: 1
+          nullable: true
+        in: query
+        example: 1
+      - name: per_page
+        required: false
+        description: Number of items per page
+        schema:
+          type: integer
+          default: 20
+          nullable: true
+        in: query
+        example: 20
+      - name: user_id
+        required: true
+        schema: {}
+        in: path
+    post:
+      operationId: postApiV4ProjectsIdServiceAccountsUserIdPersonalAccessTokens
+      summary: Create a personal access token for a project service account.
+      description: |-
+        Creates a personal access token for a specified project service account.
+                      Available only for project Owners or Maintainers.
+      tags:
+      - Access tokens
+      - Service accounts
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/APIEntitiesPersonalAccessTokenWithToken"
+        '404':
+          description: Not Found
+        '400':
+          description: Bad Request
+      parameters:
+      - name: id
+        required: true
+        description: The ID or URL-encoded path of the project
+        schema:
+          oneOf:
+          - type: string
+          - type: integer
+        in: path
+      - name: user_id
+        required: true
+        schema: {}
+        in: path
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/RequestBody_ee836c0c3c1a"
+  "/api/v4/projects/{id}/service_accounts/{user_id}/personal_access_tokens/{token_id}":
+    delete:
+      operationId: deleteApiV4ProjectsIdServiceAccountsUserIdPersonalAccessTokensTokenId
+      summary: Revoke a personal access token for a project service account
+      description: Revokes a specified personal access token for a project service
+        account.
+      tags:
+      - Access tokens
+      - Service accounts
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      parameters:
+      - name: id
+        required: true
+        description: The ID or URL-encoded path of the project
+        schema:
+          oneOf:
+          - type: string
+          - type: integer
+        in: path
+      - name: user_id
+        required: true
+        schema: {}
+        in: path
+      - name: token_id
+        required: true
+        schema: {}
+        in: path
+  "/api/v4/projects/{id}/service_accounts/{user_id}/personal_access_tokens/{token_id}/rotate":
+    post:
+      operationId: postApiV4ProjectsIdServiceAccountsUserIdPersonalAccessTokensTokenIdRotate
+      summary: Rotate a personal access token for a project service account
+      description: Rotates a specified personal access token for a project service
+        account.
+      tags:
+      - Access tokens
+      - Service accounts
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/APIEntitiesPersonalAccessTokenWithToken"
+        '404':
+          description: Not Found
+        '400':
+          description: Bad Request
+      parameters:
+      - name: id
+        required: true
+        description: The ID or URL-encoded path of the project
+        schema:
+          oneOf:
+          - type: string
+          - type: integer
+        in: path
+      - name: user_id
+        required: true
+        schema: {}
+        in: path
+      - name: token_id
+        required: true
+        schema: {}
+        in: path
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/RequestBody_8c8c40f4e9bd"
   "/api/v4/project_repository_storage_moves":
     get:
       operationId: getApiV4ProjectRepositoryStorageMoves
@@ -19827,6 +19376,457 @@ paths:
       responses:
         '200':
           description: OK
+  "/api/v4/groups/{id}/service_accounts":
+    post:
+      operationId: postApiV4GroupsIdServiceAccounts
+      summary: Create a group service account
+      description: Creates a service account in the specified group
+      tags:
+      - Service accounts
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/APIEntitiesServiceAccount"
+        '400':
+          description: 400 Bad request
+        '401':
+          description: 401 Unauthorized
+        '403':
+          description: 403 Forbidden
+        '404':
+          description: 404 Group not found
+      parameters:
+      - name: id
+        required: true
+        description: The ID or URL-encoded path of the group
+        schema:
+          oneOf:
+          - type: string
+          - type: integer
+        in: path
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/RequestBody_4d6a710f0d2d"
+    get:
+      operationId: getApiV4GroupsIdServiceAccounts
+      summary: List all group service accounts
+      description: Lists all service accounts for a specified group
+      tags:
+      - Service accounts
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/APIEntitiesServiceAccount"
+        '400':
+          description: 400 Bad request
+        '401':
+          description: 401 Unauthorized
+        '403':
+          description: 403 Forbidden
+        '404':
+          description: 404 Group not found
+      parameters:
+      - name: id
+        required: true
+        description: The ID or URL-encoded path of the group
+        schema:
+          oneOf:
+          - type: string
+          - type: integer
+        in: path
+      - name: page
+        required: false
+        description: Current page number
+        schema:
+          type: integer
+          default: 1
+          nullable: true
+        in: query
+        example: 1
+      - name: per_page
+        required: false
+        description: Number of items per page
+        schema:
+          type: integer
+          default: 20
+          nullable: true
+        in: query
+        example: 20
+      - name: order_by
+        required: false
+        description: Attribute to sort by
+        schema:
+          type: string
+          enum:
+          - id
+          - username
+          default: id
+          nullable: true
+        in: query
+      - name: sort
+        required: false
+        description: Order of sorting
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+          default: desc
+          nullable: true
+        in: query
+  "/api/v4/groups/{id}/service_accounts/{user_id}":
+    delete:
+      operationId: deleteApiV4GroupsIdServiceAccountsUserId
+      summary: Delete a group service account.
+      description: Deletes a service account from a specified group. Available only
+        for group owners and admins.
+      tags:
+      - Service accounts
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: 400 Bad request
+        '401':
+          description: 401 Unauthorized
+        '403':
+          description: 403 Forbidden
+        '404':
+          description: 404 Group not found
+      parameters:
+      - name: id
+        required: true
+        description: The ID or URL-encoded path of the group
+        schema:
+          oneOf:
+          - type: string
+          - type: integer
+        in: path
+      - name: user_id
+        required: true
+        description: The ID of the service account
+        schema:
+          type: integer
+        in: path
+      - name: hard_delete
+        required: false
+        description: Whether to remove a user's contributions
+        schema:
+          type: boolean
+          nullable: true
+        in: query
+    patch:
+      operationId: patchApiV4GroupsIdServiceAccountsUserId
+      summary: Update a group service account
+      description: Update a specified group service account.
+      tags:
+      - Service accounts
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/APIEntitiesServiceAccount"
+        '400':
+          description: 400 Bad request
+        '401':
+          description: 401 Unauthorized
+        '403':
+          description: 403 Forbidden
+        '404':
+          description: 404 User not found
+      parameters:
+      - name: id
+        required: true
+        description: The ID or URL-encoded path of the group
+        schema:
+          oneOf:
+          - type: string
+          - type: integer
+        in: path
+      - name: user_id
+        required: true
+        description: The ID of the service account
+        schema:
+          type: integer
+        in: path
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/RequestBody_4d6a710f0d2d"
+  "/api/v4/groups/{id}/service_accounts/{user_id}/personal_access_tokens":
+    get:
+      operationId: getApiV4GroupsIdServiceAccountsUserIdPersonalAccessTokens
+      summary: List all personal access tokens for a group service account
+      description: Lists all personal access tokens for a specified group service
+        account
+      tags:
+      - Access tokens
+      - Service accounts
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/APIEntitiesPersonalAccessToken"
+        '400':
+          description: Bad Request
+        '401':
+          description: 401 Unauthorized
+        '404':
+          description: 404 Group Not Found
+        '403':
+          description: Forbidden
+      parameters:
+      - name: id
+        required: true
+        description: The ID or URL-encoded path of the group
+        schema:
+          oneOf:
+          - type: string
+          - type: integer
+        in: path
+      - name: revoked
+        required: false
+        description: Filter tokens where revoked state matches parameter
+        schema:
+          type: boolean
+          nullable: true
+        in: query
+        example: false
+      - name: state
+        required: false
+        description: Filter tokens which are either active or not
+        schema:
+          type: string
+          enum:
+          - active
+          - inactive
+          nullable: true
+        in: query
+        example: active
+      - name: created_before
+        required: false
+        description: Filter tokens which were created before given datetime
+        schema:
+          type: string
+          format: date-time
+          nullable: true
+        in: query
+        example: '2022-01-01'
+      - name: created_after
+        required: false
+        description: Filter tokens which were created after given datetime
+        schema:
+          type: string
+          format: date-time
+          nullable: true
+        in: query
+        example: '2021-01-01'
+      - name: last_used_before
+        required: false
+        description: Filter tokens which were used before given datetime
+        schema:
+          type: string
+          format: date-time
+          nullable: true
+        in: query
+        example: '2021-01-01'
+      - name: last_used_after
+        required: false
+        description: Filter tokens which were used after given datetime
+        schema:
+          type: string
+          format: date-time
+          nullable: true
+        in: query
+        example: '2022-01-01'
+      - name: expires_before
+        required: false
+        description: Filter tokens which expire before given datetime
+        schema:
+          type: string
+          format: date
+          nullable: true
+        in: query
+        example: '2022-01-01'
+      - name: expires_after
+        required: false
+        description: Filter tokens which expire after given datetime
+        schema:
+          type: string
+          format: date
+          nullable: true
+        in: query
+        example: '2021-01-01'
+      - name: search
+        required: false
+        description: Filters tokens by name
+        schema:
+          type: string
+          nullable: true
+        in: query
+        example: token
+      - name: sort
+        required: false
+        description: Sort tokens
+        schema:
+          type: string
+          nullable: true
+        in: query
+        example: created_at_desc
+      - name: page
+        required: false
+        description: Current page number
+        schema:
+          type: integer
+          default: 1
+          nullable: true
+        in: query
+        example: 1
+      - name: per_page
+        required: false
+        description: Number of items per page
+        schema:
+          type: integer
+          default: 20
+          nullable: true
+        in: query
+        example: 20
+      - name: user_id
+        required: true
+        schema: {}
+        in: path
+    post:
+      operationId: postApiV4GroupsIdServiceAccountsUserIdPersonalAccessTokens
+      summary: Create a personal access token for a group service account.
+      description: |-
+        Creates a personal access token for a specified group service account.
+                      Requires the group Owner role. This feature was introduced in GitLab 16.1.
+      tags:
+      - Access tokens
+      - Service accounts
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/APIEntitiesPersonalAccessTokenWithToken"
+        '404':
+          description: Not Found
+        '400':
+          description: Bad Request
+      parameters:
+      - name: id
+        required: true
+        description: The ID or URL-encoded path of the group
+        schema:
+          oneOf:
+          - type: string
+          - type: integer
+        in: path
+      - name: user_id
+        required: true
+        schema: {}
+        in: path
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/RequestBody_ee836c0c3c1a"
+  "/api/v4/groups/{id}/service_accounts/{user_id}/personal_access_tokens/{token_id}":
+    delete:
+      operationId: deleteApiV4GroupsIdServiceAccountsUserIdPersonalAccessTokensTokenId
+      summary: Revoke a personal access token for a group service account
+      description: Revokes a specified personal access token for a group service account.
+      tags:
+      - Access tokens
+      - Service accounts
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      parameters:
+      - name: id
+        required: true
+        description: The ID or URL-encoded path of the group
+        schema:
+          oneOf:
+          - type: string
+          - type: integer
+        in: path
+      - name: user_id
+        required: true
+        schema: {}
+        in: path
+      - name: token_id
+        required: true
+        schema: {}
+        in: path
+  "/api/v4/groups/{id}/service_accounts/{user_id}/personal_access_tokens/{token_id}/rotate":
+    post:
+      operationId: postApiV4GroupsIdServiceAccountsUserIdPersonalAccessTokensTokenIdRotate
+      summary: Rotate personal access token for group service account
+      description: Rotates a specified personal access token for a group service account.
+      tags:
+      - Access tokens
+      - Service accounts
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/APIEntitiesPersonalAccessTokenWithToken"
+        '404':
+          description: Not Found
+        '400':
+          description: Bad Request
+      parameters:
+      - name: id
+        required: true
+        description: The ID or URL-encoded path of the group
+        schema:
+          oneOf:
+          - type: string
+          - type: integer
+        in: path
+      - name: user_id
+        required: true
+        schema: {}
+        in: path
+      - name: token_id
+        required: true
+        schema: {}
+        in: path
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/RequestBody_8c8c40f4e9bd"
   "/api/v4/groups/{id}/milestones":
     get:
       operationId: getApiV4GroupsIdMilestones
@@ -45526,39 +45526,6 @@ paths:
           application/json:
             schema:
               "$ref": "#/components/schemas/RequestBody_f1280e78b04a"
-  "/api/v4/projects/{id}/services/slack-slash-commands":
-    put:
-      operationId: putApiV4ProjectsIdServicesSlackSlashCommands
-      summary: Create/Edit Slack Slash Commands integration
-      description: Set Slack Slash Commands integration.
-      tags:
-      - Integrations
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/APIEntitiesIntegrationBasic"
-        '400':
-          description: Bad request
-        '401':
-          description: Unauthorized
-        '404':
-          description: Not found
-        '422':
-          description: Unprocessable entity
-      parameters:
-      - name: id
-        required: true
-        schema: {}
-        in: path
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/RequestBody_5d04a12a1f40"
   "/api/v4/projects/{id}/services/packagist":
     put:
       operationId: putApiV4ProjectsIdServicesPackagist
@@ -46433,7 +46400,6 @@ paths:
           - linear
           - matrix
           - mattermost-slash-commands
-          - slack-slash-commands
           - packagist
           - phorge
           - pipelines-email
@@ -46517,7 +46483,6 @@ paths:
           - linear
           - matrix
           - mattermost-slash-commands
-          - slack-slash-commands
           - packagist
           - phorge
           - pipelines-email
@@ -46578,35 +46543,6 @@ paths:
           application/json:
             schema:
               "$ref": "#/components/schemas/RequestBody_bb037c8929f5"
-  "/api/v4/projects/{id}/services/slack_slash_commands/trigger":
-    post:
-      operationId: postApiV4ProjectsIdServicesSlackSlashCommandsTrigger
-      summary: Trigger a slash command for slack-slash-commands
-      description: Added in GitLab 8.13
-      tags:
-      - Integrations
-      responses:
-        '201':
-          description: Created
-        '401':
-          description: Unauthorized
-        '404':
-          description: Not found
-      parameters:
-      - name: id
-        required: true
-        description: The ID or URL-encoded path of the project
-        schema:
-          oneOf:
-          - type: string
-          - type: integer
-        in: path
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/RequestBody_5d263ca42b06"
   "/api/v4/projects/{id}/integrations":
     get:
       operationId: getApiV4ProjectsIdIntegrations
@@ -47488,39 +47424,6 @@ paths:
           application/json:
             schema:
               "$ref": "#/components/schemas/RequestBody_f1280e78b04a"
-  "/api/v4/projects/{id}/integrations/slack-slash-commands":
-    put:
-      operationId: putApiV4ProjectsIdIntegrationsSlackSlashCommands
-      summary: Create/Edit Slack Slash Commands integration
-      description: Set Slack Slash Commands integration.
-      tags:
-      - Integrations
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/APIEntitiesIntegrationBasic"
-        '400':
-          description: Bad request
-        '401':
-          description: Unauthorized
-        '404':
-          description: Not found
-        '422':
-          description: Unprocessable entity
-      parameters:
-      - name: id
-        required: true
-        schema: {}
-        in: path
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/RequestBody_5d04a12a1f40"
   "/api/v4/projects/{id}/integrations/packagist":
     put:
       operationId: putApiV4ProjectsIdIntegrationsPackagist
@@ -48395,7 +48298,6 @@ paths:
           - linear
           - matrix
           - mattermost-slash-commands
-          - slack-slash-commands
           - packagist
           - phorge
           - pipelines-email
@@ -48479,7 +48381,6 @@ paths:
           - linear
           - matrix
           - mattermost-slash-commands
-          - slack-slash-commands
           - packagist
           - phorge
           - pipelines-email
@@ -48540,35 +48441,6 @@ paths:
           application/json:
             schema:
               "$ref": "#/components/schemas/RequestBody_bb037c8929f5"
-  "/api/v4/projects/{id}/integrations/slack_slash_commands/trigger":
-    post:
-      operationId: postApiV4ProjectsIdIntegrationsSlackSlashCommandsTrigger
-      summary: Trigger a slash command for slack-slash-commands
-      description: Added in GitLab 8.13
-      tags:
-      - Integrations
-      responses:
-        '201':
-          description: Created
-        '401':
-          description: Unauthorized
-        '404':
-          description: Not found
-      parameters:
-      - name: id
-        required: true
-        description: The ID or URL-encoded path of the project
-        schema:
-          oneOf:
-          - type: string
-          - type: integer
-        in: path
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/RequestBody_5d263ca42b06"
   "/api/v4/groups/{id}/integrations":
     get:
       operationId: getApiV4GroupsIdIntegrations
@@ -49450,39 +49322,6 @@ paths:
           application/json:
             schema:
               "$ref": "#/components/schemas/RequestBody_f1280e78b04a"
-  "/api/v4/groups/{id}/integrations/slack-slash-commands":
-    put:
-      operationId: putApiV4GroupsIdIntegrationsSlackSlashCommands
-      summary: Create/Edit Slack Slash Commands integration
-      description: Set Slack Slash Commands integration.
-      tags:
-      - Integrations
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/APIEntitiesIntegrationBasic"
-        '400':
-          description: Bad request
-        '401':
-          description: Unauthorized
-        '404':
-          description: Not found
-        '422':
-          description: Unprocessable entity
-      parameters:
-      - name: id
-        required: true
-        schema: {}
-        in: path
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/RequestBody_5d04a12a1f40"
   "/api/v4/groups/{id}/integrations/packagist":
     put:
       operationId: putApiV4GroupsIdIntegrationsPackagist
@@ -50357,7 +50196,6 @@ paths:
           - linear
           - matrix
           - mattermost-slash-commands
-          - slack-slash-commands
           - packagist
           - phorge
           - pipelines-email
@@ -50441,7 +50279,6 @@ paths:
           - linear
           - matrix
           - mattermost-slash-commands
-          - slack-slash-commands
           - packagist
           - phorge
           - pipelines-email
@@ -64741,7 +64578,7 @@ paths:
         content:
           multipart/form-data:
             schema:
-              "$ref": "#/components/schemas/RequestBody_f009da6ade92"
+              "$ref": "#/components/schemas/RequestBody_15565b325eb1"
     get:
       operationId: getApiV4GroupsId
       summary: Get a single group, with containing projects.
@@ -66666,8 +66503,8 @@ paths:
       tags:
       - Imports
       responses:
-        '200':
-          description: OK
+        '201':
+          description: Created
           content:
             application/json:
               schema:
@@ -88206,58 +88043,6 @@ components:
           description: Email address of the user account. Must be from a verified
             group domain.
           nullable: true
-    RequestBody_4d6a710f0d2d:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the user
-          nullable: true
-        username:
-          type: string
-          description: Username of the user
-          nullable: true
-        email:
-          type: string
-          description: Custom email address for the user
-          nullable: true
-    RequestBody_ee836c0c3c1a:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the access token
-          example: My token
-          nullable: true
-        description:
-          type: string
-          description: The description of the access token
-          example: A token used for k8s
-          nullable: true
-        expires_at:
-          type: string
-          format: date
-          description: Expiration date of the access token in ISO format (YYYY-MM-DD).
-            If undefined, the date is set to the maximum allowable lifetime limit.
-          example: '2021-01-31'
-          nullable: true
-        scopes:
-          type: array
-          items:
-            type: string
-          description: The array of scopes of the personal access token
-      required:
-      - name
-      - scopes
-    RequestBody_8c8c40f4e9bd:
-      type: object
-      properties:
-        expires_at:
-          type: string
-          format: date
-          description: The expiration date of the token
-          example: '2021-01-31'
-          nullable: true
     RequestBody_5a2db215793f:
       type: object
       properties:
@@ -89308,6 +89093,15 @@ components:
           - allowed
           - denied
           description: The approval status of the license.
+          nullable: true
+    RequestBody_8c8c40f4e9bd:
+      type: object
+      properties:
+        expires_at:
+          type: string
+          format: date
+          description: The expiration date of the token
+          example: '2021-01-31'
           nullable: true
     RequestBody_0f2b66d0bb55:
       type: object
@@ -92090,6 +91884,34 @@ components:
           nullable: true
       required:
       - name
+    RequestBody_ee836c0c3c1a:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the access token
+          example: My token
+          nullable: true
+        description:
+          type: string
+          description: The description of the access token
+          example: A token used for k8s
+          nullable: true
+        expires_at:
+          type: string
+          format: date
+          description: Expiration date of the access token in ISO format (YYYY-MM-DD).
+            If undefined, the date is set to the maximum allowable lifetime limit.
+          example: '2021-01-31'
+          nullable: true
+        scopes:
+          type: array
+          items:
+            type: string
+          description: The array of scopes of the personal access token
+      required:
+      - name
+      - scopes
     RequestBody_3f61b706b2ad:
       type: object
       properties:
@@ -94576,6 +94398,21 @@ components:
           nullable: true
         disable_invite_members:
           type: string
+          nullable: true
+    RequestBody_4d6a710f0d2d:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the user
+          nullable: true
+        username:
+          type: string
+          description: Username of the user
+          nullable: true
+        email:
+          type: string
+          description: Custom email address for the user
           nullable: true
     RequestBody_c1d0437d10f3:
       type: object
@@ -103810,20 +103647,6 @@ components:
           nullable: true
       required:
       - token
-    RequestBody_5d04a12a1f40:
-      type: object
-      properties:
-        token:
-          type: string
-          description: The Slack token.
-          nullable: true
-        use_inherited_settings:
-          type: boolean
-          description: Indicates whether to inherit the default settings. Defaults
-            to `false`.
-          nullable: true
-      required:
-      - token
     RequestBody_cc64378f9d87:
       type: object
       properties:
@@ -104905,15 +104728,6 @@ components:
         token:
           type: string
           description: The Mattermost token.
-          nullable: true
-      required:
-      - token
-    RequestBody_5d263ca42b06:
-      type: object
-      properties:
-        token:
-          type: string
-          description: The Slack token.
           nullable: true
       required:
       - token
@@ -108276,7 +108090,7 @@ components:
       required:
       - name
       - path
-    RequestBody_f009da6ade92:
+    RequestBody_15565b325eb1:
       type: object
       properties:
         name:
@@ -108722,6 +108536,11 @@ components:
           items:
             type: string
           description: References of enabled foundational flows
+          nullable: true
+        duo_template_project_id:
+          type: integer
+          description: The ID of a project to use as the Duo Code Review custom instructions
+            template for this group
           nullable: true
         allow_personal_snippets:
           type: boolean

@@ -12,7 +12,7 @@ module API
     METADATA_TAGS = %w[metadata].freeze
     feature_category :not_owned # rubocop:todo Gitlab/AvoidFeatureCategoryNotOwned
 
-    METADATA_QUERY = <<~EOF
+    METADATA_QUERY = <<~GRAPHQL
       {
         metadata {
           version
@@ -26,7 +26,7 @@ module API
           enterprise
         }
       }
-    EOF
+    GRAPHQL
 
     helpers do
       def run_metadata_query

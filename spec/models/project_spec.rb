@@ -94,7 +94,6 @@ RSpec.describe Project, factory_default: :keep, feature_category: :groups_and_pr
     it { is_expected.to have_one(:irker_integration) }
     it { is_expected.to have_one(:pivotaltracker_integration) }
     it { is_expected.to have_one(:assembla_integration) }
-    it { is_expected.to have_one(:slack_slash_commands_integration) }
     it { is_expected.to have_one(:mattermost_slash_commands_integration) }
     it { is_expected.to have_one(:buildkite_integration) }
     it { is_expected.to have_one(:bamboo_integration) }
@@ -3399,19 +3398,6 @@ RSpec.describe Project, factory_default: :keep, feature_category: :groups_and_pr
       expect(described_class.with_slack_integration).to contain_exactly(
         with_active_slack,
         with_disabled_slack
-      )
-    end
-  end
-
-  describe '.with_slack_slash_commands_integration' do
-    it 'returns projects with both active and inactive slack slash commands integrations' do
-      create(:project)
-      with_active_slash_commands = create(:slack_slash_commands_integration).project
-      with_disabled_slash_commands = create(:slack_slash_commands_integration, active: false).project
-
-      expect(described_class.with_slack_slash_commands_integration).to contain_exactly(
-        with_active_slash_commands,
-        with_disabled_slash_commands
       )
     end
   end
@@ -6914,6 +6900,17 @@ RSpec.describe Project, factory_default: :keep, feature_category: :groups_and_pr
           { key: 'CI_CONFIG_PATH', value: 'random.yml', public: true, masked: false }
         )
       end
+    end
+  end
+
+  describe '#service_accounts' do
+    let_it_be(:project) { create(:project) }
+    let!(:service_account) { create(:service_account, provisioned_by_project: project) }
+    let!(:service_account_another_project) { create(:service_account, provisioned_by_project: create(:project)) }
+    let!(:provisioned_user) { create(:user, provisioned_by_project: project) }
+
+    it 'returns only the project service accounts' do
+      expect(project.service_accounts).to eq([service_account])
     end
   end
 

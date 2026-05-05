@@ -2,7 +2,9 @@
 import NO_PIPELINES_SVG from '@gitlab/svgs/dist/illustrations/empty-state/empty-pipeline-md.svg?url';
 import ERROR_STATE_SVG from '@gitlab/svgs/dist/illustrations/empty-state/empty-job-failed-md.svg?url';
 import { GlCollapsibleListbox, GlEmptyState, GlKeysetPagination, GlLoadingIcon } from '@gitlab/ui';
+import Visibility from 'visibilityjs';
 import { debounce } from 'lodash-es';
+import * as Sentry from '~/sentry/sentry_browser_wrapper';
 import { createAlert, VARIANT_INFO, VARIANT_WARNING } from '~/alert';
 import { reportToSentry } from '~/ci/utils';
 import { s__, __ } from '~/locale';
@@ -253,13 +255,22 @@ export default {
       },
       filterParams: getInitialFilterParams(this.params),
       pendingIds: new Set(),
+      isTabSyncing: false,
     };
   },
   computed: {
     isLoading() {
+      if (this.isTabSyncing) {
+        return false;
+      }
+
       return this.$apollo.queries.pipelines.loading;
     },
     isCountLoading() {
+      if (this.isTabSyncing) {
+        return false;
+      }
+
       return this.$apollo.queries.pipelinesCount.loading;
     },
     hasPipelines() {
@@ -351,14 +362,31 @@ export default {
   },
   created() {
     this.fetchUpdatedPipelines = debounce(this.updatePipelines, BATCH_DEBOUNCE);
+
     this.pollingVisibilityCleanup = setupQueryPollingByVisibility(
       this.$apollo.queries.pipelines,
       POLL_INTERVAL,
     );
+
+    this.visibilityId = Visibility.change(async () => {
+      if (!Visibility.hidden()) {
+        this.isTabSyncing = true;
+
+        try {
+          await this.$apollo.queries.pipelines.refetch();
+          await this.$apollo.queries.pipelinesCount.refetch();
+        } catch (error) {
+          Sentry.captureException(error);
+        } finally {
+          this.isTabSyncing = false;
+        }
+      }
+    });
   },
   beforeDestroy() {
     this.pollingVisibilityCleanup?.();
     this.cancelBatch();
+    Visibility.unbind(this.visibilityId);
   },
   methods: {
     onChangeTab(scope) {

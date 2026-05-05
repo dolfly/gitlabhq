@@ -32,15 +32,16 @@ requirements such as development style guides.
 
 The following Agent Platform features support custom rules:
 
-- [GitLab Duo Agentic Chat](../../gitlab_duo_chat/agentic_chat.md)
-- [Foundational and custom agents](../agents/_index.md)
-- [Foundational and custom flows](../flows/_index.md), excluding Code Review Flow
+- [GitLab Duo Agentic Chat](../../gitlab_duo_chat/agentic_chat.md) in the GitLab UI and your local
+  environment.
+- [Foundational and custom agents](../agents/_index.md).
+- [Foundational and custom flows](../flows/_index.md), excluding Code Review Flow.
 
 ## Create custom rules
 
 You can create custom rules at two levels, depending on how you use GitLab Duo:
 
-| Level                                                           | Agentic Chat in the GitLab UI | Editor extensions | GitLab Duo CLI |
+| Level                                                           | GitLab UI | Editor extensions | GitLab Duo CLI |
 |-----------------------------------------------------------------|--------------------------|------------------|--------------|
 | User-level: Apply to all of your projects and workspaces        | {{< no >}}  |  {{< yes >}}    | {{< yes >}} |
 | Workspace-level: Apply only to a specific project or workspace  | {{< yes >}} | {{< yes >}}         | {{< yes >}} |

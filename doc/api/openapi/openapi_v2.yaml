@@ -5363,41 +5363,6 @@ paths:
       tags:
       - integrations
       operationId: putApiV4GroupsIdIntegrationsMattermostSlashCommands
-  "/api/v4/groups/{id}/integrations/slack-slash-commands":
-    put:
-      summary: Create/Edit Slack Slash Commands integration
-      description: Set Slack Slash Commands integration.
-      produces:
-      - application/json
-      consumes:
-      - application/json
-      parameters:
-      - in: path
-        name: id
-        type: integer
-        format: int32
-        required: true
-      - name: putApiV4GroupsIdIntegrationsSlackSlashCommands
-        in: body
-        required: true
-        schema:
-          "$ref": "#/definitions/putApiV4GroupsIdIntegrationsSlackSlashCommands"
-      responses:
-        '200':
-          description: Create/Edit Slack Slash Commands integration
-          schema:
-            "$ref": "#/definitions/API_Entities_IntegrationBasic"
-        '400':
-          description: Bad request
-        '401':
-          description: Unauthorized
-        '404':
-          description: Not found
-        '422':
-          description: Unprocessable entity
-      tags:
-      - integrations
-      operationId: putApiV4GroupsIdIntegrationsSlackSlashCommands
   "/api/v4/groups/{id}/integrations/packagist":
     put:
       summary: Create/Edit Packagist integration
@@ -6312,7 +6277,6 @@ paths:
         - linear
         - matrix
         - mattermost-slash-commands
-        - slack-slash-commands
         - packagist
         - phorge
         - pipelines-email
@@ -6393,7 +6357,6 @@ paths:
         - linear
         - matrix
         - mattermost-slash-commands
-        - slack-slash-commands
         - packagist
         - phorge
         - pipelines-email
@@ -21532,41 +21495,6 @@ paths:
       tags:
       - integrations
       operationId: putApiV4ProjectsIdServicesMattermostSlashCommands
-  "/api/v4/projects/{id}/services/slack-slash-commands":
-    put:
-      summary: Create/Edit Slack Slash Commands integration
-      description: Set Slack Slash Commands integration.
-      produces:
-      - application/json
-      consumes:
-      - application/json
-      parameters:
-      - in: path
-        name: id
-        type: integer
-        format: int32
-        required: true
-      - name: putApiV4ProjectsIdServicesSlackSlashCommands
-        in: body
-        required: true
-        schema:
-          "$ref": "#/definitions/putApiV4ProjectsIdServicesSlackSlashCommands"
-      responses:
-        '200':
-          description: Create/Edit Slack Slash Commands integration
-          schema:
-            "$ref": "#/definitions/API_Entities_IntegrationBasic"
-        '400':
-          description: Bad request
-        '401':
-          description: Unauthorized
-        '404':
-          description: Not found
-        '422':
-          description: Unprocessable entity
-      tags:
-      - integrations
-      operationId: putApiV4ProjectsIdServicesSlackSlashCommands
   "/api/v4/projects/{id}/services/packagist":
     put:
       summary: Create/Edit Packagist integration
@@ -22481,7 +22409,6 @@ paths:
         - linear
         - matrix
         - mattermost-slash-commands
-        - slack-slash-commands
         - packagist
         - phorge
         - pipelines-email
@@ -22562,7 +22489,6 @@ paths:
         - linear
         - matrix
         - mattermost-slash-commands
-        - slack-slash-commands
         - packagist
         - phorge
         - pipelines-email
@@ -22637,35 +22563,6 @@ paths:
       tags:
       - integrations
       operationId: postApiV4ProjectsIdServicesMattermostSlashCommandsTrigger
-  "/api/v4/projects/{id}/services/slack_slash_commands/trigger":
-    post:
-      summary: Trigger a slash command for slack-slash-commands
-      description: Added in GitLab 8.13
-      produces:
-      - application/json
-      consumes:
-      - application/json
-      parameters:
-      - in: path
-        name: id
-        description: The ID or URL-encoded path of the project
-        type: string
-        required: true
-      - name: postApiV4ProjectsIdServicesSlackSlashCommandsTrigger
-        in: body
-        required: true
-        schema:
-          "$ref": "#/definitions/postApiV4ProjectsIdServicesSlackSlashCommandsTrigger"
-      responses:
-        '201':
-          description: Trigger a slash command for slack-slash-commands
-        '401':
-          description: Unauthorized
-        '404':
-          description: Not found
-      tags:
-      - integrations
-      operationId: postApiV4ProjectsIdServicesSlackSlashCommandsTrigger
   "/api/v4/projects/{id}/integrations":
     get:
       summary: List all active integrations
@@ -23602,41 +23499,6 @@ paths:
       tags:
       - integrations
       operationId: putApiV4ProjectsIdIntegrationsMattermostSlashCommands
-  "/api/v4/projects/{id}/integrations/slack-slash-commands":
-    put:
-      summary: Create/Edit Slack Slash Commands integration
-      description: Set Slack Slash Commands integration.
-      produces:
-      - application/json
-      consumes:
-      - application/json
-      parameters:
-      - in: path
-        name: id
-        type: integer
-        format: int32
-        required: true
-      - name: putApiV4ProjectsIdIntegrationsSlackSlashCommands
-        in: body
-        required: true
-        schema:
-          "$ref": "#/definitions/putApiV4ProjectsIdIntegrationsSlackSlashCommands"
-      responses:
-        '200':
-          description: Create/Edit Slack Slash Commands integration
-          schema:
-            "$ref": "#/definitions/API_Entities_IntegrationBasic"
-        '400':
-          description: Bad request
-        '401':
-          description: Unauthorized
-        '404':
-          description: Not found
-        '422':
-          description: Unprocessable entity
-      tags:
-      - integrations
-      operationId: putApiV4ProjectsIdIntegrationsSlackSlashCommands
   "/api/v4/projects/{id}/integrations/packagist":
     put:
       summary: Create/Edit Packagist integration
@@ -24551,7 +24413,6 @@ paths:
         - linear
         - matrix
         - mattermost-slash-commands
-        - slack-slash-commands
         - packagist
         - phorge
         - pipelines-email
@@ -24632,7 +24493,6 @@ paths:
         - linear
         - matrix
         - mattermost-slash-commands
-        - slack-slash-commands
         - packagist
         - phorge
         - pipelines-email
@@ -24707,35 +24567,6 @@ paths:
       tags:
       - integrations
       operationId: postApiV4ProjectsIdIntegrationsMattermostSlashCommandsTrigger
-  "/api/v4/projects/{id}/integrations/slack_slash_commands/trigger":
-    post:
-      summary: Trigger a slash command for slack-slash-commands
-      description: Added in GitLab 8.13
-      produces:
-      - application/json
-      consumes:
-      - application/json
-      parameters:
-      - in: path
-        name: id
-        description: The ID or URL-encoded path of the project
-        type: string
-        required: true
-      - name: postApiV4ProjectsIdIntegrationsSlackSlashCommandsTrigger
-        in: body
-        required: true
-        schema:
-          "$ref": "#/definitions/postApiV4ProjectsIdIntegrationsSlackSlashCommandsTrigger"
-      responses:
-        '201':
-          description: Trigger a slash command for slack-slash-commands
-        '401':
-          description: Unauthorized
-        '404':
-          description: Not found
-      tags:
-      - integrations
-      operationId: postApiV4ProjectsIdIntegrationsSlackSlashCommandsTrigger
   "/api/v4/projects/{id}/invitations":
     post:
       summary: Invite non-members by email address to a group or project.
@@ -40614,7 +40445,7 @@ paths:
         items:
           type: boolean
       responses:
-        '200':
+        '201':
           description: Start a new GitLab Migration
           schema:
             "$ref": "#/definitions/API_Entities_BulkImport"
@@ -49712,6 +49543,11 @@ definitions:
         description: References of enabled foundational flows
         items:
           type: string
+      duo_template_project_id:
+        type: integer
+        format: int32
+        description: The ID of a project to use as the Duo Code Review custom instructions
+          template for this group
       allow_personal_snippets:
         type: boolean
         description: Allow creation of personal snippets for enterprise users of this
@@ -53112,19 +52948,6 @@ definitions:
     required:
     - token
     description: Create/Edit Mattermost Slash Commands integration
-  putApiV4GroupsIdIntegrationsSlackSlashCommands:
-    type: object
-    properties:
-      token:
-        type: string
-        description: The Slack token.
-      use_inherited_settings:
-        type: boolean
-        description: Indicates whether to inherit the default settings. Defaults to
-          `false`.
-    required:
-    - token
-    description: Create/Edit Slack Slash Commands integration
   putApiV4GroupsIdIntegrationsPackagist:
     type: object
     properties:
@@ -60767,19 +60590,6 @@ definitions:
     required:
     - token
     description: Create/Edit Mattermost Slash Commands integration
-  putApiV4ProjectsIdServicesSlackSlashCommands:
-    type: object
-    properties:
-      token:
-        type: string
-        description: The Slack token.
-      use_inherited_settings:
-        type: boolean
-        description: Indicates whether to inherit the default settings. Defaults to
-          `false`.
-    required:
-    - token
-    description: Create/Edit Slack Slash Commands integration
   putApiV4ProjectsIdServicesPackagist:
     type: object
     properties:
@@ -61735,15 +61545,6 @@ definitions:
     required:
     - token
     description: Trigger a slash command for mattermost-slash-commands
-  postApiV4ProjectsIdServicesSlackSlashCommandsTrigger:
-    type: object
-    properties:
-      token:
-        type: string
-        description: The Slack token.
-    required:
-    - token
-    description: Trigger a slash command for slack-slash-commands
   putApiV4ProjectsIdIntegrationsAppleAppStore:
     type: object
     properties:
@@ -62714,19 +62515,6 @@ definitions:
     required:
     - token
     description: Create/Edit Mattermost Slash Commands integration
-  putApiV4ProjectsIdIntegrationsSlackSlashCommands:
-    type: object
-    properties:
-      token:
-        type: string
-        description: The Slack token.
-      use_inherited_settings:
-        type: boolean
-        description: Indicates whether to inherit the default settings. Defaults to
-          `false`.
-    required:
-    - token
-    description: Create/Edit Slack Slash Commands integration
   putApiV4ProjectsIdIntegrationsPackagist:
     type: object
     properties:
@@ -63682,15 +63470,6 @@ definitions:
     required:
     - token
     description: Trigger a slash command for mattermost-slash-commands
-  postApiV4ProjectsIdIntegrationsSlackSlashCommandsTrigger:
-    type: object
-    properties:
-      token:
-        type: string
-        description: The Slack token.
-    required:
-    - token
-    description: Trigger a slash command for slack-slash-commands
   postApiV4ProjectsIdInvitations:
     type: object
     properties:

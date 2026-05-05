@@ -1,6 +1,6 @@
 ---
 stage: Growth
-group: Engagement
+group: Acquisition
 info: To determine the technical writer assigned to the Stage/Group associated with this page, see <https://handbook.gitlab.com/handbook/product/ux/technical-writing/#assignments>
 description: Send banners and notifications to users on your instance.
 title: Broadcast messages

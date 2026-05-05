@@ -53,7 +53,9 @@ To update the release notes for 19.0:
    - Documentation links are allowed and must be relative.
    - Ensure work item links are not confidential.
    - Links to other resources are also allowed.
-1. Assign the merge request to an Engineering Manager and Technical Writer for review.
+1. Open a merge request:
+   - Use the Release Notes Item template to populate the description and to track progress.
+   - Assign the merge request to an Engineering Manager and Technical Writer for review.
 
 > [!note]
 > All release notes should be merged by 00:00 (midnight) UTC on the Friday before the release day to be included in the appropriate release.
@@ -67,6 +69,9 @@ To review a release note merge request:
 1. Review the tiers, offerings, documentation link, issue link, and content.
    Ensure the links have been changed from the examples, and that the work item isn't confidential.
 1. Start an automatic rebase with `/rebase` in an empty comment, then set it to auto-merge when the pipeline completes.
+
+While it is preferable for the writer to merge, any Maintainer can merge.
+The priority is for the item to be merged before the release.
 
 ## Technical Writer release day process
 
