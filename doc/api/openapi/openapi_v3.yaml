@@ -72840,9 +72840,10 @@ components:
         references:
           type: array
           items:
-            type: string
+            type: object
         reference:
           type: string
+          example: "&1"
         created_at:
           type: string
           format: date-time
@@ -72869,7 +72870,7 @@ components:
           type: boolean
           example: true
         _links:
-          type: string
+          type: object
     APIEntitiesEpicIssueLink:
       type: object
       properties:
@@ -72882,7 +72883,7 @@ components:
           description: Relative position of the issue in the epic tree
           example: 0
         epic:
-          type: string
+          type: "::API::Entities::Epic"
         issue:
           "$ref": "#/components/schemas/APIEntitiesIssueBasic"
     APIEntitiesProjectApprovalSettings:
@@ -74817,36 +74818,45 @@ components:
       type: object
       properties:
         id:
-          type: string
+          type: integer
+          example: 1
         name:
           type: string
+          example: Development
         hide_backlog_list:
-          type: string
+          type: boolean
+          example: false
         hide_closed_list:
-          type: string
+          type: boolean
+          example: false
         project:
           "$ref": "#/components/schemas/APIEntitiesBasicProjectDetails"
         lists:
-          "$ref": "#/components/schemas/APIEntitiesList"
+          type: array
+          items:
+            "$ref": "#/components/schemas/APIEntitiesList"
         group:
           "$ref": "#/components/schemas/APIEntitiesBasicGroupDetails"
         milestone:
-          type: string
+          type: object
         assignee:
           "$ref": "#/components/schemas/APIEntitiesUserBasic"
         labels:
           "$ref": "#/components/schemas/APIEntitiesLabelBasic"
         weight:
-          type: string
+          type: integer
+          example: 0
     APIEntitiesList:
       type: object
       properties:
         id:
-          type: string
+          type: integer
+          example: 1
         label:
           "$ref": "#/components/schemas/APIEntitiesLabelBasic"
         position:
-          type: string
+          type: integer
+          example: 1
         milestone:
           "$ref": "#/components/schemas/APIEntitiesMilestone"
         iteration:
@@ -74854,11 +74864,14 @@ components:
         assignee:
           "$ref": "#/components/schemas/APIEntitiesUserSafe"
         max_issue_count:
-          type: string
+          type: integer
+          example: 0
         max_issue_weight:
-          type: string
+          type: integer
+          example: 0
         limit_metric:
           type: string
+          example: issue_count
     APIEntitiesLabelBasic:
       type: object
       properties:
@@ -75329,19 +75342,26 @@ components:
       type: object
       properties:
         id:
-          type: string
+          type: integer
+          example: 1
         name:
           type: string
+          example: topic1
         title:
           type: string
+          example: Topic 1
         description:
           type: string
+          example: A description
         total_projects_count:
-          type: string
+          type: integer
+          example: 1
         organization_id:
-          type: string
+          type: integer
+          example: 1
         avatar_url:
           type: string
+          example: http://gitlab.example.com/uploads/topic/avatar/1/avatar.png
     APIEntitiesTerraformStateProtectionRule:
       type: object
       properties:
@@ -75933,23 +75953,6 @@ components:
           type: string
         notification_level:
           type: string
-    APIEntitiesLicenseBasic:
-      type: object
-      properties:
-        key:
-          type: string
-          example: gpl-3.0
-        name:
-          type: string
-          example: GNU General Public License v3.0
-        nickname:
-          type: string
-          example: GNU GPLv3
-        html_url:
-          type: string
-          example: http://choosealicense.com/licenses/gpl-3.0
-        source_url:
-          type: string
     APIEntitiesTemplatesList:
       type: object
       properties:
@@ -75973,7 +75976,7 @@ components:
       type: object
       properties:
         fetches:
-          type: string
+          type: object
     APIEntitiesBasicSnippet:
       type: object
       properties:
@@ -76611,23 +76614,33 @@ components:
       type: object
       properties:
         id:
-          type: string
+          type: integer
+          example: 1
         head_commit_sha:
           type: string
+          example: 1234abcd
         base_commit_sha:
           type: string
+          example: 1234abcd
         start_commit_sha:
           type: string
+          example: 1234abcd
         created_at:
           type: string
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
         merge_request_id:
-          type: string
+          type: integer
+          example: 1
         state:
           type: string
+          example: collected
         real_size:
           type: string
+          example: '1'
         patch_id_sha:
           type: string
+          example: 1234abcd
     APIEntitiesApprovalState:
       type: object
       properties:
@@ -76737,8 +76750,11 @@ components:
           "$ref": "#/components/schemas/APIEntitiesUserBasic"
         state:
           type: string
+          example: unreviewed
         created_at:
           type: string
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
     APIEntitiesDiffRefs:
       type: object
       properties:
@@ -76800,15 +76816,20 @@ components:
       type: object
       properties:
         id:
-          type: string
+          type: integer
+          example: 1
         alt:
           type: string
+          example: filename
         url:
           type: string
+          example: "/uploads/secret/filename"
         full_path:
           type: string
+          example: "/-/project/1/uploads/secret/filename"
         markdown:
           type: string
+          example: "[filename](/uploads/secret/filename)"
     APIEntitiesMarkdown:
       type: object
       properties:
@@ -76874,17 +76895,24 @@ components:
       type: object
       properties:
         id:
-          type: string
+          type: integer
+          example: 1
         created_at:
           type: string
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
         filename:
           type: string
+          example: image.png
         file_path:
           type: string
+          example: "/uploads/-/system/issuable_metric_image/file/1/image.png"
         url:
           type: string
+          example: https://gitlab.example.com/example
         url_text:
           type: string
+          example: Example URL
     APIEntitiesUserAgentDetail:
       type: object
       properties:
@@ -76913,29 +76941,45 @@ components:
       type: object
       properties:
         id:
-          type: string
+          type: integer
+          example: 1
         iid:
-          type: string
+          type: integer
+          example: 1
         sequence:
-          type: string
+          type: integer
+          example: 1
         group_id:
-          type: string
+          type: integer
+          example: 1
         title:
           type: string
+          example: Iteration I
         description:
           type: string
+          example: Iteration description
         state:
-          type: string
+          type: integer
+          example: 1
         created_at:
           type: string
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
         updated_at:
           type: string
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
         start_date:
           type: string
+          format: date
+          example: '2022-01-01'
         due_date:
           type: string
+          format: date
+          example: '2022-01-31'
         web_url:
           type: string
+          example: https://gitlab.example.com/groups/gitlab-org/-/iterations/1
     EpicBaseEntity:
       type: object
       properties:
@@ -79611,27 +79655,38 @@ components:
       type: object
       properties:
         commit_count:
-          type: string
+          type: integer
+          example: 37
         storage_size:
-          type: string
+          type: integer
+          example: 1038090
         repository_size:
-          type: string
+          type: integer
+          example: 1038090
         wiki_size:
-          type: string
+          type: integer
+          example: 0
         lfs_objects_size:
-          type: string
+          type: integer
+          example: 0
         job_artifacts_size:
-          type: string
+          type: integer
+          example: 0
         pipeline_artifacts_size:
-          type: string
+          type: integer
+          example: 0
         packages_size:
-          type: string
+          type: integer
+          example: 0
         snippets_size:
-          type: string
+          type: integer
+          example: 0
         uploads_size:
-          type: string
+          type: integer
+          example: 0
         container_registry_size:
-          type: string
+          type: integer
+          example: 0
     APIEntitiesContainerExpirationPolicy:
       type: object
       properties:
@@ -79648,6 +79703,23 @@ components:
         name_regex_keep:
           type: string
         next_run_at:
+          type: string
+    APIEntitiesLicenseBasic:
+      type: object
+      properties:
+        key:
+          type: string
+          example: gpl-3.0
+        name:
+          type: string
+          example: GNU General Public License v3.0
+        nickname:
+          type: string
+          example: GNU GPLv3
+        html_url:
+          type: string
+          example: http://choosealicense.com/licenses/gpl-3.0
+        source_url:
           type: string
     APIEntitiesSamlGroupLink:
       type: object
@@ -79756,8 +79828,10 @@ components:
           type: integer
         web_url:
           type: string
+          example: http://gitlab.example.com/groups/diaspora
         name:
           type: string
+          example: Diaspora
     APIEntitiesCiRunnerManager:
       type: object
       properties:
@@ -80181,14 +80255,19 @@ components:
       properties:
         name:
           type: string
+          example: Pipeline Status
         link_url:
           type: string
+          example: https://example.gitlab.com
         image_url:
           type: string
+          example: https://example.gitlab.com
         rendered_link_url:
           type: string
+          example: https://example.gitlab.com
         rendered_image_url:
           type: string
+          example: https://example.gitlab.com
     APIEntitiesAwardEmoji:
       type: object
       properties:
@@ -80925,9 +81004,10 @@ components:
         references:
           type: array
           items:
-            type: string
+            type: object
         reference:
           type: string
+          example: "&1"
         created_at:
           type: string
           format: date-time
@@ -80954,15 +81034,21 @@ components:
           type: boolean
           example: true
         _links:
-          type: string
+          type: object
         related_epic_link_id:
-          type: string
+          type: integer
+          example: 1
         link_type:
           type: string
+          example: relates_to
         link_created_at:
           type: string
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
         link_updated_at:
           type: string
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
     APIEntitiesCiRunnerControllerTokenWithToken:
       type: object
       properties:
@@ -81164,9 +81250,10 @@ components:
         subscribed:
           type: string
         priority:
-          type: string
+          type: integer
+          example: 10
         is_project_label:
-          type: string
+          type: boolean
     APIEntitiesRelease:
       type: object
       properties:
@@ -81272,49 +81359,6 @@ components:
           type: string
         notification_level:
           type: string
-    APIEntitiesLicense:
-      type: object
-      properties:
-        key:
-          type: string
-          example: gpl-3.0
-        name:
-          type: string
-          example: GNU General Public License v3.0
-        nickname:
-          type: string
-          example: GNU GPLv3
-        html_url:
-          type: string
-          example: http://choosealicense.com/licenses/gpl-3.0
-        source_url:
-          type: string
-        popular:
-          type: boolean
-        description:
-          type: string
-          example: A simple license
-        conditions:
-          type: array
-          example:
-          - include-copyright
-          items:
-            type: string
-        permissions:
-          type: array
-          example:
-          - commercial-use
-          items:
-            type: string
-        limitations:
-          type: array
-          example:
-          - liability
-          items:
-            type: string
-        content:
-          type: string
-          example: GNU GENERAL PUBLIC LICENSE
     APIEntitiesSnippet:
       type: object
       properties:
@@ -81943,27 +81987,41 @@ components:
       type: object
       properties:
         id:
-          type: string
+          type: integer
+          example: 1
         head_commit_sha:
           type: string
+          example: 1234abcd
         base_commit_sha:
           type: string
+          example: 1234abcd
         start_commit_sha:
           type: string
+          example: 1234abcd
         created_at:
           type: string
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
         merge_request_id:
-          type: string
+          type: integer
+          example: 1
         state:
           type: string
+          example: collected
         real_size:
           type: string
+          example: '1'
         patch_id_sha:
           type: string
+          example: 1234abcd
         commits:
-          "$ref": "#/components/schemas/APIEntitiesCommit"
+          type: array
+          items:
+            "$ref": "#/components/schemas/APIEntitiesCommit"
         diffs:
-          "$ref": "#/components/schemas/APIEntitiesDiff"
+          type: array
+          items:
+            "$ref": "#/components/schemas/APIEntitiesDiff"
     APIEntitiesApprovalRule:
       type: object
       properties:
@@ -82657,7 +82715,7 @@ components:
         web_url:
           type: string
         issue_stats:
-          type: string
+          type: object
     APIEntitiesMergeRequestSimple:
       type: object
       properties:
@@ -82775,9 +82833,11 @@ components:
         task_completion_status:
           "$ref": "#/components/schemas/APIEntitiesTaskCompletionStatus"
         weight:
-          type: string
+          type: integer
+          example: 5
         blocking_issues_count:
-          type: string
+          type: integer
+          example: 2
     APIEntitiesMergeRequestBasic:
       type: object
       properties:
@@ -82813,10 +82873,14 @@ components:
           "$ref": "#/components/schemas/APIEntitiesUserBasic"
         merged_at:
           type: string
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
         closed_by:
           "$ref": "#/components/schemas/APIEntitiesUserBasic"
         closed_at:
           type: string
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
         title_html:
           type: string
         description_html:
@@ -82844,7 +82908,9 @@ components:
         target_project_id:
           type: integer
         labels:
-          type: string
+          type: array
+          items:
+            type: string
         draft:
           type: boolean
         imported:
@@ -82860,48 +82926,60 @@ components:
           type: boolean
         merge_status:
           type: string
+          example: unchecked
         detailed_merge_status:
           type: string
+          example: mergeable
         merge_after:
           type: string
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
         sha:
           type: string
+          example: 1234abcd
         merge_commit_sha:
           type: string
+          example: 1234abcd
         squash_commit_sha:
           type: string
+          example: 1234abcd
         discussion_locked:
-          type: string
+          type: boolean
         should_remove_source_branch:
-          type: string
+          type: boolean
         force_remove_source_branch:
-          type: string
+          type: boolean
         prepared_at:
           type: string
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
         allow_collaboration:
-          type: string
+          type: boolean
         allow_maintainer_to_push:
-          type: string
+          type: boolean
         reference:
           type: string
+          example: "!1"
         references:
           "$ref": "#/components/schemas/APIEntitiesIssuableReferences"
         web_url:
           type: string
+          example: https://gitlab.example.com/my-group/my-project/-/merge_requests/1
         time_stats:
           "$ref": "#/components/schemas/APIEntitiesIssuableTimeStats"
         squash:
-          type: string
+          type: boolean
         squash_on_merge:
-          type: string
+          type: boolean
         task_completion_status:
           "$ref": "#/components/schemas/APIEntitiesTaskCompletionStatus"
         has_conflicts:
-          type: string
+          type: boolean
         blocking_discussions_resolved:
-          type: string
+          type: boolean
         approvals_before_merge:
-          type: string
+          type: integer
+          example: 2
     APIEntitiesAnalyticsCodeReviewMergeRequest:
       type: object
       properties:
@@ -83034,9 +83112,11 @@ components:
         task_completion_status:
           "$ref": "#/components/schemas/APIEntitiesTaskCompletionStatus"
         weight:
-          type: string
+          type: integer
+          example: 5
         blocking_issues_count:
-          type: string
+          type: integer
+          example: 2
         vulnerability_link_id:
           type: string
         vulnerability_link_type:
@@ -83126,9 +83206,11 @@ components:
         task_completion_status:
           "$ref": "#/components/schemas/APIEntitiesTaskCompletionStatus"
         weight:
-          type: string
+          type: integer
+          example: 5
         blocking_issues_count:
-          type: string
+          type: integer
+          example: 2
         has_tasks:
           type: string
         task_status:
@@ -83244,9 +83326,11 @@ components:
         task_completion_status:
           "$ref": "#/components/schemas/APIEntitiesTaskCompletionStatus"
         weight:
-          type: string
+          type: integer
+          example: 5
         blocking_issues_count:
-          type: string
+          type: integer
+          example: 2
         has_tasks:
           type: string
         task_status:
@@ -83370,9 +83454,11 @@ components:
         task_completion_status:
           "$ref": "#/components/schemas/APIEntitiesTaskCompletionStatus"
         weight:
-          type: string
+          type: integer
+          example: 5
         blocking_issues_count:
-          type: string
+          type: integer
+          example: 2
         has_tasks:
           type: string
         task_status:
@@ -83488,9 +83574,11 @@ components:
         task_completion_status:
           "$ref": "#/components/schemas/APIEntitiesTaskCompletionStatus"
         weight:
-          type: string
+          type: integer
+          example: 5
         blocking_issues_count:
-          type: string
+          type: integer
+          example: 2
         has_tasks:
           type: string
         task_status:
@@ -83564,10 +83652,14 @@ components:
           "$ref": "#/components/schemas/APIEntitiesUserBasic"
         merged_at:
           type: string
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
         closed_by:
           "$ref": "#/components/schemas/APIEntitiesUserBasic"
         closed_at:
           type: string
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
         title_html:
           type: string
         description_html:
@@ -83595,7 +83687,9 @@ components:
         target_project_id:
           type: integer
         labels:
-          type: string
+          type: array
+          items:
+            type: string
         draft:
           type: boolean
         imported:
@@ -83611,58 +83705,77 @@ components:
           type: boolean
         merge_status:
           type: string
+          example: unchecked
         detailed_merge_status:
           type: string
+          example: mergeable
         merge_after:
           type: string
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
         sha:
           type: string
+          example: 1234abcd
         merge_commit_sha:
           type: string
+          example: 1234abcd
         squash_commit_sha:
           type: string
+          example: 1234abcd
         discussion_locked:
-          type: string
+          type: boolean
         should_remove_source_branch:
-          type: string
+          type: boolean
         force_remove_source_branch:
-          type: string
+          type: boolean
         prepared_at:
           type: string
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
         allow_collaboration:
-          type: string
+          type: boolean
         allow_maintainer_to_push:
-          type: string
+          type: boolean
         reference:
           type: string
+          example: "!1"
         references:
           "$ref": "#/components/schemas/APIEntitiesIssuableReferences"
         web_url:
           type: string
+          example: https://gitlab.example.com/my-group/my-project/-/merge_requests/1
         time_stats:
           "$ref": "#/components/schemas/APIEntitiesIssuableTimeStats"
         squash:
-          type: string
+          type: boolean
         squash_on_merge:
-          type: string
+          type: boolean
         task_completion_status:
           "$ref": "#/components/schemas/APIEntitiesTaskCompletionStatus"
         has_conflicts:
-          type: string
+          type: boolean
         blocking_discussions_resolved:
-          type: string
+          type: boolean
         approvals_before_merge:
-          type: string
+          type: integer
+          example: 2
         subscribed:
-          type: string
+          type: boolean
         changes_count:
           type: string
+          example: '1'
         latest_build_started_at:
           type: string
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
         latest_build_finished_at:
           type: string
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
         first_deployed_to_production_at:
           type: string
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
         pipeline:
           "$ref": "#/components/schemas/APIEntitiesCiPipelineBasic"
         head_pipeline:
@@ -83671,14 +83784,16 @@ components:
           "$ref": "#/components/schemas/APIEntitiesDiffRefs"
         merge_error:
           type: string
+          example: Merge error
         rebase_in_progress:
-          type: string
+          type: boolean
         diverged_commits_count:
-          type: string
+          type: integer
+          example: 0
         first_contribution:
-          type: string
+          type: boolean
         user:
-          type: string
+          type: object
     APIEntitiesMergeRequestChanges:
       type: object
       properties:
@@ -83714,10 +83829,14 @@ components:
           "$ref": "#/components/schemas/APIEntitiesUserBasic"
         merged_at:
           type: string
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
         closed_by:
           "$ref": "#/components/schemas/APIEntitiesUserBasic"
         closed_at:
           type: string
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
         title_html:
           type: string
         description_html:
@@ -83745,7 +83864,9 @@ components:
         target_project_id:
           type: integer
         labels:
-          type: string
+          type: array
+          items:
+            type: string
         draft:
           type: boolean
         imported:
@@ -83761,58 +83882,77 @@ components:
           type: boolean
         merge_status:
           type: string
+          example: unchecked
         detailed_merge_status:
           type: string
+          example: mergeable
         merge_after:
           type: string
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
         sha:
           type: string
+          example: 1234abcd
         merge_commit_sha:
           type: string
+          example: 1234abcd
         squash_commit_sha:
           type: string
+          example: 1234abcd
         discussion_locked:
-          type: string
+          type: boolean
         should_remove_source_branch:
-          type: string
+          type: boolean
         force_remove_source_branch:
-          type: string
+          type: boolean
         prepared_at:
           type: string
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
         allow_collaboration:
-          type: string
+          type: boolean
         allow_maintainer_to_push:
-          type: string
+          type: boolean
         reference:
           type: string
+          example: "!1"
         references:
           "$ref": "#/components/schemas/APIEntitiesIssuableReferences"
         web_url:
           type: string
+          example: https://gitlab.example.com/my-group/my-project/-/merge_requests/1
         time_stats:
           "$ref": "#/components/schemas/APIEntitiesIssuableTimeStats"
         squash:
-          type: string
+          type: boolean
         squash_on_merge:
-          type: string
+          type: boolean
         task_completion_status:
           "$ref": "#/components/schemas/APIEntitiesTaskCompletionStatus"
         has_conflicts:
-          type: string
+          type: boolean
         blocking_discussions_resolved:
-          type: string
+          type: boolean
         approvals_before_merge:
-          type: string
+          type: integer
+          example: 2
         subscribed:
-          type: string
+          type: boolean
         changes_count:
           type: string
+          example: '1'
         latest_build_started_at:
           type: string
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
         latest_build_finished_at:
           type: string
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
         first_deployed_to_production_at:
           type: string
+          format: date-time
+          example: '2022-01-31T15:10:45.080Z'
         pipeline:
           "$ref": "#/components/schemas/APIEntitiesCiPipelineBasic"
         head_pipeline:
@@ -83821,18 +83961,22 @@ components:
           "$ref": "#/components/schemas/APIEntitiesDiffRefs"
         merge_error:
           type: string
+          example: Merge error
         rebase_in_progress:
-          type: string
+          type: boolean
         diverged_commits_count:
-          type: string
+          type: integer
+          example: 0
         first_contribution:
-          type: string
+          type: boolean
         user:
-          type: string
+          type: object
         changes:
-          "$ref": "#/components/schemas/APIEntitiesDiff"
+          type: array
+          items:
+            "$ref": "#/components/schemas/APIEntitiesDiff"
         overflow:
-          type: string
+          type: boolean
     APIEntitiesClustersAgentToken:
       type: object
       properties:
@@ -83951,6 +84095,49 @@ components:
           - 66004
           items:
             type: integer
+    APIEntitiesLicense:
+      type: object
+      properties:
+        key:
+          type: string
+          example: gpl-3.0
+        name:
+          type: string
+          example: GNU General Public License v3.0
+        nickname:
+          type: string
+          example: GNU GPLv3
+        html_url:
+          type: string
+          example: http://choosealicense.com/licenses/gpl-3.0
+        source_url:
+          type: string
+        popular:
+          type: boolean
+        description:
+          type: string
+          example: A simple license
+        conditions:
+          type: array
+          example:
+          - include-copyright
+          items:
+            type: string
+        permissions:
+          type: array
+          example:
+          - commercial-use
+          items:
+            type: string
+        limitations:
+          type: array
+          example:
+          - liability
+          items:
+            type: string
+        content:
+          type: string
+          example: GNU GENERAL PUBLIC LICENSE
     GitlabSubscriptionsAPIEntitiesInternalNamespace:
       type: object
       properties:
@@ -84108,14 +84295,19 @@ components:
           type: integer
         web_url:
           type: string
+          example: http://gitlab.example.com/groups/diaspora
         name:
           type: string
+          example: Diaspora
         avatar_url:
           type: string
+          example: http://gitlab.example.com/uploads/group/avatar/1/avatar.png
         full_name:
           type: string
+          example: Foobar Group
         full_path:
           type: string
+          example: foo-bar
     APIEntitiesGroup:
       type: object
       properties:
@@ -84123,8 +84315,10 @@ components:
           type: integer
         web_url:
           type: string
+          example: http://gitlab.example.com/groups/diaspora
         name:
           type: string
+          example: Diaspora
         path:
           type: string
         description:
@@ -84228,8 +84422,10 @@ components:
           type: integer
         web_url:
           type: string
+          example: http://gitlab.example.com/groups/diaspora
         name:
           type: string
+          example: Diaspora
         path:
           type: string
         description:
@@ -84327,13 +84523,17 @@ components:
         duo_namespace_access_rules:
           type: string
         shared_with_groups:
-          type: string
+          type: array
+          items:
+            type: object
         runners_token:
           type: string
+          example: b8bc4a7a29eb76ea83cf79e4908c2b
         enabled_git_access_protocol:
           type: string
+          example: ssh
         prevent_sharing_groups_outside_hierarchy:
-          type: string
+          type: boolean
         step_up_auth_required_oauth_provider:
           type: string
           description: OAuth provider required for step-up authentication.
@@ -84924,18 +85124,25 @@ components:
       properties:
         name:
           type: string
+          example: Pipeline Status
         link_url:
           type: string
+          example: https://example.gitlab.com
         image_url:
           type: string
+          example: https://example.gitlab.com
         rendered_link_url:
           type: string
+          example: https://example.gitlab.com
         rendered_image_url:
           type: string
+          example: https://example.gitlab.com
         id:
-          type: string
+          type: integer
+          example: 1
         kind:
           type: string
+          example: project
     APIEntitiesApplicationWithSecret:
       type: object
       properties:
@@ -85033,7 +85240,7 @@ components:
           type: string
           example: finished
         _links:
-          type: string
+          type: object
     APIEntitiesBasicProjectDetails:
       type: object
       properties:
@@ -85282,11 +85489,15 @@ components:
           type: string
           example: registry.gitlab.example.com/gitlab/gitlab-client
         _links:
-          type: string
+          type: object
         marked_for_deletion_at:
           type: string
+          format: date-time
+          example: '2020-05-07T04:27:17.016Z'
         marked_for_deletion_on:
           type: string
+          format: date-time
+          example: '2020-05-07T04:27:17.016Z'
         packages_enabled:
           type: boolean
         empty_repo:
@@ -85479,7 +85690,7 @@ components:
         shared_with_groups:
           type: array
           items:
-            type: string
+            type: object
         only_allow_merge_if_pipeline_succeeds:
           type: boolean
         allow_merge_on_skipped_pipeline:
@@ -85683,11 +85894,15 @@ components:
           type: string
           example: registry.gitlab.example.com/gitlab/gitlab-client
         _links:
-          type: string
+          type: object
         marked_for_deletion_at:
           type: string
+          format: date-time
+          example: '2020-05-07T04:27:17.016Z'
         marked_for_deletion_on:
           type: string
+          format: date-time
+          example: '2020-05-07T04:27:17.016Z'
         packages_enabled:
           type: boolean
         empty_repo:
@@ -85880,7 +86095,7 @@ components:
         shared_with_groups:
           type: array
           items:
-            type: string
+            type: object
         only_allow_merge_if_pipeline_succeeds:
           type: boolean
         allow_merge_on_skipped_pipeline:
@@ -85999,7 +86214,7 @@ components:
           type: string
           example: This requires the title to include a Jira label
         permissions:
-          type: string
+          type: object
     APIEntitiesClusterProject:
       type: object
       properties:

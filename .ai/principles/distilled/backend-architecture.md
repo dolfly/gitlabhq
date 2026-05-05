@@ -1,6 +1,6 @@
 ---
-source_checksum: 4aeac01faa5424f2
-distilled_at_sha: 6fa778d4124d3a159928c1360de15a5b99eed36a
+source_checksum: 61bf5332a7548933
+distilled_at_sha: 9ab16c7588f7d32fdb6d509a70bae72309346826
 ---
 > **Prerequisite:** If you haven't already, also read .ai/principles/distilled/backend-ruby.md - it contains foundational rules that apply to all backend work.
 
@@ -18,6 +18,8 @@ distilled_at_sha: 6fa778d4124d3a159928c1360de15a5b99eed36a
 - DO NOT use Service classes, Presenters, Serializers, or Workers inside Finders
 - DO NOT use service classes, presenters, or serializers inside model class/instance methods
 - DO NOT invoke a Worker directly with `SomeWorker.new.perform`; use `SomeWorker.perform_async` or `SomeWorker.perform_in`
+- DO NOT execute database queries in views; move all data retrieval into the controller or a presenter and pass the result as an instance variable
+- DO NOT put business logic in views; extract conditionals that evaluate model state beyond `nil?`, `present?`, or boolean attribute checks into a helper, presenter, or ViewComponent
 - Use the abstraction table to verify that each layer only calls permitted abstractions before approving cross-layer calls
 
 ### Service Classes
@@ -63,7 +65,7 @@ distilled_at_sha: 6fa778d4124d3a159928c1360de15a5b99eed36a
 
 ### EventStore
 
-- Name events in past tense: `<DomainObject><Action>Event` (e.g., `Ci::PipelineCreatedEvent`, not `Ci::CreatePipelineEvent`)
+- Name events in past tense: `<DomainObject><Action>Event` (e.g., `Ci::PipelineCreatedEvent`, not `Ci::CreatePipelineEvent`); elide the domain object when obvious from the bounded context (e.g., `MergeRequest::ApprovedEvent` not `MergeRequest::MergeRequestApprovedEvent`)
 - Define event schemas as valid JSON Schema; mark unique identifiers as `required` and all other properties as optional
 - Publish only properties needed by subscribers; DO NOT tailor the payload to a specific subscriber
 - Dispatch events from service classes; use model state machine transitions as an exception, not `ActiveRecord` callbacks

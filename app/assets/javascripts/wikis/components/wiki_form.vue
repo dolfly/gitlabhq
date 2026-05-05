@@ -495,7 +495,7 @@ export default {
     },
 
     submitFormWithShortcut() {
-      this.$refs.form.submit();
+      this.$refs.form.$el.submit();
     },
 
     setTemplate(template) {

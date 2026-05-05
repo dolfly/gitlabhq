@@ -1270,6 +1270,18 @@ Migration/PreventForeignKeyCreation:
   Enabled: true
   EnforcedSince: 20250116000000
 
+Migration/PreventLargeBlobInDatabase:
+  Enabled: true
+  Include:
+    - 'db/migrate/*.rb'
+    - 'db/post_migrate/*.rb'
+    - 'ee/db/embedding/migrate/*.rb'
+    - 'ee/db/embedding/post_migrate/*.rb'
+    - 'ee/db/geo/migrate/*.rb'
+    - 'ee/db/geo/post_migrate/*.rb'
+  EnforcedSince: 20260430000000
+  MaxSize: 4096
+
 Migration/SchemaAdditionMethodsNoPost:
   Enabled: true
   Include:

@@ -1,6 +1,6 @@
 ---
-source_checksum: 28fe547b2855d00a
-distilled_at_sha: 6fa778d4124d3a159928c1360de15a5b99eed36a
+source_checksum: c534f466f0226a61
+distilled_at_sha: 9ab16c7588f7d32fdb6d509a70bae72309346826
 ---
 <!-- Auto-generated from docs.gitlab.com by scripts/ai/sync_principles.rb — do not edit manually -->
 
@@ -18,11 +18,10 @@ distilled_at_sha: 6fa778d4124d3a159928c1360de15a5b99eed36a
 - DO NOT enable permissions in `BasePolicy` — it is inherited by all policies and would grant the permission on every object.
 - DO NOT define permissions dynamically at runtime; declare each permission explicitly so it is searchable.
 - Set the correct `:scope` on conditions: `scope: :user` for user-data-only, `scope: :subject` for subject-data-only, `scope: :global` for neither, and no scope when both are read.
-- DO NOT cascade permissions through non-private intermediate abilities; enable permissions directly for each role.
+- DO NOT cascade permissions through non-private intermediate abilities; add each permission directly to the appropriate role YAML file. Exception: private (underscore-prefixed) permissions may cascade exactly one level deep (private permission + condition enables public permission).
 - Enable a permission unconditionally for a role, then use a separate `prevent` rule to restrict it when a condition is not met — DO NOT combine role checks and settings/flag checks in a single `rule { role & condition }`.
 - DO NOT write `rule { admin | owner }` — `admin` already satisfies `condition(:owner)`.
-- DO NOT use OR conditions (e.g., `planner_or_reporter_access`) as shorthand; use separate rules per role.
-- DO NOT conflate `condition(:guest)` (explicit member) with `can?(:guest_access)` (any user on a public project).
+- DO NOT define permissions dynamically using constructs like `readonly_features.each { |f| prevent :"create_#{f}" }`; declare each prevention explicitly.
 
 ### Regular Expressions (Ruby)
 

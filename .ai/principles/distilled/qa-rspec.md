@@ -1,6 +1,6 @@
 ---
-source_checksum: 4822036fd406ab88
-distilled_at_sha: 6fa778d4124d3a159928c1360de15a5b99eed36a
+source_checksum: 1e6b9b83d46fbccb
+distilled_at_sha: 9ab16c7588f7d32fdb6d509a70bae72309346826
 ---
 <!-- Auto-generated from docs.gitlab.com by scripts/ai/sync_principles.rb — do not edit manually -->
 
@@ -93,7 +93,14 @@ distilled_at_sha: 6fa778d4124d3a159928c1360de15a5b99eed36a
 - Mock external processes (shell-outs, Git commands, network calls, binary compilation) in feature and integration specs — DO NOT trigger real external operations when the logic under test is already covered by unit tests
 - Profile and optimize a slow shared example as a local spec before extracting it into a shared context
 - Prefer `build_stubbed` or `build` in shared examples — DO NOT use `create` unless the contract explicitly requires database state
-- Use `have_no_testid` over `wait: 0` whenever asserting on a `data-testid` attribute
+
+### View Specs
+
+- DO NOT re-test backend logic or database behavior in view specs — assertions must target rendered output using matchers such as `have_content`, `have_css`, `have_selector`, and `have_link`.
+- Use `build_stubbed` instead of `create` in view spec setup unless the spec genuinely requires persisted state.
+- Use `assign` to pass instance variables and `allow(view).to receive(...)` to stub helper methods in view specs.
+- DO NOT include `ActiveRecord::QueryRecorder` or `exceed_query_limit` assertions in view specs — query performance belongs in request or controller specs.
+- DO NOT use deep service-object mocking chains such as `receive_message_chain` in view specs.
 
 ### System / Feature Tests
 

@@ -1,6 +1,6 @@
 ---
-source_checksum: 999e452dd16b5b2d
-distilled_at_sha: a0b99fa76e7df34adb2f7ae52e37d415e916178a
+source_checksum: c4d7dd97976dce19
+distilled_at_sha: 9ab16c7588f7d32fdb6d509a70bae72309346826
 ---
 <!-- Auto-generated from docs.gitlab.com by scripts/ai/sync_principles.rb — do not edit manually -->
 

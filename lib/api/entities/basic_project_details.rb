@@ -28,7 +28,7 @@ module API
         end
       end
 
-      expose :license, with: 'API::Entities::LicenseBasic', if: :license do |project|
+      expose :license, using: ::API::Entities::LicenseBasic, if: :license do |project|
         project.repository.license
       end
 

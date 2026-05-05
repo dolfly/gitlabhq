@@ -66,7 +66,12 @@ func main() {
 		os.Exit(0)
 	}
 
-	log.WithError(run(*boot, *cfg)).Fatal("shutting down")
+	if err := run(*boot, *cfg); err != nil {
+		fmt.Fprintf(os.Stderr, "shutting down: %v\n", err)
+		os.Exit(1)
+	}
+	fmt.Fprintln(os.Stderr, "shutting down")
+	os.Exit(0)
 }
 
 type alreadyPrintedError struct{ error }

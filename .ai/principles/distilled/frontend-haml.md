@@ -1,11 +1,10 @@
 ---
-source_checksum: 38c36744460f6ecb
-distilled_at_sha: a0b99fa76e7df34adb2f7ae52e37d415e916178a
+source_checksum: 5e9c2fada813eaa0
+distilled_at_sha: 9ab16c7588f7d32fdb6d509a70bae72309346826
 ---
-<!-- Auto-generated from docs.gitlab.com by scripts/ai/sync_principles.rb — do not edit manually -->
-
 > **Prerequisite:** If you haven't already, also read .ai/principles/distilled/frontend-vue.md - it contains foundational rules that apply to all frontend work.
 
+<!-- Auto-generated from docs.gitlab.com by scripts/ai/sync_principles.rb — do not edit manually -->
 
 # HTML & HAML Principles
 

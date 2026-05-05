@@ -1,6 +1,6 @@
 ---
-source_checksum: a861e016ef636ec3
-distilled_at_sha: 6fa778d4124d3a159928c1360de15a5b99eed36a
+source_checksum: e6492c5bb0eacc33
+distilled_at_sha: 9ab16c7588f7d32fdb6d509a70bae72309346826
 ---
 > **Prerequisite:** If you haven't already, also read .ai/principles/distilled/database-fundamentals.md - it contains foundational rules that apply to all database work.
 
@@ -30,14 +30,13 @@ distilled_at_sha: 6fa778d4124d3a159928c1360de15a5b99eed36a
 - Name trigram GIN indexes using the pattern `index_TABLE_on_COLUMN_trigram`
 - Create trigram GIN indexes concurrently using `disable_ddl_transaction!` in migrations
 - Explicitly qualify column names with table names in `SELECT` statements when using `JOIN`s to avoid ambiguous column errors during deployment
-- DO NOT use `pluck` to load IDs into memory for use as arguments in another query; use subqueries instead
+- DO NOT use `pluck` to load IDs into memory for use as arguments in another query; use subqueries instead. Exception: when using CTEs with `update_all`, first pluck IDs from the CTE result and scope the update to those IDs (the CTE is dropped otherwise)
 - Use `pluck` only within model code, or when values are needed in Ruby or cached for multiple related queries
 - Limit `pluck` results to `MAX_PLUCK` (1,000) records when `pluck` is necessary
 - Use `WHERE EXISTS` instead of `WHERE IN` wherever possible
 - Check all query variants (`.exists?`, `.count`, pagination) for query plan flip issues when using complex scopes with `IN` subqueries
 - Use a CTE (via `Gitlab::SQL::CTE`) to stabilize query plans when `.exists?` causes plan flips, but only as a last resort
 - DO NOT use CTEs with `UPDATE` or `DELETE` — the CTE is dropped and the operation affects the entire table
-- When using CTEs with `update_all`, first pluck IDs from the CTE result and then scope the update to those IDs
 - DO NOT update large volumes of unbounded data without batching; use `iterating_tables_in_batches` patterns
 - Prefer `ORDER BY id` over `ORDER BY created_at` unless accurate creation-date ordering is required
 - Use `ORDER BY created_at, id` (with appropriate composite index) when accurate creation-date ordering is required, especially in Cells architecture
@@ -84,6 +83,7 @@ distilled_at_sha: 6fa778d4124d3a159928c1360de15a5b99eed36a
 - Use `BulkInsertSafe` / `bulk_insert!` for inserting large arrays of ActiveRecord objects in bulk
 - Use `BulkInsertableAssociations` with `with_bulk_insert` to bulk-insert `has_many` associations
 - Limit bulk insert input to ~1,000 records per call to avoid large single transactions
+- Use the background operations framework (BBO) for recurring data operations such as purging stale rows or deleting expired records, instead of building custom batching logic
 
 ### Pagination Performance
 

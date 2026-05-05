@@ -7477,13 +7477,13 @@ msgstr ""
 msgid "AgentArtifacts|View full session details"
 msgstr ""
 
-msgid "AgentPlan|Agent plan"
+msgid "AgentPlan|Describe your intent for Duo. A workplan structures context into an agent-ready input for autonomous execution."
 msgstr ""
 
-msgid "AgentPlan|Describe your intent for Duo. An agent plan structures context into an agent-ready input for autonomous execution."
+msgid "AgentPlan|Edit workplan"
 msgstr ""
 
-msgid "AgentPlan|Edit agent plan"
+msgid "AgentPlan|Workplan"
 msgstr ""
 
 msgid "Agents|Cannot be assigned"
@@ -81780,6 +81780,18 @@ msgstr ""
 msgid "Vulnerability|AI false positive scan complete"
 msgstr ""
 
+msgid "Vulnerability|AI false positive scan failed"
+msgstr ""
+
+msgid "Vulnerability|AI false positive scan failed. Please try running the scan again."
+msgstr ""
+
+msgid "Vulnerability|AI false positive scan in progress"
+msgstr ""
+
+msgid "Vulnerability|AI false positive scan is in progress. Results will appear here when complete."
+msgstr ""
+
 msgid "Vulnerability|AI has created a merge request to resolve this vulnerability"
 msgstr ""
 
@@ -81892,6 +81904,12 @@ msgid "Vulnerability|Evidence:"
 msgstr ""
 
 msgid "Vulnerability|External Security Report"
+msgstr ""
+
+msgid "Vulnerability|FP scan failed"
+msgstr ""
+
+msgid "Vulnerability|FP scanning"
 msgstr ""
 
 msgid "Vulnerability|FP scanning found that this vulnerability is "
@@ -84108,6 +84126,9 @@ msgstr ""
 msgid "WorkItem|Failed to unarchive custom field %{fieldName}."
 msgstr ""
 
+msgid "WorkItem|Failed to update work item type availability."
+msgstr ""
+
 msgid "WorkItem|Failed to update work item type."
 msgstr ""
 
@@ -85013,6 +85034,12 @@ msgid "WorkItem|Work item settings"
 msgstr ""
 
 msgid "WorkItem|Work item type created."
+msgstr ""
+
+msgid "WorkItem|Work item type disabled for all projects."
+msgstr ""
+
+msgid "WorkItem|Work item type enabled for all projects."
 msgstr ""
 
 msgid "WorkItem|Work item type updated."

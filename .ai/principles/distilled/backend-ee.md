@@ -1,11 +1,10 @@
 ---
-source_checksum: 994edad1d2b9bf52
-distilled_at_sha: a0b99fa76e7df34adb2f7ae52e37d415e916178a
+source_checksum: 262f4a7db7d17735
+distilled_at_sha: 9ab16c7588f7d32fdb6d509a70bae72309346826
 ---
-<!-- Auto-generated from docs.gitlab.com by scripts/ai/sync_principles.rb — do not edit manually -->
-
 > **Prerequisite:** If you haven't already, also read .ai/principles/distilled/backend-ruby.md - it contains foundational rules that apply to all backend work.
 
+<!-- Auto-generated from docs.gitlab.com by scripts/ai/sync_principles.rb — do not edit manually -->
 
 # EE Features Principles
 
@@ -23,6 +22,7 @@ distilled_at_sha: a0b99fa76e7df34adb2f7ae52e37d415e916178a
 - Place EE-only frontend files in `ee/app/assets/javascripts/`; use the `ee_else_ce` import alias for files that differ between CE and EE.
 - Place EE-only initializer code in `ee/config/initializers`; use `Gitlab.ee { ... }` in `config/initializers` only when splitting is not possible.
 - Place EE-only routes using `Gitlab.ee { draw :ee_only }`; use `draw_all` only when both CE and EE route files exist.
+- Place all Dedicated-specific code in the `ee/` directory structure.
 
 ### EE Module Injection Pattern
 
@@ -51,7 +51,6 @@ distilled_at_sha: a0b99fa76e7df34adb2f7ae52e37d415e916178a
 - Add new SaaS features to `FEATURES` in `ee/lib/gitlab/saas.rb` and create a YAML definition in `ee/config/saas_features/` using `bin/saas-feature.rb`.
 - Add new Dedicated features to `FEATURES` in `ee/lib/gitlab/dedicated.rb` and create a YAML definition in `ee/config/dedicated_features/`.
 - Ensure every SaaS and Dedicated feature YAML definition includes at minimum the `name` field and has an owner (`group`).
-- Place all Dedicated-specific code in the `ee/` directory structure.
 
 ### Testing EE Features
 

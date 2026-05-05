@@ -1171,4 +1171,36 @@ describe('WikiForm', () => {
       });
     });
   });
+
+  describe('keyboard shortcut form submission', () => {
+    beforeEach(() => {
+      createWrapper();
+    });
+
+    it('submits the form when ctrl+enter is triggered on the markdown editor', async () => {
+      const submitSpy = jest.spyOn(findForm().element, 'submit');
+      const ctrlEnterEvent = new KeyboardEvent('keydown', {
+        key: 'Enter',
+        ctrlKey: true,
+      });
+
+      findMarkdownEditor().vm.$emit('keydown', ctrlEnterEvent);
+      await nextTick();
+
+      expect(submitSpy).toHaveBeenCalled();
+    });
+
+    it('submits the form when meta+enter is triggered on the markdown editor', async () => {
+      const submitSpy = jest.spyOn(findForm().element, 'submit');
+      const metaEnterEvent = new KeyboardEvent('keydown', {
+        key: 'Enter',
+        metaKey: true,
+      });
+
+      findMarkdownEditor().vm.$emit('keydown', metaEnterEvent);
+      await nextTick();
+
+      expect(submitSpy).toHaveBeenCalled();
+    });
+  });
 });

@@ -1,6 +1,6 @@
 ---
-source_checksum: 4a538bcd2a4d95d1
-distilled_at_sha: 6fa778d4124d3a159928c1360de15a5b99eed36a
+source_checksum: e786b4cacd62e727
+distilled_at_sha: 9ab16c7588f7d32fdb6d509a70bae72309346826
 ---
 <!-- Auto-generated from docs.gitlab.com by scripts/ai/sync_principles.rb — do not edit manually -->
 
@@ -8,12 +8,15 @@ distilled_at_sha: 6fa778d4124d3a159928c1360de15a5b99eed36a
 
 ## Checklist
 
-### Process and Artifacts
+### Process Reminders
 
 - Ask: "Have you triggered the `db:gitlabcom-database-testing` pipeline?"
-- For new or modified queries: include raw SQL and query plans in the MR description.
-- For creating or dropping tables/views: ensure the Database Dictionary is updated.
-- Flag all modified or new ActiveRecord scopes as needing a database reviewer.
+- For new or modified queries: raw SQL and query plans should be documented in the MR description
+- For creating or dropping tables/views: ensure the Database Dictionary is updated
+- Flag all modified or new ActiveRecord scopes as needing a database reviewer
+
+### Process and Artifacts
+
 - Ensure `db/structure.sql` is updated and relevant version files under `db/schema_migrations` were added or removed.
 - Verify the `db:check-migrations` and `db:check-schema` pipeline jobs ran successfully.
 - Require query plans for each raw SQL query, linked directly after each SQL snippet in the MR description.

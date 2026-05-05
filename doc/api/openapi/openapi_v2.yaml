@@ -48661,18 +48661,26 @@ definitions:
     properties:
       name:
         type: string
+        example: Pipeline Status
       link_url:
         type: string
+        example: https://example.gitlab.com
       image_url:
         type: string
+        example: https://example.gitlab.com
       rendered_link_url:
         type: string
+        example: https://example.gitlab.com
       rendered_image_url:
         type: string
+        example: https://example.gitlab.com
       id:
-        type: string
+        type: integer
+        format: int32
+        example: 1
       kind:
         type: string
+        example: project
     required:
     - name
     - link_url
@@ -48687,14 +48695,19 @@ definitions:
     properties:
       name:
         type: string
+        example: Pipeline Status
       link_url:
         type: string
+        example: https://example.gitlab.com
       image_url:
         type: string
+        example: https://example.gitlab.com
       rendered_link_url:
         type: string
+        example: https://example.gitlab.com
       rendered_image_url:
         type: string
+        example: https://example.gitlab.com
     required:
     - name
     - link_url
@@ -48748,8 +48761,10 @@ definitions:
         format: int32
       web_url:
         type: string
+        example: http://gitlab.example.com/groups/diaspora
       name:
         type: string
+        example: Diaspora
       path:
         type: string
       description:
@@ -49739,8 +49754,10 @@ definitions:
         format: int32
       web_url:
         type: string
+        example: http://gitlab.example.com/groups/diaspora
       name:
         type: string
+        example: Diaspora
       path:
         type: string
       description:
@@ -49871,13 +49888,17 @@ definitions:
       duo_namespace_access_rules:
         type: string
       shared_with_groups:
-        type: string
+        type: array
+        items:
+          type: object
       runners_token:
         type: string
+        example: b8bc4a7a29eb76ea83cf79e4908c2b
       enabled_git_access_protocol:
         type: string
+        example: ssh
       prevent_sharing_groups_outside_hierarchy:
-        type: string
+        type: boolean
       step_up_auth_required_oauth_provider:
         type: string
         description: OAuth provider required for step-up authentication.
@@ -50084,8 +50105,12 @@ definitions:
         - cluster_agents
       marked_for_deletion_at:
         type: string
+        format: date-time
+        example: '2020-05-07T04:27:17.016Z'
       marked_for_deletion_on:
         type: string
+        format: date-time
+        example: '2020-05-07T04:27:17.016Z'
       packages_enabled:
         type: boolean
       empty_repo:
@@ -50284,7 +50309,7 @@ definitions:
       shared_with_groups:
         type: array
         items:
-          type: string
+          type: object
       only_allow_merge_if_pipeline_succeeds:
         type: boolean
       allow_merge_on_skipped_pipeline:
@@ -50680,27 +50705,49 @@ definitions:
     type: object
     properties:
       commit_count:
-        type: string
+        type: integer
+        format: int32
+        example: 37
       storage_size:
-        type: string
+        type: integer
+        format: int32
+        example: 1038090
       repository_size:
-        type: string
+        type: integer
+        format: int32
+        example: 1038090
       wiki_size:
-        type: string
+        type: integer
+        format: int32
+        example: 0
       lfs_objects_size:
-        type: string
+        type: integer
+        format: int32
+        example: 0
       job_artifacts_size:
-        type: string
+        type: integer
+        format: int32
+        example: 0
       pipeline_artifacts_size:
-        type: string
+        type: integer
+        format: int32
+        example: 0
       packages_size:
-        type: string
+        type: integer
+        format: int32
+        example: 0
       snippets_size:
-        type: string
+        type: integer
+        format: int32
+        example: 0
       uploads_size:
-        type: string
+        type: integer
+        format: int32
+        example: 0
       container_registry_size:
-        type: string
+        type: integer
+        format: int32
+        example: 0
     required:
     - commit_count
     - storage_size
@@ -51356,8 +51403,10 @@ definitions:
         format: int32
       web_url:
         type: string
+        example: http://gitlab.example.com/groups/diaspora
       name:
         type: string
+        example: Diaspora
     required:
     - id
     - web_url
@@ -54290,9 +54339,13 @@ definitions:
       task_completion_status:
         "$ref": "#/definitions/API_Entities_TaskCompletionStatus"
       weight:
-        type: string
+        type: integer
+        format: int32
+        example: 5
       blocking_issues_count:
-        type: string
+        type: integer
+        format: int32
+        example: 2
       has_tasks:
         type: string
       task_status:
@@ -54503,29 +54556,50 @@ definitions:
     type: object
     properties:
       id:
-        type: string
+        type: integer
+        format: int32
+        example: 1
       iid:
-        type: string
+        type: integer
+        format: int32
+        example: 1
       sequence:
-        type: string
+        type: integer
+        format: int32
+        example: 1
       group_id:
-        type: string
+        type: integer
+        format: int32
+        example: 1
       title:
         type: string
+        example: Iteration I
       description:
         type: string
+        example: Iteration description
       state:
-        type: string
+        type: integer
+        format: int32
+        example: 1
       created_at:
         type: string
+        format: date-time
+        example: '2022-01-31T15:10:45.080Z'
       updated_at:
         type: string
+        format: date-time
+        example: '2022-01-31T15:10:45.080Z'
       start_date:
         type: string
+        format: date
+        example: '2022-01-01'
       due_date:
         type: string
+        format: date
+        example: '2022-01-31'
       web_url:
         type: string
+        example: https://gitlab.example.com/groups/gitlab-org/-/iterations/1
     required:
     - id
     - iid
@@ -54746,10 +54820,14 @@ definitions:
         "$ref": "#/definitions/API_Entities_UserBasic"
       merged_at:
         type: string
+        format: date-time
+        example: '2022-01-31T15:10:45.080Z'
       closed_by:
         "$ref": "#/definitions/API_Entities_UserBasic"
       closed_at:
         type: string
+        format: date-time
+        example: '2022-01-31T15:10:45.080Z'
       title_html:
         type: string
       description_html:
@@ -54782,7 +54860,9 @@ definitions:
         type: integer
         format: int32
       labels:
-        type: string
+        type: array
+        items:
+          type: string
       draft:
         type: boolean
       imported:
@@ -54798,48 +54878,61 @@ definitions:
         type: boolean
       merge_status:
         type: string
+        example: unchecked
       detailed_merge_status:
         type: string
+        example: mergeable
       merge_after:
         type: string
+        format: date-time
+        example: '2022-01-31T15:10:45.080Z'
       sha:
         type: string
+        example: 1234abcd
       merge_commit_sha:
         type: string
+        example: 1234abcd
       squash_commit_sha:
         type: string
+        example: 1234abcd
       discussion_locked:
-        type: string
+        type: boolean
       should_remove_source_branch:
-        type: string
+        type: boolean
       force_remove_source_branch:
-        type: string
+        type: boolean
       prepared_at:
         type: string
+        format: date-time
+        example: '2022-01-31T15:10:45.080Z'
       allow_collaboration:
-        type: string
+        type: boolean
       allow_maintainer_to_push:
-        type: string
+        type: boolean
       reference:
         type: string
+        example: "!1"
       references:
         "$ref": "#/definitions/API_Entities_IssuableReferences"
       web_url:
         type: string
+        example: https://gitlab.example.com/my-group/my-project/-/merge_requests/1
       time_stats:
         "$ref": "#/definitions/API_Entities_IssuableTimeStats"
       squash:
-        type: string
+        type: boolean
       squash_on_merge:
-        type: string
+        type: boolean
       task_completion_status:
         "$ref": "#/definitions/API_Entities_TaskCompletionStatus"
       has_conflicts:
-        type: string
+        type: boolean
       blocking_discussions_resolved:
-        type: string
+        type: boolean
       approvals_before_merge:
-        type: string
+        type: integer
+        format: int32
+        example: 2
     required:
     - id
     - iid
@@ -55376,9 +55469,13 @@ definitions:
         type: object
         properties:
           total:
-            type: string
+            type: integer
+            format: int32
+            example: 10
           closed:
-            type: string
+            type: integer
+            format: int32
+            example: 5
         required:
         - total
         - closed
@@ -63750,9 +63847,13 @@ definitions:
       task_completion_status:
         "$ref": "#/definitions/API_Entities_TaskCompletionStatus"
       weight:
-        type: string
+        type: integer
+        format: int32
+        example: 5
       blocking_issues_count:
-        type: string
+        type: integer
+        format: int32
+        example: 2
       has_tasks:
         type: string
       task_status:
@@ -63983,9 +64084,13 @@ definitions:
       task_completion_status:
         "$ref": "#/definitions/API_Entities_TaskCompletionStatus"
       weight:
-        type: string
+        type: integer
+        format: int32
+        example: 5
       blocking_issues_count:
-        type: string
+        type: integer
+        format: int32
+        example: 2
     required:
     - id
     - iid
@@ -64281,17 +64386,25 @@ definitions:
     type: object
     properties:
       id:
-        type: string
+        type: integer
+        format: int32
+        example: 1
       created_at:
         type: string
+        format: date-time
+        example: '2022-01-31T15:10:45.080Z'
       filename:
         type: string
+        example: image.png
       file_path:
         type: string
+        example: "/uploads/-/system/issuable_metric_image/file/1/image.png"
       url:
         type: string
+        example: https://gitlab.example.com/example
       url_text:
         type: string
+        example: Example URL
     required:
     - id
     - created_at
@@ -64416,15 +64529,21 @@ definitions:
     type: object
     properties:
       id:
-        type: string
+        type: integer
+        format: int32
+        example: 1
       alt:
         type: string
+        example: filename
       url:
         type: string
+        example: "/uploads/secret/filename"
       full_path:
         type: string
+        example: "/-/project/1/uploads/secret/filename"
       markdown:
         type: string
+        example: "[filename](/uploads/secret/filename)"
     required:
     - id
     - alt
@@ -64640,10 +64759,14 @@ definitions:
         "$ref": "#/definitions/API_Entities_UserBasic"
       merged_at:
         type: string
+        format: date-time
+        example: '2022-01-31T15:10:45.080Z'
       closed_by:
         "$ref": "#/definitions/API_Entities_UserBasic"
       closed_at:
         type: string
+        format: date-time
+        example: '2022-01-31T15:10:45.080Z'
       title_html:
         type: string
       description_html:
@@ -64676,7 +64799,9 @@ definitions:
         type: integer
         format: int32
       labels:
-        type: string
+        type: array
+        items:
+          type: string
       draft:
         type: boolean
       imported:
@@ -64692,58 +64817,78 @@ definitions:
         type: boolean
       merge_status:
         type: string
+        example: unchecked
       detailed_merge_status:
         type: string
+        example: mergeable
       merge_after:
         type: string
+        format: date-time
+        example: '2022-01-31T15:10:45.080Z'
       sha:
         type: string
+        example: 1234abcd
       merge_commit_sha:
         type: string
+        example: 1234abcd
       squash_commit_sha:
         type: string
+        example: 1234abcd
       discussion_locked:
-        type: string
+        type: boolean
       should_remove_source_branch:
-        type: string
+        type: boolean
       force_remove_source_branch:
-        type: string
+        type: boolean
       prepared_at:
         type: string
+        format: date-time
+        example: '2022-01-31T15:10:45.080Z'
       allow_collaboration:
-        type: string
+        type: boolean
       allow_maintainer_to_push:
-        type: string
+        type: boolean
       reference:
         type: string
+        example: "!1"
       references:
         "$ref": "#/definitions/API_Entities_IssuableReferences"
       web_url:
         type: string
+        example: https://gitlab.example.com/my-group/my-project/-/merge_requests/1
       time_stats:
         "$ref": "#/definitions/API_Entities_IssuableTimeStats"
       squash:
-        type: string
+        type: boolean
       squash_on_merge:
-        type: string
+        type: boolean
       task_completion_status:
         "$ref": "#/definitions/API_Entities_TaskCompletionStatus"
       has_conflicts:
-        type: string
+        type: boolean
       blocking_discussions_resolved:
-        type: string
+        type: boolean
       approvals_before_merge:
-        type: string
+        type: integer
+        format: int32
+        example: 2
       subscribed:
-        type: string
+        type: boolean
       changes_count:
         type: string
+        example: '1'
       latest_build_started_at:
         type: string
+        format: date-time
+        example: '2022-01-31T15:10:45.080Z'
       latest_build_finished_at:
         type: string
+        format: date-time
+        example: '2022-01-31T15:10:45.080Z'
       first_deployed_to_production_at:
         type: string
+        format: date-time
+        example: '2022-01-31T15:10:45.080Z'
       pipeline:
         "$ref": "#/definitions/API_Entities_Ci_PipelineBasic"
       head_pipeline:
@@ -64752,17 +64897,20 @@ definitions:
         "$ref": "#/definitions/API_Entities_DiffRefs"
       merge_error:
         type: string
+        example: Merge error
       rebase_in_progress:
-        type: string
+        type: boolean
       diverged_commits_count:
-        type: string
+        type: integer
+        format: int32
+        example: 0
       first_contribution:
-        type: string
+        type: boolean
       user:
         type: object
         properties:
           can_merge:
-            type: string
+            type: boolean
         required:
         - can_merge
     required:
@@ -64842,8 +64990,11 @@ definitions:
         "$ref": "#/definitions/API_Entities_UserBasic"
       state:
         type: string
+        example: unreviewed
       created_at:
         type: string
+        format: date-time
+        example: '2022-01-31T15:10:45.080Z'
     required:
     - user
     - state
@@ -64898,10 +65049,14 @@ definitions:
         "$ref": "#/definitions/API_Entities_UserBasic"
       merged_at:
         type: string
+        format: date-time
+        example: '2022-01-31T15:10:45.080Z'
       closed_by:
         "$ref": "#/definitions/API_Entities_UserBasic"
       closed_at:
         type: string
+        format: date-time
+        example: '2022-01-31T15:10:45.080Z'
       title_html:
         type: string
       description_html:
@@ -64934,7 +65089,9 @@ definitions:
         type: integer
         format: int32
       labels:
-        type: string
+        type: array
+        items:
+          type: string
       draft:
         type: boolean
       imported:
@@ -64950,58 +65107,78 @@ definitions:
         type: boolean
       merge_status:
         type: string
+        example: unchecked
       detailed_merge_status:
         type: string
+        example: mergeable
       merge_after:
         type: string
+        format: date-time
+        example: '2022-01-31T15:10:45.080Z'
       sha:
         type: string
+        example: 1234abcd
       merge_commit_sha:
         type: string
+        example: 1234abcd
       squash_commit_sha:
         type: string
+        example: 1234abcd
       discussion_locked:
-        type: string
+        type: boolean
       should_remove_source_branch:
-        type: string
+        type: boolean
       force_remove_source_branch:
-        type: string
+        type: boolean
       prepared_at:
         type: string
+        format: date-time
+        example: '2022-01-31T15:10:45.080Z'
       allow_collaboration:
-        type: string
+        type: boolean
       allow_maintainer_to_push:
-        type: string
+        type: boolean
       reference:
         type: string
+        example: "!1"
       references:
         "$ref": "#/definitions/API_Entities_IssuableReferences"
       web_url:
         type: string
+        example: https://gitlab.example.com/my-group/my-project/-/merge_requests/1
       time_stats:
         "$ref": "#/definitions/API_Entities_IssuableTimeStats"
       squash:
-        type: string
+        type: boolean
       squash_on_merge:
-        type: string
+        type: boolean
       task_completion_status:
         "$ref": "#/definitions/API_Entities_TaskCompletionStatus"
       has_conflicts:
-        type: string
+        type: boolean
       blocking_discussions_resolved:
-        type: string
+        type: boolean
       approvals_before_merge:
-        type: string
+        type: integer
+        format: int32
+        example: 2
       subscribed:
-        type: string
+        type: boolean
       changes_count:
         type: string
+        example: '1'
       latest_build_started_at:
         type: string
+        format: date-time
+        example: '2022-01-31T15:10:45.080Z'
       latest_build_finished_at:
         type: string
+        format: date-time
+        example: '2022-01-31T15:10:45.080Z'
       first_deployed_to_production_at:
         type: string
+        format: date-time
+        example: '2022-01-31T15:10:45.080Z'
       pipeline:
         "$ref": "#/definitions/API_Entities_Ci_PipelineBasic"
       head_pipeline:
@@ -65010,23 +65187,28 @@ definitions:
         "$ref": "#/definitions/API_Entities_DiffRefs"
       merge_error:
         type: string
+        example: Merge error
       rebase_in_progress:
-        type: string
+        type: boolean
       diverged_commits_count:
-        type: string
+        type: integer
+        format: int32
+        example: 0
       first_contribution:
-        type: string
+        type: boolean
       user:
         type: object
         properties:
           can_merge:
-            type: string
+            type: boolean
         required:
         - can_merge
       changes:
-        "$ref": "#/definitions/API_Entities_Diff"
+        type: array
+        items:
+          "$ref": "#/definitions/API_Entities_Diff"
       overflow:
-        type: string
+        type: boolean
     required:
     - id
     - iid
@@ -65494,23 +65676,35 @@ definitions:
     type: object
     properties:
       id:
-        type: string
+        type: integer
+        format: int32
+        example: 1
       head_commit_sha:
         type: string
+        example: 1234abcd
       base_commit_sha:
         type: string
+        example: 1234abcd
       start_commit_sha:
         type: string
+        example: 1234abcd
       created_at:
         type: string
+        format: date-time
+        example: '2022-01-31T15:10:45.080Z'
       merge_request_id:
-        type: string
+        type: integer
+        format: int32
+        example: 1
       state:
         type: string
+        example: collected
       real_size:
         type: string
+        example: '1'
       patch_id_sha:
         type: string
+        example: 1234abcd
     required:
     - id
     - head_commit_sha
@@ -65526,27 +65720,43 @@ definitions:
     type: object
     properties:
       id:
-        type: string
+        type: integer
+        format: int32
+        example: 1
       head_commit_sha:
         type: string
+        example: 1234abcd
       base_commit_sha:
         type: string
+        example: 1234abcd
       start_commit_sha:
         type: string
+        example: 1234abcd
       created_at:
         type: string
+        format: date-time
+        example: '2022-01-31T15:10:45.080Z'
       merge_request_id:
-        type: string
+        type: integer
+        format: int32
+        example: 1
       state:
         type: string
+        example: collected
       real_size:
         type: string
+        example: '1'
       patch_id_sha:
         type: string
+        example: 1234abcd
       commits:
-        "$ref": "#/definitions/API_Entities_Commit"
+        type: array
+        items:
+          "$ref": "#/definitions/API_Entities_Commit"
       diffs:
-        "$ref": "#/definitions/API_Entities_Diff"
+        type: array
+        items:
+          "$ref": "#/definitions/API_Entities_Diff"
     required:
     - id
     - head_commit_sha
@@ -68563,8 +68773,12 @@ definitions:
         - cluster_agents
       marked_for_deletion_at:
         type: string
+        format: date-time
+        example: '2020-05-07T04:27:17.016Z'
       marked_for_deletion_on:
         type: string
+        format: date-time
+        example: '2020-05-07T04:27:17.016Z'
       packages_enabled:
         type: boolean
       empty_repo:
@@ -68763,7 +68977,7 @@ definitions:
       shared_with_groups:
         type: array
         items:
-          type: string
+          type: object
       only_allow_merge_if_pipeline_succeeds:
         type: boolean
       allow_merge_on_skipped_pipeline:
@@ -69655,14 +69869,19 @@ definitions:
         format: int32
       web_url:
         type: string
+        example: http://gitlab.example.com/groups/diaspora
       name:
         type: string
+        example: Diaspora
       avatar_url:
         type: string
+        example: http://gitlab.example.com/uploads/group/avatar/1/avatar.png
       full_name:
         type: string
+        example: Foobar Group
       full_path:
         type: string
+        example: foo-bar
     required:
     - id
     - web_url
@@ -77113,19 +77332,29 @@ definitions:
     type: object
     properties:
       id:
-        type: string
+        type: integer
+        format: int32
+        example: 1
       name:
         type: string
+        example: topic1
       title:
         type: string
+        example: Topic 1
       description:
         type: string
+        example: A description
       total_projects_count:
-        type: string
+        type: integer
+        format: int32
+        example: 1
       organization_id:
-        type: string
+        type: integer
+        format: int32
+        example: 1
       avatar_url:
         type: string
+        example: http://gitlab.example.com/uploads/topic/avatar/1/avatar.png
     required:
     - id
     - name

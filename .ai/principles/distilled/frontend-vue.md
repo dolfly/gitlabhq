@@ -1,6 +1,6 @@
 ---
-source_checksum: 903917313b46763c
-distilled_at_sha: 1f229dcc2a69c959aaca5679318a583ec2ae2866
+source_checksum: bc7c64954cfe4971
+distilled_at_sha: 9ab16c7588f7d32fdb6d509a70bae72309346826
 ---
 <!-- Auto-generated from docs.gitlab.com by scripts/ai/sync_principles.rb — do not edit manually -->
 
@@ -14,7 +14,6 @@ distilled_at_sha: 1f229dcc2a69c959aaca5679318a583ec2ae2866
 - DO NOT use Vuex for new code; use Apollo or Pinia instead
 - DO NOT use Apollo and Vuex together
 - DO NOT create new Vuex stores; migrate existing ones to Pinia or Apollo
-- Prefer using `<gitlab-experiment>` component when both control and variants are toggled in Vue component layer
 - Follow the standard feature directory structure: `components/`, `graphql/`, `utils/`, `router/`, `constants.js`, `index.js`
 
 ### Vue Component Basics
@@ -104,6 +103,8 @@ distilled_at_sha: 1f229dcc2a69c959aaca5679318a583ec2ae2866
 - In Jest tests, DO NOT wrap expected strings in `__()` or `s__()`; use plain string literals (i18n is mocked in the test environment)
 - Run `tooling/bin/gettext_extractor locale/gitlab.pot` after adding new translatable strings
 - Keep translations dynamic (in methods, not class-level constants or memoized class methods)
+- DO NOT use variables as arguments to translation helpers when the string can be made unique per case; create separate strings instead
+- DO NOT add errors to specific model attributes when the error message is a complete sentence; add to `:base` instead so Rails does not prepend the humanized attribute name
 
 ### Vue Testing
 

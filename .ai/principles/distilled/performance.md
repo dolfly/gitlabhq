@@ -1,6 +1,6 @@
 ---
-source_checksum: de2ec05e4925284e
-distilled_at_sha: a0b99fa76e7df34adb2f7ae52e37d415e916178a
+source_checksum: ba03d634853ea305
+distilled_at_sha: 9ab16c7588f7d32fdb6d509a70bae72309346826
 ---
 <!-- Auto-generated from docs.gitlab.com by scripts/ai/sync_principles.rb — do not edit manually -->
 
@@ -94,7 +94,6 @@ distilled_at_sha: a0b99fa76e7df34adb2f7ae52e37d415e916178a
 - DO NOT use more than `100MB` of temporary storage without consulting a maintainer
 - Ensure all features holding persistent files support Object Storage via the `ObjectStorage` concern
 - DO NOT perform file uploads or downloads via Puma; implement [Workhorse direct upload](https://docs.gitlab.com/development/uploads/) for all file uploads and downloads
-- DO NOT perform file uploads or downloads via Puma threads
 
 ## Authoritative sources
 
