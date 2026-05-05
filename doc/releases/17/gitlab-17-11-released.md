@@ -98,7 +98,7 @@ You can now use more [GitLab Duo](https://about.gitlab.com/gitlab-duo/) features
 - [Root Cause Analysis](../../user/gitlab_duo_chat/examples.md#troubleshoot-failed-cicd-jobs-with-root-cause-analysis)
 - [Vulnerability Explanation](../../user/application_security/analyze/duo.md)
 - [Vulnerability Resolution](../../user/application_security/vulnerabilities/_index.md#vulnerability-resolution)
-- [AI Impact Dashboard](/user/analytics/duo_and_sdlc_trends)
+- [AI Impact Dashboard](../../user/analytics/duo_and_sdlc_trends.md)
 - [Discussion Summary](../../user/discussions/_index.md#summarize-issue-discussions-with-gitlab-duo-chat)
 - [Merge Request Commit Message](../../user/project/merge_requests/duo_in_merge_requests.md#generate-a-merge-commit-message)
 - [Merge Request Summary](../../user/project/merge_requests/duo_in_merge_requests.md#generate-a-description-by-summarizing-code-changes)
@@ -416,7 +416,7 @@ then choose `Placeholder`.
 
 - Tier: Free, Premium, Ultimate
 - Offering: GitLab.com
-- Links: [Documentation](/user/import#placeholder-user-limits) | [Related issue](https://gitlab.com/gitlab-org/gitlab/-/issues/486691)
+- Links: [Documentation](../../user/import/mapping/post_migration_mapping.md#placeholder-user-limits) | [Related issue](https://gitlab.com/gitlab-org/gitlab/-/issues/486691)
 
 {{< /details >}}
 
@@ -571,7 +571,7 @@ You can read more about [our Kubernetes support policy and other supported Kuber
 {{< details >}}
 
 - Tier: Gold
-- Links: [Documentation](/administration/dedicated/configure_instance/authentication/saml)
+- Links: [Documentation](../../administration/dedicated/configure_instance/authentication/saml.md)
 
 {{< /details >}}
 

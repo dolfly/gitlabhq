@@ -678,7 +678,7 @@ You can now configure additional group memberships when using multiple OIDC prov
 
 - Tier: Premium, Ultimate
 - Offering: GitLab.com
-- Links: [Documentation](/api/service_accounts#rotate-a-personal-access-token-for-a-service-account-user) | [Related issue](https://gitlab.com/gitlab-org/gitlab/-/issues/505671)
+- Links: [Documentation](../../api/service_accounts.md#rotate-a-personal-access-token-for-a-group-service-account) | [Related issue](https://gitlab.com/gitlab-org/gitlab/-/issues/505671)
 
 {{< /details >}}
 

@@ -314,7 +314,7 @@ From GitLab 17.8, you can protect PyPI packages by creating protection rules. If
 
 You now have more flexibility in categorizing your epics with an expanded set of color options, including pre-existing values and custom RGB or hex codes. This enhanced visual customization allows you to easily associate epics with squads, company initiatives, or hierarchy levels, making it simpler to prioritize and organize your work on roadmaps and epic boards.
 
-Your administrator must enable [the new look for epics](/user/group/epics/#epics-as-work-items).
+Your administrator must enable [the new look for epics](../../user/group/epics/_index.md#epics-as-work-items).
 
 ### Epic ancestors
 
@@ -328,7 +328,7 @@ Your administrator must enable [the new look for epics](/user/group/epics/#epics
 
 Navigating your [epic hierarchy](../../user/group/epics/_index.md#relationships-between-epics-and-other-items) just got easier with the redesigned Ancestry widget, now prominently displayed at the top of each epic in a breadcrumb-like format. You can quickly grasp the relationships between epics by seeing both immediate and ultimate parents at a glance, helping you maintain a clear overview of your project structure and easily move between related epics.
 
-Your administrator must enable [the new look for epics](/user/group/epics/#epics-as-work-items).
+Your administrator must enable [the new look for epics](../../user/group/epics/_index.md#epics-as-work-items).
 
 ### Epic health status
 
@@ -342,7 +342,7 @@ Your administrator must enable [the new look for epics](/user/group/epics/#epics
 
 You can now easily communicate the progress of your projects with the new health status feature for epics. By setting the status to “On track,” “Needs attention,” or “At risk,” you’ll have a quick visual indicator of your epic’s health, allowing you to manage risk and keep stakeholders informed about the project’s overall status.
 
-Your administrator must enable [the new look for epics](/user/group/epics/#epics-as-work-items).
+Your administrator must enable [the new look for epics](../../user/group/epics/_index.md#epics-as-work-items).
 
 ### Epic parent
 
@@ -356,7 +356,7 @@ Your administrator must enable [the new look for epics](/user/group/epics/#epics
 
 You can now easily manage your epic hierarchy by adding a parent directly from an epic, just as you would for an issue. This streamlined process gives you more flexibility in organizing your work, allowing you to quickly establish relationships between epics and maintain a clear structure for your projects.
 
-Your administrator must enable [the new look for epics](/user/group/epics/#epics-as-work-items).
+Your administrator must enable [the new look for epics](../../user/group/epics/_index.md#epics-as-work-items).
 
 ### Track time spent on epics
 
@@ -382,7 +382,7 @@ You can now track time directly in epics, giving you more granular control over 
 
 When viewing epic detail, planners need to be able to see which child issues are planned into iterations (sprints) and which are not yet planned. This will allow teams to more easily make sure that all defined work is slated into sprints.
 
-For epics, your administrator must enable [the new look for epics](/user/group/epics/#epics-as-work-items).
+For epics, your administrator must enable [the new look for epics](../../user/group/epics/_index.md#epics-as-work-items).
 
 ### Webhooks for epics
 
@@ -396,7 +396,7 @@ For epics, your administrator must enable [the new look for epics](/user/group/e
 
 Supercharge your workflow automation with the epic webhooks, allowing you to receive real-time updates in your preferred tools whenever changes occur in your epics. By integrating GitLab with your other services, you can enhance collaboration, stay on top of project developments, and streamline your processes without constantly switching between applications.
 
-Your administrator must enable [the new look for epics](/user/group/epics/#epics-as-work-items).
+Your administrator must enable [the new look for epics](../../user/group/epics/_index.md#epics-as-work-items).
 
 ### Add vulnerabilities as supported webhook events
 

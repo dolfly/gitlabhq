@@ -26646,6 +26646,12 @@ msgstr ""
 msgid "DuoAgenticChat|AGENTS.md was not found in this page"
 msgstr ""
 
+msgid "DuoAgenticChat|An Owner or administrator can turn on GitLab Duo for this group."
+msgstr ""
+
+msgid "DuoAgenticChat|An Owner, Maintainer, or administrator can turn on GitLab Duo for this project."
+msgstr ""
+
 msgid "DuoAgenticChat|Archived conversations cannot receive new messages. Start a new conversation, or select an active conversation from your chat history."
 msgstr ""
 
@@ -26676,6 +26682,9 @@ msgstr ""
 msgid "DuoAgenticChat|Current page"
 msgstr ""
 
+msgid "DuoAgenticChat|Get GitLab Duo turned on"
+msgstr ""
+
 msgid "DuoAgenticChat|Get targeted help for tasks with specialized agents"
 msgstr ""
 
@@ -26688,6 +26697,9 @@ msgstr ""
 msgid "DuoAgenticChat|GitLab Duo Agent Platform"
 msgstr ""
 
+msgid "DuoAgenticChat|GitLab Duo Agent Platform is turned off"
+msgstr ""
+
 msgid "DuoAgenticChat|GitLab Duo Agentic Chat"
 msgstr ""
 
@@ -26698,6 +26710,12 @@ msgid "DuoAgenticChat|GitLab Duo is already responding to this chat in another t
 msgstr ""
 
 msgid "DuoAgenticChat|GitLab Duo is disabled"
+msgstr ""
+
+msgid "DuoAgenticChat|GitLab Duo is disabled for this group. %{linkStart}Learn more%{linkEnd}."
+msgstr ""
+
+msgid "DuoAgenticChat|GitLab Duo is disabled for this project. %{linkStart}Learn more%{linkEnd}."
 msgstr ""
 
 msgid "DuoAgenticChat|Go to Duo settings"

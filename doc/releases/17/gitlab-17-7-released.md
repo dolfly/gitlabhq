@@ -204,7 +204,7 @@ The Advanced SAST [code flow view](../../user/application_security/sast/gitlab_a
 
 - [Vulnerability Report](../../user/application_security/vulnerability_report/_index.md).
 - [Merge request security widget](../../user/application_security/sast/_index.md#merge-request-widget).
-- [Pipeline security report](/user/application_security/detect/security_scanning_results).
+- [Pipeline security report](../../user/application_security/detect/security_scanning_results.md).
 - [Merge request changes view](../../user/application_security/sast/_index.md#merge-request-changes-view).
 
 The new views are enabled on GitLab.com. On GitLab self-managed, the new views are on by default starting in GitLab 17.7 (MR changes view) and GitLab 17.6 (all other views). For details on supported versions and feature flags, see [code flow feature availability](../../user/application_security/sast/gitlab_advanced_sast.md#code-flow).

@@ -83,11 +83,11 @@ Please leave feedback on Root Cause Analysis for GitLab Duo Self-Hosted in [issu
 {{< details >}}
 
 - Tier: Gold
-- Links: [Documentation](/administration/dedicated/create_instance/data_residency_high_availability)
+- Links: [Documentation](../../administration/dedicated/create_instance/data_residency_high_availability.md)
 
 {{< /details >}}
 
-GitLab Dedicated customers can now select from an expanded list of AWS regions when choosing where to host their failover instance for [disaster recovery](/administration/dedicated/create_instance/data_residency_high_availability#disaster-recovery).
+GitLab Dedicated customers can now select from an expanded list of AWS regions when choosing where to host their failover instance for [disaster recovery](../../administration/dedicated/disaster_recovery.md).
 
 Expanding failover support to additional regions enables GitLab Dedicated customers to fully use the disaster recovery functionality of GitLab Dedicated regardless of which AWS region they need to use to satisfy their data residency needs.
 
@@ -269,7 +269,7 @@ To leave feedback, go to [issue 524175](https://gitlab.com/gitlab-org/gitlab/-/i
 {{< details >}}
 
 - Tier: Ultimate
-- Links: [Documentation](/user/analytics/duo_and_sdlc_trends) | [Related issue](https://gitlab.com/gitlab-org/gitlab/-/issues/523807)
+- Links: [Documentation](../../user/analytics/duo_and_sdlc_trends.md) | [Related issue](https://gitlab.com/gitlab-org/gitlab/-/issues/523807)
 
 {{< /details >}}
 
@@ -301,11 +301,11 @@ Please leave feedback on using these models with GitLab Duo Self-Hosted in [issu
 
 - Tier: Free, Premium, Ultimate
 - Offering: GitLab.com
-- Links: [Documentation](/user/import#placeholder-user-attributes) | [Related issue](https://gitlab.com/gitlab-org/gitlab/-/issues/507297)
+- Links: [Documentation](../../user/import/mapping/post_migration_mapping.md#placeholder-user-attributes) | [Related issue](https://gitlab.com/gitlab-org/gitlab/-/issues/507297)
 
 {{< /details >}}
 
-Previously, when you imported groups or projects, you could not see when [placeholder users](/user/import#placeholder-users) were created.
+Previously, when you imported groups or projects, you could not see when [placeholder users](../../user/import/mapping/post_migration_mapping.md#placeholder-users) were created.
 With this release, we’ve added timestamps so you can track the progress of your migration and troubleshoot any issues as they occur.
 
 ### Bulk edit to-do items
@@ -338,7 +338,7 @@ You can now snooze notifications in your To-Do List, allowing you to temporarily
 
 - Tier: Free, Premium, Ultimate
 - Offering: GitLab.com
-- Links: [Documentation](/user/import#request-reassignment-by-using-a-csv-file) | [Related epic](https://gitlab.com/groups/gitlab-org/-/epics/16765)
+- Links: [Documentation](../../user/import/mapping/reassignment.md#request-reassignment-by-using-a-csv-file) | [Related epic](https://gitlab.com/groups/gitlab-org/-/epics/16765)
 
 {{< /details >}}
 
@@ -530,7 +530,7 @@ This powerful enhancement increases productivity while maintaining security, giv
 - Tier: Ultimate
 - Offering: GitLab.com
 - Add-ons: Duo Enterprise
-- Links: [Documentation](/user/analytics/duo_and_sdlc_trends) | [Related issue](https://gitlab.com/gitlab-org/gitlab/-/issues/477246)
+- Links: [Documentation](../../user/analytics/duo_and_sdlc_trends.md) | [Related issue](https://gitlab.com/gitlab-org/gitlab/-/issues/477246)
 
 {{< /details >}}
 

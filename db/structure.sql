@@ -6130,6 +6130,18 @@ CREATE TABLE p_ci_build_names (
 )
 PARTITION BY LIST (partition_id);
 
+CREATE TABLE p_ci_build_needs (
+    name text NOT NULL,
+    artifacts boolean DEFAULT true NOT NULL,
+    optional boolean DEFAULT false NOT NULL,
+    build_id bigint NOT NULL,
+    partition_id bigint NOT NULL,
+    id bigint NOT NULL,
+    project_id bigint,
+    CONSTRAINT check_4fab85ecdc CHECK ((project_id IS NOT NULL))
+)
+PARTITION BY LIST (partition_id);
+
 CREATE TABLE p_ci_build_sources (
     build_id bigint NOT NULL,
     partition_id bigint NOT NULL,
@@ -16978,18 +16990,6 @@ CREATE SEQUENCE chat_teams_id_seq
 
 ALTER SEQUENCE chat_teams_id_seq OWNED BY chat_teams.id;
 
-CREATE TABLE p_ci_build_needs (
-    name text NOT NULL,
-    artifacts boolean DEFAULT true NOT NULL,
-    optional boolean DEFAULT false NOT NULL,
-    build_id bigint NOT NULL,
-    partition_id bigint NOT NULL,
-    id bigint NOT NULL,
-    project_id bigint,
-    CONSTRAINT check_4fab85ecdc CHECK ((project_id IS NOT NULL))
-)
-PARTITION BY LIST (partition_id);
-
 CREATE SEQUENCE ci_build_needs_id_seq
     START WITH 1
     INCREMENT BY 1
@@ -16998,17 +16998,6 @@ CREATE SEQUENCE ci_build_needs_id_seq
     CACHE 1;
 
 ALTER SEQUENCE ci_build_needs_id_seq OWNED BY p_ci_build_needs.id;
-
-CREATE TABLE ci_build_needs (
-    name text NOT NULL,
-    artifacts boolean DEFAULT true NOT NULL,
-    optional boolean DEFAULT false NOT NULL,
-    build_id bigint NOT NULL,
-    partition_id bigint NOT NULL,
-    id bigint DEFAULT nextval('ci_build_needs_id_seq'::regclass) NOT NULL,
-    project_id bigint,
-    CONSTRAINT check_4fab85ecdc CHECK ((project_id IS NOT NULL))
-);
 
 CREATE TABLE ci_build_pending_states (
     id bigint NOT NULL,
@@ -35443,8 +35432,6 @@ ALTER TABLE ONLY uploads ATTACH PARTITION appearance_uploads FOR VALUES IN ('App
 
 ALTER TABLE ONLY uploads ATTACH PARTITION bulk_import_export_upload_uploads FOR VALUES IN ('BulkImports::ExportUpload');
 
-ALTER TABLE ONLY p_ci_build_needs ATTACH PARTITION ci_build_needs FOR VALUES IN ('100', '101', '102', '103', '104', '105', '106', '107', '108', '109', '110', '111');
-
 ALTER TABLE ONLY ci_runner_controller_runner_level_scopings ATTACH PARTITION ci_runner_controller_runner_level_scopings_instance_type FOR VALUES IN ('1');
 
 ALTER TABLE ONLY ci_runner_taggings ATTACH PARTITION ci_runner_taggings_group_type FOR VALUES IN ('2');
@@ -39047,12 +39034,6 @@ ALTER TABLE vulnerability_statistics
 ALTER TABLE x509_certificates
     ADD CONSTRAINT check_x509_certificates_serial_number_max_length CHECK ((octet_length(serial_number) <= 25)) NOT VALID;
 
-ALTER TABLE ONLY p_ci_build_needs
-    ADD CONSTRAINT p_ci_build_needs_pkey PRIMARY KEY (id, partition_id);
-
-ALTER TABLE ONLY ci_build_needs
-    ADD CONSTRAINT ci_build_needs_pkey PRIMARY KEY (id, partition_id);
-
 ALTER TABLE ONLY ci_build_pending_states
     ADD CONSTRAINT ci_build_pending_states_pkey PRIMARY KEY (id);
 
@@ -40276,6 +40257,9 @@ ALTER TABLE ONLY p_catalog_resource_sync_events
 
 ALTER TABLE ONLY p_ci_build_names
     ADD CONSTRAINT p_ci_build_names_pkey PRIMARY KEY (build_id, partition_id);
+
+ALTER TABLE ONLY p_ci_build_needs
+    ADD CONSTRAINT p_ci_build_needs_pkey PRIMARY KEY (id, partition_id);
 
 ALTER TABLE ONLY p_ci_build_sources
     ADD CONSTRAINT p_ci_build_sources_pkey PRIMARY KEY (build_id, partition_id);
@@ -45083,6 +45067,8 @@ CREATE UNIQUE INDEX idx_unique_ai_code_repository_connection_namespace_id ON ONL
 
 CREATE UNIQUE INDEX idx_unique_ai_code_repository_connection_project_id ON ONLY p_ai_active_context_code_repositories USING btree (connection_id, project_id);
 
+CREATE UNIQUE INDEX idx_unique_approval_mr_rules_for_scan_result_policy ON approval_merge_request_rules USING btree (merge_request_id, name, rule_type, security_orchestration_policy_configuration_id, orchestration_policy_idx, approval_policy_action_idx) WHERE (report_type = ANY (ARRAY[2, 4, 5]));
+
 CREATE UNIQUE INDEX idx_unique_dashboard_name_org_namespace ON custom_dashboards USING btree (organization_id, namespace_id, name) NULLS NOT DISTINCT;
 
 CREATE UNIQUE INDEX idx_unique_slack_api_scopes_on_organization_id_and_name ON slack_api_scopes USING btree (organization_id, name);
@@ -45998,14 +45984,6 @@ CREATE INDEX index_chat_names_on_team_id_and_chat_id ON chat_names USING btree (
 CREATE INDEX index_chat_names_on_user_id ON chat_names USING btree (user_id);
 
 CREATE UNIQUE INDEX index_chat_teams_on_namespace_id ON chat_teams USING btree (namespace_id);
-
-CREATE UNIQUE INDEX p_ci_build_needs_build_id_name_partition_id_idx ON ONLY p_ci_build_needs USING btree (build_id, name, partition_id);
-
-CREATE UNIQUE INDEX index_ci_build_needs_on_build_id_and_name_partitioning ON ci_build_needs USING btree (build_id, name, partition_id);
-
-CREATE INDEX p_ci_build_needs_project_id_idx ON ONLY p_ci_build_needs USING btree (project_id);
-
-CREATE INDEX index_ci_build_needs_on_project_id ON ci_build_needs USING btree (project_id);
 
 CREATE UNIQUE INDEX index_ci_build_pending_states_on_build_id ON ci_build_pending_states USING btree (build_id);
 
@@ -50607,6 +50585,10 @@ CREATE INDEX organization_detail_uploads_uploaded_by_user_id_idx ON organization
 
 CREATE INDEX organization_detail_uploads_uploader_path_idx ON organization_detail_uploads USING btree (uploader, path);
 
+CREATE UNIQUE INDEX p_ci_build_needs_build_id_name_partition_id_idx ON ONLY p_ci_build_needs USING btree (build_id, name, partition_id);
+
+CREATE INDEX p_ci_build_needs_project_id_idx ON ONLY p_ci_build_needs USING btree (project_id);
+
 CREATE INDEX p_ci_builds_auto_canceled_by_id_idx ON ONLY p_ci_builds USING btree (auto_canceled_by_id) WHERE (auto_canceled_by_id IS NOT NULL);
 
 CREATE INDEX p_ci_builds_commit_id_artifacts_expire_at_id_idx ON ONLY p_ci_builds USING btree (commit_id, artifacts_expire_at, id) WHERE (((type)::text = 'Ci::Build'::text) AND ((retried = false) OR (retried IS NULL)) AND ((name)::text = ANY (ARRAY[('sast'::character varying)::text, ('secret_detection'::character varying)::text, ('dependency_scanning'::character varying)::text, ('container_scanning'::character varying)::text, ('dast'::character varying)::text])));
@@ -50829,8 +50811,6 @@ CREATE INDEX revised_idx_for_owasp_top_10_group_level_reports ON vulnerability_r
 
 CREATE INDEX scan_finding_approval_mr_rule_index_id ON approval_merge_request_rules USING btree (id) WHERE (report_type = 4);
 
-CREATE INDEX scan_finding_approval_mr_rule_index_merge_request_id ON approval_merge_request_rules USING btree (merge_request_id) WHERE (report_type = 4);
-
 CREATE INDEX scan_finding_approval_mr_rule_index_mr_id_and_created_at ON approval_merge_request_rules USING btree (merge_request_id, created_at) WHERE (report_type = 4);
 
 CREATE INDEX scan_finding_approval_project_rule_index_created_at_project_id ON approval_project_rules USING btree (created_at, project_id) WHERE (report_type = 4);
@@ -50846,8 +50826,6 @@ CREATE INDEX security_findings_scanner_id_idx ON ONLY security_findings USING bt
 CREATE INDEX security_findings_severity_idx ON ONLY security_findings USING btree (severity);
 
 CREATE UNIQUE INDEX security_findings_uuid_scan_id_partition_number_idx ON ONLY security_findings USING btree (uuid, scan_id, partition_number);
-
-CREATE INDEX security_policy_approval_mr_rule_index_merge_request_id ON approval_merge_request_rules USING btree (merge_request_id) WHERE (report_type = ANY (ARRAY[4, 2, 5]));
 
 CREATE INDEX snippet_uploads_checksum_idx ON snippet_uploads USING btree (checksum);
 
@@ -50872,8 +50850,6 @@ CREATE UNIQUE INDEX snippet_user_mentions_on_snippet_id_index ON snippet_user_me
 CREATE INDEX temp_index_on_users_where_dark_theme ON users USING btree (id) WHERE (theme_id = 11);
 
 CREATE UNIQUE INDEX term_agreements_unique_index ON term_agreements USING btree (user_id, term_id);
-
-CREATE INDEX tmp_idx_orphaned_approval_merge_request_rules ON approval_merge_request_rules USING btree (id) WHERE ((report_type = ANY (ARRAY[2, 4])) AND (security_orchestration_policy_configuration_id IS NULL));
 
 CREATE INDEX tmp_idx_orphaned_approval_project_rules ON approval_project_rules USING btree (id) WHERE ((report_type = ANY (ARRAY[2, 4])) AND (security_orchestration_policy_configuration_id IS NULL));
 
@@ -54467,8 +54443,6 @@ ALTER INDEX index_uploads_9ba88c4165_on_uploaded_by_user_id ATTACH PARTITION bul
 
 ALTER INDEX index_uploads_9ba88c4165_on_uploader_and_path ATTACH PARTITION bulk_import_export_upload_uploads_uploader_path_idx;
 
-ALTER INDEX p_ci_build_needs_pkey ATTACH PARTITION ci_build_needs_pkey;
-
 ALTER INDEX index_ci_rcrl_scopings_on_controller_id_and_runner_id_and_type ATTACH PARTITION ci_runner_controller_runner_l_runner_controller_id_runner_i_idx;
 
 ALTER INDEX index_ci_rcrl_scopings_on_runner_id_and_type ATTACH PARTITION ci_runner_controller_runner_level_sco_runner_id_runner_type_idx;
@@ -54608,10 +54582,6 @@ ALTER INDEX index_uploads_9ba88c4165_on_store ATTACH PARTITION import_export_upl
 ALTER INDEX index_uploads_9ba88c4165_on_uploaded_by_user_id ATTACH PARTITION import_export_upload_uploads_uploaded_by_user_id_idx;
 
 ALTER INDEX index_uploads_9ba88c4165_on_uploader_and_path ATTACH PARTITION import_export_upload_uploads_uploader_path_idx;
-
-ALTER INDEX p_ci_build_needs_build_id_name_partition_id_idx ATTACH PARTITION index_ci_build_needs_on_build_id_and_name_partitioning;
-
-ALTER INDEX p_ci_build_needs_project_id_idx ATTACH PARTITION index_ci_build_needs_on_project_id;
 
 ALTER INDEX index_ci_runner_taggings_on_organization_id ATTACH PARTITION index_ci_runner_taggings_group_type_on_organization_id;
 

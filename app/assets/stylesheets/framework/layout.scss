@@ -26,8 +26,8 @@ html {
 }
 
 .layout-page {
-  padding-top: $calc-application-bars-height;
-  padding-bottom: $calc-application-footer-height;
+  @apply gl-pt-0;
+  @apply gl-pb-3;
 }
 
 .content-wrapper {

@@ -44,6 +44,7 @@ apply only to that method. All other items apply to all installation methods.
 
 Before upgrading to GitLab 18.11, review the following:
 
+- [18.11.0 - 18.11.2] - [Geo blob sync failures with `log_error` NoMethodError on file storage](#geo-blob-sync-failures-with-log_error-nomethoderror-on-file-storage) (Geo)
 - [18.11.0 - 18.11.1] - [CI job token regression pulling container images from internal and public projects](#ci-job-token-regression-pulling-container-images-from-internal-and-public-projects)
 - [18.11.0] - [Upgrading to 18.11 triggers a PostgreSQL 17.7 version upgrade](#postgresql-version-177-upgrade-on-gitlab-1811) (Linux package, Docker, Geo)
 - [18.11.0] - [Mattermost and Spamcheck removed from SLES 12.5 packages](#mattermost-and-spamcheck-removed-from-sles-125-packages) (Linux package)
@@ -52,6 +53,7 @@ Before upgrading to GitLab 18.11, review the following:
 
 Before upgrading to GitLab 18.10, review the following:
 
+- [18.10.0 - 18.10.5] - [Geo blob sync failures with `log_error` NoMethodError on file storage](#geo-blob-sync-failures-with-log_error-nomethoderror-on-file-storage) (Geo)
 - [18.10.0 - 18.10.3] - [Geo site URL blocked when using outbound filtering](#geo-site-url-blocked-when-using-outbound-filtering) (Geo)
 - [18.10.0 - 18.10.3] - [Geo blob download failures on Ubuntu 24.04 with kernel 6.8+](#geo-blob-download-failures-on-ubuntu-2404-with-kernel-68) (Linux package, Geo)
 - [18.10.0 - 18.10.3] - [Geo secondary throttled jobs not draining](#geo-secondary-throttled-jobs-not-draining) (Geo)
@@ -157,6 +159,33 @@ Before upgrading to GitLab 18.0, review the following:
 ## Upgrade notes
 
 Specific upgrade notes for GitLab 18.
+
+### Geo blob sync failures with `log_error` NoMethodError on file storage
+
+{{< details >}}
+
+- Tier: Premium, Ultimate
+
+{{< /details >}}
+
+- Affects: Geo (file storage only)
+- Affected versions:
+
+  | Release           | Affected patch releases | Fixed patch level |
+  | ----------------- |-------------------------|-------------------|
+  | 18.11             | 18.11.0 - 18.11.2       | 18.11.3           |
+  | 18.10             | 18.10.0 - 18.10.5       | 18.10.6           |
+  | 18.0 - 18.9       | All patch releases      | Not fixed         |
+
+On Geo secondary sites that store blobs on **file storage** (rather than object
+storage), blob replication (such as Pipeline Artifacts, LFS objects, uploads,
+and job artifacts) can fail with a misleading error:
+
+```plaintext
+Error while attempting to sync: undefined method `log_error' for an instance of Gitlab::Geo::Replication::BlobDownloader
+```
+
+For more information, see [issue 598565](https://gitlab.com/gitlab-org/gitlab/-/work_items/598565).
 
 ### CI job token regression pulling container images from internal and public projects
 

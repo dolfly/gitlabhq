@@ -221,7 +221,7 @@ Customers on GitLab.com can use all of the fleet dashboard metrics available for
 
 {{< /details >}}
 
-GitLab 17.1 includes packages for supporting [Ubuntu Noble 24.04](/install/package).
+GitLab 17.1 includes packages for supporting [Ubuntu Noble 24.04](../../install/package/_index.md).
 
 ### New GraphQL API argument `markedForDeletionOn` for groups and projects
 
@@ -304,7 +304,7 @@ Thank you [@yasuk](https://gitlab.com/yasuk) for this community contribution!
 
 - Tier: Free, Premium, Ultimate
 - Offering: GitLab.com
-- Links: [Documentation](/api/group_members.md#add-a-group-member) | [Related issue](https://gitlab.com/gitlab-org/gitlab/-/issues/28208)
+- Links: [Documentation](../../api/group_members.md#add-a-group-member) | [Related issue](https://gitlab.com/gitlab-org/gitlab/-/issues/28208)
 
 {{< /details >}}
 

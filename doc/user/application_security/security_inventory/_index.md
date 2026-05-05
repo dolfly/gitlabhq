@@ -25,7 +25,7 @@ Use the security inventory to visualize which assets you need to secure and unde
 The security inventory shows:
 
 - Your groups, subgroups, and projects.
-- Security scanner coverage for each project, regardless of how the scanner is enabled. Security scanners include:
+- Security scanner coverage for each project, regardless of how the scanner is enabled. Tool coverage reflects the scan status of the most recent pipeline on the default branch. Security scanners include:
   - Static application security testing (SAST)
   - Dependency scanning
   - Container scanning

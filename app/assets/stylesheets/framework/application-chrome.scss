@@ -13,13 +13,6 @@
     scrollbar-color: var(--gl-color-neutral-950) transparent;
   }
 
-  // Variable overrides
-  @include media-breakpoint-up(xl) {
-    &.page-with-panels .page-with-super-sidebar {
-      --application-bar-left: 0px; // stylelint-disable-line length-zero-no-unit
-    }
-  }
-
   // Fix height
   &, body {
     @apply gl-h-full;
@@ -37,12 +30,6 @@
   // of rounded button borders
   .gl-gap-3:has(> .gl-button) {
     @apply gl-gap-2-5; //= 6px
-  }
-
-  // When using panels, remove top padding
-  &.page-with-panels .layout-page {
-    @apply gl-pt-0 #{!important};
-    @apply gl-pb-3;
   }
 
   // Free trial button
@@ -229,7 +216,7 @@
 
   // Layout
   &.page-with-panels .layout-page {
-    @apply gl-flex gl-gap-0 lg:gl-gap-3 gl-items-stretch gl-justify-start lg:gl-justify-center gl-flex-col lg:gl-flex-row lg:gl-pl-0 gl-pt-3 lg:gl-pb-3 sm:gl-pr-3;
+    @apply gl-flex gl-gap-0 lg:gl-gap-3 gl-items-stretch gl-justify-start lg:gl-justify-center gl-flex-col lg:gl-flex-row lg:gl-pl-0 lg:gl-pb-3 sm:gl-pr-3;
     min-height: 0;
     flex: 1;
   }

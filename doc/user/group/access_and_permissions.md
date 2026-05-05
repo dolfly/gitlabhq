@@ -126,6 +126,7 @@ list of security implications when accessing GitLab from a disallowed IP address
 - IP restrictions might not apply to forked projects or actions that indirectly interact with issues
   or artifacts in an IP-restricted group. For example, a merge request that closes an issue in an
   IP-restricted group by using an issue reference in the merge request description.
+- IP restrictions apply to project and group access tokens, service accounts, deploy keys, and deploy tokens.
 
 ### GitLab.com access restrictions
 

@@ -182,7 +182,7 @@ ul.related-merge-requests > li gl-emoji {
 }
 
 .issue-sticky-header {
-  left: var(--application-bar-left);
+  left: 0;
   right: var(--application-bar-right);
   width: auto;
   top: $calc-application-header-height;

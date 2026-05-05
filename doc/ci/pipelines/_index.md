@@ -78,7 +78,7 @@ You can also configure specific aspects of your pipelines through the GitLab UI:
 
 If you use VS Code to edit your GitLab CI/CD configuration, the [GitLab for VS Code extension](../../editor_extensions/visual_studio_code/_index.md)
 helps you [validate your configuration](../../editor_extensions/visual_studio_code/cicd.md#test-gitlab-cicd-configuration)
-and [view your pipeline status](../../editor_extensions/visual_studio_code/cicd.md#view-pipeline-information).
+and [view your pipeline status](../../editor_extensions/visual_studio_code/cicd.md#monitor-and-manage-pipelines).
 
 ### Run a pipeline manually
 

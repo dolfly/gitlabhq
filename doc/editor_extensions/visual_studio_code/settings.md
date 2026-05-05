@@ -41,7 +41,7 @@ This extension provides several sets of commands that you can trigger in the
 
 ### Manage CI/CD pipelines
 
-- [`GitLab: Show Merged GitLab CI/CD Configuration`](cicd.md#show-merged-gitlab-cicd-configuration):
+- [`GitLab: Show Merged GitLab CI/CD Configuration`](cicd.md#show-merged-configuration-file):
   Show a preview of the GitLab CI/CD configuration file `.gitlab-ci.yml` with all includes resolved.
 - [`GitLab: Validate GitLab CI/CD Configuration`](cicd.md#test-gitlab-cicd-configuration):
   Test the GitLab CI/CD configuration file `.gitlab-ci.yml`.

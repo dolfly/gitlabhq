@@ -1,7 +1,5 @@
 ---
 approval_merge_request_rules:
-  scan_finding_approval_mr_rule_index_mr_id_and_created_at:
-  - scan_finding_approval_mr_rule_index_merge_request_id
   index_approval_rule_name_for_sectional_code_owners_rule_type:
   - index_approval_rules_code_owners_rule_type
 ci_job_artifact_states:
