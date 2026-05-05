@@ -151,6 +151,7 @@ group:
   - update_git_access_protocol
   - update_group_link
   - update_knowledge_graph_setting
+  - update_member_invitation_setting
   - update_runners_registration_token
   - update_secrets_permission
   - update_security_orchestration_policy_project

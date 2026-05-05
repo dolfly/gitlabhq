@@ -337,7 +337,7 @@ be non-rooted to match at all directory levels.
 
 ### forbidden: file in allowlist YAML is allowed
 
-**Given:** A file matching an entry in `allowed_committed_files.yml` is
+**Given:** A file matching an entry in `config.yml` is
 tracked by git
 
 **When:** `scripts/ai_harness/doctor`
@@ -357,7 +357,7 @@ non-allowlisted file.
 
 ### forbidden: file outside allowlist YAML is committed
 
-**Given:** A `.claude/skills/` file not in `allowed_committed_files.yml`
+**Given:** A `.claude/skills/` file not in `config.yml`
 is tracked by git
 
 **When:** `scripts/ai_harness/doctor`

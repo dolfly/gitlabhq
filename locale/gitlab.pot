@@ -10566,6 +10566,9 @@ msgstr ""
 msgid "Artifact could not be deleted."
 msgstr ""
 
+msgid "Artifact registry"
+msgstr ""
+
 msgid "Artifact was successfully deleted."
 msgstr ""
 
@@ -36873,6 +36876,9 @@ msgstr[1] ""
 msgid "IdentityVerification|A new code has been sent."
 msgstr ""
 
+msgid "IdentityVerification|A new code is on its way. If it doesn't arrive, check your spam folder."
+msgstr ""
+
 msgid "IdentityVerification|Before you can create additional groups, we need to verify your account."
 msgstr ""
 
@@ -36907,6 +36913,9 @@ msgid "IdentityVerification|Credit card Verification"
 msgstr ""
 
 msgid "IdentityVerification|Didn't get the code? %{buttonStart}Resend code%{buttonEnd}."
+msgstr ""
+
+msgid "IdentityVerification|Didn't get the code? You can resend in %{timer}."
 msgstr ""
 
 msgid "IdentityVerification|Email Verification"
@@ -49754,6 +49763,14 @@ msgid_plural "Orbit|%{count} connections"
 msgstr[0] ""
 msgstr[1] ""
 
+msgid "Orbit|%{indexed} of %{total} projects indexed"
+msgstr ""
+
+msgid "Orbit|%{indexed} project indexed"
+msgid_plural "Orbit|%{indexed} projects indexed"
+msgstr[0] ""
+msgstr[1] ""
+
 msgid "Orbit|+%{count} more"
 msgid_plural "Orbit|+%{count} more"
 msgstr[0] ""
@@ -49958,6 +49975,9 @@ msgid "Orbit|File"
 msgstr ""
 
 msgid "Orbit|Filter"
+msgstr ""
+
+msgid "Orbit|Filter by type"
 msgstr ""
 
 msgid "Orbit|Finding"

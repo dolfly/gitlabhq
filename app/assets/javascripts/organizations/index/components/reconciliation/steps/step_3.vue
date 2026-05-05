@@ -1,24 +1,18 @@
 <script>
-import { GlAvatarLabeled, GlCard, GlIcon, GlTooltipDirective } from '@gitlab/ui';
+import { GlAvatarLabeled, GlCard } from '@gitlab/ui';
 import { AVATAR_SHAPE_OPTION_RECT } from '~/vue_shared/constants';
-import { VISIBILITY_TYPE_ICON, GROUP_VISIBILITY_TYPE } from '~/visibility_level/constants';
 import { getIdFromGraphQLId } from '~/graphql_shared/utils';
-import { numberToMetricPrefix } from '~/lib/utils/number_utils';
-import ListItemStat from '~/vue_shared/components/resource_lists/list_item_stat.vue';
+import OrganizationGroupCard from '../organization_group_card.vue';
 import BaseStep from './base_step.vue';
 
 export default {
   name: 'ReconciliationStep3',
   AVATAR_SHAPE_OPTION_RECT,
-  directives: {
-    GlTooltip: GlTooltipDirective,
-  },
   components: {
     BaseStep,
     GlAvatarLabeled,
     GlCard,
-    GlIcon,
-    ListItemStat,
+    OrganizationGroupCard,
   },
   props: {
     organizations: {
@@ -36,13 +30,6 @@ export default {
   },
   methods: {
     getIdFromGraphQLId,
-    numberToMetricPrefix,
-    visibilityIcon(visibility) {
-      return VISIBILITY_TYPE_ICON[visibility];
-    },
-    visibilityTooltip(visibility) {
-      return GROUP_VISIBILITY_TYPE[visibility];
-    },
   },
 };
 </script>
@@ -79,43 +66,11 @@ export default {
             />
           </template>
           <div class="gl-grid gl-grid-cols-2 gl-gap-4 md:gl-grid-cols-3">
-            <div
+            <organization-group-card
               v-for="group in organization.groups.nodes"
               :key="group.id"
-              class="gl-rounded-xl gl-bg-white gl-p-4"
-              data-testid="organization-group"
-            >
-              <div class="gl-flex gl-items-center gl-gap-3">
-                <gl-icon class="gl-shrink-0" variant="subtle" name="group" />
-                <div class="gl-break-anywhere">
-                  <span class="gl-font-bold">{{ group.fullName }}</span
-                  ><gl-icon
-                    v-gl-tooltip="visibilityTooltip(group.visibility)"
-                    :name="visibilityIcon(group.visibility)"
-                    class="gl-ml-2"
-                    variant="subtle"
-                    data-testid="group-visibility"
-                  />
-                </div>
-              </div>
-              <div class="gl-mt-3 gl-flex gl-items-center gl-gap-x-3 gl-pl-6">
-                <list-item-stat
-                  :tooltip-text="__('Subgroups')"
-                  icon-name="subgroup"
-                  :stat="numberToMetricPrefix(group.descendantGroupsCount)"
-                />
-                <list-item-stat
-                  :tooltip-text="__('Projects')"
-                  icon-name="project"
-                  :stat="numberToMetricPrefix(group.projectsCount)"
-                />
-                <list-item-stat
-                  :tooltip-text="__('Direct members')"
-                  icon-name="users"
-                  :stat="numberToMetricPrefix(group.groupMembersCount)"
-                />
-              </div>
-            </div>
+              :group="group"
+            />
           </div>
         </gl-card>
       </div>

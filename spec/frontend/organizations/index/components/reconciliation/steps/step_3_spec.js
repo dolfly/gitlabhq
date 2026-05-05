@@ -1,24 +1,13 @@
 import { GlAvatarLabeled, GlCard } from '@gitlab/ui';
-import organizationsForReconciliationResponse from 'test_fixtures/graphql/organizations/organizations_for_reconciliation.query.graphql.json';
 import { shallowMountExtended } from 'helpers/vue_test_utils_helper';
-import { createMockDirective, getBinding } from 'helpers/vue_mock_directive';
 import Step3 from '~/organizations/index/components/reconciliation/steps/step_3.vue';
 import BaseStep from '~/organizations/index/components/reconciliation/steps/base_step.vue';
-import ListItemStat from '~/vue_shared/components/resource_lists/list_item_stat.vue';
-
-const {
-  data: {
-    organizations: { nodes: mockOrganizations },
-  },
-} = organizationsForReconciliationResponse;
-
-const organizationWithGroups = mockOrganizations.find(
-  (organization) => organization.groups.nodes.length,
-);
-
-const organizationsWithoutGroups = mockOrganizations.filter(
-  (organization) => !organization.groups.nodes.length,
-);
+import OrganizationGroupCard from '~/organizations/index/components/reconciliation/organization_group_card.vue';
+import {
+  mockOrganizations,
+  organizationWithGroups,
+  organizationsWithoutGroups,
+} from '../mock_data';
 
 describe('ReconciliationStep3', () => {
   let wrapper;
@@ -28,9 +17,6 @@ describe('ReconciliationStep3', () => {
       propsData: {
         organizations: mockOrganizations,
         ...props,
-      },
-      directives: {
-        GlTooltip: createMockDirective('gl-tooltip'),
       },
       stubs: {
         BaseStep,
@@ -43,7 +29,7 @@ describe('ReconciliationStep3', () => {
   const findAllCards = () => wrapper.findAllComponents(GlCard);
   const findRetainedSection = () => wrapper.findByTestId('retained-organizations-section');
   const findDeletedSection = () => wrapper.findByTestId('deleted-organizations-section');
-  const findAllGroupCards = () => wrapper.findAllByTestId('organization-group');
+  const findAllGroupCards = () => wrapper.findAllComponents(OrganizationGroupCard);
 
   describe('template', () => {
     beforeEach(() => {
@@ -87,43 +73,12 @@ describe('ReconciliationStep3', () => {
       describe('group cards', () => {
         const groups = organizationWithGroups.groups.nodes;
 
-        it('renders a group card for each group', () => {
+        it('renders an organization group card for each group', () => {
           expect(findAllGroupCards()).toHaveLength(groups.length);
         });
 
-        it('renders group name', () => {
-          expect(wrapper.findByText(groups[0].fullName).exists()).toBe(true);
-        });
-
-        it('renders group visibility with tooltip', () => {
-          const icon = wrapper.findByTestId('group-visibility');
-
-          expect(icon.props('name')).toBe('earth');
-          expect(getBinding(icon.element, 'gl-tooltip').value).toBe(
-            'Public - The group and any public projects can be viewed without any authentication.',
-          );
-        });
-
-        it('renders group stats', () => {
-          const stats = wrapper.findAllComponents(ListItemStat);
-
-          expect(stats.at(0).props()).toMatchObject({
-            tooltipText: 'Subgroups',
-            iconName: 'subgroup',
-            stat: '0',
-          });
-
-          expect(stats.at(1).props()).toMatchObject({
-            tooltipText: 'Projects',
-            iconName: 'project',
-            stat: '1',
-          });
-
-          expect(stats.at(2).props()).toMatchObject({
-            tooltipText: 'Direct members',
-            iconName: 'users',
-            stat: '2',
-          });
+        it('passes group prop to organization group card', () => {
+          expect(findAllGroupCards().at(0).props('group')).toEqual(groups[0]);
         });
       });
     });

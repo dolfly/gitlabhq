@@ -1,26 +1,20 @@
 <script>
-import { GlAvatarLabeled, GlCard, GlIcon, GlTooltipDirective } from '@gitlab/ui';
+import { GlAvatarLabeled, GlCard } from '@gitlab/ui';
 import Draggable from '~/lib/utils/vue3compat/draggable_compat.vue';
 import { AVATAR_SHAPE_OPTION_RECT } from '~/vue_shared/constants';
-import { VISIBILITY_TYPE_ICON, GROUP_VISIBILITY_TYPE } from '~/visibility_level/constants';
 import { getIdFromGraphQLId } from '~/graphql_shared/utils';
-import { numberToMetricPrefix } from '~/lib/utils/number_utils';
-import ListItemStat from '~/vue_shared/components/resource_lists/list_item_stat.vue';
+import OrganizationGroupCard from '../organization_group_card.vue';
 import BaseStep from './base_step.vue';
 
 export default {
   name: 'ReconciliationStep2',
   AVATAR_SHAPE_OPTION_RECT,
   draggableGroupName: 'organizationGroups',
-  directives: {
-    GlTooltip: GlTooltipDirective,
-  },
   components: {
     BaseStep,
     GlCard,
     GlAvatarLabeled,
-    GlIcon,
-    ListItemStat,
+    OrganizationGroupCard,
     Draggable,
   },
   props: {
@@ -37,13 +31,6 @@ export default {
   },
   methods: {
     getIdFromGraphQLId,
-    numberToMetricPrefix,
-    visibilityIcon(visibility) {
-      return VISIBILITY_TYPE_ICON[visibility];
-    },
-    visibilityTooltip(visibility) {
-      return GROUP_VISIBILITY_TYPE[visibility];
-    },
     onDraggableInput(changedOrganization, groups) {
       this.pendingChanges[changedOrganization.id] = groups;
     },
@@ -115,43 +102,12 @@ export default {
                 @input="onDraggableInput(organization, $event)"
                 @end="onDraggableEnd"
               >
-                <div
+                <organization-group-card
                   v-for="group in organization.groups.nodes"
                   :key="group.id"
-                  class="gl-select-none gl-rounded-xl gl-bg-default gl-p-4 hover:gl-cursor-grab hover:gl-shadow-md"
-                  data-testid="organization-group"
-                >
-                  <div class="gl-flex gl-items-center gl-gap-3">
-                    <gl-icon class="gl-shrink-0" variant="subtle" name="group" />
-                    <div class="gl-break-anywhere">
-                      <span class="gl-font-bold">{{ group.fullName }}</span
-                      ><gl-icon
-                        v-gl-tooltip="visibilityTooltip(group.visibility)"
-                        :name="visibilityIcon(group.visibility)"
-                        class="gl-ml-2"
-                        variant="subtle"
-                        data-testid="group-visibility"
-                      />
-                    </div>
-                  </div>
-                  <div class="gl-mt-3 gl-flex gl-items-center gl-gap-x-3 gl-pl-6">
-                    <list-item-stat
-                      :tooltip-text="__('Subgroups')"
-                      icon-name="subgroup"
-                      :stat="numberToMetricPrefix(group.descendantGroupsCount)"
-                    />
-                    <list-item-stat
-                      :tooltip-text="__('Projects')"
-                      icon-name="project"
-                      :stat="numberToMetricPrefix(group.projectsCount)"
-                    />
-                    <list-item-stat
-                      :tooltip-text="__('Direct members')"
-                      icon-name="users"
-                      :stat="numberToMetricPrefix(group.groupMembersCount)"
-                    />
-                  </div>
-                </div>
+                  :group="group"
+                  class="gl-select-none hover:gl-cursor-grab hover:gl-shadow-md"
+                />
               </draggable>
               <div
                 class="organizations-reconciliation-draggable-empty-state gl-border-secondary gl-pointer-events-none gl-absolute gl-flex gl-h-11 gl-w-full gl-items-center gl-justify-center gl-rounded-md gl-border-dashed gl-border-strong"

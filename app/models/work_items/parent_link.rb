@@ -11,6 +11,7 @@ module WorkItems
 
     belongs_to :work_item
     belongs_to :work_item_parent, class_name: 'WorkItem'
+    belongs_to :namespace
 
     validates :work_item_parent, presence: true
     validates :work_item, presence: true, uniqueness: true

@@ -8,6 +8,7 @@ RSpec.describe WorkItems::ParentLink, feature_category: :portfolio_management do
   describe 'associations' do
     it { is_expected.to belong_to(:work_item) }
     it { is_expected.to belong_to(:work_item_parent).class_name('WorkItem') }
+    it { is_expected.to belong_to(:namespace) }
   end
 
   describe 'validations' do

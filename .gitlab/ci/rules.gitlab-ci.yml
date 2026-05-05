@@ -1070,16 +1070,18 @@
 # Keep in sync with doctor runtime dependencies:
 #   - scripts/ai_harness/doctor (entrypoint + helper scripts)
 #   - tooling/ai_harness/doctor/**/* (library code under tooling/)
+#   - tooling/ai_harness/config.yml (harness-wide config consumed by the doctor)
 #   - lib/gitlab/fp/**/* (functional programming utilities used by doctor)
 # When adding new runtime dependencies to doctor, add their paths here
 # in the same MR.
-.ai-harness-patterns: &ai-harness-patterns
+.ai-harness-doctor-patterns: &ai-harness-doctor-patterns
   - "**/AGENTS.md"
   - "**/CLAUDE.md"
   - ".ai/**/*"
   - "**/.ai/**/*"
   - "scripts/ai_harness/doctor"
   - "tooling/ai_harness/doctor/**/*"
+  - "tooling/ai_harness/config.yml"
   - "lib/gitlab/fp/**/*"
 
 ##################
@@ -3643,7 +3645,7 @@
 .ai-harness:rules:doctor:
   rules:
     - <<: *if-default-refs
-      changes: *ai-harness-patterns
+      changes: *ai-harness-doctor-patterns
 
 .test-metadata:rules:export-diff-stats:
   rules:

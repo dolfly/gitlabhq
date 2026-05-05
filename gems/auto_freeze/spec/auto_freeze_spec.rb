@@ -13,6 +13,39 @@ RSpec.describe AutoFreeze do
     end
   end
 
+  describe 'integration test' do
+    after do
+      RequireHooks.class_variable_set(:@@around_load, []) # rubocop:disable Style/ClassVars
+    end
+
+    it 'works with included_gems' do
+      described_class.setup!(included_gems: %w[language_server-protocol])
+
+      require 'language_server-protocol'
+
+      expect(LanguageServer::Protocol::VERSION).to be_frozen
+    end
+
+    it 'works with excluded_gems' do
+      described_class.setup!(excluded_gems: %w[minitest])
+
+      require 'minitest'
+
+      expect(Minitest::VERSION).not_to be_frozen
+    end
+
+    it 'works with excluded_gems of dependencies' do
+      # Exclude some dependencies of pry-shell
+      described_class.setup!(excluded_gems: %w[tty-markdown unicode_utils])
+
+      require 'pry-shell'
+
+      # unicode_utils-1.4.0/lib/unicode_utils/read_cdata.rb:124:in `force_encoding'
+      # does not work with frozen strings
+      expect(UnicodeUtils::CDATA_DIR).not_to be_frozen
+    end
+  end
+
   describe '.setup!' do
     before do
       allow(Freezolite).to receive(:setup)

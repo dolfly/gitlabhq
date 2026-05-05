@@ -127,6 +127,11 @@ RSpec.describe 'Email Verification On Login', :with_current_organization, :clean
     end
 
     describe 'resending a new code' do
+      before do
+        # Cooldown UI is covered by component unit specs.
+        stub_const('VerifiesWithEmailHelper::RESEND_COOLDOWN_PERIOD', 0)
+      end
+
       it 'resends a new code' do
         perform_enqueued_jobs do
           submit_sign_in_form_for(user)
@@ -136,7 +141,8 @@ RSpec.describe 'Email Verification On Login', :with_current_organization, :clean
           expect_log_message('Instructions Sent', reason: 'new unlock token needed')
 
           click_request_new_code_button
-          expect(page).to have_content(s_('IdentityVerification|A new code has been sent.'))
+          expect(page).to have_content(s_('IdentityVerification|A new code is on its way. '\
+                                          'If it doesn\'t arrive, check your spam folder.'))
           expect_log_message('Instructions Sent', reason: 'resend lock verification code')
           new_code = expect_instructions_email_and_extract_code
           expect(code).not_to eq(new_code)
@@ -173,7 +179,8 @@ RSpec.describe 'Email Verification On Login', :with_current_organization, :clean
             fill_in _('Email'), with: secondary_email.email
 
             click_button s_('IdentityVerification|Resend code')
-            expect(page).to have_content(s_('IdentityVerification|A new code has been sent.'))
+            expect(page).to have_content(s_('IdentityVerification|A new code is on its way. '\
+                                            'If it doesn\'t arrive, check your spam folder.'))
             expect_log_message('Instructions Sent', reason: 'resend lock verification code')
 
             code_from_secondary_email = expect_instructions_email_and_extract_code(email: secondary_email.email)
@@ -345,6 +352,8 @@ RSpec.describe 'Email Verification On Login', :with_current_organization, :clean
   describe 'inconsistent states' do
     context 'when the feature flag is toggled off after being prompted for a verification token' do
       before do
+        # Resend email cooldown UI is covered by component JS unit specs.
+        stub_const('VerifiesWithEmailHelper::RESEND_COOLDOWN_PERIOD', 0)
         create(:authentication_event, :successful, user: user, ip_address: '1.2.3.4')
       end
 

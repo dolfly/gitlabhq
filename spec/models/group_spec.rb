@@ -1216,14 +1216,14 @@ RSpec.describe Group, feature_category: :groups_and_projects do
       end
     end
 
-    describe 'with_owners' do
+    describe 'preload_owners' do
       let_it_be(:owner) { create(:user) }
 
       before_all do
         private_group.add_owner(owner)
       end
 
-      subject { described_class.with_owners }
+      subject { described_class.preload_owners }
 
       it 'preloads the owners association' do
         associations = subject.map { |group| group.association(:owners) }

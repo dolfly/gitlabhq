@@ -15,3 +15,9 @@ export const organizationWithoutGroupsIndex = mockOrganizations.findIndex(
   (organization) => !organization.groups.nodes.length,
 );
 export const organizationWithoutGroups = mockOrganizations[organizationWithoutGroupsIndex];
+
+export const organizationsWithoutGroups = mockOrganizations.filter(
+  (organization) => !organization.groups.nodes.length,
+);
+
+export const [mockGroup] = organizationWithGroups.groups.nodes;

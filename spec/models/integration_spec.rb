@@ -13,6 +13,7 @@ RSpec.describe Integration, feature_category: :integrations do
   describe "associations" do
     it { is_expected.to belong_to(:project).inverse_of(:integrations) }
     it { is_expected.to belong_to(:group).inverse_of(:integrations) }
+    it { is_expected.to belong_to(:inherit_from).optional }
 
     it do
       is_expected.to have_one(:issue_tracker_data)

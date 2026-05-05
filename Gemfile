@@ -545,26 +545,17 @@ group :development, :test do
   gem 'gitlab-housekeeper', path: 'gems/gitlab-housekeeper', feature_category: :tooling
 
   gem 'yard', '~> 0.9', require: false, feature_category: :tooling
-end
 
-group :development, :test, :danger do
+  # Gems required for Dangerfile
   gem 'gitlab-dangerfiles', '~> 4.11.1', require: false, feature_category: :tooling
-end
 
-group :development, :test, :coverage do
+  # Gems required for code coverage
   gem 'simplecov', '~> 0.22', require: false, feature_category: :tooling
   gem 'simplecov-lcov', '~> 0.8.0', require: false, feature_category: :tooling
   gem 'simplecov-cobertura', '~> 3.1.0', require: false, feature_category: :tooling
   gem 'undercover', '~> 0.8.0', require: false, feature_category: :tooling
-end
 
-# Gems required in omnibus-gitlab pipeline
-group :development, :test, :omnibus do
-  gem 'license_finder', '~> 7.0', require: false, feature_category: :shared # rubocop:todo Gemfile/MissingFeatureCategory -- https://gitlab.com/gitlab-org/gitlab/-/issues/581839
-end
-
-# Gems required in various pipelines
-group :development, :test, :monorepo do
+  # Gems required in various pipelines
   gem 'gitlab-rspec', path: 'gems/gitlab-rspec', feature_category: :shared # rubocop:todo Gemfile/MissingFeatureCategory -- https://gitlab.com/gitlab-org/gitlab/-/issues/581839
   gem 'gitlab-rspec_flaky', path: 'gems/gitlab-rspec_flaky', feature_category: :tooling
 end
@@ -752,3 +743,6 @@ gem "gitlab-cloud-connector", "~> 1.45", require: 'gitlab/cloud_connector', feat
 gem "gvltools", "~> 0.4.0", feature_category: :shared # rubocop:todo Gemfile/MissingFeatureCategory -- https://gitlab.com/gitlab-org/gitlab/-/issues/581839
 
 gem 'gitlab_query_language', '~> 0.26.0', feature_category: :integrations
+
+# Gems required in omnibus-gitlab pipeline
+gem 'license_finder', '~> 7.0', require: false, feature_category: :shared # rubocop:todo Gemfile/MissingFeatureCategory -- https://gitlab.com/gitlab-org/gitlab/-/issues/581839

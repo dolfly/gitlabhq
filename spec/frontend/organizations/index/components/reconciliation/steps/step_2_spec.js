@@ -2,11 +2,10 @@ import { GlAvatarLabeled, GlCard } from '@gitlab/ui';
 import { nextTick } from 'vue';
 import Draggable from '~/lib/utils/vue3compat/draggable_compat.vue';
 import { mountExtended, extendedWrapper } from 'helpers/vue_test_utils_helper';
-import { createMockDirective, getBinding } from 'helpers/vue_mock_directive';
 import { stubComponent } from 'helpers/stub_component';
 import Step2 from '~/organizations/index/components/reconciliation/steps/step_2.vue';
 import BaseStep from '~/organizations/index/components/reconciliation/steps/base_step.vue';
-import ListItemStat from '~/vue_shared/components/resource_lists/list_item_stat.vue';
+import OrganizationGroupCard from '~/organizations/index/components/reconciliation/organization_group_card.vue';
 import {
   mockOrganizations,
   organizationWithGroupsIndex,
@@ -24,9 +23,6 @@ describe('ReconciliationStep2', () => {
         organizations: mockOrganizations,
         ...props,
       },
-      directives: {
-        GlTooltip: createMockDirective('gl-tooltip'),
-      },
       stubs: {
         Draggable: stubComponent(Draggable),
       },
@@ -36,6 +32,8 @@ describe('ReconciliationStep2', () => {
   const findBaseStep = () => wrapper.findComponent(BaseStep);
   const findAllCards = () => wrapper.findAllComponents(GlCard);
   const findCardAt = (index) => extendedWrapper(findAllCards().at(index));
+  const findAllGroupCards = (organizationCard) =>
+    organizationCard.findAllComponents(OrganizationGroupCard);
 
   it('renders step title', () => {
     createComponent();
@@ -73,11 +71,6 @@ describe('ReconciliationStep2', () => {
   describe('when organization has groups', () => {
     const groups = organizationWithGroups.groups.nodes;
 
-    const findAllGroupCards = (organizationCard) =>
-      organizationCard.findAllByTestId('organization-group');
-    const findGroupCardAt = (organizationCard, index) =>
-      extendedWrapper(findAllGroupCards(organizationCard).at(index));
-
     it('renders group cards', () => {
       createComponent();
 
@@ -87,72 +80,11 @@ describe('ReconciliationStep2', () => {
       expect(groupCards).toHaveLength(groups.length);
     });
 
-    it('renders group name', () => {
+    it('passes group prop to organization group card', () => {
       createComponent();
 
       const card = findCardAt(organizationWithGroupsIndex);
-      const group = groups[0];
-      const groupCard = findGroupCardAt(card, 0);
-
-      expect(groupCard.text()).toContain(group.fullName);
-    });
-
-    it('renders group visibility with tooltip', () => {
-      createComponent();
-
-      const card = findCardAt(organizationWithGroupsIndex);
-      const groupCard = findGroupCardAt(card, 0);
-      const icon = groupCard.findByTestId('group-visibility');
-
-      expect(groupCard.findByTestId('group-visibility').props('name')).toBe('earth');
-      expect(getBinding(icon.element, 'gl-tooltip').value).toBe(
-        'Public - The group and any public projects can be viewed without any authentication.',
-      );
-    });
-
-    it('renders group stats', () => {
-      const [group] = organizationWithGroups.groups.nodes;
-
-      createComponent({
-        props: {
-          organizations: mockOrganizations.toSpliced(organizationWithGroupsIndex, 1, {
-            ...organizationWithGroups,
-            groups: {
-              ...organizationWithGroups.groups,
-              nodes: [
-                {
-                  ...group,
-                  descendantGroupsCount: 1200,
-                  projectsCount: 10500,
-                  groupMembersCount: 1500000,
-                },
-              ],
-            },
-          }),
-        },
-      });
-
-      const card = findCardAt(organizationWithGroupsIndex);
-      const groupCard = findGroupCardAt(card, 0);
-      const stats = groupCard.findAllComponents(ListItemStat);
-
-      expect(stats.at(0).props()).toMatchObject({
-        tooltipText: 'Subgroups',
-        iconName: 'subgroup',
-        stat: '1.2k',
-      });
-
-      expect(stats.at(1).props()).toMatchObject({
-        tooltipText: 'Projects',
-        iconName: 'project',
-        stat: '10.5k',
-      });
-
-      expect(stats.at(2).props()).toMatchObject({
-        tooltipText: 'Direct members',
-        iconName: 'users',
-        stat: '1.5m',
-      });
+      expect(findAllGroupCards(card).at(0).props('group')).toEqual(groups[0]);
     });
   });
 

@@ -11,7 +11,7 @@ module AiHarness
       module PerformDoctorChecks
         class CheckAiReferences
           CHECK_NAME = '.ai/ reference resolution'
-          # Keep in sync: if you change this pattern, update .ai-harness-patterns
+          # Keep in sync: if you change this pattern, update .ai-harness-doctor-patterns
           # in .gitlab/ci/rules.gitlab-ci.yml so the CI job triggers on the right paths.
           AI_REF_PATTERN = %r{\.ai/[\w.\-/]+\w}
 
@@ -39,7 +39,7 @@ module AiHarness
           def self.find_missing_references(repo_root:)
             references = []
 
-            # Keep in sync: if you change these patterns, update .ai-harness-patterns
+            # Keep in sync: if you change these patterns, update .ai-harness-doctor-patterns
             # in .gitlab/ci/rules.gitlab-ci.yml so the CI job triggers on the right paths.
             stdout, stderr, status = Open3.capture3(
               'git', '-C', repo_root, 'ls-files', 'AGENTS.md', '**/AGENTS.md'

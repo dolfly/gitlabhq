@@ -69,6 +69,9 @@ and fixability behavior — see `01_intent.md §2` and `02_contracts.md §3`.
 ## File Layout
 
 ```
+tooling/ai_harness/                 ← harness-wide
+  config.yml                        runtime config (allowed_committed_files allowlist; future harness-wide keys go here)
+
 tooling/ai_harness/doctor/          ← implementation
   AGENTS.md                         agent instructions (this file; CLAUDE.md is identical)
   CLAUDE.md                         copy of AGENTS.md (parity convention)
@@ -83,6 +86,7 @@ tooling/ai_harness/doctor/          ← implementation
     perform_doctor_checks/
       main.rb                       sub-chain: runs all four checks
       resolve_repo_root.rb          git rev-parse --show-toplevel → context[:repo_root]
+      load_config.rb                loads `tooling/ai_harness/config.yml` → context[:config]
       check_parity.rb               CLAUDE.md/AGENTS.md parity check (fixable)
       check_ai_references.rb        .ai/ reference resolution check (not fixable)
       check_gitignore.rb            .gitignore coverage check (fixable)
@@ -105,6 +109,7 @@ spec/tooling/ai_harness/doctor/     ← tests (mirrors tooling/ structure)
     perform_doctor_checks/
       main_spec.rb
       resolve_repo_root_spec.rb
+      load_config_spec.rb
       check_parity_spec.rb
       check_ai_references_spec.rb
       check_gitignore_spec.rb

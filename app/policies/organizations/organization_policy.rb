@@ -30,6 +30,7 @@ module Organizations
       enable :read_organization
       enable :read_organization_user
       enable :read_work_item_type
+      enable :read_artifact_registry
       enable :transfer_group
     end
 
@@ -50,6 +51,7 @@ module Organizations
       enable :read_organization
       enable :create_group
       enable :read_work_item_type
+      enable :read_artifact_registry
     end
   end
 end

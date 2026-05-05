@@ -29,7 +29,7 @@ workhorse:verify:
     - setup-test-env
   before_script:
     - !reference [.default-utils-before_script, before_script]
-    - export BUNDLE_WITHOUT="${BUNDLE_WITHOUT}:default:test:puma:kerberos:metrics:omnibus:ed25519"
+    - export BUNDLE_WITHOUT="${BUNDLE_WITHOUT}:default:test:puma:kerberos:metrics:ed25519"
     - bundle_install_script
     - go version
     - scripts/gitaly-test-build

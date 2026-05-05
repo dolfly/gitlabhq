@@ -682,7 +682,8 @@ RSpec.describe Organizations::Transfer::UsersService, :aggregate_failures, featu
               'ProjectSnippet',
               'Snippet',
               'ImportFailure',
-              'Clusters::Cluster'
+              'Clusters::Cluster',
+              'AntiAbuse::Event'
             ]
           end
 

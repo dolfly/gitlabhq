@@ -94,13 +94,19 @@ context[:exit_code] = Integer     # 0 or 1
 The sub-chain runs when `print_help` is false. It adds to the context:
 ```ruby
 context[:repo_root] = String     # Added by ResolveRepoRoot
+context[:config] = Hash          # Added by LoadConfig
 context[:stdout_text] = String   # Added by FormatOutput
 context[:exit_code] = Integer    # Added by DetermineExitCode
 ```
 
-`ResolveRepoRoot` raises on failure (git not found, not in a repo) —
-these are infrastructure errors, not domain errors. Check steps append
-to `context[:results]`.
+`context[:config]` mirrors the shape of `tooling/ai_harness/config.yml`
+exactly — hashes/arrays are preserved as-is. Downstream steps read keys
+they need from this hash.
+
+`ResolveRepoRoot` and `LoadConfig` raise on failure (git not found, not
+in a repo, config file missing or unparseable) — these are
+infrastructure errors, not domain errors. Check steps append to
+`context[:results]`.
 
 **Important:** The context hash does NOT contain an IO object. Check and
 transform steps are pure — no IO side effects. Stdout is handled by
@@ -259,6 +265,19 @@ def self.resolve(context) → Hash
 - Raises `RuntimeError` if git fails or returns empty (infrastructure error)
 - **Returns `context`** — chained via `.map`
 
+**`Steps::PerformDoctorChecks::LoadConfig`**:
+
+```ruby
+def self.load(context) → Hash
+```
+
+- Reads `tooling/ai_harness/config.yml` via `YAML.safe_load_file`
+- Adds `config: Hash` to context — the parsed structure preserved as-is
+- Raises on infrastructure failure (file missing, parse error). Per
+  `03_constraints.md` §3.4 these exceptions are not rescued, matching
+  `ResolveRepoRoot`'s treatment of infrastructure errors.
+- **Returns `context`** — chained via `.map`
+
 **Check steps** — each has a single public class method:
 
 ```ruby
@@ -366,10 +385,12 @@ These files in a gitignored or `.git/info/exclude`'d state are acceptable.
 
 **Allowed exceptions within forbidden patterns:**
 
-Files listed in `tooling/ai_harness/doctor/allowed_committed_files.yml`
-are intentionally committed as project content and are NOT flagged as
-forbidden. The check loads the allowlist from YAML at runtime so future
-entries can be added without code changes.
+Files listed in `tooling/ai_harness/config.yml` under the
+`allowed_committed_files` key are intentionally committed as project
+content and are NOT flagged as forbidden. The `LoadConfig` step loads
+this YAML once at the head of the sub-chain into `context[:config]`,
+and the forbidden-files check reads the allowlist via
+`context[:config].fetch('allowed_committed_files')`.
 
 The YAML uses prefix matching: an entry matches any tracked path that
 begins with the entry string. This supports both exact-file paths

@@ -18,8 +18,6 @@ danger-review:
       optional: true
     - job: cache:node-modules
       optional: true
-  variables:
-    BUNDLE_WITH: "danger"
   before_script:
     - (command -v git &> /dev/null && git config --global http.https://gitlab.com/gitlab-org/gitlab.proactiveAuth basic) || true
     - source scripts/utils.sh
