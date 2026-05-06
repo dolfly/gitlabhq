@@ -24,19 +24,31 @@ RSpec.describe Gitlab::Database::Aggregation::Graphql::Adapter, feature_category
   end
 
   describe '.each_filter_argument' do
+    let(:exact_match_filter) do
+      Gitlab::Database::Aggregation::ClickHouse::ExactMatchFilter.new(
+        :status, :string
+      )
+    end
+
+    let(:range_filter) do
+      Gitlab::Database::Aggregation::ClickHouse::RangeFilter.new(
+        :created_at, :datetime
+      )
+    end
+
+    let(:metric_exact_match_filter) do
+      Gitlab::Database::Aggregation::ClickHouse::MetricExactMatchFilter.new(
+        :session_count, :integer
+      )
+    end
+
+    let(:metric_range_filter) do
+      Gitlab::Database::Aggregation::ClickHouse::MetricRangeFilter.new(
+        :session_duration, :integer
+      )
+    end
+
     context 'with multiple filters' do
-      let(:exact_match_filter) do
-        Gitlab::Database::Aggregation::ClickHouse::ExactMatchFilter.new(
-          :status, :string
-        )
-      end
-
-      let(:range_filter) do
-        Gitlab::Database::Aggregation::ClickHouse::RangeFilter.new(
-          :created_at, :datetime
-        )
-      end
-
       it 'yields arguments for all filters' do
         filters = [exact_match_filter, range_filter]
         arguments = []
@@ -48,6 +60,39 @@ RSpec.describe Gitlab::Database::Aggregation::Graphql::Adapter, feature_category
         expect(arguments.size).to eq(3)
         expect(arguments.map(&:first)).to eq([:status, :created_at_from, :created_at_to])
       end
+    end
+
+    context 'with metric filters' do
+      it 'skips metric filters' do
+        filters = [exact_match_filter, metric_exact_match_filter, metric_range_filter]
+        arguments = []
+
+        described_class.each_filter_argument(filters) do |identifier, type, options|
+          arguments << [identifier, type, options]
+        end
+
+        expect(arguments.map(&:first)).to eq([:status])
+      end
+    end
+  end
+
+  describe '.arguments_to_filters' do
+    let(:engine_class) do
+      exact_match = Gitlab::Database::Aggregation::ClickHouse::ExactMatchFilter.new(:status, :string)
+      metric_exact_match = Gitlab::Database::Aggregation::ClickHouse::MetricExactMatchFilter.new(
+        :session_count, :integer
+      )
+
+      Class.new do
+        define_singleton_method(:filters) { [exact_match, metric_exact_match] }
+      end
+    end
+
+    it 'skips metric filters even if matching arguments are provided' do
+      arguments = { status: %w[active], session_count: [1, 2, 3] }
+
+      expect(described_class.arguments_to_filters(engine_class, arguments))
+        .to contain_exactly(identifier: :status, values: %w[active])
     end
   end
 end

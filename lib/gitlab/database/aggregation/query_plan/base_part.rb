@@ -24,6 +24,11 @@ module Gitlab
             definition.instance_key(configuration)
           end
 
+          def matches?(reference_config)
+            configuration[:identifier] == reference_config[:identifier] &&
+              instance_key == definition.instance_key(reference_config)
+          end
+
           private
 
           def validate_definition_presence

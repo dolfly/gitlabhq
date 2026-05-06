@@ -13,6 +13,8 @@ RSpec.describe Gitlab::Database::Aggregation::ClickHouse::Engine, :click_house, 
       filters do
         exact_match :user_id, :integer
         range :created_event_at, :datetime, -> { Arel.sql('anyIfMerge(created_event_at)') }, merge_column: true
+        metric_range :total_count, :integer
+        metric_range :duration_quantile, :float
       end
 
       dimensions do
@@ -115,6 +117,42 @@ RSpec.describe Gitlab::Database::Aggregation::ClickHouse::Engine, :click_house, 
 
       expect(engine).to execute_aggregation(request).and_return([
         { user_id: 1, total_count: 4 }
+      ])
+    end
+
+    it 'filters on aggregated metric via HAVING' do
+      request = Gitlab::Database::Aggregation::Request.new(
+        filters: [{ identifier: :total_count, values: 2..nil }],
+        dimensions: [{ identifier: :user_id }],
+        metrics: [{ identifier: :total_count }]
+      )
+
+      expect(engine).to execute_aggregation(request).and_return([
+        { user_id: 1, total_count: 4 }
+      ])
+    end
+
+    it 'filters on a parameterized metric, targeting the requested instance' do
+      request = Gitlab::Database::Aggregation::Request.new(
+        filters: [{ identifier: :duration_quantile, parameters: { quantile: 0.1 }, values: 200..nil }],
+        dimensions: [{ identifier: :user_id }],
+        metrics: [{ identifier: :duration_quantile, parameters: { quantile: 0.1 } }]
+      )
+
+      expect(engine).to execute_aggregation(request).and_return([
+        { user_id: 1, duration_quantile_14be4: 438 }
+      ])
+    end
+
+    it 'is invalid when filter parameters do not match any requested metric instance' do
+      request = Gitlab::Database::Aggregation::Request.new(
+        filters: [{ identifier: :duration_quantile, parameters: { quantile: 0.1 }, values: 200..nil }],
+        dimensions: [{ identifier: :user_id }],
+        metrics: [{ identifier: :duration_quantile, parameters: { quantile: 0.5 } }]
+      )
+
+      expect(engine).to execute_aggregation(request).with_errors([
+        a_string_matching(/metric `duration_quantile` must be requested to filter by it/)
       ])
     end
   end

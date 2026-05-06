@@ -798,15 +798,15 @@ export const getCurrentUtcDate = () => {
   ]
  */
 
-export function getMonthsBetweenDates(startDate, endDate) {
+export function getMonthsBetweenDates(startDate, endDate, { utc = false } = {}) {
   if (startDate > endDate) {
     return [];
   }
 
-  const startMonth = startDate.getMonth();
-  const startYear = startDate.getFullYear();
-  const endMonth = endDate.getMonth();
-  const endYear = endDate.getFullYear();
+  const startMonth = utc ? startDate.getUTCMonth() : startDate.getMonth();
+  const startYear = utc ? startDate.getUTCFullYear() : startDate.getFullYear();
+  const endMonth = utc ? endDate.getUTCMonth() : endDate.getMonth();
+  const endYear = utc ? endDate.getUTCFullYear() : endDate.getFullYear();
 
   const count = (endYear - startYear) * 12 + (1 + endMonth - startMonth);
 

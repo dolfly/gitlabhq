@@ -11,13 +11,15 @@ module Gitlab
             end
 
             def each_filter_argument(filters)
-              filters.each do |filter|
+              graphql_exposed_filters(filters).each do |filter|
                 filter_to_arguments(filter).each { |args| yield(*args) }
               end
             end
 
             def arguments_to_filters(engine_class, arguments)
-              engine_class.filters.map { |filter| build_filter(filter, arguments) }.reject { |f| f[:values].blank? }
+              graphql_exposed_filters(engine_class.filters)
+                .map { |filter| build_filter(filter, arguments) }
+                .reject { |f| f[:values].blank? }
             end
 
             def graphql_type(type)
@@ -32,6 +34,12 @@ module Gitlab
             end
 
             private
+
+            # Metric filters (HAVING-clause filters that reference an aggregated
+            # metric) are not yet exposed via GraphQL.
+            def graphql_exposed_filters(filters)
+              filters.reject(&:metric?)
+            end
 
             def build_filter(definition, arguments)
               result = {

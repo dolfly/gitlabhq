@@ -352,12 +352,7 @@ gem 'babosa', '~> 2.0', feature_category: :shared # rubocop:todo Gemfile/Missing
 gem 'loofah', '~> 2.25.0', feature_category: :shared # rubocop:todo Gemfile/MissingFeatureCategory -- https://gitlab.com/gitlab-org/gitlab/-/issues/581839
 
 # Used to provide license templates
-gem 'licensee', '~> 9.16', feature_category: :shared # rubocop:todo Gemfile/MissingFeatureCategory -- https://gitlab.com/gitlab-org/gitlab/-/issues/581839
-
-# Pinned below 1.8 so rugged.so links libgit2's old http-parser instead of
-# the bundled llhttp, which collides with llhttp-ffi symbols at runtime.
-# See https://gitlab.com/gitlab-org/gitlab/-/issues/598564
-gem 'rugged', '~> 1.7.2', require: false, feature_category: :gitaly
+gem 'licensee', '~> 10', feature_category: :shared # rubocop:todo Gemfile/MissingFeatureCategory -- https://gitlab.com/gitlab-org/gitlab/-/issues/581839
 
 # Detect and convert string character encoding
 gem 'charlock_holmes', '~> 0.7.9', feature_category: :shared # rubocop:todo Gemfile/MissingFeatureCategory -- https://gitlab.com/gitlab-org/gitlab/-/issues/581839

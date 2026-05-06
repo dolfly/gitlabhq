@@ -854,6 +854,13 @@ RSpec/AvoidConditionalStatements:
     - 'spec/features/**/*.rb'
     - 'ee/spec/features/**/*.rb'
 
+RSpec/FeatureSpecMaxExamples:
+  Enabled: true
+  Max: 25
+  Include:
+    - 'spec/features/**/*.rb'
+    - 'ee/spec/features/**/*.rb'
+
 RSpec/FactoriesInMigrationSpecs:
   Enabled: true
   Include:
@@ -1730,3 +1737,11 @@ Gitlab/Authz/AvoidHighestRoleUsage:
   Include:
     - 'app/policies/**/*.rb'
     - 'ee/app/policies/**/*.rb'
+
+Gitlab/AvoidProjectIssuableUrlHelpers:
+  Enabled: true
+  Exclude:
+    - 'spec/**/*.rb'
+    - 'ee/spec/**/*.rb'
+    - 'app/helpers/routing/projects_helper.rb'
+    - 'ee/app/helpers/ee/routing/projects_helper.rb'

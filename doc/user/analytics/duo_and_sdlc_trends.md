@@ -123,6 +123,19 @@ The Pipeline metrics table displays metrics for the pipelines run in the selecte
 - **Success rate**: Percentage of pipeline runs that completed successfully.
 - **Failure rate**: Percentage of pipeline runs that completed with failures.
 
+## Pipelines using GitLab Duo Agent Platform
+
+{{< history >}}
+
+- [Introduced](https://gitlab.com/gitlab-org/gitlab/-/issues/587303) in GitLab 19.0.
+
+{{< /history >}}
+
+The **Pipelines using GitLab Duo Agent Platform** chart displays the number of pipelines run over the last 180 days, aggregated by month. The chart shows:
+
+- **With Agent Platform**: Number of pipelines triggered by GitLab Duo Agent Platform.
+- **All pipelines**: Total number of pipelines run in the namespace.
+
 ## GitLab Duo Code Suggestions acceptance by language
 
 {{< history >}}

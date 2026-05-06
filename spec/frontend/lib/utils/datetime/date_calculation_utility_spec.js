@@ -198,6 +198,30 @@ describe('getMonthsBetweenDates', () => {
       { month: 2, year: 2026 },
     ]);
   });
+
+  describe('utc=true', () => {
+    beforeEach(() => {
+      timezoneMock.register('US/Eastern');
+    });
+
+    afterEach(() => {
+      timezoneMock.unregister();
+    });
+
+    it('uses UTC month boundaries regardless of local timezone', () => {
+      const actual = getMonthsBetweenDates(
+        new Date('2020-01-01T00:00:00Z'),
+        new Date('2020-03-01T00:00:00Z'),
+        { utc: true },
+      );
+
+      expect(actual).toEqual([
+        { month: 0, year: 2020 },
+        { month: 1, year: 2020 },
+        { month: 2, year: 2020 },
+      ]);
+    });
+  });
 });
 
 describe('convertNanoToMs', () => {

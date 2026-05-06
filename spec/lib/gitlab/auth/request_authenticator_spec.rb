@@ -455,13 +455,13 @@ RSpec.describe Gitlab::Auth::RequestAuthenticator, feature_category: :system_acc
     let_it_be(:job) { build(:ci_build, user: user, status: :running) }
 
     before do
-      env[Gitlab::Auth::AuthFinders::JOB_TOKEN_HEADER] = 'token'
+      env[Gitlab::Auth::AuthFinders::JOB_TOKEN_HEADER] = 'glcbt-token_value'
     end
 
     context 'with API requests' do
       before do
         env['SCRIPT_NAME'] = '/api/endpoint'
-        expect(::Ci::Build).to receive(:find_by_token).with('token').and_return(job)
+        expect(::Ci::Build).to receive(:find_by_token).with('glcbt-token_value').and_return(job)
       end
 
       it 'tries to find the user' do

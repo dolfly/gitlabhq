@@ -65,6 +65,8 @@ module Ci
     end
 
     def find_from_database_token
+      return unless ::Authn::Tokens::CiJobToken.prefix?(token)
+
       ::Ci::Build.find_by_token(token)
     end
 

@@ -7513,6 +7513,9 @@ msgstr ""
 msgid "AggregationEngine|metric '%{metric}' requires dimension '%{dimension}' to be requested"
 msgstr ""
 
+msgid "AggregationEngine|metric `%{identifier}` must be requested to filter by it"
+msgstr ""
+
 msgid "AggregationEngine|the specified identifier is not available: '%{identifier}'"
 msgstr ""
 
@@ -52942,6 +52945,12 @@ msgstr ""
 msgid "Pipelines settings for '%{project_name}' were successfully updated."
 msgstr ""
 
+msgid "PipelinesUsingDapChart|All Pipelines"
+msgstr ""
+
+msgid "PipelinesUsingDapChart|With Agent Platform"
+msgstr ""
+
 msgid "Pipelines| The list can only display 100 jobs. To view all jobs, %{linkStart}go to this pipeline's details page.%{linkEnd}"
 msgstr ""
 
@@ -76182,6 +76191,9 @@ msgstr[0] ""
 msgstr[1] ""
 
 msgid "Todos|%{day}, %{time}"
+msgstr ""
+
+msgid "Todos|%{who}: Approval needed to proceed with next step in %{where}"
 msgstr ""
 
 msgid "Todos|(removed)"

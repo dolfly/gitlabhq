@@ -54,9 +54,7 @@ module Gitlab
 
         def order
           @order ||= request.order.map do |configuration|
-            plan_part = orderable_parts.detect do |plan_part|
-              configuration.except(:direction) == plan_part.configuration
-            end
+            plan_part = orderable_parts.detect { |part| part.matches?(configuration) }
 
             Order.new(plan_part, configuration, query_plan: self)
           end

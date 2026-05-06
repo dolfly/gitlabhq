@@ -314,7 +314,7 @@ instructions:
          - Event name is valid and defined
          - Labels/properties match event definition's `additional_properties`
       5. Ensure test coverage exists using `trigger_internal_events` and `increment_usage_metrics` matchers for backend and `useMockInternalEventsTracking` helper for frontend
-      6. Ensure test matchers (trigger_internal_events, useMockInternalEventsTracking) also asserts all identifiers and additional_properties added in the tracking call. 
+      6. Ensure test matchers (trigger_internal_events, useMockInternalEventsTracking) also asserts all identifiers and additional_properties added in the tracking call.
       7. When testing that an event was not triggered, ensure `not_trigger_internal_events` matcher or `not_to` syntax is used
       8. For batch events:
          - When multiple events are emitted at once, ensure `with_batched_redis_writes` is used to batch all of them into a single Redis call

@@ -39,13 +39,13 @@ RSpec.describe Ci::AuthJobFinder, feature_category: :continuous_integration do
           allow(::Ci::Builds::TokenPrefix).to receive(:decode_partition).with(job.token).and_return(123)
         end
 
-        it 'queries all partitions' do
+        it 'falls back to all partitions and finds the job' do
           recorder = ActiveRecord::QueryRecorder.new { execute }
 
           expect(recorder).not_to exceed_query_limit(2).for_query(/FROM "p_ci_builds"/)
           expect(recorder).not_to exceed_query_limit(2).for_query(/"p_ci_builds"."token_encrypted" IN/)
           expect(recorder).not_to exceed_query_limit(1)
-            .for_query(/"p_ci_builds"."partition_id" = #{job.partition_id}/)
+            .for_query(/"p_ci_builds"."partition_id" = 123/)
         end
 
         it { is_expected.to eq(job) }
@@ -56,14 +56,13 @@ RSpec.describe Ci::AuthJobFinder, feature_category: :continuous_integration do
           allow(::Ci::Builds::TokenPrefix).to receive(:decode_partition).with(job.token).and_return(nil)
         end
 
-        it 'queries all partitions' do
+        it 'returns nil without querying the database' do
           recorder = ActiveRecord::QueryRecorder.new { execute }
 
-          expect(recorder).not_to exceed_query_limit(1).for_query(/FROM "p_ci_builds"/)
-          expect(recorder).not_to exceed_query_limit(1).for_query(/"p_ci_builds"."token_encrypted" IN/)
-          expect(recorder).not_to exceed_query_limit(0)
-            .for_query(/"p_ci_builds"."partition_id" = #{job.partition_id}/)
+          expect(recorder).not_to exceed_query_limit(0).for_query(/FROM "p_ci_builds"/)
         end
+
+        it { is_expected.to be_nil }
       end
     end
 

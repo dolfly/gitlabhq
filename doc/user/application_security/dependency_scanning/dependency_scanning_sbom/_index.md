@@ -415,6 +415,7 @@ variables:
 {{< history >}}
 
 - [Introduced](https://gitlab.com/groups/gitlab-org/-/work_items/20461) for Maven and Python in GitLab 18.11, disabled by default.
+- [Added](https://gitlab.com/gitlab-org/gitlab/-/work_items/590734) support for Gradle in GitLab 19.0, disabled by default.
 
 {{< /history >}}
 
@@ -430,10 +431,11 @@ alternatives (such as `eclipse-temurin:jdk-21`) or custom images containing the 
 
 The following ecosystems support dependency resolution:
 
-| Language | Package manager | Manifest files detected                                                                                                           | Resolution command    | Output artifact       |
-| -------- | --------------- | --------------------------------------------------------------------------------------------------------------------------------- | --------------------- | --------------------- |
-| Java     | Maven           | `pom.xml`                                                                                                                         | `mvn dependency:tree` | `maven.graph.json`    |
-| Python   | pip, setuptools | `requirements.txt`, `requirements.in`, `requirements.pip`, `requires.txt`, `setup.py`, `setup.cfg`, `pyproject.toml` (non-Poetry) | `pip-compile`         | `pipcompile.lock.txt` |
+| Language    | Package manager | Manifest files detected                                                                                                           | Resolution command         | Output artifact       |
+| ----------- | --------------- | --------------------------------------------------------------------------------------------------------------------------------- | -------------------------- | --------------------- |
+| Java        | Maven           | `pom.xml`                                                                                                                         | `mvn dependency:tree`      | `maven.graph.json`    |
+| Java/Kotlin | Gradle          | `build.gradle`, `build.gradle.kts`                                                                                                | `gradle dependencies`      | `gradle.graph.txt`    |
+| Python      | pip, setuptools | `requirements.txt`, `requirements.in`, `requirements.pip`, `requires.txt`, `setup.py`, `setup.cfg`, `pyproject.toml` (non-Poetry) | `pip-compile`              | `pipcompile.lock.txt` |
 
 > [!warning]
 > Dependency resolution is disabled by default during the limited availability stage.
@@ -457,6 +459,7 @@ For all available options see [available spec inputs](#available-spec-inputs) an
 To use your own image, you can set the following inputs:
 
 - `maven_resolution_image`
+- `gradle_resolution_image`
 - `python_resolution_image`
 
 For instance, to use a custom image for maven resolution:
@@ -471,6 +474,7 @@ include:
 Alternatively, you can set the following CI/CD variables:
 
 - `DS_MAVEN_RESOLUTION_IMAGE`
+- `DS_GRADLE_RESOLUTION_IMAGE`
 - `DS_PYTHON_RESOLUTION_IMAGE`
 
 #### Disable dependency resolution
@@ -518,6 +522,19 @@ The following limitations apply for Maven projects:
 - Maven enforcer plugin: Projects using strict Java version rules in the Maven Enforcer Plugin may fail. The resolution command passes `-Denforcer.skip=true` to mitigate this, but not all enforcer rules are skipped.
 - Profile-based activation: Projects using conditional modules activated by JDK version (for example, ZXing, Dubbo) might produce a different dependency graph than when built with the originally targeted Java version.
 - Plugins in early lifecycle phases: Plugins bound to the validate or initialize phases that are incompatible with the resolution image's Java version might cause failures.
+
+#### Gradle
+
+Default environment: Java 17, Gradle 8
+
+The resolution job runs `./gradlew dependencies` when a Gradle wrapper is present, or `gradle dependencies`
+otherwise. For multi-module projects, each subproject is resolved individually using `:<subproject>:dependencies`.
+The job writes the output to `gradle.graph.txt` in the corresponding project directory.
+
+The following limitations apply for Gradle projects:
+
+- Wrapper requirement: When a Gradle wrapper (`gradlew`) is present, it must reference a valid `gradle-wrapper.jar`. If no wrapper is present, the job uses the system `gradle`.
+- Plugin and version compatibility: Projects that require specific Gradle plugins, custom toolchains, or Java versions other than Java 17 might fail. Override the resolution image (`spec:inputs:gradle_resolution_image`) with one that contains the required build environment.
 
 #### Python
 

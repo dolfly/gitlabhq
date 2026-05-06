@@ -46,4 +46,10 @@ RSpec.describe Gitlab::Database::Aggregation::ClickHouse::FilterDefinition, feat
       end
     end
   end
+
+  describe '#metric?' do
+    it 'is false' do
+      expect(described_class.new(:foo, :bar)).not_to be_metric
+    end
+  end
 end

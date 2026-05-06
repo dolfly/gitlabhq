@@ -131,6 +131,7 @@ qa:orchestrator-lint:
     - .needs-orchestrator-gem-cache-lint-base
     - .qa:rules:gitlab-orchestrator
   stage: lint
+  when: on_success
   script:
     - bundle exec rubocop
 

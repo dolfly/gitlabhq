@@ -47,7 +47,9 @@ module Gitlab
             def filters_mapping
               {
                 exact_match: ExactMatchFilter,
-                range: RangeFilter
+                range: RangeFilter,
+                metric_exact_match: MetricExactMatchFilter,
+                metric_range: MetricRangeFilter
               }
             end
           end
@@ -98,6 +100,7 @@ module Gitlab
 
             query = ::ClickHouse::Client::QueryBuilder.new(inner_query, INNER_QUERY_NAME)
               .select(*outer_projections).group(Arel.sql("ALL"))
+            query = apply_outer_filters(query, plan)
 
             query = wrap_with_window_query(plan, query, outer_aliases) if has_window_metrics?(plan)
 
@@ -118,7 +121,7 @@ module Gitlab
           end
 
           def apply_inner_filters(query, plan)
-            filters = plan.filters
+            filters = plan.filters.reject { |f| f.definition.metric? }
             # PK filters are applied in deduplication subquery.
             if self.class.versioning_config
               filters = filters.reject { |f| self.class.table_primary_key.include?(f.definition.name.to_s) }
@@ -126,6 +129,15 @@ module Gitlab
 
             filters.each { |filter| query = filter.definition.apply_inner(query, filter.configuration) }
             query
+          end
+
+          def apply_outer_filters(query, plan)
+            plan.filters
+              .select { |f| f.definition.metric? }
+              .reduce(query) do |q, filter|
+                metric_part = plan.metrics.find { |m| m.matches?(filter.configuration) }
+                filter.definition.apply_outer(q, filter.configuration, Arel.sql(column_alias(metric_part)))
+              end
           end
 
           def build_dedup_subquery
