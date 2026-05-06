@@ -19,6 +19,7 @@ project:
   - read_branch_rule
   - read_build
   - read_cluster
+  - read_code_review_analytics
   - read_compliance_adherence_report
   - read_compliance_dashboard
   - read_compliance_framework

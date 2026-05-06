@@ -3003,6 +3003,7 @@ RSpec.describe ProjectPolicy, feature_category: :system_access do
         end
 
         before do
+          stub_licensed_features(code_review_analytics: true)
           allow(::Gitlab::CurrentSettings).to receive(:enforce_ci_inbound_job_token_scope_enabled?).and_return(instance_level_token_scope_enabled)
           current_user.set_ci_job_token_scope!(job)
           current_user.external = external_user
@@ -3062,6 +3063,10 @@ RSpec.describe ProjectPolicy, feature_category: :system_access do
       let(:job) { build_stubbed(:ci_build, project: scope_project, user: current_user) }
 
       context 'with all features enabled' do
+        before do
+          stub_licensed_features(code_review_analytics: true)
+        end
+
         it { expect_allowed(*::Authz::Role.get(:public_anonymous).permissions(:project)) }
       end
 

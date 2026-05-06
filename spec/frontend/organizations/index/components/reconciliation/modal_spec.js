@@ -32,6 +32,12 @@ describe('OrganizationReconciliationModal', () => {
   const successHandler = jest.fn().mockResolvedValue(organizationsForReconciliationResponse);
   const GlModalStub = stubComponent(GlModal, { template: RENDER_ALL_SLOTS_TEMPLATE });
 
+  const hideAndShowModal = async () => {
+    await wrapper.setProps({ visible: false });
+    await wrapper.setProps({ visible: true });
+    await waitForPromises();
+  };
+
   const createComponent = ({ props = {}, handler = successHandler } = {}) => {
     mockApollo = createMockApollo([[organizationsForReconciliationQuery, handler]]);
 
@@ -136,6 +142,14 @@ describe('OrganizationReconciliationModal', () => {
 
         it('passes organizations to step component', () => {
           expect(findStep1().props('organizations')).toEqual(mockOrganizations);
+        });
+
+        it('does not refetch organizations when modal is closed and reopened', async () => {
+          expect(successHandler).toHaveBeenCalledTimes(1);
+
+          await hideAndShowModal();
+
+          expect(successHandler).toHaveBeenCalledTimes(1);
         });
       });
     });
@@ -247,31 +261,43 @@ describe('OrganizationReconciliationModal', () => {
       });
 
       describe('when update event is fired', () => {
+        const groupToMoveIndex = 0;
+        const groupToMove = organizationWithGroups.groups.nodes[groupToMoveIndex];
+
+        const updatedOrganizations = mockOrganizations
+          .toSpliced(organizationWithGroupsIndex, 1, {
+            ...organizationWithGroups,
+            groups: {
+              ...organizationWithGroups.groups,
+              nodes: organizationWithGroups.groups.nodes.toSpliced(groupToMoveIndex, 1),
+            },
+          })
+          .toSpliced(organizationWithoutGroupsIndex, 1, {
+            ...organizationWithoutGroups,
+            groups: {
+              ...organizationWithoutGroups.groups,
+              nodes: [groupToMove],
+            },
+          });
+
         it('updates organizations prop', async () => {
           expect(findStep2().props('organizations')).toEqual(mockOrganizations);
-
-          const groupToMoveIndex = 0;
-          const groupToMove = organizationWithGroups.groups.nodes[groupToMoveIndex];
-
-          const updatedOrganizations = mockOrganizations
-            .toSpliced(organizationWithGroupsIndex, 1, {
-              ...organizationWithGroups,
-              groups: {
-                ...organizationWithGroups.groups,
-                nodes: organizationWithGroups.groups.nodes.toSpliced(groupToMoveIndex, 1),
-              },
-            })
-            .toSpliced(organizationWithoutGroupsIndex, 1, {
-              ...organizationWithoutGroups,
-              groups: {
-                ...organizationWithoutGroups.groups,
-                nodes: [groupToMove],
-              },
-            });
-
           findStep2().vm.$emit('update', updatedOrganizations);
 
           await nextTick();
+
+          expect(findStep2().props('organizations')).toEqual(updatedOrganizations);
+        });
+
+        it('retains organization updates after hiding and showing modal', async () => {
+          expect(findStep2().props('organizations')).toEqual(mockOrganizations);
+          findStep2().vm.$emit('update', updatedOrganizations);
+
+          await nextTick();
+
+          expect(findStep2().props('organizations')).toEqual(updatedOrganizations);
+
+          await hideAndShowModal();
 
           expect(findStep2().props('organizations')).toEqual(updatedOrganizations);
         });

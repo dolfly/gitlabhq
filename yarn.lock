@@ -1504,10 +1504,10 @@
     stylelint-declaration-strict-value "1.10.4"
     stylelint-scss "6.0.0"
 
-"@gitlab/svgs@3.159.0":
-  version "3.159.0"
-  resolved "https://registry.yarnpkg.com/@gitlab/svgs/-/svgs-3.159.0.tgz#c097379b396b57f4f772ca6d1ec72e1d15faca3c"
-  integrity sha512-qDv5ymm07F6/HYcgCW0YYl3WF+g4/SG0TW4DrfQD4sjnfOARw1laC3DwqkY6cR/hjfHBDCj+AYRX48L7T6mZjA==
+"@gitlab/svgs@3.160.0":
+  version "3.160.0"
+  resolved "https://registry.yarnpkg.com/@gitlab/svgs/-/svgs-3.160.0.tgz#01c778cc924b2f885884fa8713fa33811af7352c"
+  integrity sha512-708a9Ntkj698dKFmFN9yHiz6dxwGBYjJZzD+NAB3vVy4V7VqR6v/gYCR0LzjqPbNTKoobVlWrb1XYh61sptS6w==
 
 "@gitlab/ui@132.1.0":
   version "132.1.0"

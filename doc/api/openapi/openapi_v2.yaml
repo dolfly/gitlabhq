@@ -76891,15 +76891,9 @@ definitions:
   postApiV4ImportBitbucket:
     type: object
     properties:
-      bitbucket_username:
-        type: string
-        description: BitBucket username (for app passwords)
-      bitbucket_app_password:
-        type: string
-        description: BitBucket app password
       bitbucket_email:
         type: string
-        description: BitBucket email (for API tokens)
+        description: BitBucket email
       bitbucket_api_token:
         type: string
         description: BitBucket API token
@@ -76913,6 +76907,8 @@ definitions:
         type: string
         description: New repository name
     required:
+    - bitbucket_email
+    - bitbucket_api_token
     - repo_path
     - target_namespace
     description: Import a BitBucket Cloud repository

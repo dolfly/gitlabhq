@@ -12,6 +12,7 @@ project:
   - download_wiki_code
   - read_analytics
   - read_code
+  - read_code_review_analytics
   - read_commit_status
   - read_container_image
   - read_cycle_analytics

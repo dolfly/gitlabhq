@@ -349,7 +349,6 @@ RSpec/ExampleWithoutDescription:
     - 'spec/models/bulk_imports/tracker_spec.rb'
     - 'spec/models/ci/bridge_spec.rb'
     - 'spec/models/ci/build_pending_state_spec.rb'
-    - 'spec/models/ci/build_spec.rb'
     - 'spec/models/ci/build_trace_chunk_spec.rb'
     - 'spec/models/ci/catalog/resource_spec.rb'
     - 'spec/models/ci/catalog/resources/version_spec.rb'

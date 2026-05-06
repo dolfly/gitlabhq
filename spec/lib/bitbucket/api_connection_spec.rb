@@ -44,12 +44,6 @@ RSpec.describe Bitbucket::ApiConnection, feature_category: :importers do
       end
     end
 
-    context 'when using app password authentication' do
-      subject(:connection) { described_class.new(username: 'foo', app_password: 'bar') }
-
-      it_behaves_like 'bitbucket api connection', 'foo', 'bar'
-    end
-
     context 'when using API token authentication' do
       subject(:connection) { described_class.new(email: 'user@example.com', api_token: 'token123') }
 

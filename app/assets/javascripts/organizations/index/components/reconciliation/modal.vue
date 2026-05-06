@@ -43,7 +43,7 @@ export default {
     organizations: {
       query: organizationsForReconciliationQuery,
       skip() {
-        return !this.visible;
+        return !this.visible || this.organizations.length > 0;
       },
       update(data) {
         return data?.organizations?.nodes || [];

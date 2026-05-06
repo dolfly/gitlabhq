@@ -50469,7 +50469,7 @@ paths:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/RequestBody_a98aaa3a441e"
+              "$ref": "#/components/schemas/RequestBody_f0e6af1da635"
   "/api/v4/projects/{id}/packages/helm/{channel}/index.yaml":
     get:
       operationId: getApiV4ProjectsIdPackagesHelmChannelIndexYaml
@@ -104904,20 +104904,12 @@ components:
       - personal_access_token
       - bitbucket_server_project
       - bitbucket_server_repo
-    RequestBody_a98aaa3a441e:
+    RequestBody_f0e6af1da635:
       type: object
       properties:
-        bitbucket_username:
-          type: string
-          description: BitBucket username (for app passwords)
-          nullable: true
-        bitbucket_app_password:
-          type: string
-          description: BitBucket app password
-          nullable: true
         bitbucket_email:
           type: string
-          description: BitBucket email (for API tokens)
+          description: BitBucket email
           nullable: true
         bitbucket_api_token:
           type: string
@@ -104936,6 +104928,8 @@ components:
           description: New repository name
           nullable: true
       required:
+      - bitbucket_email
+      - bitbucket_api_token
       - repo_path
       - target_namespace
     RequestBody_99b80de3339e:
