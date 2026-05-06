@@ -3660,6 +3660,7 @@ Input type: `AiFlowTriggerCreateInput`
 | <a id="mutation-aiflowtriggercreate-configpath"></a>`configPath` | [`String`](#string) | Path to the configuration file for the AI flow trigger. |
 | <a id="mutation-aiflowtriggercreate-description"></a>`description` | [`String!`](#string) | Description of the AI flow trigger. |
 | <a id="mutation-aiflowtriggercreate-eventtypes"></a>`eventTypes` | [`[Int!]`](#int) | Event types that triggers the AI flow. |
+| <a id="mutation-aiflowtriggercreate-filter"></a>`filter` {{< icon name="warning-solid" >}} | [`JSON`](#json) | **Deprecated**: **Status**: Experiment. Introduced in GitLab 19.0. |
 | <a id="mutation-aiflowtriggercreate-projectpath"></a>`projectPath` | [`ID!`](#id) | Full path of the project the AI flow trigger is associated with. |
 | <a id="mutation-aiflowtriggercreate-userid"></a>`userId` | [`UserID!`](#userid) | Service account for the AI flow trigger. |
 
@@ -58964,6 +58965,7 @@ Iteration ID wildcard values.
 | <a id="jobartifactfiletype-dast"></a>`DAST` | DAST job artifact file type. |
 | <a id="jobartifactfiletype-dependency_scanning"></a>`DEPENDENCY_SCANNING` | DEPENDENCY SCANNING job artifact file type. |
 | <a id="jobartifactfiletype-dotenv"></a>`DOTENV` | DOTENV job artifact file type. |
+| <a id="jobartifactfiletype-environment_key"></a>`ENVIRONMENT_KEY` | ENVIRONMENT KEY job artifact file type. |
 | <a id="jobartifactfiletype-jacoco"></a>`JACOCO` | JACOCO job artifact file type. |
 | <a id="jobartifactfiletype-junit"></a>`JUNIT` | JUNIT job artifact file type. |
 | <a id="jobartifactfiletype-license_scanning"></a>`LICENSE_SCANNING` | LICENSE SCANNING job artifact file type. |

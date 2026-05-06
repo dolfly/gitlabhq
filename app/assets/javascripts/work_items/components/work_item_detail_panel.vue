@@ -25,7 +25,7 @@ export default {
     GlLink,
     GlButton,
     MountingPortal,
-    WorkItemDetail: () => import('~/work_items/components/work_item_detail.vue'),
+    WorkItemDetail: () => import('ee_else_ce/work_items/components/work_item_detail.vue'),
     WorkItemMetadataProvider,
   },
   mixins: [glFeatureFlagMixin()],

@@ -120,8 +120,8 @@ describe('OrganizationReconciliationModal', () => {
           expect(findStep1().exists()).toBe(false);
         });
 
-        it('does not render footer buttons', () => {
-          expect(wrapper.findAllComponents(GlButton)).toHaveLength(0);
+        it('hides the modal footer', () => {
+          expect(findModal().attributes('hide-footer')).toBe('true');
         });
       });
 
@@ -138,6 +138,10 @@ describe('OrganizationReconciliationModal', () => {
 
         it('does not render skeleton loader', () => {
           expect(findSkeletonLoader().exists()).toBe(false);
+        });
+
+        it('shows the modal footer', () => {
+          expect(findModal().attributes('hide-footer')).toBeUndefined();
         });
 
         it('passes organizations to step component', () => {

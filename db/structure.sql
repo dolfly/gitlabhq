@@ -26961,7 +26961,8 @@ CREATE TABLE plan_limits (
     ci_max_artifact_size_scip integer DEFAULT 200 NOT NULL,
     plan_name_uid smallint,
     ci_max_artifact_size_sarif integer DEFAULT 10 NOT NULL,
-    max_pipelines_per_merge_train smallint DEFAULT 20 NOT NULL
+    max_pipelines_per_merge_train smallint DEFAULT 20 NOT NULL,
+    ci_max_artifact_size_environment_key integer DEFAULT 1 NOT NULL
 );
 
 CREATE SEQUENCE plan_limits_id_seq
@@ -32132,6 +32133,7 @@ CREATE TABLE user_preferences (
     early_access_studio_participant boolean DEFAULT false NOT NULL,
     wiki_use_auto_commit_message boolean DEFAULT false NOT NULL,
     orbit_settings jsonb DEFAULT '{}'::jsonb NOT NULL,
+    knowledge_graph_governing_namespace_id bigint,
     CONSTRAINT check_1d670edc68 CHECK ((time_display_relative IS NOT NULL)),
     CONSTRAINT check_89bf269f41 CHECK ((char_length(diffs_deletion_color) <= 7)),
     CONSTRAINT check_9b50d9f942 CHECK ((char_length(extensions_marketplace_opt_in_url) <= 512)),
@@ -34558,6 +34560,7 @@ CREATE TABLE zoekt_nodes (
     usable_storage_bytes_locked_until timestamp with time zone,
     schema_version smallint DEFAULT 0 NOT NULL,
     services smallint[] DEFAULT '{0}'::smallint[] NOT NULL,
+    webserver_last_seen_at timestamp with time zone,
     CONSTRAINT check_32f39efba3 CHECK ((char_length(search_base_url) <= 1024)),
     CONSTRAINT check_38c354a3c2 CHECK ((char_length(index_base_url) <= 1024))
 );
@@ -44847,6 +44850,8 @@ CREATE INDEX idx_packages_nuget_metadata_on_pkg_id_and_normalized_version ON pac
 
 CREATE INDEX idx_packages_on_project_id_name_id_version_when_installable_npm ON packages_packages USING btree (project_id, name, id, version) WHERE ((package_type = 2) AND (status = ANY (ARRAY[0, 1])));
 
+CREATE INDEX idx_packages_on_project_id_name_status_when_nuget ON packages_packages USING btree (project_id, name, status, version, created_at) WHERE ((package_type = 4) AND (status <> 4));
+
 CREATE UNIQUE INDEX idx_packages_on_project_id_name_version_unique_when_generic ON packages_packages USING btree (project_id, name, version) WHERE ((package_type = 7) AND (status <> 4));
 
 CREATE UNIQUE INDEX idx_packages_on_project_id_name_version_unique_when_golang ON packages_packages USING btree (project_id, name, version) WHERE ((package_type = 8) AND (status <> 4));
@@ -45140,6 +45145,8 @@ CREATE INDEX idx_user_details_on_provisioned_by_group_id_user_id ON user_details
 CREATE INDEX idx_user_member_roles_on_member_role_id ON user_member_roles USING btree (member_role_id);
 
 CREATE UNIQUE INDEX idx_user_member_roles_on_user_id_unique ON user_member_roles USING btree (user_id);
+
+CREATE INDEX idx_user_preferences_on_knowledge_graph_governing_namespace_id ON user_preferences USING btree (knowledge_graph_governing_namespace_id);
 
 CREATE INDEX idx_vr_cleanup_policies_on_next_run_at_when_runnable ON virtual_registries_cleanup_policies USING btree (next_run_at) WHERE ((enabled = true) AND (status = ANY (ARRAY[0, 2])));
 
@@ -57412,6 +57419,9 @@ ALTER TABLE ONLY observability_metrics_issues_connections
 
 ALTER TABLE ONLY audit_events_streaming_group_namespace_filters
     ADD CONSTRAINT fk_8ed182d7da FOREIGN KEY (external_streaming_destination_id) REFERENCES audit_events_group_external_streaming_destinations(id) ON DELETE CASCADE;
+
+ALTER TABLE ONLY user_preferences
+    ADD CONSTRAINT fk_8f5100f91c FOREIGN KEY (knowledge_graph_governing_namespace_id) REFERENCES namespaces(id) ON DELETE SET NULL;
 
 ALTER TABLE ONLY compliance_requirements
     ADD CONSTRAINT fk_8f5fb77fc7 FOREIGN KEY (namespace_id) REFERENCES namespaces(id) ON DELETE CASCADE;

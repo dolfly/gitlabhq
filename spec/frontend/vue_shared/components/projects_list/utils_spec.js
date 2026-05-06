@@ -215,7 +215,7 @@ describe('renderTransferSuccessToast', () => {
     renderTransferSuccessToast(MOCK_PROJECT);
 
     expect(toast).toHaveBeenCalledWith(
-      `Project '${MOCK_PROJECT.nameWithNamespace}' has been successfully transferred.`,
+      `Project '${MOCK_PROJECT.nameWithNamespace}' transfer has been scheduled. Users with the Maintainer or Owner role will be notified when it completes.`,
     );
   });
 });

@@ -238,7 +238,7 @@ describe('renderTransferSuccessToast', () => {
     renderTransferSuccessToast(MOCK_GROUP);
 
     expect(toast).toHaveBeenCalledWith(
-      `Group '${MOCK_GROUP.fullName}' has been successfully transferred.`,
+      `Group '${MOCK_GROUP.fullName}' transfer has been scheduled. Users with the Maintainer or Owner role will be notified when it completes.`,
     );
   });
 });

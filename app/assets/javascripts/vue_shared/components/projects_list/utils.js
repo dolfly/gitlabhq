@@ -10,7 +10,7 @@ import {
   ACTION_TRANSFER,
 } from '~/vue_shared/components/list_actions/constants';
 import toast from '~/vue_shared/plugins/global_toast';
-import { sprintf, __, s__ } from '~/locale';
+import { __, s__, sprintf } from '~/locale';
 
 export const availableGraphQLProjectActions = ({
   userPermissions,
@@ -108,9 +108,14 @@ export const renderLeaveSuccessToast = (project) => {
 
 export const renderTransferSuccessToast = (project) => {
   toast(
-    sprintf(__("Project '%{project_name}' has been successfully transferred."), {
-      project_name: project.nameWithNamespace,
-    }),
+    sprintf(
+      s__(
+        "TransferProject|Project '%{project_name}' transfer has been scheduled. Users with the Maintainer or Owner role will be notified when it completes.",
+      ),
+      {
+        project_name: project.nameWithNamespace,
+      },
+    ),
   );
 };
 

@@ -834,6 +834,31 @@ RSpec.describe API::MergeRequests, :aggregate_failures, feature_category: :sourc
         )
       end
 
+      context 'with draft parameter' do
+        let_it_be(:draft_mr) { create(:merge_request, :draft_merge_request, author: user, source_project: project2, target_project: project2) }
+
+        it 'returns only draft merge requests when draft=true' do
+          get api('/merge_requests', user), params: { draft: true }
+
+          expect_response_contain_exactly(draft_mr.id)
+        end
+
+        it 'returns only non-draft merge requests when draft=false' do
+          get api('/merge_requests', user), params: { draft: false }
+
+          expect_response_contain_exactly(
+            merge_request_merged.id, merge_request2.id, merge_request_locked.id,
+            merge_request_closed.id, merge_request.id
+          )
+        end
+
+        it 'returns 400 when both draft and wip are specified' do
+          get api('/merge_requests', user), params: { draft: true, wip: 'yes' }
+
+          expect(response).to have_gitlab_http_status(:bad_request)
+        end
+      end
+
       it 'does not return unauthorized merge requests' do
         private_project = create(:project, :private)
         merge_request3 = create(:merge_request, :simple, source_project: private_project, target_project: private_project, source_branch: 'other-branch')
@@ -1318,6 +1343,29 @@ RSpec.describe API::MergeRequests, :aggregate_failures, feature_category: :sourc
       get api("/projects/#{project.id}/merge_requests", user), params: { wip: 'yes' }
 
       expect_empty_array_response
+    end
+
+    context 'with draft parameter' do
+      let!(:draft_mr) { create(:merge_request, :draft_merge_request, author: user, source_project: project, target_project: project) }
+
+      it 'returns only draft merge requests when draft=true' do
+        get api("/projects/#{project.id}/merge_requests", user), params: { draft: true }
+
+        expect_response_contain_exactly(draft_mr.id)
+      end
+
+      it 'returns only non-draft merge requests when draft=false' do
+        get api("/projects/#{project.id}/merge_requests", user), params: { draft: false }
+
+        expect(json_response).not_to include(a_hash_including('id' => draft_mr.id))
+        expect(response).to have_gitlab_http_status(:ok)
+      end
+
+      it 'returns 400 when both draft and wip are specified' do
+        get api("/projects/#{project.id}/merge_requests", user), params: { draft: true, wip: 'yes' }
+
+        expect(response).to have_gitlab_http_status(:bad_request)
+      end
     end
 
     it 'returns merge_request by "iids" array' do

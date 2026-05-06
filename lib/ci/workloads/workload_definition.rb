@@ -14,7 +14,10 @@ module Ci
         :timeout,
         :cache,
         :tags,
-        :services
+        :services,
+        :suspend_on_success,
+        :suspend_on_failure,
+        :environment_key
 
       def initialize
         self.timeout = DEFAULT_TIMEOUT

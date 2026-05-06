@@ -162,6 +162,7 @@ describe('WorkItemDetail component', () => {
     allowedChildrenTypesHandler = allowedChildrenTypesSuccessHandler,
     showSidebar = true,
     lastRealtimeUpdatedAt = new Date('2023-01-01T12:00:00.000Z'),
+    scopedSlots = {},
   } = {}) => {
     mockApollo = createControlledMockApollo([
       [workItemByIidQuery, handler],
@@ -206,6 +207,7 @@ describe('WorkItemDetail component', () => {
         WorkItemHealthStatus: true,
         WorkItemErrorTracking,
       },
+      scopedSlots,
       mocks: {
         $router: router,
       },
@@ -1201,6 +1203,24 @@ describe('WorkItemDetail component', () => {
       await nextTick();
 
       expect(findWorkItemDesigns().props('canPasteDesign')).toBe(true);
+    });
+  });
+
+  describe('widgets slot', () => {
+    it('provides workItem data through the widgets scoped slot', async () => {
+      let slotProps;
+      createComponent({
+        scopedSlots: {
+          widgets(props) {
+            slotProps = props;
+            return this.$createElement('div');
+          },
+        },
+      });
+      await mockApollo.resolveAll();
+
+      expect(slotProps).toBeDefined();
+      expect(slotProps.workItem.id).toBe('gid://gitlab/WorkItem/1');
     });
   });
 

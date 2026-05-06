@@ -105,8 +105,8 @@ export default {
   <gl-modal
     modal-id="organization-reconciliation-modal"
     scrollable
-    body-class="gl-max-w-xl gl-w-full gl-mx-auto"
     :visible="visible"
+    :hide-footer="loading"
     @change="updateModalVisibility($event)"
   >
     <skeleton-loader v-if="loading" />
@@ -119,7 +119,7 @@ export default {
       </div>
       <component :is="stepComponent" :organizations="organizations" @update="onUpdate" />
     </template>
-    <template v-if="!loading" #modal-footer>
+    <template #modal-footer>
       <div class="gl-flex gl-w-full gl-justify-center gl-gap-3">
         <gl-button @click="onPrev">{{ prevButtonText }}</gl-button>
         <gl-button variant="confirm" @click="onNext">{{ nextButtonText }}</gl-button>

@@ -15,7 +15,6 @@ API/DescriptionSuccessResponse:
     - 'ee/lib/api/elasticsearch_indexed_namespaces.rb'
     - 'ee/lib/api/group_enterprise_users.rb'
     - 'ee/lib/api/group_security_settings.rb'
-    - 'ee/lib/api/internal/search/zoekt.rb'
     - 'ee/lib/api/ldap_group_links.rb'
     - 'ee/lib/api/license.rb'
     - 'ee/lib/api/manage/groups.rb'

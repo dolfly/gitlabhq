@@ -30,7 +30,8 @@ module Observability
       'infrastructure-monitoring' => 'Observability|Infrastructure monitoring',
       'messaging-queues' => 'Observability|Messaging queues',
       'api-monitoring' => 'Observability|API monitoring',
-      'settings' => 'Observability|Notification channels'
+      'settings' => 'Observability|Notification channels',
+      'settings/api-keys' => 'Observability|API keys'
     }.freeze
 
     PATHS = %w[
@@ -73,6 +74,7 @@ module Observability
       api-monitoring
       api-monitoring/explorer
       settings/channels
+      settings/api-keys
     ].freeze
 
     ALLOWED_QUERY_PARAMS = %w[
@@ -166,8 +168,11 @@ module Observability
     end
 
     def title
-      first_segment = @path.to_s.split('/').first.to_s
-      SEGMENT_TITLES.fetch(first_segment, 'Observability')
+      path_str = @path.to_s
+      SEGMENT_TITLES.fetch(path_str) do
+        first_segment = path_str.split('/').first.to_s
+        SEGMENT_TITLES.fetch(first_segment, 'Observability')
+      end
     end
 
     def auth_tokens

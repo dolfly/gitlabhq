@@ -98,7 +98,7 @@ module Gitlab
     def self.skip_transaction_check?
       # When transactional tests are in use, Rails ensures all application threads
       # get the same connection so they can all see the data in the
-      # uncommited transaction.
+      # uncommitted transaction.
       # So we use a class instance variable so that skipping transaction checks apply to all threads.
       return @skip_transaction_check_for_exclusive_lease if ::Rails.env.test?
 

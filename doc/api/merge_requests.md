@@ -28,6 +28,8 @@ title: Merge requests API
 - `merged_at` value of `order_by` [introduced](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/147052) in GitLab 17.2.
 - `merge_after` [introduced](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/165092) in GitLab 17.5.
 - `security_policy_violations` [generally available](https://gitlab.com/gitlab-org/gitlab/-/issues/473704) in GitLab 18.4. Feature flag `policy_mergability_check` removed.
+- `draft` filter parameter [introduced](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/234098) in GitLab 19.0.
+- `wip` filter parameter [deprecated](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/234098) in GitLab 19.0.
 
 {{< /history >}}
 
@@ -107,7 +109,8 @@ Supported attributes:
 | `updated_after`             | datetime      | No       | Returns merge requests updated on or after the given date and time. Expected in ISO 8601 format (`2019-03-15T08:00:00Z`). |
 | `updated_before`            | datetime      | No       | Returns merge requests updated on or before the given date and time. Expected in ISO 8601 format (`2019-03-15T08:00:00Z`). |
 | `view`                      | string        | No       | If `simple`, returns the `iid`, URL, title, description, and basic state of merge request. |
-| `wip`                       | string        | No       | Filter merge requests against their `wip` status. Use `yes` to return only draft merge requests, `no` to return non-draft merge requests. |
+| `draft`                         | boolean        | No       | Filter merge requests by their `draft` status. `true` returns only draft merge requests, `false` returns non-draft merge requests. Mutually exclusive with `wip`. |
+| `wip`                           | string         | No       | [Deprecated](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/234098) in GitLab 19.0. Use `draft` instead. Filter merge requests by their `wip` status. `yes` returns only draft merge requests, `no` returns non-draft merge requests. |
 | `with_labels_details`       | boolean       | No       | If `true`, response returns more details for each label in labels field: `:name`, `:color`, `:description`, `:description_html`, `:text_color`. Default is `false`. |
 | `with_merge_status_recheck` | boolean       | No       | If `true`, this projection requests (but does not guarantee) an asynchronous recalculation of the `merge_status` field. Enable the `restrict_merge_status_recheck` [feature flag](../administration/feature_flags/_index.md) to ignore this attribute when requested by users without the Developer, Maintainer, or Owner role. |
 
@@ -425,7 +428,8 @@ Supported attributes:
 | `updated_after`                 | datetime       | No       | Returns merge requests updated on or after the given date and time. Expected in ISO 8601 format (`2019-03-15T08:00:00Z`). |
 | `updated_before`                | datetime       | No       | Returns merge requests updated on or before the given date and time. Expected in ISO 8601 format (`2019-03-15T08:00:00Z`). |
 | `view`                          | string         | No       | If `simple`, returns the `iid`, URL, title, description, and basic state of merge request. |
-| `wip`                           | string         | No       | Filter merge requests against their `wip` status. Use `yes` to return only draft merge requests, `no` to return non-draft merge requests. |
+| `draft`                     | boolean           | No       | Filter merge requests by their `draft` status. `true` returns only draft merge requests, `false` returns non-draft merge requests. Mutually exclusive with `wip`. |
+| `wip`                       | string            | No       | [Deprecated](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/234098) in GitLab 19.0. Use `draft` instead. Filter merge requests by their `wip` status. `yes` returns only draft merge requests, `no` returns non-draft merge requests. |
 | `with_labels_details`           | boolean        | No       | If `true`, response returns more details for each label in labels field: `:name`, `:color`, `:description`, `:description_html`, `:text_color`. Default is `false`. |
 | `with_merge_status_recheck`     | boolean        | No       | If `true`, this projection requests (but does not guarantee) an asynchronous recalculation of the `merge_status` field. Enable the `restrict_merge_status_recheck` [feature flag](../administration/feature_flags/_index.md) to ignore this attribute when requested by users without the Developer, Maintainer, or Owner role. |
 
@@ -678,7 +682,8 @@ Supported attributes:
 | `updated_after`             | datetime          | No       | Returns merge requests updated on or after the given date and time. Expected in ISO 8601 format (`2019-03-15T08:00:00Z`). |
 | `updated_before`            | datetime          | No       | Returns merge requests updated on or before the given date and time. Expected in ISO 8601 format (`2019-03-15T08:00:00Z`). |
 | `view`                      | string            | No       | If `simple`, returns the `iid`, URL, title, description, and basic state of merge request. |
-| `wip`                       | string            | No       | Filter merge requests against their `wip` status. Use `yes` to return only draft merge requests, `no` to return non-draft merge requests. |
+| `draft`                     | boolean           | No       | Filter merge requests by their `draft` status. `true` returns only draft merge requests, `false` returns non-draft merge requests. Mutually exclusive with `wip`. |
+| `wip`                       | string            | No       | [Deprecated](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/234098) in GitLab 19.0. Use `draft` instead. Filter merge requests by their `wip` status. `yes` returns only draft merge requests, `no` returns non-draft merge requests. |
 | `with_labels_details`       | boolean           | No       | If `true`, response returns more details for each label in labels field: `:name`, `:color`, `:description`, `:description_html`, `:text_color`. Default is `false`. |
 | `with_merge_status_recheck` | boolean           | No       | If `true`, this projection requests (but does not guarantee) an asynchronous recalculation of the `merge_status` field. Enable the `restrict_merge_status_recheck` [feature flag](../administration/feature_flags/_index.md) to ignore this attribute when requested by users without the Developer, Maintainer, or Owner role. |
 

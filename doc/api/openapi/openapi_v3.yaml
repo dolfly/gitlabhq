@@ -37248,13 +37248,22 @@ paths:
         example: title,description
       - name: wip
         required: false
-        description: Filter merge requests against their `wip` status. `yes` to return
-          only draft merge requests, `no` to return non-draft merge requests.
+        description: Deprecated. Use `draft` instead. Filter merge requests against
+          their `wip` status. `yes` to return only draft merge requests, `no` to return
+          non-draft merge requests.
         schema:
           type: string
           enum:
           - 'yes'
           - 'no'
+          nullable: true
+        in: query
+      - name: draft
+        required: false
+        description: Filter merge requests against their `draft` status. `true` to
+          return only draft merge requests, `false` to return non-draft merge requests.
+        schema:
+          type: boolean
           nullable: true
         in: query
       - name: not
@@ -37749,13 +37758,22 @@ paths:
         example: title,description
       - name: wip
         required: false
-        description: Filter merge requests against their `wip` status. `yes` to return
-          only draft merge requests, `no` to return non-draft merge requests.
+        description: Deprecated. Use `draft` instead. Filter merge requests against
+          their `wip` status. `yes` to return only draft merge requests, `no` to return
+          non-draft merge requests.
         schema:
           type: string
           enum:
           - 'yes'
           - 'no'
+          nullable: true
+        in: query
+      - name: draft
+        required: false
+        description: Filter merge requests against their `draft` status. `true` to
+          return only draft merge requests, `false` to return non-draft merge requests.
+        schema:
+          type: boolean
           nullable: true
         in: query
       - name: not
@@ -38431,13 +38449,22 @@ paths:
         example: title,description
       - name: wip
         required: false
-        description: Filter merge requests against their `wip` status. `yes` to return
-          only draft merge requests, `no` to return non-draft merge requests.
+        description: Deprecated. Use `draft` instead. Filter merge requests against
+          their `wip` status. `yes` to return only draft merge requests, `no` to return
+          non-draft merge requests.
         schema:
           type: string
           enum:
           - 'yes'
           - 'no'
+          nullable: true
+        in: query
+      - name: draft
+        required: false
+        description: Filter merge requests against their `draft` status. `true` to
+          return only draft merge requests, `false` to return non-draft merge requests.
+        schema:
+          type: boolean
           nullable: true
         in: query
       - name: not
@@ -54632,13 +54659,22 @@ paths:
         example: title,description
       - name: wip
         required: false
-        description: Filter merge requests against their `wip` status. `yes` to return
-          only draft merge requests, `no` to return non-draft merge requests.
+        description: Deprecated. Use `draft` instead. Filter merge requests against
+          their `wip` status. `yes` to return only draft merge requests, `no` to return
+          non-draft merge requests.
         schema:
           type: string
           enum:
           - 'yes'
           - 'no'
+          nullable: true
+        in: query
+      - name: draft
+        required: false
+        description: Filter merge requests against their `draft` status. `true` to
+          return only draft merge requests, `false` to return non-draft merge requests.
+        schema:
+          type: boolean
           nullable: true
         in: query
       - name: not
@@ -63643,7 +63679,7 @@ paths:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/RequestBody_b91d36b0df89"
+              "$ref": "#/components/schemas/RequestBody_44dc3f6e1cef"
   "/api/v4/jobs/{id}/artifacts":
     post:
       operationId: postApiV4JobsIdArtifacts
@@ -63675,7 +63711,7 @@ paths:
         content:
           multipart/form-data:
             schema:
-              "$ref": "#/components/schemas/RequestBody_785e5579e292"
+              "$ref": "#/components/schemas/RequestBody_cb43113efc39"
     get:
       operationId: getApiV4JobsIdArtifacts
       summary: Download the artifacts file for job
@@ -79318,6 +79354,8 @@ components:
         dependencies:
           type: string
         run:
+          type: string
+        suspend_options:
           type: string
         secrets:
           type: string
@@ -107669,7 +107707,7 @@ components:
           type: boolean
           description: Enable or disable the debug trace
           nullable: true
-    RequestBody_b91d36b0df89:
+    RequestBody_44dc3f6e1cef:
       type: object
       properties:
         token:
@@ -107717,10 +107755,11 @@ components:
           - jacoco
           - scip
           - sarif
+          - environment_key
           default: archive
           description: The type of artifact
           nullable: true
-    RequestBody_785e5579e292:
+    RequestBody_cb43113efc39:
       type: object
       properties:
         file:
@@ -107773,6 +107812,7 @@ components:
           - jacoco
           - scip
           - sarif
+          - environment_key
           default: archive
           description: The type of artifact
           nullable: true

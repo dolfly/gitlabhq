@@ -48,6 +48,7 @@ RSpec.describe Observability::ObservabilityPresenter, :use_clean_rails_memory_st
         ['dashboard/a/b/c',                      false],
         ['alerts/../admin',                      false],
         ['trace/test.service',                   true],
+        ['settings/api-keys',                    true],
         ['services/my@svc',                      false],
         ['services/my svc',                      false]
       ]
@@ -67,9 +68,15 @@ RSpec.describe Observability::ObservabilityPresenter, :use_clean_rails_memory_st
       expect(described_class.new(group, 'alerts/edit').title).to eq('Observability|Alerts')
     end
 
+    it 'returns the full-path title when it overrides the first-segment title' do
+      expect(described_class.new(group, 'settings/api-keys').title).to eq('Observability|API keys')
+    end
+
     context 'with every defined PATHS entry' do
       described_class::PATHS.each do |path|
-        expected_title = described_class::SEGMENT_TITLES.fetch(path.split('/').first, 'Observability')
+        expected_title = described_class::SEGMENT_TITLES.fetch(path) do
+          described_class::SEGMENT_TITLES.fetch(path.split('/').first, 'Observability')
+        end
         it "returns '#{expected_title}' for path '#{path}'" do
           expect(described_class.new(group, path).title).to eq(expected_title)
         end

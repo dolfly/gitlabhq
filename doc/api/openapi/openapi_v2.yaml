@@ -8203,12 +8203,19 @@ paths:
         example: title,description
       - in: query
         name: wip
-        description: Filter merge requests against their `wip` status. `yes` to return
-          only draft merge requests, `no` to return non-draft merge requests.
+        description: Deprecated. Use `draft` instead. Filter merge requests against
+          their `wip` status. `yes` to return only draft merge requests, `no` to return
+          non-draft merge requests.
         type: string
         enum:
         - 'yes'
         - 'no'
+        required: false
+      - in: query
+        name: draft
+        description: Filter merge requests against their `draft` status. `true` to
+          return only draft merge requests, `false` to return non-draft merge requests.
+        type: boolean
         required: false
       - in: query
         name: not[author_id]
@@ -18457,12 +18464,19 @@ paths:
         example: title,description
       - in: query
         name: wip
-        description: Filter merge requests against their `wip` status. `yes` to return
-          only draft merge requests, `no` to return non-draft merge requests.
+        description: Deprecated. Use `draft` instead. Filter merge requests against
+          their `wip` status. `yes` to return only draft merge requests, `no` to return
+          non-draft merge requests.
         type: string
         enum:
         - 'yes'
         - 'no'
+        required: false
+      - in: query
+        name: draft
+        description: Filter merge requests against their `draft` status. `true` to
+          return only draft merge requests, `false` to return non-draft merge requests.
+        type: boolean
         required: false
       - in: query
         name: not[author_id]
@@ -27154,12 +27168,19 @@ paths:
         example: title,description
       - in: query
         name: wip
-        description: Filter merge requests against their `wip` status. `yes` to return
-          only draft merge requests, `no` to return non-draft merge requests.
+        description: Deprecated. Use `draft` instead. Filter merge requests against
+          their `wip` status. `yes` to return only draft merge requests, `no` to return
+          non-draft merge requests.
         type: string
         enum:
         - 'yes'
         - 'no'
+        required: false
+      - in: query
+        name: draft
+        description: Filter merge requests against their `draft` status. `true` to
+          return only draft merge requests, `false` to return non-draft merge requests.
+        type: boolean
         required: false
       - in: query
         name: not[author_id]
@@ -45105,12 +45126,19 @@ paths:
         example: title,description
       - in: query
         name: wip
-        description: Filter merge requests against their `wip` status. `yes` to return
-          only draft merge requests, `no` to return non-draft merge requests.
+        description: Deprecated. Use `draft` instead. Filter merge requests against
+          their `wip` status. `yes` to return only draft merge requests, `no` to return
+          non-draft merge requests.
         type: string
         enum:
         - 'yes'
         - 'no'
+        required: false
+      - in: query
+        name: draft
+        description: Filter merge requests against their `draft` status. `true` to
+          return only draft merge requests, `false` to return non-draft merge requests.
+        type: boolean
         required: false
       - in: query
         name: not[author_id]
@@ -56177,6 +56205,7 @@ definitions:
         - jacoco
         - scip
         - sarif
+        - environment_key
         example: archive
       size:
         type: integer
@@ -72372,6 +72401,7 @@ definitions:
         - jacoco
         - scip
         - sarif
+        - environment_key
         default: archive
     description: Authorize uploading job artifact
   postApiV4JobsIdArtifacts:
@@ -72424,6 +72454,7 @@ definitions:
         - jacoco
         - scip
         - sarif
+        - environment_key
         default: archive
       artifact_format:
         type: string

@@ -4,6 +4,7 @@ import currentUserOrganizationsGraphQlResponse from 'test_fixtures/graphql/organ
 import { shallowMountExtended } from 'helpers/vue_test_utils_helper';
 import createMockApollo from 'helpers/mock_apollo_helper';
 import waitForPromises from 'helpers/wait_for_promises';
+import setWindowLocation from 'helpers/set_window_location_helper';
 import { createAlert } from '~/alert';
 import { DEFAULT_PER_PAGE } from '~/api';
 import currentUserOrganizationsQuery from '~/organizations/shared/graphql/queries/current_user_organizations.query.graphql';
@@ -306,6 +307,38 @@ describe('OrganizationsIndexApp', () => {
 
       it('does not render modal', () => {
         expect(findReconciliationModal().exists()).toBe(false);
+      });
+    });
+
+    describe('when showReconciliationModal query param is true', () => {
+      beforeEach(async () => {
+        setWindowLocation('?showReconciliationModal=true');
+
+        createComponent({
+          provide: { glFeatures: { organizationReconciliation: true } },
+        });
+
+        await waitForPromises();
+      });
+
+      it('opens reconciliation modal', () => {
+        expect(findReconciliationModal().props('visible')).toBe(true);
+      });
+    });
+
+    describe('when showReconciliationModal query param is not set', () => {
+      beforeEach(async () => {
+        setWindowLocation('?');
+
+        createComponent({
+          provide: { glFeatures: { organizationReconciliation: true } },
+        });
+
+        await waitForPromises();
+      });
+
+      it('does not open reconciliation modal', () => {
+        expect(findReconciliationModal().props('visible')).toBe(false);
       });
     });
   });

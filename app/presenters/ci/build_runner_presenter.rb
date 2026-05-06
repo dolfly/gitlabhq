@@ -93,6 +93,17 @@ module Ci
       "#{Project::INSTANCE_RUNNER_RUNNING_JOBS_MAX_BUCKET}+"
     end
 
+    def suspend_options
+      opts = options[:suspend_options]
+      return unless opts.present?
+
+      {
+        suspend_on_success: opts[:suspend_on_success] || false,
+        suspend_on_failure: opts[:suspend_on_failure] || false,
+        environment_key: opts[:environment_key]
+      }.compact
+    end
+
     private
 
     def create_archive(artifacts)

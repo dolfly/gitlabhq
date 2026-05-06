@@ -314,7 +314,7 @@ RSpec.describe 'Database schema',
       p_ci_builds: 26,
       p_ci_pipelines: 24,
       packages_package_files: 16,
-      packages_packages: 27,
+      packages_packages: 28,
       project_type_ci_runners: 16,
       projects: 54, # Decrement by 2 after the removal of temporary indexes https://gitlab.com/gitlab-org/gitlab/-/merge_requests/217449
       sbom_occurrences: 25,

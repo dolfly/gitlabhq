@@ -2,6 +2,8 @@
 import { GlButton } from '@gitlab/ui';
 import { __, s__ } from '~/locale';
 import { createAlert } from '~/alert';
+import { parseBoolean } from '~/lib/utils/common_utils';
+import { getParameterByName } from '~/lib/utils/url_utility';
 import glFeatureFlagsMixin from '~/vue_shared/mixins/gl_feature_flags_mixin';
 import { DEFAULT_PER_PAGE } from '~/api';
 import OrganizationsView from '~/organizations/shared/components/organizations_view.vue';
@@ -28,7 +30,7 @@ export default {
   data() {
     return {
       organizations: {},
-      showReconciliationModal: false,
+      showReconciliationModal: parseBoolean(getParameterByName('showReconciliationModal')),
       pagination: {
         first: DEFAULT_PER_PAGE,
         after: null,

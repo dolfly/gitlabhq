@@ -92,7 +92,10 @@ module API
           documentation: { example: 'title,description' }
         optional :wip, type: String,
           values: %w[yes no],
-          desc: 'Filter merge requests against their `wip` status. `yes` to return only draft merge requests, `no` to return non-draft merge requests.'
+          desc: 'Deprecated. Use `draft` instead. Filter merge requests against their `wip` status. `yes` to return only draft merge requests, `no` to return non-draft merge requests.'
+        optional :draft, type: Boolean,
+          desc: 'Filter merge requests against their `draft` status. `true` to return only draft merge requests, `false` to return non-draft merge requests.'
+        mutually_exclusive :draft, :wip
         optional :not, type: Hash, desc: 'Returns merge requests that do not match the parameters supplied' do
           use :merge_requests_negatable_params, prefix: '`<Negated>` '
 

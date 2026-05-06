@@ -1,5 +1,5 @@
 import toast from '~/vue_shared/plugins/global_toast';
-import { sprintf, __ } from '~/locale';
+import { sprintf, __, s__ } from '~/locale';
 import {
   ACTION_COPY_ID,
   ACTION_EDIT,
@@ -109,9 +109,14 @@ export const renderUnarchiveSuccessToast = (group) => {
 
 export const renderTransferSuccessToast = (group) => {
   toast(
-    sprintf(__("Group '%{group_name}' has been successfully transferred."), {
-      group_name: group.fullName,
-    }),
+    sprintf(
+      s__(
+        "TransferGroup|Group '%{group_name}' transfer has been scheduled. Users with the Maintainer or Owner role will be notified when it completes.",
+      ),
+      {
+        group_name: group.fullName,
+      },
+    ),
   );
 };
 
