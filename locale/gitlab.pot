@@ -6397,6 +6397,9 @@ msgstr ""
 msgid "AdminSettings|Maximum number of variables in a dotenv artifact"
 msgstr ""
 
+msgid "AdminSettings|Maximum parallel pipelines per merge train"
+msgstr ""
+
 msgid "AdminSettings|Maximum size of a dotenv artifact in bytes"
 msgstr ""
 
@@ -56498,6 +56501,9 @@ msgstr ""
 msgid "ProjectSettings|Infrastructure"
 msgstr ""
 
+msgid "ProjectSettings|Instance limit: %{limit}. Set a value between 1 and %{limit}, or leave empty to use the instance limit."
+msgstr ""
+
 msgid "ProjectSettings|Instrumentation details"
 msgstr ""
 
@@ -56526,6 +56532,9 @@ msgid "ProjectSettings|Manages large files such as audio, video, and graphics fi
 msgstr ""
 
 msgid "ProjectSettings|Maximum %{maxLength} characters."
+msgstr ""
+
+msgid "ProjectSettings|Maximum parallel pipelines per merge train"
 msgstr ""
 
 msgid "ProjectSettings|Merge checks"

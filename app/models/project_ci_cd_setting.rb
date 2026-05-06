@@ -62,6 +62,9 @@ class ProjectCiCdSetting < ApplicationRecord
   attribute :forward_deployment_enabled, default: true
   attribute :separated_caches, default: true
   validates :merge_trains_skip_train_allowed, inclusion: { in: [true, false] }
+  validates :max_pipelines_per_merge_train,
+    numericality: { only_integer: true, greater_than_or_equal_to: 1 },
+    allow_nil: true
 
   chronic_duration_attr :runner_token_expiration_interval_human_readable, :runner_token_expiration_interval
   chronic_duration_attr_writer :delete_pipelines_in_human_readable, :delete_pipelines_in_seconds

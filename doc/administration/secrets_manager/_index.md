@@ -64,17 +64,23 @@ and optionally multiple standby nodes that take over if the active node fails.
 
 Prerequisites:
 
-- You must have administrator access to the instance.
-- You must be running GitLab 18.8 or later.
-- You must have a Kubernetes cluster.
-- You must have an external (non-Omnibus) PostgreSQL instance.
+- Administrator access.
+- GitLab 18.8 or later.
+- For installing OpenBao on the same host as a Linux package instance, GitLab 19.0 or later.
+- A Kubernetes cluster.
+- For Cloud Native GitLab deployments, an external (non-Omnibus) PostgreSQL instance.
   The external PostgreSQL instance is required by the GitLab Helm chart for Cloud Native deployments,
   not by OpenBao specifically. OpenBao uses a separate logical database on that instance.
 
-To install OpenBao, use the [OpenBao Helm chart for Kubernetes deployments](https://docs.gitlab.com/charts/charts/openbao/).
+Choose the installation method based on your GitLab deployment:
 
-After installation, verify that OpenBao is working by following the [GitLab Secrets Manager user documentation](../../ci/secrets/secrets_manager/_index.md)
-to test secret operations.
+- **Cloud Native GitLab**: Use this if you deploy GitLab to Kubernetes.
+  See the [OpenBao Helm chart documentation](https://docs.gitlab.com/charts/charts/openbao/).
+- **Omnibus GitLab**: Use this if you deploy GitLab with the Linux package (single node).
+  See [Install OpenBao on the same host (Linux package)](linux-package-integration.md).
+
+After installation, verify that OpenBao is working by following the
+[GitLab Secrets Manager user documentation](../../ci/secrets/secrets_manager/_index.md).
 
 ## Sizing recommendations
 

@@ -10,6 +10,13 @@ RSpec.describe ProjectCiCdSetting, feature_category: :continuous_integration do
 
     subject { described_class.new(project: project) }
 
+    it 'validates max_pipelines_per_merge_train is at least 1 or nil' do
+      expect(subject).to validate_numericality_of(:max_pipelines_per_merge_train)
+        .only_integer
+        .is_greater_than_or_equal_to(1)
+        .allow_nil
+    end
+
     it 'validates default_git_depth is between 0 and 1000 or nil' do
       expect(subject).to validate_numericality_of(:default_git_depth)
         .only_integer

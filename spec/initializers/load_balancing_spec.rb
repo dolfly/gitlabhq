@@ -102,18 +102,18 @@ RSpec.describe 'load_balancing', :delete, :reestablished_active_record_base, fea
     it 'reconfigures load balancing' do
       initialize_load_balancer
 
-      original_models = Gitlab::Database::LoadBalancing.base_models.dup
+      original_models = Gitlab::Database::LoadBalancing.base_model_names.dup
       expect(original_models).not_to be_empty
 
       # Simulate the LB singleton losing its state (as if it were reloaded).
       Gitlab::Database::LoadBalancing.configure! do |lb|
-        lb.base_models = []
+        lb.base_model_names = []
       end
-      expect(Gitlab::Database::LoadBalancing.base_models).to be_empty
+      expect(Gitlab::Database::LoadBalancing.base_model_names).to be_empty
 
       configure_load_balancing!
 
-      expect(Gitlab::Database::LoadBalancing.base_models).to match_array(original_models)
+      expect(Gitlab::Database::LoadBalancing.base_model_names).to match_array(original_models)
     end
   end
 
