@@ -4761,7 +4761,8 @@ for `PROVIDER` and `STACK`:
 - `parallel:matrix` jobs add the matrix values to the job names to differentiate
   the jobs from each other. However, long values can cause job names to exceed the
   255-character limit. For more information, see [epic 11791](https://gitlab.com/groups/gitlab-org/-/work_items/11791).
-- You cannot use the matrix values as variables for [`rules:if`](#rulesif).
+- Matrix variable values are available as CI/CD variables in [`rules:if`](#rulesif) expressions.
+  For more information, see [Use matrix variables in `rules:if`](../jobs/job_control.md#use-matrix-variables-in-rulesif).
 - You cannot create multiple matrix configurations with the same values but different names.
   Job names are generated from the matrix values, not the names, so matrix entries
   with identical values generate identical job names that overwrite each other.
@@ -4784,6 +4785,7 @@ for `PROVIDER` and `STACK`:
 - [Run a one-dimensional matrix of parallel jobs](../jobs/job_control.md#run-a-one-dimensional-matrix-of-parallel-jobs).
 - [Run a matrix of triggered parallel jobs](../jobs/job_control.md#run-a-matrix-of-parallel-trigger-jobs).
 - [Select different runner tags for each parallel matrix job](../jobs/job_control.md#select-different-runner-tags-for-each-parallel-matrix-job).
+- [Use matrix variables in rules](../jobs/job_control.md#use-matrix-variables-in-rules).
 - [Matrix expressions in `needs:parallel:matrix`](matrix_expressions.md#matrix-expressions-in-needsparallelmatrix).
 
 ---

@@ -253,6 +253,12 @@ module LoginHelpers
       post "/users/auth/#{provider_name}" => "omniauth_callbacks##{provider_name}"
     end
 
+    # Ensure the controller has an action for this provider (it may not if the
+    # provider was not configured at class-load time, e.g. iam_* providers).
+    unless OmniauthCallbacksController.method_defined?(provider_name.to_sym)
+      OmniauthCallbacksController.alias_method provider_name.to_sym, :handle_omniauth
+    end
+
     # Tag the example so the after hook in spec/support/omniauth.rb
     # calls cleanup_provider_routes after the test.
     RSpec.current_example.metadata[:provider_routes_modified] = true

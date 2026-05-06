@@ -8,6 +8,7 @@ query getCatalogResources(
   $searchTerm: String
   $sortValue: CiCatalogResourceSort
   $verificationLevel: CiCatalogResourceVerificationLevel
+  $topics: [String!]
   $after: String
   $before: String
   $first: Int = 20
@@ -19,6 +20,7 @@ query getCatalogResources(
     search: $searchTerm
     sort: $sortValue
     verificationLevel: $verificationLevel
+    topics: $topics
     after: $after
     before: $before
     first: $first

@@ -85,7 +85,7 @@ For gems not listed in this table, it's still recommended but not required that 
 
 When adding a new gem to our `Gemfile` or even changing versions in
 `Gemfile.lock` we strongly recommend that you
-[request a Security review](https://handbook.gitlab.com/handbook/security/product-security/application-security/appsec-reviews/#adding-features-to-the-queue--requesting-a-security-review).
+[request a Security review](https://handbook.gitlab.com/handbook/security/product-security/security-platforms-architecture/application-security/appsec-reviews/#adding-features-to-the-queue--requesting-a-security-review).
 New gems add an extra security risk for GitLab, and it is important to
 evaluate this risk before we ship this to production. Technically, just adding
 a new gem and pushing to a branch in our main `gitlab` project is a security

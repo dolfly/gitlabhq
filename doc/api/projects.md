@@ -313,6 +313,7 @@ following response attributes:
 | `merge_pipelines_enabled` | boolean | Indicates if merge pipelines are enabled. |
 | `merge_trains_enabled` | boolean | Indicates if merge trains are enabled. |
 | `merge_trains_skip_train_allowed` | boolean | Indicates if skipping the merge train is allowed. |
+| `max_pipelines_per_merge_train` | integer | Maximum number of parallel pipelines per merge train. |
 | `only_allow_merge_if_all_status_checks_passed` | boolean | Whether merges are allowed only if all status checks have passed. Ultimate only. |
 | `allow_pipeline_trigger_approve_deployment` | boolean | Whether pipeline triggers can approve deployments. |
 | `prevent_merge_without_jira_issue` | boolean | Indicates if merges require an associated Jira issue. |
@@ -749,6 +750,7 @@ following response attributes:
 | `merge_pipelines_enabled` | boolean | Indicates if merge pipelines are enabled. |
 | `merge_trains_enabled` | boolean | Indicates if merge trains are enabled. |
 | `merge_trains_skip_train_allowed` | boolean | Indicates if skipping the merge train is allowed. |
+| `max_pipelines_per_merge_train` | integer | Maximum number of parallel pipelines per merge train. |
 | `only_allow_merge_if_all_status_checks_passed` | boolean | Whether merges are allowed only if all status checks have passed. Ultimate only. |
 | `allow_pipeline_trigger_approve_deployment` | boolean | Whether pipeline triggers can approve deployments. |
 | `prevent_merge_without_jira_issue` | boolean | Indicates if merges require an associated Jira issue. |
@@ -1130,6 +1132,7 @@ following response attributes:
 | `merge_pipelines_enabled` | boolean | Indicates if merge pipelines are enabled. |
 | `merge_trains_enabled` | boolean | Indicates if merge trains are enabled. |
 | `merge_trains_skip_train_allowed` | boolean | Indicates if skipping the merge train is allowed. |
+| `max_pipelines_per_merge_train` | integer | Maximum number of parallel pipelines per merge train. |
 | `only_allow_merge_if_all_status_checks_passed` | boolean | Whether merges are allowed only if all status checks have passed. Ultimate only. |
 | `allow_pipeline_trigger_approve_deployment` | boolean | Whether pipeline triggers can approve deployments. |
 | `prevent_merge_without_jira_issue` | boolean | Indicates if merges require an associated Jira issue. |
@@ -1593,6 +1596,7 @@ following response attributes:
 | `merge_pipelines_enabled` | boolean | Indicates if merge pipelines are enabled. |
 | `merge_trains_enabled` | boolean | Indicates if merge trains are enabled. |
 | `merge_trains_skip_train_allowed` | boolean | Indicates if skipping the merge train is allowed. |
+| `max_pipelines_per_merge_train` | integer | Maximum number of parallel pipelines per merge train. |
 | `only_allow_merge_if_all_status_checks_passed` | boolean | Whether merges are allowed only if all status checks have passed. Ultimate only. |
 | `allow_pipeline_trigger_approve_deployment` | boolean | Whether pipeline triggers can approve deployments. |
 | `prevent_merge_without_jira_issue` | boolean | Indicates if merges require an associated Jira issue. |
@@ -2185,6 +2189,7 @@ Supported general project attributes:
 | `merge_requests_enabled`                           | boolean | No                             | _(Deprecated)_ Enable merge requests for this project. Use `merge_requests_access_level` instead. |
 | `merge_trains_enabled`                             | boolean | No                             | Enable or disable merge trains. |
 | `merge_trains_skip_train_allowed`                  | boolean | No                             | Allows merge train merge requests to be merged without waiting for pipelines to finish. |
+| `max_pipelines_per_merge_train`                    | integer | No                             | Maximum number of parallel pipelines per merge train. |
 | `mirror_trigger_builds`                            | boolean | No                             | Pull mirroring triggers builds. Premium and Ultimate only. |
 | `mirror`                                           | boolean | No                             | Enables pull mirroring in a project. Premium and Ultimate only. |
 | `namespace_id`                                     | integer | No                             | Namespace for the new project. Specify a group ID or subgroup ID. If not provided, defaults to the current user's personal namespace. |
@@ -2411,6 +2416,7 @@ Supported general project attributes:
 | `mr_default_title_template`                        | string            | No       | [Template](../user/project/merge_requests/title_templates.md) used to set default merge request title. |
 | `merge_trains_enabled`                             | boolean           | No       | Enable or disable merge trains. |
 | `merge_trains_skip_train_allowed`                  | boolean           | No       | Allows merge train merge requests to be merged without waiting for pipelines to finish. |
+| `max_pipelines_per_merge_train`                    | integer           | No       | Maximum number of parallel pipelines per merge train. |
 | `mirror_overwrites_diverged_branches`              | boolean           | No       | Pull mirror overwrites diverged branches. Premium and Ultimate only. |
 | `mirror_trigger_builds`                            | boolean           | No       | Pull mirroring triggers builds. Premium and Ultimate only. |
 | `mirror_user_id`                                   | integer           | No       | User responsible for all the activity surrounding a pull mirror event. _(administrators only)_ Premium and Ultimate only. |

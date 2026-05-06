@@ -63,6 +63,29 @@ RSpec.describe Wikis::PageMetaFinder, feature_category: :wiki do
       end
     end
 
+    context 'when a wiki page has been deleted' do
+      before do
+        wiki_page_meta_3.update!(deleted_at: Time.current)
+      end
+
+      it 'excludes deleted wiki page meta records' do
+        finder = described_class.new(user)
+
+        result = finder.execute
+
+        expect(result).to include(wiki_page_meta_1, wiki_page_meta_2)
+        expect(result).not_to include(wiki_page_meta_3)
+      end
+
+      it 'excludes deleted records even when matching search term' do
+        finder = described_class.new(user, search: 'Deployment')
+
+        result = finder.execute
+
+        expect(result).to be_empty
+      end
+    end
+
     context 'when extra keyword arguments are passed' do
       it 'ignores them without error' do
         expect do

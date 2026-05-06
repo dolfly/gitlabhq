@@ -35,6 +35,20 @@ RSpec.describe WikiPage::Meta, feature_category: :wiki do
     end
   end
 
+  describe '.active' do
+    let_it_be(:active_meta) { create(:wiki_page_meta, title: 'Active Page', project: project) }
+    let_it_be(:deleted_meta) do
+      create(:wiki_page_meta, title: 'Deleted Page', project: project, deleted_at: 3.days.ago)
+    end
+
+    it 'returns only records without deleted_at set' do
+      results = described_class.active
+
+      expect(results).to include(active_meta)
+      expect(results).not_to include(deleted_meta)
+    end
+  end
+
   describe '.search_by_title' do
     let_it_be(:meta_1) { create(:wiki_page_meta, title: 'Deploy Guide', project: project) }
     let_it_be(:meta_2) { create(:wiki_page_meta, title: 'Setup Instructions', project: project) }

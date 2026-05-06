@@ -190,10 +190,13 @@ To add a merge request to a merge train:
 The merge request's merge train status displays under the pipeline widget with a
 message similar to `This merge request is 2 of 3 in queue.`
 
-Each merge train can run a maximum of twenty pipelines in parallel. If you add more than
-twenty merge requests to the merge train, the extra merge requests are queued, waiting
-for pipelines to complete. There is no limit to the number of queued merge requests
-waiting to join the merge train.
+Each merge train can run a maximum number of pipelines in parallel.
+The default limit is 20. If you add more merge requests to the merge
+train than the limit, the extra merge requests are queued until a
+pipeline completes. The number of queued merge requests is unlimited.
+
+To change this limit, see
+[merge train pipeline limits](../../administration/instance_limits.md#merge-train-parallel-pipeline-limit).
 
 ## Remove a merge request from a merge train
 

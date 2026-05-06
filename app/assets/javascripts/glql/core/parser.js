@@ -1,6 +1,6 @@
 import jsYaml from 'js-yaml';
 import { glql } from '@gitlab/query-language-rust';
-import { DEFAULT_DISPLAY_TYPE } from '../constants';
+import { DEFAULT_DISPLAY_TYPE, MODE_STANDARD } from '../constants';
 import { extractGroupOrProject } from '../utils/common';
 import { glqlFeatureFlags } from '../utils/feature_flags';
 
@@ -38,7 +38,7 @@ export const parseQuery = async (query, config) => {
     variables,
     config,
     fields,
-    mode: mode || 'standard',
+    mode: mode || MODE_STANDARD,
   };
 };
 

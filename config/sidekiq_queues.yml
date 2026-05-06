@@ -415,6 +415,8 @@
   - 1
 - - dependencies_export
   - 1
+- - dependency_management_security_update_create_merge_request
+  - 1
 - - dependency_management_security_update_scheduler
   - 1
 - - dependency_proxy
@@ -704,6 +706,8 @@
 - - merge_requests_duo_code_review_chat
   - 1
 - - merge_requests_execute_approval_hooks
+  - 1
+- - merge_requests_execute_merge_request_ready
   - 1
 - - merge_requests_handle_assignees_change
   - 1

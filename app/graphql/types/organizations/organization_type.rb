@@ -69,6 +69,11 @@ module Types
         null: false,
         description: 'Web URL of the organization.',
         experiment: { milestone: '16.6' }
+      field :work_item_types, ::Types::WorkItems::TypeType.connection_type,
+        null: true,
+        description: 'Work item types available to the organization.',
+        experiment: { milestone: '18.10' },
+        resolver: ::Resolvers::WorkItems::TypesResolver
 
       markdown_field :description_html, null: true, experiment: { milestone: '16.7' }, &:organization_detail
 

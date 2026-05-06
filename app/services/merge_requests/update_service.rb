@@ -253,7 +253,7 @@ module MergeRequests
         # email template itself, see `change_in_merge_request_draft_status_email` template.
         notify_draft_status_changed(merge_request)
         trigger_merge_request_status_updated(merge_request)
-        publish_draft_change_event(merge_request)
+        publish_draft_change_event(merge_request, new_draft_status: new_title_draft)
       end
 
       if !old_title_draft && new_title_draft
@@ -265,10 +265,14 @@ module MergeRequests
       end
     end
 
-    def publish_draft_change_event(merge_request)
+    def publish_draft_change_event(merge_request, new_draft_status:)
       Gitlab::EventStore.publish(
         MergeRequests::DraftStateChangeEvent.new(
-          data: { current_user_id: current_user.id, merge_request_id: merge_request.id }
+          data: {
+            current_user_id: current_user.id,
+            merge_request_id: merge_request.id,
+            new_draft_status: new_draft_status
+          }
         )
       )
     end

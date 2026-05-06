@@ -11,6 +11,7 @@ import {
   getBaseAdditionalProperties,
   validateEvent,
   isEventEligible,
+  parseToNumeric,
 } from '~/tracking/utils';
 import * as Sentry from '~/sentry/sentry_browser_wrapper';
 import { TRACKING_CONTEXT_SCHEMA } from '~/experimentation/constants';
@@ -328,5 +329,20 @@ describe('~/tracking/utils', () => {
         expect(isEventEligible(action)).toBe(expected);
       },
     );
+  });
+  describe('parseToNumeric', () => {
+    it('returns undefined for invalid inputs', () => {
+      expect(parseToNumeric('abc')).toBeUndefined();
+      expect(parseToNumeric('')).toBeUndefined();
+      expect(parseToNumeric(null)).toBeUndefined();
+      expect(parseToNumeric(undefined)).toBeUndefined();
+    });
+
+    it('returns numbers for valid numeric strings', () => {
+      expect(parseToNumeric('123')).toBe(123);
+      expect(parseToNumeric('0')).toBe(0);
+      expect(parseToNumeric('3.1416')).toBe(3.1416);
+      expect(parseToNumeric('-42')).toBe(-42);
+    });
   });
 });

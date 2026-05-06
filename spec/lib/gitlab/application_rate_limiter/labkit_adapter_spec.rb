@@ -32,6 +32,26 @@ RSpec.describe Gitlab::ApplicationRateLimiter::LabkitAdapter,
       end
     end
 
+    context 'with flag basis resolution' do
+      it 'reads the per-key flag for cohort 1 entries' do
+        expect(described_class.shadow_or_enforce?(:pipelines_create,
+          threshold_override: nil, interval_override: nil)).to be(true)
+
+        stub_feature_flags(rate_limiter_use_labkit_pipelines_create: false)
+        expect(described_class.shadow_or_enforce?(:pipelines_create,
+          threshold_override: nil, interval_override: nil)).to be(false)
+      end
+
+      it 'reads the cohort-wide flag for cohort 2 entries' do
+        expect(described_class.shadow_or_enforce?(:ai_action,
+          threshold_override: nil, interval_override: nil)).to be(true)
+
+        stub_feature_flags(rate_limiter_use_labkit_cohort_2: false)
+        expect(described_class.shadow_or_enforce?(:ai_action,
+          threshold_override: nil, interval_override: nil)).to be(false)
+      end
+    end
+
     context 'when an override is passed' do
       let(:override_counter) { instance_double(Prometheus::Client::Counter, increment: nil) }
 
@@ -75,12 +95,18 @@ RSpec.describe Gitlab::ApplicationRateLimiter::LabkitAdapter,
   end
 
   describe '.enforce?' do
-    it 'reflects the per-key enforce flag' do
+    it 'reflects the per-key enforce flag for cohort 1 entries' do
+      expect(described_class.enforce?(:pipelines_create)).to be(true)
+
       stub_feature_flags(rate_limiter_use_labkit_pipelines_create_enforce: false)
       expect(described_class.enforce?(:pipelines_create)).to be(false)
+    end
 
-      stub_feature_flags(rate_limiter_use_labkit_pipelines_create_enforce: true)
-      expect(described_class.enforce?(:pipelines_create)).to be(true)
+    it 'reflects the cohort-wide enforce flag for cohort 2 entries' do
+      expect(described_class.enforce?(:ai_action)).to be(true)
+
+      stub_feature_flags(rate_limiter_use_labkit_cohort_2_enforce: false)
+      expect(described_class.enforce?(:ai_action)).to be(false)
     end
   end
 
@@ -91,7 +117,7 @@ RSpec.describe Gitlab::ApplicationRateLimiter::LabkitAdapter,
         described_class.run!(:users_get_by_id, scope: user)
 
         count = Gitlab::Redis::RateLimiting.with do |r|
-          r.get("labkit:rl:applimiter_users_get_by_id:limit_user_lookups_by_user:user_id:#{user.id}")
+          r.get("labkit:rl:applimiter_users_get_by_id:limit_user_lookups_by_user:user:#{user.id}")
         end
 
         expect(count.to_i).to eq(2)
@@ -129,7 +155,7 @@ RSpec.describe Gitlab::ApplicationRateLimiter::LabkitAdapter,
         described_class.run!(:notes_create, scope: [user])
 
         count = Gitlab::Redis::RateLimiting.with do |r|
-          r.get("labkit:rl:applimiter_notes_create:limit_notes_by_user:user_id:#{user.id}")
+          r.get("labkit:rl:applimiter_notes_create:limit_notes_by_user:user:#{user.id}")
         end
 
         expect(count.to_i).to eq(2)
@@ -141,7 +167,7 @@ RSpec.describe Gitlab::ApplicationRateLimiter::LabkitAdapter,
         described_class.run!(:pipelines_create, scope: [project, user, 'abc123'])
 
         expected_key = "labkit:rl:applimiter_pipelines_create:limit_pipelines_by_project_user_sha" \
-          ":project_id:#{project.id}:user_id:#{user.id}:sha:abc123"
+          ":project:#{project.id}:user:#{user.id}:sha:abc123"
         count = Gitlab::Redis::RateLimiting.with { |r| r.get(expected_key) }
 
         expect(count.to_i).to eq(1)
@@ -151,10 +177,100 @@ RSpec.describe Gitlab::ApplicationRateLimiter::LabkitAdapter,
         described_class.run!(:search_rate_limit, scope: [user])
 
         expected_key = "labkit:rl:applimiter_search_rate_limit:limit_searches_by_user_scope" \
-          ":user_id:#{user.id}:search_scope:_unknown_"
+          ":user:#{user.id}:search_scope:_unknown_"
         count = Gitlab::Redis::RateLimiting.with { |r| r.get(expected_key) }
 
         expect(count.to_i).to eq(1)
+      end
+    end
+
+    context 'with a polymorphic-scope key' do
+      let_it_be(:group) { create(:group) }
+
+      it 'routes Project and Group scopes to disjoint counters' do
+        described_class.run!(:web_hook_test, scope: [project, user])
+        described_class.run!(:web_hook_test, scope: [group, user])
+
+        project_key = "labkit:rl:applimiter_web_hook_test:limit_web_hook_tests_by_parent_user" \
+          ":project:#{project.id}:group:_unknown_:user:#{user.id}"
+        group_key = "labkit:rl:applimiter_web_hook_test:limit_web_hook_tests_by_parent_user" \
+          ":project:_unknown_:group:#{group.id}:user:#{user.id}"
+
+        Gitlab::Redis::RateLimiting.with do |r|
+          expect(r.get(project_key).to_i).to eq(1)
+          expect(r.get(group_key).to_i).to eq(1)
+        end
+      end
+    end
+
+    context 'with a key whose actor can be a User or an IP string' do
+      it 'routes a User scope to the user characteristic' do
+        described_class.run!(:expanded_diff_files, scope: user)
+
+        expected_key = "labkit:rl:applimiter_expanded_diff_files:limit_expanded_diff_files_by_user_or_ip" \
+          ":user:#{user.id}:ip:_unknown_"
+        count = Gitlab::Redis::RateLimiting.with { |r| r.get(expected_key) }
+
+        expect(count.to_i).to eq(1)
+      end
+
+      it 'routes a String scope to the ip characteristic' do
+        described_class.run!(:expanded_diff_files, scope: '203.0.113.7')
+
+        expected_key = "labkit:rl:applimiter_expanded_diff_files:limit_expanded_diff_files_by_user_or_ip" \
+          ":user:_unknown_:ip:203.0.113.7"
+        count = Gitlab::Redis::RateLimiting.with { |r| r.get(expected_key) }
+
+        expect(count.to_i).to eq(1)
+      end
+    end
+
+    context 'with STI subclass scope values' do
+      let_it_be(:deploy_key) { create(:deploy_key) }
+
+      it 'routes a DeployKey to :key via is_a?, not into a primitive slot' do
+        described_class.run!(:gitlab_shell_operation, scope: [:upload, project, deploy_key])
+
+        expected_key = "labkit:rl:applimiter_gitlab_shell_operation" \
+          ":limit_gitlab_shell_operations_by_action_project_actor" \
+          ":action:upload:project:#{project.id}:user:_unknown_:key:#{deploy_key.id}:ip:_unknown_"
+        count = Gitlab::Redis::RateLimiting.with { |r| r.get(expected_key) }
+
+        expect(count.to_i).to eq(1)
+      end
+    end
+
+    context 'with duplicate AR scope values of the same registered class' do
+      let_it_be(:user_a) { create(:user) }
+      let_it_be(:user_b) { create(:user) }
+
+      it 'routes the first AR instance and discards subsequent same-class instances' do
+        described_class.run!(:users_get_by_id, scope: [user_a, user_b])
+
+        first_key  = "labkit:rl:applimiter_users_get_by_id:limit_user_lookups_by_user:user:#{user_a.id}"
+        second_key = "labkit:rl:applimiter_users_get_by_id:limit_user_lookups_by_user:user:#{user_b.id}"
+
+        Gitlab::Redis::RateLimiting.with do |r|
+          expect(r.get(first_key).to_i).to eq(1)
+          expect(r.get(second_key)).to be_nil
+        end
+      end
+    end
+  end
+
+  describe '.ar_characteristic_types' do
+    it 'orders subclasses before their registered bases' do
+      table = described_class.send(:ar_characteristic_types)
+      classes = table.keys
+
+      classes.each_with_index do |klass, i|
+        classes[(i + 1)..].each do |later|
+          expect(later).not_to be < klass,
+            "#{later} (=> #{table[later]}) is a subclass of #{klass} " \
+              "(=> #{table[klass]}) but appears after it; is_a? routing " \
+              "would assign #{later} instances to #{table[klass]} rather " \
+              "than #{table[later]}."
+        end
       end
     end
   end

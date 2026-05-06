@@ -125,12 +125,12 @@ RSpec.describe Gitlab::GithubImport::Importer::DiffNoteImporter, :aggregate_fail
 
         context 'when the note has suggestions' do
           let(:note_body) do
-            <<~EOB
+            <<~MARKDOWN
             Suggestion:
             ```suggestion
             what do you think to do it like this
             ```
-            EOB
+            MARKDOWN
           end
 
           it 'pushes placeholder references' do
@@ -393,12 +393,12 @@ RSpec.describe Gitlab::GithubImport::Importer::DiffNoteImporter, :aggregate_fail
 
         context 'when the note has suggestions' do
           let(:note_body) do
-            <<~EOB
+            <<~MARKDOWN
             Suggestion:
             ```suggestion
             what do you think to do it like this
             ```
-            EOB
+            MARKDOWN
           end
 
           it 'does not push placeholder references' do

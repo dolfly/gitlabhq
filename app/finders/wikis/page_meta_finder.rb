@@ -32,7 +32,7 @@ module Wikis
     attr_reader :user, :search
 
     def init_collection
-      WikiPage::Meta.for_projects_visible_to_user(user)
+      WikiPage::Meta.active.for_projects_visible_to_user(user)
     end
 
     def by_search(items)

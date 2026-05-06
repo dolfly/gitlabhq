@@ -43,6 +43,7 @@ describe('CiResourcesPage', () => {
     sortValue: DEFAULT_SORT_VALUE,
     minAccessLevel: null,
     verificationLevel: null,
+    topics: [],
   };
 
   const createComponent = () => {
@@ -272,6 +273,7 @@ describe('CiResourcesPage', () => {
           await findCatalogSearch().vm.$emit('update-filters', {
             searchTerm: newSearch,
             verificationLevel: null,
+            topics: [],
           });
           await waitForPromises();
 
@@ -287,6 +289,7 @@ describe('CiResourcesPage', () => {
           await findCatalogSearch().vm.$emit('update-filters', {
             searchTerm: newSearch,
             verificationLevel: null,
+            topics: [],
           });
         });
 
@@ -309,6 +312,7 @@ describe('CiResourcesPage', () => {
         await findCatalogSearch().vm.$emit('update-filters', {
           searchTerm: null,
           verificationLevel: 'Verified creator',
+          topics: [],
         });
       });
 
@@ -338,6 +342,48 @@ describe('CiResourcesPage', () => {
 
       it('passes the verification level to the search component', () => {
         expect(findCatalogSearch().props('initialVerificationLevel')).toBe('Verified creator');
+      });
+    });
+
+    describe('when search component emits topics filter', () => {
+      const topics = ['ruby', 'ci-cd'];
+
+      beforeEach(async () => {
+        catalogResourcesResponse.mockResolvedValue(catalogResponseBody);
+        await createComponent();
+        await findCatalogSearch().vm.$emit('update-filters', {
+          searchTerm: null,
+          verificationLevel: null,
+          topics,
+        });
+      });
+
+      it('passes topics to the graphql query', () => {
+        expect(catalogResourcesResponse).toHaveBeenCalledTimes(2);
+        expect(catalogResourcesResponse.mock.calls[1][0]).toEqual({
+          ...defaultQueryVariables,
+          topics,
+        });
+      });
+    });
+
+    describe('when topics are present in URL', () => {
+      beforeEach(async () => {
+        setWindowLocation('?topics=ruby,ci-cd');
+        catalogResourcesResponse.mockResolvedValue(catalogResponseBody);
+        await createComponent();
+      });
+
+      it('calls the query with topics', () => {
+        expect(catalogResourcesResponse).toHaveBeenCalledTimes(1);
+        expect(catalogResourcesResponse.mock.calls[0][0]).toEqual({
+          ...defaultQueryVariables,
+          topics: ['ruby', 'ci-cd'],
+        });
+      });
+
+      it('passes the topics to the search component', () => {
+        expect(findCatalogSearch().props('initialTopics')).toEqual(['ruby', 'ci-cd']);
       });
     });
   });

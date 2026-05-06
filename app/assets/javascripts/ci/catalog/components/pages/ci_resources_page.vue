@@ -33,6 +33,8 @@ export default {
   data() {
     const searchTerm = getParameterByName('search');
     const verificationLevel = getParameterByName('verification_level');
+    const topicsParam = getParameterByName('topics');
+    const topics = topicsParam ? topicsParam.split(',') : [];
 
     return {
       catalogResources: [],
@@ -42,6 +44,7 @@ export default {
       searchTerm: searchTerm || null,
       sortValue: DEFAULT_SORT_VALUE,
       verificationLevel: verificationLevel || null,
+      topics,
       tabData: {
         name: TAB_NAME.all,
         scope: SCOPE.all,
@@ -56,6 +59,7 @@ export default {
         return {
           searchTerm: this.searchTerm,
           verificationLevel: this.verificationLevelEnum,
+          topics: this.topics,
         };
       },
       update({ namespaces, all, analytics }) {
@@ -80,6 +84,7 @@ export default {
           searchTerm: this.searchTerm,
           sortValue: this.sortValue,
           verificationLevel: this.verificationLevelEnum,
+          topics: this.topics,
           first: ciCatalogResourcesItemsCount,
         };
       },
@@ -169,11 +174,18 @@ export default {
     incrementPage() {
       this.updatePageCount(this.currentPage + 1);
     },
-    onUpdateFilters({ searchTerm = null, verificationLevel = null }) {
+    onUpdateFilters({ searchTerm = null, verificationLevel = null, topics = [] }) {
       this.searchTerm = searchTerm;
       this.verificationLevel = verificationLevel;
+      this.topics = topics;
       this.resetPageCount();
-      historyPushState(setUrlParams({ search: searchTerm, verification_level: verificationLevel }));
+      historyPushState(
+        setUrlParams({
+          search: searchTerm,
+          verification_level: verificationLevel,
+          topics: topics.length ? topics.join(',') : null,
+        }),
+      );
     },
     onUpdateSorting(sortValue) {
       this.sortValue = sortValue;
@@ -196,6 +208,7 @@ export default {
     <catalog-search
       :initial-search-term="searchTerm"
       :initial-verification-level="verificationLevel"
+      :initial-topics="topics"
       @update-sorting="onUpdateSorting"
       @update-filters="onUpdateFilters"
     />

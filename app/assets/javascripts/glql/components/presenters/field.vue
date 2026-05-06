@@ -6,6 +6,7 @@ import HealthPresenter from 'ee_else_ce/glql/components/presenters/health.vue';
 import IssuablePresenter from './issuable.vue';
 import MilestonePresenter from './milestone.vue';
 import UserPresenter from './user.vue';
+import UserAvatarPresenter from './user_avatar.vue';
 import LabelPresenter from './label.vue';
 import TypePresenter from './type.vue';
 import StatePresenter from './state.vue';
@@ -22,6 +23,8 @@ import LinkPresenter from './link.vue';
 import TimePresenter from './time.vue';
 import TextPresenter from './text.vue';
 import UrlPresenter from './url.vue';
+import PercentagePresenter from './percentage.vue';
+import NumberPresenter from './number.vue';
 
 const presentersByObjectType = {
   MergeRequest: IssuablePresenter,
@@ -71,6 +74,17 @@ const presentersByFieldKey = {
   shortSha: CodePresenter,
   refPath: { CiJob: UrlPresenter, default: CodePresenter },
   type: TypePresenter,
+  user: {
+    DuoCodeSuggestionsAggregationResponseDimensions: UserAvatarPresenter,
+    default: UserPresenter,
+  },
+  acceptanceRate: PercentagePresenter,
+  acceptedCount: NumberPresenter,
+  rejectedCount: NumberPresenter,
+  shownCount: NumberPresenter,
+  totalCount: NumberPresenter,
+  usersCount: NumberPresenter,
+  suggestionSizeSum: NumberPresenter,
 };
 
 export default {
@@ -115,8 +129,8 @@ export default {
       const field = this.dataForField(item, fieldKey);
       return (
         this.nullPresenter(field) ||
-        this.presenterByObjectType(field) ||
         this.presenterByFieldKey(fieldKey) ||
+        this.presenterByObjectType(field) ||
         this.presenterByPrimitiveType(field)
       );
     },

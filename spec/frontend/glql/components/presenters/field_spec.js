@@ -19,15 +19,19 @@ import StatePresenter from '~/glql/components/presenters/state.vue';
 import TextPresenter from '~/glql/components/presenters/text.vue';
 import TimePresenter from '~/glql/components/presenters/time.vue';
 import UserPresenter from '~/glql/components/presenters/user.vue';
+import UserAvatarPresenter from '~/glql/components/presenters/user_avatar.vue';
 import NullPresenter from '~/glql/components/presenters/null.vue';
 import CollectionPresenter from '~/glql/components/presenters/collection.vue';
 import TypePresenter from '~/glql/components/presenters/type.vue';
+import PercentagePresenter from '~/glql/components/presenters/percentage.vue';
+import NumberPresenter from '~/glql/components/presenters/number.vue';
 import {
   MOCK_EPIC,
   MOCK_ISSUE,
   MOCK_LABELS,
   MOCK_MILESTONE,
   MOCK_USER,
+  MOCK_DIMENSIONS,
   MOCK_ASSIGNEES,
   MOCK_MR_ASSIGNEES,
   MOCK_MR_REVIEWERS,
@@ -103,16 +107,24 @@ describe('FieldPresenter', () => {
 
   describe('if fieldKey is passed', () => {
     it.each`
-      fieldKey          | field            | presenter            | presenterName
-      ${'health'}       | ${'onTrack'}     | ${HealthPresenter}   | ${'HealthPresenter'}
-      ${'healthStatus'} | ${'onTrack'}     | ${HealthPresenter}   | ${'HealthPresenter'}
-      ${'state'}        | ${'opened'}      | ${StatePresenter}    | ${'StatePresenter'}
-      ${'lastComment'}  | ${'lastComment'} | ${HtmlPresenter}     | ${'HtmlPresenter'}
-      ${'type'}         | ${'TASK'}        | ${TypePresenter}     | ${'TypePresenter'}
-      ${'duration'}     | ${3600}          | ${DurationPresenter} | ${'DurationPresenter'}
-      ${'webPath'}      | ${'/foo'}        | ${UrlPresenter}      | ${'UrlPresenter'}
-      ${'shortSha'}     | ${'abc123'}      | ${CodePresenter}     | ${'CodePresenter'}
-      ${'refName'}      | ${'main'}        | ${CodePresenter}     | ${'CodePresenter'}
+      fieldKey               | field            | presenter              | presenterName
+      ${'user'}              | ${MOCK_USER}     | ${UserPresenter}       | ${'UserPresenter'}
+      ${'health'}            | ${'onTrack'}     | ${HealthPresenter}     | ${'HealthPresenter'}
+      ${'healthStatus'}      | ${'onTrack'}     | ${HealthPresenter}     | ${'HealthPresenter'}
+      ${'state'}             | ${'opened'}      | ${StatePresenter}      | ${'StatePresenter'}
+      ${'lastComment'}       | ${'lastComment'} | ${HtmlPresenter}       | ${'HtmlPresenter'}
+      ${'type'}              | ${'TASK'}        | ${TypePresenter}       | ${'TypePresenter'}
+      ${'duration'}          | ${3600}          | ${DurationPresenter}   | ${'DurationPresenter'}
+      ${'webPath'}           | ${'/foo'}        | ${UrlPresenter}        | ${'UrlPresenter'}
+      ${'shortSha'}          | ${'abc123'}      | ${CodePresenter}       | ${'CodePresenter'}
+      ${'refName'}           | ${'main'}        | ${CodePresenter}       | ${'CodePresenter'}
+      ${'acceptanceRate'}    | ${0.75}          | ${PercentagePresenter} | ${'PercentagePresenter'}
+      ${'acceptedCount'}     | ${1234}          | ${NumberPresenter}     | ${'NumberPresenter'}
+      ${'rejectedCount'}     | ${567}           | ${NumberPresenter}     | ${'NumberPresenter'}
+      ${'shownCount'}        | ${1801}          | ${NumberPresenter}     | ${'NumberPresenter'}
+      ${'totalCount'}        | ${10000}         | ${NumberPresenter}     | ${'NumberPresenter'}
+      ${'usersCount'}        | ${42}            | ${NumberPresenter}     | ${'NumberPresenter'}
+      ${'suggestionSizeSum'} | ${500000}        | ${NumberPresenter}     | ${'NumberPresenter'}
     `('renders $presenterName for field key: $fieldKey', ({ fieldKey, field, presenter }) => {
       createWrapper({ [fieldKey]: field }, fieldKey);
 
@@ -141,6 +153,18 @@ describe('FieldPresenter', () => {
       createWrapper({ __typename: 'Issue', status: 'open' }, 'status');
 
       expect(wrapper.findComponent(CiStatusPresenter).exists()).toBe(false);
+    });
+
+    it('renders UserAvatarPresenter for user on analytics dimensions', () => {
+      createWrapper({ ...MOCK_DIMENSIONS, user: MOCK_USER }, 'user');
+
+      expect(wrapper.findComponent(UserAvatarPresenter).exists()).toBe(true);
+    });
+
+    it('renders UserPresenter for user on other types', () => {
+      createWrapper({ user: MOCK_USER }, 'user');
+
+      expect(wrapper.findComponent(UserPresenter).exists()).toBe(true);
     });
 
     it('handles items without __typename for type-scoped fields', () => {

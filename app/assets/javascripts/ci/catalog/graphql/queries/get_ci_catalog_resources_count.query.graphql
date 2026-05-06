@@ -3,14 +3,21 @@
 query getCatalogResourcesCount(
   $searchTerm: String
   $verificationLevel: CiCatalogResourceVerificationLevel
+  $topics: [String!]
 ) {
-  all: ciCatalogResources(scope: ALL, search: $searchTerm, verificationLevel: $verificationLevel) {
+  all: ciCatalogResources(
+    scope: ALL
+    search: $searchTerm
+    verificationLevel: $verificationLevel
+    topics: $topics
+  ) {
     count
   }
   namespaces: ciCatalogResources(
     scope: NAMESPACES
     search: $searchTerm
     verificationLevel: $verificationLevel
+    topics: $topics
   ) {
     count
   }
@@ -19,6 +26,7 @@ query getCatalogResourcesCount(
     minAccessLevel: MAINTAINER
     search: $searchTerm
     verificationLevel: $verificationLevel
+    topics: $topics
   ) {
     count
   }

@@ -67,8 +67,10 @@ To set up private connectivity for your internal services:
 1. Configure your Private Hosted Zone (PHZ) records to route to these hostnames through outbound PrivateLink connections.
 1. Plan for the 10-endpoint limit on outbound PrivateLink connections.
 
-If you need to connect to more than 10 endpoints, implement a reverse proxy or TLS passthrough on your infrastructure.
-This approach routes multiple services through fewer PrivateLink connections.
+If you need to connect to more than 10 endpoints, you can use the
+[`terraform-outbound-proxy`](https://gitlab.com/gitlab-com/gl-infra/gitlab-dedicated/customer-tools/terraform-outbound-proxy)
+Terraform module to deploy a reverse proxy in your VPC. This approach routes multiple
+services through fewer PrivateLink connections.
 
 #### Data encryption
 
@@ -202,6 +204,12 @@ Your website uses the domain `tenant_name.gitlab-dedicated.site`, where `tenant_
 > [!note]
 > Custom domains are not supported. If you add a custom domain like `gitlab.my-company.com`,
 > you still access your website at `tenant_name.gitlab-dedicated.site`.
+
+If you migrate from GitLab Self-Managed and want to preserve a legacy wildcard domain
+(for example, `*.gitlab-pages.company.com`), you can use the
+[`terraform-gitlab-pages-redirect`](https://gitlab.com/gitlab-com/gl-infra/gitlab-dedicated/customer-tools/terraform-gitlab-pages-redirect)
+Terraform module to issue 301 redirects from your existing wildcard domain to your
+`tenant_name.gitlab-dedicated.site` URLs.
 
 Control access to your website with:
 

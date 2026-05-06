@@ -32,7 +32,7 @@ Define a job in your `.gitlab-ci.yml` file that generates the
 GitLab checks this report, compares key load performance metrics between the source and
 target branches, and shows the results in the merge request.
 
-![A merge request displays performance metrics with degraded TTFB values.](img/load_performance_testing_v13_2.png)
+![A merge request displays performance metrics with degraded TTFB values.](img/load_performance_testing_v18_11.png)
 
 The key metrics shown in the merge request widget are:
 

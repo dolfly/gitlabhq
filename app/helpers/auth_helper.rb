@@ -217,11 +217,20 @@ module AuthHelper
 
   # rubocop: disable CodeReuse/ActiveRecord
   def auth_active?(provider)
-    return current_user.atlassian_identity.present? if provider == :atlassian_oauth2
+    provider = provider.to_s
+    return current_user.atlassian_identity.present? if provider == 'atlassian_oauth2'
 
-    current_user.identities.exists?(provider: provider.to_s)
+    provider = normalize_provider(provider)
+    current_user.identities.exists?(provider: provider)
   end
   # rubocop: enable CodeReuse/ActiveRecord
+
+  def normalize_provider(provider)
+    return provider unless ::Feature.enabled?(:iam_svc_login, :instance)
+    return provider if provider.blank?
+
+    provider.delete_prefix('iam_')
+  end
 
   def unlink_provider_allowed?(provider)
     IdentityProviderPolicy.new(current_user, provider).can?(:unlink)

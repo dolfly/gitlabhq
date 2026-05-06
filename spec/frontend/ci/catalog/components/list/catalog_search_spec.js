@@ -1,6 +1,7 @@
 import { GlFilteredSearch, GlSorting } from '@gitlab/ui';
 import { shallowMountExtended } from 'helpers/vue_test_utils_helper';
 import CatalogSearch from '~/ci/catalog/components/list/catalog_search.vue';
+import TopicToken from '~/ci/catalog/components/tokens/topic_token.vue';
 import VerificationLevelToken from '~/ci/catalog/components/tokens/verification_level_token.vue';
 import {
   SORT_ASC,
@@ -34,12 +35,24 @@ describe('CatalogSearch', () => {
 
     it('configures the verification level token', () => {
       const tokens = findFilteredSearch().props('availableTokens');
+      const verificationToken = tokens.find((t) => t.type === 'verificationLevel');
 
-      expect(tokens).toHaveLength(1);
-      expect(tokens[0]).toMatchObject({
+      expect(verificationToken).toMatchObject({
         type: 'verificationLevel',
         token: VerificationLevelToken,
         unique: true,
+      });
+    });
+
+    it('configures the topic token', () => {
+      const tokens = findFilteredSearch().props('availableTokens');
+      const topicToken = tokens.find((t) => t.type === 'topic');
+
+      expect(topicToken).toMatchObject({
+        type: 'topic',
+        token: TopicToken,
+        unique: true,
+        multiSelect: true,
       });
     });
 
@@ -78,10 +91,22 @@ describe('CatalogSearch', () => {
       ]);
     });
 
-    it('includes both search term and verification level', () => {
+    it('includes initial topics', () => {
+      createComponent({ initialTopics: ['ruby', 'ci-cd'] });
+
+      expect(findFilteredSearch().props('value')).toEqual([
+        {
+          type: 'topic',
+          value: { data: ['ruby', 'ci-cd'], operator: '||' },
+        },
+      ]);
+    });
+
+    it('includes all filters together', () => {
       createComponent({
         initialSearchTerm: 'test',
         initialVerificationLevel: 'GITLAB_MAINTAINED',
+        initialTopics: ['ruby'],
       });
 
       expect(findFilteredSearch().props('value')).toEqual([
@@ -89,22 +114,29 @@ describe('CatalogSearch', () => {
           type: 'verificationLevel',
           value: { data: 'GITLAB_MAINTAINED', operator: '=' },
         },
+        {
+          type: 'topic',
+          value: { data: ['ruby'], operator: '||' },
+        },
         'test',
       ]);
     });
   });
 
-  describe('search', () => {
+  describe('search and filter', () => {
     beforeEach(() => {
       createComponent();
     });
 
     it.each`
-      description                                       | filters                                                                                 | expected
-      ${'with search term on submit'}                   | ${['dog']}                                                                              | ${{ searchTerm: 'dog', verificationLevel: null }}
-      ${'with empty search term when cleared'}          | ${[]}                                                                                   | ${{ searchTerm: null, verificationLevel: null }}
-      ${'with verification level'}                      | ${[{ type: 'verificationLevel', value: { data: 'GITLAB_MAINTAINED', operator: '=' } }]} | ${{ searchTerm: null, verificationLevel: 'GITLAB_MAINTAINED' }}
-      ${'with both search term and verification level'} | ${['cat', { type: 'verificationLevel', value: { data: 'UNVERIFIED', operator: '=' } }]} | ${{ searchTerm: 'cat', verificationLevel: 'UNVERIFIED' }}
+      description                                       | filters                                                                                                                                               | expected
+      ${'with search term on submit'}                   | ${['dog']}                                                                                                                                            | ${{ searchTerm: 'dog', verificationLevel: null, topics: [] }}
+      ${'with empty search term when cleared'}          | ${[]}                                                                                                                                                 | ${{ searchTerm: null, verificationLevel: null, topics: [] }}
+      ${'with verification level'}                      | ${[{ type: 'verificationLevel', value: { data: 'GITLAB_MAINTAINED', operator: '=' } }]}                                                               | ${{ searchTerm: null, verificationLevel: 'GITLAB_MAINTAINED', topics: [] }}
+      ${'with both search term and verification level'} | ${['cat', { type: 'verificationLevel', value: { data: 'UNVERIFIED', operator: '=' } }]}                                                               | ${{ searchTerm: 'cat', verificationLevel: 'UNVERIFIED', topics: [] }}
+      ${'with single topic'}                            | ${[{ type: 'topic', value: { data: 'ruby', operator: '||' } }]}                                                                                       | ${{ searchTerm: null, verificationLevel: null, topics: ['ruby'] }}
+      ${'with multiple topics'}                         | ${[{ type: 'topic', value: { data: ['ruby', 'ci-cd'], operator: '||' } }]}                                                                            | ${{ searchTerm: null, verificationLevel: null, topics: ['ruby', 'ci-cd'] }}
+      ${'with all filters'}                             | ${['cat', { type: 'verificationLevel', value: { data: 'UNVERIFIED', operator: '=' } }, { type: 'topic', value: { data: ['ruby'], operator: '||' } }]} | ${{ searchTerm: 'cat', verificationLevel: 'UNVERIFIED', topics: ['ruby'] }}
     `('emits update-filters $description', ({ filters, expected }) => {
       findFilteredSearch().vm.$emit('submit', filters);
 

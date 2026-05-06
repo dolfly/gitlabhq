@@ -989,10 +989,11 @@ RSpec.describe MergeRequests::UpdateService, :mailer, :request_store, feature_ca
         end
 
         context 'when merge_when_checks_pass is enabled' do
-          it 'publishes a DraftStateChangeEvent' do
+          it 'publishes a DraftStateChangeEvent with new_draft_status: false' do
             expected_data = {
               current_user_id: user.id,
-              merge_request_id: merge_request.id
+              merge_request_id: merge_request.id,
+              new_draft_status: false
             }
 
             expect { update_merge_request(title: 'New title') }.to publish_event(MergeRequests::DraftStateChangeEvent).with(expected_data)
@@ -1005,6 +1006,17 @@ RSpec.describe MergeRequests::UpdateService, :mailer, :request_store, feature_ca
               .to change { merge_request.title }
               .from(draft_title)
               .to(title)
+          end
+
+          it 'publishes a DraftStateChangeEvent with new_draft_status: false' do
+            expected_data = {
+              current_user_id: user.id,
+              merge_request_id: merge_request.id,
+              new_draft_status: false
+            }
+
+            expect { update_merge_request({ wip_event: "ready" }) }
+              .to publish_event(MergeRequests::DraftStateChangeEvent).with(expected_data)
           end
         end
       end
@@ -1026,10 +1038,11 @@ RSpec.describe MergeRequests::UpdateService, :mailer, :request_store, feature_ca
         end
 
         context 'when merge_when_checks_pass is enabled' do
-          it 'publishes a DraftStateChangeEvent' do
+          it 'publishes a DraftStateChangeEvent with new_draft_status: true' do
             expected_data = {
               current_user_id: user.id,
-              merge_request_id: merge_request.id
+              merge_request_id: merge_request.id,
+              new_draft_status: true
             }
 
             expect { update_merge_request(title: 'Draft: New title') }.to publish_event(MergeRequests::DraftStateChangeEvent).with(expected_data)
@@ -1048,6 +1061,17 @@ RSpec.describe MergeRequests::UpdateService, :mailer, :request_store, feature_ca
               .to change { merge_request.title }
               .from(title)
               .to(draft_title)
+          end
+
+          it 'publishes a DraftStateChangeEvent with new_draft_status: true' do
+            expected_data = {
+              current_user_id: user.id,
+              merge_request_id: merge_request.id,
+              new_draft_status: true
+            }
+
+            expect { update_merge_request({ wip_event: "draft" }) }
+              .to publish_event(MergeRequests::DraftStateChangeEvent).with(expected_data)
           end
         end
       end

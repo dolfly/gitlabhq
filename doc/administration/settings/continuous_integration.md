@@ -368,6 +368,7 @@ You can configure the following CI/CD limits:
 - Maximum number of runners created or active in a group during the past seven days
 - Maximum number of runners created or active in a project during the past seven days
 - Maximum number of downstream pipelines in a pipeline's hierarchy tree
+- Maximum parallel pipelines per merge train
 <!-- vale gitlab_base.CurrentStatus = YES -->
 
 For more information on what these limits control, see [CI/CD limits](../instance_limits.md#cicd-limits).

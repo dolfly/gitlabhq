@@ -1,7 +1,12 @@
 <script>
 import { GlFilteredSearch, GlSorting } from '@gitlab/ui';
 import { s__, __ } from '~/locale';
-import { OPERATORS_IS } from '~/vue_shared/components/filtered_search_bar/constants';
+import {
+  OPERATORS_IS,
+  OPERATORS_OR,
+  OPERATOR_OR,
+  OPERATOR_IS,
+} from '~/vue_shared/components/filtered_search_bar/constants';
 import {
   SORT_ASC,
   SORT_DESC,
@@ -10,6 +15,7 @@ import {
   SORT_OPTION_STAR_COUNT,
   SORT_OPTION_POPULARITY,
 } from '../../constants';
+import TopicToken from '../tokens/topic_token.vue';
 import VerificationLevelToken from '../tokens/verification_level_token.vue';
 
 export default {
@@ -29,6 +35,11 @@ export default {
       required: false,
       type: String,
     },
+    initialTopics: {
+      default: () => [],
+      required: false,
+      type: Array,
+    },
   },
   emits: ['update-sorting', 'update-filters'],
   data() {
@@ -37,7 +48,14 @@ export default {
     if (this.initialVerificationLevel) {
       filteredSearchValue.push({
         type: 'verificationLevel',
-        value: { data: this.initialVerificationLevel, operator: '=' },
+        value: { data: this.initialVerificationLevel, operator: OPERATOR_IS },
+      });
+    }
+
+    if (this.initialTopics.length) {
+      filteredSearchValue.push({
+        type: 'topic',
+        value: { data: this.initialTopics, operator: OPERATOR_OR },
       });
     }
 
@@ -81,7 +99,10 @@ export default {
       const verificationLevel =
         filters.find((f) => f.type === 'verificationLevel')?.value?.data || null;
 
-      this.$emit('update-filters', { searchTerm, verificationLevel });
+      const topicFilter = filters.find((f) => f.type === 'topic');
+      const topics = topicFilter ? [topicFilter.value?.data].flat().filter(Boolean) : [];
+
+      this.$emit('update-filters', { searchTerm, verificationLevel, topics });
     },
     onSortDirectionChange() {
       this.isAscending = !this.isAscending;
@@ -97,6 +118,14 @@ export default {
       unique: true,
       token: VerificationLevelToken,
       operators: OPERATORS_IS,
+    },
+    {
+      type: 'topic',
+      title: s__('CiCatalog|Topic'),
+      unique: true,
+      multiSelect: true,
+      token: TopicToken,
+      operators: OPERATORS_OR,
     },
   ],
   sortOptions: [
@@ -115,6 +144,7 @@ export default {
       :value="filteredSearchValue"
       :search-text-option-label="__('Search for this text')"
       terms-as-tokens
+      show-friendly-text
       data-testid="catalog-search-bar"
       @submit="onSubmit"
     />

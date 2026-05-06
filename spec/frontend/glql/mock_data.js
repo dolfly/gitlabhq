@@ -46,6 +46,28 @@ export const MOCK_USER = {
   webUrl: 'https://gitlab.com/foobar',
   username: 'foobar',
   name: 'Foo Bar',
+  avatarUrl: 'https://gitlab.com/uploads/-/system/user/avatar/1/avatar.png',
+};
+
+export const MOCK_ANALYTICS_USER = {
+  id: 1,
+  webUrl: 'https://gitlab.com/foobar',
+  username: 'foobar',
+  name: 'Foo Bar',
+  avatarUrl: 'https://gitlab.com/uploads/-/system/user/avatar/1/avatar.png',
+};
+
+export const MOCK_DIMENSIONS = {
+  __typename: 'DuoCodeSuggestionsAggregationResponseDimensions',
+  language: 'ruby',
+  user: {
+    __typename: 'UserCore',
+    id: 'gid://gitlab/User/1',
+    webUrl: 'https://gitlab.com/foobar',
+    username: 'foobar',
+    name: 'Foo Bar',
+    avatarUrl: 'https://gitlab.com/uploads/-/system/user/avatar/1/avatar.png',
+  },
 };
 
 export const MOCK_MILESTONE = {

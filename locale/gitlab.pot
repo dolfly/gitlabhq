@@ -3343,6 +3343,9 @@ msgstr ""
 msgid "AICatalog|Triage Issue, Generate Release Notes, Update Docs"
 msgstr ""
 
+msgid "AICatalog|Trigger this %{itemType} when a merge request is marked as ready for review (draft status removed)."
+msgstr ""
+
 msgid "AICatalog|Trigger this %{itemType} when a pipeline status changes."
 msgstr ""
 
@@ -15491,6 +15494,9 @@ msgstr ""
 msgid "CiCatalog|There was an error fetching the CI/CD Catalog project count."
 msgstr ""
 
+msgid "CiCatalog|There was an error fetching topics."
+msgstr ""
+
 msgid "CiCatalog|This catalog contains third-party content. Use of this content is subject to the relevant content provider's terms of use. GitLab does not control and has no liability for third-party content."
 msgstr ""
 
@@ -15507,6 +15513,9 @@ msgid "CiCatalog|To publish CI/CD components to the Catalog, you must use the %{
 msgstr ""
 
 msgid "CiCatalog|To set the project as a catalog resource, provide a brief description in the %{linkStart}project settings%{linkEnd}."
+msgstr ""
+
+msgid "CiCatalog|Topic"
 msgstr ""
 
 msgid "CiCatalog|Unable to remove project as a CI/CD Catalog project."
@@ -44213,6 +44222,9 @@ msgid "Merge request must not be draft."
 msgstr ""
 
 msgid "Merge request not merged"
+msgstr ""
+
+msgid "Merge request ready"
 msgstr ""
 
 msgid "Merge request reports"

@@ -33698,6 +33698,7 @@ CREATE TABLE wiki_page_meta (
     updated_at timestamp with time zone NOT NULL,
     title character varying(255) NOT NULL,
     namespace_id bigint,
+    deleted_at timestamp with time zone,
     CONSTRAINT check_d858755109 CHECK ((num_nonnulls(namespace_id, project_id) = 1))
 );
 

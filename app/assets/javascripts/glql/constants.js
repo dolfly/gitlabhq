@@ -7,3 +7,5 @@ export const DISPLAY_TYPES = {
 };
 
 export const DEFAULT_DISPLAY_TYPE = DISPLAY_TYPES.LIST;
+
+export const MODE_STANDARD = 'standard';

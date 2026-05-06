@@ -774,7 +774,7 @@ RSpec.describe Gitlab::ApplicationRateLimiter, :clean_gitlab_redis_rate_limiting
     end
 
     context 'when use_labkit is on and enforce is off' do
-      let(:labkit_key) { "labkit:rl:applimiter_users_get_by_id:limit_user_lookups_by_user:user_id:#{user.id}" }
+      let(:labkit_key) { "labkit:rl:applimiter_users_get_by_id:limit_user_lookups_by_user:user:#{user.id}" }
 
       def legacy_key_count
         Gitlab::Redis::RateLimiting.with do |r|
@@ -810,7 +810,7 @@ RSpec.describe Gitlab::ApplicationRateLimiter, :clean_gitlab_redis_rate_limiting
     end
 
     context 'when use_labkit and enforce are both on' do
-      let(:labkit_key) { "labkit:rl:applimiter_users_get_by_id:limit_user_lookups_by_user:user_id:#{user.id}" }
+      let(:labkit_key) { "labkit:rl:applimiter_users_get_by_id:limit_user_lookups_by_user:user:#{user.id}" }
 
       def legacy_key_count
         Gitlab::Redis::RateLimiting.with do |r|

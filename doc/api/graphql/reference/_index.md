@@ -33746,6 +33746,7 @@ Represents the current license.
 | <a id="currentlicense-createdat"></a>`createdAt` | [`Date`](#date) | Date when the license was added. |
 | <a id="currentlicense-email"></a>`email` | [`String`](#string) | Email of the licensee. |
 | <a id="currentlicense-expiresat"></a>`expiresAt` | [`Date`](#date) | Date when the license expires. |
+| <a id="currentlicense-hasgitlabcreditsaddon"></a>`hasGitlabCreditsAddOn` | [`Boolean!`](#boolean) | Whether the license has an active GitLab Credits add-on. |
 | <a id="currentlicense-id"></a>`id` | [`ID!`](#id) | ID of the license extracted from the license data. |
 | <a id="currentlicense-lastsync"></a>`lastSync` | [`Time`](#time) | Date when the license was last synced. |
 | <a id="currentlicense-maximumusercount"></a>`maximumUserCount` | [`Int`](#int) | Highest number of billable users on the system during the term of the current license. |
@@ -56695,6 +56696,7 @@ Possible event types for flow triggers.
 | <a id="aiflowtriggereventtype-assign"></a>`ASSIGN` | Flow trigger assign event. |
 | <a id="aiflowtriggereventtype-assign_reviewer"></a>`ASSIGN_REVIEWER` | Flow trigger assign_reviewer event. |
 | <a id="aiflowtriggereventtype-mention"></a>`MENTION` | Flow trigger mention event. |
+| <a id="aiflowtriggereventtype-merge_request_ready"></a>`MERGE_REQUEST_READY` | Flow trigger merge_request_ready event. |
 | <a id="aiflowtriggereventtype-pipeline_hooks"></a>`PIPELINE_HOOKS` | Flow trigger pipeline_hooks event. |
 
 ### `AiMessageRole`

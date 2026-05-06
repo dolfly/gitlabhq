@@ -318,6 +318,100 @@ deploystacks:
   environment: $PROVIDER/$STACK
 ```
 
+### Use matrix variables in rules
+
+GitLab evaluates rules separately for each individual matrix job,
+using that job's variable values.
+
+#### Use matrix variables in `rules:if`
+
+Use matrix variables in [`rules:if`](../yaml/_index.md#rulesif) expressions
+to include or exclude individual matrix jobs based on their variable values.
+
+For example, to skip jobs when the matrix variable `SKIP` is set to `"true"`:
+
+```yaml
+test:
+  script: echo "Building $ARCH"
+  parallel:
+    matrix:
+      - ARCH: [amd64, arm64]
+        SKIP: ["false", "true"]
+  rules:
+    - if: $SKIP == "true"
+      when: never
+    - when: on_success
+```
+
+Only the jobs where `SKIP` is `"false"` are included in the pipeline.
+
+> [!note]
+> Matrix variables in `rules:if` do not support nested expansion. If a matrix variable value
+> references another CI/CD variable (for example, `FILE: $GLOBAL_FILE`), the reference is not
+> resolved. The expression uses the literal string value, so `$FILE` evaluates to `"$GLOBAL_FILE"`
+> rather than the value of `GLOBAL_FILE`.
+
+#### Use matrix variables in `rules:changes`
+
+Use matrix variables in [`rules:changes`](../yaml/_index.md#ruleschanges)
+paths to include a matrix job only when files relevant to that job have changed.
+This pattern is useful in monorepos where each matrix value corresponds to a
+component or service with its own directory.
+
+For example, to run a test job only for the component whose files changed:
+
+```yaml
+test:
+  script: echo "Testing $COMPONENT"
+  parallel:
+    matrix:
+      - COMPONENT: [frontend, backend, database]
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "push"
+      changes:
+        - components/$COMPONENT/**/*
+```
+
+In this example:
+
+- Three `test` jobs are evaluated, one for each `COMPONENT` value.
+- Each job checks `rules:changes` with its own `$COMPONENT` value substituted into the path.
+- Only jobs where matching files changed are added to the pipeline.
+
+For example, if only `components/frontend/npm.lock` changed, only the `frontend` job runs.
+
+You can use multiple matrix variables in the same path:
+
+```yaml
+test:
+  script: echo "Testing $SERVICE in $ENV"
+  parallel:
+    matrix:
+      - SERVICE: [api, web]
+        ENV: [dev, prod]
+  rules:
+    - changes:
+        - config/$SERVICE/$ENV/**/*
+```
+
+#### Use matrix variables in `rules:exists`
+
+Use matrix variables in [`rules:exists`](../yaml/_index.md#rulesexists)
+paths to include a matrix job only when a specific file exists.
+
+For example:
+
+```yaml
+test:
+  script: echo "Testing $TYPE"
+  parallel:
+    matrix:
+      - TYPE: [go, ruby, python]
+  rules:
+    - exists:
+        - "**/*.$TYPE"
+```
+
 ### Fetch artifacts from a `parallel:matrix` job
 
 You can fetch artifacts from a job created with [`parallel:matrix`](../yaml/_index.md#parallelmatrix)

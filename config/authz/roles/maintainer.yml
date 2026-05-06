@@ -7,6 +7,7 @@ inherits_from:
 project:
   permissions: []
   raw_permissions:
+  - _read_maintainer_job_artifact
   - add_cluster
   - admin_ai_catalog_item
   - admin_ai_catalog_item_consumer
@@ -62,6 +63,8 @@ project:
   - change_reject_non_dco_commits
   - change_reject_unsigned_commits
   - change_restrict_user_defined_variables
+  - create_ai_catalog_agent
+  - create_ai_catalog_agent_item_consumer
   - create_ai_catalog_flow
   - create_ai_catalog_flow_item_consumer
   - create_ai_catalog_item_consumer
@@ -194,6 +197,7 @@ group:
   - change_push_rules
   - change_reject_non_dco_commits
   - change_reject_unsigned_commits
+  - create_ai_catalog_agent_item_consumer
   - create_ai_catalog_flow_item_consumer
   - create_ai_catalog_item_consumer
   - create_ai_catalog_third_party_flow_item_consumer
@@ -227,6 +231,7 @@ group:
   - read_secrets_permission
   - read_security_configuration
   - start_trial
+  - update_ci_namespace_settings
   - update_cluster
   - update_product_analytics_settings
   - update_protected_branch

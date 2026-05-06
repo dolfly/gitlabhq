@@ -392,6 +392,11 @@ To create an inbound PrivateLink connection:
 1. Use the instance URL provided during onboarding to connect to your GitLab Dedicated
    instance from your VPC.
 
+You can use the
+[`terraform-inbound-privatelink`](https://gitlab.com/gitlab-com/gl-infra/gitlab-dedicated/customer-tools/terraform-inbound-privatelink)
+Terraform module to automate the AWS VPC Endpoint setup and output the Route 53 records
+required when you switch DNS.
+
 #### Configure DNS for KAS and registry
 
 Create additional DNS configuration in your VPC to access KAS (GitLab agent for
@@ -458,7 +463,11 @@ Use outbound PrivateLink connections to send webhooks, import or mirror projects
 repositories, and give hosted runners access to custom secrets managers, artifacts,
 job images, and deployments in your infrastructure.
 
-You can create up to 10 outbound PrivateLink connections per region.
+You can create up to 10 outbound PrivateLink connections per region. To consolidate more
+than 10 backend services behind a single connection, you can use the
+[`terraform-outbound-proxy`](https://gitlab.com/gitlab-com/gl-infra/gitlab-dedicated/customer-tools/terraform-outbound-proxy)
+Terraform module to deploy a highly available NGINX reverse proxy with TLS passthrough,
+HTTP routing, and SMTP forwarding.
 
 #### Add an outbound PrivateLink connection
 

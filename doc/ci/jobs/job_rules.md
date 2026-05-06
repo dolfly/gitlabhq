@@ -120,6 +120,9 @@ The rule for this job compares all files and paths in the current branch
 recursively (`**/*`) against the `main` branch. The rule matches and the
 job runs only when there are changes to the files in the branch.
 
+For `parallel:matrix` jobs, you can [use matrix variables in `rules:changes` paths](job_control.md#use-matrix-variables-in-rules)
+to run each job instance only when files relevant to that matrix value have changed.
+
 ## Run a job when a file is not present
 
 You can use `rules: exists` to configure a job to run only when a specific file does not exist.
@@ -138,6 +141,9 @@ job:
 
 In this example, if the `example_dir/example.yml` file exists in the branch, the job does not run.
 If the file does not exist, the job can run in merge request pipelines.
+
+For `parallel:matrix` jobs, you can [use matrix variables in `rules:exists` paths](job_control.md#use-matrix-variables-in-rules)
+to include a job instance only when a specific file exists.
 
 ## Common `if` clauses with predefined variables
 
@@ -414,7 +420,10 @@ the expression. For example:
 
 - `if: $VARIABLE`
 
-You can also [use CI/CD inputs in variable expressions](../inputs/examples.md#use-cicd-inputs-in-variable-expressions).
+You can also:
+
+- [Use CI/CD inputs in variable expressions](../inputs/examples.md#use-cicd-inputs-in-variable-expressions).
+- [Use `parallel:matrix` variables in `rules:if` expressions](job_control.md#use-matrix-variables-in-rules).
 
 ### Compare a variable to a regular expression
 

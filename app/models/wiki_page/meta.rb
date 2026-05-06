@@ -47,6 +47,7 @@ class WikiPage
     scope :for_projects_visible_to_user, ->(user) {
       joins(:project).merge(Project.public_or_visible_to_user(user))
     }
+    scope :active, -> { where(deleted_at: nil) }
 
     delegate :wiki, to: :container
     delegate :to_reference, to: :wiki_page, allow_nil: true
