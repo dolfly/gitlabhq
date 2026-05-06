@@ -7,6 +7,11 @@
 #   .gitlab/caproni/exec.sh rake gitlab:graphql:schema:dump
 #   .gitlab/caproni/exec.sh rails runner 'puts User.count'
 #   .gitlab/caproni/exec.sh $SHELL
+#   MIRRORD_CONFIG=rspec .gitlab/caproni/exec.sh ruby bin/rspec spec/…
+#
+# The mirrord config file is resolved from `.gitlab/caproni/.mirrord/`
+# with `$MIRRORD_CONFIG.json`; set MIRRORD_CONFIG to pick a non-default
+# config (default: `exec`).
 #
 # Prerequisites:
 # - `scripts/prepare-dev-env.sh` was performed
@@ -23,7 +28,8 @@ fi
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 MONOLITH_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"
 
-CONFIG="$MONOLITH_DIR/.gitlab/caproni/.mirrord/exec.json"
+CONFIG_NAME="${MIRRORD_CONFIG:-exec}"
+CONFIG="$MONOLITH_DIR/.gitlab/caproni/.mirrord/${CONFIG_NAME}.json"
 TARGET_DEPLOYMENT="deploy/gitlab-toolbox"
 TARGET="$TARGET_DEPLOYMENT/container/toolbox"
 NAMESPACE="gitlab"

@@ -32131,6 +32131,7 @@ CREATE TABLE user_preferences (
     policy_advanced_editor boolean DEFAULT false NOT NULL,
     early_access_studio_participant boolean DEFAULT false NOT NULL,
     wiki_use_auto_commit_message boolean DEFAULT false NOT NULL,
+    orbit_settings jsonb DEFAULT '{}'::jsonb NOT NULL,
     CONSTRAINT check_1d670edc68 CHECK ((time_display_relative IS NOT NULL)),
     CONSTRAINT check_89bf269f41 CHECK ((char_length(diffs_deletion_color) <= 7)),
     CONSTRAINT check_9b50d9f942 CHECK ((char_length(extensions_marketplace_opt_in_url) <= 512)),

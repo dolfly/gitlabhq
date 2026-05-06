@@ -29,10 +29,10 @@
   @apply gl-bg-default;
   @apply gl-px-4;
   @apply gl-rounded-t-lg;
+  @apply gl-border-b;
   @apply lg:gl-px-5;
   z-index: $panel-header-inner-z-index;
   min-height: $panel-header-inner-height;
-  border-bottom: 1px solid var(--super-sidebar-bg);
 
   @media (forced-colors: active) {
     border-bottom: 1px solid;

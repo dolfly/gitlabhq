@@ -525,6 +525,7 @@ class User < ApplicationRecord
     :use_work_items_view, :use_work_items_view=,
     :text_editor, :text_editor=,
     :default_text_editor_enabled, :default_text_editor_enabled=,
+    :orbit_enabled, :orbit_enabled=,
     :merge_request_dashboard_list_type, :merge_request_dashboard_list_type=,
     :merge_request_dashboard_show_drafts, :merge_request_dashboard_show_drafts=,
     to: :user_preference

@@ -8,9 +8,9 @@ module Ci
       where(project_id: project_id).where.not(first_pipeline_succeeded_at: nil).exists?
     end
 
-    def self.record_first_pipeline_success!(project_id)
+    def self.record_first_pipeline_success!(project_id, timestamp = Time.current)
       upsert(
-        { project_id: project_id, first_pipeline_succeeded_at: Time.current },
+        { project_id: project_id, first_pipeline_succeeded_at: timestamp },
         unique_by: :project_id
       )
     end

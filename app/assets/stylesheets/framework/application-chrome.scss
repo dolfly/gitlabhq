@@ -21,7 +21,7 @@
   body {
     @apply gl-flex gl-flex-col;
     // Application chrome background
-    background-color: var(--super-sidebar-bg);
+    background-color: var(--body-background-color);
   }
 
   // TODO: Evaluate introducing semantic design tokens for button spacing
@@ -321,6 +321,7 @@
       z-index: $top-bar-z-index;
       @apply gl-sticky #{!important};
       @apply gl-top-0 gl-py-3 gl-px-3;
+      @apply gl-border-b;
     }
 
     .ai-nav-icon-active,
@@ -342,11 +343,6 @@
     max-height: calc(100vh - #{$header-height} - #{$top-bar-height} - #{$gl-spacing-scale-9});
   }
 
-  .ai-panel-header-actions {
-    border-left: 1px solid var(--super-sidebar-bg);
-    @apply gl-pl-3;
-  }
-
   .ai-panel-maximized .paneled-view {
     flex-grow: 1;
   }
@@ -365,13 +361,6 @@
     .ai-panel-maximized .panels-container {
       display: flex;
     }
-  }
-
-  // Panel header
-  .work-item-detail-panel-header {
-    @apply gl-bg-default gl-shadow-none gl-relative gl-px-4 lg:gl-px-5 #{!important};
-    z-index: 99;
-    border-bottom: 1px solid var(--super-sidebar-bg);
   }
 
   .content-wrapper {
@@ -412,12 +401,6 @@
   .work-item-detail-panel-content {
     @apply gl-px-5;
     flex: 1;
-  }
-
-  // duplicate class to override Tailwind
-  .work-item-detail-panel-header.work-item-detail-panel-header {
-    @apply gl-py-4;
-    width: auto;
   }
 
   #contextual-panel-portal > .vue-portal-target {
@@ -671,11 +654,6 @@
     // bottom color
     --_shade-4: hsla(from var(--theme-color) calc(h + 20) calc(s + 20) l / 40%);
 
-    // Temporarily unship this change as it introduced some regressions, see https://gitlab.com/gitlab-org/gitlab/-/merge_requests/204009
-    // --theme-background-color: color-mix(in srgb, var(--gl-background-color-default), var(--theme-color) 2%);
-    --theme-background-color: var(--gl-background-color-default);
-    --theme-border-color: hsl(from var(--theme-color) h 24 90);
-
     body {
       background:
         radial-gradient(circle at top, rgba(255, 255, 255, 0.6), transparent 40vw),
@@ -684,14 +662,13 @@
         radial-gradient(farthest-side at 50% 0%, var(--_shade-2), transparent 70vw),
         linear-gradient(-10deg, var(--_shade-4), transparent 70%),
         var(--gl-background-color-default);
-      background-color: var(--super-sidebar-bg);
+      background-color: var(--body-background-color);
     }
 
     .ai-panels,
     .super-sidebar,
     .super-topbar {
       --theme-accent-badge-color: var(--theme-accent-color);
-      --super-sidebar-bg: var(--theme-background-color);
       --super-sidebar-accent-color-fg: hsl(from var(--theme-accent-color) h calc(s - 20) 20);
       --super-sidebar-nav-item-current-bg: hsla(from var(--theme-accent-color) h s l / 16%);
       --super-sidebar-nav-item-hover-bg: hsla(from var(--theme-accent-color) h s l / 16%);
@@ -747,11 +724,6 @@
     // bottom color
     --_shade-5: hsla(from var(--theme-color) h s l / 55%);
 
-    // Temporarily unship this change as it introduced some regressions, see https://gitlab.com/gitlab-org/gitlab/-/merge_requests/204009
-    // --theme-background-color: color-mix(in srgb, var(--gl-background-color-default), var(--theme-color) 1%);
-    --theme-background-color: var(--gl-background-color-default);
-    --theme-border-color: hsl(from var(--theme-color) h 12 25);
-
     body {
       background:
         linear-gradient(var(--_shade-1), var(--_shade-1)),
@@ -759,14 +731,13 @@
         radial-gradient(farthest-side at 50% 0%, var(--_shade-3), transparent 65vw),
         linear-gradient(-10deg, var(--_shade-5), transparent),
         var(--_shade-2);
-      background-color: var(--super-sidebar-bg);
+      background-color: var(--body-background-color);
     }
 
     .ai-panels,
     .super-sidebar,
     .super-topbar {
       --theme-accent-badge-color: hsl(from var(--theme-accent-color) h calc(s - 10) calc(l + 20));
-      --super-sidebar-bg: var(--theme-background-color);
       --super-sidebar-nav-item-current-bg: hsla(from var(--theme-accent-color) h s calc(l + 20) / 25%);
       --super-sidebar-accent-color-fg: hsl(from var(--theme-accent-color) h s 88);
       --super-sidebar-nav-item-hover-bg: hsla(from var(--theme-accent-color) h calc(s - 30) l / 16%);
@@ -813,11 +784,6 @@
     background: transparent !important;
   }
 
-  .bottom-scrim-visible,
-  .top-scrim-visible {
-    border-color: var(--theme-border-color);
-  }
-
   .organization-switcher-button {
     @apply gl-bg-alpha-dark-8 dark:gl-bg-alpha-light-16;
     @apply gl-border-transparent;
@@ -827,22 +793,6 @@
       align-items: center;
       gap: var(--gl-spacing-scale-2);
     }
-  }
-
-  .panel-header .panel-header-inner,
-  .work-item-detail-panel-header,
-  .ai-panel-header {
-    border-bottom: 1px solid var(--theme-border-color);
-  }
-
-  .panel-header-inner,
-  .static-panel,
-  .contextual-panel,
-  .ai-panel,
-  .settings-sticky-header,
-  .settings-sticky-header::before,
-  .settings-sticky-footer {
-    background-color: var(--theme-background-color) !important;
   }
 }
 

@@ -14,15 +14,18 @@ module Ci
     def perform(pipeline_id)
       pipeline = Ci::Pipeline.find_by_id(pipeline_id)
       return unless pipeline&.success?
+      return if Ci::ProjectMetric.first_pipeline_success_recorded?(pipeline.project_id)
 
-      Ci::ProjectMetric.record_first_pipeline_success!(pipeline.project_id)
+      succeeded_at = Time.current
+
+      Ci::ProjectMetric.record_first_pipeline_success!(pipeline.project_id, succeeded_at)
 
       track_internal_event(
         'first_pipeline_succeeded',
         project: pipeline.project,
         user: pipeline.user,
         additional_properties: {
-          value: (Time.current - pipeline.project.created_at).to_i
+          value: (succeeded_at - pipeline.project.created_at).to_i
         }
       )
     end

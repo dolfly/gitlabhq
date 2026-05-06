@@ -147,13 +147,14 @@ export default {
 <template>
   <div class="gl-leading-20 gl-text-default">
     <div class="gl-flex gl-items-center gl-font-bold gl-leading-24 gl-text-default">
-      <span data-testid="title" class="hide-collapsed">{{ __('Work Items') }}</span>
+      <span data-testid="title" class="hide-collapsed">{{ __('Work items') }}</span>
       <gl-loading-icon v-if="isLoading" size="sm" inline class="hide-collapsed gl-ml-2" />
       <gl-button
         v-if="showCollapsedState"
         v-show="!isCollapsed"
         v-gl-tooltip
         :title="__('Collapse work items')"
+        :aria-label="__('Collapse work items')"
         category="tertiary"
         icon="chevron-down"
         size="small"

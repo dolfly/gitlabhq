@@ -4,7 +4,7 @@
       "mode": "localwithoverrides",
       "read_only": "^/etc/gitlab",
       "mapping": {
-        "^/etc/gitlab/gitlab-workhorse/secret": "./workhorse/secret"
+        "^/etc/gitlab/gitlab-workhorse/secret": "./.gitlab_workhorse_secret"
       }
     },
     "env": {

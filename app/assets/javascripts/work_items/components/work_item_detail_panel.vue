@@ -243,9 +243,7 @@ export default {
       data-testid="work-item-detail-panel"
       class="work-item-detail-panel gl-pt-4 gl-leading-reset"
     >
-      <div
-        class="work-item-detail-panel-header gl-flex gl-w-full gl-items-start gl-gap-x-2 gl-px-4 @xl/panel:gl-px-6"
-      >
+      <div class="work-item-detail-panel-header">
         <div class="gl-flex gl-grow gl-items-center gl-gap-2">
           <!-- eslint-disable local-rules/vue-no-web-url -->
           <gl-link

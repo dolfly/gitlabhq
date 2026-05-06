@@ -655,4 +655,31 @@ RSpec.describe EventCreateService, :clean_gitlab_redis_cache, :clean_gitlab_redi
       end
     end
   end
+
+  describe 'composite identity attribution', :request_store do
+    let_it_be(:service_account) do
+      create(:user, :service_account, composite_identity_enforced: true, developer_of: project)
+    end
+
+    let_it_be(:human) { create(:user, developer_of: project) }
+    let_it_be(:issue) { create(:issue, project: project) }
+
+    before do
+      ::Gitlab::Auth::Identity.link_from_scoped_user(service_account, human, context: :authentication)
+    end
+
+    it 'attributes Event.author to the service account when SA acts via OAuth' do
+      service.open_issue(issue, human)
+
+      expect(Event.where(target: issue, action: :created).last.author).to eq(service_account)
+    end
+
+    it 'attributes bulk Event.author to the service account' do
+      design = create(:design, issue: issue)
+
+      service.save_designs(human, create: [design])
+
+      expect(Event.where(target: design, action: :created).last.author).to eq(service_account)
+    end
+  end
 end

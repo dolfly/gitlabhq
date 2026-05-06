@@ -26,6 +26,20 @@ $work-item-overview-gap-width: 2rem;
   transition: none;
 }
 
+.work-item-detail-panel-header {
+  @apply gl-flex;
+  @apply gl-items-start;
+  @apply gl-gap-x-2;
+  @apply gl-bg-default;
+  @apply gl-shadow-none;
+  @apply gl-relative;
+  @apply gl-px-4;
+  @apply gl-py-4;
+  @apply gl-border-b;
+  @apply lg:gl-px-5;
+  z-index: $panel-header-inner-z-index;
+}
+
 @include gl-container-width-down(md, panel) {
   .work-item-overview {
     display: block !important;

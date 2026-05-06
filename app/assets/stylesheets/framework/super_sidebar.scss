@@ -5,7 +5,7 @@ $command-palette-spacing: px-to-rem(14px);
 
 @mixin notification-dot($color, $size, $top, $left) {
   background-color: $color;
-  border: 2px solid var(--super-sidebar-bg);
+  border: 2px solid var(--body-background-color);
   position: absolute;
   height: $size;
   width: $size;
@@ -23,11 +23,10 @@ $command-palette-spacing: px-to-rem(14px);
 .super-topbar,
 .super-sidebar,
 .application-chrome {
-  --super-sidebar-bg: var(--gl-background-color-strong);
+  --body-background-color: var(--gl-background-color-strong);
+
   --super-sidebar-accent-color-fg: var(--gl-color-blue-800);
   --super-sidebar-accent-color-bg: var(--gl-color-blue-100);
-
-  --super-sidebar-search-bar-button-bg: var(--gl-background-color-subtle);
 
   --super-sidebar-nav-item-hover-bg: var(--gl-color-alpha-dark-8);
   --super-sidebar-nav-item-active-bg: var(--gl-color-alpha-dark-16);
@@ -39,12 +38,10 @@ $command-palette-spacing: px-to-rem(14px);
 .gl-dark .super-topbar,
 .gl-dark .super-sidebar,
 .gl-dark.application-chrome {
-  --super-sidebar-bg: var(--gl-background-color-subtle);
+  --body-background-color: var(--gl-background-color-subtle);
 
   --super-sidebar-accent-color-fg: var(--gl-color-blue-200);
   --super-sidebar-accent-color-bg: var(--gl-color-neutral-950);
-
-  --super-sidebar-search-bar-button-bg: var(--gl-color-alpha-light-16);
 
   --super-sidebar-nav-item-hover-bg: var(--gl-color-alpha-light-16);
   --super-sidebar-nav-item-active-bg: var(--gl-color-alpha-light-24);
@@ -56,7 +53,6 @@ $command-palette-spacing: px-to-rem(14px);
 @mixin super-sidebar-theme(
   $theme-color,
   $theme-accent-color,
-  $theme-notification-color,
   $background,
   $accent-color-fg,
   $accent-color-bg,
@@ -68,8 +64,7 @@ $command-palette-spacing: px-to-rem(14px);
   &.application-chrome {
     --theme-color: #{$theme-color};
     --theme-accent-color: #{$theme-accent-color};
-    --theme-notification-color: #{$theme-notification-color};
-    --super-sidebar-bg: #{$background};
+    --body-background-color: #{$background};
     --super-sidebar-accent-color-fg: #{$accent-color-fg};
     --super-sidebar-accent-color-bg: #{$accent-color-bg};
     --super-sidebar-accent-color-badge: #{$accent-color-badge};
@@ -80,7 +75,6 @@ $command-palette-spacing: px-to-rem(14px);
   @include super-sidebar-theme(
     $theme-color: var(--gl-color-purple-500),
     $theme-accent-color: var(--gl-color-purple-500),
-    $theme-notification-color: var(--gl-color-purple-500),
     $background: var(--gl-color-purple-50),
     $accent-color-fg: var(--gl-color-purple-800),
     $accent-color-bg: var(--gl-color-purple-100),
@@ -91,7 +85,6 @@ $command-palette-spacing: px-to-rem(14px);
     @include super-sidebar-theme(
       $theme-color: var(--gl-color-purple-500),
       $theme-accent-color: var(--gl-color-purple-500),
-      $theme-notification-color: var(--gl-color-purple-500),
       $background: var(--gl-background-color-subtle),
       $accent-color-fg: var(--gl-color-purple-200),
       $accent-color-bg: var(--gl-background-color-subtle),
@@ -104,7 +97,6 @@ $command-palette-spacing: px-to-rem(14px);
   @include super-sidebar-theme(
     $theme-color: var(--gl-color-blue-500),
     $theme-accent-color: var(--gl-color-blue-500),
-    $theme-notification-color: var(--gl-color-blue-500),
     $background: var(--gl-color-blue-50),
     $accent-color-fg: var(--gl-color-blue-900),
     $accent-color-bg: var(--gl-color-blue-100),
@@ -115,7 +107,6 @@ $command-palette-spacing: px-to-rem(14px);
     @include super-sidebar-theme(
       $theme-color: var(--gl-color-blue-500),
       $theme-accent-color: var(--gl-color-blue-500),
-      $theme-notification-color: var(--gl-color-blue-500),
       $background: var(--gl-background-color-subtle),
       $accent-color-fg: var(--gl-color-blue-100),
       $accent-color-bg: var(--gl-background-color-subtle),
@@ -129,7 +120,6 @@ $command-palette-spacing: px-to-rem(14px);
   @include super-sidebar-theme(
     $theme-color: var(--gl-color-green-500),
     $theme-accent-color: var(--gl-color-green-500),
-    $theme-notification-color: var(--gl-color-green-500),
     $background: var(--gl-color-green-50),
     $accent-color-fg: var(--gl-color-green-900),
     $accent-color-bg: var(--gl-color-green-100),
@@ -140,7 +130,6 @@ $command-palette-spacing: px-to-rem(14px);
     @include super-sidebar-theme(
       $theme-color: var(--gl-color-green-400),
       $theme-accent-color: var(--gl-color-green-400),
-      $theme-notification-color: var(--gl-color-green-500),
       $background: var(--gl-background-color-subtle),
       $accent-color-fg: var(--gl-color-green-200),
       $accent-color-bg: var(--gl-background-color-subtle),
@@ -153,7 +142,6 @@ $command-palette-spacing: px-to-rem(14px);
   @include super-sidebar-theme(
     $theme-color: var(--gl-color-red-500),
     $theme-accent-color: var(--gl-color-red-500),
-    $theme-notification-color: var(--gl-color-red-500),
     $background: var(--gl-color-red-50),
     $accent-color-fg: var(--gl-color-red-800),
     $accent-color-bg: var(--gl-color-red-100),
@@ -164,7 +152,6 @@ $command-palette-spacing: px-to-rem(14px);
     @include super-sidebar-theme(
       $theme-color: var(--gl-color-red-500),
       $theme-accent-color: var(--gl-color-red-500),
-      $theme-notification-color: var(--gl-color-red-500),
       $background: var(--gl-background-color-subtle),
       $accent-color-fg: var(--gl-color-red-200),
       $accent-color-bg: var(--gl-background-color-subtle),
@@ -177,7 +164,6 @@ $command-palette-spacing: px-to-rem(14px);
   @include super-sidebar-theme(
     $theme-color: var(--gl-color-neutral-500),
     $theme-accent-color: var(--gl-color-neutral-500),
-    $theme-notification-color: var(--gl-color-neutral-500),
     $background: var(--gl-background-color-strong),
     $accent-color-fg: var(--gl-color-neutral-800),
     $accent-color-bg: var(--gl-color-neutral-100),
@@ -188,7 +174,6 @@ $command-palette-spacing: px-to-rem(14px);
     @include super-sidebar-theme(
       $theme-color: var(--gl-color-neutral-500),
       $theme-accent-color: var(--gl-color-neutral-500),
-      $theme-notification-color: var(--gl-color-blue-500),
       $background: var(--gl-background-color-subtle),
       $accent-color-fg: var(--gl-color-neutral-100),
       $accent-color-bg: var(--gl-background-color-subtle),
@@ -200,7 +185,6 @@ $command-palette-spacing: px-to-rem(14px);
 .ui-neutral {
   --theme-color: var(--gl-color-neutral-500);
   --theme-accent-color: var(--gl-color-blue-500);
-  --theme-notification-color: var(--gl-color-blue-500);
 }
 
 html:not(.application-chrome) .super-sidebar {
@@ -216,7 +200,7 @@ html:not(.application-chrome) .super-sidebar {
   top: $calc-application-bars-height;
   bottom: $calc-application-footer-height;
   left: 0;
-  background-color: var(--super-sidebar-bg);
+  background-color: var(--body-background-color);
   transform: translate3d(0, 0, 0);
   z-index: $super-sidebar-z-index;
 
@@ -304,7 +288,7 @@ html:not(.application-chrome) .super-sidebar {
       }
 
       .badge {
-        background: var(--super-sidebar-bg);
+        background: var(--body-background-color);
 
         .gl-dark & {
           color: var(--gl-color-neutral-950);
@@ -680,6 +664,3 @@ $scroll-scrim-height: 2.25rem;
   background: linear-gradient(90deg, #ffb177 0%, #936fff 100%);
 }
 
-.super-sidebar {
-  background-color: var(--super-sidebar-bg);
-}

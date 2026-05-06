@@ -9,8 +9,6 @@ Gitlab/DirectStdio:
     - 'ee/lib/tasks/cloud_connector/task_helper.rb'
     - 'ee/lib/tasks/gitlab/ldap.rake'
     - 'lib/backup/targets/files.rb'
-    - 'lib/click_house/migration.rb'
-    - 'lib/tasks/gitlab/graphql.rake'
     - 'qa/qa/specs/runner.rb'
     - 'qa/qa/tools/generate_perf_testdata.rb'
     - 'qa/qa/tools/lib/project.rb'

@@ -215,7 +215,7 @@ $focus-mode-z-index: 9000;
 }
 
 .content-panels.is-focused {
-  background: var(--super-sidebar-bg);
+  background: var(--body-background-color);
 
   .panel-content .panel-content-inner {
     @apply gl-mx-0;

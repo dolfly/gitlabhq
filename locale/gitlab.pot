@@ -54206,6 +54206,9 @@ msgstr ""
 msgid "Preferences|Behavior"
 msgstr ""
 
+msgid "Preferences|Beta"
+msgstr ""
+
 msgid "Preferences|Choose a color mode."
 msgstr ""
 
@@ -54323,6 +54326,9 @@ msgstr ""
 msgid "Preferences|Ona"
 msgstr ""
 
+msgid "Preferences|Orbit in GitLab Duo"
+msgstr ""
+
 msgid "Preferences|Preview"
 msgstr ""
 
@@ -54380,6 +54386,9 @@ msgstr ""
 msgid "Preferences|Type in rich text, as you see it."
 msgstr ""
 
+msgid "Preferences|Use Orbit in GitLab Duo"
+msgstr ""
+
 msgid "Preferences|Use relative times"
 msgstr ""
 
@@ -54387,6 +54396,9 @@ msgid "Preferences|Web IDE"
 msgstr ""
 
 msgid "Preferences|Web IDE and Workspaces"
+msgstr ""
+
+msgid "Preferences|When enabled, Orbit tools will be available in Agentic Chat and foundational agents."
 msgstr ""
 
 msgid "Preferences|When you type in a description or comment box, pressing %{kbdOpen}Enter%{kbdClose} creates a new line indented the same as the previous line."
@@ -83408,9 +83420,6 @@ msgid "Withdraw access request"
 msgstr ""
 
 msgid "Work Item type %{gid} was not found"
-msgstr ""
-
-msgid "Work Items"
 msgstr ""
 
 msgid "Work Items Onboarding Modal"

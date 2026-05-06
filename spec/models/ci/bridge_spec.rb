@@ -1150,10 +1150,10 @@ RSpec.describe Ci::Bridge, feature_category: :continuous_integration do
       end
 
       let(:yaml) do
-        <<~EOY
+        <<~YAML
           ---
           include: path/to/child.yml
-        EOY
+        YAML
       end
 
       it { is_expected.to eq yaml }

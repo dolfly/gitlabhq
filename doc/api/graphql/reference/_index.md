@@ -16372,6 +16372,7 @@ Input type: `UserPreferencesUpdateInput`
 | <a id="mutation-userpreferencesupdate-mergerequestdashboardlisttype"></a>`mergeRequestDashboardListType` | [`MergeRequestsDashboardListType`](#mergerequestsdashboardlisttype) | Merge request dashboard list rendering type. |
 | <a id="mutation-userpreferencesupdate-mergerequestdashboardshowdrafts"></a>`mergeRequestDashboardShowDrafts` | [`Boolean`](#boolean) | Show draft merge requests on the merge request dashboard. |
 | <a id="mutation-userpreferencesupdate-mergerequestssort"></a>`mergeRequestsSort` | [`MergeRequestSort`](#mergerequestsort) | Sort order for issue lists. |
+| <a id="mutation-userpreferencesupdate-orbitsettings"></a>`orbitSettings` {{< icon name="warning-solid" >}} | [`JSON`](#json) | **Deprecated**: **Status**: Experiment. Introduced in GitLab 19.0. |
 | <a id="mutation-userpreferencesupdate-organizationgroupsprojectsdisplay"></a>`organizationGroupsProjectsDisplay` {{< icon name="warning-solid" >}} | [`OrganizationGroupProjectDisplay`](#organizationgroupprojectdisplay) | **Deprecated**: **Status**: Experiment. Introduced in GitLab 17.2. |
 | <a id="mutation-userpreferencesupdate-organizationgroupsprojectssort"></a>`organizationGroupsProjectsSort` {{< icon name="warning-solid" >}} | [`OrganizationGroupProjectSort`](#organizationgroupprojectsort) | **Deprecated**: **Status**: Experiment. Introduced in GitLab 17.2. |
 | <a id="mutation-userpreferencesupdate-projectssort"></a>`projectsSort` | [`ProjectSort`](#projectsort) | Sort order for projects. |
@@ -53643,6 +53644,7 @@ Returns [`String`](#string).
 | <a id="userpreferences-issuessort"></a>`issuesSort` | [`IssueSort`](#issuesort) | Sort order for issue lists. |
 | <a id="userpreferences-mergerequestdashboardlisttype"></a>`mergeRequestDashboardListType` | [`MergeRequestsDashboardListType`](#mergerequestsdashboardlisttype) | Merge request dashboard list rendering type. |
 | <a id="userpreferences-mergerequestdashboardshowdrafts"></a>`mergeRequestDashboardShowDrafts` | [`Boolean`](#boolean) | Show draft merge requests on merge request dashboard. |
+| <a id="userpreferences-orbitsettings"></a>`orbitSettings` {{< icon name="warning-solid" >}} | [`JSON!`](#json) | **Introduced** in GitLab 19.0. **Status**: Experiment. Orbit agent settings for the user. |
 | <a id="userpreferences-organizationgroupsprojectsdisplay"></a>`organizationGroupsProjectsDisplay` {{< icon name="warning-solid" >}} | [`OrganizationGroupProjectDisplay!`](#organizationgroupprojectdisplay) | **Introduced** in GitLab 17.2. **Status**: Experiment. Default list view for organization groups and projects. |
 | <a id="userpreferences-organizationgroupsprojectssort"></a>`organizationGroupsProjectsSort` {{< icon name="warning-solid" >}} | [`OrganizationGroupProjectSort`](#organizationgroupprojectsort) | **Introduced** in GitLab 17.2. **Status**: Experiment. Sort order for organization groups and projects. |
 | <a id="userpreferences-projectssort"></a>`projectsSort` | [`ProjectSort`](#projectsort) | Sort order for projects. |

@@ -180,8 +180,6 @@ class Project < ApplicationRecord
 
   after_save :invalidate_namespace_cache, if: :saved_change_to_archived?
 
-  use_fast_destroy :build_trace_chunks
-
   has_many :project_topics, -> { order(:id) }, class_name: 'Projects::ProjectTopic'
   has_many :topics, through: :project_topics, class_name: 'Projects::Topic'
 

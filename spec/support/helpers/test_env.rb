@@ -202,6 +202,9 @@ module TestEnv
   end
 
   def send_rspec_setup_duration_telemetry(duration, component_durations)
+    # Skip sending GDK telemetry if root dir is outside of GDK.
+    return unless File.exist?(File.expand_path('../../../../GDK_ROOT', __dir__))
+
     gdk_path = Gitlab::Utils.which('gdk')
     return unless gdk_path
 
@@ -295,6 +298,7 @@ module TestEnv
         Gitlab::SetupHelper::Workhorse.create_configuration(workhorse_dir, nil, force: true)
       else
         FileUtils.rm_rf(workhorse_dir)
+        install_mise_tools_for('workhorse')
         Gitlab::SetupHelper::Workhorse.compile_into(workhorse_dir)
         Gitlab::SetupHelper::Workhorse.create_configuration(workhorse_dir, nil)
 
@@ -531,6 +535,7 @@ module TestEnv
           raise ComponentFailedToInstallError unless system('rake', "#{task}[#{task_args.join(',')}]")
         end
 
+        install_mise_tools_for(install_dir)
         yield if block_given?
       end
     end
@@ -542,6 +547,31 @@ module TestEnv
 
   def ci?
     ENV['CI'].present?
+  end
+
+  # Ensures component's build tools are installed before we
+  # shell out to `make`.
+  # Gated on MISE_SHELL to keep impact small.
+  def install_mise_tools_for(dir)
+    # For the time being this is fully gated by an env
+    # variable set by caproni
+    return unless ENV['GL_AUTOINSTALL_TEST_DEPS'] == "1"
+
+    ## We always use precompiled binaries in CI
+    return if ci?
+
+    tool_versions = File.join(dir, '.tool-versions')
+    return unless File.exist?(tool_versions)
+
+    system('mise', 'trust', '--yes', tool_versions)
+    Dir.chdir(dir) { system('mise', 'install') }
+
+    # We can't assume mise was activated with `--shims`, so the shims dir
+    # may not be on PATH. Prepend it explicitly so subsequent `make` calls
+    # resolve per-cwd from each sub-repo's .tool-versions.
+    mise_data = ENV['MISE_DATA_DIR'] || File.join(Dir.home, '.local', 'share', 'mise')
+    shims = File.join(mise_data, 'shims')
+    ENV['PATH'] = "#{shims}:#{ENV['PATH']}" if File.directory?(shims) && ENV['PATH'].split(':').exclude?(shims) # rubocop:disable RSpec/EnvAssignment -- mutation is for the duration of the test-env setup script, not a test.
   end
 
   def ensure_component_dir_name_is_correct!(component, path)

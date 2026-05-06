@@ -15,6 +15,20 @@ module QA
       CAPYBARA_MAX_WAIT_TIME = Env.max_capybara_wait_time
       DEFAULT_WINDOW_SIZE = '1480,2200'
 
+      class SeleniumDriverWithSafeQuit < Capybara::Selenium::Driver
+        def quit
+          super
+        # EOFError raised by selenium-webdriver >= 4.40.0 when Net::HTTP checks driver
+        # status after ChromeDriver has already exited. Introduced in:
+        #   https://github.com/SeleniumHQ/selenium/pull/16877
+        #   https://github.com/SeleniumHQ/selenium/pull/15635
+        # Safe to ignore -- driver process is confirmed stopped at this point.
+        rescue EOFError
+          nil
+        end
+      end
+      private_constant :SeleniumDriverWithSafeQuit
+
       def self.blank_page?
         ['', 'about:blank', 'data:,'].include?(Capybara.current_session.driver.browser.current_url)
       rescue StandardError
@@ -194,7 +208,7 @@ module QA
             })
           end
 
-          Capybara::Selenium::Driver.new(app, options: webdriver_options, **selenium_options)
+          SeleniumDriverWithSafeQuit.new(app, options: webdriver_options, **selenium_options)
         end
 
         # Keep only the screenshots generated from the last failing test suite
