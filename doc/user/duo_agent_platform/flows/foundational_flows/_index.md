@@ -122,6 +122,12 @@ Prerequisites:
 
 ### On GitLab Self-Managed
 
+{{< history >}}
+
+- Full image reference for image registry [introduced](https://gitlab.com/gitlab-org/gitlab/-/work_items/594208) in GitLab 19.0.
+
+{{< /history >}}
+
 {{< tabs >}}
 
 {{< tab title="For an instance" >}}
@@ -134,8 +140,12 @@ Prerequisites:
 1. In the left sidebar, select **GitLab Duo**.
 1. Select **Change configuration**.
 1. Under **Flow execution**, select the **Allow flow execution** and **Allow foundational flows** checkboxes.
-1. Optional. In the **Image registry** text box, enter the container registry URL for foundational flow images.
-   Leave this text box empty to use the default `registry.gitlab.com`.
+1. Optional. In the **Image registry** text box, enter one of the following:
+
+   - A registry hostname to use the default image from that registry.
+   - A full image reference to override the image entirely (for example, `registry.example.com/group/project/image:tag`).
+
+   Leave blank to use the default `registry.gitlab.com`.
 1. Select **Save changes**.
 
 {{< /tab >}}

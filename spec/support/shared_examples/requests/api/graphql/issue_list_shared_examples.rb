@@ -529,8 +529,7 @@ RSpec.shared_examples 'graphql issue list request spec' do
       include_examples 'N+1 query check'
     end
 
-    context 'when award emoji votes',
-      quarantine: 'https://gitlab.com/gitlab-org/quality/test-failure-issues/-/issues/5996' do
+    context 'when award emoji votes' do
       let(:requested_fields) { 'upvotes downvotes' }
 
       before do

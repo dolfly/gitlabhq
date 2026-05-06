@@ -950,7 +950,6 @@ export default {
     'ee/app/assets/javascripts/security_dashboard/components/shared/filters/severity_filter.vue',
     'ee/app/assets/javascripts/security_dashboard/components/shared/filters/status_filter.vue',
     'ee/app/assets/javascripts/security_dashboard/components/shared/filters/tool_filter.vue',
-    'ee/app/assets/javascripts/security_dashboard/components/shared/filters/tool_with_vendor_filter.vue',
     'ee/app/assets/javascripts/security_dashboard/components/shared/over_time_period_selector.vue',
     'ee/app/assets/javascripts/security_dashboard/components/shared/project_security_status_chart.vue',
     'ee/app/assets/javascripts/security_dashboard/components/shared/risk_score_group_by.vue',

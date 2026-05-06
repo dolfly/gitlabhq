@@ -686,6 +686,13 @@ RSpec.describe Projects::MergeRequestsController, feature_category: :source_code
 
         expect(merge_request.notes.system.last.author).to eq(user)
       end
+
+      it 'attributes the system note to the human user when assigning a service account as assignee' do
+        put project_merge_request_path(project, merge_request),
+          params: { merge_request: { assignee_ids: [service_account.id] } }
+
+        expect(merge_request.notes.system.last.author).to eq(user)
+      end
     end
 
     it 'applies correct timezone to merge_after' do

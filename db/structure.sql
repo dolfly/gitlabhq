@@ -510,8 +510,7 @@ CREATE TABLE namespaces (
     traversal_ids bigint[] DEFAULT '{}'::bigint[] NOT NULL,
     organization_id bigint,
     state smallint DEFAULT 0,
-    CONSTRAINT check_2eae3bdf93 CHECK ((organization_id IS NOT NULL)),
-    CONSTRAINT check_9d490f2140 CHECK ((state IS NOT NULL))
+    CONSTRAINT check_2eae3bdf93 CHECK ((organization_id IS NOT NULL))
 );
 
 CREATE FUNCTION find_namespaces_by_id(namespaces_id bigint) RETURNS namespaces

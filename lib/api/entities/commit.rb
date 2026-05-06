@@ -16,9 +16,9 @@ module API
       expose :committer_name, documentation: { type: 'String', example: 'Jack Smith' }
       expose :committer_email, documentation: { type: 'String', example: 'jack@example.com' }
       expose :committed_date, documentation: { type: 'DateTime', example: '2012-05-28T04:42:42-07:00' }
-      expose :trailers, documentation: { type: 'object', example: { "Merged-By" => "Jane Doe janedoe@gitlab.com" } }
+      expose :trailers, documentation: { type: 'Hash', example: { "Merged-By" => "Jane Doe janedoe@gitlab.com" } }
       expose :extended_trailers, documentation: {
-        type: 'object',
+        type: 'Hash',
         example: { "Signed-off-by" => ["John Doe <johndoe@gitlab.com>", "Jane Doe <janedoe@gitlab.com>"] }
       }
 

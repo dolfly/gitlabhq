@@ -7792,7 +7792,7 @@ msgstr ""
 msgid "AiPowered|Connection method"
 msgstr ""
 
-msgid "AiPowered|Container registry for foundational flow images. Leave blank to use registry.gitlab.com"
+msgid "AiPowered|Container registry for the foundational flow image. Enter either a registry hostname to use the default image from that registry or a full image reference to override the image entirely (for example, \"registry.example.com/group/project/image:tag\"). Leave blank to use \"registry.gitlab.com\"."
 msgstr ""
 
 msgid "AiPowered|Control AI access to your data or external networks."
@@ -68935,9 +68935,6 @@ msgstr ""
 msgid "SecurityReports|To widen your search, change or remove filters above"
 msgstr ""
 
-msgid "SecurityReports|Tool"
-msgstr ""
-
 msgid "SecurityReports|Top 10 CWEs"
 msgstr ""
 
@@ -87366,9 +87363,6 @@ msgid "ciReport|API Fuzzing"
 msgstr ""
 
 msgid "ciReport|API fuzzing"
-msgstr ""
-
-msgid "ciReport|All tools"
 msgstr ""
 
 msgid "ciReport|Analyze a deployed version of your web application for known vulnerabilities by examining it from the outside in. DAST works by simulating external attacks on your application while it is running."

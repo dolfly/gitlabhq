@@ -379,6 +379,48 @@ docker run -d \
 
 For VPC endpoints, use the format: `https://vpce-{vpc-endpoint-id}-{service-name}.{region}.vpce.amazonaws.com`
 
+#### Bedrock guardrails
+
+{{< history >}}
+
+- [Introduced](https://gitlab.com/gitlab-org/modelops/applied-ml/code-suggestions/ai-assist/-/merge_requests/4715) in GitLab 19.0.
+
+{{< /history >}}
+
+You can use Amazon Bedrock Guardrails to provide safety and privacy controls for your Bedrock model requests.
+
+To apply these guardrails, set the `AIGW_BEDROCK_GUARDRAIL_CONFIG` environment variable value to a
+JSON object with the following fields:
+
+| Field                 | Description |
+|-----------------------|-------------|
+| `guardrailIdentifier` | The ID of the guardrail in your AWS account. Can be a simple ID (`abc123`), or full ARN (`arn:aws:bedrock:us-east-1:123456789012:guardrail/abc123`). |
+| `guardrailVersion`    | The version of the guardrail to apply. Set to `1`. |
+| `trace`               | Whether to include trace information in the response. Can set to `enabled` or `disabled`. |
+
+> [!note]
+> When a guardrail blocks a request, the message returned to users is the custom blocked message
+> configured in your AWS Bedrock guardrail, not a GitLab-provided message. Configure your guardrail's
+> blocked messaging in the AWS console to ensure users receive appropriate guidance.
+
+For a Helm deployment, set the environment variable as follows:
+
+```yaml
+extraEnvironmentVariables:
+  - name: AIGW_BEDROCK_GUARDRAIL_CONFIG
+    value: '{"guardrailIdentifier": "<guardrail_id>", "guardrailVersion": "1", "trace": "disabled"}'
+```
+
+For a Docker deployment:
+
+```shell
+docker run -d \
+  -e AIGW_BEDROCK_GUARDRAIL_CONFIG='{"guardrailIdentifier": "<guardrail_id>", "guardrailVersion": "1", "trace": "disabled"}' \
+  # ... other configuration
+```
+
+For more information, see [Amazon Bedrock Guardrails](https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html).
+
 ### Configure authentication with Google Vertex AI
 
 To use models from Google Vertex AI, you must authenticate your AI Gateway instance. You can use any of the following mechanisms:

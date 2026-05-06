@@ -358,21 +358,6 @@ CREATE TABLE code_suggestion_events_daily
     `user_id` UInt64 DEFAULT 0,
     `date` Date32 DEFAULT toDate(now64()),
     `event` UInt8 DEFAULT 0,
-    `language` String DEFAULT '',
-    `suggestions_size_sum` UInt32 DEFAULT 0,
-    `occurrences` UInt64 DEFAULT 0
-)
-ENGINE = SummingMergeTree
-PARTITION BY toYear(date)
-ORDER BY (namespace_path, date, user_id, event, language)
-SETTINGS index_granularity = 64;
-
-CREATE TABLE code_suggestion_events_daily_new
-(
-    `namespace_path` String DEFAULT '0/',
-    `user_id` UInt64 DEFAULT 0,
-    `date` Date32 DEFAULT toDate(now64()),
-    `event` UInt8 DEFAULT 0,
     `ide_name` LowCardinality(String) DEFAULT '',
     `language` LowCardinality(String) DEFAULT '',
     `suggestions_size_sum` UInt32 DEFAULT 0,
@@ -381,6 +366,21 @@ CREATE TABLE code_suggestion_events_daily_new
 ENGINE = SummingMergeTree
 PARTITION BY toYear(date)
 ORDER BY (namespace_path, date, user_id, event, ide_name, language)
+SETTINGS index_granularity = 64;
+
+CREATE TABLE code_suggestion_events_daily_new
+(
+    `namespace_path` String DEFAULT '0/',
+    `user_id` UInt64 DEFAULT 0,
+    `date` Date32 DEFAULT toDate(now64()),
+    `event` UInt8 DEFAULT 0,
+    `language` String DEFAULT '',
+    `suggestions_size_sum` UInt32 DEFAULT 0,
+    `occurrences` UInt64 DEFAULT 0
+)
+ENGINE = SummingMergeTree
+PARTITION BY toYear(date)
+ORDER BY (namespace_path, date, user_id, event, language)
 SETTINGS index_granularity = 64;
 
 CREATE TABLE contributions
@@ -2749,15 +2749,17 @@ CREATE MATERIALIZED VIEW code_suggestion_events_daily_mv TO code_suggestion_even
     `user_id` UInt64,
     `date` Date,
     `event` UInt16,
+    `ide_name` LowCardinality(String),
     `language` LowCardinality(String),
     `suggestions_size_sum` UInt64,
     `occurrences` UInt8
 )
 AS SELECT
-    namespace_path,
-    user_id,
+    namespace_path AS namespace_path,
+    user_id AS user_id,
     toDate(timestamp) AS date,
-    event,
+    event AS event,
+    toLowCardinality(JSONExtractString(extras, 'ide_name')) AS ide_name,
     toLowCardinality(JSONExtractString(extras, 'language')) AS language,
     JSONExtractUInt(extras, 'suggestion_size') AS suggestions_size_sum,
     1 AS occurrences
@@ -2770,7 +2772,6 @@ CREATE MATERIALIZED VIEW code_suggestion_events_daily_new_mv TO code_suggestion_
     `user_id` UInt64,
     `date` Date,
     `event` UInt16,
-    `ide_name` LowCardinality(String),
     `language` LowCardinality(String),
     `suggestions_size_sum` UInt64,
     `occurrences` UInt8
@@ -2780,7 +2781,6 @@ AS SELECT
     user_id AS user_id,
     toDate(timestamp) AS date,
     event AS event,
-    toLowCardinality(JSONExtractString(extras, 'ide_name')) AS ide_name,
     toLowCardinality(JSONExtractString(extras, 'language')) AS language,
     JSONExtractUInt(extras, 'suggestion_size') AS suggestions_size_sum,
     1 AS occurrences

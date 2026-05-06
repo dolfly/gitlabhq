@@ -14,7 +14,8 @@ module API
       expose :only_protected_branches, documentation: { type: 'Boolean' }
       expose :keep_divergent_refs, documentation: { type: 'Boolean' }
       expose :auth_method, documentation: { type: 'String', example: 'password' }
-      expose :ssh_known_hosts_fingerprints, as: :host_keys, using: MirrorHostKey, documentation: { is_array: true }
+      expose :ssh_known_hosts_fingerprints, as: :host_keys, using: ::API::Entities::MirrorHostKey,
+        documentation: { type: '::API::Entities::MirrorHostKey', is_array: true }
     end
   end
 end

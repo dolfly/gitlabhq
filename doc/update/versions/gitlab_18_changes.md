@@ -53,6 +53,7 @@ Before upgrading to GitLab 18.11, review the following:
 
 Before upgrading to GitLab 18.10, review the following:
 
+- [18.10.0 - 18.10.3] - [SLES 12.5 RPM package installation failure](#sles-125-rpm-package-installation-failure) (Linux package)
 - [18.10.0 - 18.10.5] - [Geo blob sync failures with `log_error` NoMethodError on file storage](#geo-blob-sync-failures-with-log_error-nomethoderror-on-file-storage) (Geo)
 - [18.10.0 - 18.10.3] - [Geo site URL blocked when using outbound filtering](#geo-site-url-blocked-when-using-outbound-filtering) (Geo)
 - [18.10.0 - 18.10.3] - [Geo blob download failures on Ubuntu 24.04 with kernel 6.8+](#geo-blob-download-failures-on-ubuntu-2404-with-kernel-68) (Linux package, Geo)
@@ -63,6 +64,7 @@ Before upgrading to GitLab 18.10, review the following:
 
 Before upgrading to GitLab 18.9, review the following:
 
+- [18.9.1 - 18.9.5] - [SLES 12.5 RPM package installation failure](#sles-125-rpm-package-installation-failure) (Linux package)
 - [18.9.0 - 18.9.5] - [Geo site URL blocked when using outbound filtering](#geo-site-url-blocked-when-using-outbound-filtering) (Geo)
 - [18.9.0 - 18.9.5] - [Geo secondary throttled jobs not draining](#geo-secondary-throttled-jobs-not-draining) (Geo)
 - [18.9.0 - 18.9.5] - [Sidekiq concurrency limiter causes job backlogs on Helm chart and Operator deployments](#sidekiq-concurrency-limiter-causes-job-backlogs-on-helm-chart-and-operator-deployments) (Helm chart, Operator)
@@ -217,6 +219,39 @@ Available workarounds for operators who have already upgraded:
    to the GitLab instance.
 
 For more information, see [issue 597223](https://gitlab.com/gitlab-org/gitlab/-/work_items/597223).
+
+### SLES 12.5 RPM package installation failure
+
+- Affects: Linux package
+- Affected versions:
+
+  | Release | Affected patch releases          | Installable patch level |
+  | ------- | -------------------------------- | ----------------------- |
+  | 18.10   | 18.10.0 - 18.10.3                | 18.10.4 - 18.10.5       |
+  | 18.9    | 18.9.1 - 18.9.5                  | 18.9.0, 18.9.6          |
+
+> [!warning]
+> On SLES 12.5, only GitLab 18.9.0, 18.10.4, and 18.11.2 can be installed successfully.
+> All other patch releases in the affected range fail to install.
+
+GitLab Linux packages for SLES 12.5 fail to install with `error: install failed`
+when using the `rpm` or `zypper` commands. The root cause is a 16 MiB RPM header
+data size limitation (`HEADER_DATA_MAX`) in RPM 4.11.2, which is the version
+shipped with SLES 12 SP5. As the number of files in the GitLab package grew,
+the serialized RPM header exceeded this limit, causing the RPM database
+transaction to fail silently during installation.
+
+The issue was resolved in specific patch releases by reducing the file count
+in the Linux package
+(see [merge request 9215](https://gitlab.com/gitlab-org/omnibus-gitlab/-/merge_requests/9215)).
+However, subsequent patch releases may regress if the file count grows again.
+To install GitLab on SLES 12.5, use only the installable patch levels listed above.
+
+SUSE distributions are
+[deprecated in GitLab 18.9 and scheduled for removal in GitLab 19.0](../deprecations.md#linux-package-support-for-suse-distributions).
+Consider migrating to a supported operating system.
+
+For more information, see [issue 9647](https://gitlab.com/gitlab-org/omnibus-gitlab/-/issues/9647).
 
 ### Mattermost and Spamcheck removed from SLES 12.5 packages
 

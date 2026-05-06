@@ -1664,7 +1664,6 @@ export default {
     'ee/app/assets/javascripts/security_dashboard/components/shared/filters/severity_filter.vue',
     'ee/app/assets/javascripts/security_dashboard/components/shared/filters/status_filter.vue',
     'ee/app/assets/javascripts/security_dashboard/components/shared/filters/tool_filter.vue',
-    'ee/app/assets/javascripts/security_dashboard/components/shared/filters/tool_with_vendor_filter.vue',
     'ee/app/assets/javascripts/security_dashboard/components/shared/issues_badge.vue',
     'ee/app/assets/javascripts/security_dashboard/components/shared/merge_request_badge.vue',
     'ee/app/assets/javascripts/security_dashboard/components/shared/pipeline_status_badge.vue',

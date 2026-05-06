@@ -54475,13 +54475,20 @@ definitions:
     type: object
     properties:
       id:
-        type: string
+        type: integer
+        format: int32
+        example: 1
       size:
-        type: string
+        type: integer
+        format: int32
+        example: 1024
       filename:
         type: string
+        example: image.png
       created_at:
         type: string
+        format: date-time
+        example: '2012-06-28T10:52:04Z'
       uploaded_by:
         "$ref": "#/definitions/API_Entities_UserSafe"
     required:
@@ -57934,7 +57941,7 @@ definitions:
         type: string
         example: PGP
       signature:
-        type: string
+        type: object
       commit_source:
         type: string
         example: gitaly
@@ -59450,7 +59457,10 @@ definitions:
       commit:
         "$ref": "#/definitions/API_Entities_BlameRangeCommit"
       lines:
-        type: string
+        type: array
+        items:
+          type: string
+        example: lorem ipsum
     required:
     - commit
     - lines
@@ -59460,22 +59470,35 @@ definitions:
     properties:
       id:
         type: string
+        example: 2695effb5807a22ff3d138d593fd856244e155e7
       parent_ids:
-        type: string
+        type: array
+        items:
+          type: string
+        example: 2a4b78934375d7f53875269ffd4f45fd83a84ebe
       message:
         type: string
+        example: Initial commit
       authored_date:
         type: string
+        format: date-time
+        example: '2012-05-28T04:42:42-07:00'
       author_name:
         type: string
+        example: John Smith
       author_email:
         type: string
+        example: john@example.com
       committed_date:
         type: string
+        format: date-time
+        example: '2012-05-28T04:42:42-07:00'
       committer_name:
         type: string
+        example: Jack Smith
       committer_email:
         type: string
+        example: jack@example.com
     required:
     - id
     - parent_ids
@@ -64776,10 +64799,13 @@ definitions:
     properties:
       base_sha:
         type: string
+        example: b83d6e391c22777fca1ed3012fce84f633d7fed0
       head_sha:
         type: string
+        example: b83d6e391c22777fca1ed3012fce84f633d7fed0
       start_sha:
         type: string
+        example: b83d6e391c22777fca1ed3012fce84f633d7fed0
     required:
     - base_sha
     - head_sha
@@ -67315,6 +67341,7 @@ definitions:
         example: none
       repository_storage:
         type: string
+        example: default
     required:
     - id
     - title
@@ -70093,7 +70120,9 @@ definitions:
         type: string
         example: release-1-0
       create_access_levels:
-        "$ref": "#/definitions/API_Entities_ProtectedRefAccess"
+        type: array
+        items:
+          "$ref": "#/definitions/API_Entities_ProtectedRefAccess"
     required:
     - name
     - create_access_levels
@@ -70408,6 +70437,7 @@ definitions:
           "$ref": "#/definitions/API_Entities_MirrorHostKey"
       mirror_branch_regex:
         type: string
+        example: feature-.*
     required:
     - id
     - enabled
@@ -70428,6 +70458,7 @@ definitions:
     properties:
       fingerprint_sha256:
         type: string
+        example: SHA256:abcd1234
     required:
     - fingerprint_sha256
   postApiV4ProjectsIdRemoteMirrors:
@@ -70737,6 +70768,7 @@ definitions:
     properties:
       notes:
         type: string
+        example: "## 1.0.0 (2023-01-01)"
     required:
     - notes
     description: API_Entities_Changelog model
@@ -70995,7 +71027,7 @@ definitions:
         type: string
         example: PGP
       signature:
-        type: string
+        type: object
     required:
     - signature_type
     - signature
@@ -75743,6 +75775,7 @@ definitions:
         example: none
       repository_storage:
         type: string
+        example: default
     required:
     - id
     - title
@@ -75819,6 +75852,7 @@ definitions:
         example: none
       repository_storage:
         type: string
+        example: default
     required:
     - id
     - title

@@ -5,9 +5,11 @@ class AddNotNullConstraintToNamespacesState < Gitlab::Database::Migration[2.3]
 
   disable_ddl_transaction!
 
-  def up
-    add_not_null_constraint :namespaces, :state
-  end
+  # Disabled as part of the revert of !233206.
+  # The NOT NULL constraint on namespaces.state is being reverted.
+
+  # no-op
+  def up; end
 
   def down
     remove_not_null_constraint :namespaces, :state

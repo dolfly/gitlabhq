@@ -25,3 +25,6 @@ danger-review:
     - yarn_install_script
   # extending from .review:rules:danger doesn't work
   rules: !reference [.review:rules:danger, rules]
+
+danger-review dry-run:
+  rules: !reference [.review:rules:danger-local, rules]

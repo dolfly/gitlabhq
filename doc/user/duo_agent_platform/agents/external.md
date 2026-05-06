@@ -20,8 +20,9 @@ title: External agents
 
 {{< history >}}
 
-- Introduced in GitLab 18.3 [with a flag](../../../administration/feature_flags/_index.md) named `ai_flow_triggers`. Enabled by default.
-- Renamed from CLI agents in GitLab 18.6.
+- Introduced on GitLab.com in GitLab 18.3 [with a flag](../../../administration/feature_flags/_index.md) named `ai_flow_triggers`. Enabled by default.
+- Renamed from CLI agents in GitLab 18.6
+- Claude Code Agent and Codex Agent enabled on GitLab Self-Managed and GitLab Dedicated in GitLab 18.6.
 - Enabling in groups [introduced](https://gitlab.com/gitlab-org/gitlab/-/issues/578318) in GitLab 18.7 [with a flag](../../../administration/feature_flags/_index.md) named `ai_catalog_agents`. Enabled on GitLab.com.
 - Enabling directly in projects as a maintainer [introduced](https://gitlab.com/groups/gitlab-org/-/work_items/20743) in GitLab 18.10 [with a flag](../../../administration/feature_flags/_index.md) named `ai_catalog_project_level_enablement`. Enabled on GitLab.com, GitLab Self-Managed, and GitLab Dedicated by default.
 - Feature flag `ai_catalog_project_level_enablement` removed in GitLab 18.11.
@@ -76,7 +77,6 @@ For a broader overview of security threats and mitigations in the Duo Agent Plat
 {{< details >}}
 
 - Tier: Premium, Ultimate
-- Offering: GitLab.com
 
 {{< /details >}}
 
@@ -112,19 +112,22 @@ Required steps to enable and use managed agents:
 
 The [Claude Code Agent by GitLab](https://gitlab.com/explore/ai-catalog/agents/2337/)
 uses GitLab-managed credentials and does not require additional configuration.
-This agent is available only on GitLab.com.
 
 ### Codex Agent
 
 The [Codex Agent by GitLab](https://gitlab.com/explore/ai-catalog/agents/2334/)
 uses GitLab-managed credentials and does not require additional configuration.
-This agent is available only on GitLab.com.
 
 ### Amazon Q Developer Agent
 
+{{< details >}}
+
+- Offering: GitLab.com
+
+{{< /details >}}
+
 The [Amazon Q Developer Agent](https://gitlab.com/explore/ai-catalog/agents/2332/) does not use
 GitLab-managed credentials. To use this agent, you must provide your own credentials.
-This agent is available only on GitLab.com.
 
 To use the Amazon Q Developer Agent:
 
@@ -137,9 +140,14 @@ To use the Amazon Q Developer Agent:
 
 ### Develop with Gemini Agent
 
+{{< details >}}
+
+- Offering: GitLab.com
+
+{{< /details >}}
+
 The [Develop with Gemini Agent](https://gitlab.com/explore/ai-catalog/agents/2331/) does not use the GitLab-managed credentials.
 To use this agent, you must provide your own credentials.
-This agent is available only on GitLab.com.
 
 To use the Develop with Gemini Agent:
 

@@ -15,31 +15,40 @@ RSpec.describe Namespaces::Stateful, feature_category: :groups_and_projects do
     it { is_expected.to define_enum_for(:state).with_values(**states).without_instance_methods }
   end
 
-  describe 'zero handling' do
+  describe 'NULL and zero handling during migration' do
     describe 'state reading' do
-      it "treats 0 state as ancestor_inherited" do
-        namespace.update_column(:state, 0)
-        namespace.reload
+      where(:db_value) do
+        [nil, 0]
+      end
 
-        expect(namespace.state).to eq('ancestor_inherited')
-        expect(namespace.state_name).to eq(:ancestor_inherited)
+      with_them do
+        it "treats #{params[:db_value].inspect} state as ancestor_inherited" do
+          namespace.update_column(:state, db_value)
+          namespace.reload
+
+          expect(namespace.state).to eq('ancestor_inherited')
+          expect(namespace.state_name).to eq(:ancestor_inherited)
+        end
       end
     end
 
     describe 'transitions from ancestor_inherited' do
-      where(:event, :to_state) do
-        :archive           | :archived
-        :schedule_deletion | :deletion_scheduled
-        :start_deletion    | :deletion_in_progress
+      where(:db_value, :event, :to_state) do
+        nil | :archive           | :archived
+        nil | :schedule_deletion | :deletion_scheduled
+        nil | :start_deletion    | :deletion_in_progress
+        0   | :archive           | :archived
+        0   | :schedule_deletion | :deletion_scheduled
+        0   | :start_deletion    | :deletion_in_progress
       end
 
       with_them do
         before do
-          namespace.update_column(:state, 0)
+          namespace.update_column(:state, db_value)
           namespace.reload
         end
 
-        it "transitions from 0 to #{params[:to_state]} on #{params[:event]}" do
+        it "transitions from #{params[:db_value].inspect} to #{params[:to_state]} on #{params[:event]}" do
           expect { namespace.public_send(event, transition_user: user) }
             .to change { namespace.state_name }
                   .from(:ancestor_inherited)
@@ -48,7 +57,7 @@ RSpec.describe Namespaces::Stateful, feature_category: :groups_and_projects do
       end
     end
 
-    describe 'transitions back to ancestor_inherited write 0' do
+    describe 'transitions back to ancestor_inherited write 0 instead of NULL' do
       it 'writes 0 to the database when transitioning to ancestor_inherited' do
         namespace.update!(state: :archived)
 

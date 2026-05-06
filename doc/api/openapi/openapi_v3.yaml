@@ -72720,7 +72720,7 @@ components:
           description: Relative position of the issue in the epic tree
           example: 0
         epic:
-          type: "::API::Entities::Epic"
+          type: object
         issue:
           "$ref": "#/components/schemas/APIEntitiesIssueBasic"
     APIEntitiesProjectApprovalSettings:
@@ -73281,11 +73281,15 @@ components:
       type: object
       properties:
         id:
-          type: string
+          type: integer
+          example: 1
         key:
           type: string
+          example: "-----BEGIN PGP PUBLIC KEY BLOCK-----"
         created_at:
           type: string
+          format: date-time
+          example: '2017-09-05T09:17:46.264Z'
     APIEntitiesUserStatus:
       type: object
       properties:
@@ -73341,8 +73345,10 @@ components:
       properties:
         name:
           type: string
+          example: Ruby
         content:
           type: string
+          example: "# Ruby gitignore template"
     APIEntitiesElasticIndexSetting:
       type: object
       properties:
@@ -74760,7 +74766,7 @@ components:
           type: string
           example: main
         link:
-          type: string
+          type: object
     APIEntitiesWorkItemsFeaturesVerificationStatus:
       type: object
       properties:
@@ -75269,7 +75275,7 @@ components:
           type: string
           example: PGP
         signature:
-          type: string
+          type: object
     APIEntitiesTagRelease:
       type: object
       properties:
@@ -75393,22 +75399,34 @@ components:
       properties:
         basename:
           type: string
+          example: README
         data:
           type: string
+          example: |-
+            ---
+            title: Page
+            ---
         path:
           type: string
+          example: README.md
         filename:
           type: string
+          example: README.md
         id:
           type: string
+          example: 2695effb5807a22ff3d138d593fd856244e155e7
         ref:
           type: string
+          example: main
         startline:
-          type: string
+          type: integer
+          example: 1
         project_id:
-          type: string
+          type: integer
+          example: 1
         group_id:
-          type: string
+          type: integer
+          example: 1
     APIEntitiesResourceMilestoneEvent:
       type: object
       properties:
@@ -75440,6 +75458,7 @@ components:
       properties:
         notes:
           type: string
+          example: "## 1.0.0 (2023-01-01)"
     APIEntitiesContributor:
       type: object
       properties:
@@ -75643,11 +75662,13 @@ components:
             "$ref": "#/components/schemas/APIEntitiesMirrorHostKey"
         mirror_branch_regex:
           type: string
+          example: feature-.*
     APIEntitiesMirrorHostKey:
       type: object
       properties:
         fingerprint_sha256:
           type: string
+          example: SHA256:abcd1234
     APIEntitiesReleasesEvidence:
       type: object
       properties:
@@ -75717,7 +75738,9 @@ components:
           type: string
           example: release-1-0
         create_access_levels:
-          "$ref": "#/components/schemas/APIEntitiesProtectedRefAccess"
+          type: array
+          items:
+            "$ref": "#/components/schemas/APIEntitiesProtectedRefAccess"
     APIEntitiesProtectedBranch:
       type: object
       properties:
@@ -76620,10 +76643,13 @@ components:
       properties:
         base_sha:
           type: string
+          example: b83d6e391c22777fca1ed3012fce84f633d7fed0
         head_sha:
           type: string
+          example: b83d6e391c22777fca1ed3012fce84f633d7fed0
         start_sha:
           type: string
+          example: b83d6e391c22777fca1ed3012fce84f633d7fed0
     APIEntitiesBillableMembership:
       type: object
       properties:
@@ -76663,13 +76689,18 @@ components:
       type: object
       properties:
         id:
-          type: string
+          type: integer
+          example: 1
         size:
-          type: string
+          type: integer
+          example: 1024
         filename:
           type: string
+          example: image.png
         created_at:
           type: string
+          format: date-time
+          example: '2012-06-28T10:52:04Z'
         uploaded_by:
           "$ref": "#/components/schemas/APIEntitiesUserSafe"
     APIEntitiesProjectUpload:
@@ -78052,29 +78083,45 @@ components:
       properties:
         id:
           type: string
+          example: 2695effb5807a22ff3d138d593fd856244e155e7
         parent_ids:
-          type: string
+          type: array
+          example: 2a4b78934375d7f53875269ffd4f45fd83a84ebe
+          items:
+            type: string
         message:
           type: string
+          example: Initial commit
         authored_date:
           type: string
+          format: date-time
+          example: '2012-05-28T04:42:42-07:00'
         author_name:
           type: string
+          example: John Smith
         author_email:
           type: string
+          example: john@example.com
         committed_date:
           type: string
+          format: date-time
+          example: '2012-05-28T04:42:42-07:00'
         committer_name:
           type: string
+          example: Jack Smith
         committer_email:
           type: string
+          example: jack@example.com
     APIEntitiesBlameRange:
       type: object
       properties:
         commit:
           "$ref": "#/components/schemas/APIEntitiesBlameRangeCommit"
         lines:
-          type: string
+          type: array
+          example: lorem ipsum
+          items:
+            type: string
     APIEntitiesFeatureDefinition:
       type: object
       properties:
@@ -78766,7 +78813,7 @@ components:
           type: string
           example: PGP
         signature:
-          type: string
+          type: object
         commit_source:
           type: string
           example: gitaly
@@ -81301,6 +81348,7 @@ components:
           example: none
         repository_storage:
           type: string
+          example: default
     APIEntitiesPersonalSnippet:
       type: object
       properties:
@@ -81359,6 +81407,7 @@ components:
           example: none
         repository_storage:
           type: string
+          example: default
     APIEntitiesProjectSnippet:
       type: object
       properties:
@@ -81417,6 +81466,7 @@ components:
           example: none
         repository_storage:
           type: string
+          example: default
     APIEntitiesGroupHook:
       type: object
       properties:
