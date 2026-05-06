@@ -2,9 +2,9 @@
 source_checksum: e6492c5bb0eacc33
 distilled_at_sha: 9ab16c7588f7d32fdb6d509a70bae72309346826
 ---
-> **Prerequisite:** If you haven't already, also read .ai/principles/distilled/database-fundamentals.md - it contains foundational rules that apply to all database work.
-
 <!-- Auto-generated from docs.gitlab.com by scripts/ai/sync_principles.rb — do not edit manually -->
+
+> **Prerequisite:** If you haven't already, also read .ai/principles/distilled/database-fundamentals.md - it contains foundational rules that apply to all database work.
 
 # Database Principles
 

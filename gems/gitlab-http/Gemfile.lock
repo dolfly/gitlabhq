@@ -2,8 +2,8 @@ PATH
   remote: ../gitlab-rspec
   specs:
     gitlab-rspec (0.1.0)
-      activerecord (>= 6.1, < 8)
-      activesupport (>= 6.1, < 8)
+      activerecord (>= 7, < 9)
+      activesupport (>= 7, < 9)
       gitlab_quality-test_tooling (>= 3.13, < 4)
       rspec (~> 3.0)
       test-prof (~> 1.5)
@@ -27,7 +27,7 @@ PATH
   remote: .
   specs:
     gitlab-http (0.1.0)
-      activesupport (~> 7)
+      activesupport (>= 7, < 9)
       concurrent-ruby (~> 1.2)
       httparty (~> 0.21)
       ipaddress (~> 0.8.3)

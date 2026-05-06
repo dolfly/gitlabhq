@@ -35,7 +35,7 @@ RSpec.describe ::SystemNotes::IssuablesService, feature_category: :team_planning
       end
 
       it 'sets the note text' do
-        expect(system_note.note).to eq "marked this issue as related to #{issue1.to_reference(project)}"
+        expect(system_note.note).to eq "marked as related to #{issue1.to_reference(project)}"
       end
     end
 
@@ -48,7 +48,7 @@ RSpec.describe ::SystemNotes::IssuablesService, feature_category: :team_planning
 
       it 'sets the note text' do
         expect(system_note.note).to eq(
-          "marked this issue as related to #{issue1.to_reference(project)} and #{issue2.to_reference(project)}"
+          "marked as related to #{issue1.to_reference(project)} and #{issue2.to_reference(project)}"
         )
       end
     end
@@ -56,8 +56,8 @@ RSpec.describe ::SystemNotes::IssuablesService, feature_category: :team_planning
     context 'with work items' do
       let_it_be(:noteable) { create(:work_item, :task, project: project) }
 
-      it 'sets the note text with the correct work item type' do
-        expect(subject.note).to eq "marked this task as related to #{noteable_ref.to_reference(project)}"
+      it 'sets the note text without referencing the work item type' do
+        expect(subject.note).to eq "marked as related to #{noteable_ref.to_reference(project)}"
       end
     end
   end
@@ -373,7 +373,7 @@ RSpec.describe ::SystemNotes::IssuablesService, feature_category: :team_planning
       end
 
       it 'sets the note text' do
-        expect(subject.note).to eq 'made the issue confidential'
+        expect(subject.note).to eq 'made the item confidential'
       end
     end
 
@@ -383,7 +383,7 @@ RSpec.describe ::SystemNotes::IssuablesService, feature_category: :team_planning
       end
 
       it 'sets the note text' do
-        expect(subject.note).to eq 'made the issue visible to everyone'
+        expect(subject.note).to eq 'made the item visible to everyone'
       end
     end
   end

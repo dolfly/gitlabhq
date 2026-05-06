@@ -164,7 +164,11 @@ export const getReferrersCache = () => {
 export const addReferrersCacheEntry = (cache, entry) => {
   const referrers = JSON.stringify([{ ...entry, timestamp: Date.now() }, ...cache]);
 
-  window.localStorage.setItem(URLS_CACHE_STORAGE_KEY, referrers);
+  try {
+    window.localStorage.setItem(URLS_CACHE_STORAGE_KEY, referrers);
+  } catch {
+    // localStorage may be full or unavailable; tracking is best-effort.
+  }
 };
 
 function validateProperty(obj, key, allowedTypes) {

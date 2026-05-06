@@ -181,6 +181,23 @@ RSpec.describe Organizations::Stateful, feature_category: :organization do
     end
   end
 
+  describe '#ensure_organization_is_empty' do
+    it 'prevents schedule_deletion when organization is not empty' do
+      create(:group, organization: organization)
+
+      expect(organization.schedule_deletion(transition_user: user)).to be false
+      expect(organization.errors[:state])
+        .to include('schedule_deletion transition requires the organization to be empty')
+    end
+
+    it 'allows schedule_deletion when organization is empty' do
+      expect { organization.schedule_deletion(transition_user: user) }
+        .to change { organization.state_name }
+        .from(:active)
+        .to(:deletion_scheduled)
+    end
+  end
+
   describe '#set_deletion_schedule_data' do
     before do
       organization.update_column(:state, Organizations::Organization.states[:active])

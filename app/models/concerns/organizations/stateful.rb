@@ -23,6 +23,7 @@ module Organizations
       state_machine :state, initial: :unconfirmed do
         before_transition :update_state_metadata
         before_transition on: :schedule_deletion, do: :ensure_transition_user
+        before_transition on: :schedule_deletion, do: :ensure_organization_is_empty
         before_transition on: :schedule_deletion, do: :set_deletion_schedule_data
         before_transition on: :cancel_deletion, do: :clear_deletion_schedule_data
         # We don't call :set_deletion_schedule_data on :reschedule_deletion
@@ -61,6 +62,13 @@ module Organizations
       end
 
       private
+
+      def ensure_organization_is_empty(_transition)
+        return true if empty?
+
+        errors.add(:state, 'schedule_deletion transition requires the organization to be empty')
+        false
+      end
 
       def ensure_confirmed_by_user(transition)
         return true if confirmed_by_user(transition)

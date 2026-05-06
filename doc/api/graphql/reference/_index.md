@@ -924,6 +924,23 @@ Run a series of status checks for Cloud Connector features.
 
 Returns [`CloudConnectorStatus`](#cloudconnectorstatus).
 
+### `Query.complianceFrameworkTemplates`
+
+{{< details >}}
+**Introduced** in GitLab 19.0.
+**Status**: Experiment.
+{{< /details >}}
+
+List of available compliance framework templates.
+
+Returns [`[ComplianceFrameworkTemplate!]`](#complianceframeworktemplate).
+
+#### Arguments
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| <a id="query-complianceframeworktemplates-id"></a>`id` | [`ComplianceManagementFrameworksTemplateRegistryTemplateID`](#compliancemanagementframeworkstemplateregistrytemplateid) | Filter by template ID. |
+
 ### `Query.complianceRequirementControls`
 
 Get the list of all the compliance requirement controls.
@@ -6190,6 +6207,35 @@ Input type: `CreateComplianceFrameworkInput`
 | <a id="mutation-createcomplianceframework-clientmutationid"></a>`clientMutationId` | [`String`](#string) | A unique identifier for the client performing the mutation. |
 | <a id="mutation-createcomplianceframework-errors"></a>`errors` | [`[String!]!`](#string) | Errors encountered during the mutation. |
 | <a id="mutation-createcomplianceframework-framework"></a>`framework` | [`ComplianceFramework`](#complianceframework) | Created compliance framework. |
+
+### `Mutation.createComplianceFrameworkFromTemplate`
+
+{{< details >}}
+**Introduced** in GitLab 19.0.
+**Status**: Experiment.
+{{< /details >}}
+
+Input type: `CreateComplianceFrameworkFromTemplateInput`
+
+#### Arguments
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| <a id="mutation-createcomplianceframeworkfromtemplate-clientmutationid"></a>`clientMutationId` | [`String`](#string) | A unique identifier for the client performing the mutation. |
+| <a id="mutation-createcomplianceframeworkfromtemplate-color"></a>`color` | [`String`](#string) | Override the color of the compliance framework in hex format. e.g. #FCA121. |
+| <a id="mutation-createcomplianceframeworkfromtemplate-default"></a>`default` | [`Boolean`](#boolean) | Set the compliance framework as the default framework for the group. |
+| <a id="mutation-createcomplianceframeworkfromtemplate-description"></a>`description` | [`String`](#string) | Override the description of the compliance framework. |
+| <a id="mutation-createcomplianceframeworkfromtemplate-name"></a>`name` | [`String`](#string) | Override the name of the compliance framework. |
+| <a id="mutation-createcomplianceframeworkfromtemplate-namespacepath"></a>`namespacePath` | [`ID!`](#id) | Full path of the namespace to add the compliance framework to. |
+| <a id="mutation-createcomplianceframeworkfromtemplate-templateid"></a>`templateId` | [`ComplianceManagementFrameworksTemplateRegistryTemplateID!`](#compliancemanagementframeworkstemplateregistrytemplateid) | Unique identifier of the template to create the framework from. |
+
+#### Fields
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| <a id="mutation-createcomplianceframeworkfromtemplate-clientmutationid"></a>`clientMutationId` | [`String`](#string) | A unique identifier for the client performing the mutation. |
+| <a id="mutation-createcomplianceframeworkfromtemplate-errors"></a>`errors` | [`[String!]!`](#string) | Errors encountered during the mutation. |
+| <a id="mutation-createcomplianceframeworkfromtemplate-framework"></a>`framework` | [`ComplianceFramework`](#complianceframework) | Created compliance framework. |
 
 ### `Mutation.createComplianceRequirement`
 
@@ -32882,6 +32928,21 @@ Compliance framework Coverage summary for a group.
 | ---- | ---- | ----------- |
 | <a id="complianceframeworkcoveragesummary-coveredcount"></a>`coveredCount` | [`Int!`](#int) | Number of projects covered by at least one framework. |
 | <a id="complianceframeworkcoveragesummary-totalprojects"></a>`totalProjects` | [`Int!`](#int) | Total number of projects in the group. |
+
+### `ComplianceFrameworkTemplate`
+
+Represents a compliance framework template that can be used to create a compliance framework.
+
+#### Fields
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| <a id="complianceframeworktemplate-color"></a>`color` | [`String!`](#string) | Hexadecimal representation of the template's label color. |
+| <a id="complianceframeworktemplate-description"></a>`description` | [`String!`](#string) | Description of the compliance framework template. |
+| <a id="complianceframeworktemplate-id"></a>`id` | [`ID!`](#id) | Unique identifier of the template. |
+| <a id="complianceframeworktemplate-json"></a>`json` | [`String!`](#string) | Full JSON representation of the compliance framework template. |
+| <a id="complianceframeworktemplate-name"></a>`name` | [`String!`](#string) | Name of the compliance framework template. |
+| <a id="complianceframeworktemplate-templateversion"></a>`templateVersion` | [`Int!`](#int) | Version of the template. |
 
 ### `ComplianceFrameworksNeedingAttention`
 
@@ -62093,6 +62154,12 @@ An example `ComplianceManagementComplianceFrameworkComplianceRequirementsControl
 A `ComplianceManagementFrameworkID` is a global ID. It is encoded as a string.
 
 An example `ComplianceManagementFrameworkID` is: `"gid://gitlab/ComplianceManagement::Framework/1"`.
+
+### `ComplianceManagementFrameworksTemplateRegistryTemplateID`
+
+A `ComplianceManagementFrameworksTemplateRegistryTemplateID` is a global ID. It is encoded as a string.
+
+An example `ComplianceManagementFrameworksTemplateRegistryTemplateID` is: `"gid://gitlab/ComplianceManagement::Frameworks::TemplateRegistry::Template/1"`.
 
 ### `ComplianceManagementProjectsComplianceViolationID`
 

@@ -58,6 +58,21 @@ RSpec.describe Gitlab::Database::Batch::Strategies::PrimaryKey, '#next_batch', f
     end
   end
 
+  context 'when cursor column is a non-integer type' do
+    let(:job_class) do
+      Class.new(Gitlab::BackgroundOperation::BaseOperationWorker) do
+        cursor :id, :name
+      end
+    end
+
+    it 'correctly casts values in the tuple comparison' do
+      batch_bounds = batching_strategy.next_batch(:namespaces,
+        batch_min_value: [namespace1.id, namespace1.name], batch_size: 3, job_class: job_class)
+
+      expect(batch_bounds).to match_array([[namespace1.id, namespace1.name], [namespace3.id, namespace3.name]])
+    end
+  end
+
   context 'with scope_to' do
     let(:scoped_job_class) do
       Class.new(Gitlab::BackgroundOperation::BaseOperationWorker) do

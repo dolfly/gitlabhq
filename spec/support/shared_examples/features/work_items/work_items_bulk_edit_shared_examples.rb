@@ -143,6 +143,8 @@ RSpec.shared_examples 'when user bulk unassigns parent' do
     select_no_parent_on_bulk_edit
     click_update_selected
 
+    expect(find_work_item_element(child_work_item.id)).to have_no_testid('work-item-parent-metadata-link')
+
     find_work_item_element(child_work_item.id).click
     within_testid('work-item-parent') do
       expect(page).not_to have_content parent_work_item.title
@@ -153,6 +155,9 @@ RSpec.shared_examples 'when user bulk unassigns parent' do
     check_work_items([child_work_item.title, child_work_item_2.title])
     select_no_parent_on_bulk_edit
     click_update_selected
+
+    expect(find_work_item_element(child_work_item.id)).to have_no_testid('work-item-parent-metadata-link')
+    expect(find_work_item_element(child_work_item_2.id)).to have_no_testid('work-item-parent-metadata-link')
 
     find_work_item_element(child_work_item.id).click
     within_testid('work-item-parent') do

@@ -343,9 +343,9 @@ RSpec.describe EventCreateService, :clean_gitlab_redis_cache, :clean_gitlab_redi
 
       it 'is idempotent', :aggregate_failures do
         event = nil
-        expect { event = create_event }.to change(Event, :count).by(1)
+        expect { event = create_event }.to change { Event.count }.by(1)
         duplicate = nil
-        expect { duplicate = create_event }.not_to change(Event, :count)
+        expect { duplicate = create_event }.not_to change { Event.count }
 
         expect(duplicate).to eq(event)
       end

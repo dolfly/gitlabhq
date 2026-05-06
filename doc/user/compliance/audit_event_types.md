@@ -493,6 +493,12 @@ Audit event types belong to the following product categories.
 |:----------|:---------------------|:------------------|:--------------|:------|
 | [`project_feature_monitor_access_level_updated`](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/106919) | A project's monitor access level setting is updated | {{< yes >}} | GitLab [15.7](https://gitlab.com/gitlab-org/gitlab/-/issues/369304) | Project |
 
+### Organization
+
+| Type name | Event triggered when | Saved to database | Introduced in | Scope |
+|:----------|:---------------------|:------------------|:--------------|:------|
+| [`organization_deletion_marked`](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/233210) | An organization is marked for deletion | {{< yes >}} | GitLab [19.0](https://gitlab.com/gitlab-org/gitlab/-/work_items/594308) | Instance |
+
 ### Package registry
 
 | Type name | Event triggered when | Saved to database | Introduced in | Scope |

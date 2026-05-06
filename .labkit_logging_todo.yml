@@ -12,6 +12,8 @@
 # Regenerate entire TODO:
 #   Delete this file and run: LABKIT_LOGGING_TODO_UPDATE=true bundle exec rspec
 
+skip_ci_failure: true # added temporarly see https://gitlab.com/gitlab-org/quality/tooling/labkit-spec/-/work_items/2
+
 ---
 offenses:
 - logger_class: Gitlab::AppJsonLogger

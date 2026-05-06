@@ -102,6 +102,16 @@ describe('~/tracking/utils', () => {
         expect(cache[0].referrer).toBe(TEST_HOST);
         expect(cache[0].timestamp).toBeDefined();
       });
+
+      it('does not throw when localStorage is full', () => {
+        const setItemSpy = jest.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
+          throw new Error('QuotaExceededError');
+        });
+
+        expect(() => addReferrersCacheEntry([], { referrer: TEST_HOST })).not.toThrow();
+
+        setItemSpy.mockRestore();
+      });
     });
 
     describe('createInternalEventPayload', () => {

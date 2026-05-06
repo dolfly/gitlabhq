@@ -8065,7 +8065,13 @@ msgstr ""
 msgid "AiPowered|These settings are disabled because GitLab Duo availability is set to always off."
 msgstr ""
 
+msgid "AiPowered|This setting applies to the entire instance. By turning on these features, you accept the %{termsLinkStart}GitLab Duo AI Terms%{termsLinkEnd} unless your organization has a separate agreement with GitLab that governs AI usage."
+msgstr ""
+
 msgid "AiPowered|This setting applies to the entire instance. By turning on these features, you accept the %{termsLinkStart}GitLab Duo AI Terms%{termsLinkEnd} unless your organization has a separate agreement with GitLab that governs AI usage. %{prerequisitesLinkStart}What are the prerequisites for the GitLab Duo Agent Platform%{prerequisitesLinkEnd}?"
+msgstr ""
+
+msgid "AiPowered|This setting applies to the top-level group. By turning on these features, you accept the %{termsLinkStart}GitLab Duo AI Terms%{termsLinkEnd} unless your organization has a separate agreement with GitLab that governs AI usage."
 msgstr ""
 
 msgid "AiPowered|This setting applies to the top-level group. By turning on these features, you accept the %{termsLinkStart}GitLab Duo AI Terms%{termsLinkEnd} unless your organization has a separate agreement with GitLab that governs AI usage. %{prerequisitesLinkStart}What are the prerequisites for the GitLab Duo Agent Platform%{prerequisitesLinkEnd}?"
@@ -8119,6 +8125,9 @@ msgstr ""
 msgid "AiPowered|Turn on experiment and beta GitLab Duo features"
 msgstr ""
 
+msgid "AiPowered|Turn on features for GitLab Duo Core"
+msgstr ""
+
 msgid "AiPowered|Turn on prompt caching"
 msgstr ""
 
@@ -8153,6 +8162,9 @@ msgid "AiPowered|When GitLab Duo is not available, experiment and beta features 
 msgstr ""
 
 msgid "AiPowered|When GitLab Duo is not available, prompt caching cannot be turned on."
+msgstr ""
+
+msgid "AiPowered|When turned on, users can access features included in the GitLab Duo Core add-on. %{linkStart}Which features are included%{linkEnd}?"
 msgstr ""
 
 msgid "AiPowered|When you save, GitLab Duo will be turned off for all groups, subgroups, and projects."
@@ -50485,6 +50497,12 @@ msgid "Organization Administration"
 msgstr ""
 
 msgid "Organization ID cannot be nil"
+msgstr ""
+
+msgid "Organization has already been marked for deletion"
+msgstr ""
+
+msgid "Organization must be empty before it can be deleted"
 msgstr ""
 
 msgid "Organization parameter must be specified"

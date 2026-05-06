@@ -510,7 +510,8 @@ CREATE TABLE namespaces (
     traversal_ids bigint[] DEFAULT '{}'::bigint[] NOT NULL,
     organization_id bigint,
     state smallint DEFAULT 0,
-    CONSTRAINT check_2eae3bdf93 CHECK ((organization_id IS NOT NULL))
+    CONSTRAINT check_2eae3bdf93 CHECK ((organization_id IS NOT NULL)),
+    CONSTRAINT check_9d490f2140 CHECK ((state IS NOT NULL))
 );
 
 CREATE FUNCTION find_namespaces_by_id(namespaces_id bigint) RETURNS namespaces
@@ -16599,12 +16600,12 @@ CREATE TABLE bulk_import_entities (
     jid text,
     created_at timestamp with time zone NOT NULL,
     updated_at timestamp with time zone NOT NULL,
-    source_xid integer,
+    source_xid_convert_to_bigint integer,
     migrate_projects boolean DEFAULT true NOT NULL,
     has_failures boolean DEFAULT false,
     migrate_memberships boolean DEFAULT true NOT NULL,
     organization_id bigint,
-    source_xid_convert_to_bigint bigint,
+    source_xid bigint,
     CONSTRAINT check_13f279f7da CHECK ((char_length(source_full_path) <= 255)),
     CONSTRAINT check_469f9235c5 CHECK ((num_nonnulls(namespace_id, organization_id, project_id) = 1)),
     CONSTRAINT check_715d725ea2 CHECK ((char_length(destination_name) <= 255)),

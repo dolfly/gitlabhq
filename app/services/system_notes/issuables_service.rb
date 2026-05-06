@@ -28,12 +28,12 @@ module SystemNotes
     #
     # Example Note text:
     #
-    #   "marked this issue as related to gitlab-foss#9001"
-    #   "marked this issue as related to gitlab-foss#9001, gitlab-foss#9002, and gitlab-foss#9003"
+    #   "marked as related to gitlab-foss#9001"
+    #   "marked as related to gitlab-foss#9001, gitlab-foss#9002, and gitlab-foss#9003"
     #
     # Returns the created Note object
     def relate_issuable(noteable_ref)
-      body = "marked this #{noteable_name} as related to #{extract_issuable_reference(noteable_ref)}"
+      body = "marked as related to #{extract_issuable_reference(noteable_ref)}"
 
       create_note(NoteSummary.new(noteable, project, author, body, action: 'relate'))
     end
@@ -352,7 +352,7 @@ module SystemNotes
     #
     # Example Note text:
     #
-    #   "made the issue confidential"
+    #   "made the item confidential"
     #
     # Returns the created Note object
     def change_issue_confidentiality
@@ -582,8 +582,15 @@ module SystemNotes
       issue_activity_counter.public_send(event_name, author: author, project: project || noteable.project) # rubocop: disable GitlabSecurity/PublicSend
     end
 
+    # System notes intentionally use the generic word "item" instead of the
+    # specific noteable type (e.g. "issue", "task", "incident"). The user is
+    # already viewing the item, so the type is redundant in the note copy.
     def noteable_name
-      name = noteable.try(:issue_type) || noteable.to_ability_name
+      name = if noteable.respond_to?(:issue_type)
+               'item'
+             else
+               noteable.to_ability_name
+             end
 
       name.humanize(capitalize: false)
     end

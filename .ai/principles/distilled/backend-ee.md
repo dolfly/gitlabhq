@@ -2,9 +2,9 @@
 source_checksum: 262f4a7db7d17735
 distilled_at_sha: 9ab16c7588f7d32fdb6d509a70bae72309346826
 ---
-> **Prerequisite:** If you haven't already, also read .ai/principles/distilled/backend-ruby.md - it contains foundational rules that apply to all backend work.
-
 <!-- Auto-generated from docs.gitlab.com by scripts/ai/sync_principles.rb — do not edit manually -->
+
+> **Prerequisite:** If you haven't already, also read .ai/principles/distilled/backend-ruby.md - it contains foundational rules that apply to all backend work.
 
 # EE Features Principles
 

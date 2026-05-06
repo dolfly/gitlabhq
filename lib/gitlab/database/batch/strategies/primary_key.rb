@@ -30,16 +30,21 @@ module Gitlab
 
           private
 
-          # rubocop:disable GitlabSecurity/SqlInjection -- no user input
           def create_keyset_iterator(scope, cursor_columns, batch_min_value)
-            tuple_columns = cursor_columns.map { |col| "#{scope.table_name}.#{col}" }.join(', ')
-            tuple_values = batch_min_value.map { |v| connection.quote(v) }.join(', ')
+            arel_table = scope.arel_table
+            cursor_expression = Arel::Nodes::Grouping.new(
+              cursor_columns.map { |column| arel_table[column] }
+            )
+            cursor_values = Arel::Nodes::Grouping.new(
+              cursor_columns.zip(batch_min_value).map do |column, value|
+                Arel::Nodes.build_quoted(value, arel_table[column])
+              end
+            )
 
             Gitlab::Pagination::Keyset::Iterator.new(
-              scope: scope.where("(#{tuple_columns}) >= (#{tuple_values})").order(cursor_columns)
+              scope: scope.where(cursor_expression.gteq(cursor_values)).order(cursor_columns)
             )
           end
-          # rubocop:enable GitlabSecurity/SqlInjection
 
           def apply_scope_to(model_class, job_class, table_name, cursor_columns, job_arguments)
             job_instance = job_class.new(

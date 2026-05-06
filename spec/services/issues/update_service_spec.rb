@@ -786,9 +786,9 @@ RSpec.describe Issues::UpdateService, :mailer, :request_store, feature_category:
       it 'creates system note about confidentiality change' do
         update_issue(confidential: true)
 
-        note = find_note('made the issue confidential')
+        note = find_note('made the item confidential')
 
-        expect(note.note).to eq 'made the issue confidential'
+        expect(note.note).to eq 'made the item confidential'
       end
 
       it 'executes confidential issue hooks' do

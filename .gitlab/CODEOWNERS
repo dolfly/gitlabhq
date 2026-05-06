@@ -141,6 +141,7 @@ yarn.lock @gitlab-org/maintainers/frontend
 /doc-locale/ja-jp/ @gitlab-com/localization/maintainers/tech-docs @gitlab-com/localization/maintainers/japanese
 /argo_translation.yml @gitlab-com/localization/maintainers/tech-docs
 /doc-locale/.markdownlint/ @gitlab-com/localization/maintainers/tech-docs
+/lib/gitlab/i18n.rb @gitlab-com/localization/maintainers/i18n @gitlab-org/maintainers/rails-backend
 
 config/bounded_contexts.yml @fabiopitino @grzesiek @stanhu @cwoolley-gitlab @tkuah
 
@@ -448,13 +449,86 @@ Dangerfile
 /ee/spec/services/software_license_policies/
 /spec/finders/security/license_compliance_jobs_finder_spec.rb
 
-[Secure::Secret Detection] @gitlab-org/secure/secret-detection
-/ee/lib/gitlab/checks/secrets_check.rb
-/ee/spec/lib/gitlab/checks/secrets_check_spec.rb
+[AST:Secret Detection] @gitlab-org/secure/secret-detection
+/ee/lib/gitlab/checks/secret_push_protection/
+/ee/spec/lib/gitlab/checks/secret_push_protection/
 /ee/spec/support/shared_contexts/secrets_check_shared_contexts.rb
 /ee/spec/support/shared_examples/lib/gitlab/secrets_check_shared_examples.rb
-/lib/gitlab/checks/changed_blobs.rb
-/spec/lib/gitlab/checks/changed_blobs.rb
+/ee/app/services/security/configuration/set_secret_push_protection_service.rb
+/ee/app/services/security/configuration/set_project_secret_push_protection_service.rb
+/ee/app/graphql/mutations/security/configuration/set_secret_push_protection.rb
+/ee/spec/services/security/configuration/set_secret_push_protection_service_spec.rb
+/ee/spec/services/security/configuration/set_project_secret_push_protection_service_spec.rb
+/ee/spec/requests/api/graphql/mutations/security/configuration/set_secret_push_protection_spec.rb
+
+^[AST:Secret Detection optional] @gitlab-org/secure/secret-detection
+/ee/app/finders/security/project_security_exclusions_finder.rb
+/ee/app/graphql/mutations/security/ci_configuration/set_group_validity_checks.rb
+/ee/app/graphql/mutations/security/ci_configuration/set_validity_checks.rb
+/ee/app/graphql/mutations/security/configuration/project_security_exclusion_create.rb
+/ee/app/graphql/mutations/security/configuration/project_security_exclusion_delete.rb
+/ee/app/graphql/mutations/security/configuration/project_security_exclusion_update.rb
+/ee/app/graphql/mutations/security/finding/refresh_finding_token_status.rb
+/ee/app/graphql/mutations/security/finding/refresh_security_finding_token_status.rb
+/ee/app/graphql/mutations/vulnerabilities/refresh_vulnerability_finding_token_status.rb
+/ee/app/graphql/resolvers/security/finding_token_status_resolver.rb
+/ee/app/graphql/resolvers/security/project_security_exclusion_resolver.rb
+/ee/app/graphql/resolvers/vulnerabilities/finding_token_status_resolver.rb
+/ee/app/graphql/types/security/exclusion_scanner_enum.rb
+/ee/app/graphql/types/security/exclusion_type_enum.rb
+/ee/app/graphql/types/security/finding_token_status_type.rb
+/ee/app/graphql/types/security/project_security_exclusion_type.rb
+/ee/app/graphql/types/vulnerabilities/finding_token_status_state_enum.rb
+/ee/app/graphql/types/vulnerabilities/finding_token_status_type.rb
+/ee/app/models/security/*_security_exclusion.rb
+/ee/app/models/security/finding_token_status.rb
+/ee/app/models/vulnerabilities/finding_token_status.rb
+/ee/app/policies/security/finding_token_status_policy.rb
+/ee/app/policies/security/project_security_exclusion_policy.rb
+/ee/app/policies/vulnerabilities/finding_token_status_policy.rb
+/ee/app/services/security/configuration/set_group_validity_checks_service.rb
+/ee/app/services/security/configuration/set_project_validity_checks_service.rb
+/ee/app/services/security/configuration/set_validity_checks_service.rb
+/ee/app/services/security/secret_detection/
+/ee/app/workers/security/configuration/set_group_validity_checks_worker.rb
+/ee/app/workers/security/secret_detection/
+/ee/lib/gitlab/metrics/secret_detection/
+/ee/lib/security/secret_detection/
+/ee/spec/factories/security/security_finding_token_statuses.rb
+/ee/spec/finders/security/project_security_exclusions_finder_spec.rb
+/ee/spec/graphql/resolvers/security/finding_token_status_resolver_spec.rb
+/ee/spec/graphql/resolvers/security/project_security_exclusion_resolver_spec.rb
+/ee/spec/graphql/resolvers/vulnerabilities/finding_token_status_resolver_spec.rb
+/ee/spec/graphql/types/security/exclusion_scanner_enum_spec.rb
+/ee/spec/graphql/types/security/exclusion_type_enum_spec.rb
+/ee/spec/graphql/types/security/project_security_exclusion_type_spec.rb
+/ee/spec/graphql/types/vulnerabilities/finding_token_status_type_spec.rb
+/ee/spec/lib/gitlab/metrics/secret_detection/
+/ee/spec/lib/security/secret_detection/
+/ee/spec/models/security/*_security_exclusion_spec.rb
+/ee/spec/models/security/finding_token_status_spec.rb
+/ee/spec/models/vulnerabilities/finding_token_status_spec.rb
+/ee/spec/policies/security/finding_token_status_policy_spec.rb
+/ee/spec/policies/security/project_security_exclusion_policy_spec.rb
+/ee/spec/policies/vulnerabilities/finding_token_status_policy_spec.rb
+/ee/spec/requests/api/graphql/mutations/security/configuration/project_security_exclusion_create_spec.rb
+/ee/spec/requests/api/graphql/mutations/security/configuration/project_security_exclusion_delete_spec.rb
+/ee/spec/requests/api/graphql/mutations/security/configuration/project_security_exclusion_update_spec.rb
+/ee/spec/requests/api/graphql/mutations/security/configuration/set_group_validity_checks_spec.rb
+/ee/spec/requests/api/graphql/mutations/security/configuration/set_validity_checks_spec.rb
+/ee/spec/requests/api/graphql/mutations/security/finding/refresh_finding_token_status_spec.rb
+/ee/spec/requests/api/graphql/mutations/security/finding/refresh_security_finding_token_status_spec.rb
+/ee/spec/requests/api/graphql/mutations/vulnerabilities/refresh_vulnerability_finding_token_status_spec.rb
+/ee/spec/requests/api/graphql/project/security/project_security_exclusion_query_spec.rb
+/ee/spec/requests/api/graphql/project/security/project_security_exclusions_query_spec.rb
+/ee/spec/requests/api/graphql/vulnerabilities/finding_token_status_spec.rb
+/ee/spec/services/security/configuration/set_group_validity_checks_service_spec.rb
+/ee/spec/services/security/configuration/set_project_validity_checks_service_spec.rb
+/ee/spec/services/security/configuration/set_validity_checks_service_spec.rb
+/ee/spec/services/security/secret_detection/
+/ee/spec/support/shared_examples/services/security/secret_detection/
+/ee/spec/workers/security/configuration/set_group_validity_checks_worker_spec.rb
+/ee/spec/workers/security/secret_detection/
 
 ^[Code Owners] @reprazent @kerrizor @garyh @jwoodwardgl
 /ee/lib/gitlab/code_owners.rb

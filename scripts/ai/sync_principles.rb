@@ -168,10 +168,13 @@ class SyncPrinciples
         next
       end
 
-      updated = "#{header}#{updated}" unless updated.start_with?('<!--')
       config = manifest.dig('principles', name)
-      updated = "#{prerequisite_note(name, manifest)}#{updated}" if prerequisite_note(name, manifest)
+      note = prerequisite_note(name, manifest)
+
+      updated = "#{header}#{updated}" unless updated.start_with?('<!-- Auto-generated')
+      updated = updated.sub(/^(<!-- Auto-generated.*-->)\n\n*/, "\\1\n\n#{note}") if note
       updated = "#{updated.rstrip}\n\n#{sources_footer(config)}"
+
       checksum = compute_checksum(config)
       content = <<~CONTENT
         ---
@@ -1018,8 +1021,13 @@ class SyncPrinciples
 
       content = File.read(path)
 
+      # Consume the header line plus any blank lines that follow so we can
+      # insert exactly: header + blank line + note (which already ends with "\n\n").
+      auto_header_pattern = /^(<!-- Auto-generated.*-->)\n\n*/
+
       if content.include?('> **Prerequisite:**')
-        updated = content.sub(/^> \*\*Prerequisite:\*\*.*\n\n/, note)
+        stripped = content.sub(/^> \*\*Prerequisite:\*\*.*\n\n+/, '')
+        updated = stripped.sub(auto_header_pattern, "\\1\n\n#{note}")
         next if updated == content
 
         File.write(path, updated)
@@ -1027,13 +1035,9 @@ class SyncPrinciples
         next
       end
 
-      auto_header = '<!-- Auto-generated'
-      insert_at = content.index(auto_header)
-      next unless insert_at
+      updated = content.sub(auto_header_pattern, "\\1\n\n#{note}")
+      next if updated == content
 
-      insert_at += content[insert_at..].index("\n") + 1
-      updated = content.dup
-      updated.insert(insert_at, "\n#{note}")
       File.write(path, updated)
       puts "  #{name}: injected prerequisite note"
     end

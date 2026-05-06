@@ -2,8 +2,8 @@ PATH
   remote: ../gitlab-rspec
   specs:
     gitlab-rspec (0.1.0)
-      activerecord (>= 6.1, < 8)
-      activesupport (>= 6.1, < 8)
+      activerecord (>= 7, < 9)
+      activesupport (>= 7, < 9)
       gitlab_quality-test_tooling (>= 3.13, < 4)
       rspec (~> 3.0)
       test-prof (~> 1.5)
@@ -12,7 +12,7 @@ PATH
   remote: .
   specs:
     gitlab-rspec_flaky (0.1.0)
-      activesupport (>= 6.1, < 8)
+      activesupport (>= 7, < 9)
       rspec (~> 3.0)
 
 GEM

@@ -160,7 +160,7 @@ To change GitLab Duo Core availability for a top-level group:
 1. Select **Settings** > **GitLab Duo**.
 1. Select **Change configuration**.
 1. Under **GitLab Duo availability**, select an option.
-1. Under **GitLab Duo Core**, select or clear the **Turn on GitLab Duo Agent Platform access** checkbox.
+1. Under **GitLab Duo Core**, select or clear the **Turn on features for GitLab Duo Core** checkbox.
    If you selected **Always off** for GitLab Duo availability, you cannot access
    this setting.
 1. Select **Save changes**.
@@ -179,7 +179,7 @@ To change GitLab Duo Core availability for an instance:
 1. In the left sidebar, select **GitLab Duo**.
 1. Select **Change configuration**.
 1. Under **GitLab Duo availability**, select an option.
-1. Under **GitLab Duo Core**, select or clear the **Turn on GitLab Duo Agent Platform access** checkbox.
+1. Under **GitLab Duo Core**, select or clear the **Turn on features for GitLab Duo Core** checkbox.
    If you selected **Always off** for GitLab Duo availability, you cannot access
    this setting.
 1. Select **Save changes**.

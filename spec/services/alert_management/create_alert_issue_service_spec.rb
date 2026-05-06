@@ -182,7 +182,7 @@ RSpec.describe AlertManagement::CreateAlertIssueService, feature_category: :inci
         end
 
         it 'does not create yet another issue' do
-          expect { execute }.not_to change(Issue, :count)
+          expect { execute }.not_to change { Issue.count }
         end
 
         it 'responds with error' do
