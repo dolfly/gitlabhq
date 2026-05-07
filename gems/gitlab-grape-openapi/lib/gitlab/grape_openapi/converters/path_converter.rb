@@ -45,11 +45,21 @@ module Gitlab
           method = extract_method(route)
           path = normalize_path(route)
 
+          # Hidden routes (declared with `hidden true`) must be skipped before
+          # OperationConverter runs. Otherwise it pollutes the shared schema and
+          # request-body registries with entries that no emitted operation references,
+          # surfacing as `no-unused-components` warnings under `components.schemas`.
+          return true if hidden?(route)
+
           # Grape registers catch-all routes with HTTP method * (matches any method) and
           # paths containing *path (wildcard segments). Neither is valid OpenAPI: * isn't
           # an HTTP method, and *path isn't a valid path segment. These are internal
           # Grape routing artifacts, not actual API endpoints.
           method == '*' || path.include?('*')
+        end
+
+        def hidden?(route)
+          !!route.options.dig(:settings, :description, :hidden)
         end
 
         def normalize_path(route)

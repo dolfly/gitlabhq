@@ -211,6 +211,28 @@ RSpec.describe ProjectCiCdSetting, feature_category: :continuous_integration do
     end
   end
 
+  describe '#pipeline_override_role_privileged?' do
+    let(:project) { build(:project) }
+    let(:setting) { project.ci_cd_settings }
+
+    subject { setting.pipeline_override_role_privileged? }
+
+    before do
+      setting.pipeline_variables_minimum_override_role = role
+    end
+
+    where(:role, :expected) do
+      :owner          | true
+      :no_one_allowed | true
+      :maintainer     | false
+      :developer      | false
+    end
+
+    with_them do
+      it { is_expected.to eq(expected) }
+    end
+  end
+
   describe '.configured_to_delete_old_pipelines' do
     let_it_be(:project) { create(:project, ci_delete_pipelines_in_seconds: 2.weeks.to_i) }
     let_it_be(:other_project) { create(:project, group_runners_enabled: true) }

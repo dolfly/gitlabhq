@@ -49,7 +49,8 @@ Use the AI Catalog to:
 
 Prerequisites:
 
-- You must meet the [prerequisites](_index.md#prerequisites).
+- Meet the [GitLab Duo Agent Platform prerequisites](_index.md#prerequisites).
+- On GitLab Self-Managed, have [GitLab Duo turned on for the instance](turn_on_off.md#for-an-instance).
 - To enable agents and flows from the AI Catalog:
   - In a group, you must have the Maintainer or Owner role.
   - In a project, you must have the Maintainer or Owner role.

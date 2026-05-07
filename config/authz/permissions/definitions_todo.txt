@@ -168,7 +168,6 @@ change_push_rules
 change_reject_non_dco_commits
 change_reject_unsigned_commits
 change_repository_storage
-change_restrict_user_defined_variables
 change_seat_control
 change_share_with_group_lock
 change_visibility_level

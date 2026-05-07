@@ -4952,12 +4952,12 @@ RSpec.describe API::Projects, :aggregate_failures, feature_category: :groups_and
             expect(response).to have_gitlab_http_status(:ok)
           end
 
-          it 'rejects to ci_pipeline_variables_minimum_override_role to owner' do
+          it 'allows setting ci_pipeline_variables_minimum_override_role to owner' do
             project_param = { ci_pipeline_variables_minimum_override_role: 'owner' }
 
             put api("/projects/#{project3.id}", current_user), params: project_param
 
-            expect(response).to have_gitlab_http_status(:bad_request)
+            expect(response).to have_gitlab_http_status(:ok)
           end
         end
 

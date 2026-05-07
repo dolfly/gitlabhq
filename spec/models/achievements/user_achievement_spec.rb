@@ -43,6 +43,14 @@ RSpec.describe Achievements::UserAchievement, type: :model, feature_category: :u
         expect(described_class.shown_on_profile).to contain_exactly(user_achievement, revoked_user_achievement)
       end
     end
+
+    describe '.hidden_on_profile' do
+      subject(:hidden_on_profile) { described_class.hidden_on_profile }
+
+      it 'only returns user achievements which are hidden on profiles' do
+        expect(hidden_on_profile).to contain_exactly(hidden_user_achievement)
+      end
+    end
   end
 
   describe 'validations' do

@@ -2,6 +2,8 @@
 
 module Achievements
   class UserAchievement < ApplicationRecord
+    include FromUnion
+
     belongs_to :achievement, inverse_of: :user_achievements, optional: false
     belongs_to :user, inverse_of: :user_achievements, optional: false
 
@@ -16,6 +18,10 @@ module Achievements
 
     scope :not_revoked, -> { where(revoked_by_user_id: nil) }
     scope :shown_on_profile, -> { where(show_on_profile: true) }
+    scope :hidden_on_profile, -> { where(show_on_profile: false) }
+    scope :for_namespaces, ->(namespace_ids) {
+      joins(:achievement).where(achievements: { namespace_id: namespace_ids })
+    }
     scope :order_by_priority_asc, -> {
       keyset_order = Gitlab::Pagination::Keyset::Order.build([
         Gitlab::Pagination::Keyset::ColumnOrderDefinition.new(

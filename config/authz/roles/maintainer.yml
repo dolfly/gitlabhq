@@ -62,7 +62,6 @@ project:
   - change_push_rules
   - change_reject_non_dco_commits
   - change_reject_unsigned_commits
-  - change_restrict_user_defined_variables
   - create_ai_catalog_agent
   - create_ai_catalog_agent_item_consumer
   - create_ai_catalog_flow
@@ -162,6 +161,7 @@ project:
   - update_cluster
   - update_freeze_period
   - update_pages
+  - update_pipeline_variable_override_setting
   - update_product_analytics_settings
   - update_protected_branch
   - update_protected_tags
@@ -217,6 +217,7 @@ group:
   - provision_cloud_runner
   - provision_gke_runner
   - read_any_audit_event
+  - read_ci_namespace_settings
   - read_deploy_token
   - read_group_all_available_runners
   - read_jobs_statistics

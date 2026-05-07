@@ -354,17 +354,14 @@ RSpec.describe 'ProjectCiCdSettingsUpdate', feature_category: :continuous_integr
           expect(response).to have_gitlab_http_status(:success)
         end
 
-        it 'is not allowed for maintainers', :aggregate_failures do
-          expect { post_graphql_mutation(mutation, current_user: maintainer) }.not_to(
+        it 'is allowed for maintainers', :aggregate_failures do
+          expect { post_graphql_mutation(mutation, current_user: maintainer) }.to(
             change { project.reload.ci_pipeline_variables_minimum_override_role }
+              .from('developer')
+              .to('owner')
           )
 
-          expect(response_errors).to(
-            include(
-              'Changing the ci_pipeline_variables_minimum_override_role to the owner role is not allowed'
-            )
-          )
-
+          expect(response_errors).to be_blank
           expect(response).to have_gitlab_http_status(:success)
         end
       end

@@ -81,8 +81,8 @@ class ProjectPolicy < BasePolicy
   desc "Project is scheduled for deletion"
   condition(:deletion_scheduled, scope: :subject) { project.marked_for_deletion_at.present? }
 
-  desc "Project user pipeline variables minimum override role"
-  condition(:project_pipeline_override_role_owner) { project.ci_pipeline_variables_minimum_override_role == 'owner' }
+  desc "Project pipeline variables minimum override role is in a privileged state"
+  condition(:project_pipeline_override_role_privileged) { project.pipeline_override_role_privileged? }
 
   desc "Project is in the process of being deleted"
   condition(:self_deletion_in_progress) { project.self_deletion_in_progress? }
@@ -343,7 +343,8 @@ class ProjectPolicy < BasePolicy
     enable :update_max_artifacts_size
   end
 
-  rule { project_pipeline_override_role_owner & ~can?(:owner_access) }.prevent :change_restrict_user_defined_variables
+  rule { project_pipeline_override_role_privileged & ~can?(:_update_privileged_pipeline_variable_override_setting) }
+    .prevent :update_pipeline_variable_override_setting
 
   condition(:can_create_fork_in_namespace) do
     can?(:create_project_fork, project.namespace.root_ancestor)

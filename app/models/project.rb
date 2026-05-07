@@ -591,6 +591,7 @@ class Project < ApplicationRecord
     delegate :allow_composite_identities_to_run_pipelines, :allow_composite_identities_to_run_pipelines=
     delegate :group_runners_enabled, :group_runners_enabled=
     delegate :keep_latest_artifact, :keep_latest_artifact=
+    delegate :pipeline_override_role_privileged?
     delegate :restrict_user_defined_variables, :restrict_user_defined_variables=
     delegate :runner_token_expiration_interval, :runner_token_expiration_interval=, :runner_token_expiration_interval_human_readable, :runner_token_expiration_interval_human_readable=
     delegate :job_token_scope_enabled, :job_token_scope_enabled=, prefix: :ci_outbound

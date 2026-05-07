@@ -18,6 +18,8 @@ class ProjectCiCdSetting < ApplicationRecord
       maintainer: MAINTAINER_ROLE,
       owner: OWNER_ROLE }.freeze
 
+  PRIVILEGED_PIPELINE_VARIABLES_ROLES = %w[owner no_one_allowed].freeze
+
   ALLOWED_SUB_CLAIM_COMPONENTS = %w[
     project_path
     ref_type
@@ -100,6 +102,10 @@ class ProjectCiCdSetting < ApplicationRecord
   def keep_latest_artifacts_available?
     # The project level feature can only be enabled when the feature is enabled instance wide
     Gitlab::CurrentSettings.current_application_settings.keep_latest_artifact? && keep_latest_artifact?
+  end
+
+  def pipeline_override_role_privileged?
+    PRIVILEGED_PIPELINE_VARIABLES_ROLES.include?(pipeline_variables_minimum_override_role)
   end
 
   def override_pipeline_variables_allowed?(role_access_level, user)

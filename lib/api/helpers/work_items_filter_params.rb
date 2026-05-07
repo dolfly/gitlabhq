@@ -3,10 +3,11 @@
 module API
   module Helpers
     class WorkItemsFilterParams
-      attr_reader :params
+      attr_reader :params, :resource_parent
 
-      def initialize(params)
+      def initialize(params, resource_parent: nil)
         @params = params
+        @resource_parent = resource_parent
       end
 
       def transform

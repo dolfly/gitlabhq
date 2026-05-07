@@ -1163,7 +1163,7 @@ RSpec.describe ProjectPolicy, feature_category: :system_access do
     end
   end
 
-  describe 'change_restrict_user_defined_variables' do
+  describe 'update_pipeline_variable_override_setting' do
     using RSpec::Parameterized::TableSyntax
 
     where(:user_role, :minimum_role, :allowed) do
@@ -1173,7 +1173,8 @@ RSpec.describe ProjectPolicy, feature_category: :system_access do
       :developer  | :developer      | false
       :maintainer | :developer      | true
       :maintainer | :maintainer     | true
-      :maintainer | :no_one_allowed | true
+      :maintainer | :no_one_allowed | false
+      :owner      | :no_one_allowed | true
       :owner      | :owner          | true
       :developer  | :owner          | false
       :maintainer | :owner          | false
@@ -1188,11 +1189,11 @@ RSpec.describe ProjectPolicy, feature_category: :system_access do
         ci_cd_settings.save!
       end
 
-      it 'allows/disallows change_restrict_user_defined_variables variables based on project defined minimum role' do
+      it 'allows/disallows update_pipeline_variable_override_setting based on project defined minimum role' do
         if allowed
-          is_expected.to be_allowed(:change_restrict_user_defined_variables)
+          is_expected.to be_allowed(:update_pipeline_variable_override_setting)
         else
-          is_expected.to be_disallowed(:change_restrict_user_defined_variables)
+          is_expected.to be_disallowed(:update_pipeline_variable_override_setting)
         end
       end
     end

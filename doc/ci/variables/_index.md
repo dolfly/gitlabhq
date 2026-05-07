@@ -570,8 +570,9 @@ To limit the use of pipeline variables to only the Maintainer role and higher:
 - Under **Minimum role to use pipeline variables**, select one of:
   - `no_one_allowed`: No pipelines can run with pipeline variables.
     Default for new projects in new namespaces on GitLab.com.
+    Once the setting is at this value, only the Owner role can change it.
   - `owner`: Only users with the Owner role can run pipelines with pipeline variables.
-    You must have the Owner role for the project to change the setting to this value.
+    Once the setting is at this value, only the Owner role can change it.
   - `maintainer`: Only users with the Maintainer or Owner role can run pipelines with pipeline variables.
     Default when not specified on GitLab Self-Managed and GitLab Dedicated.
   - `developer`: Only users with the Developer, Maintainer, or Owner role can run pipelines with pipeline variables.

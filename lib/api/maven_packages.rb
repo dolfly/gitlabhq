@@ -27,6 +27,9 @@ module API
     helpers ::API::Helpers::Packages::Maven::BasicAuthHelpers
 
     helpers do
+      # overridden in EE
+      def enforce_dependency_firewall_on_upload!(_package_name, _version); end
+
       def path_exists?(path)
         return false if path.blank?
 
@@ -241,8 +244,10 @@ module API
       put ':id/packages/maven/*path/:file_name/authorize', requirements: MAVEN_ENDPOINT_REQUIREMENTS do
         authorize_upload!
 
-        package_name = params[:path].rpartition('/').first
+        package_name, _, version = params[:path].rpartition('/')
         protect_package!(package_name, :maven)
+
+        enforce_dependency_firewall_on_upload!(package_name, version)
 
         status 200
         content_type Gitlab::Workhorse::INTERNAL_API_CONTENT_TYPE

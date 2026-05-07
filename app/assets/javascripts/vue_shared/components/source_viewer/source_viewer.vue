@@ -176,7 +176,7 @@ export default {
       if (this.renderedChunks.includes(chunkIndex)) return;
 
       if (chunkIndex > 0 && handleOverlappingChunk) {
-        // request the blame information for overlapping chunk incase it is visible in the DOM
+        // request the blame information for overlapping chunk in case it is visible in the DOM
         this.handleChunkAppear(chunkIndex - 1, false);
       }
 

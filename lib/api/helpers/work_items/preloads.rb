@@ -89,7 +89,7 @@ module API
                           { group_id: resource_parent.id }
                         end
 
-          transformer = ::API::Helpers::WorkItemsFilterParams.new(params)
+          transformer = ::API::Helpers::WorkItemsFilterParams.new(params, resource_parent: resource_parent)
           filter_params = transformer.transform
 
           base_params.merge(filter_params).merge(sort: "#{params[:order_by]}_#{params[:sort]}")
