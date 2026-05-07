@@ -31,7 +31,7 @@
       = render ::Layouts::StaticPanelComponent.new(html_options: { class: @content_wrapper_class },
           container_options: { class: "#{container_class unless @no_container} #{@content_class}" },
           main_options: page_itemtype,
-          page_breadcrumbs_in_top_bar_feature_flag: Feature.enabled?(:page_breadcrumbs_in_top_bar, current_user)) do |c|
+          page_breadcrumbs_in_top_bar_feature_flag: !@force_show_panel_header && Feature.enabled?(:page_breadcrumbs_in_top_bar, current_user)) do |c|
 
         - c.with_broadcasts do
           = dispensable_render_if_exists "shared/token_expiration_banner"
@@ -39,8 +39,9 @@
 
         - c.with_header do
           = render "layouts/nav/breadcrumbs/breadcrumbs"
-          = render "layouts/nav/work_items/feedback_popup"
-          = yield(:top_bar_actions) if content_for?(:top_bar_actions)
+
+        - c.with_actions do
+          = yield :static_panel_actions
 
         - c.with_before_body do
           = render 'layouts/alerts', alert_class: alert_class, context: context

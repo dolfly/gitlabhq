@@ -48,6 +48,21 @@
   @apply gl-ml-auto;
   @apply gl-flex;
   @apply gl-gap-3;
+  @apply gl-items-center;
+}
+
+.panel-header-inner-actions-portal-target {
+  display: none;
+
+  &:has(> .vue-portal-target) {
+    display: block;
+  }
+
+  > .vue-portal-target {
+    @apply gl-flex;
+    @apply gl-gap-3;
+    @apply gl-items-center;
+  }
 }
 
 // Only display breadcrumb-free panel-header when it has action buttons or feedback badges

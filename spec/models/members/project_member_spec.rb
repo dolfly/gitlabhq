@@ -402,7 +402,7 @@ RSpec.describe ProjectMember, feature_category: :groups_and_projects do
       end
 
       it 'changes access level' do
-        expect { action }.to change { user.can?(:developer_access, project) }.from(false).to(true)
+        expect { action }.to change { user.can?(:push_code, project) }.from(false).to(true)
       end
 
       it_behaves_like 'calls AuthorizedProjectUpdate::ProjectRecalculatePerUserWorker inline to recalculate authorizations'

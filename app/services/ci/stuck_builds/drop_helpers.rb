@@ -11,12 +11,6 @@ module Ci
         end
       end
 
-      def drop_incomplete(builds, failure_reason:)
-        fetch(builds) do |build|
-          drop_incomplete_build :outdated, build, failure_reason
-        end
-      end
-
       def drop_stuck_from_queue(builds_queue, failure_reason:)
         fetch_from_queue(builds_queue) do |build|
           next unless build.stuck?
@@ -58,17 +52,6 @@ module Ci
       # rubocop: enable CodeReuse/ActiveRecord
 
       def drop_build(type, build, reason)
-        log_dropping_message(type, build, reason)
-        Gitlab::OptimisticLocking.retry_lock(build, 3, name: 'stuck_ci_jobs_worker_drop_build') do |b|
-          b.drop!(reason)
-        end
-      rescue StandardError => ex
-        build.doom!
-
-        track_exception_for_build(ex, build)
-      end
-
-      def drop_incomplete_build(type, build, reason)
         log_dropping_message(type, build, reason)
         Gitlab::OptimisticLocking.retry_lock(build, 3, name: 'stuck_ci_jobs_worker_drop_build') do |b|
           # retry_lock resets the build on retry. Builds only lock on status, so

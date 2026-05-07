@@ -49,6 +49,22 @@ RSpec.describe Layouts::StaticPanelComponent, feature_category: :design_system d
     end
   end
 
+  describe 'root element' do
+    it 'has the js-paneled-view class' do
+      render_inline component
+
+      expect(page).to have_css('.paneled-view.js-paneled-view')
+    end
+  end
+
+  describe 'actions portal target' do
+    it 'is always rendered' do
+      render_inline component
+
+      expect(page).to have_css('.js-panel-actions-portal-target')
+    end
+  end
+
   describe 'slots' do
     it 'renders broadcasts slot inside .broadcast-wrapper' do
       render_inline component do |c|
@@ -64,6 +80,14 @@ RSpec.describe Layouts::StaticPanelComponent, feature_category: :design_system d
       end
 
       expect(page).to have_css('.panel-header-inner', text: 'Header content')
+    end
+
+    it 'renders actions slot inside .panel-header-inner-actions' do
+      render_inline component do |c|
+        c.with_actions { tag.div(class: 'test-action') }
+      end
+
+      expect(page).to have_css('.panel-header-inner-actions .test-action')
     end
 
     it 'renders before_body slot before the container' do

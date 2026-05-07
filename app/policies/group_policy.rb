@@ -166,8 +166,6 @@ class GroupPolicy < Namespaces::GroupProjectNamespaceSharedPolicy
   end
 
   rule { developer }.policy do
-    enable :developer_access
-
     enable(*Authz::Role.get(:developer).direct_permissions(:group))
   end
 

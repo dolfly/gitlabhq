@@ -20,6 +20,7 @@ module Layouts
 
     renders_one :broadcasts
     renders_one :header
+    renders_one :actions
     renders_one :before_body
     renders_one :body
     renders_one :after_body

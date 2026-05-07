@@ -1388,6 +1388,7 @@ four standard [pagination arguments](#pagination-arguments):
 | <a id="query-groups-search"></a>`search` | [`String`](#string) | Search query for group name or group full path. |
 | <a id="query-groups-sort"></a>`sort` | [`String`](#string) | Sort order of results. Format: `<field_name>_<sort_direction>`, for example: `id_desc` or `name_asc`. |
 | <a id="query-groups-toplevelonly"></a>`topLevelOnly` | [`Boolean`](#boolean) | Only include top-level groups. |
+| <a id="query-groups-withknowledgegraphenabled"></a>`withKnowledgeGraphEnabled` {{< icon name="warning-solid" >}} | [`Boolean`](#boolean) | **Introduced** in GitLab 18.10. **Status**: Experiment. Return only groups with Knowledge Graph enabled. |
 
 ### `Query.instanceExternalAuditEventDestinations`
 
@@ -45611,6 +45612,7 @@ four standard [pagination arguments](#pagination-arguments):
 | <a id="organization-groups-search"></a>`search` | [`String`](#string) | Search query for group name or group full path. |
 | <a id="organization-groups-sort"></a>`sort` | [`String`](#string) | Sort order of results. Format: `<field_name>_<sort_direction>`, for example: `id_desc` or `name_asc`. |
 | <a id="organization-groups-toplevelonly"></a>`topLevelOnly` | [`Boolean`](#boolean) | Only include top-level groups. |
+| <a id="organization-groups-withknowledgegraphenabled"></a>`withKnowledgeGraphEnabled` {{< icon name="warning-solid" >}} | [`Boolean`](#boolean) | **Introduced** in GitLab 18.10. **Status**: Experiment. Return only groups with Knowledge Graph enabled. |
 
 ##### `Organization.projects`
 

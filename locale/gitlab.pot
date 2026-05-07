@@ -72716,6 +72716,9 @@ msgstr ""
 msgid "Sunday"
 msgstr ""
 
+msgid "SuperSonics|%{plan} with GitLab Credits"
+msgstr ""
+
 msgid "SuperSonics|Activate subscription"
 msgstr ""
 

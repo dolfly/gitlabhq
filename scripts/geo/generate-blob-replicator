@@ -705,6 +705,20 @@ module Geo
       upload_partition ? "::Geo::#{replicable_name_camel}" : "::#{model_class}"
     end
 
+    # Upload partition tables only have a `created_at` column (no `updated_at`),
+    # so upload-partition registries override `model_updated_last` to avoid
+    # `oldest_unsynced_time` raising PG::UndefinedColumn on `MIN(updated_at)`.
+    def model_updated_last_override
+      return '' unless upload_partition
+
+      <<-RUBY
+
+    def self.model_updated_last
+      :created_at
+    end
+      RUBY
+    end
+
     def generate_registry_model
       write_file("ee/app/models/geo/#{replicable_name}_registry.rb", <<~RUBY)
         # frozen_string_literal: true
@@ -723,7 +737,7 @@ module Geo
             def self.model_foreign_key
               :#{foreign_key_name}
             end
-          end
+        #{model_updated_last_override}  end
         end
       RUBY
     end
@@ -1681,7 +1695,8 @@ module Geo
         "#{p}_verified_count",
         "#{p}_verification_failed_count",
         "#{p}_synced_in_percentage",
-        "#{p}_verified_in_percentage"
+        "#{p}_verified_in_percentage",
+        "#{p}_oldest_unsynced_time"
       ]
     end
 
@@ -1692,6 +1707,14 @@ module Geo
                 "integer",
                 "null"
               ]
+            }
+      JSON
+    end
+
+    def int_property(name)
+      <<~JSON.chomp
+            "#{name}": {
+              "type": "integer"
             }
       JSON
     end
@@ -1719,7 +1742,8 @@ module Geo
         nullable_int_property("#{p}_verified_count"),
         nullable_int_property("#{p}_verification_failed_count"),
         string_property("#{p}_synced_in_percentage"),
-        string_property("#{p}_verified_in_percentage")
+        string_property("#{p}_verified_in_percentage"),
+        int_property("#{p}_oldest_unsynced_time")
       ]
 
       properties.join(",\n")
@@ -1780,7 +1804,8 @@ module Geo
         ["#{p}_verified_count", 'null'],
         ["#{p}_verification_failed_count", 'null'],
         ["#{p}_synced_in_percentage", '"0.00%"'],
-        ["#{p}_verified_in_percentage", '"0.00%"']
+        ["#{p}_verified_in_percentage", '"0.00%"'],
+        ["#{p}_oldest_unsynced_time", 'null']
       ]
 
       fields.map { |name, val| "#{indent}\"#{name}\": #{val}" }.join(",\n") + ","
@@ -1836,7 +1861,8 @@ module Geo
         metric_row("geo_#{p}_registry",                m, "Number of #{h} in the registry"),
         metric_row("geo_#{p}_verification_total",      m, "Number of #{h} to attempt to verify on secondary"),
         metric_row("geo_#{p}_verified",                m, "Number of #{h} successfully verified on secondary"),
-        metric_row("geo_#{p}_verification_failed",     m, "Number of #{h} that failed verification on secondary")
+        metric_row("geo_#{p}_verification_failed",     m, "Number of #{h} that failed verification on secondary"),
+        metric_row("geo_#{p}_oldest_unsynced_time",    m, "Timestamp of the oldest unsynced #{h} on secondary")
       ]
 
       rows.join("\n")

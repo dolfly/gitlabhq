@@ -18,20 +18,32 @@ export default {
       required: false,
       default: null,
     },
+    /**
+     * URL for the maximized panel. When set to a truthy value, the maximize button is rendered.
+     */
+    maximizeUrl: {
+      type: String,
+      required: false,
+      default: null,
+    },
   },
-  emits: ['close'],
+  emits: ['close', 'maximize'],
 };
 </script>
 
 <template>
-  <div class="paneled-view contextual-panel !gl-w-full">
+  <div class="paneled-view js-paneled-view contextual-panel !gl-w-full">
     <div class="panel-header">
       <div class="panel-header-inner">
         <slot name="header">
           <span class="panel-header-inner-text">{{ header }}</span>
         </slot>
 
-        <panel-actions @close="$emit('close')">
+        <panel-actions
+          :maximize-url="maximizeUrl"
+          @close="$emit('close')"
+          @maximize="$emit('maximize', $event)"
+        >
           <slot name="actions"></slot>
         </panel-actions>
       </div>

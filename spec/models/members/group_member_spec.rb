@@ -361,9 +361,9 @@ RSpec.describe GroupMember, feature_category: :groups_and_projects do
       let(:action) { group.members.find_by(user: user).update!(access_level: Gitlab::Access::DEVELOPER) }
 
       it 'changes access level' do
-        expect { action }.to change { user.can?(:developer_access, project_a) }.from(false).to(true)
-          .and change { user.can?(:developer_access, project_b) }.from(false).to(true)
-          .and change { user.can?(:developer_access, project_c) }.from(false).to(true)
+        expect { action }.to change { user.can?(:push_code, project_a) }.from(false).to(true)
+          .and change { user.can?(:push_code, project_b) }.from(false).to(true)
+          .and change { user.can?(:push_code, project_c) }.from(false).to(true)
       end
 
       it_behaves_like 'calls AuthorizedProjectsWorker inline to recalculate authorizations'
