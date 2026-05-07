@@ -514,15 +514,14 @@ RSpec.shared_examples 'graphql issue list request spec' do
       include_examples 'N+1 query check'
     end
 
-    context 'when requesting `closed_as_duplicate_of`',
-      quarantine: 'https://gitlab.com/gitlab-org/gitlab/-/issues/448489' do
+    context 'when requesting `closed_as_duplicate_of`' do
       let(:requested_fields) { 'closedAsDuplicateOf { id }' }
-      let(:issue_a_dup) { create(:issue, project: issue_a.project) }
-      let(:issue_b_dup) { create(:issue, project: issue_b.project) }
+      let_it_be(:issue_a_dup) { create(:issue, project: issue_a.project) }
+      let_it_be(:issue_b_dup) { create(:issue, project: issue_b.project) }
 
       before do
-        issue_a.update!(duplicated_to_id: issue_a_dup)
-        issue_b.update!(duplicated_to_id: issue_a_dup)
+        issue_a.update!(duplicated_to_id: issue_a_dup.id)
+        issue_b.update!(duplicated_to_id: issue_b_dup.id)
       end
 
       include_examples 'N+1 query check'

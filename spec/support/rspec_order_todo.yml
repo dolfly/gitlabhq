@@ -2475,7 +2475,6 @@
 - './spec/features/admin/admin_sees_background_migrations_spec.rb'
 - './spec/features/admin/admin_sees_projects_statistics_spec.rb'
 - './spec/features/admin/admin_sees_project_statistics_spec.rb'
-- './spec/features/admin/admin_settings_spec.rb'
 - './spec/features/admin/admin_system_info_spec.rb'
 - './spec/features/admin/admin_users_impersonation_tokens_spec.rb'
 - './spec/features/admin/admin_users_spec.rb'

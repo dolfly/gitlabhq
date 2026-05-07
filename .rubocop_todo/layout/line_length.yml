@@ -2199,7 +2199,6 @@ Layout/LineLength:
     - 'spec/features/admin/admin_mode/login_spec.rb'
     - 'spec/features/admin/admin_sees_background_migrations_spec.rb'
     - 'spec/features/admin/admin_sees_project_statistics_spec.rb'
-    - 'spec/features/admin/admin_settings_spec.rb'
     - 'spec/features/alert_management/user_filters_alerts_by_status_spec.rb'
     - 'spec/features/alert_management/user_updates_alert_status_spec.rb'
     - 'spec/features/alert_management_spec.rb'

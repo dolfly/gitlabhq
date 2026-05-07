@@ -502,7 +502,6 @@ RSpec/BeEq:
     - 'spec/controllers/users/terms_controller_spec.rb'
     - 'spec/db/production/settings_spec.rb'
     - 'spec/features/admin/admin_mode/login_spec.rb'
-    - 'spec/features/admin/admin_settings_spec.rb'
     - 'spec/features/admin/users/users_spec.rb'
     - 'spec/features/file_uploads/user_avatar_spec.rb'
     - 'spec/features/merge_request/batch_comments_spec.rb'

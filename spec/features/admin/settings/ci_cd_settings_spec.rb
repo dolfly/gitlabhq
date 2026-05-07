@@ -141,7 +141,7 @@ RSpec.describe 'Admin updates CI/CD settings', :request_store, :enable_admin_mod
     end
   end
 
-  context 'for Container Registry' do
+  context 'for Container Registry', feature_category: :container_registry do
     let(:client_support) { true }
     let(:settings_titles) do
       {

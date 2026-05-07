@@ -44,10 +44,10 @@ export default {
       const timeago = getTimeago();
 
       if (this.timeDifference >= -1 && this.timeDifference < 7) {
-        return `${timeago.format(this.issueDueDate)} (${this.standardDateFormat})`;
+        return `${timeago.format(this.issueDueDateTime)} (${this.standardDateFormat})`;
       }
 
-      return timeago.format(this.issueDueDate);
+      return timeago.format(this.issueDueDateTime);
     },
     body() {
       if (this.timeDifference === 0) {
@@ -70,6 +70,11 @@ export default {
     },
     issueDueDate() {
       return newDate(this.date);
+    },
+    issueDueDateTime() {
+      const dueDateTime = newDate(this.issueDueDate);
+      dueDateTime.setHours(23, 59, 59, 999);
+      return dueDateTime;
     },
     timeDifference() {
       const today = new Date();

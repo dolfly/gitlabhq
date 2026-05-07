@@ -3502,9 +3502,6 @@ msgstr ""
 msgid "AICatalog|must belong to this project's top-level group"
 msgstr ""
 
-msgid "AICatalog|must have at least one node"
-msgstr ""
-
 msgid "AICatalog|unable to validate definition"
 msgstr ""
 
@@ -28255,6 +28252,9 @@ msgid "Edit description"
 msgstr ""
 
 msgid "Edit diagram URL and alt text"
+msgstr ""
+
+msgid "Edit embed URL and title"
 msgstr ""
 
 msgid "Edit environment"

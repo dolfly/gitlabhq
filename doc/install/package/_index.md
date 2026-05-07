@@ -79,7 +79,6 @@ We aim to provide at least 6 months' notice before discontinuing support for any
 | [Red Hat Enterprise Linux 8](almalinux.md)          | GitLab CE / GitLab EE 12.8.1   | `x86_64`, `arm64` <sup>1</sup>   | May 2029             | GitLab CE / GitLab EE 22.0.0  | [Red Hat Enterprise Linux details](https://access.redhat.com/support/policy/updates/errata/#Life_Cycle_Dates) |
 | [Red Hat Enterprise Linux 9](almalinux.md)          | GitLab CE / GitLab EE 16.0.0   | `x86_64`, `arm64` <sup>1</sup>   | May 2032             | GitLab CE / GitLab EE 25.0.0  | [Red Hat Enterprise Linux details](https://access.redhat.com/support/policy/updates/errata/#Life_Cycle_Dates) |
 | [Red Hat Enterprise Linux 10](almalinux.md)          | GitLab CE / GitLab EE 18.6.0   | `x86_64`, `arm64` <sup>1</sup>   | May 2035             | GitLab CE / GitLab EE 28.0.0  | [Red Hat Enterprise Linux details](https://access.redhat.com/support/policy/updates/errata/#Life_Cycle_Dates) |
-| [Ubuntu 20.04](ubuntu.md)                           | GitLab CE / GitLab EE 13.2.0   | `amd64`, `arm64` <sup>1</sup>    | April 2025           | GitLab CE / GitLab EE 18.8.0  | [Ubuntu details](https://wiki.ubuntu.com/Releases)                                                            |
 | [Ubuntu 22.04](ubuntu.md)                           | GitLab CE / GitLab EE 15.5.0   | `amd64`, `arm64` <sup>1</sup>    | April 2027           | GitLab CE / GitLab EE 19.11.0 | [Ubuntu details](https://wiki.ubuntu.com/Releases). FIPS packages were added in GitLab 18.4. Before upgrading from Ubuntu 20.04, view the [upgrade notes](#ubuntu-2204-fips). |
 | [Ubuntu 24.04](ubuntu.md)                           | GitLab CE / GitLab EE 17.1.0   | `amd64`, `arm64` <sup>1</sup>    | April 2029           | GitLab CE / GitLab EE 21.11.0 | [Ubuntu details](https://wiki.ubuntu.com/Releases)                                                            |
 
@@ -134,6 +133,7 @@ You can find the list of deprecated operating systems and the final GitLab relea
 | Ubuntu 14.04     | [April 2019](https://ubuntu.com/info/release-end-of-life)                           | GitLab CE / GitLab EE 11.10 |
 | Ubuntu 16.04     | [April 2021](https://ubuntu.com/info/release-end-of-life)                           | GitLab CE / GitLab EE 13.12 |
 | Ubuntu 18.04     | [June 2023](https://ubuntu.com/info/release-end-of-life)                            | GitLab CE / GitLab EE 16.11 |
+| Ubuntu 20.04     | [May 2025](https://ubuntu.com/info/release-end-of-life)                            | GitLab CE / GitLab EE 18.11 |
 
 ### Raspberry Pi OS (32-bit - Raspbian)
 

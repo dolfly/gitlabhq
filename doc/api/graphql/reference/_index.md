@@ -3180,7 +3180,6 @@ Input type: `AiCatalogFlowCreateInput`
 | <a id="mutation-aicatalogflowcreate-projectid"></a>`projectId` | [`ProjectID!`](#projectid) | Project for the flow. |
 | <a id="mutation-aicatalogflowcreate-public"></a>`public` | [`Boolean!`](#boolean) | Whether the flow is publicly visible in the catalog. |
 | <a id="mutation-aicatalogflowcreate-release"></a>`release` | [`Boolean`](#boolean) | Whether to release the latest version of the flow. |
-| <a id="mutation-aicatalogflowcreate-steps"></a>`steps` | [`[AiCatalogFlowStepsInput!]`](#aicatalogflowstepsinput) | Steps for the flow. |
 
 #### Fields
 
@@ -3235,7 +3234,6 @@ Input type: `AiCatalogFlowUpdateInput`
 | <a id="mutation-aicatalogflowupdate-name"></a>`name` | [`String`](#string) | Name for the flow. |
 | <a id="mutation-aicatalogflowupdate-public"></a>`public` | [`Boolean`](#boolean) | Whether the flow is publicly visible in the catalog. |
 | <a id="mutation-aicatalogflowupdate-release"></a>`release` | [`Boolean`](#boolean) | Whether to release the latest version of the flow. |
-| <a id="mutation-aicatalogflowupdate-steps"></a>`steps` | [`[AiCatalogFlowStepsInput!]`](#aicatalogflowstepsinput) | Steps for the flow. |
 | <a id="mutation-aicatalogflowupdate-versionbump"></a>`versionBump` | [`AiCatalogVersionBump`](#aicatalogversionbump) | Bump version, calculated from the last released version name. |
 
 #### Fields
@@ -18314,29 +18312,6 @@ The edge type for [`AiCatalogCustomAndFoundationalItem`](#aicatalogcustomandfoun
 | <a id="aicatalogcustomandfoundationalitemedge-cursor"></a>`cursor` | [`String!`](#string) | A cursor for use in pagination. |
 | <a id="aicatalogcustomandfoundationalitemedge-node"></a>`node` | [`AiCatalogCustomAndFoundationalItem`](#aicatalogcustomandfoundationalitem) | The item at the end of the edge. |
 
-#### `AiCatalogFlowStepsConnection`
-
-The connection type for [`AiCatalogFlowSteps`](#aicatalogflowsteps).
-
-##### Fields
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| <a id="aicatalogflowstepsconnection-edges"></a>`edges` | [`[AiCatalogFlowStepsEdge]`](#aicatalogflowstepsedge) | A list of edges. |
-| <a id="aicatalogflowstepsconnection-nodes"></a>`nodes` | [`[AiCatalogFlowSteps]`](#aicatalogflowsteps) | A list of nodes. |
-| <a id="aicatalogflowstepsconnection-pageinfo"></a>`pageInfo` | [`PageInfo!`](#pageinfo) | Information to aid in pagination. |
-
-#### `AiCatalogFlowStepsEdge`
-
-The edge type for [`AiCatalogFlowSteps`](#aicatalogflowsteps).
-
-##### Fields
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| <a id="aicatalogflowstepsedge-cursor"></a>`cursor` | [`String!`](#string) | A cursor for use in pagination. |
-| <a id="aicatalogflowstepsedge-node"></a>`node` | [`AiCatalogFlowSteps`](#aicatalogflowsteps) | The item at the end of the edge. |
-
 #### `AiCatalogItemConnection`
 
 The connection type for [`AiCatalogItem`](#aicatalogitem).
@@ -29036,15 +29011,6 @@ Returns [`AiCatalogItemVersion`](#aicatalogitemversion).
 | ---- | ---- | ----------- |
 | <a id="aicatalogflow-latestversion-released"></a>`released` | [`Boolean`](#boolean) | Return the latest released version. |
 
-### `AiCatalogFlowSteps`
-
-#### Fields
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| <a id="aicatalogflowsteps-agent"></a>`agent` | [`AiCatalogAgent`](#aicatalogagent) | Agent used. |
-| <a id="aicatalogflowsteps-pinnedversionprefix"></a>`pinnedVersionPrefix` | [`String`](#string) | Major version, minor version, or patch the agent is pinned to. |
-
 ### `AiCatalogFlowVersion`
 
 An AI catalog flow version.
@@ -29061,7 +29027,6 @@ An AI catalog flow version.
 | <a id="aicatalogflowversion-item"></a>`item` | [`AiCatalogItem!`](#aicatalogitem) | Item the version belongs to. |
 | <a id="aicatalogflowversion-released"></a>`released` | [`Boolean!`](#boolean) | Indicates the item version is released. |
 | <a id="aicatalogflowversion-releasedat"></a>`releasedAt` | [`Time`](#time) | Timestamp of when the item version was released. |
-| <a id="aicatalogflowversion-steps"></a>`steps` | [`AiCatalogFlowStepsConnection`](#aicatalogflowstepsconnection) | Steps of the flow. (see [Connections](#connections)) |
 | <a id="aicatalogflowversion-updatedat"></a>`updatedAt` | [`Time!`](#time) | Timestamp of when the item version was updated. |
 | <a id="aicatalogflowversion-versionname"></a>`versionName` | [`String`](#string) | Version name of the item version. |
 
@@ -65257,15 +65222,6 @@ see the associated mutation type above.
 | <a id="aiagenticchatinput-currentfile"></a>`currentFile` | [`AiCurrentFileInput`](#aicurrentfileinput) | Information about currently selected text which can be passed for additional context. |
 | <a id="aiagenticchatinput-namespaceid"></a>`namespaceId` | [`NamespaceID`](#namespaceid) | Global ID of the namespace the user is acting on. |
 | <a id="aiagenticchatinput-resourceid"></a>`resourceId` | [`AiModelID!`](#aimodelid) | Global ID of the resource to mutate. |
-
-### `AiCatalogFlowStepsInput`
-
-#### Arguments
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| <a id="aicatalogflowstepsinput-agentid"></a>`agentId` | [`AiCatalogItemID!`](#aicatalogitemid) | Agent to use. |
-| <a id="aicatalogflowstepsinput-pinnedversionprefix"></a>`pinnedVersionPrefix` | [`String`](#string) | Major version, minor version, or patch to pin the agent to. |
 
 ### `AiChatInput`
 
