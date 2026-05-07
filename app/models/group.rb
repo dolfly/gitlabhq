@@ -1179,12 +1179,12 @@ class Group < Namespace
     !feature_flag_enabled_for_self_or_ancestor?(:work_item_legacy_url, type: :gitlab_com_derisk)
   end
 
-  # overriden in EE
+  # overridden in EE
   def has_active_hooks?(hooks_scope = :push_hooks)
     false
   end
 
-  # overriden in EE
+  # overridden in EE
   def enterprise_user_settings_available?(user = nil)
     false
   end

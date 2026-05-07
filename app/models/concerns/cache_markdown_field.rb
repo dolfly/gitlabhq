@@ -171,7 +171,7 @@ module CacheMarkdownField
     true
   end
 
-  # Overriden on objects that needs to filter
+  # Overridden on objects that needs to filter
   # mentioned users that cannot read them, for example,
   # guest users that are referenced on a confidential note.
   def mentioned_filtered_user_ids_for(refs)

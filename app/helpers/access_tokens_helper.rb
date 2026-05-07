@@ -62,7 +62,8 @@ module AccessTokensHelper
         legacy_new: legacy_new_user_settings_personal_access_tokens_path,
         revoke: expose_path(api_v4_personal_access_tokens_path),
         rotate: expose_path(api_v4_personal_access_tokens_path),
-        show: "#{expose_path(api_v4_personal_access_tokens_path)}?user_id=:id"
+        show: "#{expose_path(api_v4_personal_access_tokens_path)}?user_id=:id",
+        granular_tokens_enforced: granular_tokens_enforced?(user).to_s
       }
     }
   end
@@ -88,6 +89,12 @@ module AccessTokensHelper
     return unless Gitlab::CurrentSettings.require_personal_access_token_expiry?
 
     ::PersonalAccessToken.max_expiration_lifetime_in_days
+  end
+
+  def granular_tokens_enforced?(user)
+    return false unless ::Feature.enabled?(:granular_personal_access_tokens, user)
+
+    Gitlab::CurrentSettings.granular_tokens_enforced?
   end
 end
 

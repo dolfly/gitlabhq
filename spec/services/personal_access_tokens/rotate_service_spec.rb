@@ -254,5 +254,55 @@ RSpec.describe PersonalAccessTokens::RotateService, feature_category: :system_ac
         end
       end
     end
+
+    describe 'granular_tokens_enforced?' do
+      context 'when `granular_personal_access_tokens` feature flag is disabled' do
+        before do
+          stub_feature_flags(granular_personal_access_tokens: false)
+        end
+
+        it_behaves_like 'rotates token successfully'
+      end
+
+      context 'when `granular_personal_access_tokens` feature flag is enabled' do
+        before do
+          stub_feature_flags(granular_personal_access_tokens: token.user)
+        end
+
+        context 'when granular tokens are not enforced' do
+          before do
+            allow(Gitlab::CurrentSettings).to receive(:granular_tokens_enforced?).and_return(false)
+          end
+
+          it_behaves_like 'rotates token successfully'
+        end
+
+        context 'when granular tokens are enforced' do
+          before do
+            allow(Gitlab::CurrentSettings).to receive(:granular_tokens_enforced?).and_return(true)
+          end
+
+          context 'when token is a legacy token' do
+            it 'returns an error' do
+              expect(response).to be_error
+              expect(response.message).to eq(
+                s_('AccessTokens|Rotation of legacy personal access tokens is disabled. ' \
+                  'Use a fine-grained token instead.')
+              )
+            end
+
+            it 'does not create PersonalAccessToken records' do
+              expect { response }.not_to change { PersonalAccessToken.count }
+            end
+          end
+
+          context 'when token is a granular token' do
+            let_it_be(:token, reload: true) { create(:granular_pat, user: current_user) }
+
+            it_behaves_like 'rotates token successfully'
+          end
+        end
+      end
+    end
   end
 end

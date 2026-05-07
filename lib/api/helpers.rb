@@ -171,7 +171,7 @@ module API
     end
     # rubocop: enable CodeReuse/ActiveRecord
 
-    # Can be overriden by API endpoints
+    # Can be overridden by API endpoints
     def find_project_scopes
       Project.without_deleted.not_hidden
     end

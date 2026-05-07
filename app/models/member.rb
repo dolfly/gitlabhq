@@ -517,7 +517,7 @@ class Member < ApplicationRecord
       Arel::Nodes::As.new(Arel::Nodes::SqlLiteral.new('0'), Arel::Nodes::SqlLiteral.new('access_level'))
     end
 
-    # overriden in EE
+    # overridden in EE
     def member_role_id(_group)
       null_member_role_id_sql
     end

@@ -3,14 +3,6 @@
 $bottom-padding: $gl-spacing-scale-6;
 $file-tree-browser-z-index: 500;
 
-.content-wrapper:has(.navigation-root) {
-  padding-bottom: $bottom-padding;
-}
-
-.navigation-root {
-  min-height: calc(100dvh - var(--application-header-height) - #{$bottom-padding});
-}
-
 .file-tree-browser-overlay {
   @apply gl-bg-overlay;
   z-index: $file-tree-browser-z-index - 1;

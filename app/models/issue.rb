@@ -690,7 +690,7 @@ class Issue < ApplicationRecord
     true
   end
 
-  # Overriden in EE
+  # Overridden in EE
   def supports_parent?; end
 
   def as_json(options = {})

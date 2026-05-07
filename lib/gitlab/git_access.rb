@@ -595,7 +595,7 @@ module Gitlab
       container.repository_size_checker
     end
 
-    # overriden in EE
+    # overridden in EE
     def check_additional_conditions!; end
 
     def repository_access_level

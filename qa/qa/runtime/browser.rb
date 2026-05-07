@@ -18,12 +18,13 @@ module QA
       class SeleniumDriverWithSafeQuit < Capybara::Selenium::Driver
         def quit
           super
-        # EOFError raised by selenium-webdriver >= 4.40.0 when Net::HTTP checks driver
-        # status after ChromeDriver has already exited. Introduced in:
+        # EOFError and Net::ReadTimeout are raised by selenium-webdriver >= 4.40.0 when
+        # Net::HTTP checks driver status after ChromeDriver has already exited or stopped
+        # responding. Introduced in:
         #   https://github.com/SeleniumHQ/selenium/pull/16877
         #   https://github.com/SeleniumHQ/selenium/pull/15635
         # Safe to ignore -- driver process is confirmed stopped at this point.
-        rescue EOFError
+        rescue EOFError, Net::ReadTimeout
           nil
         end
       end

@@ -52,7 +52,7 @@ class PasswordsController < Devise::PasswordsController
 
   protected
 
-  # overriden in EE
+  # overridden in EE
   def log_audit_reset_failure(_user); end
 
   def resource_from_email

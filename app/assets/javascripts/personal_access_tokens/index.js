@@ -20,7 +20,8 @@ export const initPersonalAccessTokenApp = () => {
     return null;
   }
 
-  const { accessTokenGranularNew, accessTokenLegacyNew } = el.dataset;
+  const { accessTokenGranularNew, accessTokenLegacyNew, accessTokenGranularTokensEnforced } =
+    el.dataset;
 
   return new Vue({
     el,
@@ -29,6 +30,7 @@ export const initPersonalAccessTokenApp = () => {
     provide: {
       accessTokenGranularNewUrl: accessTokenGranularNew,
       accessTokenLegacyNewUrl: accessTokenLegacyNew,
+      granularTokensEnforced: parseBoolean(accessTokenGranularTokensEnforced),
     },
     render(createElement) {
       return createElement(PersonalAccessTokensApp);

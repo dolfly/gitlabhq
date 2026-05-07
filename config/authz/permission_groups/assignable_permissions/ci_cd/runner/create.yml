@@ -3,5 +3,8 @@ name: create_runner
 description: Grants the ability to create runners
 boundaries:
   - user
+  - project
+  - group
+  - instance
 permissions:
   - create_runner

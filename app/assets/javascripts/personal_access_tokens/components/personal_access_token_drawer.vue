@@ -25,6 +25,9 @@ export default {
     PersonalAccessTokenGranularScopes,
     PersonalAccessTokenLegacyScopes,
   },
+  inject: {
+    granularTokensEnforced: { default: false },
+  },
   props: {
     token: {
       type: Object,
@@ -39,6 +42,9 @@ export default {
     },
     isTokenGranular() {
       return this.token?.granular;
+    },
+    canRotate() {
+      return this.isTokenActive && (!this.granularTokensEnforced || this.isTokenGranular);
     },
     expiryDate() {
       return timeFormattedAsDate(this.token.expiresAt);
@@ -128,6 +134,7 @@ export default {
           </gl-button>
 
           <gl-button
+            v-if="canRotate"
             v-gl-tooltip.bottom="$options.i18n.rotate"
             category="tertiary"
             size="small"

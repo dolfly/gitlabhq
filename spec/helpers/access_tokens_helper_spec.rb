@@ -78,7 +78,12 @@ RSpec.describe AccessTokensHelper, feature_category: :system_access do
   end
 
   describe '#personal_access_token_data' do
+    let_it_be(:user) { build(:user) }
+    let_it_be(:token) { { name: 'My token', description: 'My description', scopes: [:api, :sudo] } }
+
     before do
+      allow(helper).to receive(:filter_sort_scopes).and_return([])
+
       allow(helper).to receive_messages(
         expires_at_field_data: {
           max_date: '2022-03-02',
@@ -89,25 +94,60 @@ RSpec.describe AccessTokensHelper, feature_category: :system_access do
     end
 
     it 'returns data for the PATs UI in the user settings' do
-      expect(helper.personal_access_token_data({ name: 'My token',
-        description: 'My description',
-        scopes: [:api, :sudo] }, build_stubbed(:user))).to match({
-          access_token: a_hash_including({
-            max_date: '2022-03-02',
-            min_date: '2022-03-02',
-            available_scopes: '[]',
-            name: 'My token',
-            description: 'My description',
-            scopes: '["api","sudo"]',
-            create: '/-/user_settings/personal_access_tokens',
-            table_url: '/-/user_settings/personal_access_tokens',
-            granular_new: '/-/user_settings/personal_access_tokens/granular/new',
-            legacy_new: '/-/user_settings/personal_access_tokens/legacy/new',
-            revoke: '/api/v4/personal_access_tokens',
-            rotate: '/api/v4/personal_access_tokens',
-            show: '/api/v4/personal_access_tokens?user_id=:id'
-          })
+      expect(helper.personal_access_token_data(token, user)).to match(a_hash_including({
+        access_token: a_hash_including({
+          max_date: '2022-03-02',
+          min_date: '2022-03-02',
+          available_scopes: '[]',
+          name: 'My token',
+          description: 'My description',
+          scopes: '["api","sudo"]',
+          create: '/-/user_settings/personal_access_tokens',
+          table_url: '/-/user_settings/personal_access_tokens',
+          granular_new: '/-/user_settings/personal_access_tokens/granular/new',
+          legacy_new: '/-/user_settings/personal_access_tokens/legacy/new',
+          revoke: '/api/v4/personal_access_tokens',
+          rotate: '/api/v4/personal_access_tokens',
+          show: '/api/v4/personal_access_tokens?user_id=:id',
+          granular_tokens_enforced: 'false'
         })
+      }))
+    end
+
+    describe 'granular_tokens_enforced' do
+      subject(:granular_token_enforced) do
+        helper.personal_access_token_data(token, user).dig(:access_token, :granular_tokens_enforced)
+      end
+
+      context 'when `granular_personal_access_tokens` feature flag is disabled' do
+        before do
+          stub_feature_flags(granular_personal_access_tokens: false)
+        end
+
+        it { is_expected.to eq('false') }
+      end
+
+      context 'when `granular_personal_access_tokens` feature flag is enabled' do
+        before do
+          stub_feature_flags(granular_personal_access_tokens: user)
+        end
+
+        context 'when granular tokens are not enforced' do
+          before do
+            allow(Gitlab::CurrentSettings).to receive(:granular_tokens_enforced?).and_return(false)
+          end
+
+          it { is_expected.to eq('false') }
+        end
+
+        context 'when granular tokens are enforced' do
+          before do
+            allow(Gitlab::CurrentSettings).to receive(:granular_tokens_enforced?).and_return(true)
+          end
+
+          it { is_expected.to eq('true') }
+        end
+      end
     end
   end
 

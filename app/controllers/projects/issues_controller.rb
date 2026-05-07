@@ -430,7 +430,7 @@ class Projects::IssuesController < Projects::ApplicationController
   # Overridden in EE
   def create_vulnerability_issue_feedback(issue); end
 
-  # Overriden in EE
+  # Overridden in EE
   def work_item_redirect_except_actions
     WORK_ITEM_REDIRECT_EXCEPT_ACTIONS
   end

@@ -560,6 +560,7 @@ Project permissions for [compliance](compliance/_index.md) features including co
 | View [allowed and denied licenses in MR](compliance/license_scanning_of_cyclonedx_files/_index.md) <sup>1</sup> |   ✓   |    ✓    |    ✓     |        ✓         |     ✓     |     ✓      |   ✓   |
 | View [audit events](compliance/audit_events.md) <sup>2</sup>                                                    |       |         |          |        ✓         |     ✓     |     ✓      |   ✓   |
 | View licenses in [dependency list](application_security/dependency_list/_index.md)                              |       |         |          |        ✓         |     ✓     |     ✓      |   ✓   |
+| View [compliance center](compliance/compliance_center/_index.md)                                                |       |         |          |        ✓         |           |            |   ✓   |
 | Manage [audit streams](compliance/audit_event_streaming.md)                                                     |       |         |          |                  |           |            |   ✓   |
 
 **Footnotes**:

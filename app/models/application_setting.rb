@@ -1267,7 +1267,7 @@ class ApplicationSetting < ApplicationRecord
     HUMANIZED_ATTRIBUTES[attribute.to_sym] || super
   end
 
-  # overriden in EE
+  # overridden in EE
   def self.rate_limits_definition
     {
       autocomplete_users_limit: [:integer, { default: 300 }],
@@ -1373,6 +1373,12 @@ class ApplicationSetting < ApplicationRecord
 
   def custom_default_search_scope_set?
     ::Search::Scopes.all_scope_names.include?(default_search_scope)
+  end
+
+  def granular_tokens_enforced?
+    return false unless Feature.enabled?(:granular_personal_access_tokens_enforcement, :instance)
+
+    enforce_granular_tokens? && granular_tokens_enforced_after <= Date.current
   end
 
   private

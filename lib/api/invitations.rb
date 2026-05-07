@@ -12,7 +12,7 @@ module API
 
     helpers do
       params :invitation_params_ee do
-        # Overriden in EE
+        # Overridden in EE
       end
     end
 

@@ -2818,4 +2818,69 @@ RSpec.describe ApplicationSetting, feature_category: :settings, type: :model do
       end
     end
   end
+
+  describe '#granular_tokens_enforced?' do
+    subject(:granular_tokens_enforced?) { setting.granular_tokens_enforced? }
+
+    context 'when `granular_personal_access_tokens_enforcement` feature flag is disabled' do
+      before do
+        stub_feature_flags(granular_personal_access_tokens_enforcement: false)
+      end
+
+      it { is_expected.to be false }
+    end
+
+    context 'when `granular_personal_access_tokens_enforcement` feature flag is enabled' do
+      before do
+        stub_feature_flags(granular_personal_access_tokens_enforcement: true)
+      end
+
+      context 'when enforce_granular_tokens is false' do
+        before do
+          setting.update!(enforce_granular_tokens: false)
+        end
+
+        it { is_expected.to be false }
+      end
+
+      context 'when enforce_granular_tokens is true' do
+        context 'when granular_token_enforced_after is in the future' do
+          before do
+            setting.update!(
+              enforce_granular_tokens: true,
+              granular_tokens_enforced_after: 1.month.from_now.to_date
+            )
+          end
+
+          it { is_expected.to be false }
+        end
+
+        context 'when granular_token_enforced_after is today' do
+          before do
+            setting.update!(
+              enforce_granular_tokens: true,
+              granular_tokens_enforced_after: Date.current
+            )
+          end
+
+          it { is_expected.to be true }
+        end
+
+        context 'when granular_token_enforced_after is in the past' do
+          before do
+            setting.update_columns(
+              personal_access_token_settings: {
+                enforce_granular_tokens: true,
+                granular_tokens_enforced_after: 1.month.ago.to_date
+              }
+            )
+
+            setting.reload
+          end
+
+          it { is_expected.to be true }
+        end
+      end
+    end
+  end
 end

@@ -441,7 +441,7 @@ Grants the ability to read and update resource groups.
 
 #### Runner
 
-Grants the ability to assign, create, and read runners.
+Grants the ability to assign, create, delete, read, and update runners.
 
 | Action | Access | Method | Path |
 | ------ | ------ | ------ | ---- |

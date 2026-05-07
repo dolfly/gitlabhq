@@ -184,5 +184,58 @@ RSpec.describe PersonalAccessTokens::CreateService, feature_category: :system_ac
         end
       end
     end
+
+    describe 'granular_tokens_enforced?' do
+      let(:current_user) { user }
+
+      context 'when `granular_personal_access_tokens` feature flag is disabled' do
+        before do
+          stub_feature_flags(granular_personal_access_tokens: false)
+        end
+
+        it_behaves_like 'a successfully created token'
+      end
+
+      context 'when `granular_personal_access_tokens` feature flag is enabled' do
+        before do
+          stub_feature_flags(granular_personal_access_tokens: user)
+        end
+
+        context 'when granular tokens are not enforced' do
+          before do
+            allow(Gitlab::CurrentSettings).to receive(:granular_tokens_enforced?).and_return(false)
+          end
+
+          it_behaves_like 'a successfully created token'
+        end
+
+        context 'when granular tokens are enforced' do
+          before do
+            allow(Gitlab::CurrentSettings).to receive(:granular_tokens_enforced?).and_return(true)
+          end
+
+          context 'when creating a legacy token' do
+            let(:params) { { name: 'Test token', scopes: [:api], expires_at: Date.today + 1.month } }
+
+            it 'returns an error' do
+              expect(execute).to be_error
+              expect(execute.message).to eq(
+                s_('AccessTokens|Creation of legacy personal access tokens is disabled. Use a fine-grained token instead.')
+              )
+            end
+
+            it 'does not create a token' do
+              expect { execute }.not_to change { PersonalAccessToken.count }
+            end
+          end
+
+          context 'when creating a granular token' do
+            let(:params) { { name: 'gPAT', impersonation: false, granular: true, scopes: [:granular], expires_at: Date.today + 1.month } }
+
+            it_behaves_like 'a successfully created token'
+          end
+        end
+      end
+    end
   end
 end

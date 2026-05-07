@@ -150,7 +150,7 @@ module API
       end
 
       params :share_project_params_ee do
-        # Overriden in EE
+        # Overridden in EE
       end
 
       def self.update_params_at_least_one_of
