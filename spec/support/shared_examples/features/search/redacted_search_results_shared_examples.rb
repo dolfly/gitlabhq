@@ -31,9 +31,11 @@ RSpec.shared_examples 'a redacted search results' do
     Kaminari.paginate_array(objects).page(1).per(20)
   end
 
-  before do
+  before_all do
     accessible_project.add_maintainer(user)
+  end
 
+  before do
     allow(search_service)
       .to receive_message_chain(:search_results, :objects)
             .and_return(unredacted_results)

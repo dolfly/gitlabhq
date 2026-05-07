@@ -8,6 +8,7 @@ import { useCodeReview } from '~/diffs/stores/code_review';
 import { useMergeRequestDiscussions } from '~/merge_request/stores/merge_request_discussions';
 import { useDiffsList } from '~/rapid_diffs/stores/diffs_list';
 import { DiffFile } from '~/rapid_diffs/web_components/diff_file';
+import { initCommitWidget } from '~/rapid_diffs/app/init_commit_widget';
 import { initCompareVersions } from '~/rapid_diffs/app/init_compare_versions';
 import { initNewDiscussionToggle } from '~/rapid_diffs/app/init_new_discussions_toggle';
 import { initLineRangeSelection } from '~/rapid_diffs/app/init_line_range_selection';
@@ -19,6 +20,7 @@ class MergeRequestRapidDiffsApp extends RapidDiffsFacade {
     this.#initCodeReview();
     super.init();
     this.#initCompareVersions();
+    this.#initCommitWidget();
     await this.#initDiscussions();
     initNewDiscussionToggle(this.root, { allowExpandedLines: true });
     initLineRangeSelection(this.root);
@@ -85,6 +87,10 @@ class MergeRequestRapidDiffsApp extends RapidDiffsFacade {
   #initCompareVersions() {
     if (!this.appData.versions) return;
     initCompareVersions(this.root.querySelector('[data-after-browser-toggle]'), this.appData);
+  }
+
+  #initCommitWidget() {
+    initCommitWidget(this.root.querySelector('[data-commit-widget]'));
   }
 }
 

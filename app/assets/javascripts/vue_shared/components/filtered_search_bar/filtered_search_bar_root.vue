@@ -106,6 +106,7 @@ export default {
       default: true,
     },
   },
+  emits: ['checked-input', 'onSort', 'onFilter', 'onInput', 'token-complete', 'token-destroy'],
   data() {
     return {
       recentSearchesPromise: null,

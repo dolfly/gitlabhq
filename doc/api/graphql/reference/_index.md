@@ -3661,7 +3661,7 @@ Input type: `AiFlowTriggerCreateInput`
 | <a id="mutation-aiflowtriggercreate-eventtypes"></a>`eventTypes` | [`[Int!]`](#int) | Event types that triggers the AI flow. |
 | <a id="mutation-aiflowtriggercreate-filter"></a>`filter` {{< icon name="warning-solid" >}} | [`JSON`](#json) | **Deprecated**: **Status**: Experiment. Introduced in GitLab 19.0. |
 | <a id="mutation-aiflowtriggercreate-projectpath"></a>`projectPath` | [`ID!`](#id) | Full path of the project the AI flow trigger is associated with. |
-| <a id="mutation-aiflowtriggercreate-userid"></a>`userId` | [`UserID!`](#userid) | Service account for the AI flow trigger. |
+| <a id="mutation-aiflowtriggercreate-userid"></a>`userId` | [`UserID`](#userid) | Service account for the AI flow trigger. |
 
 #### Fields
 
@@ -61097,7 +61097,6 @@ Name of the feature that the callout is for.
 | <a id="usergroupcalloutfeaturename-expired_duo_pro_trial_widget"></a>`EXPIRED_DUO_PRO_TRIAL_WIDGET` | Callout feature name for expired_duo_pro_trial_widget. |
 | <a id="usergroupcalloutfeaturename-expired_trial_status_widget"></a>`EXPIRED_TRIAL_STATUS_WIDGET` | Callout feature name for expired_trial_status_widget. |
 | <a id="usergroupcalloutfeaturename-free_group_limited_alert"></a>`FREE_GROUP_LIMITED_ALERT` | Callout feature name for free_group_limited_alert. |
-| <a id="usergroupcalloutfeaturename-mrs_premium_message_callout"></a>`MRS_PREMIUM_MESSAGE_CALLOUT` | Callout feature name for mrs_premium_message_callout. |
 | <a id="usergroupcalloutfeaturename-namespace_over_storage_users_combined_alert"></a>`NAMESPACE_OVER_STORAGE_USERS_COMBINED_ALERT` | Callout feature name for namespace_over_storage_users_combined_alert. |
 | <a id="usergroupcalloutfeaturename-namespace_storage_limit_alert_alert_threshold"></a>`NAMESPACE_STORAGE_LIMIT_ALERT_ALERT_THRESHOLD` | Callout feature name for namespace_storage_limit_alert_alert_threshold. |
 | <a id="usergroupcalloutfeaturename-namespace_storage_limit_alert_error_threshold"></a>`NAMESPACE_STORAGE_LIMIT_ALERT_ERROR_THRESHOLD` | Callout feature name for namespace_storage_limit_alert_error_threshold. |
@@ -61106,9 +61105,7 @@ Name of the feature that the callout is for.
 | <a id="usergroupcalloutfeaturename-namespace_user_cap_reached_alert"></a>`NAMESPACE_USER_CAP_REACHED_ALERT` | Callout feature name for namespace_user_cap_reached_alert. |
 | <a id="usergroupcalloutfeaturename-preview_usage_quota_free_plan_alert"></a>`PREVIEW_USAGE_QUOTA_FREE_PLAN_ALERT` | Callout feature name for preview_usage_quota_free_plan_alert. |
 | <a id="usergroupcalloutfeaturename-preview_user_over_limit_free_plan_alert"></a>`PREVIEW_USER_OVER_LIMIT_FREE_PLAN_ALERT` | Callout feature name for preview_user_over_limit_free_plan_alert. |
-| <a id="usergroupcalloutfeaturename-project_premium_message_callout"></a>`PROJECT_PREMIUM_MESSAGE_CALLOUT` | Callout feature name for project_premium_message_callout. |
 | <a id="usergroupcalloutfeaturename-project_repository_limit_alert_warning_threshold"></a>`PROJECT_REPOSITORY_LIMIT_ALERT_WARNING_THRESHOLD` | Callout feature name for project_repository_limit_alert_warning_threshold. |
-| <a id="usergroupcalloutfeaturename-repository_premium_message_callout"></a>`REPOSITORY_PREMIUM_MESSAGE_CALLOUT` | Callout feature name for repository_premium_message_callout. |
 | <a id="usergroupcalloutfeaturename-usage_quota_trial_alert"></a>`USAGE_QUOTA_TRIAL_ALERT` | Callout feature name for usage_quota_trial_alert. |
 | <a id="usergroupcalloutfeaturename-user_reached_limit_free_plan_alert"></a>`USER_REACHED_LIMIT_FREE_PLAN_ALERT` | Callout feature name for user_reached_limit_free_plan_alert. |
 | <a id="usergroupcalloutfeaturename-web_hook_disabled"></a>`WEB_HOOK_DISABLED` | Callout feature name for web_hook_disabled. |

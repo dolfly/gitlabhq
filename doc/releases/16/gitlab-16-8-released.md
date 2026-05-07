@@ -43,6 +43,8 @@ Thank you Ted, Martin, and Helio! 🙌
 
 ### Static Analysis Findings in Merge request changes view
 
+<!-- categories: SAST -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -56,6 +58,8 @@ No need to navigate elsewhere – it’s all consolidated in one place. The UI i
 
 ### Google Cloud Secret Manager support
 
+<!-- categories: Secrets Management -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -67,6 +71,8 @@ No need to navigate elsewhere – it’s all consolidated in one place. The UI i
 Secrets stored in Google Cloud Secret Manager can now be easily retrieved and used in CI/CD jobs. Our new integration simplifies the process of interacting with Google Cloud Secret Manager through GitLab CI/CD, helping you streamline your build and deploy processes! This is just one of the many ways [GitLab and Google Cloud are better together](https://about.gitlab.com/blog/gitlab-google-partnership-s3c/)!
 
 ### Workspaces are now generally available
+
+<!-- categories: Workspaces -->
 
 {{< details >}}
 
@@ -84,6 +90,8 @@ Since their introduction in GitLab 16.0, workspaces have received improvements t
 
 ### Enforce 2FA for GitLab administrators
 
+<!-- categories: User Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -94,6 +102,8 @@ Since their introduction in GitLab 16.0, workspaces have received improvements t
 You can now enforce whether GitLab administrators are required to use two-factor authentication (2FA) in their self-managed instance. It is good security practice to use 2FA for all accounts, especially for privileged accounts like administrators. If this setting is enforced, and an administrator does not already use 2FA, they must set up 2FA on their next sign-in.
 
 ### Speed up your builds with the Maven dependency proxy
+
+<!-- categories: Dependency Proxy, Package Registry -->
 
 {{< details >}}
 
@@ -112,6 +122,8 @@ If the package changes in the external repository (for example, a user deletes a
 
 ### Deeper insights into velocity in the Issue Analytics report
 
+<!-- categories: Value Stream Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -123,6 +135,8 @@ If the package changes in the external repository (for example, a user deletes a
 The **Issue Analytics** report now contains information on the number of closed issues in a month to allow for a detailed velocity analysis. With this valuable addition, GitLab users can now gain insights into trends associated with their projects, and improve the overall turn-around time and value delivered to their customers. The **Issue Analytics** visualization contains a bar chart with the number of issues for each month, with a default time span of 13 months. You can access this chart from the drill-down in the [Value Streams Dashboard](../../user/analytics/value_streams_dashboard.md#dashboard-metrics-and-drill-down-reports).
 
 ### New organization-level DevOps view with DORA-based industry benchmarks
+
+<!-- categories: Value Stream Management, DORA Metrics -->
 
 {{< details >}}
 
@@ -141,6 +155,8 @@ To help us improve the Value Streams Dashboard, please share feedback about your
 ## Scale and Deployments
 
 ### Omnibus improvements
+
+<!-- categories: Omnibus Package -->
 
 {{< details >}}
 
@@ -162,6 +178,8 @@ This means plaintext passwords for Redis no longer need to be stored in `gitlab.
 
 ### Smarter approval resets with `patch-id` support
 
+<!-- categories: Code Review Workflow -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -177,6 +195,8 @@ If you have feedback about your experiences with resets now, let us know in [iss
 
 ### View blame information directly in the file page
 
+<!-- categories: Source Code Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -187,6 +207,8 @@ If you have feedback about your experiences with resets now, let us know in [iss
 In previous versions of GitLab, viewing file blame required you to access a different page. Now you can view the file blame information directly from the file page.
 
 ### Set CPU and memory usage per workspace
+
+<!-- categories: Workspaces -->
 
 {{< details >}}
 
@@ -201,6 +223,8 @@ Now you can also set CPU and memory usage per workspace. By configuring requests
 
 ### Kubernetes 1.28 support
 
+<!-- categories: Deployment Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -214,6 +238,8 @@ This release adds full support for Kubernetes version 1.28, released in August 2
 You can read more about our Kubernetes support policy and other supported Kubernetes versions.
 
 ### New customizable permissions
+
+<!-- categories: Permissions -->
 
 {{< details >}}
 
@@ -235,6 +261,8 @@ Add these abilities, along with other pre-existing custom abilities, to any base
 
 ### Assign a custom role with SAML SSO
 
+<!-- categories: Permissions -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -246,6 +274,8 @@ Add these abilities, along with other pre-existing custom abilities, to any base
 Users can be assigned a custom role as the default role they are created with when they are provisioned with SAML SSO. Previously, only static roles could be chosen as the default. This allows automatically provisioned users to be assigned a role that best aligns with the principle of least privilege.
 
 ### Filter streaming audit events by sub group/project at group level
+
+<!-- categories: Compliance Management -->
 
 {{< details >}}
 
@@ -260,6 +290,8 @@ Streaming audit events have been extended to support filtering by sub-group or p
 This additional filter will allow you to separate out events in your streams to send to different destinations, or to exclude irrelevant sub-groups/projects, ensuring you have the most actionable events for your team to monitor.
 
 ### Compliance framework management improvements
+
+<!-- categories: Compliance Management -->
 
 {{< details >}}
 
@@ -282,6 +314,8 @@ capabilities:
 
 ### Instance-level audit event streaming to AWS S3
 
+<!-- categories: Audit Events -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -295,6 +329,8 @@ Previously, you could configure only top-level group streaming audit events for 
 With GitLab 16.8, we’ve extended support for AWS S3 to instance-level streaming destinations.
 
 ### Enforce policy to prevent branches being deleted or unprotected
+
+<!-- categories: Security Policy Management -->
 
 {{< details >}}
 
@@ -310,6 +346,8 @@ For each existing or new scan result policy, you can enable `Prevent branch modi
 
 ### SAML Group Sync for custom roles
 
+<!-- categories: Permissions -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -321,6 +359,8 @@ For each existing or new scan result policy, you can enable `Prevent branch modi
 You can now use SAML Group Sync to map custom roles to groups of users. Previously, you could only map SAML groups to GitLab’s static roles. This gives more flexibility to customers who use SAML Group Links to manage group membership and member roles.
 
 ### SAML SSO authentication for merge request approval
+
+<!-- categories: Code Review Workflow -->
 
 {{< details >}}
 
@@ -338,6 +378,8 @@ password-based solution.
 
 ### Introduce group-level landing page for Analytics Dashboards
 
+<!-- categories: Value Stream Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -349,6 +391,8 @@ password-based solution.
 We are introducing a new landing page for the group-level analytics dashboard. This enhancement ensures a more consistent and user-friendly navigation experience. In the first phase this page includes the [Value Streams Dashboard](https://www.youtube.com/watch?v=8pLEucNUlWI), but it also sets the groundwork for future features, allowing you to personalize your dashboards. These improvements aim to streamline your experience, and provide more flexibility in managing and interpreting your data.
 
 ### View all ancestor items of a task or OKR
+
+<!-- categories: Portfolio Management -->
 
 {{< details >}}
 
@@ -367,6 +411,8 @@ Work items include:
 
 ### Runner Fleet Dashboard: CSV export of compute minutes used by instance runners
 
+<!-- categories: Fleet Visibility -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -377,6 +423,8 @@ Work items include:
 You might need to run a report of CI/CD compute minutes used by projects on instance runners for various reasons. However, there wasn’t a simple to use mechanism in GitLab for you to generate a CI/CD compute minutes usage report. With this feature, you can export a report of CI/CD compute minutes used by each project on shared runners as a CSV file.
 
 ### GitLab Runner 16.8
+
+<!-- categories: GitLab Runner Core -->
 
 {{< details >}}
 
@@ -401,6 +449,8 @@ The list of all changes is in the GitLab Runner [CHANGELOG](https://gitlab.com/g
 
 ### Predefined variables for merge request description
 
+<!-- categories: Secrets Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -412,6 +462,8 @@ The list of all changes is in the GitLab Runner [CHANGELOG](https://gitlab.com/g
 If you use automation to work with merge requests in CI/CD pipelines, you might have wanted an easier way to fetch a merge request’s description without an API call. In GitLab 16.7 we introduced the `CI_MERGE_REQUEST_DESCRIPTION` predefined variable, making the description easily accessible in all jobs. In GitLab 16.8 we tweaked the behavior to truncate `CI_MERGE_REQUEST_DESCRIPTION` at 2700 characters, because very large descriptions can cause runner errors. You can check if the description was truncated with the newly introduced `CI_MERGE_REQUEST_DESCRIPTION_IS_TRUNCATED` predefined variable, which is set to `true` when the description was truncated.
 
 ### Windows 2022 support for SaaS runners on Windows
+
+<!-- categories: GitLab Runner SaaS -->
 
 {{< details >}}
 
@@ -428,6 +480,8 @@ SaaS runners on Windows allow you to increase your development teams’ velocity
 Try it out today by using `saas-windows-medium-amd64` as the tag in your .GitLab-ci.yml file.
 
 ### CI/CD Components Catalog section for your internal components
+
+<!-- categories: Pipeline Composition -->
 
 {{< details >}}
 

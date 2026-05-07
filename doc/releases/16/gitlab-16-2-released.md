@@ -31,6 +31,8 @@ A big thanks to all of our community contributors this past release 🙌
 
 ### All new rich text editor experience
 
+<!-- categories: Team Planning, Portfolio Management, Code Review Workflow -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -49,6 +51,8 @@ We are proud of the new editing experience and can’t wait to see what you thin
 
 ### GitLab triggers a Flux synchronization without any configuration
 
+<!-- categories: Deployment Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -60,6 +64,8 @@ We are proud of the new editing experience and can’t wait to see what you thin
 By default, Flux synchronizes Kubernetes manifests at regular intervals. Triggering a reconciliation immediately when a manifest changes by default requires additional configuration. With the GitLab agent for Kubernetes, you can push a change to your manifest and trigger a Flux sync automatically.
 
 ### Support for Keyless Signing with Cosign
+
+<!-- categories: Pipeline Composition -->
 
 {{< details >}}
 
@@ -73,6 +79,8 @@ Properly storing, rotating, and managing signing keys can be difficult and typic
 To begin using keyless signing for your build artifacts, container images, and packages, users only need to add a few lines to their CI/CD file as [shown in our documentation](../../ci/yaml/signing_examples.md).
 
 ### Command palette
+
+<!-- categories: Navigation & Settings -->
 
 {{< details >}}
 
@@ -95,6 +103,8 @@ Type one of the special characters:
 
 ### GitLab Duo Code Suggestions improvements powered by Google AI
 
+<!-- categories: Code Suggestions -->
+
 {{< details >}}
 
 - Tier: Gold, Silver, Free
@@ -112,6 +122,8 @@ We are continuously iterating to improve Code Suggestions. Give it a try and [sh
 
 ### Track your machine learning model experiments
 
+<!-- categories: MLOps -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -124,6 +136,8 @@ When data scientists create machine learning (ML) models, they often experiment 
 With machine learning model experiments, data scientists can log parameters, metrics, and artifacts directly into GitLab, giving easy access to their most performant models. This feature is an experiment.
 
 ### New customization layer for the Value Streams Dashboard
+
+<!-- categories: Value Stream Management, DORA Metrics -->
 
 {{< details >}}
 
@@ -141,6 +155,8 @@ The new configuration also includes the option to filter the metrics by labels. 
 
 ### Group-level wiki now available in Advanced Search
 
+<!-- categories: Global Search -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -153,6 +169,8 @@ With this release, we’ve extended Advanced Search to include [group-level wiki
 
 ### Omnibus improvements
 
+<!-- categories: Omnibus Package -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -164,6 +182,8 @@ With this release, we’ve extended Advanced Search to include [group-level wiki
 - For fresh installations of GitLab, you can now opt-in to using [PostgreSQL 14](https://www.postgresql.org/docs/14/release-14.html#id-1.11.6.12.4).
 
 ### View deployments from Jira issues mentioned in GitLab commits
+
+<!-- categories: Integrations -->
 
 {{< details >}}
 
@@ -183,6 +203,8 @@ last 5,000 commits made to the branch after the last successful deployment. The 
 
 ### Automatic deletion of unconfirmed users
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -193,6 +215,8 @@ last 5,000 commits made to the branch after the last successful deployment. The 
 When invitations are sent to an incorrect email address, they can never be confirmed. Previously, administrators had to manually delete these accounts. Now, administrators can turn on automatic deletion of unconfirmed users after a specified number of days. Similarly, on GitLab.com, unconfirmed accounts will be deleted automatically after [the specified number of days](../../user/gitlab_com/_index.md).
 
 ### Improved security for feed tokens
+
+<!-- categories: System Access -->
 
 {{< details >}}
 
@@ -205,6 +229,8 @@ When invitations are sent to an incorrect email address, they can never be confi
 Feed tokens have been made more secure by only working for the URL they were generated for. This narrows the scope of feeds that can be read if the token was leaked.
 
 ### GitLab for Slack app available on self-managed GitLab
+
+<!-- categories: Integrations -->
 
 {{< details >}}
 
@@ -220,6 +246,8 @@ install that copy in your Slack workspace. Each copy is private and not publicly
 To create and configure the app, see [GitLab for Slack app administration](../../administration/settings/slack_app.md).
 
 ### Speed up imports from GitHub using multiple access tokens
+
+<!-- categories: Importers -->
 
 {{< details >}}
 
@@ -243,6 +271,8 @@ When using multiple access tokens:
 
 ### Sync auditor role with OIDC provider
 
+<!-- categories: User Management -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -255,6 +285,8 @@ You can now sync OIDC groups to the `auditor` role in GitLab. This allows automa
 Thank you [Marin Hannache](https://gitlab.com/mareo) for your contribution!
 
 ### Improved sign-in and sign-up pages
+
+<!-- categories: System Access -->
 
 {{< details >}}
 
@@ -276,6 +308,8 @@ The GitLab sign-in and sign-up pages have been improved:
 
 ### Backup adds the ability to skip projects
 
+<!-- categories: Backup/Restore of GitLab instances -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -287,6 +321,8 @@ The built-in backup and restore tool adds the ability to skip specific repositor
 Thanks to [Yuri Konotopov](https://gitlab.com/nE0sIghT) for this [community contribution](https://gitlab.com/gitlab-org/security-products/analyzers/semgrep/-/merge_requests/196)!
 
 ### Geo add individual resync and reverification for all components
+
+<!-- categories: Geo-replication, Disaster Recovery -->
 
 {{< details >}}
 
@@ -301,6 +337,8 @@ Geo adds the ability to resync and reverify individual items for all component t
 
 ### Improve Git LFS download performance
 
+<!-- categories: Source Code Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -314,6 +352,8 @@ Previously, due to how LFS objects were fetched, GitLab created many very small 
 
 ### Install the agent for Kubernetes using extra volumes in the Helm chart
 
+<!-- categories: Deployment Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -325,6 +365,8 @@ Previously, due to how LFS objects were fetched, GitLab created many very small 
 The `agentk` component of the agent for Kubernetes requires a token to authenticate with GitLab. Previously, you could provide the token as-is, or as a reference to the Kubernetes secret that contains the token. However, you might operate in an environment where the secret is already available in a volume, and prefer to mount that volume instead of creating a separate secret. From GitLab 16.2, the GitLab agent Helm chart ships with this added feature thanks to a community contribution from [Thomas Spear](https://gitlab.com/tspearconquest).
 
 ### Support for custom CI variables in the Scan Execution Policies editor
+
+<!-- categories: Security Policy Management -->
 
 {{< details >}}
 
@@ -338,6 +380,8 @@ You can now define custom CI variables, including their values, in the Scan Exec
 
 ### Allow scan execution policies to enable CI/CD pipelines in development projects
 
+<!-- categories: Security Policy Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -349,6 +393,8 @@ You can now define custom CI variables, including their values, in the Scan Exec
 In previous GitLab versions, security policies were not enforced on projects without a `.gitlab-ci.yml` file, or where AutoDevOps was disabled. In GitLab 16.2, security policies implicity enable CI/CD pipelines on projects that do not contain a `.gitlab-ci.yml` file. This is another step in ensuring compliance of security policies and allow you to enforce secret detection, static analysis, or any other jobs where builds are not required.
 
 ### Target "Default" or "Protected" branches in security policies
+
+<!-- categories: Security Policy Management -->
 
 {{< details >}}
 
@@ -369,6 +415,8 @@ Branch rules can be configured across our various security policy rule types by 
 
 ### Audit event streaming to Google Cloud Logging
 
+<!-- categories: Audit Events -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -386,6 +434,8 @@ Now, you can select Google Cloud Logging as the destination for the stream and p
 key to allow for a more seamless integration.
 
 ### Compliance frameworks report export
+
+<!-- categories: Compliance Management -->
 
 {{< details >}}
 
@@ -407,6 +457,8 @@ which projects are tagged with which frameworks.
 
 ### Group/Sub-Group Level Dependency List
 
+<!-- categories: Dependency Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -419,6 +471,8 @@ Managing dependencies at the project level is problematic for large organization
 With this release, you can see all dependencies at the project or group level, including subgroups. This feature is off by default behind feature flag `group_level_dependencies`.
 
 ### Allow initial push to protected branches
+
+<!-- categories: Compliance Management, Source Code Management -->
 
 {{< details >}}
 
@@ -438,6 +492,8 @@ can force push.
 
 ### Instance-level streaming audit events
 
+<!-- categories: Audit Events -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -450,6 +506,8 @@ Before GitLab 16.1, only audit events from top-level groups could be streamed to
 Now, instance administrators can add a streaming destination for audit events produced at the instance level.
 
 ### Streaming audit event filtering UI
+
+<!-- categories: Audit Events -->
 
 {{< details >}}
 
@@ -469,6 +527,8 @@ search through the list manually.
 
 ### Interactive diff suggestions in merge requests
 
+<!-- categories: Team Planning, Portfolio Management, Code Review Workflow -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -484,6 +544,8 @@ We plan to have the rich text editor available in more areas of GitLab soon and 
 
 ### Import PyPI packages with CI/CD pipelines
 
+<!-- categories: Package Registry -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -496,6 +558,8 @@ Have you been thinking about moving your PyPI repository to GitLab, but haven’
 You can now use the Packages Importer tool to import packages from any PyPI-compliant registry, like Artifactory.
 
 ### Add emoji reactions to comments on uploaded designs
+
+<!-- categories: Design Management -->
 
 {{< details >}}
 
@@ -512,6 +576,8 @@ communication and enabling teams to provide quick feedback in a more expressive
 way.
 
 ### SAST analyzer updates
+
+<!-- categories: SAST -->
 
 {{< details >}}
 
@@ -542,6 +608,8 @@ For previous changes, see [last month’s updates](https://about.gitlab.com/rele
 
 ### Secret Detection updates
 
+<!-- categories: Secret Detection -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -566,6 +634,8 @@ For previous changes, see [the most recent Secret Detection update](https://abou
 
 ### Support for NuGet v2 in Dependency and License Scanning
 
+<!-- categories: Software Composition Analysis -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -577,6 +647,8 @@ For previous changes, see [the most recent Secret Detection update](https://abou
 In addition to NuGet `v1` lock files, GitLab Dependency and License Scanning both now support analyzing dependencies defined in NuGet `v2` lock files.
 
 ### Improved SAST vulnerability tracking
+
+<!-- categories: SAST -->
 
 {{< details >}}
 
@@ -599,6 +671,8 @@ You don’t have to take action to receive this update unless you’ve [pinned S
 
 ### CI/CD: Support for `when: never` on conditional includes
 
+<!-- categories: Pipeline Composition -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -612,6 +686,8 @@ You don’t have to take action to receive this update unless you’ve [pinned S
 In this release, we are expanding the power of the keyword so you can use `when: never` when using [`rules` with `include`](../../ci/yaml/includes.md#use-rules-with-include). Now, you can decide when external CI/CD configuration will be excluded when a specific rule is satisfied. This will help you write a standardized pipeline with better ability to dynamically modify itself based on the conditions you choose.
 
 ### Medium SaaS runners on Linux available to all tiers
+
+<!-- categories: GitLab Runner SaaS -->
 
 {{< details >}}
 
@@ -627,6 +703,8 @@ Previously users on the Free tier were only able to use our small Linux runner, 
 We are excited to see our Free users accelerate their pipeline speeds.
 
 ### GitLab Runner 16.2
+
+<!-- categories: GitLab Runner Core -->
 
 {{< details >}}
 

@@ -31,6 +31,8 @@ Want to learn more about Pooja’s contributions? Check out her [GitLab profile]
 
 ### GitLab Duo Agent Platform Self-Hosted models now available for cloud licenses
 
+<!-- categories: Self-Hosted Models -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -46,6 +48,8 @@ Administrators can configure [compatible models](../../administration/gitlab_duo
 Not yet on Ultimate? [Start a free trial with Duo Agent Platform included](https://docs.gitlab.com/#gitlab-duo-agent-platform-available-in-ultimate-trials).
 
 ### Vulnerability resolution with GitLab Duo Agent Platform (Beta)
+
+<!-- categories: Vulnerability Management -->
 
 {{< details >}}
 
@@ -69,6 +73,8 @@ SAST vulnerability resolution is available from the vulnerability report and the
 This feature is available as a free beta for Ultimate customers. We welcome your feedback in [issue 585626](https://gitlab.com/gitlab-org/gitlab/-/work_items/585626).
 
 ### Navigate repositories with collapsible file tree
+
+<!-- categories: Source Code Management -->
 
 {{< details >}}
 
@@ -95,6 +101,8 @@ codebases with thousands of files.
 
 ### Include CI/CD inputs from a file
 
+<!-- categories: Pipeline Composition -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -108,6 +116,8 @@ Previously, pipeline inputs could only be defined directly within a pipeline’s
 In this release you can now include input definitions from external files using the familiar `include` keyword. Being able to maintain a list of inputs in a separate place helps you have a manageable solution across many projects or pipelines. You can maintain centralized input configurations and even dynamically manage input values from external sources.
 
 ### Web-based commit signing on GitLab.com
+
+<!-- categories: Source Code Management -->
 
 {{< details >}}
 
@@ -134,6 +144,8 @@ the foundation for comprehensive commit signing policies across your organizatio
 
 ### Container virtual registry now available (Beta)
 
+<!-- categories: Virtual Registry -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -152,6 +164,8 @@ On GitLab.com, this feature is behind a feature flag. To request access or share
 
 ### New security dashboard chart: Vulnerabilities by age
 
+<!-- categories: Vulnerability Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -168,6 +182,8 @@ The chart shows the distribution of unresolved vulnerabilities based on the amou
 
 ### OAuth support in JetBrains IDEs for Self-Managed and Dedicated
 
+<!-- categories: Editor Extensions -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -183,6 +199,8 @@ The GitLab Duo plugin for JetBrains IDEs now supports OAuth authentication for G
 
 ### Non-billable Minimal Access users
 
+<!-- categories: Seat Cost Management -->
+
 {{< details >}}
 
 - Tier: Premium
@@ -197,6 +215,8 @@ Now, users with the Minimal Access role on GitLab Self-Managed Premium subscript
 This change unlocks the [restricted access](../../administration/settings/sign_up_restrictions.md#restricted-access) feature, which automatically assigns the Minimal Access role to users who would otherwise exceed the seat limit during identity provider syncs. This change keeps syncs running smoothly without unexpected billing overages or manual intervention.
 
 ### Geo data management view on primary site
+
+<!-- categories: Disaster Recovery, Geo Replication -->
 
 {{< details >}}
 
@@ -218,6 +238,8 @@ This enhancement is the first step toward comprehensive self-serve troubleshooti
 
 ### GitLab Duo Agent Platform available in Ultimate trials
 
+<!-- categories: Acquisition, Duo Agent Platform -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -231,6 +253,8 @@ Teams evaluating GitLab can now test agentic AI capabilities that automate compl
 [Start your free trial](https://gitlab.com/-/trial_registrations/new). Current paid customers can access evaluation credits through their account team. [Contact Sales](https://about.gitlab.com/sales/) to learn more.
 
 ### Zero Downtime Upgrades now supported for Cloud Native Hybrid deployments
+
+<!-- categories: Cloud Native Installation -->
 
 {{< details >}}
 
@@ -251,6 +275,8 @@ With this release, we’re bringing that same operational experience to self-man
 The upgrade procedure has been comprehensively tested and is now fully documented, giving you the confidence to maintain availability during version upgrades.
 
 ### Archive a group and its content
+
+<!-- categories: Groups & Projects -->
 
 {{< details >}}
 
@@ -276,6 +302,8 @@ Share your feedback in [epic 18616](https://gitlab.com/groups/gitlab-org/-/epics
 
 ### Valkey as replacement option for Redis (Beta)
 
+<!-- categories: Omnibus Package -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -300,6 +328,8 @@ We are monitoring the potential feature divergence between Redis and Valkey and 
 
 ### Dependency Scanning with SBOM support for Java pom.xml manifest files
 
+<!-- categories: Software Composition Analysis -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -317,6 +347,8 @@ To enable manifest fallback, set the `DS_ENABLE_MANIFEST_FALLBACK` CI/CD variabl
 
 ### Dependency Scanning with SBOM support for Python requirements.txt manifest files
 
+<!-- categories: Software Composition Analysis -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -333,6 +365,8 @@ This improvement makes it easier for Python projects to enable dependency scanni
 To enable manifest fallback, set the `DS_ENABLE_MANIFEST_FALLBACK` CI/CD variable to `"true"`.
 
 ### Restrict personal snippets for enterprise users
+
+<!-- categories: Source Code Management -->
 
 {{< details >}}
 
@@ -352,6 +386,8 @@ tighter control over where code is shared.
 When restricted, enterprise users cannot create snippets in their personal namespace.
 
 ### Rapid Diffs improves performance for commit changes
+
+<!-- categories: Source Code Management -->
 
 {{< details >}}
 
@@ -376,6 +412,8 @@ All existing functionality is preserved. As Rapid Diffs expands to other areas o
 
 ### Support for Bitbucket Cloud API tokens in import API
 
+<!-- categories: Importers -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -393,6 +431,8 @@ in favor of API tokens, and we’re planning to remove support for app passwords
 Importing from Bitbucket Cloud through the GitLab UI is not affected by this change.
 
 ### Centralized security governance and configuration
+
+<!-- categories: Vulnerability Management -->
 
 {{< details >}}
 
@@ -428,6 +468,8 @@ The security inventory has been upgraded to act as your primary dashboard to ass
 
 ### Security attributes
 
+<!-- categories: Security Asset Inventories -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -441,6 +483,8 @@ Security attributes, [introduced as a beta in GitLab 18.6](gitlab-18-6-released.
 Security attributes allow security teams to apply business context to their projects, including business impact, application, business unit, internet exposure, and location. You can also create custom attribute categories to match your organization’s taxonomy. By applying these attributes, you can filter and prioritize the items in your security inventory based on risk posture and organizational context.
 
 ### Security dashboards: Vulnerabilities over time chart improvements
+
+<!-- categories: Vulnerability Management -->
 
 {{< details >}}
 
@@ -457,6 +501,8 @@ The chart previously included vulnerabilities that were no longer detected, lead
 We are aware of two additional issues that may slightly alter counts in some cases. Follow [issue 590022](https://gitlab.com/gitlab-org/gitlab/-/issues/590022) and [issue 590018](https://gitlab.com/gitlab-org/gitlab/-/issues/590018) for updates.
 
 ### View CI/CD job metrics for projects (limited availability)
+
+<!-- categories: Fleet Visibility -->
 
 {{< details >}}
 
@@ -475,6 +521,8 @@ scale.
 
 ### Add timestamps to CI job logs
 
+<!-- categories: Continuous Integration (CI) -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -487,6 +535,8 @@ You can now view timestamps on each CI job log line to identify performance bott
 
 ### CI/CD Catalog component analytics
 
+<!-- categories: Pipeline Composition -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -498,6 +548,8 @@ You can now view timestamps on each CI job log line to identify performance bott
 Previously, teams lacked visibility into how CI/CD Catalog component projects were being used across their organization. Now you can view usage counts and adoption patterns at a high level, helping you understand which component projects are most valuable and optimize your catalog investments.
 
 ### View security reports from child pipelines in merge requests
+
+<!-- categories: Continuous Integration (CI) -->
 
 {{< details >}}
 

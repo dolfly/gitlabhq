@@ -334,7 +334,6 @@ Gitlab/JsonSafeParse:
     - 'spec/helpers/projects/project_members_helper_spec.rb'
     - 'spec/helpers/projects_helper_spec.rb'
     - 'spec/helpers/releases_helper_spec.rb'
-    - 'spec/helpers/search_helper_spec.rb'
     - 'spec/helpers/sessions_helper_spec.rb'
     - 'spec/helpers/terms_helper_spec.rb'
     - 'spec/helpers/tree_helper_spec.rb'

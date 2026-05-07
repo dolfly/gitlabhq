@@ -1,4 +1,6 @@
 ---
+stage: Release Notes
+group: Monthly Release
 title: GitLab 16 release notes
 description: GitLab version 16 release announcements with new features and improvements
 ---

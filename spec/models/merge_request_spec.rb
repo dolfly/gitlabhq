@@ -604,6 +604,163 @@ RSpec.describe MergeRequest, factory_default: :keep, feature_category: :code_rev
         end
       end
     end
+
+    describe '.merged' do
+      let_it_be(:merged_mr) { create(:merge_request, :merged, :unique_branches) }
+
+      it 'returns only merged merge requests' do
+        expect(described_class.merged).to include(merged_mr)
+        expect(described_class.merged).not_to include(merge_request1, merge_request2)
+      end
+    end
+
+    describe '.open_and_closed' do
+      let_it_be(:closed_mr) { create(:merge_request, :closed, :unique_branches) }
+      let_it_be(:merged_mr) { create(:merge_request, :merged, :unique_branches) }
+
+      it 'returns opened and closed merge requests, but not merged ones' do
+        expect(described_class.open_and_closed).to include(merge_request1, merge_request2, closed_mr)
+        expect(described_class.open_and_closed).not_to include(merged_mr)
+      end
+    end
+
+    describe '.author_or_assignee' do
+      let_it_be(:user3) { create(:user) }
+      let_it_be(:authored_mr) { create(:merge_request, :unique_branches, author: user3) }
+      let_it_be(:assigned_mr) { create(:merge_request, :unique_branches, assignees: [user3]) }
+      let_it_be(:unrelated_mr) { create(:merge_request, :unique_branches) }
+
+      subject(:result) { described_class.author_or_assignee(user3) }
+
+      it 'includes MRs where user is the author' do
+        expect(result).to include(authored_mr)
+      end
+
+      it 'includes MRs where user is an assignee' do
+        expect(result).to include(assigned_mr)
+      end
+
+      it 'excludes MRs unrelated to the user' do
+        expect(result).not_to include(unrelated_mr)
+      end
+    end
+
+    describe '.by_source_or_target_branch' do
+      let_it_be(:mr_source) { create(:merge_request, :unique_branches, source_branch: 'my-feature') }
+      let_it_be(:mr_target) { create(:merge_request, :unique_branches, target_branch: 'my-feature') }
+      let_it_be(:mr_unrelated) { create(:merge_request, :unique_branches) }
+
+      it 'returns MRs where the branch is the source branch' do
+        expect(described_class.by_source_or_target_branch('my-feature')).to include(mr_source)
+      end
+
+      it 'returns MRs where the branch is the target branch' do
+        expect(described_class.by_source_or_target_branch('my-feature')).to include(mr_target)
+      end
+
+      it 'excludes MRs where the branch matches neither source nor target' do
+        expect(described_class.by_source_or_target_branch('my-feature')).not_to include(mr_unrelated)
+      end
+    end
+
+    describe '.by_milestone' do
+      let_it_be(:project_with_milestone) { create(:project) }
+      let_it_be(:milestone) { create(:milestone, project: project_with_milestone) }
+      let_it_be(:mr_with_milestone) do
+        create(:merge_request, :unique_branches,
+          source_project: project_with_milestone,
+          target_project: project_with_milestone,
+          milestone: milestone)
+      end
+
+      let_it_be(:mr_without_milestone) do
+        create(:merge_request, :unique_branches,
+          source_project: project_with_milestone,
+          target_project: project_with_milestone)
+      end
+
+      it 'returns MRs with the given milestone' do
+        expect(described_class.by_milestone(milestone)).to contain_exactly(mr_with_milestone)
+      end
+    end
+
+    describe '.of_projects' do
+      let_it_be(:project_a) { create(:project) }
+      let_it_be(:project_b) { create(:project) }
+      let_it_be(:mr_in_a) { create(:merge_request, :unique_branches, target_project: project_a, source_project: project_a) }
+      let_it_be(:mr_in_b) { create(:merge_request, :unique_branches, target_project: project_b, source_project: project_b) }
+
+      it 'returns MRs targeting the specified project' do
+        expect(described_class.of_projects([project_a.id])).to contain_exactly(mr_in_a)
+      end
+
+      it 'accepts multiple project IDs' do
+        expect(described_class.of_projects([project_a.id, project_b.id])).to contain_exactly(mr_in_a, mr_in_b)
+      end
+    end
+
+    describe '.from_project' do
+      let_it_be(:project_a) { create(:project) }
+      let_it_be(:project_b) { create(:project) }
+      let_it_be(:mr_from_a) do
+        create(:merge_request, :unique_branches, source_project: project_a, target_project: project_a)
+      end
+
+      let_it_be(:mr_from_b) do
+        create(:merge_request, :unique_branches, source_project: project_b, target_project: project_b)
+      end
+
+      it 'returns MRs where source_project matches' do
+        expect(described_class.from_project(project_a)).to contain_exactly(mr_from_a)
+      end
+
+      it 'excludes MRs with a different source project' do
+        expect(described_class.from_project(project_a)).not_to include(mr_from_b)
+      end
+    end
+
+    describe '.from_source_branches' do
+      let_it_be(:mr_feature) { create(:merge_request, :unique_branches, source_branch: 'scope-feature-branch') }
+      let_it_be(:mr_fix) { create(:merge_request, :unique_branches, source_branch: 'scope-fix-branch') }
+      let_it_be(:mr_develop) { create(:merge_request, :unique_branches, source_branch: 'scope-develop-branch') }
+
+      it 'returns MRs with source branches in the given array' do
+        expect(described_class.from_source_branches(%w[scope-feature-branch scope-fix-branch]))
+          .to contain_exactly(mr_feature, mr_fix)
+      end
+
+      it 'excludes MRs with non-matching source branches' do
+        expect(described_class.from_source_branches(%w[scope-feature-branch])).not_to include(mr_develop)
+      end
+    end
+
+    describe '.by_target_branch' do
+      let_it_be(:mr_to_main) { create(:merge_request, :unique_branches, target_branch: 'scope-main-branch') }
+      let_it_be(:mr_to_develop) { create(:merge_request, :unique_branches, target_branch: 'scope-dev-branch') }
+
+      it 'returns MRs with the specified target branch' do
+        expect(described_class.by_target_branch('scope-main-branch')).to include(mr_to_main)
+      end
+
+      it 'excludes MRs with a different target branch' do
+        expect(described_class.by_target_branch('scope-main-branch')).not_to include(mr_to_develop)
+      end
+    end
+
+    describe '.by_target_branch_wildcard' do
+      let_it_be(:mr_release_1) { create(:merge_request, :unique_branches, target_branch: 'release-1-wc') }
+      let_it_be(:mr_release_2) { create(:merge_request, :unique_branches, target_branch: 'release-2-wc') }
+      let_it_be(:mr_main) { create(:merge_request, :unique_branches, target_branch: 'main-wc') }
+
+      it 'returns MRs with target branches matching the wildcard pattern' do
+        expect(described_class.by_target_branch_wildcard('release-*-wc'))
+          .to contain_exactly(mr_release_1, mr_release_2)
+      end
+
+      it 'excludes MRs with non-matching target branches' do
+        expect(described_class.by_target_branch_wildcard('release-*-wc')).not_to include(mr_main)
+      end
+    end
   end
 
   describe '#squash_option' do

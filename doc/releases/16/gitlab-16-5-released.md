@@ -33,6 +33,8 @@ Thank you to Thorben and the rest of the GitLab Community for contributing 🙌
 
 ### Compliance standards adherence report
 
+<!-- categories: Compliance Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -59,6 +61,8 @@ can focus on the projects or standards that matter most to your organization.
 
 ### Create rules to set target branches for merge requests
 
+<!-- categories: Code Review Workflow -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -73,6 +77,8 @@ When you create a merge request, the rule checks the name of the branch. If the 
 
 ### Resolve an issue thread
 
+<!-- categories: Team Planning -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -84,6 +90,8 @@ When you create a merge request, the rule checks the name of the branch. If the 
 Long-running issues with many threads can be challenging to read and track. You can now resolve a thread on an issue when the topic of discussion has concluded.
 
 ### Fast-forward merge trains with semi-linear history
+
+<!-- categories: Merge Trains -->
 
 {{< details >}}
 
@@ -99,6 +107,8 @@ In 16.4, we released [Fast-forward merge trains](https://about.gitlab.com/releas
 
 ### Find epics with advanced search
 
+<!-- categories: Global Search -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -110,6 +120,8 @@ In 16.4, we released [Fast-forward merge trains](https://about.gitlab.com/releas
 The popularity of epics in GitLab continues to grow. Previously, finding epics was a little more difficult than other content types. With this release, you can now search and view results for epics when you use advanced search.
 
 ### Omnibus improvements
+
+<!-- categories: Omnibus Package -->
 
 {{< details >}}
 
@@ -128,6 +140,8 @@ from `/opt/gitlab/embedded/selinux/rhel/7/` to `/opt/gitlab/embedded/selinux` to
 
 ### Reviewer information for merge requests in the Jira development panel
 
+<!-- categories: Integrations -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -140,6 +154,8 @@ With the [GitLab for Jira Cloud app](../../integration/jira/connect-app.md), you
 Previously, when a reviewer was assigned to a merge request, the reviewer information was not displayed in the Jira development panel. With this release, the reviewer name, email, and approval status are displayed in the Jira development panel when you use the GitLab for Jira Cloud app.
 
 ### Changing context just got easier
+
+<!-- categories: Navigation & Settings -->
 
 {{< details >}}
 
@@ -154,6 +170,8 @@ You can try it out by selecting the **Search or go to…** button or with a keyb
 
 ### Webhook now triggered when a release is deleted
 
+<!-- categories: Webhooks -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -166,6 +184,8 @@ You can use release events to monitor release objects and react to changes. Prev
 With GitLab 16.5, a webhook is now also triggered when a release is deleted.
 
 ### Redesigned Service Desk issues list
+
+<!-- categories: Service Desk -->
 
 {{< details >}}
 
@@ -182,6 +202,8 @@ It now matches more closely the regular issues list. Available features include:
 
 ### Geo adds bulk resync and reverify buttons for all components
 
+<!-- categories: Geo-replication, Disaster Recovery -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -192,6 +214,8 @@ It now matches more closely the regular issues list. Available features include:
 You can now trigger bulk resync or reverify for any data component managed by Geo, through buttons in the Geo admin UI. Selecting the button will apply the operation to all data items related to the respective component. Before, this was only possible by logging into the Rails console. These actions are now more accessible, and the experience of troubleshooting and applying large scale changes that require a full resync or reverify of specific components, such as moving storage locations, is improved.
 
 ### Back up and restore repository data in the cloud
+
+<!-- categories: Gitaly, Backup/Restore of GitLab instances -->
 
 {{< details >}}
 
@@ -208,6 +232,8 @@ With this update, repository backups get stored in an object storage location of
 
 ### Integrate deployment approval and approval rule changes into audit events
 
+<!-- categories: Environment Management -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -222,6 +248,8 @@ GitLab now ships with a new set of audit events for deployment approval and appr
 
 ### Use the API to delete a user's SAML and SCIM identities
 
+<!-- categories: User Management -->
+
 {{< details >}}
 
 - Tier: Silver, Gold
@@ -235,6 +263,8 @@ Previously, group Owners had no way to programmatically delete SAML or SCIM iden
 Thank you [jgao1025](https://gitlab.com/jgao1025) for your contribution!
 
 ### Export the compliance violations report
+
+<!-- categories: Compliance Management -->
 
 {{< details >}}
 
@@ -254,6 +284,8 @@ In GitLab 16.5, you can now export a list of the items included in the complianc
 
 ### New customizable permissions
 
+<!-- categories: User Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -265,6 +297,8 @@ In GitLab 16.5, you can now export a list of the items included in the complianc
 The permissions to manage group members and project access tokens have been added to the custom roles framework. You can add these permissions to any base role to create a custom role. By creating custom roles with only the permissions needed to accomplish a particular set of tasks, you do not have to unnecessarily assign highly privileged roles such as Maintainer and Owner to users.
 
 ### Instance-level audit event streaming to Google Cloud Logging
+
+<!-- categories: Audit Events -->
 
 {{< details >}}
 
@@ -279,6 +313,8 @@ With GitLab 16.5, we’ve extended support for Google Cloud Logging to instance-
 
 ### Configurable locked user policy
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -289,6 +325,8 @@ With GitLab 16.5, we’ve extended support for Google Cloud Logging to instance-
 Administrators can now configure a locked user policy for their instance by choosing the number of unsuccessful sign-in attempts, and how long the user is locked for. For example, five unsuccessful sign-in attempts would lock a user for 60 minutes. This allows administrators to define a locked user policy that meets their security and compliance needs. Previously, the number of sign-in attempts and locked user time period were not configurable.
 
 ### Activate and deactivate headers for streaming audit events
+
+<!-- categories: Audit Events -->
 
 {{< details >}}
 
@@ -309,6 +347,8 @@ With GitLab 16.5, you can use the **Active** checkbox in the GitLab UI to toggle
 
 ### API to create PAT for currently authenticated user
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -319,6 +359,8 @@ With GitLab 16.5, you can use the **Active** checkbox in the GitLab UI to toggle
 You can now use a new REST API endpoint at `user/personal_access_tokens` to create a new personal access token for the currently authenticated user. This token’s scope is limited to `k8s_proxy` for security reasons, so you can use it to only perform Kubernetes API calls using the agent for Kubernetes. Previously, only instance administrators could [create personal access tokens through the API](../../api/users.md).
 
 ### Vulnerability report grouping by status and severity
+
+<!-- categories: Vulnerability Management -->
 
 {{< details >}}
 
@@ -332,6 +374,8 @@ As a user, you require the ability to group vulnerabilities so that you can more
 
 ### Export individual wiki pages as PDF
 
+<!-- categories: Wiki -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -344,6 +388,8 @@ From GitLab 16.5, you can export individual wiki pages as PDF files. Now, sharin
 
 ### Add a child task, objective, or key result with a quick action
 
+<!-- categories: Portfolio Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -355,6 +401,8 @@ From GitLab 16.5, you can export individual wiki pages as PDF files. Now, sharin
 You can now add a child item for a task, objective, or key result by using the `/add_child` quick action.
 
 ### Linked items widget in tasks, objectives, and key results
+
+<!-- categories: Portfolio Management -->
 
 {{< details >}}
 
@@ -370,6 +418,8 @@ When we migrate [epics](https://gitlab.com/groups/gitlab-org/-/epics/9290) and [
 
 ### Set a parent for a task, objective, or key result with a quick action
 
+<!-- categories: Portfolio Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -381,6 +431,8 @@ When we migrate [epics](https://gitlab.com/groups/gitlab-org/-/epics/9290) and [
 You can now set a parent item for a task, objective, or key result by using the `/set_parent` quick action.
 
 ### DAST analyzer updates
+
+<!-- categories: DAST -->
 
 {{< details >}}
 
@@ -398,6 +450,8 @@ During the 16.5 release milestone, we enabled the following active checks for br
 
 ### Make jobs API endpoint rate limit configurable
 
+<!-- categories: Continuous Integration (CI) -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -411,6 +465,8 @@ defaulting to 600 requests per minute per user. As a follow up iteration, we are
 configurable, enabling instance administrators to set the limit that best matches their requirements.
 
 ### GitLab Runner 16.5
+
+<!-- categories: GitLab Runner Core -->
 
 {{< details >}}
 

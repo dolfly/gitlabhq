@@ -62,6 +62,8 @@ open source community! 🙌
 
 ### Semantic versioning in the CI/CD catalog
 
+<!-- categories: Pipeline Composition -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -76,6 +78,8 @@ When using a component with the `include: component` syntax, you should use the 
 
 ### GitLab Duo access governance control
 
+<!-- categories: Duo Chat -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -88,6 +92,8 @@ Generative AI is revolutionizing work processes, and you can now facilitate the 
 You can now disable GitLab Duo AI features for a project, a group, or an instance by using the API. You can then enable GitLab Duo for specific projects or groups when you’re ready. These changes are part of a suite of expected work to make AI features more granular to control.
 
 ### Wiki templates
+
+<!-- categories: Wiki -->
 
 {{< details >}}
 
@@ -103,6 +109,8 @@ With this enhancement, you can make your wiki page layouts more consistent, crea
 
 ### New ClickHouse integration for high-performance DevOps Analytics
 
+<!-- categories: Value Stream Management -->
+
 {{< details >}}
 
 - Tier: Gold
@@ -116,6 +124,8 @@ The [Contribution Analytics report](../../user/group/contribution_analytics/_ind
 Although ClickHouse enhances GitLab’s analytics capabilities, it’s not meant to replace PostgreSQL or Redis, and the existing capabilities remain unchanged.
 
 ### GitLab Pages and Advanced Search available on GitLab Dedicated
+
+<!-- categories: GitLab Dedicated -->
 
 {{< details >}}
 
@@ -132,6 +142,8 @@ With GitLab Pages, you can publish static websites directly from a repository in
 
 ### Offload CI traffic to Geo secondaries
 
+<!-- categories: Geo-replication -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -144,6 +156,8 @@ You can now offload CI runner traffic to Geo secondary sites. Locate runner flee
 ## Scale and Deployments
 
 ### GitLab chart improvements
+
+<!-- categories: Cloud Native Installation -->
 
 {{< details >}}
 
@@ -159,6 +173,8 @@ GitLab 16.10 includes support for installing GitLab on Kubernetes 1.27. For more
 Kubernetes closer to their official release.
 
 ### Omnibus improvements
+
+<!-- categories: Omnibus Package -->
 
 {{< details >}}
 
@@ -179,6 +195,8 @@ Mattermost 9.5 includes various security updates and the deprecation of support 
 
 ### Filter members by Enterprise users with GraphQL API
 
+<!-- categories: Groups & Projects -->
+
 {{< details >}}
 
 - Tier: Free, Silver, Gold
@@ -190,6 +208,8 @@ Mattermost 9.5 includes various security updates and the deprecation of support 
 With the GraphQL API you can now filter group members by Enterprise users.
 
 ### Blocked users are excluded from the followers list
+
+<!-- categories: User Profile -->
 
 {{< details >}}
 
@@ -205,6 +225,8 @@ Thank you @SethFalco for this community contribution!
 
 ### Filter groups by visibility in the REST API
 
+<!-- categories: Groups & Projects -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -219,6 +241,8 @@ Thank you @imskr for this community contribution!
 
 ### Updated project deletion functionality
 
+<!-- categories: Groups & Projects -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -230,6 +254,8 @@ Thank you @imskr for this community contribution!
 Now it’s easier to identify deleted projects in project lists. From GitLab 16.10, deleted projects display a `Pending deletion` badge next to the project title on the project overview page. An alert message clarifies that deleted projects are read-only. This message is visible on all project pages to ensure that this context is not lost even when working on sub-pages of the deleted project.
 
 ### Threaded notifications supported in Google Chat
+
+<!-- categories: Integrations -->
 
 {{< details >}}
 
@@ -246,6 +272,8 @@ Thanks to [Robbie Demuth](https://gitlab.com/robbie-demuth) for [this community 
 
 ### Custom payload template for webhooks
 
+<!-- categories: Webhooks -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -261,6 +289,8 @@ With this release, you can set a custom payload template in the webhook configur
 Thanks to [Niklas](https://gitlab.com/Taucher2003) for [this community contribution](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/142738)!
 
 ### Create Service Desk tickets from the UI and API
+
+<!-- categories: Service Desk -->
 
 {{< details >}}
 
@@ -280,6 +310,8 @@ Adding a Service Desk ticket using the API follows the same concept: Create an i
 
 ### Automatically collapse generated files in merge requests
 
+<!-- categories: Code Review Workflow -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -298,6 +330,8 @@ You can leave feedback on this change in [issue 438727](https://gitlab.com/gitla
 
 ### Expanded checks in merge widget
 
+<!-- categories: Code Review Workflow -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -311,6 +345,8 @@ When you view a merge request, the merge widget now gives you a comprehensive vi
 
 ### Manually refresh the dashboard for Kubernetes
 
+<!-- categories: Environment Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -322,6 +358,8 @@ When you view a merge request, the merge widget now gives you a comprehensive vi
 GitLab 16.10 adds a dedicated refresh feature to the dashboard for Kubernetes. Now you can manually fetch Kubernetes resource data, and ensure you have access to the most recent information about your clusters.
 
 ### Improved environment details page
+
+<!-- categories: Environment Management -->
 
 {{< details >}}
 
@@ -335,6 +373,8 @@ The environment details page is improved in GitLab 16.10. When you select an env
 
 ### Improved error message for authentication rate limit
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -346,6 +386,8 @@ The environment details page is improved in GitLab 16.10. When you select an env
 When authenticating with GitLab, it is possible to hit the authentication attempt rate limit, such as when using a script. Previously, if you hit the authentication rate limit, a `403 Forbidden` message was returned, which did not explain why you are getting this error. We now return a more descriptive error message which tells you that you’ve hit the authentication rate limit.
 
 ### Audit event `scope` attribute
+
+<!-- categories: Compliance Management -->
 
 {{< details >}}
 
@@ -365,6 +407,8 @@ You can use this new attribute to parse through external streaming destinations 
 
 ### Custom names for service accounts
 
+<!-- categories: User Management -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -377,6 +421,8 @@ You can now customize a service account’s username and display name. Previousl
 
 ### Audit event for assigning a custom role
 
+<!-- categories: Permissions -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -388,6 +434,8 @@ You can now customize a service account’s username and display name. Previousl
 GitLab now records an audit event when a user is assigned a different role, regardless of whether that role is a default role or a custom role. This event is important to identify if user permissions have been added or changed in case of privilege escalation.
 
 ### New permissions for custom roles
+
+<!-- categories: Permissions -->
 
 {{< details >}}
 
@@ -406,6 +454,8 @@ With the release of these custom permissions, you can reduce the number of Owner
 
 ### Scan result policies are now "Merge request approval policies"
 
+<!-- categories: Security Policy Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -420,6 +470,8 @@ Merge request approval policies do not replace or conflict with existing merge r
 
 ### Webhooks support mutual TLS
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -430,6 +482,8 @@ Merge request approval policies do not replace or conflict with existing merge r
 You can now configure webhooks to support mutual TLS. This configuration establishes the authenticity of the webhook source and enhances security. You configure the client certificate in PEM format, which is presented to the server during the TLS handshake. You can also protect the certificate with a PEM passphrase.
 
 ### Sign-in page improvements
+
+<!-- categories: System Access -->
 
 {{< details >}}
 
@@ -443,6 +497,8 @@ The GitLab sign-in page has been refreshed with improvements that fix spacing is
 
 ### Smart card support for Active Directory LDAP
 
+<!-- categories: User Management -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -453,6 +509,8 @@ The GitLab sign-in page has been refreshed with improvements that fix spacing is
 Smart card authentication against an LDAP server now supports Entra ID (formerly known as Azure Active Directory). This makes it easy to sync user identity data from Entra ID, and authenticate against LDAP with smart cards.
 
 ### Use merge base pipeline for merge request approval policy comparison
+
+<!-- categories: Security Policy Management -->
 
 {{< details >}}
 
@@ -467,6 +525,8 @@ Rather than comparing to the target branch’s latest completed `HEAD` pipeline,
 
 ### Support domain-level redirects for GitLab Pages
 
+<!-- categories: Pages -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -480,6 +540,8 @@ Previously, GitLab focused on supporting simple redirect rules. In GitLab 14.3, 
 From GitLab 16.10, GitLab Pages supports domain-level redirects. You can combine domain-level redirects with [splat rules](https://gitlab.com/gitlab-org/gitlab-pages/-/issues/601) to dynamically rewrite the URL path. This improvement helps prevent confusion and ensure that you can still find your information after a domain change, even if you use an old domain.
 
 ### List repository tags with the new container registry API
+
+<!-- categories: Container Registry -->
 
 {{< details >}}
 
@@ -498,6 +560,8 @@ This improvement is available only on GitLab.com. Self-managed support is blocke
 
 ### New contributor count metric in the Value Streams Dashboard
 
+<!-- categories: Value Stream Management -->
+
 {{< details >}}
 
 - Tier: Gold
@@ -512,6 +576,8 @@ The **Contributor count** metric is available only on GitLab.com, and requires t
 
 ### Inherited filters in Value Stream Analytics for seamless and accurate workflow analysis
 
+<!-- categories: Value Stream Management -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -523,6 +589,8 @@ The **Contributor count** metric is available only on GitLab.com, and requires t
 [Value stream analytics](../../user/group/value_stream_analytics/_index.md) now applies the same filters when drilling down from the **Lead time** tile to the [**Issue Analytics** report](../../user/group/issues_analytics/_index.md). The filter inheritance helps you dive deeper and seamlessly into data as you switch between analytics views.
 
 ### Add an issue to the current or next iteration with a quick action
+
+<!-- categories: Team Planning -->
 
 {{< details >}}
 
@@ -536,6 +604,8 @@ The `/iteration` quick action now accepts a cadence reference with `--current` o
 
 ### Continuous Vulnerability Scanning available by default for Container Scanning
 
+<!-- categories: Software Composition Analysis -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -548,6 +618,8 @@ Continuous Vulnerability Scanning for Container Scanning is now available by def
 
 ### Improved Dependency Scanning support for sbt
 
+<!-- categories: Software Composition Analysis -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -559,6 +631,8 @@ Continuous Vulnerability Scanning for Container Scanning is now available by def
 We have updated the mechanism we use to generate the list of dependencies for projects using sbt. This change is only applicable to projects using sbt version 1.7.2 and later. To fully leverage Dependency Scanning for sbt projects, you should upgrade to sbt version 1.7.2 and later.
 
 ### DAST analyzer performance updates
+
+<!-- categories: DAST -->
 
 {{< details >}}
 
@@ -578,6 +652,8 @@ We also completed the following browser-based DAST crawler performance improveme
 - Optimize JSON unmarshalling of DevTools messages. This reduced scan time by 7%. For more information, see [issue 439726](https://gitlab.com/gitlab-org/gitlab/-/issues/439726).
 
 ### GitLab Runner 16.10
+
+<!-- categories: GitLab Runner Core -->
 
 {{< details >}}
 

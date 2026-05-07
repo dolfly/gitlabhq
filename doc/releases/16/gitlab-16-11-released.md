@@ -50,6 +50,8 @@ A big thanks to our newest MVPs, Ivan and Baptiste, and to the rest of GitLab’
 
 ### GitLab Duo Chat now generally available
 
+<!-- categories: Duo Chat -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -76,6 +78,8 @@ Feel free to share your thoughts by clicking the feedback button in the chat or 
 
 ### GitLab Duo Chat available in JetBrains IDEs
 
+<!-- categories: Editor Extensions -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -91,6 +95,8 @@ As part of GitLab’s AI offerings, Duo Chat further streamlines the developer e
 For a complete list of capabilities, see our [Duo Chat documentation](../../user/gitlab_duo_chat/_index.md).
 
 ### Security policy scopes
+
+<!-- categories: Security Policy Management -->
 
 {{< details >}}
 
@@ -111,6 +117,8 @@ While today all policies managed in a security policy project are enforced again
 
 ### Understand your users better with Product Analytics
 
+<!-- categories: Product Analytics Visualization -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -129,6 +137,8 @@ data for visualization.
 
 ### Disable personal access tokens for Enterprise Users
 
+<!-- categories: User Management -->
+
 {{< details >}}
 
 - Tier: Silver, Gold
@@ -142,6 +152,8 @@ GitLab.com group Owners can now disable the creation and use of personal access 
 This granular control gives options when it comes to balancing security and accessibility on GitLab.com.
 
 ### Autocomplete support for links to wiki pages
+
+<!-- categories: Wiki -->
 
 {{< details >}}
 
@@ -159,6 +171,8 @@ issue, and use the autocomplete shortcut to seamlessly link to your wiki pages f
 
 ### Sidebar for metadata on the project overview page
 
+<!-- categories: Groups & Projects -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -170,6 +184,8 @@ issue, and use the autocomplete shortcut to seamlessly link to your wiki pages f
 We’ve redesigned the project overview page. Now you can find all of the project information and links in one sidebar rather than multiple areas.
 
 ### Email notifications for changes made using Switchboard
+
+<!-- categories: GitLab Dedicated, Switchboard -->
 
 {{< details >}}
 
@@ -184,6 +200,8 @@ Configuration changes made to your GitLab Dedicated instance by tenant administr
 All users with access to view or edit your tenant in Switchboard will receive a notification for each change made.
 
 ### Option to cancel a pipeline immediately if any jobs fails
+
+<!-- categories: Continuous Integration (CI) -->
 
 {{< details >}}
 
@@ -203,6 +221,8 @@ Special thanks to [Marco](https://gitlab.com/zillemarco) for contributing to the
 
 ### Omnibus improvements
 
+<!-- categories: Omnibus Package -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -214,6 +234,8 @@ Special thanks to [Marco](https://gitlab.com/zillemarco) for contributing to the
 `attempt_auto_pg_upgrade?` setting to `true`, which will attempt to automatically upgrade the version of PostgreSQL to 14.This process is the same as for last time we bumped the minimum-supported PostgreSQL version.
 
 ### Updated project archiving functionality
+
+<!-- categories: Groups & Projects -->
 
 {{< details >}}
 
@@ -230,6 +252,8 @@ An alert message clarifies that archived projects are read-only. This message is
 In addition, when deleting a group, the confirmation modal now lists the number of archived projects to prevent accidental deletions.
 
 ### Custom webhook headers
+
+<!-- categories: Webhooks -->
 
 {{< details >}}
 
@@ -254,6 +278,8 @@ Thanks to [Niklas](https://gitlab.com/Taucher2003) for [this community contribut
 
 ### Test project hooks with the REST API
 
+<!-- categories: Webhooks -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -268,6 +294,8 @@ Thanks to [Phawin](https://gitlab.com/lifez) for [this community contribution](h
 
 ### GitLab for Slack app configurable for groups and instances
 
+<!-- categories: Integrations -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -281,6 +309,8 @@ Previously, you could configure the GitLab for Slack app for one project at a ti
 This improvement brings the GitLab for Slack app closer to feature parity with the deprecated [Slack notifications integration](../../user/project/integrations/slack.md).
 
 ### Configurable import jobs limit
+
+<!-- categories: Importers -->
 
 {{< details >}}
 
@@ -302,6 +332,8 @@ of self-managed GitLab instances can now configure the number of import jobs acc
 
 ### Explore your Product Analytics data with GitLab Duo
 
+<!-- categories: Product Analytics Visualization -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -322,6 +354,8 @@ You can help us mature this feature by providing feedback about your experience 
 
 ### Group comment templates
 
+<!-- categories: Code Review Workflow, Team Planning -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -340,6 +374,8 @@ We’re really excited about this next iteration of comment templates and will a
 
 ### Build step of Auto DevOps upgraded
 
+<!-- categories: Auto DevOps -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -355,6 +391,8 @@ This breaking change arrives outside a GitLab major release to accommodate a bre
 Additionally, we’re planning another major upgrade from `heroku/builder:20` to `heroku/builder:22` in GitLab 17.0.
 
 ### Users list search and filter improvements
+
+<!-- categories: System Access -->
 
 {{< details >}}
 
@@ -373,6 +411,8 @@ Thank you [Ivan Shtyrliaiev](https://www.linkedin.com/in/bahek2462774/) for your
 
 ### Webhook notifications for expiring group and project access tokens
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -386,6 +426,8 @@ Webhook events for project and group access tokens are now available.
 Previously, email was the only way to get notifications about expiring tokens. A webhook event, if triggered, will be triggered seven days before an access token expires.
 
 ### Display linked Security Policies in Compliance Frameworks
+
+<!-- categories: Compliance Management -->
 
 {{< details >}}
 
@@ -403,6 +445,8 @@ through these extensive controls and then roll them up to a compliance framework
 
 ### Renew application secret with API
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -415,6 +459,8 @@ You can now use the Applications API to renew application secrets. Previously, y
 Thank you [Phawin](https://gitlab.com/lifez) for your contribution!
 
 ### Extend policy bot comment with violation data
+
+<!-- categories: Security Policy Management -->
 
 {{< details >}}
 
@@ -435,6 +481,8 @@ With these extra details, you can now more quickly understand the state of your 
 
 ### Authenticate to Google Cloud with workload identity federation
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Free, Silver, Gold
@@ -451,6 +499,8 @@ This feature is in Beta and is currently available only on GitLab.com.
 
 ### Issue with duplicate security policies resolved
 
+<!-- categories: Security Policy Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -464,6 +514,8 @@ In GitLab 16.9 and earlier, it was possible for a project to both inherit securi
 This issue has been resolved and it is no longer possible to link to a security policies project from which policies are already inherited.
 
 ### More username options
+
+<!-- categories: User Management -->
 
 {{< details >}}
 
@@ -482,6 +534,8 @@ Thank you [Justin Zeng](https://www.linkedin.com/in/jzeng88/) for your contribut
 
 ### Improved GitLab Pages visibility in sidebar
 
+<!-- categories: Pages -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -495,6 +549,8 @@ In previous releases, for projects with a GitLab Pages site, it was difficult to
 From GitLab 16.11, the right sidebar has a shortcut link to the site, so you can find the URL without needing to check the docs.
 
 ### Connect Google Artifact Registry to your GitLab project
+
+<!-- categories: Container Registry -->
 
 {{< details >}}
 
@@ -513,6 +569,8 @@ This feature is in Beta and is currently available only on GitLab.com.
 
 ### Visually distinguish epics using colors
 
+<!-- categories: Portfolio Management -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -527,6 +585,8 @@ Quickly distinguish between group ownership, stage in a lifecycle, development t
 
 ### Value stream events can now be calculated cumulatively
 
+<!-- categories: Value Stream Management -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -540,6 +600,8 @@ We introduced a more robust method for calculating durations between label event
 Now, the duration is calculated as cumulative time, meaning it now correctly represents only the time when an issue or merge request had a given label.
 
 ### Dependency graph support for dependency scanning SBOMs
+
+<!-- categories: Software Composition Analysis -->
 
 {{< details >}}
 
@@ -558,6 +620,8 @@ Users can access dependency graph information in CycloneDX SBOMs generated as a 
 
 ### Dependency Scanning support for Yarn v4
 
+<!-- categories: Software Composition Analysis -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -569,6 +633,8 @@ Users can access dependency graph information in CycloneDX SBOMs generated as a 
 Dependency Scanning supports Yarn v4. This enhancement allows our analyzer to parse Yarn v4 lockfiles.
 
 ### DAST analyzer performance updates
+
+<!-- categories: DAST -->
 
 {{< details >}}
 
@@ -584,6 +650,8 @@ During the 16.11 release milestone we completed the following DAST improvements:
 
 ### Automate the creation of Google Compute Engine Runners from GitLab - Public Beta
 
+<!-- categories: GitLab Runner Core -->
+
 {{< details >}}
 
 - Tier: Free, Silver, Gold
@@ -597,6 +665,8 @@ Previously, creating GitLab Runners in Google Compute Engine required multiple c
 Now, you can easily provision GitLab Runners in Google Compute Engine with a terraform template from the GitLab Runner Infrastructure Toolkit and GitLab to deploy a GitLab runner and provision the Google Cloud infrastructure - without having to switch between multiple systems.
 
 ### Improve automatic retry for failed CI jobs with specific exit codes
+
+<!-- categories: Pipeline Composition -->
 
 {{< details >}}
 
@@ -618,6 +688,8 @@ Thanks to [Baptiste Lalanne](https://gitlab.com/BaptisteLalanne) for this commun
 
 ### GitLab Runner 16.11
 
+<!-- categories: GitLab Runner Core -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -636,6 +708,8 @@ The list of all changes is in the GitLab Runner [CHANGELOG](https://gitlab.com/g
 
 ### Expanded Hashicorp Vault Secrets support, including Artifactory and AWS
 
+<!-- categories: Secrets Management -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -650,6 +724,8 @@ Thanks so much to [Ivo Ivanov](https://gitlab.com/urbanwax) for this great contr
 
 ### Control who can download job artifacts
 
+<!-- categories: Pipeline Composition -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -662,6 +738,8 @@ By default, all generated artifacts from CI/CD jobs in a public pipeline are ava
 So in this release, we’ve added the `artifacts:access` keyword. Now, users can control whether artifacts can be downloaded by all users with access to the pipeline, only users with the Developer role or higher, or no user at all.
 
 ### Improved pipeline details page
+
+<!-- categories: Pipeline Composition -->
 
 {{< details >}}
 

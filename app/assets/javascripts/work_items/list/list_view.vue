@@ -153,6 +153,11 @@ export default {
       required: false,
       default: null,
     },
+    workItemsCount: {
+      type: Number,
+      required: false,
+      default: 0,
+    },
   },
   emits: [
     'refetch-data',
@@ -174,15 +179,9 @@ export default {
       return this.isManualOrdering ? VueDraggable : 'ul';
     },
     skeletonItemCount() {
-      const { totalItems, defaultPageSize, currentPage } = this;
-      const totalPages = Math.ceil(totalItems / defaultPageSize);
-
-      if (totalPages) {
-        return currentPage < totalPages
-          ? defaultPageSize
-          : totalItems % defaultPageSize || defaultPageSize;
-      }
-      return DEFAULT_SKELETON_COUNT;
+      const { workItemsCount, pageSize } = this;
+      const totalPages = Math.ceil(workItemsCount / pageSize);
+      return totalPages ? pageSize : DEFAULT_SKELETON_COUNT;
     },
     checkedIssuables() {
       return this.workItems.filter((issuable) => this.checkedIssuableIds.includes(issuable.id));

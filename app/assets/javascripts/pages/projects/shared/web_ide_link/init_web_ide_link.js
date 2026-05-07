@@ -12,7 +12,7 @@ const apolloProvider = new VueApollo({
   defaultClient: createDefaultClient(),
 });
 
-export default ({ el, router }) => {
+export function initWebIdeLink({ el, router }) {
   if (!el) return;
 
   const { projectPath, ref, isBlob, webIdeUrl, showGitpodButton, gitpodEnabled, ...options } =
@@ -56,4 +56,4 @@ export default ({ el, router }) => {
       });
     },
   });
-};
+}

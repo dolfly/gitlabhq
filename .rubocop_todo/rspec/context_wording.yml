@@ -1620,7 +1620,6 @@ RSpec/ContextWording:
     - 'spec/lib/gitlab/process_supervisor_spec.rb'
     - 'spec/lib/gitlab/profiler_spec.rb'
     - 'spec/lib/gitlab/project_authorizations_spec.rb'
-    - 'spec/lib/gitlab/project_search_results_spec.rb'
     - 'spec/lib/gitlab/prometheus_client_spec.rb'
     - 'spec/lib/gitlab/query_limiting/middleware_spec.rb'
     - 'spec/lib/gitlab/query_limiting_spec.rb'

@@ -43,6 +43,8 @@ Thanks to Yuri for his valuable contribution!
 
 ### All new navigation experience
 
+<!-- categories: Navigation & Settings -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -68,6 +70,8 @@ Please try the new navigation and let us know about your experience in [this iss
 
 ### Visualize Kubernetes resources in GitLab
 
+<!-- categories: Deployment Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -82,6 +86,8 @@ This feature works with every connected Kubernetes cluster. It doesn’t matter 
 
 ### Authenticate with service accounts
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -95,6 +101,8 @@ There are many use cases for which a non-human user might need to authenticate. 
 Service accounts are not tied to a human user, and are more granular in scope. Service account creation and management is API-only. Support for a UI option is proposed in [issue 9965](https://gitlab.com/groups/gitlab-org/-/epics/9965).
 
 ### GitLab Dedicated is now generally available
+
+<!-- categories: GitLab Dedicated -->
 
 {{< details >}}
 
@@ -112,6 +120,8 @@ Customers in highly-regulated industries are unable to adopt multi-tenant SaaS o
 
 ### Manage job artifacts through the Artifacts page
 
+<!-- categories: Build Artifacts -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -127,6 +137,8 @@ Users with at least the Maintainer role can use this new interface to delete art
 Please use the survey at the top of the Artifacts page to share any feedback you have about this new functionality. To view additional UI features under consideration, you can check out the [Build Artifacts page enhancements epic](https://gitlab.com/groups/gitlab-org/-/epics/8311).
 
 ### Improved CI/CD variables list view
+
+<!-- categories: Secrets Management -->
 
 {{< details >}}
 
@@ -144,6 +156,8 @@ In GitLab 16.1, you will see the first iteration of these improvements. We have 
 
 ### GitLab chart improvements
 
+<!-- categories: Cloud Native Installation -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -157,6 +171,8 @@ with optional local overrides.
 
 ### Omnibus improvements
 
+<!-- categories: Omnibus Package -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -168,6 +184,8 @@ with optional local overrides.
 [Debian 12 `Bookworm`](https://www.debian.org/releases/bookworm/) that released on June 10, 2023.
 
 ### Improved domain verification
+
+<!-- categories: User Management -->
 
 {{< details >}}
 
@@ -183,6 +201,8 @@ Now, domain verification lives at the group level, and has been streamlined. Thi
 
 ### View Vulnerability Report as Customizable Permission
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -194,6 +214,8 @@ Now, domain verification lives at the group level, and has been streamlined. Thi
 The ability to view the vulnerability report is now split into a separate permission, enabling GitLab administrators and group owners to create a custom role with this permission. Previously, viewing the vulnerability report was limited to the Developer role and above. Now, any user can view the vulnerability report, as long as they are assigned a custom role that has the permission.
 
 ### Password reset email sent to any verified email address
+
+<!-- categories: User Management -->
 
 {{< details >}}
 
@@ -207,6 +229,8 @@ If you forget your GitLab password, you can now reset it by email with any verif
 
 ### SCIM identities included in users API response
 
+<!-- categories: System Access, API -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -219,6 +243,8 @@ The users API now returns the SCIM identities for a user. Previously, this infor
 
 ### Reintroduction of OmniAuth Shibboleth support
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -229,6 +255,8 @@ The users API now returns the SCIM identities for a user. Previously, this infor
 Shibboleth OmniAuth support has been re-introduced to GitLab. It was previously [removed](https://gitlab.com/gitlab-org/gitlab/-/issues/388959) in GitLab 15.9 due to lack of upstream support. Thanks to a generous community contribution by [lukaskoenen](https://gitlab.com/lukaskoenen), who took on upstream support, `omniauth-shibboleth-redux` is now supported in self-managed GitLab.
 
 ### Select administrator access for personal access tokens in Admin Mode
+
+<!-- categories: System Access -->
 
 {{< details >}}
 
@@ -243,6 +271,8 @@ Thank you [Jonas Wälter](https://gitlab.com/wwwjon), [Diego Louzán](https://gi
 
 ### Prevent user from deleting account
 
+<!-- categories: User Management -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -253,6 +283,8 @@ Thank you [Jonas Wälter](https://gitlab.com/wwwjon), [Diego Louzán](https://gi
 Administrators can prevent users from deleting their account with a new user restrictions configuration setting. If this setting is enabled, users will no longer be able to delete their accounts, preserving auditable account information.
 
 ### Personal access token `last_used` value updated more frequently
+
+<!-- categories: System Access -->
 
 {{< details >}}
 
@@ -267,6 +299,8 @@ The `last_used` value for personal access tokens (PAT) was previously updated ev
 Thank you [Jacob Torrey](https://thinkst.com/) for your contribution!
 
 ### More detail in completed GitHub project import summary
+
+<!-- categories: Importers -->
 
 {{< details >}}
 
@@ -285,6 +319,8 @@ and helps you troubleshoot problems.
 
 ### Show external user as a comment author in Service Desk issues
 
+<!-- categories: Service Desk -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -296,6 +332,8 @@ When a requester replies to a Service Desk email, it is useful to the Service De
 
 ### Issue URL placeholder in Service Desk emails
 
+<!-- categories: Service Desk -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -306,6 +344,8 @@ When a requester replies to a Service Desk email, it is useful to the Service De
 For Service Desk requesters, it can be helpful to access the Service Desk issue directly rather than interact with the Service Desk request only via email. We are introducing a new placeholder `%{ISSUE_URL}`, that you can use in your email templates (for example, the “thank you” email) to link requesters directly to the Service Desk issue.
 
 ### Backup adds the ability to skip projects
+
+<!-- categories: Backup/Restore of GitLab instances -->
 
 {{< details >}}
 
@@ -319,6 +359,8 @@ Thanks to [Yuri Konotopov](https://gitlab.com/nE0sIghT) for this [community cont
 
 ### Geo adds filtering by replication status to all components
 
+<!-- categories: Geo-replication, Disaster Recovery -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -329,6 +371,8 @@ Thanks to [Yuri Konotopov](https://gitlab.com/nE0sIghT) for this [community cont
 Geo adds filtering by replication status to all components managed by the [self-service framework](../../development/geo/framework.md). Now you can filter items in the replication details views by “In progress”, “Failed”, and “Synced” status making it easier and faster to locate data that is failing to synchronize.
 
 ### Geo verifies Design repositories
+
+<!-- categories: Geo-replication, Disaster Recovery -->
 
 {{< details >}}
 
@@ -343,6 +387,8 @@ When you add a design to an issue, a design Git repository is created or updated
 
 ### Comment on whole file in merge requests
 
+<!-- categories: Code Review Workflow -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -353,6 +399,8 @@ When you add a design to an issue, a design Git repository is created or updated
 Merge requests now support commenting on an entire file, because not all merge request feedback is line-specific. If a file is deleted, you might want more information about why. You might also want to provide feedback about a filename, or general comments about structure.
 
 ### Create a changelog from the GitLab CLI
+
+<!-- categories: GitLab CLI -->
 
 {{< details >}}
 
@@ -369,6 +417,8 @@ Thanks [Michael Mead](https://gitlab.com/michael-mead) for your contribution!
 
 ### Fail closed for invalid Security Policy approval checks
 
+<!-- categories: Security Policy Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -380,6 +430,8 @@ Thanks [Michael Mead](https://gitlab.com/michael-mead) for your contribution!
 Security and compliance policies allow organizations to enforce checks and balances across multiple projects to align with their security and governance programs. It’s critical for our customers to ensure changes that impact policies do not result in the guardrails coming down. With this update, invalid rules will “fail closed”, blocking MRs until invalid rules in any scan result policies are addressed.
 
 ### Install npm packages from your group or subgroup
+
+<!-- categories: Package Registry -->
 
 {{< details >}}
 
@@ -396,6 +448,8 @@ To make sharing packages easier between projects, you can now install packages f
 
 ### Add a description to design uploads
 
+<!-- categories: Portfolio Management, Design Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -407,6 +461,8 @@ To make sharing packages easier between projects, you can now install packages f
 Currently the [Design uploads](../../user/project/issues/design_management.md#add-a-design-to-an-issue) have no metadata to explain their purpose, or why they are being uploaded. We’ve added a text box as a description so you can help users understand the image better.
 
 ### Configure the static file directory in GitLab Pages
+
+<!-- categories: Pages -->
 
 {{< details >}}
 
@@ -421,6 +477,8 @@ This makes it easier to use Pages with popular static site frameworks such as Ne
 without needing to change the output folder in their configuration.
 
 ### Code Quality analyzer updates
+
+<!-- categories: Code Quality -->
 
 {{< details >}}
 
@@ -445,6 +503,8 @@ For Code Quality changes in previous releases, see [the most recent update](http
 
 ### SAST analyzer updates
 
+<!-- categories: SAST -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -463,6 +523,8 @@ To remain on a specific version of any analyzer and prevent automatic updates, y
 For previous changes, see [last month’s updates](https://about.gitlab.com/releases/2023/05/22/gitlab-16-0-released/#sast-analyzer-updates).
 
 ### Automatic response to leaked Google Cloud secrets
+
+<!-- categories: Secret Detection -->
 
 {{< details >}}
 
@@ -487,6 +549,8 @@ See [the blog post about this integration](https://about.gitlab.com/blog/how-sec
 
 ### Clearer guidance and better coverage for SAST rules
 
+<!-- categories: SAST -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -507,6 +571,8 @@ As of GitLab 16.1, the [`sast-rules` project](https://gitlab.com/gitlab-org/secu
 
 ### Shared ruleset customizations in SAST, IaC Scanning, and Secret Detection
 
+<!-- categories: SAST, Secret Detection -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -526,6 +592,8 @@ Further improvements in this area are discussed in [an issue](https://gitlab.com
 
 ### CI/CD: Use `needs` in `rules`
 
+<!-- categories: Pipeline Composition -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -536,6 +604,8 @@ Further improvements in this area are discussed in [an issue](https://gitlab.com
 The [needs:](../../ci/yaml/_index.md#needs) keyword defines a dependency relationship between jobs, which you can use to set jobs to run out of stage order. In this release we’ve added the ability to define this relationship for specific `rules` conditions. When a condition matches a rule, the job’s `needs` configuration is completely replaced with the `needs` in the rule. This can help speed up a pipeline based on your defined conditions, when a job can start earlier than normal. You can also use this to force a job to wait for an earlier one to complete before starting, you now have more flexible `needs` options!
 
 ### Beautify the UI of CI/CD pipelines and jobs
+
+<!-- categories: Continuous Integration (CI) -->
 
 {{< details >}}
 
@@ -548,6 +618,8 @@ The [needs:](../../ci/yaml/_index.md#needs) keyword defines a dependency relatio
 One of GitLab’s most used features is CI/CD. In 16.1, we focused on improving the usability and experience of CI/CD pipeline and job list views, as well as the pipeline details page. It’s now easier to find the information you are looking for! If you have any comments about the changes, we’d love to hear from you in our [feedback issue](https://gitlab.com/gitlab-org/gitlab/-/issues/414756).
 
 ### Increased storage for GitLab SaaS runners on Linux
+
+<!-- categories: GitLab Runner SaaS -->
 
 {{< details >}}
 
@@ -563,6 +635,8 @@ You can now seamlessly build, test, and deploy larger applications that require 
 
 ### CI/CD job token scope API endpoint
 
+<!-- categories: Secrets Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -577,6 +651,8 @@ To make this setting configurable through the REST API as well, [Gerardo Navarro
 
 ### Runner details - consolidate runners sharing a configuration
 
+<!-- categories: Runner Fleet -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -587,6 +663,8 @@ To make this setting configurable through the REST API as well, [Gerardo Navarro
 The new runner creation method enables you to re-use a runner configuration for scenarios where you may need to register multiple runners with the same capabilities. Runners registered with the same authentication token share a configuration and are grouped in the new detailed view.
 
 ### GitLab Runner 16.1
+
+<!-- categories: GitLab Runner Core -->
 
 {{< details >}}
 

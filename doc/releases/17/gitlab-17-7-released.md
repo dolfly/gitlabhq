@@ -34,6 +34,8 @@ We are so grateful to Vedant for all of his contributions and to all of our open
 
 ### New Planner user role
 
+<!-- categories: Portfolio Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -45,6 +47,8 @@ We are so grateful to Vedant for all of his contributions and to all of our open
 We’ve introduced the new Planner role to give you tailored access to Agile planning tools like epics, roadmaps, and Kanban boards without over-provisioning [permissions](../../user/permissions.md). This change helps you collaborate more effectively while keeping your workflows secure and aligned with the principle of least privilege.
 
 ### Instance administrators can control which integrations can be enabled
+
+<!-- categories: Integrations -->
 
 {{< details >}}
 
@@ -58,6 +62,8 @@ Instance administrators can now configure an allowlist to control which integrat
 Previously enabled integrations that are later blocked by the allowlist settings are disabled. If these integrations are allowed again, they are re-enabled with their existing configuration.
 
 ### New user contribution and membership mapping available in direct transfer
+
+<!-- categories: Importers -->
 
 {{< details >}}
 
@@ -78,6 +84,8 @@ For more information, see [streamline migrations with user contribution and memb
 
 ### Auto-resolve vulnerabilities when not found in subsequent scans
 
+<!-- categories: Vulnerability Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -91,6 +99,8 @@ GitLab’s [security scanning tools](../../user/application_security/_index.md) 
 We are introducing a new policy type *Vulnerability Management policy* for users who want vulnerabilities automatically set to Resolved when no longer detected by automated scanning. Simply configure a new policy with the new Auto-resolve option and apply it to the appropriate project(s). You can even configure the policy to only Auto-resolve vulnerabilities of a certain severity or from specific security scanners. Once in place, the next time the project’s default branch is scanned, any existing vulnerabilities that are no longer found will be marked as Resolved. The action updates the vulnerability record with an activity note, timestamp when the action occurred, and the pipeline the vulnerability was determined to be removed in.
 
 ### Rotate personal, project, and group access tokens in the UI
+
+<!-- categories: System Access -->
 
 {{< details >}}
 
@@ -106,6 +116,8 @@ Thank you [shangsuru](https://gitlab.com/shangsuru) for your contribution!
 
 ### Track CI/CD component usage across projects
 
+<!-- categories: Pipeline Composition -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -119,6 +131,8 @@ To address this, we’ve added a new GraphQL query that enables DevOps teams to 
 This capability empowers DevOps teams to enhance productivity and make better decisions by providing crucial insights.
 
 ### Small hosted runner on Linux Arm available to all Tiers
+
+<!-- categories: GitLab Hosted Runners -->
 
 {{< details >}}
 
@@ -138,6 +152,8 @@ We are determined to provide the industry’s fastest CI/CD build speed and look
 
 ### Omnibus improvements
 
+<!-- categories: Omnibus Package -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -154,6 +170,8 @@ FIPS Linux packages for AmazonLinux 2 will continue to use the same Libgcrypt bu
 ## Unified DevOps and Security
 
 ### Improved detection accuracy in Advanced SAST
+
+<!-- categories: SAST -->
 
 {{< details >}}
 
@@ -178,6 +196,8 @@ If you’ve already enabled Advanced SAST, the new rules are [automatically acti
 
 ### Efficient risk prioritization with KEV
 
+<!-- categories: Software Composition Analysis -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -191,6 +211,8 @@ In GitLab 17.7, we added support for the Known Exploited Vulnerabilities Catalog
 This data is available to composition analysis users through GraphQL. There is [planned work](https://gitlab.com/gitlab-org/gitlab/-/issues/427441) to support displaying this data in the GitLab UI.
 
 ### Expanded Code Flow view for Advanced SAST
+
+<!-- categories: SAST -->
 
 {{< details >}}
 
@@ -213,6 +235,8 @@ To learn more about Advanced SAST, see [the announcement blog](https://about.git
 
 ### New `/help` command in GitLab Duo Chat
 
+<!-- categories: Editor Extensions, Duo Chat -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -227,6 +251,8 @@ Discover GitLab Duo Chat’s powerful features! Just type `/help` in the chat me
 Give it a try and see how GitLab Duo Chat can make your work smoother and more efficient.
 
 ### Setting `environment.action: access` and `prepare` resets the `auto_stop_in` timer
+
+<!-- categories: Deployment Management -->
 
 {{< details >}}
 
@@ -251,6 +277,8 @@ Learn more about these proposed changes in the following issues:
 
 ### Kubernetes 1.31 support
 
+<!-- categories: Deployment Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -265,6 +293,8 @@ For more information, see our [Kubernetes support policy and other supported Kub
 
 ### Set namespace and Flux resource path from CI/CD job
 
+<!-- categories: Environment Management, Deployment Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -276,6 +306,8 @@ For more information, see our [Kubernetes support policy and other supported Kub
 To use the dashboard for Kubernetes, you need to select an agent for Kubernetes connection from the environment settings, and optionally configure a namespace and a Flux resource to track the reconciliation status. In GitLab 17.6, we added support for selecting an agent with a CI/CD configuration. However, configuring the namespace and the Flux resource still required you to use the UI or make an API call. In 17.7, you can fully configure the dashboard using the CI/CD syntax with the `environment.kubernetes.namespace` and `environment.kubernetes.flux_resource_path` attributes.
 
 ### Group and project access tokens in credentials inventory
+
+<!-- categories: System Access -->
 
 {{< details >}}
 
@@ -289,6 +321,8 @@ Group and project access tokens are now visible in the credentials inventory on 
 
 ### Extended token expiration notifications
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -300,6 +334,8 @@ Group and project access tokens are now visible in the credentials inventory on 
 Previously, token expiration email notifications were only sent seven days before expiry. Now, these notifications are also sent 30 and 60 days before expiry. The increased frequency and date range of notifications makes users more aware of tokens that may be expiring soon.
 
 ### Unicode 15.1 emoji support 🦖🍋‍🟩🐦‍🔥
+
+<!-- categories: Markdown -->
 
 {{< details >}}
 
@@ -318,6 +354,8 @@ and identities, helping everyone feel included when communicating on the platfor
 
 ### Set your preferred text editor as default
 
+<!-- categories: Text Editors -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -332,6 +370,8 @@ This update ensures smoother workflows by aligning the editor interface with ind
 
 ### New description field for access tokens
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -343,6 +383,8 @@ This update ensures smoother workflows by aligning the editor interface with ind
 When creating a personal, project, group, or impersonation access token, you can now optionally enter a description of that token. This helps provide extra context about the token, such as where and how is it used.
 
 ### Enable secret push protection in your groups with APIs
+
+<!-- categories: Secret Detection -->
 
 {{< details >}}
 
@@ -356,6 +398,8 @@ With this release, you can now enable secret push protection on all projects in 
 
 ### New API endpoint to list enterprise users
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Silver, Gold
@@ -368,6 +412,8 @@ Group Owners can now use a dedicated API endpoint to list enterprise users and a
 
 ### Remove Owner base role from custom roles
 
+<!-- categories: Permissions -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -379,6 +425,8 @@ Group Owners can now use a dedicated API endpoint to list enterprise users and a
 The Owner base role is no longer available when creating a custom role as it provided no additional value because permissions are additive. Existing custom roles with the Owner base role are not impacted by this change.
 
 ### Navigation and usability improvements for the compliance center
+
+<!-- categories: Compliance Management -->
 
 {{< details >}}
 

@@ -45,6 +45,8 @@ Thanks to Chaitanya for contributing to GitLab’s security foundation and the r
 
 ### Maven virtual registry now available in beta
 
+<!-- categories: Virtual Registry -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -61,6 +63,8 @@ The Maven virtual registry is currently available in beta for GitLab Premium and
 We invite enterprise customers to participate in the Maven virtual registry beta program to help shape the final release. Beta participants will receive early access to the capabilities, direct engagement with GitLab product teams, and priority support during evaluation. To join the beta program, express interest and provide your use case details in [issue 498139](https://gitlab.com/gitlab-org/gitlab/-/issues/498139), and share feedback and suggestions in [issue 543045](https://gitlab.com/gitlab-org/gitlab/-/issues/543045).
 
 ### Duo Code Review is now generally available
+
+<!-- categories: Code Review Workflow -->
 
 {{< details >}}
 
@@ -92,6 +96,8 @@ Share your experience and feedback in [issue 517386](https://gitlab.com/gitlab-o
 
 ### Compromised password detection for native GitLab credentials
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Free, Silver, Gold
@@ -110,6 +116,8 @@ Note: This feature is only available for native GitLab usernames and passwords. 
 
 ### Achieve [SLSA](https://slsa.dev/) Level 1 compliance with CI/CD components
 
+<!-- categories: Artifact Security -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -125,6 +133,8 @@ in reusable modules that can be easily integrated into CI/CD workflows.
 ## Scale and Deployments
 
 ### Multiple matches per file in code search
+
+<!-- categories: Code Search -->
 
 {{< details >}}
 
@@ -145,6 +155,8 @@ With this change, finding and understanding code patterns across your repositori
 
 ### New `accessLevels` argument for `projectMembers` in GraphQL API
 
+<!-- categories: Groups & Projects -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -163,6 +175,8 @@ This enhancement is particularly valuable to organizations managing large-scale 
 
 ### DAST detection parity with secret detection default rules
 
+<!-- categories: DAST -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -174,6 +188,8 @@ This enhancement is particularly valuable to organizations managing large-scale 
 The DAST analyzer now automatically ingests the same default secret detection rules that are used by GitLab’s Secret Detection analyzer. This improvement ensures consistency in the types of secrets detected by both.
 
 ### Define a `Name` for external custom controls
+
+<!-- categories: Compliance Management -->
 
 {{< details >}}
 
@@ -190,6 +206,8 @@ We’ve now added a `Name` field as part of the workflow when defining an extern
 create multiple external custom controls and clearly define each one with its own unique name.
 
 ### Pagination for requirements in compliance frameworks UI
+
+<!-- categories: Compliance Management -->
 
 {{< details >}}
 
@@ -209,6 +227,8 @@ select requirements when there is a large number of them attached to a complianc
 
 ### UI performance and filtering improvements for compliance center
 
+<!-- categories: Compliance Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -227,6 +247,8 @@ By delivering these improvements, we continue to ensure that the compliance cent
 continue to perform at scale for customers who regularly use the compliance center.
 
 ### Control status pop-up in the compliance status report
+
+<!-- categories: Compliance Management -->
 
 {{< details >}}
 
@@ -253,6 +275,8 @@ and which are potentially succeeding and failing, rather than just seeing a sing
 
 ### Enhanced merge request review experience with review panel
 
+<!-- categories: Code Review Workflow -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -266,6 +290,8 @@ When you review a merge request, it can be valuable to see all of the comments a
 When conducting code reviews, you can now access a dedicated drawer that consolidates all your pending draft comments in one organized view. The enhanced review panel moves the review submission interface to a more accessible location, and provides a numbered badge showing your pending comment count. When you open the panel, you’ll see all your draft comments organized in a scrollable list, making it easier to review and manage your feedback before submitting.
 
 ### Enhanced CODEOWNERS file validation with permission checks
+
+<!-- categories: Source Code Management -->
 
 {{< details >}}
 
@@ -288,6 +314,8 @@ This proactive validation helps prevent approval workflow disruptions by catchin
 
 ### Custom workspace initialization with `postStart` events
 
+<!-- categories: Workspaces -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -304,6 +332,8 @@ GitLab workspace now supports custom `postStart` events in your devfile, allowin
 
 ### View downstream pipeline job logs in VS Code
 
+<!-- categories: Editor Extensions -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -318,6 +348,8 @@ This feature was developed through the [GitLab Co-create program](https://about.
 
 ### View inactive personal access tokens
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -329,6 +361,8 @@ This feature was developed through the [GitLab Co-create program](https://about.
 GitLab automatically deactivates access tokens after they expire or are revoked. You can now review these inactive tokens. Previously, access tokens were no longer visible after they became inactive. This change enhances traceability and security of these token types.
 
 ### Epic support for GitLab Query Language views Beta
+
+<!-- categories: Wiki, Team Planning -->
 
 {{< details >}}
 
@@ -343,6 +377,8 @@ We’ve made a significant improvement to GitLab Query Language (GLQL) views. Yo
 This is a huge step forward for our planning and tracking capabilities, making it easier than ever to query and organize at the epic level.
 
 ### PHP support for Advanced SAST
+
+<!-- categories: SAST -->
 
 {{< details >}}
 
@@ -360,6 +396,8 @@ To see which types of vulnerabilities Advanced SAST detects in each language, se
 
 ### Filter by component version in the dependency list
 
+<!-- categories: Dependency Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -372,6 +410,8 @@ The dependency lists now supports filtering by a component’s version number. Y
 (for example, `version=1.1,1.2,1.4` ) but ranges are not supported. This feature is available in both groups and projects.
 
 ### Variable precedence controls in pipeline execution policies
+
+<!-- categories: Security Policy Management -->
 
 {{< details >}}
 
@@ -408,6 +448,8 @@ By solving this critical variable control challenge, GitLab enables organization
 
 ### Filter for bot and human users
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -424,6 +466,8 @@ Established GitLab instances can often have large numbers of human and bot users
 
 ### [ORCID](https://orcid.org/) identifier in user profile
 
+<!-- categories: User Profile -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -438,6 +482,8 @@ This feature was developed as a community contribution by Thomas Labalette and E
 
 ### Subscribe to service account pipeline notifications
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -451,6 +497,8 @@ You can now subscribe to notifications for pipeline events triggered by service 
 Thank you [Densett](https://gitlab.com/[Densett](https://gitlab.com/Densett)), [Gilles Dehaudt](https://gitlab.com/tonton1728), [Lenain](https://gitlab.com/lenaing), [Geoffrey McQuat](https://gitlab.com/gmcquat), and [Raphaël Bihoré](https://gitlab.com/rbihore) for your contribution!
 
 ### Increased SAST coverage for Duo Vulnerability Resolution
+
+<!-- categories: Vulnerability Management -->
 
 {{< details >}}
 
@@ -468,6 +516,8 @@ Previously, you had to manually resolve detected vulnerabilities with these Comm
 Now, Duo Vulnerability Resolution can automatically fix these vulnerabilities.
 
 ### GitLab Runner 18.1
+
+<!-- categories: GitLab Runner Core -->
 
 {{< details >}}
 

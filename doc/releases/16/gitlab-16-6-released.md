@@ -37,6 +37,8 @@ Our many thanks to Joe for continuing to improve GitLab!
 
 ### GitLab Duo Chat available in Beta
 
+<!-- categories: Duo Chat -->
+
 {{< details >}}
 
 - Tier: Gold
@@ -62,6 +64,8 @@ You can also help us mature these features by providing feedback about your expe
 
 ### Automatic claims of enterprise users
 
+<!-- categories: User Management -->
+
 {{< details >}}
 
 - Tier: Silver, Gold
@@ -73,6 +77,8 @@ You can also help us mature these features by providing feedback about your expe
 When a GitLab.com user’s primary email address matches an existing verified domain, the user is automatically claimed as an enterprise user. This gives the group Owner more user management controls and visibility into the user’s account. After a user becomes an enterprise user, they can only change their primary email to an email their organization owns as per its verified domains.
 
 ### Minimal forking - only include the default branch
+
+<!-- categories: Source Code Management -->
 
 {{< details >}}
 
@@ -91,6 +97,8 @@ The new option shows which branch is the default, so that you are aware of exact
 
 ### Allow users to enforce MR approvals as a compliance policy
 
+<!-- categories: Security Policy Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -107,6 +115,8 @@ Available in SaaS in 16.6. Available for Self-managed behind the feature flag `s
 
 ### Switchboard portal for GitLab Dedicated is now generally available
 
+<!-- categories: Switchboard, GitLab Dedicated -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -120,6 +130,8 @@ Switchboard, a new self-service portal, is now available for customers and team 
 Using Switchboard, you can now make some [configuration changes](../../administration/dedicated/_index.md) to your GitLab Dedicated instance. This functionality will expand in future releases.
 
 ### CI/CD components Beta release
+
+<!-- categories: Pipeline Composition -->
 
 {{< details >}}
 
@@ -135,6 +147,8 @@ Today we are excited to announce the Beta availability of CI/CD components. With
 If you try out CI/CD components, you are also welcome to try the new CI/CD catalog, currently available as an experimental feature. You can search the [Global CI/CD catalog](../../ci/components/_index.md) for components that others have created and published for public use. Additionally, if you create your own components, you can choose to publish them in the catalog too!
 
 ### Improved UI for CI/CD variable management
+
+<!-- categories: Secrets Management -->
 
 {{< details >}}
 
@@ -152,6 +166,8 @@ Your [feedback for this change](https://gitlab.com/gitlab-org/gitlab/-/issues/42
 
 ### Runner Fleet Dashboard - Starter metrics (Beta)
 
+<!-- categories: Runner Fleet -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -165,6 +181,8 @@ Operators of self-managed runner fleets need observability and the ability to qu
 
 ### Hide archived projects in search results by default
 
+<!-- categories: Global Search -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -177,6 +195,8 @@ Previously, users saw many archived projects in their project search results. Th
 
 ### Private group names are hidden from unauthorized users
 
+<!-- categories: Groups & Projects -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -188,6 +208,8 @@ Previously, users saw many archived projects in their project search results. Th
 Previously, the names of private groups were visible to all users when accessing the **Groups** tab of a project’s or group’s members page. To enhance security, we are now masking private groups’ name and source from users who are not members of the shared group, shared project, or invited group. Instead, this information will be displayed as **Private**.
 
 ### Comprehensive list of items that failed to be imported
+
+<!-- categories: Importers -->
 
 {{< details >}}
 
@@ -215,6 +237,8 @@ to import for a given group or project. For each item that wasn’t imported, yo
 
 ### Consistent navigation experience for all users
 
+<!-- categories: Navigation & Settings -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -234,6 +258,8 @@ As a recap, with the new GitLab navigation, you can:
 
 ### GitLab Silent Mode
 
+<!-- categories: Disaster Recovery -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -247,6 +273,8 @@ When GitLab Silent Mode is enabled, it blocks all major outbound traffic such as
 
 ### Real-time Kubernetes status updates in the GitLab UI
 
+<!-- categories: Deployment Management, Environment Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -258,6 +286,8 @@ When GitLab Silent Mode is enabled, it blocks all major outbound traffic such as
 In GitLab 16.6, you can use the cluster UI integration on your environment page to determine the status of currently running applications without leaving GitLab. Previously, the status was updated by a one-time request when the UI loaded, which made tracking deployment progress unwieldy. The current version of GitLab upgrades the underlying connection to use the Kubernetes watch API for the Flux reconciliation and Pod statuses, and provides near real-time updates of the cluster state in the GitLab UI.
 
 ### Connect to Kubernetes clusters with the GitLab CLI
+
+<!-- categories: GitLab CLI, Deployment Management -->
 
 {{< details >}}
 
@@ -272,6 +302,8 @@ From GitLab version 16.4, you can connect to a Kubernetes cluster from a local t
 The GitLab CLI can now list the agent connections available from a GitLab project checkout directory or the specified project. You can set up the connection through a selected agent with a dedicated command. When `kubectl` or any other tool needs to authenticate with the cluster, the GitLab CLI generates a temporary, restricted token for the signed-in user.
 
 ### Allow compliance teams to prevent pushing and force pushing into protected branches
+
+<!-- categories: Security Policy Management -->
 
 {{< details >}}
 
@@ -289,6 +321,8 @@ Available in SaaS in 16.6. Available for Self-managed behind the feature flag `s
 
 ### Group-level audit event streaming to AWS S3
 
+<!-- categories: Audit Events -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -303,6 +337,8 @@ for top-level groups. This feature provides relevant information for an easier a
 Previously, you had to use custom HTTP headers to try to build a request that AWS S3 would accept. This method was prone to errors and could be difficult to troubleshoot.
 
 ### Improved handling of unresponsive external status checks
+
+<!-- categories: Compliance Management -->
 
 {{< details >}}
 
@@ -319,6 +355,8 @@ response from the external system.
 
 ### Changes to the vulnerability report's Tool filter
 
+<!-- categories: Vulnerability Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -331,6 +369,8 @@ Previously, the vulnerability report allowed you to filter by a static list of G
 
 ### Service accounts have optional expiry dates
 
+<!-- categories: User Management -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -342,6 +382,8 @@ Previously, the vulnerability report allowed you to filter by a static list of G
 GitLab administrators and group Owners can choose if they want to enforce an expiry date for service accounts. Previously, service account tokens had to expire within a year, in line with personal, project, and group access token expiration limits. This allows administrators and group Owners to choose the balance between security and ease of use that best aligns with their goals.
 
 ### Prevent duplicate NuGet packages
+
+<!-- categories: Package Registry -->
 
 {{< details >}}
 
@@ -358,6 +400,8 @@ You can adjust this setting with the [GitLab API](../../api/graphql/reference/_i
 
 ### Upload packages to the Maven repository with basic HTTP authentication
 
+<!-- categories: Package Registry -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -370,6 +414,8 @@ The GitLab Package Registry now supports uploading Maven packages with basic HTT
 Publishing artifacts with `sbt` is not supported, but [issue 408479](https://gitlab.com/gitlab-org/gitlab/-/issues/408479) proposes to add this feature.
 
 ### Container Scanning: Exclude findings which won't be fixed
+
+<!-- categories: Software Composition Analysis -->
 
 {{< details >}}
 
@@ -384,6 +430,8 @@ you to focus on actionable findings, you can now exclude such findings. For conf
 
 ### Include CVSS Vectors in the vulnerability report export
 
+<!-- categories: Software Composition Analysis -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -397,6 +445,8 @@ This additional data helps you analyze and triage vulnerabilities outside GitLab
 
 ### Added support for SBT projects using Java 21
 
+<!-- categories: Software Composition Analysis -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -408,6 +458,8 @@ This additional data helps you analyze and triage vulnerabilities outside GitLab
 Dependency Scanning and License Scanning now support SBT projects using Java 21.
 
 ### DAST analyzer updates
+
+<!-- categories: DAST -->
 
 {{< details >}}
 
@@ -426,6 +478,8 @@ During the 16.6 release milestone, we enabled the following active checks for br
 
 ### macOS 14 (Sonoma) and Xcode 15 image support
 
+<!-- categories: GitLab Runner SaaS -->
+
 {{< details >}}
 
 - Tier: Silver, Gold
@@ -441,6 +495,8 @@ SaaS runners on macOS allow you to increase your development teams’ velocity i
 Try it out today by using `macos-14-xcode-15` as the image in your .GitLab-ci.yml file.
 
 ### GitLab Runner 16.6
+
+<!-- categories: GitLab Runner Core -->
 
 {{< details >}}
 

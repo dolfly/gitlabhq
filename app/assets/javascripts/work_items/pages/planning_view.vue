@@ -76,6 +76,7 @@ import {
 import searchLabelsQuery from '~/work_items/list/graphql/search_labels.query.graphql';
 import getWorkItemsQuery from 'ee_else_ce/work_items/list/graphql/get_work_items_full.query.graphql';
 import getWorkItemsSlimQuery from 'ee_else_ce/work_items/list/graphql/get_work_items_slim.query.graphql';
+import getWorkItemsRestQuery from '~/work_items/list/graphql/get_work_items_rest.query.graphql';
 import getWorkItemsCountOnlyQuery from 'ee_else_ce/work_items/list/graphql/get_work_items_count_only.query.graphql';
 import hasWorkItemsQuery from '~/work_items/list/graphql/has_work_items.query.graphql';
 import updateWorkItemListUserPreference from '~/work_items/graphql/update_work_item_list_user_preferences.mutation.graphql';
@@ -306,7 +307,11 @@ export default {
     },
 
     workItemsSlim() {
-      return this.createWorkItemQuery(getWorkItemsSlimQuery);
+      const query =
+        this.glFeatures.workItemRestApiFrontendUsers && this.glFeatures.workItemRestApi
+          ? getWorkItemsRestQuery
+          : getWorkItemsSlimQuery;
+      return this.createWorkItemQuery(query);
     },
 
     workItemsCount: {
@@ -503,10 +508,12 @@ export default {
 
   computed: {
     workItems() {
+      const useRestApi =
+        this.glFeatures.workItemRestApiFrontendUsers && this.glFeatures.workItemRestApi;
       const combined = combineWorkItemLists(
         this.workItemsSlim,
         this.workItemsFull,
-        Boolean(this.glFeatures.workItemFeaturesField),
+        !useRestApi && Boolean(this.glFeatures.workItemFeaturesField),
       );
       const sortKey = this.queryVariables.sort || CREATED_DESC;
       return getSortedWorkItems(combined, sortKey);

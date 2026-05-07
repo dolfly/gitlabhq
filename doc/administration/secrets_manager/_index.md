@@ -75,9 +75,9 @@ Prerequisites:
 Choose the installation method based on your GitLab deployment:
 
 - **Cloud Native GitLab**: Use this if you deploy GitLab to Kubernetes.
-  See the [OpenBao Helm chart documentation](https://docs.gitlab.com/charts/charts/openbao/).
-- **Omnibus GitLab**: Use this if you deploy GitLab with the Linux package (single node).
-  See [Install OpenBao on the same host (Linux package)](linux-package-integration.md).
+  For more information, see [OpenBao Helm chart documentation](https://docs.gitlab.com/charts/charts/openbao/).
+- **Linux package**: Use this if you deploy GitLab with the Linux package on a single node. For more information, see
+  [install OpenBao on a Linux package instance host](linux_package_integration.md).
 
 After installation, verify that OpenBao is working by following the
 [GitLab Secrets Manager user documentation](../../ci/secrets/secrets_manager/_index.md).

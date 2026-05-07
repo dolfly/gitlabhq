@@ -130,6 +130,8 @@ module Ci
     scope :ordered, -> { order(id: :desc) }
 
     scope :with_recent_runner_queue, -> { where(arel_table[:contacted_at].gt(recent_queue_deadline)) }
+
+    # Remove with FF `ci_read_job_execution_status_from_running_builds`
     scope :with_executing_builds, -> do
       where_exists(
         ::Ci::Build.executing
@@ -363,6 +365,25 @@ module Ci
 
     def self.created_runner_prefix
       ::Authn::TokenField::PrefixHelper.prepend_instance_prefix(CREATED_RUNNER_TOKEN_PREFIX)
+    end
+
+    def self.ids_with_running_builds(ids)
+      return [] if ids.empty?
+
+      running_builds_table = ::Ci::RunningBuild.quoted_table_name
+
+      sql = <<~SQL.squish
+        WITH input_runners AS (
+          SELECT unnest(ARRAY[?]) AS runner_id
+        )
+        SELECT runner_id FROM input_runners
+        WHERE EXISTS (
+          SELECT 1 FROM #{running_builds_table}
+          WHERE #{running_builds_table}.runner_id = input_runners.runner_id
+        )
+      SQL
+
+      connection.select_values(sanitize_sql_array([sql, ids]))
     end
 
     def runner_matcher

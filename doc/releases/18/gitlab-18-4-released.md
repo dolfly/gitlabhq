@@ -51,6 +51,8 @@ and growing our open source community!
 
 ### GitLab Duo Model Selection now generally available
 
+<!-- categories: Model Personalization -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -67,6 +69,8 @@ Owners of top-level groups on GitLab.com and administrators on Self-Managed and 
 GitLab users that belong to multiple namespaces on GitLab.com can now also set a default namespace to ensure consistent AI model preferences across all development contexts. For more information on GitLab Duo Model Selection, [read the blog](https://about.gitlab.com/blog/speed-meets-governance-model-selection-comes-to-gitlab-duo/).
 
 ### GitLab Knowledge Graph
+
+<!-- categories: Duo Agent Platform, Duo Chat, Code Suggestions, Vulnerability Management -->
 
 {{< details >}}
 
@@ -88,6 +92,8 @@ This feature is in beta status. Provide feedback in [issue 160](https://gitlab.c
 
 ### End user model selection now available with GitLab Duo
 
+<!-- categories: Model Personalization -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -105,6 +111,8 @@ To get started, look for the model dropdown in GitLab Duo Agentic Chat to select
 
 ### CI/CD job tokens can authenticate Git push requests
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -118,6 +126,8 @@ Enable this with the Job token permissions settings in the UI, or alternatively 
 parameter in the project’s REST API endpoint.
 
 ### GitLab Duo context exclusion
+
+<!-- categories: Duo Agent Platform, Duo Chat, Code Suggestions, Vulnerability Management -->
 
 {{< details >}}
 
@@ -133,6 +143,8 @@ GitLab Duo context exclusion allows you to control which project content is excl
 This feature is currently in beta. Provide feedback on GitLab Duo context exclusion in [issue 566244](https://gitlab.com/gitlab-org/gitlab/-/issues/566244).
 
 ### Expanded AWS region support for GitLab Dedicated
+
+<!-- categories: GitLab Dedicated, Switchboard -->
 
 {{< details >}}
 
@@ -150,6 +162,8 @@ All newly available regions can be selected when provisioning your GitLab Dedica
 
 ### Simulate CI/CD Pipelines against different branch
 
+<!-- categories: Pipeline Composition -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -163,6 +177,8 @@ Previously, when using the pipeline editor and validating your changes using the
 ## Agentic Core
 
 ### Automatic Duo Code Review for groups and applications
+
+<!-- categories: Code Review Workflow -->
 
 {{< details >}}
 
@@ -179,6 +195,8 @@ This feature is currently available in GitLab.com, and we plan to make it availa
 
 ### Additional supported models for GitLab Duo Self-Hosted
 
+<!-- categories: Self-Hosted Models -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -192,6 +210,8 @@ OpenAI GPT-5 is now supported on Azure OpenAI. Open source OpenAI GPT OSS 20B an
 To leave feedback on using these models with GitLab Duo Self-Hosted, see [issue 523918](https://gitlab.com/gitlab-org/gitlab/-/issues/523918).
 
 ### Duo Code Review on GitLab Duo Self-Hosted is generally available
+
+<!-- categories: Code Suggestions, Self-Hosted Models -->
 
 {{< details >}}
 
@@ -209,6 +229,8 @@ Provide feedback on Code Review in [issue 517386](https://gitlab.com/gitlab-org/
 
 ### Pipeline secret detection now excludes certain files and directories by default
 
+<!-- categories: Secret Detection -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -223,6 +245,8 @@ if they have a low likelihood of containing secrets, improving scan performance.
 
 ### Secret detection analyzer Git fetching improvements
 
+<!-- categories: Secret Detection -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -236,6 +260,8 @@ Version [7.12.0](https://gitlab.com/gitlab-org/security-products/analyzers/secre
 This enhancement reduces job timeouts, decreases resource consumption, and provides more predictable scan performance. Experience faster secret detection scans, especially in large repositories, with clearer logging that matches the actual fetching behavior.
 
 ### Significantly faster Advanced SAST scanning
+
+<!-- categories: SAST -->
 
 {{< details >}}
 
@@ -256,6 +282,8 @@ You can see which analyzer version you’re using by [checking scan job logs](..
 
 ### Operational Container Scanning severity threshold configuration
 
+<!-- categories: Software Composition Analysis -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -274,6 +302,8 @@ We gratefully acknowledge this community contribution from [John Walsh](https://
 To learn more about contributing to GitLab, check out the [Community Contribution program](https://about.gitlab.com/community/contribute/).
 
 ### Publish OpenTofu modules and providers to the GitLab container registry with CI/CD templates
+
+<!-- categories: Infrastructure as Code -->
 
 {{< details >}}
 
@@ -296,6 +326,8 @@ to deploy the OpenTofu module in the GitLab registry using the OCI format.
 
 ### Bypass confirmation for enterprise users when reassigning placeholders
 
+<!-- categories: Importers -->
+
 {{< details >}}
 
 - Tier: Silver, Gold
@@ -309,6 +341,8 @@ Users with the Owner role for a group can now bypass user confirmation when reas
 Enterprise users still receive notification emails after the reassignment is complete, ensuring transparency throughout the process.
 
 ### Configure how to view issues from the Issues page
+
+<!-- categories: Portfolio Management -->
 
 {{< details >}}
 
@@ -326,6 +360,8 @@ With the new toggle that switches between the drawer view and full-page navigati
 
 ### Enhanced parent filtering for epic and issue lists
 
+<!-- categories: Portfolio Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -338,6 +374,8 @@ We’ve replaced the “epic” filter on the Issues and Epics pages with a more
 
 ### Issue boards now show complete epic hierarchies
 
+<!-- categories: Portfolio Management -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -349,6 +387,8 @@ We’ve replaced the “epic” filter on the Issues and Epics pages with a more
 You can now view all issues from child epics when filtering by a parent epic in issue boards, bringing consistency with how the Issues page already works. This improvement helps you better track and visualize your complete epic hierarchy without missing any issues nested in child epics, making your project management workflow more efficient and reliable.
 
 ### Text editors toolbar parity
+
+<!-- categories: Markdown -->
 
 {{< details >}}
 
@@ -371,6 +411,8 @@ Both editors now have consistent button placement and separators, making it easi
 
 ### Vulnerability details shows the auto-resolve pipeline ID
 
+<!-- categories: Vulnerability Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -385,6 +427,8 @@ If a vulnerability is automatically resolved, the vulnerability notes in the vul
 
 ### Enhanced controls for who can download job artifacts
 
+<!-- categories: Artifact Security -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -398,6 +442,8 @@ In GitLab 16.11, we added the `artifacts:access` keyword enabling users to contr
 In this release, you can now restrict who can download artifacts to only the Maintainer role or higher, giving you one more option for controlling who can download job artifacts.
 
 ### GitLab Runner 18.4
+
+<!-- categories: GitLab Runner Core -->
 
 {{< details >}}
 

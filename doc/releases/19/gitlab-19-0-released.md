@@ -38,6 +38,8 @@ The first person to add a feature in this area, please make the title visible an
 
 ### Filter exact code search results by repository
 
+<!-- categories: Global Search -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -61,6 +63,8 @@ The first person to add a feature in this area, please make the title visible an
 
 ### Improved array support for CI/CD inputs
 
+<!-- categories: Pipeline Composition -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -75,6 +79,8 @@ This enhancement provides more flexible and powerful input interpolation capabil
 enabling you to reference individual array items directly without additional processing steps.
 
 ### Select multiple values for pipeline inputs
+
+<!-- categories: Pipeline Composition -->
 
 {{< details >}}
 
@@ -94,6 +100,8 @@ run tests with multiple tag combinations, or perform any operation across multip
 in a single pipeline run.
 
 ### Secure webhooks with HMAC signing tokens
+
+<!-- categories: Importers -->
 
 {{< details >}}
 

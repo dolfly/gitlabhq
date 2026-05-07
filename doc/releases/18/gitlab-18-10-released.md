@@ -34,6 +34,8 @@ Want to connect with Harshith and learn more about his contributions? Visit Hars
 
 ### SAST false positive detection with GitLab Duo Agent Platform
 
+<!-- categories: Vulnerability Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -61,6 +63,8 @@ We welcome your feedback in [issue 583697](https://gitlab.com/gitlab-org/gitlab/
 
 ### Purchase GitLab Credits on the Free tier on GitLab.com
 
+<!-- categories: Subscription Management -->
+
 {{< details >}}
 
 - Tier: Free
@@ -83,6 +87,8 @@ This [purchase option](../../subscriptions/gitlab_credits.md#buy-gitlab-credits)
 
 ### Sign in securely with passkeys
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -103,6 +109,8 @@ Passkeys offer the following benefits:
 To get started, add a passkey in your account settings. We welcome your questions and feedback in issue [366758](https://gitlab.com/gitlab-org/gitlab/-/work_items/[366758](https://gitlab.com/gitlab-org/gitlab/-/work_items/366758)).
 
 ### Introducing the work items list and saved views
+
+<!-- categories: Portfolio Management -->
 
 {{< details >}}
 
@@ -125,6 +133,8 @@ Share your thoughts and feedback in [issue 590689](https://gitlab.com/gitlab-org
 
 ### Custom agents can use MCP to access external data
 
+<!-- categories: AI Catalog -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -138,6 +148,8 @@ You can now connect custom agents in the AI Catalog to external data sources and
 This feature is an experiment. Share your feedback in [issue 593219](https://gitlab.com/gitlab-org/gitlab/-/work_items/593219).
 
 ### Enforce merge request title naming conventions with regex
+
+<!-- categories: Code Review Workflow -->
 
 {{< details >}}
 
@@ -166,6 +178,8 @@ Your existing merge request workflows continue to work as before. This check onl
 applies to projects where you explicitly configure a title regex.
 
 ### Secret false positive detection with AI (beta)
+
+<!-- categories: Vulnerability Management, Secret Detection -->
 
 {{< details >}}
 
@@ -198,6 +212,8 @@ Share feedback in [issue 592861](https://gitlab.com/gitlab-org/gitlab/-/work_ite
 
 ### Use runtime inputs with CI/CD jobs
 
+<!-- categories: Pipeline Composition -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -221,6 +237,8 @@ Job inputs can use the default values without any user interaction, but you can 
 
 ### GitLab Blob Search for group and instance code search
 
+<!-- categories: Duo Agent Platform -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -238,6 +256,8 @@ Previously, blob search was limited to a single project, or required specifying 
 
 ### GitLab MCP server tool for pipeline management
 
+<!-- categories: MCP Server -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -254,6 +274,8 @@ If you want to see other GitLab MCP sever tools, let us know in the [feedback is
 
 ### Project Maintainers can enable custom agents and flows
 
+<!-- categories: AI Catalog -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -267,6 +289,8 @@ Previously, enabling AI agents and flows from the AI Catalog required top-level 
 Now, when browsing the AI Catalog at the explore level or project level, project Maintainers can enable agents and flows directly in their projects.
 
 ### Configure network access control for remote flows in projects
+
+<!-- categories: Duo Agent Platform -->
 
 {{< details >}}
 
@@ -284,6 +308,8 @@ Configure [network access controls](../../user/duo_agent_platform/environment_sa
 
 ### Self-hosted Vertex AI for GitLab Duo Agent Platform
 
+<!-- categories: Self-Hosted Models -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -298,6 +324,8 @@ Customers can now configure Anthropic models hosted on Vertex AI for use with Gi
 
 ### Users can enable agents and flows directly from projects
 
+<!-- categories: AI Catalog -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -311,6 +339,8 @@ Maintainers and Owners can now enable agents and flows directly from their proje
 Top-level group Owners can also select their group, and the specific projects where they want to activate agents and flows, streamlining their workflow setup.
 
 ### Support for Agent Skills in IDEs and CI/CD pipelines
+
+<!-- categories: Duo Agent Platform -->
 
 {{< details >}}
 
@@ -337,6 +367,8 @@ the specification.
 
 ### Download credit usage data as CSV
 
+<!-- categories: Consumables Cost Management -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -352,6 +384,8 @@ The export provides a daily, per-action breakdown of credit consumption for the 
 Finance and operations teams can use this data to perform cost allocation, chargeback reporting, and usage analysis in Excel, Google Sheets, or BI tools without manual data gathering or support requests.
 
 ### Link credit usage to GitLab Duo Agent Platform sessions
+
+<!-- categories: Consumables Cost Management -->
 
 {{< details >}}
 
@@ -369,6 +403,8 @@ This link provides a direct audit trail from billing to AI session behavior, so 
 
 ### Sort users in the GitLab Credits dashboard
 
+<!-- categories: Consumables Cost Management -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -384,6 +420,8 @@ The default sort order is by total credits consumed (highest first), so the top 
 With this view, administrators managing thousands of GitLab Duo users can quickly identify high-usage individuals for cost allocation, chargeback reporting, and license utilization audits.
 
 ### New navigation experience for projects in Explore
+
+<!-- categories: Groups & Projects -->
 
 {{< details >}}
 
@@ -411,6 +449,8 @@ The cleaner design aligns with other project lists for visual consistency. You c
 
 ### Dependency Scanning with SBOM support for Java Gradle build files
 
+<!-- categories: Software Composition Analysis -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -428,6 +468,8 @@ This improvement makes it easier for Java projects using Gradle to enable depend
 To enable manifest fallback, set the `DS_ENABLE_MANIFEST_FALLBACK` CI/CD variable to `"true"`.
 
 ### Dependency scanning SBOM-based scanning extended to self-managed
+
+<!-- categories: Software Composition Analysis -->
 
 {{< details >}}
 
@@ -453,6 +495,8 @@ We welcome feedback on this feature. If you have questions, comments, or would l
 
 ### License scanning support for Dart/Flutter projects using Pub package manager
 
+<!-- categories: Software Composition Analysis -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -468,6 +512,8 @@ License data is sourced directly from [pub.dev](https://pub.dev), the official D
 Dart/Flutter dependency scanning and vulnerability detection were already supported.
 
 ### Conan 2.0 package registry support (Beta)
+
+<!-- categories: Package Registry -->
 
 {{< details >}}
 
@@ -487,6 +533,8 @@ We welcome feedback as we work toward general availability. Please share your ex
 
 ### Manage container virtual registries with a dedicated UI (Beta)
 
+<!-- categories: Virtual Registry -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -503,6 +551,8 @@ This feature is in beta. To share feedback, please comment in the [feedback issu
 
 ### GitLab Helm Chart registry generally available
 
+<!-- categories: Package Registry -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -518,6 +568,8 @@ The path to GA included resolving a hard limit that prevented the `index.yaml` e
 Platform and DevOps teams can publish and install Helm charts directly from GitLab using standard Helm client workflows, with support for project-level endpoints and authentication using personal access tokens, deploy tokens, and CI/CD job tokens. Now you can keep charts alongside the source code, pipelines, and security scanning that depend on them.
 
 ### Task item support in Markdown tables
+
+<!-- categories: Markdown -->
 
 {{< details >}}
 
@@ -536,6 +588,8 @@ This improvement makes it easier to track task completion directly within struct
 layouts in issues, epics, and other content.
 
 ### Pipeline secret detection in security configuration profiles
+
+<!-- categories: Vulnerability Management -->
 
 {{< details >}}
 
@@ -559,6 +613,8 @@ Applying the profile requires no YAML configuration. The profile can be applied 
 
 ### macOS Tahoe 26 and Xcode 26 job image
 
+<!-- categories: GitLab Hosted Runners -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -577,6 +633,8 @@ on-demand build environment integrated with GitLab CI/CD.
 Try it out today by using the `macos-26-xcode-26` image in your `.gitlab-ci.yml` file.
 
 ### GitLab Runner 18.10
+
+<!-- categories: GitLab Runner Core -->
 
 {{< details >}}
 

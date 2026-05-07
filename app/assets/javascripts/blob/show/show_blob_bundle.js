@@ -2,7 +2,7 @@ import { provideWebIdeLink } from 'ee_else_ce/pages/projects/shared/web_ide_link
 import { BlobViewer, initAuxiliaryViewer } from '~/blob/viewer/index';
 import GpgBadges from '~/gpg_badges';
 import initBlob from '~/pages/projects/init_blob';
-import initWebIdeLink from '~/pages/projects/shared/web_ide_link';
+import { initWebIdeLink } from '~/pages/projects/shared/web_ide_link/init_web_ide_link';
 import '~/sourcegraph/load';
 import HighlightWorker from '~/vue_shared/components/source_viewer/workers/highlight_worker?worker';
 import initAmbiguousRefModal from '~/ref/init_ambiguous_ref_modal';

@@ -35,6 +35,8 @@ Océane Legrand is a Full Stack Developer at Scania where she works on maintaini
 
 ### Enhance security with protected container repositories
 
+<!-- categories: Container Registry -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -50,6 +52,8 @@ This feature and the [protected packages](https://gitlab.com/groups/gitlab-org/-
 
 ### List the deployments related to a release
 
+<!-- categories: Environment Management, Deployment Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -64,6 +68,8 @@ We would like to express our gratitude to [Anton Kalmykov](https://gitlab.com/an
 
 ### Machine learning model experiments tracking in GA
 
+<!-- categories: MLOps -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -74,6 +80,8 @@ We would like to express our gratitude to [Anton Kalmykov](https://gitlab.com/an
 When creating machine learning models, data scientists often experiment with different parameters, configurations, and feature engineering to improve the performance of the model. Keeping track of all this metadata and the associated artifacts so that the data scientist can later replicate the experiment is not trivial. Machine learning experiment tracking enables them to log parameters, metrics, and artifacts directly into GitLab, giving easy access later on while also keeping all experimental data within your GitLab environment. This feature is now generally available with enhanced data displays, enhanced permissions, deeper integration with GitLab, and bug fixes.
 
 ### Hosted runners on Linux for GitLab Dedicated now in limited availability
+
+<!-- categories: GitLab Dedicated, GitLab Hosted Runners -->
 
 {{< details >}}
 
@@ -101,6 +109,8 @@ contact your GitLab representative.
 
 ### Large M2 Pro hosted runners on macOS (Beta)
 
+<!-- categories: GitLab Hosted Runners -->
+
 {{< details >}}
 
 - Tier: Silver, Gold
@@ -122,6 +132,8 @@ Try out the new M2 Pro runners today by using `saas-macos-large-m2pro` as the ta
 ## Agentic Core
 
 ### GitLab MLOps Python Client Beta
+
+<!-- categories: MLOps -->
 
 {{< details >}}
 
@@ -147,6 +159,8 @@ We welcome the wider Python and data science community to contributions and shar
 
 ### View subgroups and projects pending deletion
 
+<!-- categories: Groups & Projects -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -161,6 +175,8 @@ Now, when a group is marked for deletion, all of its subgroups and projects will
 
 ### Track multiple to-do items in an issue or merge request
 
+<!-- categories: Notifications -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -172,6 +188,8 @@ Now, when a group is marked for deletion, all of its subgroups and projects will
 You can now keep track of multiple discussions and mentions within a single issue or merge request. With the new multiple to-do items feature, you’ll receive separate to-do items for each mention or action, ensuring you don’t miss important updates or requests for your attention. This enhancement helps you manage your work more effectively and respond to your team’s needs more efficiently.
 
 ### Project creation protection for groups now includes Owners
+
+<!-- categories: Groups & Projects -->
 
 {{< details >}}
 
@@ -189,6 +207,8 @@ Thank you [@yasuk](https://gitlab.com/yasuk) for this community contribution!
 
 ### Secret detection now includes remediation steps
 
+<!-- categories: Secret Detection -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -200,6 +220,8 @@ Thank you [@yasuk](https://gitlab.com/yasuk) for this community contribution!
 It’s important to fix exposed secrets quickly to minimize the risk of attackers using exposed credentials to break into your systems. Proper remediation requires multiple steps beyond just removing the secret, such as rotating credentials and investigating potential unauthorized access. To help keep your systems secure, secret detection now includes specific remediation steps for each type of detected secret. This guidance helps you systematically address exposures and reduce the risk of security breaches. Remediation steps will appear on all vulnerabilities upon the completion of a pipeline.
 
 ### Find the commit that resolved a vulnerability
+
+<!-- categories: Vulnerability Management -->
 
 {{< details >}}
 
@@ -213,6 +235,8 @@ Previously, when a vulnerability was no longer detected, we did not provide user
 Now, we display a link to the commit SHA where the vulnerability was resolved, providing better traceability and insight into the resolution process. This makes it easier for security and development teams to collaborate and manage vulnerabilities more effectively.
 
 ### Use roles to define project members as Code Owners
+
+<!-- categories: Source Code Management -->
 
 {{< details >}}
 
@@ -234,6 +258,8 @@ This simplifies Code Owner management as team members join, leave, or change rol
 
 ### View paused Flux reconciliations on the dashboard for Kubernetes
 
+<!-- categories: Deployment Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -246,6 +272,8 @@ Previously, when you suspended Flux reconciliation from the dashboard for Kubern
 
 ### Search for pods on the dashboard for Kubernetes
 
+<!-- categories: Environment Management, Deployment Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -257,6 +285,8 @@ Previously, when you suspended Flux reconciliation from the dashboard for Kubern
 On the dashboard for Kubernetes, finding specific pods in large deployments can be time-consuming. A new search bar lets you quickly filter pods by name. The search works across all available pods, and you can combine it with status filters to find exactly the pods you need to monitor or troubleshoot.
 
 ### Support multiple distinct approval actions in merge request approval policies
+
+<!-- categories: Security Policy Management -->
 
 {{< details >}}
 
@@ -278,6 +308,8 @@ Example uses of this improvement include:
 
 ### Primary domain redirect for GitLab Pages
 
+<!-- categories: Pages -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -289,6 +321,8 @@ Example uses of this improvement include:
 You can now set a primary domain in GitLab Pages to automatically redirect all requests from custom domains to your primary domain. This helps maintain SEO rankings and provides a consistent brand experience by directing visitors to your preferred domain, regardless of which URL they initially use to access your site.
 
 ### Safeguard your dependencies with protected packages
+
+<!-- categories: Package Registry -->
 
 {{< details >}}
 
@@ -304,6 +338,8 @@ From GitLab 17.8, you can protect PyPI packages by creating protection rules. If
 
 ### Customizable colors for epics
 
+<!-- categories: Portfolio Management -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -317,6 +353,8 @@ You now have more flexibility in categorizing your epics with an expanded set of
 Your administrator must enable [the new look for epics](../../user/group/epics/_index.md#epics-as-work-items).
 
 ### Epic ancestors
+
+<!-- categories: Portfolio Management -->
 
 {{< details >}}
 
@@ -332,6 +370,8 @@ Your administrator must enable [the new look for epics](../../user/group/epics/_
 
 ### Epic health status
 
+<!-- categories: Portfolio Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -345,6 +385,8 @@ You can now easily communicate the progress of your projects with the new health
 Your administrator must enable [the new look for epics](../../user/group/epics/_index.md#epics-as-work-items).
 
 ### Epic parent
+
+<!-- categories: Portfolio Management -->
 
 {{< details >}}
 
@@ -360,6 +402,8 @@ Your administrator must enable [the new look for epics](../../user/group/epics/_
 
 ### Track time spent on epics
 
+<!-- categories: Portfolio Management -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -371,6 +415,8 @@ Your administrator must enable [the new look for epics](../../user/group/epics/_
 You can now track time directly in epics, giving you more granular control over your project’s time management. This new feature allows you to log time spent on different aspects of your project, helping you monitor progress, stay on schedule, and keep your budget in check as you work through sprints and milestones.
 
 ### Show iteration field on child items in epics, issues, and objectives
+
+<!-- categories: Portfolio Management -->
 
 {{< details >}}
 
@@ -386,6 +432,8 @@ For epics, your administrator must enable [the new look for epics](../../user/gr
 
 ### Webhooks for epics
 
+<!-- categories: Portfolio Management -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -400,6 +448,8 @@ Your administrator must enable [the new look for epics](../../user/group/epics/_
 
 ### Add vulnerabilities as supported webhook events
 
+<!-- categories: Webhooks, Vulnerability Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -411,6 +461,8 @@ Your administrator must enable [the new look for epics](../../user/group/epics/_
 Introducing a webhook integration that generates events for actions related to vulnerabilities to allow you to automate and integrate with external resources. For example, events are generated when vulnerabilities are created or the status of a vunerability changes.
 
 ### Enforce centralized workflow rules for the `override_ci` strategy
+
+<!-- categories: Security Policy Management -->
 
 {{< details >}}
 
@@ -430,6 +482,8 @@ The `inject_ci` strategy remains unchanged and workflow rules can only be used t
 
 ### Make `skip_ci` configurable for pipeline execution policies
 
+<!-- categories: Security Policy Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -444,6 +498,8 @@ To use this feature, set `skip_ci` to `allowed: false` in the pipeline execution
 
 ### Manage concurrency of scheduled scan execution pipelines
 
+<!-- categories: Security Policy Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -457,6 +513,8 @@ To improve the scalability of global scheduled scan execution policies, we have 
 To use the new property, update your policy using YAML mode and follow the [`time_window` schema](../../user/application_security/policies/scan_execution_policies.md#time_window-schema). You can provide a value in seconds for the window of time in which the schedules should run. For example, `86400` for a 24 hour time window. Then supply the `distribution: random` field and value to enforce the schedules to execute at random times across the defined time window.
 
 ### Scaling UI performance for the 'Frameworks' report tab in the Compliance Center
+
+<!-- categories: Compliance Management -->
 
 {{< details >}}
 
@@ -474,6 +532,8 @@ returns up to 1,000 projects that are attached to that particular framework as p
 right-hand side pop up menu.
 
 ### Pipeline limits available in GitLab Community Edition
+
+<!-- categories: Continuous Integration (CI) -->
 
 {{< details >}}
 

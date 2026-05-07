@@ -353,6 +353,11 @@ RSpec.configure do |config|
 
       # This feature is wip and should not be enabled in tests by default
       stub_feature_flags(iam_svc_login: false)
+
+      # Work items list REST API is still in development and not compatible with
+      # all filters yet.
+      # Please see https://gitlab.com/gitlab-org/gitlab/-/work_items/594636 for tracking progress.
+      stub_feature_flags(work_item_rest_api_frontend_users: false)
     else
       unstub_all_feature_flags
     end

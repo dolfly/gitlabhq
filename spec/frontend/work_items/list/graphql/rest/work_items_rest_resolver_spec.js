@@ -1,0 +1,230 @@
+import MockAdapter from 'axios-mock-adapter';
+import axios from '~/lib/utils/axios_utils';
+import { HTTP_STATUS_OK, HTTP_STATUS_INTERNAL_SERVER_ERROR } from '~/lib/utils/http_status';
+import { workItemsRestResolver } from '~/work_items/list/graphql/rest/work_items_rest_resolver';
+
+const FULL_PATH = 'gitlab-org/gitlab-shell';
+const ENCODED_PATH = encodeURIComponent(FULL_PATH);
+const ENDPOINT = `/api/v4/namespaces/${ENCODED_PATH}/-/work_items`;
+
+const makeNamespace = (fullPath = FULL_PATH) => ({ fullPath });
+
+const makeRestItem = (overrides = {}) => ({
+  global_id: 'gid://gitlab/WorkItem/1',
+  iid: 42,
+  title: 'My work item',
+  state: 'opened',
+  created_at: '2024-01-01T00:00:00Z',
+  updated_at: '2024-01-02T00:00:00Z',
+  closed_at: null,
+  reference: 'gitlab-org/gitlab-shell#42',
+  web_path: '/gitlab-org/gitlab-shell/-/work_items/42',
+  author: {
+    id: 1,
+    name: 'Administrator',
+    username: 'root',
+    avatar_url: 'http://localhost/avatar.png',
+    web_path: '/root',
+  },
+  namespace: {
+    id: 10,
+    full_path: FULL_PATH,
+  },
+  work_item_type: {
+    id: 5,
+    name: 'Issue',
+    icon_name: 'issue-type-issue',
+  },
+  features: null,
+  ...overrides,
+});
+
+describe('workItemsRestResolver', () => {
+  let mockAxios;
+
+  beforeEach(() => {
+    mockAxios = new MockAdapter(axios);
+    window.gon = { api_version: 'v4' };
+  });
+
+  afterEach(() => {
+    mockAxios.restore();
+    delete window.gon;
+  });
+
+  describe('happy path', () => {
+    it('fetches from the correct URL and returns a WorkItemConnection shape', async () => {
+      const item = makeRestItem();
+      mockAxios.onGet(ENDPOINT).reply(HTTP_STATUS_OK, [item], {});
+
+      const result = await workItemsRestResolver(makeNamespace(), {});
+
+      expect(result).toMatchObject({ __typename: 'WorkItemConnection' });
+      expect(result.nodes).toHaveLength(1);
+    });
+
+    it('URL-encodes the fullPath when building the endpoint', async () => {
+      const slashPath = 'my-group/my-project';
+      const encodedSlashPath = encodeURIComponent(slashPath);
+      mockAxios
+        .onGet(`/api/v4/namespaces/${encodedSlashPath}/-/work_items`)
+        .reply(HTTP_STATUS_OK, [], {});
+
+      await workItemsRestResolver(makeNamespace(slashPath), {});
+
+      expect(mockAxios.history.get).toHaveLength(1);
+      expect(mockAxios.history.get[0].url).toContain(encodedSlashPath);
+    });
+
+    it('maps REST item fields to the GraphQL WorkItem shape', async () => {
+      const item = makeRestItem();
+      mockAxios.onGet(ENDPOINT).reply(HTTP_STATUS_OK, [item], {});
+
+      const { nodes } = await workItemsRestResolver(makeNamespace(), {});
+      const node = nodes[0];
+
+      expect(node).toMatchObject({ __typename: 'WorkItem' });
+      expect(node.id).toBe(item.global_id);
+      expect(node.iid).toBe(String(item.iid));
+      expect(node.title).toBe(item.title);
+      expect(node.state).toBe('OPEN');
+      expect(node.createdAt).toBe(item.created_at);
+      expect(node.updatedAt).toBe(item.updated_at);
+      expect(node.closedAt).toBeNull();
+      expect(node.webPath).toBe(item.web_path);
+    });
+
+    it('maps author to UserCore shape', async () => {
+      const item = makeRestItem();
+      mockAxios.onGet(ENDPOINT).reply(HTTP_STATUS_OK, [item], {});
+
+      const { nodes } = await workItemsRestResolver(makeNamespace(), {});
+      const { author } = nodes[0];
+
+      expect(author).toMatchObject({ __typename: 'UserCore' });
+      expect(author.id).toBe(`gid://gitlab/User/${item.author.id}`);
+      expect(author.name).toBe(item.author.name);
+      expect(author.username).toBe(item.author.username);
+    });
+
+    it('maps namespace to Namespace shape', async () => {
+      const item = makeRestItem();
+      mockAxios.onGet(ENDPOINT).reply(HTTP_STATUS_OK, [item], {});
+
+      const { nodes } = await workItemsRestResolver(makeNamespace(), {});
+      const { namespace } = nodes[0];
+
+      expect(namespace).toMatchObject({ __typename: 'Namespace' });
+      expect(namespace.id).toBe(`gid://gitlab/Namespace/${item.namespace.id}`);
+      expect(namespace.fullPath).toBe(item.namespace.full_path);
+    });
+
+    it('maps workItemType to WorkItemType shape', async () => {
+      const item = makeRestItem();
+      mockAxios.onGet(ENDPOINT).reply(HTTP_STATUS_OK, [item], {});
+
+      const { nodes } = await workItemsRestResolver(makeNamespace(), {});
+      const { workItemType } = nodes[0];
+
+      expect(workItemType).toMatchObject({ __typename: 'WorkItemType' });
+      expect(workItemType.id).toBe(`gid://gitlab/WorkItems::Type/${item.work_item_type.id}`);
+      expect(workItemType.name).toBe(item.work_item_type.name);
+      expect(workItemType.iconName).toBe(item.work_item_type.icon_name);
+    });
+
+    it('returns an empty nodes array when response data is empty', async () => {
+      mockAxios.onGet(ENDPOINT).reply(HTTP_STATUS_OK, [], {});
+
+      const { nodes } = await workItemsRestResolver(makeNamespace(), {});
+
+      expect(nodes).toEqual([]);
+    });
+  });
+
+  describe('pagination', () => {
+    it('sets hasNextPage and endCursor from x-next-cursor header', async () => {
+      mockAxios.onGet(ENDPOINT).reply(HTTP_STATUS_OK, [], { 'x-next-cursor': 'cursor_abc' });
+
+      const { pageInfo } = await workItemsRestResolver(makeNamespace(), {});
+
+      expect(pageInfo).toMatchObject({ __typename: 'PageInfo' });
+      expect(pageInfo.hasNextPage).toBe(true);
+      expect(pageInfo.endCursor).toBe('cursor_abc');
+    });
+
+    it('sets hasPreviousPage and startCursor from x-prev-cursor header', async () => {
+      mockAxios.onGet(ENDPOINT).reply(HTTP_STATUS_OK, [], { 'x-prev-cursor': 'cursor_xyz' });
+
+      const { pageInfo } = await workItemsRestResolver(makeNamespace(), {});
+
+      expect(pageInfo.hasPreviousPage).toBe(true);
+      expect(pageInfo.startCursor).toBe('cursor_xyz');
+    });
+
+    it('sets hasNextPage and hasPreviousPage to false when cursor headers are absent', async () => {
+      mockAxios.onGet(ENDPOINT).reply(HTTP_STATUS_OK, [], {});
+
+      const { pageInfo } = await workItemsRestResolver(makeNamespace(), {});
+
+      expect(pageInfo.hasNextPage).toBe(false);
+      expect(pageInfo.hasPreviousPage).toBe(false);
+      expect(pageInfo.endCursor).toBeNull();
+      expect(pageInfo.startCursor).toBeNull();
+    });
+  });
+
+  describe('LABELS widget mapping', () => {
+    it('returns an empty LABELS widget when features is null', async () => {
+      const item = makeRestItem({ features: null });
+      mockAxios.onGet(ENDPOINT).reply(HTTP_STATUS_OK, [item], {});
+
+      const { nodes } = await workItemsRestResolver(makeNamespace(), {});
+      const labelsWidget = nodes[0].widgets.find((w) => w.type === 'LABELS');
+
+      expect(labelsWidget).toMatchObject({ __typename: 'WorkItemWidgetLabels' });
+      expect(labelsWidget.labels.nodes).toEqual([]);
+    });
+
+    it('maps labels from features.labels to the LABELS widget', async () => {
+      const item = makeRestItem({
+        features: {
+          labels: {
+            allows_scoped_labels: true,
+            labels: [
+              {
+                id: 10,
+                title: 'bug',
+                color: '#e11',
+                text_color: '#fff',
+                description: 'A bug',
+              },
+            ],
+          },
+        },
+      });
+      mockAxios.onGet(ENDPOINT).reply(HTTP_STATUS_OK, [item], {});
+
+      const { nodes } = await workItemsRestResolver(makeNamespace(), {});
+      const labelsWidget = nodes[0].widgets.find((w) => w.type === 'LABELS');
+
+      expect(labelsWidget.allowsScopedLabels).toBe(true);
+      expect(labelsWidget.labels.nodes).toHaveLength(1);
+      expect(labelsWidget.labels.nodes[0]).toMatchObject({
+        __typename: 'Label',
+        id: 'gid://gitlab/Label/10',
+        title: 'bug',
+        color: '#e11',
+        textColor: '#fff',
+        description: 'A bug',
+      });
+    });
+  });
+
+  describe('error handling', () => {
+    it('throws when axios request fails', async () => {
+      mockAxios.onGet(ENDPOINT).reply(HTTP_STATUS_INTERNAL_SERVER_ERROR);
+
+      await expect(workItemsRestResolver(makeNamespace(), {})).rejects.toThrow();
+    });
+  });
+});

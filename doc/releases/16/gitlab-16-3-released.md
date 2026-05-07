@@ -36,6 +36,8 @@ and [Batuhan Apaydın](https://gitlab.com/batuhan.apaydin) for their great contr
 
 ### New velocity metrics in the Value Streams Dashboard
 
+<!-- categories: Value Stream Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -54,6 +56,8 @@ To help us improve the Value Streams Dashboard, please share feedback about your
 
 ### Connect to Workspaces with SSH
 
+<!-- categories: Workspaces -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -68,6 +72,8 @@ With GitLab 16.3, you can now securely connect to a workspace from your desktop 
 
 ### Flux sync status visualization
 
+<!-- categories: Environment Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -81,6 +87,8 @@ In previous releases, you probably used `kubectl` or another third-party tool to
 Deployments rely on Flux `Kustomization` and `HelmRelease` resources to gather the status of a given environment, which requires a namespace to be configured for the environment. By default, GitLab searches the `Kustomization` and `HelmRelease` resources for the name of the project slug. You can customize the name GitLab looks for in the environment settings.
 
 ### Additional filtering for scan result policies
+
+<!-- categories: Security Policy Management -->
 
 {{< details >}}
 
@@ -99,6 +107,8 @@ Determining which results from a security or compliance scan are actionable is a
 
 ### Security findings in VS Code
 
+<!-- categories: Editor Extensions, API Security, Container Scanning, DAST, Fuzz Testing, SAST, Secret Detection, Software Composition Analysis, Vulnerability Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -116,6 +126,8 @@ Security scan results are pulled from an API, so this feature is available to de
 
 ### Use the `needs` keyword with parallel jobs
 
+<!-- categories: Pipeline Composition -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -129,6 +141,8 @@ The `needs` keyword is used to define dependency relationships between jobs. You
 Previously, it was impossible to use the `needs` keyword to set [parallel matrix](../../ci/yaml/_index.md#parallelmatrix) jobs as dependent, but in this release, we have enabled the ability to use `needs` with parallel matrix jobs too. You can now define a flexible dependency relationship to parallel matrix jobs, which can help speed up your pipeline even more! The earlier your jobs can start, the earlier your pipeline can finish!
 
 ### More powerful GitLab SaaS runners on Linux
+
+<!-- categories: GitLab Runner SaaS -->
 
 {{< details >}}
 
@@ -144,6 +158,8 @@ We are determined to provide the industry’s fastest CI/CD build speed and look
 
 ### Azure Key Vault secrets manager support
 
+<!-- categories: Secrets Management -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -158,6 +174,8 @@ Secrets stored in Azure Key Vault can now easily be retrieved and used in CI/CD 
 
 ### Include or exclude archived projects from project search results
 
+<!-- categories: Global Search -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -169,6 +187,8 @@ Secrets stored in Azure Key Vault can now easily be retrieved and used in CI/CD 
 You can now opt to include or exclude archived projects from search results. By default, archived projects are excluded. This feature is available for project search in GitLab. Support for other [global search scopes](../../user/search/_index.md) is proposed in future releases.
 
 ### Omnibus improvements
+
+<!-- categories: Omnibus Package -->
 
 {{< details >}}
 
@@ -184,6 +204,8 @@ generally available and was replaced with Amazon Linux 2023, so we have adjusted
 
 ### Audit event recorded for applications settings change
 
+<!-- categories: Audit Events -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -195,6 +217,8 @@ generally available and was replaced with Amazon Linux 2023, so we have adjusted
 Application setting changes at an instance, project, and group level are now recorded in the audit log, along with which user made the change. This improves auditing of application settings for both self-managed and SaaS.
 
 ### Preserve pull request reviewers when importing from BitBucket Server
+
+<!-- categories: Importers -->
 
 {{< details >}}
 
@@ -210,6 +234,8 @@ important from an audit and compliance perspective.
 In GitLab 16.3, we added support for correctly importing PR reviewers from BitBucket. In GitLab, they become merge request reviewers.
 
 ### Configurable import limits available in application settings
+
+<!-- categories: Importers -->
 
 {{< details >}}
 
@@ -236,6 +262,8 @@ With these new application settings, both self-managed GitLab and GitLab.com adm
 
 ### New navigation has color themes available
 
+<!-- categories: Navigation & Settings -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -246,6 +274,8 @@ With these new application settings, both self-managed GitLab and GitLab.com adm
 With the new navigation enabled, you can now select one of five different color themes, and choose the light or dark variety for each. Use themes to identify different environments or choose your favorite color.
 
 ### No entity export timeout for migrations by direct transfer
+
+<!-- categories: Importers -->
 
 {{< details >}}
 
@@ -261,6 +291,8 @@ The upper limit for the overall migration timeout is 4 hours, and so the 90 minu
 
 ### Support for Azure AD overage claim
 
+<!-- categories: User Management -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -272,6 +304,8 @@ The upper limit for the overall migration timeout is 4 hours, and so the 90 minu
 GitLab SAML Group Sync now supports the Azure AD (now known as Entra ID) overage claim, which allows a user to have over 150 groups associated with them. The previous maximum was 150 groups. For more information, see [Microsoft group overages](https://learn.microsoft.com/en-us/security/zero-trust/develop/configure-tokens-group-claims-app-roles#group-overages).
 
 ### Geo verifies group wikis
+
+<!-- categories: Geo-replication, Disaster Recovery -->
 
 {{< details >}}
 
@@ -285,6 +319,8 @@ Geo is now able to detect and correct data corruption of [group wikis](../../use
 ## Unified DevOps and Security
 
 ### CODEOWNERS file syntax and format validation
+
+<!-- categories: Source Code Management -->
 
 {{< details >}}
 
@@ -310,6 +346,8 @@ Previously, the `CODEOWNERS` file didn’t validate the information being entere
 
 ### Kubernetes 1.27 support
 
+<!-- categories: Deployment Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -324,6 +362,8 @@ You can read more about [our Kubernetes support policy](../../user/clusters/agen
 
 ### Wrap feature flag names instead of truncating
 
+<!-- categories: Feature Flags -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -337,6 +377,8 @@ If you used feature flags in previous versions of GitLab, you might have noticed
 In GitLab 16.3, the entire feature flag name is shown. Long names wrap across multiple lines, if needed.
 
 ### Names for audit event streams
+
+<!-- categories: Audit Events -->
 
 {{< details >}}
 
@@ -353,6 +395,8 @@ With GitLab 16.3, you can now name audit event streaming destinations to help id
 
 ### Explain this vulnerability
 
+<!-- categories: Vulnerability Management -->
+
 {{< details >}}
 
 - Tier: Gold
@@ -364,6 +408,8 @@ With GitLab 16.3, you can now name audit event streaming destinations to help id
 GitLab surfaces vulnerabilities that contain relevant information, however, sometimes it is unclear where to start. It takes time to research and synthesize information that is surfaced within the vulnerability record. Moreover it can be difficult to figure out how to fix a given vulnerability. With this Beta release, you can click a button to get an explanation and recommendation on how to mitigate the vulnerability, generated by AI.
 
 ### Compliance reports renamed to Compliance center
+
+<!-- categories: Compliance Management -->
 
 {{< details >}}
 
@@ -380,6 +426,8 @@ From GitLab 16.3, Compliance reports are known as Compliance center.
 
 ### Improve accuracy of scan result policies
 
+<!-- categories: Security Policy Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -393,6 +441,8 @@ A scan result policy is a type of security policy you use to evaluate and block 
 Previously, we compared vulnerabilities in the latest source and target branches to detect any new violations of policy rules. But, this might not capture vulnerabilities detected from scans running as a result of various pipeline sources. To increase accuracy, we are now comparing the latest completed pipelines for each pipeline source (with the exception of parent/child pipelines). This will ensure a more comprehensive evaluation and reduce the cases where approvals are required when it may be unexpected.
 
 ### Instance-level streaming audit event filters
+
+<!-- categories: Audit Events -->
 
 {{< details >}}
 
@@ -408,6 +458,8 @@ of audit events to send to each streaming location, focusing only on the events 
 
 ### Security bot to trigger scan execution policies pipelines
 
+<!-- categories: Security Policy Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -421,6 +473,8 @@ Security bot users will be created to support managing background tasks, and to 
 When a security policy project is linked to a group or subgroup, a security policy bot will be created in each project in the group or subgroup. When a link is made to a group, subgroup, or an individual project, a security bot user will be created for the given project or for any projects in the group or subgroup. Any groups, subgroups, or projects that already have a link to a security policy project will be unaffected at this time, but users may re-establish any existing links to take advantage of this feature. In GitLab 16.4, we plan to [enable security bots](https://gitlab.com/gitlab-org/gitlab/-/issues/414376) on all projects hosted on GitLab.com that have existing security policy project links.
 
 ### SAST analyzer updates
+
+<!-- categories: SAST -->
 
 {{< details >}}
 
@@ -441,6 +495,8 @@ For previous changes, see [last month’s updates](https://about.gitlab.com/rele
 
 ### Dependency and License Scanning support for Java v21
 
+<!-- categories: Software Composition Analysis -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -453,6 +509,8 @@ GitLab Dependency and License Scanning now support analyzing Java v21 Maven lock
 
 ### Runner tags enable UI-based configuration of on-demand DAST scans
 
+<!-- categories: DAST -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -464,6 +522,8 @@ GitLab Dependency and License Scanning now support analyzing Java v21 Maven lock
 You can now use tags to specify which runners you wish to use for on-demand DAST scans. Prior to 16.3, you could configure DAST scans using private runners via CI configuration files. This UI-based configuration enables efficient UI-configuration for managing DAST scans.
 
 ### Improved SAST vulnerability tracking
+
+<!-- categories: SAST -->
 
 {{< details >}}
 
@@ -490,6 +550,8 @@ You don’t have to take action to receive this update unless you’ve [pinned S
 
 ### Automatic response to leaked Postman API keys
 
+<!-- categories: Secret Detection -->
+
 {{< details >}}
 
 - Tier: Gold
@@ -510,6 +572,8 @@ See [the Postman blog post about this integration](https://blog.postman.com/prot
 
 ### Expose pipeline name as a predefined CI/CD variable
 
+<!-- categories: Continuous Integration (CI) -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -521,6 +585,8 @@ See [the Postman blog post about this integration](https://blog.postman.com/prot
 Pipeline names defined with the [`workflow:name`](../../ci/yaml/_index.md#workflowname) keyword are now accessible via the predefined variable `$CI_PIPELINE_NAME`.
 
 ### GitLab Runner 16.3
+
+<!-- categories: GitLab Runner Core -->
 
 {{< details >}}
 

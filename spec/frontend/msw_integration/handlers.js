@@ -1,6 +1,7 @@
 import { rest } from 'msw';
 import { handleWorkItemOperation, workItemRestEndpoints } from './work_items/handlers';
 import { handleAiDuoPanelOperation } from './work_items/ai_duo_panel';
+import { captureRequest } from './test_helpers';
 
 // CE-only endpoints and handlers should be added here
 export const featureHandlers = [handleWorkItemOperation, handleAiDuoPanelOperation];
@@ -9,7 +10,16 @@ export const restEndpoints = [...workItemRestEndpoints];
 export function buildHandlers(allFeatureHandlers, allRestEndpoints) {
   const restEndpointsHandlers = allRestEndpoints.map((endpoint) =>
     rest[endpoint.method](endpoint.path, (req, res, ctx) => {
-      return res(ctx.json(endpoint.response));
+      const operationName = endpoint.name || `REST:${endpoint.method}:${endpoint.path}`;
+      captureRequest(operationName, req);
+
+      const transforms = [ctx.json(endpoint.response)];
+      if (endpoint.headers) {
+        Object.entries(endpoint.headers).forEach(([key, value]) => {
+          transforms.push(ctx.set(key, value));
+        });
+      }
+      return res(...transforms);
     }),
   );
 

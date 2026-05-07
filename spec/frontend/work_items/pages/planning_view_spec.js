@@ -75,6 +75,7 @@ import getWorkItemsFullQuery from 'ee_else_ce/work_items/list/graphql/get_work_i
 import getWorkItemsSlimQuery from 'ee_else_ce/work_items/list/graphql/get_work_items_slim.query.graphql';
 import hasWorkItemsQuery from '~/work_items/list/graphql/has_work_items.query.graphql';
 import getWorkItemsCountOnlyQuery from 'ee_else_ce/work_items/list/graphql/get_work_items_count_only.query.graphql';
+import getWorkItemsRestQuery from '~/work_items/list/graphql/get_work_items_rest.query.graphql';
 import workItemsReorderMutation from '~/work_items/graphql/work_items_reorder.mutation.graphql';
 import getUserWorkItemsPreferences from '~/work_items/graphql/get_user_preferences.query.graphql';
 import namespaceSavedViewQuery from '~/work_items/list/graphql/namespace_saved_view.query.graphql';
@@ -1538,6 +1539,75 @@ describe('planning-view', () => {
 
     it('combines the slim and full results correctly and passes the to the list component', () => {
       expect(findListView().props('workItems')).toEqual(combinedQueryResultExample);
+    });
+  });
+
+  describe('when workItemRestApiFrontendUsers and workItemRestApi are enabled', () => {
+    let restQueryHandler;
+
+    beforeEach(async () => {
+      restQueryHandler = jest.fn().mockResolvedValue({
+        data: {
+          namespace: {
+            id: 'gid://gitlab/Group/3',
+            __typename: 'Namespace',
+            fullPath: 'full/path',
+            name: 'Test',
+            workItems: {
+              __typename: 'WorkItemConnection',
+              pageInfo: {
+                hasNextPage: false,
+                hasPreviousPage: false,
+                startCursor: null,
+                endCursor: null,
+                __typename: 'PageInfo',
+              },
+              nodes: [
+                {
+                  __typename: 'WorkItem',
+                  id: 'gid://gitlab/WorkItem/1',
+                  iid: '1',
+                  title: 'REST work item',
+                  state: 'OPEN',
+                },
+              ],
+            },
+          },
+        },
+      });
+
+      mountComponent({
+        additionalHandlers: [[getWorkItemsRestQuery, restQueryHandler]],
+        provide: { glFeatures: { workItemRestApiFrontendUsers: true, workItemRestApi: true } },
+      });
+
+      findListView().vm.$emit('update-query', exampleQueryParams);
+      await waitForPromises();
+    });
+
+    it('calls getWorkItemsRestQuery instead of getWorkItemsSlimQuery', () => {
+      expect(restQueryHandler).toHaveBeenCalled();
+      expect(defaultSlimQueryHandler).not.toHaveBeenCalled();
+    });
+
+    describe('filtering and sorting', () => {
+      it('applies filters', async () => {
+        findFilteredSearchBar().vm.$emit('onFilter', [
+          { type: TOKEN_TYPE_AUTHOR, value: { data: 'homer', operator: OPERATOR_IS } },
+        ]);
+        await nextTick();
+        expect(restQueryHandler).toHaveBeenCalledWith(
+          expect.objectContaining({ authorUsername: 'homer' }),
+        );
+      });
+
+      it('applies sort', async () => {
+        findFilteredSearchBar().vm.$emit('onSort', UPDATED_DESC);
+        await waitForPromises();
+        expect(restQueryHandler).toHaveBeenCalledWith(
+          expect.objectContaining({ sort: UPDATED_DESC }),
+        );
+      });
     });
   });
 

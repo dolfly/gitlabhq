@@ -35,6 +35,8 @@ Thank you Alexey for making GitLab more inclusive and transparent!
 
 ### Duo Code Review available in beta
 
+<!-- categories: Code Review Workflow -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -59,6 +61,8 @@ You can track future progress for Duo Code Review in epic [13008](https://gitlab
 
 ### Root Cause Analysis available on GitLab Duo Self-Hosted
 
+<!-- categories: Self-Hosted Models -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -80,6 +84,8 @@ Please leave feedback on Root Cause Analysis for GitLab Duo Self-Hosted in [issu
 
 ### Expanded AWS Regions available for GitLab Dedicated failover instances
 
+<!-- categories: GitLab Dedicated, Switchboard -->
+
 {{< details >}}
 
 - Tier: Gold
@@ -94,6 +100,8 @@ Expanding failover support to additional regions enables GitLab Dedicated custom
 These newly available regions are only available for hosting failover instances as they do not fully support certain AWS features that GitLab Dedicated relies on.
 
 ### GitLab Query Language views Beta
+
+<!-- categories: Wiki, Team Planning -->
 
 {{< details >}}
 
@@ -116,6 +124,8 @@ Teams can now maintain context while accessing the information they need, creati
 [We welcome your feedback](https://gitlab.com/gitlab-org/gitlab/-/issues/509791) on GLQL views as we continue to enhance this feature.
 
 ### Enhanced Markdown experience
+
+<!-- categories: Markdown -->
 
 {{< details >}}
 
@@ -145,6 +155,8 @@ These improvements make GitLab Flavored Markdown more powerful for teams creatin
 
 ### New visualization of DevOps performance with DORA metrics across projects
 
+<!-- categories: Value Stream Management, DORA Metrics -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -158,6 +170,8 @@ We are excited to introduce the **Projects by DORA metric** panel, a new additio
 The [DORA metrics](../../user/analytics/dora_metrics.md) are available out-of-the-box in GitLab, and now together with the [**DORA Performers score** panel](https://about.gitlab.com/blog/inside-dora-performers-score-in-gitlab-value-streams-dashboard/) executives have a complete view into their organization’s DevOps health top to bottom.
 
 ### New issues look now in beta
+
+<!-- categories: Team Planning -->
 
 {{< details >}}
 
@@ -180,6 +194,8 @@ Issues now share a common framework with epics and tasks, featuring real-time up
 
 ### Description templates for epics, issues, tasks, objectives and key results
 
+<!-- categories: Portfolio Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -193,6 +209,8 @@ You can now streamline your workflow and maintain consistency across your projec
 This powerful addition allows you to create standardized templates, saving you time and ensuring all crucial information is included every time you create a new work item.
 
 ### Change the severity of a vulnerability
+
+<!-- categories: Vulnerability Management -->
 
 {{< details >}}
 
@@ -216,6 +234,8 @@ All severity changes are tracked in the vulnerability history and audit events a
 
 ### GitLab Duo Chat is now resizable
 
+<!-- categories: Duo Chat -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -228,6 +248,8 @@ All severity changes are tracked in the vulnerability history and audit events a
 In the GitLab UI, you can now resize the Duo Chat drawer. This makes it easier to view code outputs, or keep Chat open whilst working with GitLab in the background.
 
 ### Manage multiple conversations in GitLab Duo Chat
+
+<!-- categories: Duo Chat -->
 
 {{< details >}}
 
@@ -252,6 +274,8 @@ Share your experience with us in [issue 526013](https://gitlab.com/gitlab-org/gi
 
 ### Select models for AI-powered features on GitLab Duo Self-Hosted
 
+<!-- categories: Self-Hosted Models -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -265,6 +289,8 @@ On GitLab Duo Self-Hosted, you can now select individual supported models for ea
 To leave feedback, go to [issue 524175](https://gitlab.com/gitlab-org/gitlab/-/issues/524175).
 
 ### AI Impact Dashboard available on GitLab Duo Self-Hosted Code Suggestions
+
+<!-- categories: Self-Hosted Models, Value Stream Management, DORA Metrics -->
 
 {{< details >}}
 
@@ -280,6 +306,8 @@ Use the AI Impact Dashboard to compare AI usage trends with metrics like lead ti
 Please leave feedback on the AI Impact Dashboard in [issue 456105](https://gitlab.com/gitlab-org/gitlab/-/issues/456105).
 
 ### Meta Llama 3 models available for GitLab Duo Self-Hosted Code Suggestions and Chat
+
+<!-- categories: Self-Hosted Models -->
 
 {{< details >}}
 
@@ -297,6 +325,8 @@ Please leave feedback on using these models with GitLab Duo Self-Hosted in [issu
 
 ### Timestamps of when placeholder users were created
 
+<!-- categories: Importers -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -310,6 +340,8 @@ With this release, we’ve added timestamps so you can track the progress of you
 
 ### Bulk edit to-do items
 
+<!-- categories: Notifications -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -322,6 +354,8 @@ You can now efficiently manage your To-Do List with our improved bulk editing fe
 
 ### Snooze to-do items
 
+<!-- categories: Notifications -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -333,6 +367,8 @@ You can now efficiently manage your To-Do List with our improved bulk editing fe
 You can now snooze notifications in your To-Do List, allowing you to temporarily hide items and focus on what’s most important right now. Whether you need an hour to concentrate or want to revisit a task tomorrow, you’ll have fine-grained control over when notifications reappear, helping you manage your workflow more effectively.
 
 ### Request reassignment by using a CSV file
+
+<!-- categories: Importers -->
 
 {{< details >}}
 
@@ -353,6 +389,8 @@ This method eliminates tedious manual reassignment through the UI.
 To further streamline large-scale migrations, API support for CSV-based reassignment is now also available.
 
 ### New navigation experience for projects in Your Work
+
+<!-- categories: Groups & Projects -->
 
 {{< details >}}
 
@@ -376,6 +414,8 @@ We value your feedback on this update! Join the discussion in [epic 16662](https
 
 ### Improved project creation permission settings
 
+<!-- categories: Groups & Projects -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -398,6 +438,8 @@ Thank you [@yasuk](https://gitlab.com/yasuk) for this community contribution!
 
 ### Dependency Scanning support for pub (Dart) package manager
 
+<!-- categories: Software Composition Analysis -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -411,6 +453,8 @@ Dependency Scanning has added support for pub, the official package manager for 
 This addition was a community contribution from one of our users, Alexandre Laroche. The GitLab Composition Analysis team appreciates this contribution to improve our product, many thanks, Alexandre. If you are interested in learning more about contributing to GitLab please check out our [Community Contribution program](https://about.gitlab.com/community/contribute/).
 
 ### Select a compliance framework as default from the dropdown list on the Frameworks page
+
+<!-- categories: Compliance Management -->
 
 {{< details >}}
 
@@ -430,6 +474,8 @@ center of a top-level group. This feature isn’t available in the compliance ce
 
 ### Ignore specific revisions in Git blame
 
+<!-- categories: Source Code Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -447,6 +493,8 @@ When you look through the history of a project with `blame`, these kinds of comm
 
 ### Path exclusions for CODEOWNERS
 
+<!-- categories: Source Code Management, Code Review Workflow -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -463,6 +511,8 @@ You can now configure the `CODEOWNERS` file with path exclusions to ignore certa
 when you want to exclude specific files, or paths from requiring a Code Owner approval.
 
 ### Configurable squash settings in branch rules
+
+<!-- categories: Source Code Management, Code Review Workflow -->
 
 {{< details >}}
 
@@ -483,6 +533,8 @@ This flexibility ensures consistent commit history across your project while res
 
 ### Wider distribution for token expiration notifications
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -494,6 +546,8 @@ This flexibility ensures consistent commit history across your project while res
 Previously, access token expiry notification emails were only sent to direct members of the group and project in which the token was expiring. Now, these notifications are also sent to inherited group and project members, if the setting is enabled. This wider distribution makes it easier to manage the token before expiry.
 
 ### Handling of `needs` statements in pipeline execution policies for compliance
+
+<!-- categories: Security Policy Management -->
 
 {{< details >}}
 
@@ -511,6 +565,8 @@ To inject jobs at the beginning of the pipeline without overriding `needs` behav
 
 ### Authenticate to private Pages with an access token
 
+<!-- categories: Pages -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -524,6 +580,8 @@ You can now authenticate to private GitLab Pages sites programmatically using ac
 This powerful enhancement increases productivity while maintaining security, giving developers more flexibility in how they interact with and distribute private Pages content.
 
 ### New insights into GitLab Duo Code Suggestions and GitLab Duo Chat trends
+
+<!-- categories: Value Stream Management -->
 
 {{< details >}}
 
@@ -539,6 +597,8 @@ With these additional metrics, managers can better measure the AI impact on thei
 
 ### Docker Hub authentication for the dependency proxy
 
+<!-- categories: Container Registry -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -553,6 +613,8 @@ Starting April 1, 2025, Docker Hub will enforce stricter pull limits (100 per 6-
 With this release, you can configure Docker Hub authentication through the GraphQL API using your Docker Hub credentials, [personal access token](https://docs.docker.com/security/for-developers/access-tokens/), or [organization access tokens](https://docs.docker.com/security/for-admins/access-tokens/). Support for UI configuration will be available in GitLab 17.11.
 
 ### Package registry adds audit events
+
+<!-- categories: Package Registry -->
 
 {{< details >}}
 
@@ -570,6 +632,8 @@ Audit events for projects are stored either in a group namespace or the project 
 
 ### Sort access tokens in Credentials Inventory
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -582,6 +646,8 @@ You can now sort personal, project, and group access tokens in the Credentials I
 Thank you [Chaitanya Sonwane](https://gitlab.com/chaitanyason9) for your contribution!
 
 ### Identify and revoke tokens with token information API
+
+<!-- categories: System Access -->
 
 {{< details >}}
 
@@ -596,6 +662,8 @@ Thank you [Nicholas Wittstruck](https://gitlab.com/nwittstruck) and the team fro
 
 ### Configurable token duration with GitLab OIDC provider
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -609,6 +677,8 @@ Thank you [Henry Sachs](https://gitlab.com/DerAstronaut) for your contribution!
 
 ### Map OmniAuth profile attributes to user
 
+<!-- categories: User Management -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -619,6 +689,8 @@ Thank you [Henry Sachs](https://gitlab.com/DerAstronaut) for your contribution!
 You can now map the Organization and Title profile attributes from an OmniAuth identity provider (IdP) to a user’s GitLab profile. This allows the IdP to be the single source of truth for these attributes, and users can no longer change them.
 
 ### Extended webhook triggers for expiring tokens
+
+<!-- categories: System Access -->
 
 {{< details >}}
 
@@ -631,6 +703,8 @@ You can now map the Organization and Title profile attributes from an OmniAuth i
 You can now trigger webhook events 60 and 30 days before a project or group access token expires. Previously, these webhook events only triggered 7 days before expiry. This is an optional setting that matches the existing email notification schedule for expiring tokens.
 
 ### GitLab Runner 17.10
+
+<!-- categories: GitLab Runner Core -->
 
 {{< details >}}
 

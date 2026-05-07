@@ -31,6 +31,8 @@ We are so grateful to Salihu for all of his contributions and to all of our open
 
 ### GitLab Duo Self-Hosted is generally available
 
+<!-- categories: Self-Hosted Models -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -46,6 +48,8 @@ With GitLab Duo Self-Hosted, you can use models hosted either on-premise or in a
 Please leave feedback in [issue 512753](https://gitlab.com/gitlab-org/gitlab/-/issues/512753).
 
 ### Run multiple Pages sites with parallel deployments
+
+<!-- categories: Pages -->
 
 {{< details >}}
 
@@ -68,6 +72,8 @@ Parallel deployments expire after 24 hours by default to help manage storage spa
 
 ### Add project files to Duo Chat in VS Code and JetBrains IDEs
 
+<!-- categories: Editor Extensions, Duo Chat -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -83,6 +89,8 @@ By adding project files, Duo Chat gains deep understanding of your specific code
 
 ### Workspaces container support with Sysbox
 
+<!-- categories: Workspaces -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -96,6 +104,8 @@ GitLab workspaces now supports building and running containers directly in your 
 Introduced in GitLab 17.4 as part of our [sudo access feature](https://about.gitlab.com/releases/2024/09/19/gitlab-17-4-released/#secure-sudo-access-for-workspaces), this capability enables you to maintain your complete container workflow in your GitLab workspace environment.
 
 ### Create workspaces without a custom devfile
+
+<!-- categories: Workspaces -->
 
 {{< details >}}
 
@@ -115,6 +125,8 @@ Previously, setting up a workspace required creating a `devfile.yaml` configurat
 Start developing and create a workspace immediately without additional setup or configuration steps.
 
 ### GitLab-managed Kubernetes resources
+
+<!-- categories: Environment Management, Deployment Management -->
 
 {{< details >}}
 
@@ -136,6 +148,8 @@ When your developers deploy applications, GitLab automatically creates the neces
 
 ### Simplified access to deployments within project environments
 
+<!-- categories: Environment Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -147,6 +161,8 @@ When your developers deploy applications, GitLab automatically creates the neces
 Have you ever struggled to get an overview of your deployments within a project? You can now view recent deployment details in the environments list without having to expand each environment. For each environment, the list shows your latest successful deployment and, if different, your most recent deployment attempt.
 
 ### Wiki page comments
+
+<!-- categories: Wiki -->
 
 {{< details >}}
 
@@ -169,6 +185,8 @@ With wiki comments, teams can maintain living documentation that evolves alongsi
 
 ### Enhancing workflow visibility: new insights into merge request review time
 
+<!-- categories: Value Stream Management, Code Review Workflow -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -182,6 +200,8 @@ To improve development workflow tracking, [Value Stream Analytics](https://about
 With this enhancement, teams gain deeper insights into opportunities to optimize review times, which help reduce the overall cycle time of development, leading to faster software delivery.
 
 ### EPSS, KEV, and CVSS data for vulnerability risk prioritization
+
+<!-- categories: Vulnerability Management -->
 
 {{< details >}}
 
@@ -200,6 +220,8 @@ We’ve added support for the following vulnerability risk data:
 You can now efficiently prioritize risk across your dependency and container image vulnerabilities using this data. You can find the data in the Vulnerability Report and in the Vulnerability Details page.
 
 ### Configure DAST scans through the UI with full control
+
+<!-- categories: DAST -->
 
 {{< details >}}
 
@@ -225,6 +247,8 @@ This enhanced control helps you run more effective security scans while maintain
 
 ### Automatic CI/CD pipeline cleanup
 
+<!-- categories: Continuous Integration (CI) Scaling -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -242,6 +266,8 @@ This can help reduce the disk usage in projects that run lots of pipelines that 
 ## Agentic Core
 
 ### Composite identity for more secure AI connections
+
+<!-- categories: Duo Workflow -->
 
 {{< details >}}
 
@@ -261,6 +287,8 @@ For more information about how the composite identity for service accounts can b
 
 ### Restrict users from making their profile private
 
+<!-- categories: User Management, User Profile -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -272,6 +300,8 @@ Users can choose to make their user profile public or private.
 Administrators can now control whether users have the option to make profiles private across their GitLab instance. In the Admin Area, “Allow users to make their profiles private” controls this setting. This setting is enabled by default, allowing users to choose private profiles.
 
 ### Manage project integrations from a group with the REST API
+
+<!-- categories: API, Integrations -->
 
 {{< details >}}
 
@@ -286,6 +316,8 @@ Previously, you could manage project integrations from a group in the GitLab UI 
 Thanks to [Van](https://gitlab.com/van.m.anderson) for their [initial community contribution](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/148283), which was subsequently picked up and completed by GitLab.
 
 ### Group sharing visibility enhancement
+
+<!-- categories: Groups & Projects -->
 
 {{< details >}}
 
@@ -302,6 +334,8 @@ We welcome feedback about this change in [epic 16777](https://gitlab.com/groups/
 ## Unified DevOps and Security
 
 ### Enable Dependency Scanning using SBOM for Cargo, Conda, Cocoapods and Swift projects
+
+<!-- categories: Software Composition Analysis -->
 
 {{< details >}}
 
@@ -330,6 +364,8 @@ Customers who want to entirely prevent the use of the new Dependency Scanning an
 
 ### License scanning support for Swift packages
 
+<!-- categories: Software Composition Analysis -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -343,6 +379,8 @@ In GitLab 17.9, we added support for license scanning on Swift packages. This wi
 This data is available to composition analysis users through the Dependency List, SBOM reports, and GraphQL API.
 
 ### Multi-core Advanced SAST offers faster scans
+
+<!-- categories: SAST -->
 
 {{< details >}}
 
@@ -363,6 +401,8 @@ We’re working to enable this performance improvement by default; this is track
 
 ### Apply a compliance framework by using a project's compliance center
 
+<!-- categories: Compliance Management -->
+
 {{< details >}}
 
 - Tier: Ultimate, Premium
@@ -382,6 +422,8 @@ not project owners.
 
 ### Workspace extensions now support proposed APIs
 
+<!-- categories: Workspaces -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -394,6 +436,8 @@ Workspace extensions now support enabling proposed APIs, improving compatibility
 
 ### Implement OCI-based GitOps with the FluxCD CI/CD component
 
+<!-- categories: Container Registry, Deployment Management, Component Catalog -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -405,6 +449,8 @@ Workspace extensions now support enabling proposed APIs, improving compatibility
 Have you ever wondered how to implement GitOps best practices with GitLab? The new [FluxCD component](https://gitlab.com/components/fluxcd/) makes it easy. Use the FluxCD component to package Kubernetes manifests into OCI images and store the images in OCI-compatible container registries. You can optionally sign the images and trigger an immediate FluxCD reconciliation.
 
 ### Get started with the GitLab integration with Kubernetes
+
+<!-- categories: Deployment Management -->
 
 {{< details >}}
 
@@ -419,6 +465,8 @@ In this release, we added new Kubernetes Getting started guides that show you ho
 To supplement the Kubernetes Getting started guides, we also included a series of recommendations for integrating GitLab into Kubernetes environments.
 
 ### Discover and migrate certificate-based Kubernetes clusters
+
+<!-- categories: Deployment Management -->
 
 {{< details >}}
 
@@ -435,6 +483,8 @@ To help users migrate, we added a new cluster API endpoint that group Owners can
 We encourage all GitLab.com users to check if they are affected, and to plan their migrations as soon as possible.
 
 ### Enforce custom stages in pipeline execution policies
+
+<!-- categories: Security Policy Management -->
 
 {{< details >}}
 
@@ -461,6 +511,8 @@ The `inject_policy` stage replaces `inject_ci` which will be deprecated, allowin
 
 ### Rotate access tokens with `self_rotate` scope
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -475,6 +527,8 @@ Thank you [Stéphane Talbot](https://gitlab.com/stalb) and [Anthony Juckel](http
 
 ### View inactive project and group access tokens
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate, Silver, Gold
@@ -485,6 +539,8 @@ Thank you [Stéphane Talbot](https://gitlab.com/stalb) and [Anthony Juckel](http
 You can now view inactive group and project access tokens in the UI. Previously, GitLab instantly deleted project and group access tokens after they expired or were revoked. This lack of a record of inactive tokens made auditing and security reviews more difficult. GitLab now retains inactive group and project access token records for 30 days, which helps teams track token usage and expiration for compliance and monitoring purposes.
 
 ### View access token IP addresses
+
+<!-- categories: System Access -->
 
 {{< details >}}
 
@@ -500,6 +556,8 @@ Thank you [Jayce Martin](https://jrm2k.us), [Avinash Koganti](http://www.linkedi
 
 ### Control access to GitLab Pages for groups
 
+<!-- categories: Pages -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -511,6 +569,8 @@ Thank you [Jayce Martin](https://jrm2k.us), [Avinash Koganti](http://www.linkedi
 You can now restrict GitLab Pages access at the group level. Group owners can enable a single setting to make all Pages sites in a group and its subgroups visible only to project members. This centralized control simplifies security management without modifying individual project settings.
 
 ### Change work item type to another
+
+<!-- categories: Portfolio Management -->
 
 {{< details >}}
 
@@ -524,6 +584,8 @@ You can now easily change the type of your work items, giving you the flexibilit
 
 ### Speed up adding new child items by keeping the form open
 
+<!-- categories: Portfolio Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -535,6 +597,8 @@ You can now easily change the type of your work items, giving you the flexibilit
 We’ve streamlined the process of creating multiple child items by keeping the form open after each submission, making it easier to add multiple entries without extra clicks. This update saves you time and ensures a smoother workflow when managing your tasks.
 
 ### Work items GraphQL API - additional query filters
+
+<!-- categories: Portfolio Management -->
 
 {{< details >}}
 
@@ -554,6 +618,8 @@ These new filters give you more control when querying and organizing work items 
 
 ### Block deletion of active security policy projects
 
+<!-- categories: Security Policy Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -567,6 +633,8 @@ To ensure secure management of security policies and prevent disruption to enabl
 If a security policy project is linked to any groups or projects, the links must be removed before the security policy project can be deleted.
 
 ### Dependency list filter by component in projects
+
+<!-- categories: Dependency Management -->
 
 {{< details >}}
 
@@ -582,6 +650,8 @@ Previously, you could not search for packages in the Dependencies list for a pro
 
 ### Filter by identifier in the project Vulnerability Report
 
+<!-- categories: Vulnerability Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -594,6 +664,8 @@ In the Vulnerability Report for a project, you can now filter the results by vul
 You can use the identifier in conjunction with other filters like the severity, status, or tool filters. The vulnerability identifier filter is limited to reports with 20,000 vulnerabilities or less.
 
 ### Support custom roles in merge request approval policies
+
+<!-- categories: Permissions, Security Policy Management -->
 
 {{< details >}}
 
@@ -609,6 +681,8 @@ You can now tailor approval requirements to match your organization’s unique t
 
 ### Search and filter the Credentials Inventory
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -620,6 +694,8 @@ You can now tailor approval requirements to match your organization’s unique t
 You can now use search and filter capabilities in the Credentials Inventory. This makes it easier to identify tokens and keys which fall within certain user-defined parameters, including tokens that expire within a certain window. Previously, the entries in the Credentials Inventory were presented as a static list.
 
 ### OAuth application authorization audit event
+
+<!-- categories: Audit Events -->
 
 {{< details >}}
 
@@ -637,6 +713,8 @@ applications. This new audit event further improves your ability to audit your G
 
 ### Use API to disable 2FA for individual enterprise users
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Silver, Gold
@@ -648,6 +726,8 @@ applications. This new audit event further improves your ability to audit your G
 You can now use the API to clear all two-factor authentication (2FA) registrations for an individual enterprise user. Previously, this was only possible in the UI. Using the API allows for automated and bulk operations, saving time when 2FA resets need to be done at scale.
 
 ### Email notifications for service accounts
+
+<!-- categories: System Access -->
 
 {{< details >}}
 
@@ -663,6 +743,8 @@ Thank you [Gilles Dehaudt](https://gitlab.com/tonton1728), [Étienne Girondel](h
 
 ### Support for additional group memberships with multiple OIDC providers
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -673,6 +755,8 @@ Thank you [Gilles Dehaudt](https://gitlab.com/tonton1728), [Étienne Girondel](h
 You can now configure additional group memberships when using multiple OIDC providers. Previously, if you configured multiple OIDC providers, you were limited to a single group membership.
 
 ### Custom expiration date for rotated service account tokens
+
+<!-- categories: System Access -->
 
 {{< details >}}
 
@@ -685,6 +769,8 @@ You can now configure additional group memberships when using multiple OIDC prov
 When rotating an access token for a service account, you can now use the `expires_at` attribute to set a custom expiration date. Previously, tokens automatically expired seven days after rotation. This allows for more granular management of token lifetimes, enhancing your ability to maintain secure access controls.
 
 ### Support merge request variables in pipeline execution policies
+
+<!-- categories: Security Policy Management -->
 
 {{< details >}}
 
@@ -707,6 +793,8 @@ With this enhancement, you can:
 
 ### New permissions for custom roles
 
+<!-- categories: Permissions -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -718,6 +806,8 @@ With this enhancement, you can:
 You can create custom roles with the [Read compliance dashboard](https://gitlab.com/gitlab-org/gitlab/-/issues/465324) permission. Custom roles allow you to grant only the specific permissions users need to complete their tasks. This helps you define roles that are tailored to the needs of your group, and can reduce the number of users who need the Owner or Maintainer role.
 
 ### GitLab Runner 17.9
+
+<!-- categories: GitLab Runner Core -->
 
 {{< details >}}
 

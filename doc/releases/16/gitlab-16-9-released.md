@@ -41,6 +41,8 @@ Thank you Ravi and Ian! 🙌
 
 ### GitLab Duo Chat Beta now available in Premium
 
+<!-- categories: Duo Chat -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -66,6 +68,8 @@ You can help us mature these features by providing feedback about your experienc
 
 ### Request changes on merge requests
 
+<!-- categories: Code Review Workflow -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -84,6 +88,8 @@ The sidebar now shows the outcome of your review next to your name. Currently, e
 You can leave feedback about the **Request changes** feature in our [feedback issue](https://gitlab.com/gitlab-org/gitlab/-/issues/438573).
 
 ### Improvements to the CI/CD variables user interface
+
+<!-- categories: Secrets Management -->
 
 {{< details >}}
 
@@ -104,6 +110,8 @@ Your [feedback for these changes](https://gitlab.com/gitlab-org/gitlab/-/issues/
 
 ### Expanded options for auto-canceling pipelines
 
+<!-- categories: Pipeline Composition -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -119,6 +127,8 @@ This lack of flexibility hinders users who want more control over which exact jo
 
 ### Limit concurrent code-indexing jobs for advanced search
 
+<!-- categories: Global Search -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -129,6 +139,8 @@ This lack of flexibility hinders users who want more control over which exact jo
 As a GitLab administrator, you can now set the maximum number of Elasticsearch code-indexing background jobs that can run concurrently. Previously, you could only limit the number of concurrent jobs by creating dedicated Sidekiq processes.
 
 ### Custom guidelines for managing group and project members
+
+<!-- categories: Groups & Projects -->
 
 {{< details >}}
 
@@ -144,6 +156,8 @@ Guidelines are helpful for teams that use external tooling to manage members of 
 Thank you @bufferoverflow for this community contribution!
 
 ### Show import stats for direct transfer
+
+<!-- categories: Importers -->
 
 {{< details >}}
 
@@ -162,6 +176,8 @@ In this release, we added import results statistics for groups and projects. To 
 
 ### Enable Jira issues at the group level
 
+<!-- categories: Integrations -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -173,6 +189,8 @@ In this release, we added import results statistics for groups and projects. To 
 With this release, you can enable Jira issues for all projects in a GitLab group. Previously, you could only enable Jira issues for each GitLab project individually.
 
 ### REST API support for the GitLab for Slack app
+
+<!-- categories: Integrations -->
 
 {{< details >}}
 
@@ -188,6 +206,8 @@ You cannot create a GitLab for Slack app from the API. Instead, you must [instal
 
 ### Access GitLab usage data through the REST API
 
+<!-- categories: Application Instrumentation -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -201,6 +221,8 @@ Self-managed users can now seamlessly access Service Ping data through a REST AP
 
 ### Authenticate and sign commits with SSH certificates
 
+<!-- categories: Source Code Management -->
+
 {{< details >}}
 
 - Tier: Silver, Gold
@@ -211,6 +233,8 @@ Self-managed users can now seamlessly access Service Ping data through a REST AP
 Previously, Git access control options on GitLab.com relied on credentials set up in the user account. Now you can set up a process to make Git access possible using only SSH certificates. You can also use these certificates to sign commits.
 
 ### Limit workspaces per user on the GitLab agent
+
+<!-- categories: Remote Development -->
 
 {{< details >}}
 
@@ -224,6 +248,8 @@ In GitLab 16.8, we introduced settings for the GitLab agent for Kubernetes to li
 Now in 16.9, you can also limit the number of workspaces per user. With this new setting, you have even more control over your cloud resources and can prevent individual developers from inflating cloud spend.
 
 ### Allow users to cleanup partial resources from failed deployments
+
+<!-- categories: Environment Management -->
 
 {{< details >}}
 
@@ -239,6 +265,8 @@ This behaviour might be considered a breaking change in some situations. The new
 
 ### Kubernetes 1.29 support
 
+<!-- categories: Deployment Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -253,6 +281,8 @@ You can read more about our Kubernetes support policy and other supported Kubern
 
 ### Enterprise user email address accessible through UI and API
 
+<!-- categories: User Management -->
+
 {{< details >}}
 
 - Tier: Silver, Gold
@@ -265,6 +295,8 @@ Group Owners that have [enterprise users](../../user/enterprise_user/_index.md) 
 
 ### Add or remove service accounts from groups with LDAP group sync
 
+<!-- categories: User Management -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -275,6 +307,8 @@ Group Owners that have [enterprise users](../../user/enterprise_user/_index.md) 
 Previously, if a group had LDAP sync enabled, administrators were not able to invite or remove any users from that group. Now, administrators can use the group and project members API to invite service account users to or remove those users from a group with LDAP sync. Administrators still cannot invite human users to or remove those users from a group with LDAP sync. This ensures that LDAP group sync is the single source of truth for human user account membership, while allowing the flexibility to use service accounts to add automations to LDAP-synced groups.
 
 ### Audit event for updating or deleting a custom role
+
+<!-- categories: Permissions -->
 
 {{< details >}}
 
@@ -288,6 +322,8 @@ GitLab now records an audit event when a custom role is updated or deleted. This
 
 ### Improved UX for expired SAML SSO sessions
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Silver, Gold
@@ -299,6 +335,8 @@ GitLab now records an audit event when a custom role is updated or deleted. This
 If you belong to a group that requires SAML SSO authentication, but you do not have a valid session for that group, a banner is displayed that prompts you to refresh your session. Previously, issues and merge requests were not displayed when a session had expired, but this was not clear to the user. Now, it is clear to users when they must reauthenticate to see all of their work items.
 
 ### Standards Adherence Report Improvements
+
+<!-- categories: Compliance Management -->
 
 {{< details >}}
 
@@ -324,6 +362,8 @@ In this milestone, we’ve made some improvements which will make reporting more
 
 ### Rich text editor broader availability
 
+<!-- categories: Team Planning, Portfolio Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -345,6 +385,8 @@ With improved access to the rich text editor, you can collaborate more efficient
 
 ### Allow duplicate Terraform modules
 
+<!-- categories: Package Registry -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -357,6 +399,8 @@ You can use the GitLab package registry to publish and download Terraform module
 However, you might want to allow duplicate uploads, especially for releases. In this release, GitLab expands the group setting for the package registry so you can allow or deny duplicate modules.
 
 ### Validate Terraform modules from your group or subgroup
+
+<!-- categories: Package Registry -->
 
 {{< details >}}
 
@@ -371,6 +415,8 @@ From GitLab 16.9, you can view all of your group and subgroup modules in GitLab.
 
 ### Boards work in progress line
 
+<!-- categories: Portfolio Management -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -381,6 +427,8 @@ From GitLab 16.9, you can view all of your group and subgroup modules in GitLab.
 You can now visualize your work in progress limits in a board list. When a limit has been exceeded, an indicator line will appear in the list to help you understand which items are over the limit and manage the list accordingly.
 
 ### New stage events for custom Value Stream Analytics
+
+<!-- categories: Value Stream Management -->
 
 {{< details >}}
 
@@ -393,6 +441,8 @@ You can now visualize your work in progress limits in a board list. When a limit
 To improve the [tracking of development workflows in GitLab](https://about.gitlab.com/blog/value-stream-total-time-chart/), the Value Stream Analytics has been extended with a new stage event: `Issue first added to iteration`. You can use this event to detect problems caused by a lack of agility from teams planning too far ahead or execution challenges in teams that have issues rolling over from iteration to iteration. For example, you can now add a “Planned” stage that starts when `Issue first added to iteration` and ends when the `Issue first assigned`.
 
 ### Improvements to Operational Container Scanning
+
+<!-- categories: Software Composition Analysis -->
 
 {{< details >}}
 
@@ -407,6 +457,8 @@ With this change to OCS, users who run `gitlab-agent` in FIPS mode cannot run Op
 
 ### DAST analyzer updates
 
+<!-- categories: DAST -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -420,6 +472,8 @@ We resolved the following bugs during the 16.9 release milestone:
 - Browser-based DAST crawl tasks are not running in parallel, causing performance degradation. [See the issue](https://gitlab.com/gitlab-org/gitlab/-/issues/435325) for more details.
 
 ### Updated SAST rules for higher-quality results
+
+<!-- categories: SAST -->
 
 {{< details >}}
 
@@ -438,6 +492,8 @@ This update is automatically applied on GitLab 16.0 or newer unless you’ve [pi
 We’re working on more SAST rule improvements in [epic 10907](https://gitlab.com/groups/gitlab-org/-/epics/10907).
 
 ### More detailed security findings in VS Code
+
+<!-- categories: Editor Extensions, API Security, Container Scanning, DAST, Fuzz Testing, SAST, Secret Detection, Software Composition Analysis, Vulnerability Management -->
 
 {{< details >}}
 
@@ -461,6 +517,8 @@ We’ve also:
 
 ### Control which roles can cancel pipelines or jobs
 
+<!-- categories: Continuous Integration (CI) -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -472,6 +530,8 @@ We’ve also:
 Organizations might want to control which user roles are able to cancel a pipeline. Previously, anyone who could run a pipeline could also cancel a pipeline. Now, a project Maintainer is able to update a setting which restricts pipeline and job cancellation to specific roles, or even prevents cancellation completely!
 
 ### Fleet Dashboard: Compute minutes used on instance runners per project metric card
+
+<!-- categories: Fleet Visibility -->
 
 {{< details >}}
 
@@ -485,6 +545,8 @@ When managing a GitLab Runner Fleet at scale, you have told us that knowing whic
 Now, the runner compute usage by project metric card, a complement to the previously released CI/CD compute minutes export by CSV feature, is available in the Runner Fleet Dashboard. You can see the top projects that consume instance runner minutes, and the most used instance runners in your GitLab environment.
 
 ### GitLab Runner 16.9
+
+<!-- categories: GitLab Runner Core -->
 
 {{< details >}}
 
@@ -506,6 +568,8 @@ We’re also releasing GitLab Runner 16.9 today! GitLab Runner is the lightweigh
 The list of all changes is in the GitLab Runner [CHANGELOG](https://gitlab.com/gitlab-org/gitlab-runner/blob/16-9-stable/CHANGELOG.md).
 
 ### Show MR link for branch based pipelines
+
+<!-- categories: Continuous Integration (CI) -->
 
 {{< details >}}
 

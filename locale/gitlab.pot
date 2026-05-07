@@ -3256,6 +3256,9 @@ msgstr ""
 msgid "AICatalog|That the user who runs it has access to."
 msgstr ""
 
+msgid "AICatalog|The service account does not belong to the configuration for the agent or flow associated with this project"
+msgstr ""
+
 msgid "AICatalog|The service account is part of a composite identity that runs the agent. This identity combines the user's role with the service account's role and uses the more restrictive of the two."
 msgstr ""
 
@@ -55892,24 +55895,6 @@ msgstr ""
 msgid "ProjectActivityRSS|Subscribe"
 msgstr ""
 
-msgid "ProjectCard|AI across the software development lifecycle. To keep this Premium feature, upgrade before your trial ends."
-msgstr ""
-
-msgid "ProjectCard|Accelerate your workflow with GitLab Duo Core"
-msgstr ""
-
-msgid "ProjectCard|Automatically pull from upstream repositories. To keep this Premium feature, upgrade before your trial ends."
-msgstr ""
-
-msgid "ProjectCard|Control your merge request review process with approval rules"
-msgstr ""
-
-msgid "ProjectCard|Keep your repositories synchronized with pull mirroring"
-msgstr ""
-
-msgid "ProjectCard|Set approval requirements and specific reviewers. To keep this Premium feature, upgrade before your trial ends."
-msgstr ""
-
 msgid "ProjectCreationLevel|Administrators"
 msgstr ""
 
@@ -77218,9 +77203,6 @@ msgid "TrialWidget|Ultimate with GitLab Duo Enterprise"
 msgstr ""
 
 msgid "TrialWidget|Upgrade"
-msgstr ""
-
-msgid "TrialWidget|Upgrade to keep your Premium features"
 msgstr ""
 
 msgid "TrialWidget|Your trial of GitLab Duo Enterprise has ended"

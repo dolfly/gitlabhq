@@ -45,6 +45,8 @@ genuinely appreciating their contributors, GitLab community is absolutely wonder
 
 ### The new GitLab UI: Designed for productivity
 
+<!-- categories: Design Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -61,6 +63,8 @@ GitLab is committed to continuous improvement, so please share your thoughts in 
 
 ### Exact code search in limited availability
 
+<!-- categories: Global Search -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -76,6 +80,8 @@ For GitLab.com, exact code search is enabled by default. For GitLab Self-Managed
 This feature is in active development. We welcome your feedback in [issue 420920](https://gitlab.com/gitlab-org/gitlab/-/issues/420920)!
 
 ### CI/CD Components can reference their own metadata
+
+<!-- categories: Pipeline Composition -->
 
 {{< details >}}
 
@@ -96,6 +102,8 @@ You can now build and publish versioned resources like Docker images when you re
 ensuring everything is in sync, eliminating manual version management, and preventing version mismatches.
 
 ### Support dynamic job dependencies in `needs:[parallel:matrix](../../ci/yaml.md#parallelmatrix)`
+
+<!-- categories: Pipeline Composition -->
 
 {{< details >}}
 
@@ -119,6 +127,8 @@ Terraform deployments across multiple environments, and any workflow requiring p
 
 ### GitLab Security Analyst Agent available as a foundational agent
 
+<!-- categories: Vulnerability Management, Dependency Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -135,6 +145,8 @@ This feature is in beta, and we welcome your feedback in [issue 576916](https://
 
 ### Model selection for GitLab Duo Agentic Chat in VS Code and JetBrains IDEs
 
+<!-- categories: Editor Extensions, Model Personalization -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -147,6 +159,8 @@ This feature is in beta, and we welcome your feedback in [issue 576916](https://
 Easily choose your preferred AI model right in GitLab Duo Chat, now available in the VS Code and JetBrains IDEs. Use the dropdown list in the GitLab Duo Chat panel to select among Claude, GPT, and other supported models. Model availability is managed by your organization admins, ensuring you have access to the right models for your workflow.
 
 ### Security dashboard upgrade (beta on GitLab.com)
+
+<!-- categories: Vulnerability Management -->
 
 {{< details >}}
 
@@ -170,6 +184,8 @@ The new security dashboards released in 18.6 are currently available on GitLab.c
 
 ### GitLab MCP server available in [beta](../../policy/development_stages_support.md#beta)
 
+<!-- categories: MCP Server -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -187,6 +203,8 @@ The GitLab MCP server provides key tools covering issues, merge requests, and pi
 
 ### Advanced search available for both issue descriptions and comments
 
+<!-- categories: Global Search -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -198,6 +216,8 @@ The GitLab MCP server provides key tools covering issues, merge requests, and pi
 Advanced search now returns matching results from both issue descriptions and comments. Previously, users had to search issue descriptions and comments separately. This improvement provides a more streamlined and comprehensive search workflow for GitLab issues.
 
 ### Gemini 2.5 Flash model compatible with GitLab Duo Agent Platform for [GitLab Duo Self-Hosted](../../administration/gitlab_duo_self_hosted/supported_models_and_hardware_requirements.md#supported-models)
+
+<!-- categories: Self-Hosted Models -->
 
 {{< details >}}
 
@@ -213,6 +233,8 @@ You can now use the Gemini 2.5 Flash model on GitLab Duo Agent Platform with Git
 ## Scale and Deployments
 
 ### Rate limit for listing project and group members
+
+<!-- categories: Groups & Projects -->
 
 {{< details >}}
 
@@ -236,6 +258,8 @@ Most users should not be affected by this change under normal usage patterns.
 
 ### Increased rule coverage for secret push protection and pipeline secret detection
 
+<!-- categories: Secret Detection -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -248,6 +272,8 @@ We’ve added support for 40 new rules to GitLab’s pipeline secret detection. 
 to improve quality and reduce false positives. These changes are released in [version 7.20.1](https://gitlab.com/gitlab-org/security-products/analyzers/secrets/-/releases/v7.20.1) of the secrets analyzer.
 
 ### Code Owners now supports inherited group memberships
+
+<!-- categories: Code Review Workflow, Source Code Management -->
 
 {{< details >}}
 
@@ -276,6 +302,8 @@ approval requirements that Code Owners provide.
 
 ### Toggle draft merge request visibility on your homepage
 
+<!-- categories: Code Review Workflow -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -298,6 +326,8 @@ your homepage by using the display preferences. When you hide draft merge reques
 This change helps you focus on merge requests that need immediate attention.
 
 ### New GitLab CLI features and improvements
+
+<!-- categories: GitLab CLI -->
 
 {{< details >}}
 
@@ -322,6 +352,8 @@ To get started with the GitLab CLI or update to the latest version,
 see the [installation guide](https://gitlab.com/gitlab-org/cli/#installation).
 
 ### Webhook notifications for merge request review re-requests
+
+<!-- categories: Code Review Workflow -->
 
 {{< details >}}
 
@@ -351,6 +383,8 @@ reviews are re-requested.
 
 ### Web IDE support for offline GitLab Self-Managed environments
 
+<!-- categories: Web IDE, Editor Extensions -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -369,6 +403,8 @@ With this update, administrators can configure their GitLab instance to serve We
 - Enable Markdown preview, code editing, and GitLab Duo Chat within the Web IDE in isolated networks.
 
 ### Webhook triggers for system-initiated approval resets
+
+<!-- categories: Code Review Workflow -->
 
 {{< details >}}
 
@@ -396,6 +432,8 @@ appropriately to the specific context of each approval change.
 
 ### GitLab Duo Planner Agent now available by default
 
+<!-- categories: Team Planning -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -413,6 +451,8 @@ This feature is in beta, and we welcome your feedback in [issue 576622](https://
 
 ### Helm chart registry: No more 1,000 chart limit
 
+<!-- categories: Package Registry -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -428,6 +468,8 @@ Platform engineers were forced to implement complex workarounds, like splitting 
 In GitLab 18.6, we’ve eliminated the 1,000 chart limitation by pre-computing metadata responses and storing them in object storage. This architectural change delivers both unlimited chart access and improved performance, as metadata is generated once in background jobs rather than on every request.
 
 ### Warn mode in merge request approval policies (Beta)
+
+<!-- categories: Security Policy Management -->
 
 {{< details >}}
 
@@ -446,6 +488,8 @@ Policies in warn mode generate informative bot comments without blocking merge r
 Clear indicators in merge requests tell users when policies are in `warn` or `enforce` mode, and audit events track policy violations and dismissals for compliance reporting. Developers can dismiss vulnerabilities while providing reasoning for the dismissal, creating a collaborative approach to security policy management.
 
 ### Security attributes (Beta)
+
+<!-- categories: Security Asset Inventories -->
 
 {{< details >}}
 
@@ -467,6 +511,8 @@ By applying these attributes across your projects, you can much more quickly sea
 - Quickly locate projects that contribute to applications which are publicly accessible/exposed
 
 ### Exceptions to bypass merge request approval policies
+
+<!-- categories: Security Policy Management -->
 
 {{< details >}}
 
@@ -491,6 +537,8 @@ This feature eliminates the need to entirely disable security policies during em
 
 ### Designate an account succession beneficiary
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Free, Silver, Gold
@@ -503,6 +551,8 @@ You can now designate an account beneficiary permission to manage your GitLab ac
 
 ### Group Owners can update primary emails for enterprise users
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Silver, Gold
@@ -514,6 +564,8 @@ You can now designate an account beneficiary permission to manage your GitLab ac
 Group owners can can now update the primary email address of enterprise users in their group. Updates can be made through the Users API. Previously, each enterprise user had to manually update their own email address. This change makes it easier to manage enterprise users at scale.
 
 ### GitLab Runner 18.6
+
+<!-- categories: GitLab Runner Core -->
 
 {{< details >}}
 

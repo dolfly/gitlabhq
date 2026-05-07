@@ -13,7 +13,7 @@ Migrate to GitLab from third-party systems.
 - [From GitHub](../../project/import/github.md)
 - [From Gitea](../gitea.md)
 - [From Bitbucket Cloud](../bitbucket_cloud.md)
-- [From FogBugz](../../project/import/fogbugz.md)
+- [From FogBugz](fogbugz.md)
 - [Through a manifest file](manifest_file.md)
 - [Through a Git URL](repo_by_url.md)
 - [From IBM DevOps ClearCase](clearcase.md)

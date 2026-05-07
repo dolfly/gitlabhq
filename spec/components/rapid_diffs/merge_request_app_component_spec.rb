@@ -176,11 +176,17 @@ RSpec.describe RapidDiffs::MergeRequestAppComponent, feature_category: :code_rev
   context "when user does not have permission to create notes" do
     let(:user_permissions) { { can_create_note: false } }
 
-    it "does not render before_diffs_list slot" do
+    it "does not render new discussion toggle" do
       render_component
 
       expect(page).not_to have_selector('[data-new-discussion-toggle]', visible: :all)
     end
+  end
+
+  it "always renders commit widget placeholder" do
+    render_component
+
+    expect(page).to have_selector('[data-commit-widget]', visible: :all)
   end
 
   def render_component

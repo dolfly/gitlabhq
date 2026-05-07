@@ -100,11 +100,13 @@ module WorkItemsHelpers
   end
 
   def click_bulk_edit
+    find_button('Bulk edit')
     click_button 'Bulk edit'
   end
 
   def click_update_selected
     click_button 'Update selected'
+    expect(page).to have_no_button('Update selected')
   end
 
   def check_work_items(items = [])

@@ -168,7 +168,7 @@ RSpec.describe SearchHelper, :with_current_organization, feature_category: :glob
         context 'with limiting' do
           let_it_be(:users) { create_list(:user, 6, name: 'Jane Doe') }
 
-          before do
+          before_all do
             users.each do |user|
               project.add_developer(user)
             end
@@ -312,8 +312,10 @@ RSpec.describe SearchHelper, :with_current_organization, feature_category: :glob
           expect(::Gitlab::Search::RecentWikiPages).to receive(:new).with(user: user)
             .and_return(recent_wiki_pages)
 
-          wiki_page_meta1 = create(:wiki_page_meta, title: 'Wiki page 1', project: project1, canonical_slug: 'wiki-page-1')
-          wiki_page_meta2 = create(:wiki_page_meta, title: 'Wiki page 2', project: project2, canonical_slug: 'wiki-page-2')
+          wiki_page_meta1 = create(:wiki_page_meta, title: 'Wiki page 1', project: project1,
+            canonical_slug: 'wiki-page-1')
+          wiki_page_meta2 = create(:wiki_page_meta, title: 'Wiki page 2', project: project2,
+            canonical_slug: 'wiki-page-2')
 
           expect(recent_wiki_pages).to receive(:search).with(search_term)
             .and_return(WikiPage::Meta.id_in_ordered([wiki_page_meta1.id, wiki_page_meta2.id]))
@@ -491,10 +493,13 @@ RSpec.describe SearchHelper, :with_current_organization, feature_category: :glob
     let_it_be(:issue) { create(:issue, project: project) }
     let(:issue_iid) { "\##{issue.iid}" }
 
-    before do
-      allow(self).to receive(:current_user).and_return(user)
+    before_all do
       group.add_owner(user)
       project.add_owner(user)
+    end
+
+    before do
+      allow(self).to receive(:current_user).and_return(user)
       @project = project
     end
 
@@ -616,7 +621,7 @@ RSpec.describe SearchHelper, :with_current_organization, feature_category: :glob
     end
 
     context 'when the user has access to one group' do
-      before do
+      before_all do
         group_2.add_developer(user)
       end
 
@@ -682,7 +687,7 @@ RSpec.describe SearchHelper, :with_current_organization, feature_category: :glob
         let_it_be(:group) { create(:group, name: 'test group') }
         let_it_be(:project_3) { create(:project, name: 'nothing', namespace: group) }
 
-        before do
+        before_all do
           group.add_owner(user)
         end
 
@@ -768,7 +773,7 @@ RSpec.describe SearchHelper, :with_current_organization, feature_category: :glob
   describe 'search_filter_input_options' do
     context 'for project' do
       before do
-        @project = create(:project, :repository)
+        @project = build_stubbed(:project)
       end
 
       it 'includes id with type' do
@@ -792,7 +797,7 @@ RSpec.describe SearchHelper, :with_current_organization, feature_category: :glob
 
     context 'for group' do
       before do
-        @group = create(:group, name: 'group')
+        @group = build_stubbed(:group, name: 'group')
       end
 
       it 'does not includes project-id' do
@@ -821,7 +826,7 @@ RSpec.describe SearchHelper, :with_current_organization, feature_category: :glob
   describe 'search_history_storage_prefix' do
     context 'for project' do
       it 'returns project full_path' do
-        @project = create(:project, :repository)
+        @project = build_stubbed(:project)
 
         expect(search_history_storage_prefix).to eq(@project.full_path)
       end
@@ -829,7 +834,7 @@ RSpec.describe SearchHelper, :with_current_organization, feature_category: :glob
 
     context 'for group' do
       it 'returns group full_path' do
-        @group = create(:group, :nested, name: 'group-name')
+        @group = build_stubbed(:group, :nested, name: 'group-name')
 
         expect(search_history_storage_prefix).to eq(@group.full_path)
       end
@@ -880,7 +885,7 @@ RSpec.describe SearchHelper, :with_current_organization, feature_category: :glob
   end
 
   describe '#highlight_and_truncate_issuable' do
-    let_it_be(:issue) { create(:issue) }
+    let(:issue) { build_stubbed(:issue) }
     let(:highlight_and_truncate) { highlight_and_truncate_issuable(issue, 'test', {}) }
 
     before do
@@ -1034,7 +1039,7 @@ RSpec.describe SearchHelper, :with_current_organization, feature_category: :glob
     end
 
     context 'when group data' do
-      let_it_be(:group) { create(:group) }
+      let(:group) { build_stubbed(:group) }
 
       let(:group_metadata) do
         {
@@ -1060,8 +1065,8 @@ RSpec.describe SearchHelper, :with_current_organization, feature_category: :glob
     end
 
     context 'when project data' do
-      let_it_be(:project_group) { create(:group) }
-      let_it_be(:project) { create(:project, group: project_group) }
+      let(:project_group) { build_stubbed(:group) }
+      let(:project) { build_stubbed(:project, group: project_group) }
       let(:project_metadata) do
         {
           issues_path: project_issues_path(project),
@@ -1121,7 +1126,7 @@ RSpec.describe SearchHelper, :with_current_organization, feature_category: :glob
     end
 
     context 'for ref data' do
-      let_it_be(:project) { create(:project) }
+      let(:project) { build_stubbed(:project) }
       let(:ref) { 'test-branch' }
 
       context 'when user can? download project data' do
@@ -1143,7 +1148,7 @@ RSpec.describe SearchHelper, :with_current_organization, feature_category: :glob
 
     context 'for snippet' do
       context 'when searching from snippets' do
-        let(:snippet) { create(:project_snippet) }
+        let(:snippet) { build_stubbed(:project_snippet) }
 
         it 'adds :for_snippets true correctly to hash' do
           expect(header_search_context[:for_snippets]).to be(true)
@@ -1208,7 +1213,7 @@ RSpec.describe SearchHelper, :with_current_organization, feature_category: :glob
       end
 
       it 'returns items in order' do
-        expect(Gitlab::Json.parse(search_navigation_json).keys)
+        expect(Gitlab::Json.safe_parse(search_navigation_json).keys)
           .to eq(%w[projects blobs work_items merge_requests wiki_blobs commits notes milestones users snippet_titles])
       end
     end

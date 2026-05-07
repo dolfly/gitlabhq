@@ -22,6 +22,7 @@ import isExpandedHierarchyTreeChildQuery from '~/work_items/graphql/client/is_ex
 import activeBoardItemQuery from 'ee_else_ce/boards/graphql/client/active_board_item.query.graphql';
 import activeDiscussionQuery from '~/work_items/components/design_management/graphql/client/active_design_discussion.query.graphql';
 import { updateNewWorkItemCache, workItemBulkEdit } from '~/work_items/graphql/resolvers';
+import { workItemsRestResolver } from '~/work_items/list/graphql/rest/work_items_rest_resolver';
 import { preserveDetailsState } from '~/work_items/utils';
 import {
   linkedItems,
@@ -49,6 +50,12 @@ export const config = {
           },
           isExpandedHierarchyTreeChild: (_, { variables, toReference }) =>
             toReference({ __typename: 'LocalWorkItemChildIsExpanded', id: variables.id }),
+          namespace: {
+            keyArgs: ['fullPath'],
+            merge(existing, incoming) {
+              return incoming ?? existing;
+            },
+          },
         },
       },
       MergeRequestConnection: {
@@ -500,7 +507,13 @@ export const config = {
   },
 };
 
+const namespaceResolvers =
+  window.gon?.features?.workItemRestApiFrontendUsers && window.gon?.features?.workItemRestApi
+    ? { Namespace: { workItems: workItemsRestResolver } }
+    : {};
+
 export const resolvers = {
+  ...namespaceResolvers,
   Mutation: {
     updateIssueState: (_, { issueType = undefined, isDirty = false }, { cache }) => {
       const sourceData = cache.readQuery({ query: getIssueStateQuery });

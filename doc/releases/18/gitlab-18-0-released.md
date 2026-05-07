@@ -42,6 +42,8 @@ Thanks to Michael and the Adfinis team for co-creating GitLab!
 
 ### GitLab Premium and Ultimate with Duo
 
+<!-- categories: Code Suggestions, Duo Chat -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -62,6 +64,8 @@ GitLab’s AI-native features include Code Suggestions and Chat within the IDE. 
 
 ### Repository X-Ray now available on GitLab Duo Self-Hosted
 
+<!-- categories: Self-Hosted Models -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -73,6 +77,8 @@ GitLab’s AI-native features include Code Suggestions and Chat within the IDE. 
 You can now use Repository X-Ray with Code Suggestions on GitLab Duo Self-Hosted. This feature is in beta for GitLab Duo Self-Hosted, and is generally available on GitLab Self-Managed instances.
 
 ### Automatic reviews with Duo Code Review
+
+<!-- categories: Code Review Workflow -->
 
 {{< details >}}
 
@@ -94,6 +100,8 @@ Automatic reviews ensure that all code in your project receives a review, consis
 
 ### Code Suggestions prompt caching
 
+<!-- categories: Code Suggestions -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -106,6 +114,8 @@ Automatic reviews ensure that all code in your project receives a review, consis
 Code Suggestions now includes prompt caching. Prompt caching significantly improves code completion latency by avoiding the re-processing of cached prompt and input data. The cached data is never logged to any persistent storage, and you can optionally disable prompt caching in the GitLab Duo settings.
 
 ### Improved Duo Code Review context
+
+<!-- categories: Code Review Workflow -->
 
 {{< details >}}
 
@@ -130,6 +140,8 @@ code reviews.
 
 ### List only Enterprise users for contributions reassignment on GitLab.com
 
+<!-- categories: Importers -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -148,6 +160,8 @@ The same scoping is also applied to CSV-based reassignment, preventing accidenta
 
 ### Support for multiple workspaces in the GitLab for Slack app
 
+<!-- categories: Integrations -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -162,6 +176,8 @@ To enable support for multiple workspaces, configure the GitLab for Slack app as
 
 ### Delete groups and placeholder users
 
+<!-- categories: Importers -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -174,6 +190,8 @@ In GitLab 18.0, when you delete a top-level group, placeholder users associated 
 This way, unnecessary placeholder users are removed without disrupting the history or attributions of other projects.
 
 ### Internal releases available for GitLab Dedicated
+
+<!-- categories: GitLab Dedicated -->
 
 {{< details >}}
 
@@ -189,6 +207,8 @@ This new capability delivers immediate protection for critical vulnerabilities f
 
 ### GitLab chart 9.0 released with breaking changes
 
+<!-- categories: Cloud Native Installation, Omnibus Package -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -202,6 +222,8 @@ This new capability delivers immediate protection for critical vulnerabilities f
 
 ### Event data collection
 
+<!-- categories: Application Instrumentation -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -213,6 +235,8 @@ This new capability delivers immediate protection for critical vulnerabilities f
 In GitLab 18.0, we are enabling event-level product usage data collection from GitLab Self-Managed and GitLab Dedicated instances. Unlike aggregated data, event-level data provides GitLab with deeper insights into usage, allowing us to improve user experience on the platform and increase feature adoption. For detailed instructions on how to adjust data sharing settings, please refer to our documentation.
 
 ### Deletion protection available for all users
+
+<!-- categories: Groups & Projects -->
 
 {{< details >}}
 
@@ -228,6 +252,8 @@ By making data safety a core feature, GitLab can help better protect your work a
 
 ### Delayed project deletion for user namespaces
 
+<!-- categories: Groups & Projects -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -242,6 +268,8 @@ We hope this enhancement provides greater peace of mind when managing your perso
 
 ### New `active` parameter for Groups and Projects REST APIs
 
+<!-- categories: Groups & Projects -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -255,6 +283,8 @@ We’ve added a new `active` parameter to our Groups and Projects REST APIs that
 Thank you [@dagaranupam](https://gitlab.com/dagaranupam) for adding this parameter to the Projects API.
 
 ### Rate limits for Groups, Projects, and Users API
+
+<!-- categories: Groups & Projects -->
 
 {{< details >}}
 
@@ -273,6 +303,8 @@ For complete details about specific rate limits and implementation information, 
 ## Unified DevOps and Security
 
 ### Security scanners now support MR pipelines
+
+<!-- categories: API Security, Container Scanning, DAST, Fuzz Testing, SAST, Secret Detection, Software Composition Analysis -->
 
 {{< details >}}
 
@@ -301,6 +333,8 @@ We also changed the API Discovery template to align with other Stable templates 
 
 ### Display and filter archived projects in the compliance projects report
 
+<!-- categories: Compliance Management -->
+
 {{< details >}}
 
 - Tier: Ultimate, Premium
@@ -325,6 +359,8 @@ This feature includes:
 
 ### Create a workspace from merge requests
 
+<!-- categories: Workspaces -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -340,6 +376,8 @@ You can now create a workspace directly from a merge request with the new **Open
 - Make additional modifications to the merge request without local setup.
 
 ### View open merge requests targeting files
+
+<!-- categories: Source Code Management -->
 
 {{< details >}}
 
@@ -365,6 +403,8 @@ reveals a popover with the list of these merge requests.
 
 ### Shared Kubernetes namespace for workspaces
 
+<!-- categories: Workspaces -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -386,6 +426,8 @@ Thank you to the half dozen community contributors who helped build this feature
 
 ### Improved pod status visualizations in the dashboard for Kubernetes
 
+<!-- categories: Deployment Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -399,6 +441,8 @@ You can use the dashboard for Kubernetes to monitor your deployed applications. 
 In GitLab 18.0, error states in the UI show a specific container’s status, similar to the `kubectl` output. Now, you can quickly identify and troubleshoot failing pods without leaving the GitLab interface.
 
 ### Exclude packages from license approval rules
+
+<!-- categories: Security Policy Management -->
 
 {{< details >}}
 
@@ -436,6 +480,8 @@ The policy then enforces your license rules while respecting the defined excepti
 
 ### Limit maximum user session length
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -449,6 +495,8 @@ Administrators can now choose if the maximum length of a user session is compute
 Thank you [John Parent](https://gitlab.kitware.com/john.parent) for your contribution!
 
 ### GitLab Query Language views enhancements
+
+<!-- categories: Wiki, Team Planning -->
 
 {{< details >}}
 
@@ -470,6 +518,8 @@ We welcome your feedback on this enhancement, and on GLQL views in general, in [
 
 ### Pages template improvements
 
+<!-- categories: Pages -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -483,6 +533,8 @@ GitLab provides [templates for popular static site generators](https://gitlab.co
 Refining templates available for GitLab Pages streamlines the website creation process. Use templates to launch professional-looking sites with minimal technical expertise. Enhanced templates also provide modern, responsive designs, eliminating the need for custom development work.
 
 ### Configure Jira issues from vulnerabilities using the Jira integration API
+
+<!-- categories: Vulnerability Management -->
 
 {{< details >}}
 
@@ -498,6 +550,8 @@ You can now configure this integration from the project integrations API, which 
 
 ### Improved traceability of redetected vulnerabilities
 
+<!-- categories: Vulnerability Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -512,6 +566,8 @@ GitLab now adds a system note to the vulnerability history when resolved vulnera
 
 ### Bulk add vulnerabilities to issues from the vulnerability report
 
+<!-- categories: Vulnerability Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -524,6 +580,8 @@ With this release you can now bulk add vulnerabilities to new or existing GitLab
 You may now associate multiple issues and vulnerabilities together. Additionally, related vulnerabilities are now listed within the issue page.
 
 ### Disable user invitations
+
+<!-- categories: System Access -->
 
 {{< details >}}
 
@@ -542,6 +600,8 @@ This feature helps organizations maintain strict control over membership access.
 
 ### LDAP authentication with GitLab username
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -552,6 +612,8 @@ This feature helps organizations maintain strict control over membership access.
 LDAP users can now authenticate requests with their GitLab username. Previously, if the GitLab username didn’t match their LDAP username, GitLab returned an authentication error. This change helps users maintain separate naming conventions in GitLab and LDAP systems without disrupting approval workflows.
 
 ### Support for SHA256 SAML certificates
+
+<!-- categories: System Access -->
 
 {{< details >}}
 
@@ -564,6 +626,8 @@ LDAP users can now authenticate requests with their GitLab username. Previously,
 GitLab now automatically detects and supports both SHA1 and SHA256 certificate fingerprints for Group SAML authentication. This maintains backward compatibility with existing SHA1 fingerprints while adding support for more secure SHA256 fingerprints. This upgrade is essential to prepare for the upcoming ruby-saml 2.x release that will make SHA256 the default.
 
 ### Granular permissions for job tokens in beta
+
+<!-- categories: Permissions -->
 
 {{< details >}}
 
@@ -581,6 +645,8 @@ We’re actively seeking community feedback on this feature. If you have questio
 
 ### New permissions for custom roles
 
+<!-- categories: Permissions -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -594,6 +660,8 @@ Custom roles allow you to grant only the specific permissions users need to comp
 This helps you define roles that are tailored to the needs of your group, and can reduce the number of users who need the Owner or Maintainer role.
 
 ### New CI/CD analytics view for projects in limited availability
+
+<!-- categories: Fleet Visibility -->
 
 {{< details >}}
 
@@ -611,6 +679,8 @@ This enhancement leads to faster development cycles, improved collaboration, and
 CI/CD workflows in GitLab.
 
 ### GitLab Runner 18.0
+
+<!-- categories: GitLab Runner Core -->
 
 {{< details >}}
 

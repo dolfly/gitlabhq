@@ -28,6 +28,8 @@ Many thanks to Archish and the rest of GitLab’s open source contributors for c
 
 ### More context-aware GitLab Duo Code Suggestions using open tabs
 
+<!-- categories: Editor Extensions, Code Suggestions -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -42,6 +44,8 @@ Elevate your coding workflow and receive more context-aware Code Suggestions usi
 This improvement to Code Suggestions now uses the content of your open editor tabs to provide more relevant and accurate code recommendations.
 
 ### Auto-merge when all checks pass
+
+<!-- categories: Code Review Workflow -->
 
 {{< details >}}
 
@@ -59,6 +63,8 @@ We’re really excited about this improvement to accelerate your merge request w
 
 ### Extension marketplace now available in the Web IDE
 
+<!-- categories: Web IDE -->
+
 {{< details >}}
 
 - Tier: Free, Silver, Gold
@@ -72,6 +78,8 @@ We’re thrilled to announce the launch of the extension marketplace in the Web 
 The extension marketplace is disabled by default. To get started, you can enable the extension marketplace in the **Integrations** section of your [user preferences](https://gitlab.com/-/profile/preferences). For [enterprise users](../../user/enterprise_user/_index.md), only users with the Owner role for a top-level group can enable the extension marketplace.
 
 ### Secure sudo access for workspaces
+
+<!-- categories: Remote Development -->
 
 {{< details >}}
 
@@ -91,6 +99,8 @@ With this feature, you can fully customize your environment to match your workfl
 
 ### List Kubernetes resource events
 
+<!-- categories: Deployment Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -106,6 +116,8 @@ This release adds events to the resource details view of [the dashboard for Kube
 This is the first time we’ve added events to the UI. Currently, events are refreshed every time you open the resource details view. You can track the development of real-time event streaming in [issue 470042](https://gitlab.com/gitlab-org/gitlab/-/issues/470042).
 
 ### GitLab Pages without wildcard DNS is generally available
+
+<!-- categories: Pages -->
 
 {{< details >}}
 
@@ -125,6 +137,8 @@ wildcard DNS records or certificates.
 
 ### GitLab Pages parallel deployments in beta
 
+<!-- categories: Pages -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -141,6 +155,8 @@ Additionally, parallel deployments can be useful for localization when you deplo
 
 ### Summarize issue discussions with GitLab Duo Chat
 
+<!-- categories: Team Planning -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -153,6 +169,8 @@ Additionally, parallel deployments can be useful for localization when you deplo
 Getting up to speed on lengthy issue discussions can be a significant time investment. With this release, AI-generated issue discussion summarization has been integrated with Duo Chat and is now generally available for GitLab.com, Self-managed, and Dedicated customers.
 
 ### Advanced SAST is generally available
+
+<!-- categories: SAST -->
 
 {{< details >}}
 
@@ -175,6 +193,8 @@ To learn more, see [the announcement blog](https://about.gitlab.com/blog/gitlab-
 
 ### Hide CI/CD variable values in the UI
 
+<!-- categories: Variables -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -189,6 +209,8 @@ You might not want anyone to see the value of a variable after it is saved to pr
 
 ### Omnibus improvements
 
+<!-- categories: Omnibus Package -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -202,6 +224,8 @@ GitLab 17.7 will include OpenSSL V3. This will affect Omnibus instances with ext
 
 ### List groups invited to a group or project using the Groups or Projects API
 
+<!-- categories: Groups & Projects -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -213,6 +237,8 @@ GitLab 17.7 will include OpenSSL V3. This will affect Omnibus instances with ext
 We added new endpoints to the Groups API and Projects API to retrieve the groups that have been invited to a group or project. This functionality is available only on the Members page of a group or project. We hope that this addition will make it easier to automate membership management for your groups and projects. The endpoints are rate-limited to 60 requests per minute per user.
 
 ### Restrict group access by domain with the Groups API
+
+<!-- categories: API, Groups & Projects -->
 
 {{< details >}}
 
@@ -226,6 +252,8 @@ Previously, you could only add domain restrictions at the group level in the UI.
 
 ### Improved source display for group and project members
 
+<!-- categories: Groups & Projects -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -237,6 +265,8 @@ Previously, you could only add domain restrictions at the group level in the UI.
 We have simplified the display of the source column on the Members page for groups and projects. Direct members are still indicated as `Direct member`. Inherited members are now listed as `Inherited from` followed by the group name. Members that were added by inviting a group to the group or project are listed as `Invited group` followed by the group name. For members that inherited from an invited group that was added to a parent group, we now display the last step to keep the display actionable for users managing membership.
 
 ### GitLab Duo seat assignment email
+
+<!-- categories: Seat Cost Management -->
 
 {{< details >}}
 
@@ -251,6 +281,8 @@ Users on self-managed instances will now receive an email when they are assigned
 To disable this email, an administrator can disable the `duo_seat_assignment_email_for_sm` feature flag.
 
 ### Resend failed webhook requests with the API
+
+<!-- categories: Webhooks -->
 
 {{< details >}}
 
@@ -279,6 +311,8 @@ Thanks to [Phawin](https://gitlab.com/lifez) for [this community contribution](h
 
 ### Idempotency keys for webhook requests
 
+<!-- categories: Webhooks -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -295,6 +329,8 @@ Thanks to [Van](https://gitlab.com/van.m.anderson) for this [community contribut
 ## Unified DevOps and Security
 
 ### CI/CD component for code intelligence
+
+<!-- categories: Code Review Workflow -->
 
 {{< details >}}
 
@@ -317,6 +353,8 @@ We’ll continue to evaluate [available SCIP indexers](https://github.com/source
 
 ### Linked files in merge request show first
 
+<!-- categories: Code Review Workflow -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -334,6 +372,8 @@ Feedback about linked files can be left in [issue 439582](https://gitlab.com/git
 
 ### Authenticate with OAuth for GitLab Duo in JetBrains IDEs
 
+<!-- categories: Editor Extensions -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -345,6 +385,8 @@ Feedback about linked files can be left in [issue 439582](https://gitlab.com/git
 Our GitLab Duo plugin for JetBrains now offers a more secure and streamlined onboarding process. Sign in quickly and securely with OAuth. It integrates seamlessly with your existing workflow, with no personal access token required!
 
 ### Non-deployment jobs to protected environments aren't turned into manual jobs
+
+<!-- categories: Environment Management -->
 
 {{< details >}}
 
@@ -377,6 +419,8 @@ You can learn more about these proposed changes in the following issues:
 
 ### Trigger a Flux reconciliation from the cluster UI
 
+<!-- categories: Deployment Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -391,6 +435,8 @@ To trigger a reconciliation, go to a configured dashboard and select the Flux st
 
 ### Optional token expiration
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -401,6 +447,8 @@ To trigger a reconciliation, go to a configured dashboard and select the Flux st
 Administrators can now decide if they want to enforce a mandatory expiration date for personal, project, and group access tokens. If administrators disable this setting, any new access token generated will not be required to have an expiration date. By default this setting is enabled, and an expiration less than that of the maximum allowed lifetime is required. This setting is available in GitLab 16.11 and later.
 
 ### Search by multiple compliance frameworks
+
+<!-- categories: Compliance Management -->
 
 {{< details >}}
 
@@ -416,6 +464,8 @@ Now you can search by multiple compliance frameworks, which makes it easier to s
 
 ### Grant read access to pipeline execution YAML files in projects linked to security policies
 
+<!-- categories: Security Policy Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -429,6 +479,8 @@ In GitLab 17.4, we added a setting to security policies you can use to grant rea
 To configure the setting, go to the security policy project you want to share. Select **Settings > General > Visibility, project features, permissions**, scroll to **Pipeline execution policies**, and enable the **Grant access to this repository for projects linked to it as the security policy project source for security policies** toggle.
 
 ### Support suffix for jobs with name collisions in pipeline execution policy pipelines
+
+<!-- categories: Security Policy Management -->
 
 {{< details >}}
 
@@ -449,6 +501,8 @@ In a follow-up enhancement, we will introduce the configuration option within th
 
 ### Resizable wiki sidebar
 
+<!-- categories: Wiki -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -462,6 +516,8 @@ content. As wiki content grows, having a resizable sidebar helps manage and brow
 lists of pages more efficiently.
 
 ### Support for ingesting CycloneDX 1.6 SBOMs
+
+<!-- categories: Software Composition Analysis -->
 
 {{< details >}}
 
@@ -478,6 +534,8 @@ In GitLab 17.4 we have added support for ingesting CycloneDX version 1.6 SBOMs.
 Fields relating to hardware (HBOM), services (SaaSBOM), and AI/ML models (AI/ML-BOM) are not currently supported. SBOMs that contain data relating to these BOMs will be processed, but the data will not be analyzed or presented to users. Support for these other BOM-types is being tracked in this [epic](https://gitlab.com/groups/gitlab-org/-/epics/14989).
 
 ### Automatic cleanup for removed SAST analyzers
+
+<!-- categories: SAST -->
 
 {{< details >}}
 
@@ -496,6 +554,8 @@ The migration only resolves vulnerabilities that you haven’t confirmed or dism
 
 ### Secret Detection support for Anthropic API keys
 
+<!-- categories: Secret Detection -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -508,6 +568,8 @@ Both pipeline and client-side Secret Detection now support detection of [Anthrop
 
 ### JaCoCo support for test coverage visualization available in beta
 
+<!-- categories: Code Testing and Coverage -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -519,6 +581,8 @@ Both pipeline and client-side Secret Detection now support detection of [Anthrop
 You can now use JaCoCo coverage reports, a popular standard for coverage calculation, inside your merge requests. The feature is available as beta, but ready for testing by anyone who wants to use JaCoCo coverage reports right away. If you have any feedback, feel free to contribute to the [feedback issue](https://gitlab.com/gitlab-org/gitlab/-/issues/479804).
 
 ### GitLab Runner 17.4
+
+<!-- categories: GitLab Runner Core -->
 
 {{< details >}}
 

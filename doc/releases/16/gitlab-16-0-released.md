@@ -28,6 +28,8 @@ Thank you Jimmy for helping us iterate on the logic for vulnerability findings a
 
 ### Value Streams Dashboard is now generally available
 
+<!-- categories: Value Stream Management, DORA Metrics -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -52,6 +54,8 @@ to buy or maintain a third-party tool.
 
 ### Upsizing GitLab SaaS runners on Linux
 
+<!-- categories: GitLab Runner SaaS -->
+
 {{< details >}}
 
 - Tier: Free, Silver, Gold
@@ -65,6 +69,8 @@ You asked, we listened! In our efforts to be best-in-class for CI/CD build speed
 We’re excited to see pipelines run faster and boost productivity.
 
 ### GPU-enabled SaaS runners on Linux
+
+<!-- categories: GitLab Runner SaaS -->
 
 {{< details >}}
 
@@ -81,6 +87,8 @@ Now, with GPU-enabled SaaS runners on Linux, these workloads can be seamlessly s
 So why wait? Try out the new runner today and let us know what you think in this [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/403008). We can’t wait to hear your feedback!
 
 ### Apple silicon (M1) GitLab SaaS runners on macOS - Beta
+
+<!-- categories: GitLab Hosted Runnersit -->
 
 {{< details >}}
 
@@ -100,6 +108,8 @@ that require macOS in a secure, on-demand GitLab Runner build environment integr
 
 ### Comment templates
 
+<!-- categories: Code Review Workflow, Team Planning -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -116,6 +126,8 @@ This is a great way to standardize your replies and save you time!
 
 ### Update your fork from the GitLab UI
 
+<!-- categories: Source Code Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -129,6 +141,8 @@ Managing your fork just got easier. When your fork is behind, select **Update fo
 See how many commits your fork is ahead (or behind) on your project’s main page and at **Repository > Files**. If merge conflicts exist, the UI gives guidance on how to resolve them using Git from the command line.
 
 ### Mirror specific branches only
+
+<!-- categories: Source Code Management -->
 
 {{< details >}}
 
@@ -146,6 +160,8 @@ can decrease the amount of data your mirrors push or pull, and keep sensitive br
 
 ### New Web IDE experience now generally available
 
+<!-- categories: Web IDE -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -161,6 +177,8 @@ We have received overwhelmingly positive feedback on the Web IDE Beta and starti
 it the default multi-file code editor across GitLab.
 
 ### Workspaces available in Beta for public projects
+
+<!-- categories: Workspaces -->
 
 {{< details >}}
 
@@ -180,6 +198,8 @@ This short video walks you through the lifecycle of a workspace in the current B
 
 ### Security training with SecureFlag
 
+<!-- categories: Vulnerability Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -197,6 +217,8 @@ which can be transferred to a real environment.
 
 ### Token rotation API
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -210,6 +232,8 @@ Previously, to rotate tokens, the token owner had to manually create a new token
 Now, token owners can use a `:rotate` API endpoint to programatically rotate personal, group, and project access tokens.
 
 ### AI-powered workflow features
+
+<!-- categories: Code Suggestions, Workflow Automation, Intelligent Code Security -->
 
 {{< details >}}
 
@@ -226,6 +250,8 @@ These AI-powered workflows boost efficiency and reduce cycle times in every phas
 Learn more about [AI-powered workflows](https://about.gitlab.com/solutions/ai/)
 
 ### Code Suggestions improvements
+
+<!-- categories: Code Suggestions -->
 
 {{< details >}}
 
@@ -247,6 +273,8 @@ Read more about these [improvements and what’s next](https://about.gitlab.com/
 
 ### Error Tracking is now generally available
 
+<!-- categories: Error Tracking -->
+
 {{< details >}}
 
 - Tier: Free, Silver, Gold
@@ -261,6 +289,8 @@ In this release, we are supporting both the [GitLab integrated error tracking](.
 [Sentry-based](../../operations/error_tracking.md) backends.
 
 ### Custom value streams for project-level value stream analytics
+
+<!-- categories: Value Stream Management -->
 
 {{< details >}}
 
@@ -278,6 +308,8 @@ Until now, these features were only available at the group-level VSA only.
 
 ### Rate limit for unauthenticated users of the Projects List API
 
+<!-- categories: Groups & Projects -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -294,6 +326,8 @@ Users of self-managed GitLab instances have the same rate limitation by default,
 
 ### Self-managed GitLab uses two database connections
 
+<!-- categories: Cell -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -309,6 +343,8 @@ This change applies to installation methods with Omnibus GitLab, GitLab Helm cha
 
 ### Option to disable followers
 
+<!-- categories: System Access, User Profile -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -322,6 +358,8 @@ We have received feedback from users who wanted to prevent getting unwanted foll
 When you disable this feature, no one can follow you, and you cannot follow anyone. All existing following and follower relationships are removed, and the count is set to zero.
 
 ### Delayed group and project deletion set as default
+
+<!-- categories: Groups & Projects -->
 
 {{< details >}}
 
@@ -340,6 +378,8 @@ Users of Ultimate and Premium groups can still delete a group or project immedia
 We believe that this change will contribute to a safer deletion process and will be beneficial in preventing accidental deletions. We’d love your feedback in issue [#396996](https://gitlab.com/gitlab-org/gitlab/-/issues/396996).
 
 ### GitLab chart improvements
+
+<!-- categories: Cloud Native Installation -->
 
 {{< details >}}
 
@@ -365,6 +405,8 @@ in the `global.registry.*` configuration for simplification because the values a
 
 ### Omnibus improvements
 
+<!-- categories: Omnibus Package -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -382,6 +424,8 @@ in the `global.registry.*` configuration for simplification because the values a
 - GitLab 16.0 includes [Mattermost 7.10](https://mattermost.com/) with [security updates](https://mattermost.com/security-updates/). An upgrade from earlier versions is recommended.
 
 ### Additional Registration Features available to Free users
+
+<!-- categories: Product Analytics -->
 
 {{< details >}}
 
@@ -401,6 +445,8 @@ GitLab Free customers with a self-managed instance running GitLab Enterprise Edi
 To get access to these features, register with GitLab and send us activity data through [Service Ping](../../administration/settings/usage_statistics.md#enable-registration-features).
 
 ### Import collaborators as an additional item to import
+
+<!-- categories: Importers -->
 
 {{< details >}}
 
@@ -424,6 +470,8 @@ direct collaborators are imported. Outside collaborators are never imported.
 
 ### Filter GitHub repositories to import
 
+<!-- categories: Importers -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -446,6 +494,8 @@ to that organization.
 
 ### Mark to-do items completed by other group or project owners Done
 
+<!-- categories: Groups & Projects, User Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -461,6 +511,8 @@ With this new functionality, to-do items that have already been completed by ano
 
 ### Opt in to a new navigation experience
 
+<!-- categories: Navigation & Settings -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -474,6 +526,8 @@ Please let us know about your experience in [this issue](https://gitlab.com/gitl
 
 ### Limit session length for users
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -484,6 +538,8 @@ Please let us know about your experience in [this issue](https://gitlab.com/gitl
 Administrators can remove the “Remember Me” option for users when signing in so that sessions cannot be extended and the user is forced to re-authenticate. Limiting the duration of a session may improve instance security.
 
 ### Authenticate with Jira personal access tokens
+
+<!-- categories: Integrations -->
 
 {{< details >}}
 
@@ -501,6 +557,8 @@ if you are using Jira Data Center and Jira Server with Jira 8.14 and later. A Ji
 
 ### Placeholder for issue description in Service Desk automated replies
 
+<!-- categories: Service Desk -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -517,6 +575,8 @@ In this release, we add an `%{ISSUE_DESCRIPTION}` placeholder so that Service De
 
 ### Real-time merge request updates
 
+<!-- categories: Web IDE -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -532,6 +592,8 @@ We’re looking at more areas for [real-time improvements](https://gitlab.com/gr
 
 ### Provide a reason when dismissing vulnerabilities in bulk
 
+<!-- categories: Vulnerability Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -546,6 +608,8 @@ With this release, you can now select a dismissal reason when choosing the dismi
 status, and add a comment when changing a vulnerability’s status."
 
 ### Add and remove compliance frameworks without using bulk actions
+
+<!-- categories: Compliance Management -->
 
 {{< details >}}
 
@@ -568,6 +632,8 @@ compliance framework report as well. This simplifies the framework creation work
 
 ### Filter compliance violations by target branch name
 
+<!-- categories: Compliance Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -583,6 +649,8 @@ you are most concerned with.
 
 ### Support role-based approval action for scan result policies
 
+<!-- categories: Security Policy Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -596,6 +664,8 @@ With role-based approval actions, you can configure scan result policies to requ
 This gives you additional flexibility over requiring individual approvers or defined groups of users, making it easier to enforce policies based on roles you already leverage in GitLab, at scale, especially across large organizations.
 
 ### Introducing Out-of-band Application Security Testing through browser-based DAST
+
+<!-- categories: DAST -->
 
 {{< details >}}
 
@@ -615,6 +685,8 @@ We’re continuously iterating to develop new Breach and Attack Simulation featu
 
 ### Import Maven/Gradle packages by using CI/CD pipelines
 
+<!-- categories: Package Registry -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -629,6 +701,8 @@ You can now use the Packages Importer tool to import packages from any Maven/Gra
 To use the tool, simply create a `config.yml` file that contains the details of the packages you want to import into GitLab. Then add the importer to a `.gitlab-ci.yml` pipeline configuration file, and the importer does the rest. It runs in the pipeline, dynamically generating a child pipeline with jobs that import all the packages into your GitLab package registry.
 
 ### Download packages from the Maven Registry with Scala
+
+<!-- categories: Package Registry -->
 
 {{< details >}}
 
@@ -645,6 +719,8 @@ Please note that publishing artifacts using `sbt` is not yet supported, but you 
 
 ### Add or resolve to-do items on tasks, objectives, and key results
 
+<!-- categories: Team Planning -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -658,6 +734,8 @@ We know that GitLab [To-Do List](../../user/todos.md) is a widely adopted featur
 In this release, we’re introducing the ability to toggle a to-do item on or off from a work item record.
 
 ### GitLab Pages unique subdomains
+
+<!-- categories: Pages -->
 
 {{< details >}}
 
@@ -673,6 +751,8 @@ Now, you can secure your sites by assigning a unique subdomain to each GitLab Pa
 
 ### Add emoji reactions on tasks, objectives and key results
 
+<!-- categories: Team Planning -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -687,6 +767,8 @@ Before this release, you could only add reactions on issues, merge requests, sni
 
 ### Change work item type from quick action
 
+<!-- categories: Portfolio Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -698,6 +780,8 @@ Before this release, you could only add reactions on issues, merge requests, sni
 With this additional quick action, you can now convert key results to objectives.
 
 ### Pick custom colors for labels
+
+<!-- categories: Team Planning -->
 
 {{< details >}}
 
@@ -712,6 +796,8 @@ This release introduces a color picker to label management, allowing you to sele
 
 ### Reorder child records for tasks, objectives and key results
 
+<!-- categories: Portfolio Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -725,6 +811,8 @@ If you’re a user of [tasks](../../user/tasks.md) or OKRs you’ve likely wishe
 With this work, users will now be able to reorder child records within work item widgets allowing them to indicate relative priority or signal what’s up next.
 
 ### New stage events for custom Value Stream Analytics
+
+<!-- categories: Value Stream Management -->
 
 {{< details >}}
 
@@ -742,6 +830,8 @@ and MR assignment events prior to GitLab 16.0 are not available.
 
 ### Display message when deploy freeze is active
 
+<!-- categories: Environment Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -753,6 +843,8 @@ and MR assignment events prior to GitLab 16.0 are not available.
 GitLab now shows you a message on the Environments page when a deploy freeze is in effect. This helps ensure your team is aware of when freezes occur, and when deployments are not allowed.
 
 ### SAST analyzer updates
+
+<!-- categories: SAST -->
 
 {{< details >}}
 
@@ -781,6 +873,8 @@ For previous changes, see [last month’s updates](https://about.gitlab.com/rele
 
 ### Secret Detection updates
 
+<!-- categories: Secret Detection -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -806,6 +900,8 @@ For previous changes, see [last month’s updates](https://about.gitlab.com/rele
 
 ### Browser-based DAST performance improvements
 
+<!-- categories: DAST -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -827,6 +923,8 @@ With these improvements, we have seen browser-based DAST scan times reduced by 5
 application being scanned. While this percentage decrease may not be seen in all scans, your browser-based DAST scans should now take significantly less time to complete.
 
 ### Faster, easier Scala scanning in SAST
+
+<!-- categories: SAST -->
 
 {{< details >}}
 
@@ -856,6 +954,8 @@ If you have any questions, feedback, or issues with the new Semgrep-based Scala 
 
 ### Create an instance runner in the Admin Area as a user
 
+<!-- categories: Runner Fleet -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -866,6 +966,8 @@ If you have any questions, feedback, or issues with the new Semgrep-based Scala 
 In this new workflow, adding a new runner to a GitLab instance requires authorized users to create a runner in the GitLab UI and include essential configuration metadata. With this method, the runner is now easily traceable to the user, which will help administrators troubleshoot build issues or respond to security incidents.
 
 ### Trigger job mirror status of downstream pipeline when cancelled
+
+<!-- categories: Pipeline Composition -->
 
 {{< details >}}
 
@@ -882,6 +984,8 @@ This change may have an impact on your existing pipelines, especially if you hav
 
 ### CI/CD components
 
+<!-- categories: Pipeline Composition -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -895,6 +999,8 @@ When combined with the [`inputs`](../../ci/yaml/includes.md) keyword, a CI/CD co
 
 ### REST API endpoint to create a runner
 
+<!-- categories: Runner Fleet -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -905,6 +1011,8 @@ When combined with the [`inputs`](../../ci/yaml/includes.md) keyword, a CI/CD co
 Users can now use the new REST API endpoint, `POST /user/runners`, to automate the creation of runners associated with a user. When a runner is created, an authentication token is generated. This new endpoint supports the Next GitLab Runner Token Architecture workflow.
 
 ### Per-cache fallback cache keys in CI/CD pipelines
+
+<!-- categories: Pipeline Composition -->
 
 {{< details >}}
 
@@ -919,6 +1027,8 @@ We previously introduced a single fallback cache to use when no cache is found, 
 
 ### Create a group runner as a user
 
+<!-- categories: Runner Fleet -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -929,6 +1039,8 @@ We previously introduced a single fallback cache to use when no cache is found, 
 In this new workflow, adding a new runner to a GitLab group requires authorized users to create a runner in the GitLab UI and include essential configuration metadata. With this method, the runner is now easily traceable to the user, which will help administrators troubleshoot build issues or respond to security incidents.
 
 ### Configurable maximum number of included CI/CD configuration files
+
+<!-- categories: Pipeline Composition -->
 
 {{< details >}}
 
@@ -944,6 +1056,8 @@ Previously, a single CI/CD configuration could include up to 150 files, but in G
 
 ### Create project runners as a user
 
+<!-- categories: Runner Fleet -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -956,6 +1070,8 @@ In this new workflow, adding a new runner to a project requires authorized users
 With this method, the runner is now easily traceable to the user, which will help administrators troubleshoot build issues or respond to security incidents.
 
 ### Rate Limit for the `projects/:id/jobs` API endpoint reduced
+
+<!-- categories: Continuous Integration (CI) -->
 
 {{< details >}}
 
@@ -970,6 +1086,8 @@ Previously, the `GET /api/:version/projects/:id/jobs` was rate limited to 2000 a
 To move this in line with other rate limits and improve efficiency and reliability, we have lowered the limit to 600 authenticated requests per minute.
 
 ### GitLab Runner 16.0
+
+<!-- categories: GitLab Runner Core -->
 
 {{< details >}}
 

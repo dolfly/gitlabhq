@@ -33,6 +33,8 @@ Thank you Muhammed and Niklas! 🙌
 
 ### GitLab Duo Code Suggestions is generally available
 
+<!-- categories: Code Suggestions -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -53,6 +55,8 @@ GitLab Duo Code Suggestions is [free to try](../../user/project/repository/code_
 
 ### Use GitLab pages without a wildcard DNS
 
+<!-- categories: Pages -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -68,6 +72,8 @@ We welcome feedback related to this feature in [issue 434372](https://gitlab.com
 
 ### New drill-down view from Insights report charts
 
+<!-- categories: Value Stream Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -81,6 +87,8 @@ With the [Insights report](https://www.youtube.com/watch?v=OMTfPsLa98I) you can 
 We plan to include this capability in the other Insight reports as a custom option in a later version.
 
 ### SAST results in MR changes view
+
+<!-- categories: SAST -->
 
 {{< details >}}
 
@@ -101,6 +109,8 @@ We plan to enable the [feature flag](https://gitlab.com/gitlab-org/gitlab/-/issu
 
 ### CI/CD Catalog - Beta release
 
+<!-- categories: Pipeline Composition -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -118,6 +128,8 @@ While this is our initial beta release of the feature, we continue to work on ma
 
 ### Add a Mastodon handle to your User Profile
 
+<!-- categories: User Profile -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -129,6 +141,8 @@ While this is our initial beta release of the feature, we continue to work on ma
 You can now list your Mastodon handle on the User Profile. With this enhancement we are now supporting a fediverse social network, which will help in advancing [ActivityPub for GitLab](https://gitlab.com/groups/gitlab-org/-/epics/11247).
 
 ### Group descriptions extended to 500 characters
+
+<!-- categories: Groups & Projects -->
 
 {{< details >}}
 
@@ -142,6 +156,8 @@ Group descriptions can now contain up to 500 characters. If you try to save a gr
 
 ### Search bar more prominent on the search results page
 
+<!-- categories: Global Search -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -154,6 +170,8 @@ The search bar is now more prominent on the search results page. To increase the
 
 ### Issues with code more discoverable in advanced search
 
+<!-- categories: Global Search -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -165,6 +183,8 @@ The search bar is now more prominent on the search results page. To increase the
 In GitLab 16.7, issues with code have become more discoverable. With advanced search, you can now find issues that contain code snippets and logs in their descriptions.
 
 ### Customize time format for display
+
+<!-- categories: Internationalization -->
 
 {{< details >}}
 
@@ -188,6 +208,8 @@ In the following milestone we will [audit all timestamps](https://gitlab.com/gro
 
 ### Access the Admin Area from the left sidebar
 
+<!-- categories: Navigation & Settings -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -199,6 +221,8 @@ In the following milestone we will [audit all timestamps](https://gitlab.com/gro
 Administrators can now access the Admin Area in one step, by using a link at the bottom of the left sidebar. Previously, you had to select **Search or go to** and then select **Admin Area**. This change should save you time when accessing the Admin Area.
 
 ### Remove hardcoded time limit for migrations to complete
+
+<!-- categories: Importers -->
 
 {{< details >}}
 
@@ -217,6 +241,8 @@ As a result, this worker might have incorrectly marked a migration as stuck.
 In this milestone, instead of using an 8 hour time limit, GitLab now only marks the migration as stuck if the child workers stop working for 24 hours.
 
 ### Comprehensive results of imports by direct transfer
+
+<!-- categories: Importers -->
 
 {{< details >}}
 
@@ -253,6 +279,8 @@ In this milestone we also improved navigation with the breadcrumbs between those
 
 ### Reopen Service Desk issues when an external participant comments
 
+<!-- categories: Service Desk -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -270,6 +298,8 @@ items for them. This way you can make sure you never miss a follow-up email agai
 
 ### Backups supports alternate compression libraries
 
+<!-- categories: Backup/Restore of GitLab instances -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -283,6 +313,8 @@ You can now override the default single-threaded gzip compression library with a
 
 ### Define a network policy with egress rules
 
+<!-- categories: Workspaces -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -293,6 +325,8 @@ You can now override the default single-threaded gzip compression library with a
 In GitLab 16.7, you can now define a network policy with egress rules when you configure the GitLab agent for Kubernetes to support Workspaces. Use this feature for your self-hosted installation where the GitLab instance resolves to a private IP or when a workspace must access a cloud resource on a private IP range.
 
 ### Add custom emoji to groups
+
+<!-- categories: Code Review Workflow, Team Planning -->
 
 {{< details >}}
 
@@ -305,6 +339,8 @@ Who doesn’t love a good emoji to really express yourself? When commenting on i
 Groups can now add custom emoji to use across their projects. Custom emoji allow you to express your true feelings and communicate more clearly with the rest of your team. We can’t wait to see how you’ll react next.
 
 ### Complex merge request dependency chains now supported
+
+<!-- categories: Code Review Workflow -->
 
 {{< details >}}
 
@@ -319,6 +355,8 @@ The limitations around dependency hierarchy, and items in the chain, have been r
 
 ### Notify me when any merge request needs approval
 
+<!-- categories: Code Review Workflow -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -331,6 +369,8 @@ When your approval is required for a merge request, you need to be notified to t
 Enable the **Added as approver** custom notification level to trigger an email and to-do for each merge request you are eligible to approve. This helps you be aware of merge requests sooner in the process, and take action to get the proposal merged.
 
 ### Beta support for OpenTofu
+
+<!-- categories: Infrastructure Cost Data -->
 
 {{< details >}}
 
@@ -346,6 +386,8 @@ GitLab continues to support Terraform for the MR widget, module registry, and Gi
 
 ### Custom time period for access tokens rotation
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -358,6 +400,8 @@ You can now optionally input a new parameter, `expires_at`, when rotating an acc
 
 ### Use the UI to assign users to custom roles
 
+<!-- categories: Permissions -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -369,6 +413,8 @@ You can now optionally input a new parameter, `expires_at`, when rotating an acc
 You can now use the UI to assign a custom role to a new user, or change an existing user’s role to a custom role. You can do this in any part of the UI where you can currently assign or change a user’s role. Previously, you could only do this through the API.
 
 ### Enforce variables in Scan Execution Policies with the highest precedence
+
+<!-- categories: Security Policy Management -->
 
 {{< details >}}
 
@@ -386,6 +432,8 @@ Scan execution policies allow teams to enforce scanners and to define default an
 
 ### SAML attribute statements support Microsoft SAML attribute format
 
+<!-- categories: User Management -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -397,6 +445,8 @@ Scan execution policies allow teams to enforce scanners and to define default an
 SAML attribute statements now support the Microsoft SAML attribute format, which is in URL form. Previously, self-managed instance administrators had to manually configure attribute statements, and GitLab.com group owners had to add custom attributes to their SAML responses. This change allows both self-managed GitLab and GitLab.com to work with Microsoft without any manual configuration.
 
 ### Improvements to rich text editor
+
+<!-- categories: Team Planning, Portfolio Management -->
 
 {{< details >}}
 
@@ -411,6 +461,8 @@ In GitLab 16.2 we released the rich text editor as an alternative to the existin
 With GitLab 16.7, we’ve changed the rich text editor to match the behavior with our Markdown editing experience and fix reported bugs. We’ve [changed the sorting order in the labels autocomplete modal to be consistent between the Markdown and rich-text editor](https://gitlab.com/gitlab-org/gitlab/-/issues/419097), [addressed a bug in the options returned in the unassign quick action in the rich-text editor](https://gitlab.com/gitlab-org/gitlab/-/issues/420344), [added support for custom emojis](https://gitlab.com/gitlab-org/gitlab/-/issues/422958), and [updated the look and feel of the quick action selection dropdown to be consistent in the two editing experiences](https://gitlab.com/gitlab-org/gitlab/-/issues/406714), among other improvements.
 
 ### List repository tags with new Container Registry API
+
+<!-- categories: Container Registry -->
 
 {{< details >}}
 
@@ -429,6 +481,8 @@ This feature is available only on GitLab.com. Self-managed support is blocked un
 
 ### Rename projects with container images in the container registry on GitLab.com
 
+<!-- categories: Container Registry -->
+
 {{< details >}}
 
 - Tier: Free, Silver, Gold
@@ -442,6 +496,8 @@ This was a real problem that forced users to rely on custom scripts to manually 
 
 ### Filter by predefined date ranges in Value Stream Analytics
 
+<!-- categories: Value Stream Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -454,6 +510,8 @@ The value stream analytics report now has a set of filter options for data in th
 
 ### Support for Continuous Vulnerability Scanning for Dependency Scanning
 
+<!-- categories: Software Composition Analysis -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -465,6 +523,8 @@ The value stream analytics report now has a set of filter options for data in th
 Continuous Vulnerability Scanning is now Generally Available. With CVS enabled, your projects are automatically scanned when advisories are added to the GitLab Advisory Database. If new dependency-related vulnerabilities are identified, vulnerabilities are created automatically.
 
 ### DAST vulnerability check updates
+
+<!-- categories: DAST -->
 
 {{< details >}}
 
@@ -483,6 +543,8 @@ During the 16.7 release milestone, we enabled the following active checks for br
 
 ### DAST authentication now supports multi-step login forms
 
+<!-- categories: DAST -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -494,6 +556,8 @@ During the 16.7 release milestone, we enabled the following active checks for br
 The new `DAST_AFTER_LOGIN_ACTIONS` variable enables you to provide a list of actions to be executed after login. This allows for multi step login interactions, for example Azure AD’s “Keep Me Signed In” workflow.
 
 ### Updated SAST rules to reduce false-positive results
+
+<!-- categories: SAST -->
 
 {{< details >}}
 
@@ -514,6 +578,8 @@ We’re working on more SAST rule improvements in [epic 10907](https://gitlab.co
 
 ### `artifacts:public` CI/CD keyword now generally available
 
+<!-- categories: Build Artifacts -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -525,6 +591,8 @@ We’re working on more SAST rule improvements in [epic 10907](https://gitlab.co
 Previously, the `artifacts:public` keyword was only available as a default disabled feature for self-managed instances. Now in GitLab 16.7 we’ve made the `artifacts:public` keyword generally available for all users. You can now use the `artifacts:public` keyword in CI/CD configuration files to control whether job artifacts should be publicly accessible.
 
 ### Improved ability to keep the latest job artifacts
+
+<!-- categories: Build Artifacts -->
 
 {{< details >}}
 
@@ -541,6 +609,8 @@ In GitLab 16.7 the bugs causing this unintended behavior are resolved. Job artif
 The **Keep artifacts from most recent successful jobs** setting overrides the job’s `artifacts: expire_in` configuration and can result in a large number of artifacts stored without expiry. If your pipelines create many large artifacts, they can fill up your project storage quota quickly. We recommend disabling this setting if this feature is not required.
 
 ### GitLab Runner 16.7
+
+<!-- categories: GitLab Runner Core -->
 
 {{< details >}}
 
@@ -564,6 +634,8 @@ We’re also releasing GitLab Runner 16.7 today! GitLab Runner is the lightweigh
 The list of all changes is in the GitLab Runner [CHANGELOG](https://gitlab.com/gitlab-org/gitlab-runner/blob/16-7-stable/CHANGELOG.md).
 
 ### GitLab Runner supports SLSA v1.0 statement
+
+<!-- categories: GitLab Runner Core -->
 
 {{< details >}}
 

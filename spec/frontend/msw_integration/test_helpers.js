@@ -126,3 +126,35 @@ export function waitForAssertion(assertion) {
     assertion();
   });
 }
+
+/**
+ * Request tracking utilities for MSW integration tests.
+ * Allows tests to verify which endpoints were called and with what parameters.
+ */
+
+export const capturedRequests = {};
+
+/**
+ * Resets all captured requests. Should be called in beforeEach hooks.
+ */
+export function resetCapturedRequests() {
+  Object.keys(capturedRequests).forEach((key) => delete capturedRequests[key]);
+}
+
+/**
+ * Captures a request for later verification in tests.
+ * @param {string} name - The operation/endpoint name
+ * @param {Request} request - The MSW request object
+ */
+export function captureRequest(name, request) {
+  if (!capturedRequests[name]) {
+    capturedRequests[name] = [];
+  }
+
+  capturedRequests[name].push({
+    url: request.url.toString(),
+    params: Object.fromEntries(request.url.searchParams),
+    method: request.method,
+    timestamp: Date.now(),
+  });
+}

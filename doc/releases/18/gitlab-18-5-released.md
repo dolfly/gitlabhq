@@ -40,6 +40,8 @@ Thank you, Jose, for your outstanding work! 🚀
 
 ### GitLab Duo Planner, a specialized agent and Product Manager team member (beta)
 
+<!-- categories: Portfolio Management -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -56,6 +58,8 @@ It’s like having a proactive teammate who understands your planning workflow a
 This feature is currently in beta. Please provide feedback in [issue 576622](https://gitlab.com/gitlab-org/gitlab/-/issues/576622).
 
 ### GitLab Security Analyst Agent for Duo Agent Catalog (beta)
+
+<!-- categories: Vulnerability Management, Dependency Management -->
 
 {{< details >}}
 
@@ -85,6 +89,8 @@ This feature is in beta, and we welcome your feedback in [issue 576916](https://
 
 ### Maven virtual registry now available in beta
 
+<!-- categories: Virtual Registry -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -103,6 +109,8 @@ We invite enterprise customers to participate in the Maven virtual registry beta
 
 ### Pick up where you left off on the new personal homepage
 
+<!-- categories: Navigation -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -114,6 +122,8 @@ We invite enterprise customers to participate in the Maven virtual registry beta
 You can now access a new personal homepage that consolidates all your important GitLab activities in one place, making it easier to pick up where you left off. The homepage brings together your to-do items, assigned issues, merge requests, review requests, and recently viewed content, helping you navigate GitLab’s large surface area and stay focused on what matters the most to you.
 
 ### GPT-5 now available as a model option for GitLab Duo Agentic Chat
+
+<!-- categories: Model Personalization -->
 
 {{< details >}}
 
@@ -129,6 +139,8 @@ OpenAI GPT-5 is now available as a GitLab AI Vendor model when selecting a model
 To get started using GPT-5, select your preferred model from the model dropdown list in GitLab Duo Chat.
 
 ### Instance-wide compliance and security policy management
+
+<!-- categories: Compliance Management, Security Policy Management -->
 
 {{< details >}}
 
@@ -163,6 +175,8 @@ Learn more about compliance and security policy groups for [compliance framework
 
 ### DAST authentication scripts
 
+<!-- categories: DAST -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -179,6 +193,8 @@ This enhancement helps your team maintain critical security controls while condu
 
 ### Additional triggers for CLI agents
 
+<!-- categories: Duo Agent Platform -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -194,6 +210,8 @@ You can now trigger CLI agents using additional events to give you more flexibil
 - **Assign reviewer**: Trigger agents when a reviewer is added to a merge request.
 
 ### GitLab Duo Agent Platform for GitLab Duo Self-Hosted now in beta
+
+<!-- categories: Self-Hosted Models -->
 
 {{< details >}}
 
@@ -212,6 +230,8 @@ to use with GitLab Duo Agent Platform.
 
 ### Codestral now supported for GitLab Duo Chat (Classic)
 
+<!-- categories: Self-Hosted Models -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -229,6 +249,8 @@ for classic Duo Chat. This model is supported for GitLab Duo Self-Hosted custome
 
 ### GPT OSS Models compatible with GitLab Duo Agent Platform for GitLab Duo Self-Hosted
 
+<!-- categories: Self-Hosted Models -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -243,6 +265,8 @@ You can now use GPT OSS models on GitLab Duo Agent Platform with GitLab Duo Self
 ## Scale and Deployments
 
 ### Enhanced **Admin** area groups list
+
+<!-- categories: Groups & Projects -->
 
 {{< details >}}
 
@@ -262,6 +286,8 @@ This update brings the administrator experience in line with GitLab design stand
 
 ### Updated navigation experience for groups
 
+<!-- categories: Groups & Projects -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -280,6 +306,8 @@ These improvements make it easier to navigate your groups and projects while pro
 These enhancements save time by putting more information and actions at your fingertips. This update also lays the groundwork for future features like bulk editing and advanced filtering options.
 
 ### Improved inactive item management for groups and projects
+
+<!-- categories: Groups & Projects -->
 
 {{< details >}}
 
@@ -301,6 +329,8 @@ The clear separation of active from inactive content also provides a more focuse
 ## Unified DevOps and Security
 
 ### New vulnerability management features in GitLab Duo Agentic Chat
+
+<!-- categories: Vulnerability Management, Dependency Management -->
 
 {{< details >}}
 
@@ -338,6 +368,8 @@ letting engineers focus on genuine threats while AI handles repetitive assessmen
 
 ### C/C++ support for Advanced SAST
 
+<!-- categories: SAST -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -354,6 +386,8 @@ We welcome feedback on this feature. If you have any questions, comments, or wou
 
 ### Secret validity checks is in beta
 
+<!-- categories: Secret Detection -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -368,6 +402,8 @@ Now that validity checks is in beta, enable it to display the status of detected
 
 ### Increased rule coverage for secret push protection and pipeline secret detection
 
+<!-- categories: Secret Detection -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -380,6 +416,8 @@ New rules have been added to the GitLab pipeline secret detection. Some existing
 to improve quality and reduce false positives. These changes are released in [version 7.15.0](https://gitlab.com/gitlab-org/security-products/analyzers/secrets/-/releases/v7.15.0) of the secrets analyzer.
 
 ### Customizable detection logic for Advanced SAST
+
+<!-- categories: SAST -->
 
 {{< details >}}
 
@@ -395,6 +433,8 @@ For more information, see [Customize rulesets](../../user/application_security/s
 
 ### Advanced SAST diff-based scanning in merge requests
 
+<!-- categories: SAST -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -408,6 +448,8 @@ You can now perform diff-based scans that analyze only the code changes in a mer
 We are working to enable this performance improvement by default; this is tracked in [issue 546359](https://gitlab.com/gitlab-org/gitlab/-/issues/546359).
 
 ### Control requests for external control statuses
+
+<!-- categories: Compliance Management -->
 
 {{< details >}}
 
@@ -435,6 +477,8 @@ status update timing.
 
 ### Dependency scanning in limited availability
 
+<!-- categories: Software Composition Analysis -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -456,6 +500,8 @@ We welcome feedback on this feature. If you have questions, comments, or would l
 
 ### Variable expansion in environment `deployment_tier`
 
+<!-- categories: Environment Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -468,6 +514,8 @@ You can now use CI/CD variables in the `environment:deployment_tier` field, maki
 dynamically configure deployment tiers based on pipeline conditions.
 
 ### Configure status lifecycles for issues and tasks
+
+<!-- categories: Team Planning -->
 
 {{< details >}}
 
@@ -482,6 +530,8 @@ Previously, issues and tasks were required to share the same set of configured s
 Share your feedback and help us improve the feature by [contributing to our feedback issue](https://gitlab.com/gitlab-com/www-gitlab-com/-/issues/35235) with your use cases and suggestions.
 
 ### Format Markdown tables in the plain text editor
+
+<!-- categories: Markdown -->
 
 {{< details >}}
 
@@ -504,6 +554,8 @@ complex tables.
 
 ### View child task completion in issues
 
+<!-- categories: Team Planning -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -515,6 +567,8 @@ complex tables.
 You can now track the progress of issues directly from the child items widget, giving you a status overview at a glance. This enhancement provides real-time visibility into potential bottlenecks when work is already in progress, helping you quickly identify at-risk items and make timely adjustments before sprint deadlines are threatened.
 
 ### Expose original severity from the vulnerabilities API
+
+<!-- categories: Vulnerability Management -->
 
 {{< details >}}
 
@@ -528,6 +582,8 @@ The vulnerabilities GraphQL API now exposes the original severity of vulnerabili
 This allows you to determine what the severity of the vulnerability was before severity overrides were applied.
 
 ### Time windows for merge request approval policies
+
+<!-- categories: Security Policy Management -->
 
 {{< details >}}
 
@@ -547,6 +603,8 @@ The system will compare your merge request’s security results against the late
 
 ### Refreshed security finding statuses in the pipeline **Security** tab
 
+<!-- categories: Vulnerability Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -560,6 +618,8 @@ Previously, in the **Security** tab for a pipeline, if you dismissed an vulnerab
 Status updates in the security tab of a pipeline page are now updated after they are changed.
 
 ### Exceptions to bypass merge request approval policies
+
+<!-- categories: Security Policy Management -->
 
 {{< details >}}
 
@@ -584,6 +644,8 @@ This feature eliminates the need to entirely disable security policies during em
 
 ### Show only active vulnerabilities in the dependency list
 
+<!-- categories: Dependency Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -597,6 +659,8 @@ Previously, the dependency list included some dismissed vulnerabilities.
 To provide you with a more useful representation of the vulnerabilities in the dependency list, the project dependency list now includes only active vulnerabilities in the `detected` and `confirmed` states.
 
 ### Static reachability in limited availability and experimental Java support
+
+<!-- categories: Software Composition Analysis -->
 
 {{< details >}}
 
@@ -614,6 +678,8 @@ Data produced by static reachability can be used as part of users’ triage and 
 We welcome feedback on this feature. If you have questions, comments, or would like to engage with our team, please see this [feedback issue](https://gitlab.com/gitlab-org/gitlab/-/issues/535498).
 
 ### GitLab Runner 18.5
+
+<!-- categories: GitLab Runner Core -->
 
 {{< details >}}
 

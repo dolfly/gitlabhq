@@ -700,7 +700,7 @@ gem 'cvss-suite', '~> 4.1.1', require: 'cvss_suite', feature_category: :software
 gem 'arr-pm', '~> 0.0.12', feature_category: :package_registry
 
 # Remote Development
-gem 'devfile', '~> 0.5.0', feature_category: :workspaces
+gem 'devfile', '~> 0.5.1', feature_category: :workspaces
 gem 'hashdiff', '~> 1.2.0', feature_category: :workspaces
 
 # Apple plist parsing

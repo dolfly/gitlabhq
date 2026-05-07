@@ -99,17 +99,12 @@ RSpec.describe RapidDiffs::DiffCompareVersionsEntity, feature_category: :code_re
         allow(merge_request).to receive(:commit_exists?).with(commit.id).and_return(true)
       end
 
-      it 'includes selected commit with diff_refs' do
-        expect(serialized[:commit]).to include(
-          id: commit.id,
-          short_id: Commit.truncate_sha(commit.id),
-          commit_url: "/#{project.full_path}/-/commit/#{commit.id}"
-        )
-        expect(serialized[:commit][:diff_refs]).to eq(
-          base_sha: commit.diff_refs.base_sha,
-          start_sha: commit.diff_refs.start_sha,
-          head_sha: commit.diff_refs.head_sha
-        )
+      it 'includes selected commit with full commit data and diff_refs' do
+        expect(serialized[:commit]).to include(id: commit.id, short_id: Commit.truncate_sha(commit.id))
+        expect(serialized[:commit]).to have_key(:commit_url)
+        expect(serialized[:commit]).to have_key(:title_html)
+        expect(serialized[:commit]).to have_key(:authored_date)
+        expect(serialized[:commit]).to have_key(:diff_refs)
       end
     end
 

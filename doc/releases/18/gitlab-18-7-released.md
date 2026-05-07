@@ -37,6 +37,8 @@ We look forward to your continued involvement.
 
 ### Secret validity checks improved and generally available
 
+<!-- categories: Secret Detection -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -58,6 +60,8 @@ In this release, validity checks are generally available.
 
 ### Separate model selection for Agentic Chat and agents
 
+<!-- categories: Model Personalization -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -71,6 +75,8 @@ Separate models can now be selected for Agentic Chat and for all other agents fo
 This provides more options for model selection for GitLab Duo Agent Platform.
 
 ### Improved GitLab Duo and SDLC trends dashboard
+
+<!-- categories: DevOps Reports -->
 
 {{< details >}}
 
@@ -99,6 +105,8 @@ data points. For self-managed instances, see improved recommendations and config
 
 ### Additional Planner Agent features available in beta
 
+<!-- categories: Portfolio Management -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -119,6 +127,8 @@ decisions.
 Please provide your feedback in [issue 576622](https://gitlab.com/gitlab-org/gitlab/-/issues/576622).
 
 ### Dynamic input options in CI/CD pipelines
+
+<!-- categories: Pipeline Composition -->
 
 {{< details >}}
 
@@ -145,6 +155,8 @@ This dynamic capability enables you to create more intelligent, context-aware in
 through the pipeline creation process, reducing errors and ensuring only valid combinations of inputs are selected.
 
 ### SAST False Positive Detection with AI (Beta)
+
+<!-- categories: Vulnerability Management -->
 
 {{< details >}}
 
@@ -178,6 +190,8 @@ We welcome your feedback in [issue 583697](https://gitlab.com/gitlab-org/gitlab/
 
 ### New security dashboards enabled by default
 
+<!-- categories: Vulnerability Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -200,6 +214,8 @@ The new features include:
 Please note that using the new dashboard requires Elasticsearch.
 
 ### Instance setting to control publishing of components to the CI/CD Catalog
+
+<!-- categories: Pipeline Composition, Component Catalog -->
 
 {{< details >}}
 
@@ -225,6 +241,8 @@ component ecosystem while enabling their teams to discover and reuse approved co
 
 ### Advanced search available for both merge request descriptions and comments
 
+<!-- categories: Global Search -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -239,6 +257,8 @@ had to search merge request descriptions and comments separately.
 This improvement provides a more streamlined and comprehensive search workflow for GitLab merge requests.
 
 ### Support for `AGENTS.md` with GitLab Duo Chat (Agentic) in IDEs
+
+<!-- categories: Editor Extensions -->
 
 {{< details >}}
 
@@ -262,6 +282,8 @@ tailored instructions for different components.
 
 ### AI agent and flow versioning
 
+<!-- categories: Duo Agent Platform -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -276,6 +298,8 @@ This means your AI-powered workflows stay stable and predictable even as catalog
 validate new versions before you upgrade.
 
 ### AI gateway timeout setting
+
+<!-- categories: Model Personalization -->
 
 {{< details >}}
 
@@ -292,6 +316,8 @@ This value can range from 60 to 600 seconds.
 
 ### Report agents and flows to administrators
 
+<!-- categories: AI Catalog -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -306,6 +332,8 @@ abuse report that includes your feedback, and an administrator can choose to hid
 Use this feature to keep your agents and flows safe across your entire organization.
 
 ### Configure foundational agent availability
+
+<!-- categories: Duo Agent Platform -->
 
 {{< details >}}
 
@@ -324,6 +352,8 @@ security and governance policies.
 
 ### Enhanced active trial experience for Self-Managed
 
+<!-- categories: Acquisition -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -341,6 +371,8 @@ These enhancements help eliminate confusion about trial duration and make it eas
 
 ### Advanced vulnerability management available in Self-Managed and Dedicated environments
 
+<!-- categories: Vulnerability Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -357,6 +389,8 @@ Advanced vulnerability management is available to all Ultimate customers and inc
 - Filtering by policy violation bypass reason.
 
 ### Data Analyst foundational agent powered by GLQL (Beta)
+
+<!-- categories: Custom Dashboards Foundation -->
 
 {{< details >}}
 
@@ -378,6 +412,8 @@ This agent is currently in beta status, so please share your thoughts in the
 where you’d like to see this go next.
 
 ### Filter and comment on compliance violations
+
+<!-- categories: Compliance Management -->
 
 {{< details >}}
 
@@ -411,6 +447,8 @@ projects.
 
 ### Compliance framework controls show accurate scan status
 
+<!-- categories: Compliance Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -432,6 +470,8 @@ of your controls reflects whether security scans ran and completed, not whether 
 
 ### Accessibility improvements for heading anchor links
 
+<!-- categories: Markdown -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -447,6 +487,8 @@ These changes make it easier for all users to understand and navigate to specifi
 issues, and other content.
 
 ### Warn mode in merge request approval policies
+
+<!-- categories: Security Policy Management -->
 
 {{< details >}}
 
@@ -481,6 +523,8 @@ Additionally, you can use the API to query a filtered list of policy violations 
 
 ### Service accounts available during trials on GitLab.com
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Silver, Gold
@@ -493,6 +537,8 @@ Service accounts are now available during trial periods, allowing you to test au
 before purchasing.
 
 ### GitLab Runner 18.7
+
+<!-- categories: GitLab Runner Core -->
 
 {{< details >}}
 
@@ -527,6 +573,8 @@ included with GitLab.
 The list of all changes is in the GitLab Runner [CHANGELOG](https://gitlab.com/gitlab-org/gitlab-runner/blob/18-7-stable/[CHANGELOG](https://gitlab.com/gitlab-org/gitlab-runner/blob/18-7-stable/CHANGELOG.md).md).
 
 ### View child pipeline reports in merge requests
+
+<!-- categories: Continuous Integration (CI) -->
 
 {{< details >}}
 

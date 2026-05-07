@@ -159,7 +159,6 @@ RSpec/VerifiedDoubleReference:
     - 'spec/lib/gitlab/import_export/json/streaming_serializer_spec.rb'
     - 'spec/lib/gitlab/internal_events_spec.rb'
     - 'spec/lib/gitlab/lets_encrypt/client_spec.rb'
-    - 'spec/lib/gitlab/project_search_results_spec.rb'
     - 'spec/lib/gitlab/rack_attack_spec.rb'
     - 'spec/lib/gitlab/repository_archive_rate_limiter_spec.rb'
     - 'spec/lib/gitlab/sidekiq_middleware/skip_jobs_spec.rb'

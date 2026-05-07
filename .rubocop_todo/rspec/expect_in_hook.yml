@@ -201,7 +201,6 @@ RSpec/ExpectInHook:
     - 'spec/lib/gitlab/omniauth_initializer_spec.rb'
     - 'spec/lib/gitlab/pagination/gitaly_keyset_pager_spec.rb'
     - 'spec/lib/gitlab/patch/database_config_spec.rb'
-    - 'spec/lib/gitlab/project_search_results_spec.rb'
     - 'spec/lib/gitlab/redis/queues_spec.rb'
     - 'spec/lib/gitlab/repository_cache_adapter_spec.rb'
     - 'spec/lib/gitlab/sidekiq_daemon/monitor_spec.rb'

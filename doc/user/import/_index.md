@@ -32,7 +32,7 @@ A migration tool is available for some third-party platforms. Some support
 | [GitHub](../project/import/github.md)                                          | {{< no >}}              | {{< yes >}} | {{< yes >}}    | {{< yes >}}            |
 | [Gitea](gitea.md)                                                              | {{< no >}}              | {{< yes >}} | {{< yes >}}    | {{< yes >}}            |
 | [Bitbucket Cloud](bitbucket_cloud.md)                                          | {{< no >}}              | {{< yes >}} | {{< yes >}}    | {{< no >}}             |
-| [FogBugz](../project/import/fogbugz.md)                                        | {{< no >}}              | {{< yes >}} | {{< yes >}}    | {{< no >}}             |
+| [FogBugz](third_party_systems/fogbugz.md)                                      | {{< no >}}              | {{< yes >}} | {{< yes >}}    | {{< no >}}             |
 | Git repository through a [manifest file](third_party_systems/manifest_file.md) | {{< no >}}              | {{< yes >}} | {{< yes >}}    | {{< no >}}             |
 | Git repository through a [repository URL](third_party_systems/repo_by_url.md)  | {{< no >}}              | {{< yes >}} | {{< yes >}}    | {{< no >}}             |
 | [IBM DevOps ClearCase](third_party_systems/clearcase.md)                       | {{< no >}}              | {{< yes >}} | {{< no >}}     | {{< no >}}             |

@@ -48,6 +48,8 @@ Joe is a Senior R&D Engineer at [Kitware](https://www.kitware.com/) and has been
 
 ### Model registry available in beta
 
+<!-- categories: MLOps -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -64,6 +66,8 @@ We think of the model registry as a cornerstone concept that enables teams to co
 
 ### See multiple GitLab Duo Code Suggestions in VS Code
 
+<!-- categories: Editor Extensions, Code Suggestions -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -75,6 +79,8 @@ We think of the model registry as a cornerstone concept that enables teams to co
 GitLab Duo Code Suggestions in VS Code will now show you if there are multiple suggestions available. Simply hover over the suggestion and use the arrows or keyboard shortcut to cycle through the suggestions.
 
 ### Secret Push Protection available in beta
+
+<!-- categories: Secret Detection -->
 
 {{< details >}}
 
@@ -98,6 +104,8 @@ Secret push protection is available on GitLab.com and for Dedicated customers as
 
 ### GitLab Runner Autoscaler is generally available
 
+<!-- categories: GitLab Runner Core -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -110,6 +118,8 @@ In earlier versions of GitLab, some customers needed an autoscaling solution for
 Today, we’re pleased to announce the general availability of the GitLab Runner Autoscaler. The GitLab Runner Autoscaler is composed of GitLab-developed taskscaler and [fleeting](https://docs.gitlab.com/runner/fleet_scaling/fleeting.html) technologies and the cloud provider plugin for Google Compute Engine.
 
 ### GitLab connector application now available on the Snowflake Marketplace
+
+<!-- categories: Audit Events, Compliance Management -->
 
 {{< details >}}
 
@@ -132,6 +142,8 @@ To make use of this functionality, customers must deploy and manage the applicat
 
 ### Improved wiki user experience
 
+<!-- categories: Wiki -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -150,6 +162,8 @@ These enhancements improve ease of use, discoverability, and content management 
 
 ### New Value Stream Management report generator tool
 
+<!-- categories: Value Stream Management, DORA Metrics -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -165,6 +179,8 @@ You can now schedule [DevSecOps comparison metrics reports](https://gitlab.com/c
 You can access the scheduled reports tool using the [CI/CD Catalog](https://gitlab.com/explore/catalog).
 
 ### Container images linked to signatures
+
+<!-- categories: Container Registry -->
 
 {{< details >}}
 
@@ -184,6 +200,8 @@ This improvement is generally available only on GitLab.com. Self-managed support
 
 ### Require confirmation for manual jobs
 
+<!-- categories: Continuous Integration (CI) -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -197,6 +215,8 @@ Manual jobs can be used to trigger highly critical operations in your CI pipelin
 Special thanks to [Phawin](https://gitlab.com/lifez) for this community contribution!
 
 ### Runner fleet dashboard for groups
+
+<!-- categories: Fleet Visibility -->
 
 {{< details >}}
 
@@ -214,6 +234,8 @@ Customers on GitLab.com can use all of the fleet dashboard metrics available for
 
 ### Omnibus improvements
 
+<!-- categories: Omnibus Package -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -224,6 +246,8 @@ Customers on GitLab.com can use all of the fleet dashboard metrics available for
 GitLab 17.1 includes packages for supporting [Ubuntu Noble 24.04](../../install/package/_index.md).
 
 ### New GraphQL API argument `markedForDeletionOn` for groups and projects
+
+<!-- categories: Groups & Projects -->
 
 {{< details >}}
 
@@ -238,6 +262,8 @@ You can now use the new GraphQL API argument `markedForDeletionOn` to list the g
 Thank you [@imskr](https://gitlab.com/imskr) for this community contribution!
 
 ### New placeholders for group and project badges
+
+<!-- categories: Groups & Projects -->
 
 {{< details >}}
 
@@ -258,6 +284,8 @@ Thank you [@TamsilAmani](https://gitlab.com/TamsilAmani) for this community cont
 
 ### New `%{latest_tag}` placeholder for badges
 
+<!-- categories: Groups & Projects -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -271,6 +299,8 @@ You can now create badge links and image URLs using a `%{latest_tag}` placeholde
 Thank you [@TamsilAmani](https://gitlab.com/TamsilAmani) for this community contribution!
 
 ### Filter groups by `marked_for_deletion_on` date with the Groups API
+
+<!-- categories: Groups & Projects -->
 
 {{< details >}}
 
@@ -286,6 +316,8 @@ Thank you [@imskr](https://gitlab.com/imskr) for this community contribution!
 
 ### List contributed projects of a user with GraphQL API
 
+<!-- categories: Groups & Projects -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -300,6 +332,8 @@ Thank you [@yasuk](https://gitlab.com/yasuk) for this community contribution!
 
 ### Add members by username with the Members API
 
+<!-- categories: User Management, Groups & Projects -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -313,6 +347,8 @@ Previously, when using the Members API, you could add members to groups and proj
 Thank you [@imskr](https://gitlab.com/imskr) for this community contribution!
 
 ### Updated sorting and filtering functionality in Explore
+
+<!-- categories: Groups & Projects -->
 
 {{< details >}}
 
@@ -332,6 +368,8 @@ We welcome feedback about these changes in [issue 438322](https://gitlab.com/git
 
 ### Improved visibility level selection
 
+<!-- categories: Groups & Projects -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -346,6 +384,8 @@ We hope these changes help you resolve the conflicts in selecting your desired v
 
 ### Filter projects by `marked_for_deletion_on` date with the Projects API
 
+<!-- categories: Groups & Projects -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -359,6 +399,8 @@ You can now filter responses in the Projects API using the attribute `marked_for
 Thank you [@imskr](https://gitlab.com/imskr) for this community contribution!
 
 ### Audit event on webhook creation
+
+<!-- categories: Webhooks, Audit Events -->
 
 {{< details >}}
 
@@ -375,6 +417,8 @@ In this release, we’ve added an audit event for when a user creates a system, 
 
 ### Use REST API to cancel a running direct transfer migration
 
+<!-- categories: Importers -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -389,6 +433,8 @@ Until now cancelling a running direct transfer migration
 In this release, we’ve added the ability for Administrators to cancel a migration by using the REST API.
 
 ### Test group hooks with the REST API
+
+<!-- categories: Webhooks -->
 
 {{< details >}}
 
@@ -405,6 +451,8 @@ This endpoint has a special rate limit of three requests per minute per group ho
 Thanks to [Phawin](https://gitlab.com/lifez) for [this community contribution](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/150486)!
 
 ### Re-import a chosen project relation by using the API
+
+<!-- categories: Importers -->
 
 {{< details >}}
 
@@ -423,6 +471,8 @@ In this release, we’ve added an API endpoint that re-imports a named relation,
 
 ### Keep inherited membership structure when importing by direct transfer
 
+<!-- categories: Importers -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -438,6 +488,8 @@ From this release, GitLab now first migrates group membership before migrating p
 the source GitLab instance.
 
 ### Use the REST API to set custom webhook headers
+
+<!-- categories: API, Webhooks -->
 
 {{< details >}}
 
@@ -456,6 +508,8 @@ Thanks to [Niklas](https://gitlab.com/Taucher2003) for [this community contribut
 
 ### Backups include external merge request diffs stored on disk
 
+<!-- categories: Backup/Restore of GitLab instances -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -470,6 +524,8 @@ The `backup-utility` for Cloud Native Hybrid environments already supported back
 ## Unified DevOps and Security
 
 ### Disable diff previews in code review emails
+
+<!-- categories: Code Review Workflow -->
 
 {{< details >}}
 
@@ -486,6 +542,8 @@ A gigantic thank you to [Joe Snyder](https://gitlab.com/joe-snyder) for contribu
 
 ### Administrators can search users by partial email address
 
+<!-- categories: User Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -498,6 +556,8 @@ Administrators can now search users by partial email address in the User overvie
 Thanks [@zzaakiirr](https://gitlab.com/zzaakiirr) for this community contribution!
 
 ### Show Release RSS icon on Releases page
+
+<!-- categories: Release Orchestration -->
 
 {{< details >}}
 
@@ -512,6 +572,8 @@ Do you need to be notified when a new release is posted? GitLab now provides an 
 Thanks to [Martin Schurz](https://gitlab.com/schurzi) for the contribution!
 
 ### New permissions for custom roles
+
+<!-- categories: Permissions -->
 
 {{< details >}}
 
@@ -532,6 +594,8 @@ With custom roles, you can reduce the number of users with the Owner role by cre
 
 ### Merge request approval policies fail open/closed (Policy editor)
 
+<!-- categories: Security Policy Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -545,6 +609,8 @@ Building on the previous [iteration](https://gitlab.com/groups/gitlab-org/-/epic
 For example, a merge request policy configured to fail open allows a merge request to merge if there is not enough evidence to evaluate the criteria. The lack of evidence might be because an analyzer is not enabled for the project, or the analyzer failed to produce results for the policy to evaluate. This approach allows for progressive rollout of policies as teams work to ensure proper scan execution and enforcement.
 
 ### Project Owners receive expiring access token notifications
+
+<!-- categories: System Access -->
 
 {{< details >}}
 
@@ -560,6 +626,8 @@ Thank you [Jacob Henner](https://gitlab.com/arcesium-henner) for your contributi
 
 ### Downscale pasted images on image upload
 
+<!-- categories: Team Planning, Portfolio Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -572,6 +640,8 @@ GitLab 17.1 enhances the handling of high-resolution images, enabling them to be
 
 ### Draggable media in the rich text editor
 
+<!-- categories: Team Planning -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -583,6 +653,8 @@ GitLab 17.1 enhances the handling of high-resolution images, enabling them to be
 Previously, moving media in the rich text editor required you to copy and paste each item manually. This often slowed down the inclusion of media in issues, epics, and wikis. In GitLab 17.1, you can now drag and drop media in the rich text editor, significantly enhancing efficiency during editing.
 
 ### Pages support for mutual TLS in GitLab API calls
+
+<!-- categories: Pages -->
 
 {{< details >}}
 
@@ -597,6 +669,8 @@ From GitLab 17.1, you can configure a client certificate for GitLab Pages. This 
 
 ### Redirect wiki pages to new URL when renamed
 
+<!-- categories: Wiki -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -609,6 +683,8 @@ GitLab 17.1 introduces a significant enhancement to wiki page redirects. When yo
 
 ### Updated Pages UI
 
+<!-- categories: Pages -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -620,6 +696,8 @@ GitLab 17.1 introduces a significant enhancement to wiki page redirects. When yo
 In GitLab 17.1 we’ve improved the Pages user interface. Improvements include more efficient use of screen space. These UI improvements are focused on improving user experience and efficiency when managing Pages.
 
 ### Display the last published date for container images
+
+<!-- categories: Container Registry -->
 
 {{< details >}}
 
@@ -635,6 +713,8 @@ In GitLab 17.1, we’ve updated the UI to include accurate `last_published_at` t
 This improvement is generally available only on GitLab.com. Self-managed support is in beta and available only on instances that have enabled the beta [next-generation container registry](../../administration/packages/container_registry_metadata_database.md).
 
 ### Sort container registry tags by publish date
+
+<!-- categories: Container Registry -->
 
 {{< details >}}
 
@@ -652,6 +732,8 @@ This improvement is generally available only on GitLab.com. Self-managed support
 
 ### Real-time board updates for a smoother workflow
 
+<!-- categories: Portfolio Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -663,6 +745,8 @@ This improvement is generally available only on GitLab.com. Self-managed support
 You’ll now notice a smoother experience when updating issues on [boards](../../user/project/issue_board.md)! Changes you make in the sidebar will instantly appear on the board itself, no more refreshing required. This reactive boards experience streamlines your workflow, allowing you to quickly make updates while seeing them reflected in real-time.
 
 ### Track time on tasks
+
+<!-- categories: Team Planning -->
 
 {{< details >}}
 
@@ -676,6 +760,8 @@ With this release, you can now set time estimates and record time spent on tasks
 
 ### Understand an epic's progress percentage
 
+<!-- categories: Portfolio Management -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -687,6 +773,8 @@ With this release, you can now set time estimates and record time spent on tasks
 You can now easily see the overall progress of an epic based on the weight completion of its child items. This new progress rollup in the hierarchy widget makes it easier to understand the full scope of work for an epic and track progress as you go.
 
 ### API Security Testing analyzer updates
+
+<!-- categories: API Security -->
 
 {{< details >}}
 
@@ -707,6 +795,8 @@ These new variables provide greater customization and flexibility to ensure scan
 DAST API was renamed API Security Testing in 16.10. Variable names now begin with the prefix `APISEC`. Previously, they began with `DAST_API`. Variables prefixed with `DAST_API` will be supported until 18.0 (May 2025). To ensure your configurations work as expected, you should update your variable names as soon as possible.
 
 ### Container Scanning for Registry
+
+<!-- categories: Software Composition Analysis -->
 
 {{< details >}}
 
@@ -730,6 +820,8 @@ As always, we appreciate feedback on our newly released features. To provide fee
 
 ### Fuzz Testing analyzer updates
 
+<!-- categories: Fuzz Testing -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -748,6 +840,8 @@ These new variables provide greater customization and flexibility for ensuring s
 
 ### Enhanced control over who can override user-defined variables
 
+<!-- categories: Secrets Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -759,6 +853,8 @@ These new variables provide greater customization and flexibility for ensuring s
 To better control who can override user-defined variables, we are introducing the `ci_pipeline_variables_minimum_role` project setting. This new setting provides greater flexibility than the existing [`restrict_user_defined_variables`](../../ci/variables/_index.md#restrict-pipeline-variables) setting. You can now restrict override permissions to no users, or only users with at least the Developer, Maintainer, or Owner roles.
 
 ### GitLab Runner 17.1 released
+
+<!-- categories: GitLab Runner Core -->
 
 {{< details >}}
 

@@ -50,6 +50,8 @@ Thank you, Ahmed, for your exceptional contributions to GitLab’s Web IDE!
 
 ### Duo Agent Platform in Visual Studio (Beta)
 
+<!-- categories: Editor Extensions -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -71,6 +73,8 @@ Try the Duo Agent Platform beta in Visual Studio today and experience a new leve
 
 ### Embedded views (powered by GLQL)
 
+<!-- categories: Markdown, Wiki, Team Planning -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -88,6 +92,8 @@ Embedded views transform static documentation into living dashboards that stay c
 We welcome your feedback as we continue to enhance embedded views. Please share your thoughts and suggestions in our [feedback issue](https://gitlab.com/gitlab-org/gitlab/-/issues/509792).
 
 ### Migration by direct transfer
+
+<!-- categories: Importers -->
 
 {{< details >}}
 
@@ -109,6 +115,8 @@ On GitLab.com, migration by direct transfer is enabled by default. On GitLab Sel
 
 ### Fine-grained permissions for CI/CD job tokens
 
+<!-- categories: Permissions -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -125,6 +133,8 @@ We’re actively working to add [additional fine-grained permissions](https://gi
 
 ### Code Review available on GitLab Duo Self-Hosted (Beta)
 
+<!-- categories: Code Suggestions, Self-Hosted Models -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -140,6 +150,8 @@ Use Code Review on GitLab Duo Self-Hosted to accelerate your development process
 Provide feedback on Code Review in [issue 517386](https://gitlab.com/gitlab-org/gitlab/-/issues/517386).
 
 ### Customize instructions for GitLab Duo Code Review
+
+<!-- categories: Code Review Workflow -->
 
 {{< details >}}
 
@@ -164,6 +176,8 @@ Help us improve this feature by sharing your thoughts and suggestions in our [fe
 
 ### Bring your own models to GitLab Duo Self-Hosted (Beta)
 
+<!-- categories: Self-Hosted Models -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -178,6 +192,8 @@ This feature makes GitLab Duo Self-Hosted more flexible, but GitLab cannot guara
 
 ### Hybrid model selection on GitLab Duo Self-Hosted (Beta)
 
+<!-- categories: Self-Hosted Models -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -191,6 +207,8 @@ You can now use a mix of GitLab AI vendor models and privately configured self-h
 With hybrid models on GitLab Duo Self-Hosted, GitLab Self-Managed instance administrators can now choose between a self-hosted model and self-hosted AI gateway, or a GitLab AI vendor model and the GitLab-hosted AI gateway, on a feature-by-feature basis. This enables administrators to balance their security and scalability requirements. To provide feedback on hybrid model selection, see [issue 561048](https://gitlab.com/gitlab-org/gitlab/-/issues/561048).
 
 ### Surfacing violations of compliance framework controls (Beta)
+
+<!-- categories: Compliance Management -->
 
 {{< details >}}
 
@@ -217,6 +235,8 @@ while providing reassurance that non-compliance can be effectively identified, r
 
 ### New Web IDE source control operations
 
+<!-- categories: Web IDE -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -236,6 +256,8 @@ These enhancements bring Git operations right to your fingertips. For informatio
 
 ### AWS Secrets Manager support for GitLab CI/CD
 
+<!-- categories: Secrets Management -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -249,6 +271,8 @@ Secrets stored in AWS Secrets Manager can now be easily retrieved and used in CI
 Thank you to [Markus Siebert](https://gitlab.com/m-s-db) and [Henry Sachs](https://gitlab.com/DerAstronaut) who helped build this feature through [GitLab’s Co-Create program](https://about.gitlab.com/community/co-create/)!
 
 ### Custom admin role
+
+<!-- categories: Permissions -->
 
 {{< details >}}
 
@@ -265,6 +289,8 @@ If you have questions, want to share your implementation experience, or would li
 ## Agentic Core
 
 ### More models available for use with GitLab Duo Self-Hosted
+
+<!-- categories: Self-Hosted Models -->
 
 {{< details >}}
 
@@ -283,6 +309,8 @@ see [issue 523918](https://gitlab.com/gitlab-org/gitlab/-/issues/523918).
 
 ### New navigation experience for groups in Your work
 
+<!-- categories: Groups & Projects -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -299,6 +327,8 @@ We hope that these improvements make it easier to find and manage the groups tha
 We value your feedback on this update! Join the discussion in [epic 18401](https://gitlab.com/groups/gitlab-org/-/epics/18401) to share your experience with the new navigation system.
 
 ### Enhanced **Admin** area projects list
+
+<!-- categories: Groups & Projects -->
 
 {{< details >}}
 
@@ -320,6 +350,8 @@ This update brings the administrator experience in line with GitLab design stand
 
 ### Improved file location information for Dependency Scanning analyzer
 
+<!-- categories: Software Composition Analysis -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -340,6 +372,8 @@ for the Dependency Scanning job.
 
 ### User-defined source for license information
 
+<!-- categories: Software Composition Analysis -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -356,6 +390,8 @@ use the [Security Configuration UI](../../user/application_security/detect/secur
 for license information.
 
 ### Concise DAST job output
+
+<!-- categories: DAST -->
 
 {{< details >}}
 
@@ -374,6 +410,8 @@ Each section of the job output is concise and intuitive, with a link to our trou
 To override concise job output, set `DAST_FF_DIAGNOSTIC_JOB_OUTPUT: "true"` in your DAST configuration.
 
 ### Instance level compliance and policy management (Beta)
+
+<!-- categories: Compliance Management, Security Policy Management -->
 
 {{< details >}}
 
@@ -408,6 +446,8 @@ able to manage policies centrally within a single top-level group or namespace.
 
 ### Faster workspace startup with shallow cloning
 
+<!-- categories: Workspaces -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -421,6 +461,8 @@ Workspaces now use shallow cloning to reduce startup time. During initialization
 This feature applies automatically to all new workspaces, no configuration is required, and it doesn’t affect your development workflow.
 
 ### New CLI commands for GitLab-managed OpenTofu and Terraform states
+
+<!-- categories: GitLab CLI, Infrastructure as Code -->
 
 {{< details >}}
 
@@ -447,6 +489,8 @@ To manage state with the `opentofu` command, you must have at least `glab` 1.66 
 
 ### Kubernetes 1.33 support
 
+<!-- categories: Deployment Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -460,6 +504,8 @@ GitLab now fully supports Kubernetes version 1.33. If you deploy your apps to Ku
 For more information, see the [Supported Kubernetes versions for GitLab features](../../user/clusters/agent/_index.md#supported-kubernetes-versions-for-gitlab-features).
 
 ### OAuth apps support SSO authentication
+
+<!-- categories: Pages, System Access -->
 
 {{< details >}}
 
@@ -482,6 +528,8 @@ Your OAuth integrations now respect SSO policies automatically, eliminating conf
 
 ### Control unique domains default for GitLab Pages sites
 
+<!-- categories: Pages -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -497,6 +545,8 @@ With this new setting for the instance, you can set new Pages sites to use path-
 Users can still override this setting for individual projects, and existing Pages sites remain unaffected.
 
 ### Enhancements to wiki functionality
+
+<!-- categories: Wiki -->
 
 {{< details >}}
 
@@ -519,6 +569,8 @@ With these updates, your GitLab wiki becomes living documentation that evolves a
 
 ### Bulk edit epic assignees, milestones, and more
 
+<!-- categories: Portfolio Management -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -532,6 +584,8 @@ You can now bulk edit more epic attributes in a group. In addition to labels, yo
 This enhancement makes it faster to manage large numbers of epics by letting you apply the same changes across multiple epics simultaneously.
 
 ### Grant pipeline execution policies access to CI/CD configurations via API
+
+<!-- categories: Security Policy Management -->
 
 {{< details >}}
 
@@ -550,6 +604,8 @@ This improvement enables better automation and integration workflows for teams m
 
 ### Group by OWASP 2021 in the vulnerability report
 
+<!-- categories: Vulnerability Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -561,6 +617,8 @@ This improvement enables better automation and integration workflows for teams m
 In the vulnerability report for projects and groups, you can now group the vulnerabilities by their OWASP Top 10 2021 category. Available for GitLab.com and GitLab Dedicated instances only.
 
 ### Scan execution policy templates
+
+<!-- categories: Security Policy Management -->
 
 {{< details >}}
 
@@ -580,6 +638,8 @@ templates:
 Once you select a template, choose which GitLab security scans to enable with the template to get up and running immediately. If you have more advanced use cases, you can switch to the custom configuration to extend the policy with specific branch patterns, pipeline sources, and more.
 
 ### Security policy audit events
+
+<!-- categories: Security Policy Management -->
 
 {{< details >}}
 
@@ -618,6 +678,8 @@ This enhancement strengthens your security posture by ensuring you have access t
 
 ### Service account and access token exceptions for approval policies
 
+<!-- categories: Security Policy Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -638,6 +700,8 @@ This enhancement maintains strict security policies with flexibility for modern 
 
 ### SAML SSO support for session timeout attribute
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -652,6 +716,8 @@ ensuring consistent session management across your organization. This feature re
 
 ### Additional service account email configuration options
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -663,6 +729,8 @@ ensuring consistent session management across your organization. This feature re
 By default, GitLab automatically generates an email address for new service accounts. Organizations can now assign a custom email address for service accounts through the UI. Previously, custom email configuration was only possible through the Service Accounts API. This change allows organizations to better route notifications to designated email addresses.
 
 ### Enterprise user enhancements
+
+<!-- categories: System Access -->
 
 {{< details >}}
 
@@ -680,6 +748,8 @@ Additionally, organizations can now hide enterprise user emails on their user pr
 
 ### SSH key security warnings
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -691,6 +761,8 @@ Additionally, organizations can now hide enterprise user emails on their user pr
 GitLab now displays a security warning in the UI when a user uploads a weak SSH key. This warning appears for older key types or keys with insufficient bit length (less than 2048 bits). This change helps educate users about SSH key security best practices and encourages the use of stronger cryptographic keys.
 
 ### GitLab Runner 18.3
+
+<!-- categories: GitLab Runner Core -->
 
 {{< details >}}
 

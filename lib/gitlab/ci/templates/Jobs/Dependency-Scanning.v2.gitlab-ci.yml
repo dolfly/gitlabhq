@@ -82,6 +82,10 @@ spec:
       type: number
       default: 3
       description: "Vulnerability scanning API initial delay in seconds before downloading scan results."
+    enable_manifest_fallback:
+      type: boolean
+      default: false
+      description: "Enable manifest fallback for dependency scanning."
 
     # Settings for all dependency resolution jobs.
     resolution_jobs_stage:
@@ -168,6 +172,7 @@ variables:
     - export DS_ENABLE_VULNERABILITY_SCAN="${DS_ENABLE_VULNERABILITY_SCAN:-$[[ inputs.enable_vulnerability_scan ]]}"
     - export DS_API_TIMEOUT="${DS_API_TIMEOUT:-$[[ inputs.vulnerability_scan_api_timeout ]]}"
     - export DS_API_SCAN_DOWNLOAD_DELAY="${DS_API_SCAN_DOWNLOAD_DELAY:-$[[ inputs.vulnerability_scan_api_download_delay ]]}"
+    - export DS_ENABLE_MANIFEST_FALLBACK="${DS_ENABLE_MANIFEST_FALLBACK:-$[[ inputs.enable_manifest_fallback ]]}"
     - /analyzer run
   artifacts:
     access: "developer"

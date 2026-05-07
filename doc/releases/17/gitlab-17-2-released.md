@@ -43,6 +43,8 @@ co-create GitLab.
 
 ### Log streaming for Kubernetes pods and containers
 
+<!-- categories: Environment Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -55,6 +57,8 @@ In GitLab 16.1, we introduced the Kubernetes pod list and detail views. However,
 GitLab now ships with a log streaming view for pods and containers, so you can quickly check and troubleshoot issues across your environments without leaving your application delivery tool.
 
 ### GitLab Duo disabling input and output logging by default.
+
+<!-- categories: GitLab Duo Chat -->
 
 {{< details >}}
 
@@ -73,6 +77,8 @@ consent via a GitLab Support ticket.
 
 ### Block a merge request by requesting changes
 
+<!-- categories: Code Review Workflow -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -89,6 +95,8 @@ Leave us feedback about this new feature in [issue 455339](https://gitlab.com/gi
 
 ### Vulnerability Explanation
 
+<!-- categories: Vulnerability Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -101,6 +109,8 @@ Leave us feedback about this new feature in [issue 455339](https://gitlab.com/gi
 Vulnerability Explanation is now a part of GitLab Duo Chat and is generally available. With Vulnerability Explanation, you can open chat from any SAST vulnerability to better understand the vulnerability, see how it could be exploited, and review a potential fix.
 
 ### OAuth 2.0 device authorization grant support
+
+<!-- categories: System Access -->
 
 {{< details >}}
 
@@ -115,6 +125,8 @@ This makes the device authorization grant flow ideal for users attempting to use
 Thank you [John Parent](https://kitware.com/) for your contribution!
 
 ### Pipeline execution policy type
+
+<!-- categories: Security Policy Management -->
 
 {{< details >}}
 
@@ -133,6 +145,8 @@ The pipeline execution policy has two modes: inject and override. The *inject* m
 As with all GitLab policies, enforcement can be managed centrally by designated security and compliance team members who create and manage the policies. [Learn how to get started by creating your first pipeline execution policy](../../user/application_security/policies/pipeline_execution_policies.md)!
 
 ### Expanded support of custom rulesets in pipeline secret detection
+
+<!-- categories: Secret Detection -->
 
 {{< details >}}
 
@@ -157,6 +171,8 @@ The analyzer also now supports:
 
 ### GitLab Duo Chat and Code Suggestions available in workspaces
 
+<!-- categories: Workspaces, Duo Chat, Code Suggestions -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -172,6 +188,8 @@ The analyzer also now supports:
 
 ### Improved sorting and filtering in group overview
 
+<!-- categories: Groups & Projects -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -185,6 +203,8 @@ We have updated the sorting and filtering functionality of the group overview pa
 We welcome feedback about these changes in [issue 438322](https://gitlab.com/gitlab-org/gitlab/-/issues/438322).
 
 ### List groups that a group was invited to using the Groups API
+
+<!-- categories: API, Groups & Projects -->
 
 {{< details >}}
 
@@ -202,6 +222,8 @@ Thank you [@imskr](https://gitlab.com/imskr) for this community contribution!
 
 ### Resolve to-do items, one discussion at a time
 
+<!-- categories: Notifications -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -215,6 +237,8 @@ Discussions on GitLab issues can get busy. GitLab helps you manage these convers
 Previously, when you took action on a thread in the issue, all to-do items were resolved, even if you were mentioned in several different threads. Now, GitLab resolves only the to-do item for the thread you interacted with.
 
 ### Indicate imported items in UI
+
+<!-- categories: Importers -->
 
 {{< details >}}
 
@@ -232,6 +256,8 @@ user. For example, merge requests, issues, and notes.
 
 ### Deleted branches are removed from Jira development panel
 
+<!-- categories: Integrations -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -246,6 +272,8 @@ appeared in Jira development panel. Selecting that branch caused a `404` error o
 From this release, branches deleted in GitLab are removed from the Jira development panel.
 
 ### Find project settings by using the command palette
+
+<!-- categories: Settings, Global Search -->
 
 {{< details >}}
 
@@ -263,6 +291,8 @@ With this release, you can now search for project settings from the command pale
 
 ### Merge commit message generation now GA
 
+<!-- categories: Code Review Workflow -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -279,6 +309,8 @@ This new GitLab Duo capability is a great way to make sure your project’s comm
 
 ### GitLab Duo for the CLI now GA
 
+<!-- categories: GitLab CLI -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -294,6 +326,8 @@ Use `glab duo ask <git question>` to have GitLab Duo provide you with formatted 
 The `ask` command for the GitLab CLI is a great way to speed up your workflow with `git` commands you need a little extra help remembering.
 
 ### Pure SSH transfer protocol for LFS
+
+<!-- categories: Source Code Management -->
 
 {{< details >}}
 
@@ -315,6 +349,8 @@ Thank you to [Kyle Edwards](https://gitlab.com/KyleFromKitware) and
 
 ### Deployments and approvals to protected environments trigger an audit event
 
+<!-- categories: Continuous Delivery -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -330,6 +366,8 @@ An accessible record of deployment events, like deployment approvals, is essenti
 - `deployment_rejected` records who rejected a deployment job, and when it was rejected.
 
 ### Assigning frameworks at subgroup compliance center
+
+<!-- categories: Compliance Management -->
 
 {{< details >}}
 
@@ -351,6 +389,8 @@ visualize their compliance posture at the subgroup level in addition to the full
 
 ### Expand "Scan Execution Policies" to run `latest` templates for each GitLab analyzer
 
+<!-- categories: Security Policy Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -367,6 +407,8 @@ Note: Be sure to review all changes between `default` and `latest` templates bef
 
 ### Identify dates when multiple access tokens expire
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -377,6 +419,8 @@ Note: Be sure to review all changes between `default` and `latest` templates bef
 Administrators can now run a script that identifies dates when multiple access tokens expire. You can use this script in combination with other scripts on the [token troubleshooting page](../../security/tokens/token_troubleshooting.md) to identify and extend large batches of tokens that might be approaching their expiration date, if token rotation has not yet been implemented.
 
 ### OAuth authorization screen improvements
+
+<!-- categories: System Access -->
 
 {{< details >}}
 
@@ -390,6 +434,8 @@ The OAuth authorization screen now more clearly describes the authorization you 
 
 ### Streamlined instance administrator setup
 
+<!-- categories: User Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -400,6 +446,8 @@ The OAuth authorization screen now more clearly describes the authorization you 
 The administrator setup experience for a new install of GitLab has been streamlined and made more secure. The initial administrator root email address is now randomzied, and administrators are forced to change this email address to an account that they can access. Previously, this step could have been delayed, and an administrator might forget to change the email address.
 
 ### User API added to the Snowflake Data Connector
+
+<!-- categories: Audit Events, Compliance Management -->
 
 {{< details >}}
 
@@ -413,6 +461,8 @@ which is available in the Snowflake Marketplace app. You can now stream user dat
 
 ### Simplified setup for Google Cloud integration
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Free, Silver, Gold
@@ -425,6 +475,8 @@ Google Cloud CLI commands are now natively available when setting up workload id
 
 ### Separate wiki page title and path fields
 
+<!-- categories: Wiki -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -436,6 +488,8 @@ Google Cloud CLI commands are now natively available when setting up workload id
 In GitLab 17.2, wiki page titles are separate from their paths. In previous releases, if a page title changed, the path would also change, which could cause links to the page to break. Now, if a wiki page’s title changes, the path remains unchanged. Even if a wiki page path changes, an automatic redirect is set up to prevent broken links.
 
 ### Improvements to the wiki sidebar
+
+<!-- categories: Wiki -->
 
 {{< details >}}
 
@@ -453,6 +507,8 @@ The addition of a search bar makes discovering content easier. And because the s
 
 ### Document modules in the Terraform module registry
 
+<!-- categories: Package Registry -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -467,6 +523,8 @@ Previously, you had to search other sources for this critical information, which
 
 ### Add type attribute to issues events webhook
 
+<!-- categories: Team Planning, Webhooks, Incident Management, Service Desk -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -479,6 +537,8 @@ Issues, tasks, incidents, requirements, objectives, and key results
 all trigger payloads under the **Issues Events** webhook category. Until now, there has been no way to quickly determine the type of object that triggered the webhook within the event payload. This release introduces an `object_attributes.type` attribute available on payloads within the **Issues events**, **Comments**, **Confidential issues events**, and **Emoji events** triggers.
 
 ### GitLab Advanced SAST available in Beta for Go, Java, and Python
+
+<!-- categories: SAST -->
 
 {{< details >}}
 
@@ -502,6 +562,8 @@ We welcome any testing feedback in [issue 466322](https://gitlab.com/gitlab-org/
 
 ### API Security Testing now supports signed authentication requests
 
+<!-- categories: API Security -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -513,6 +575,8 @@ We welcome any testing feedback in [issue 466322](https://gitlab.com/gitlab-org/
 API Security already has support for “overrides” which can modify the requests sent by the scanner. However these overrides must be set ahead of time and cannot change based on the request itself. GitLab 17.2 adds a “per-request script” (`APISEC_PER_REQUEST_SCRIPT`), which allows a user to provide a C# script that is called prior to sending each request. This provides support for “signing” the request with a secret as a form of authentication.
 
 ### Container Scanning: Continuous Vulnerability Scanning OS support
+
+<!-- categories: Software Composition Analysis -->
 
 {{< details >}}
 
@@ -529,6 +593,8 @@ This enhancement allows our analyzer to fully support Continuous Vulnerability S
 As a note, RPM versions containing a caret (`^`) are not supported. Work to support these versions is being tracked in this [issue](https://gitlab.com/gitlab-org/gitlab/-/issues/459969).
 
 ### DAST analyzer updates
+
+<!-- categories: DAST -->
 
 {{< details >}}
 
@@ -558,6 +624,8 @@ During the 17.2 release milestone, we published the following updates.
 
 ### API Fuzz Testing now supports signed authentication requests
 
+<!-- categories: Fuzz Testing -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -569,6 +637,8 @@ During the 17.2 release milestone, we published the following updates.
 API Fuzzing already has support for “overrides” which can modify the requests sent by the scanner. However these overrides must be set ahead of time and cannot change based on the request itself. GitLab 17.2 adds a “per-request script” (`FUZZAPI_PER_REQUEST_SCRIPT`), which allows a user to provide a C# script that is called prior to sending each request. This provides support for “signing” the request with a secret as a form of authentication.
 
 ### Secret push protection now available for Self-Managed, and improved warnings of potential leaks
+
+<!-- categories: Secret Detection -->
 
 {{< details >}}
 
@@ -585,6 +655,8 @@ During the 17.2 release milestone, we published the following updates:
 
 ### Sort options for pipeline schedules
 
+<!-- categories: Continuous Integration (CI) -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -597,6 +669,8 @@ You can now sort the pipeline schedules list by description, ref, next run, crea
 
 ### `rules:changes:compare_to` now supports CI/CD variables
 
+<!-- categories: Pipeline Composition, Variables -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -608,6 +682,8 @@ You can now sort the pipeline schedules list by description, ref, next run, crea
 In GitLab 15.3 we introduced the [`compare_to` keyword](../../ci/yaml/_index.md#ruleschangescompare_to) for `rules:change`. This made it possible to define the exact ref to compare against. Beginning in GitLab 17.2, you can now use CI/CD variables with this keyword, making it easier to define and reuse `compare_to` values in multiple jobs.
 
 ### GitLab Runner 17.2
+
+<!-- categories: GitLab Runner Core -->
 
 {{< details >}}
 
@@ -632,6 +708,8 @@ We’re releasing GitLab Runner 17.2 today! GitLab Runner is the lightweight, hi
 For a list of all changes, see the GitLab Runner [CHANGELOG](https://gitlab.com/gitlab-org/gitlab-runner/blob/17-2-stable/CHANGELOG.md).
 
 ### New agent authorization strategy for workspaces
+
+<!-- categories: Workspaces -->
 
 {{< details >}}
 

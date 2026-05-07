@@ -106,6 +106,10 @@ module Geo
       @replicable_name_camel ||= replicable_name.split('_').map(&:capitalize).join
     end
 
+    def table_name_camel
+      @table_name_camel ||= table_name.split('_').map(&:capitalize).join
+    end
+
     def replicable_name_human
       @replicable_name_human ||= replicable_name.split('_').map(&:capitalize).join(' ')
     end
@@ -189,6 +193,13 @@ module Geo
 
     def next_timestamp
       @next_timestamp ||= (Time.now.utc + 1).strftime('%Y%m%d%H%M%S')
+    end
+
+    # Timestamp for the partition unique index migration. Must be lower than
+    # the state migration timestamp (next_timestamp) so the index exists
+    # before the state table's foreign key references it.
+    def partition_unique_index_timestamp
+      @partition_unique_index_timestamp ||= (Time.now.utc - 1).strftime('%Y%m%d%H%M%S')
     end
 
     def additional_timestamps(count)
@@ -335,6 +346,7 @@ module Geo
       generate_replication_feature_flag
       generate_force_primary_checksumming_feature_flag
       generate_geo_migration
+      generate_partition_unique_index_migration if upload_partition
       generate_state_migration
       generate_sharding_key_trigger_migration
       generate_geo_db_dictionary
@@ -737,7 +749,8 @@ module Geo
             def self.model_foreign_key
               :#{foreign_key_name}
             end
-        #{model_updated_last_override}  end
+            #{model_updated_last_override}
+          end
         end
       RUBY
     end
@@ -1009,6 +1022,42 @@ module Geo
       RUBY
     end
 
+    # -- Partition unique index migration (upload partitions only) --
+
+    def generate_partition_unique_index_migration
+      migration_class = "AddUniqueIndexOn#{table_name_camel}Id"
+      glob_suffix = "add_unique_index_on_#{table_name}_id.rb"
+      existing = find_existing_migration('db/migrate', glob_suffix)
+
+      if existing
+        puts "  [SKIP]   #{existing} (already exists)"
+        return
+      end
+
+      file_path = "db/migrate/#{partition_unique_index_timestamp}_add_unique_index_on_#{table_name}_id.rb"
+
+      write_file(file_path, <<~RUBY)
+        # frozen_string_literal: true
+
+        class #{migration_class} < Gitlab::Database::Migration[#{MIGRATION_VERSION}]
+          disable_ddl_transaction!
+
+          milestone '#{milestone}'
+
+          PARTITION_TABLE_NAME = :#{table_name}
+          PARTITION_INDEX_NAME = :idx_#{table_name}_on_id
+
+          def up
+            add_concurrent_index PARTITION_TABLE_NAME, :id, unique: true, name: PARTITION_INDEX_NAME, allow_partition: true
+          end
+
+          def down
+            execute "DROP INDEX CONCURRENTLY IF EXISTS \#{PARTITION_INDEX_NAME}"
+          end
+        end
+      RUBY
+    end
+
     # -- Main DB state migration --
 
     def state_foreign_key_options
@@ -1038,7 +1087,7 @@ module Geo
       # partition tables have composite PKs. Instead, we add the FK separately.
       if upload_partition
         fk_in_create_table = ''
-        fk_after_create = "add_concurrent_foreign_key :#{state_table_name}, :uploads, column: :#{foreign_key_name}, on_delete: :cascade"
+        fk_after_create = "add_concurrent_foreign_key :#{state_table_name}, :#{table_name}, column: :#{foreign_key_name}, on_delete: :cascade"
       else
         fk_in_create_table = ",\n                foreign_key: #{state_foreign_key_options}"
         fk_after_create = ''

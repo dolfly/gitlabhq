@@ -72,7 +72,7 @@ RSpec.describe Gitlab::Database::GitlabSchema, feature_category: :database do
         end
 
         let(:dynamic_views) do
-          %w[ci_builds_views_100 merge_request_diff_commits_views
+          %w[ci_builds_views_100 ci_builds_views_102 merge_request_diff_commits_views
             merge_request_diff_commits_views_1 merge_request_diff_commits_views_2
             merge_request_diff_commits_views_3 merge_request_diff_commits_views_4]
         end

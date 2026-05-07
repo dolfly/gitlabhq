@@ -6,7 +6,7 @@ import settingsPanel from './components/settings_panel.vue';
 
 Vue.use(VueApollo);
 
-export default function initProjectPermissionsSettings() {
+export function initProjectPermissionsSettings() {
   const apolloProvider = new VueApollo({
     defaultClient: createDefaultClient(),
   });

@@ -44,6 +44,8 @@ We are so grateful to Jim and all of our open source community for contributing 
 
 ### Introducing Duo Quick Chat
 
+<!-- categories: Editor Extensions, Duo Chat -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -56,6 +58,8 @@ We are so grateful to Jim and all of our open source community for contributing 
 Introducing Duo Quick Chat, an AI-powered chat designed to work exactly where you are in your code. Duo Quick Chat operates directly on the lines you’re editing, offering real-time assistance without ever moving you away from your code. Whether you’re refactoring, fixing bugs, or writing tests, Duo Quick Chat provides suggestions and explanations on the spot, ensuring that you stay fully focused without switching context.
 
 ### Use self-hosted model for GitLab Duo Code Suggestions
+
+<!-- categories: Self-Hosted Models -->
 
 {{< details >}}
 
@@ -73,6 +77,8 @@ Please leave feedback in [the feedback issue](https://gitlab.com/gitlab-org/gitl
 
 ### Export code suggestion usage events
 
+<!-- categories: Value Stream Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -88,6 +94,8 @@ Now, you can export raw code suggestion events from the GraphQL API. This way yo
 
 ### Have a conversation with GitLab Duo Chat about your merge request
 
+<!-- categories: Duo Chat -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -102,6 +110,8 @@ In response to your feedback, GitLab Duo Chat is now aware of merge requests. Wh
 This new feature complements our existing feature, where you can quickly populate the description of a merge request by asking GitLab Duo to [summarize code changes](../../user/project/merge_requests/duo_in_merge_requests.md#generate-a-description-by-summarizing-code-changes), so that reviewers can get a general understanding of what the merge request is about.
 
 ### Enhanced branch rules editing capabilities
+
+<!-- categories: Source Code Management -->
 
 {{< details >}}
 
@@ -119,6 +129,8 @@ We encourage you to explore these new capabilities and to provide feedback. You 
 
 ### GitLab Dedicated Tenant Overview in Switchboard
 
+<!-- categories: GitLab Dedicated, Switchboard -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -132,6 +144,8 @@ Switchboard’s new Tenant Overview now provides a single place to quickly acces
 With this first release, you can now view your current GitLab version, instance URL, and the date and time of your upcoming and past maintenance windows all on the Tenant Overview page.
 
 ### Secret Push Protection is generally available
+
+<!-- categories: Secret Detection -->
 
 {{< details >}}
 
@@ -151,6 +165,8 @@ To learn more, see [the blog](https://about.gitlab.com/blog/prevent-secret-leaks
 
 ### Credentials Inventory available on GitLab.com
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Gold
@@ -164,6 +180,8 @@ The Credentials Inventory is now available for top-level group Owners on GitLab.
 Group Owners can use the Credentials Inventory to understand the credentials that exist in their purview, and provide increased visibility and control.
 
 ### Component filter on the Dependency List
+
+<!-- categories: Dependency Management -->
 
 {{< details >}}
 
@@ -181,6 +199,8 @@ With the new **filter by component** on the dependency list, you isolate vulnera
 
 ### GitLab chart improvements
 
+<!-- categories: Cloud Native Installation -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -192,6 +212,8 @@ GitLab 17.5 includes an update to our version of the NGINX Ingress Controller. T
 note this includes new RBAC requirements because the new controller now uses endpointslices and requires an RBAC rule to access them.
 
 ### Omnibus improvements
+
+<!-- categories: Omnibus Package -->
 
 {{< details >}}
 
@@ -207,6 +229,8 @@ so PostgreSQL upgrades must be triggered manually.
 
 ### Elevate your coding: Duo Chat now in Visual Studio for Windows
 
+<!-- categories: Editor Extensions, Duo Chat -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -219,6 +243,8 @@ so PostgreSQL upgrades must be triggered manually.
 Empower your development workflow with Duo Chat, now seamlessly integrated into Visual Studio for Windows. Duo Chat enhances your coding experience by providing AI-powered capabilities to explain, refine, debug code, or write tests all in real-time. This integration allows you to leverage Duo Chat’s advanced AI tools directly within your familiar development environment, improving productivity and enabling faster, more efficient problem-solving.
 
 ### Configure agent and GitOps environment settings with the REST API
+
+<!-- categories: Environment Management, Deployment Management -->
 
 {{< details >}}
 
@@ -235,6 +261,8 @@ To further improve support for dynamic environments, [issue 467912](https://gitl
 
 ### Easy bootstrapping of GitLab Kubernetes integration
 
+<!-- categories: Deployment Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -249,6 +277,8 @@ The GitLab CLI now offers [the `glab cluster agent bootstrap` command](https://g
 Now, you can configure Flux and the agent with just two simple commands.
 
 ### Kubernetes integration support for firewalled GitLab installations
+
+<!-- categories: Deployment Management -->
 
 {{< details >}}
 
@@ -265,6 +295,8 @@ Once the initial connection is established, all the features of the agent are av
 
 ### Stream Kubernetes resource events
 
+<!-- categories: Deployment Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -279,6 +311,8 @@ This release further improves the dashboard for Kubernetes by letting you stream
 
 ### Suspend or resume GitOps reconciliation from the GitLab UI
 
+<!-- categories: Deployment Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -290,6 +324,8 @@ This release further improves the dashboard for Kubernetes by letting you stream
 As a Flux user, have you ever needed to quickly stop an automatic reconciliation or drift remediation? Have you wanted to trigger a `HelmRelease` to synchronize manually removed resources? These actions are best achieved with the Flux suspend and resume functions. Until now, your best option was to use the Flux CLI, which required a context switch and several commands to ensure the right resource was affected. In GitLab 17.5, you can suspend or resume a reconciliation from the built-in dashboard for Kubernetes.
 
 ### Improved user management summary
+
+<!-- categories: User Management -->
 
 {{< details >}}
 
@@ -308,6 +344,8 @@ This increases user management efficiency, because administrators can quickly se
 
 ### Add groups to security policy scope
 
+<!-- categories: Security Policy Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -324,6 +362,8 @@ This improvement also precedes a number of [enhancements](https://gitlab.com/gro
 
 ### Disable password authentication for enterprise users
 
+<!-- categories: User Management -->
+
 {{< details >}}
 
 - Tier: Silver, Gold
@@ -335,6 +375,8 @@ This improvement also precedes a number of [enhancements](https://gitlab.com/gro
 Enterprise users can authenticate using a local account with username and password. Now, group Owners can disable password authentication for the group’s enterprise users. If password authentication is disabled, enterprise users can use either the group’s SAML identity provider to authenticate with GitLab web UI, or a personal access token to authenticate with GitLab API and Git using HTTP Basic Authentication.
 
 ### Access compliance center on projects
+
+<!-- categories: Compliance Management -->
 
 {{< details >}}
 
@@ -352,6 +394,8 @@ view-only capabilities for checks and violations that pertain to a particular pr
 To add or edit a framework, you should access the compliance center on top-level groups instead.
 
 ### Migration process for compliance pipelines to security policies
+
+<!-- categories: Compliance Management, Security Policy Management -->
 
 {{< details >}}
 
@@ -372,6 +416,8 @@ warning banner that:
 
 ### View token associations using API
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -383,6 +429,8 @@ warning banner that:
 You can now view which groups, subgroups, and projects a token is associated with. This makes it easier to determine the impact of token expirations or revocations, and to understand where a token is able to be used.
 
 ### Selective SAML single sign-on enforcement
+
+<!-- categories: User Management -->
 
 {{< details >}}
 
@@ -409,6 +457,8 @@ working properly before selecting the **Enable SAML authentication for this grou
 
 ### Enhance API performance when working with container registry tags
 
+<!-- categories: Container Registry -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -421,6 +471,8 @@ We’re excited to announce a significant improvement to our Container Registry 
 Keyset pagination offers a more efficient method for handling large datasets, resulting in improved performance and a better user experience. This update is particularly useful when managing large container registries, as it allows for smoother navigation through repository tags. In order to use this feature, self-managed instances must upgrade to the [next-generation container registry](../../administration/packages/container_registry_metadata_database.md).
 
 ### Safeguard your dependencies with protected packages
+
+<!-- categories: Container Registry -->
 
 {{< details >}}
 
@@ -435,6 +487,8 @@ We’re thrilled to introduce support for protected npm packages, a new feature 
 From GitLab 17.5, you can protect npm packages by creating protection rules. If a package is matched by a protection rule, only specified users can update or delete the package. With this feature, you can prevent accidental changes, improve compliance with regulatory requirements, and streamline your workflows by reducing the need for manual oversight.
 
 ### Ruby support and rule updates for Advanced SAST
+
+<!-- categories: SAST -->
 
 {{< details >}}
 
@@ -459,6 +513,8 @@ To see which types of vulnerabilities Advanced SAST detects in each language, se
 To learn more about Advanced SAST, see [last month’s announcement blog](https://about.gitlab.com/blog/gitlab-advanced-sast-is-now-generally-available/).
 
 ### GitLab Runner 17.5
+
+<!-- categories: GitLab Runner Core -->
 
 {{< details >}}
 

@@ -35,6 +35,8 @@ Thank you, Heidi, for your tremendous contributions to GitLab!
 
 ### Customize compliance frameworks with requirements and compliance controls
 
+<!-- categories: Compliance Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -70,6 +72,8 @@ evidence needs.
 
 ### GitLab Eclipse plugin available in beta
 
+<!-- categories: Editor Extensions -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -84,6 +88,8 @@ We’re thrilled to announce the beta release of the GitLab Eclipse plugin, now 
 As the plugin is currently in beta, we’re actively improving features, including expanding authentication options, and refining the final user experience. Your feedback is invaluable. Please share your thoughts to help us make the GitLab Eclipse plugin even better by adding your feedback [in issue 162](https://gitlab.com/gitlab-org/editor-extensions/gitlab-eclipse-plugin/-/issues/162).
 
 ### More GitLab Duo features now available on GitLab Duo Self-Hosted
+
+<!-- categories: Self-Hosted Models -->
 
 {{< details >}}
 
@@ -108,6 +114,8 @@ You can now use more [GitLab Duo](https://about.gitlab.com/gitlab-duo/) features
 
 ### Extension marketplace for Web IDE on self-managed instances
 
+<!-- categories: Web IDE -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -128,6 +136,8 @@ It’s important to note that some extensions require a local runtime environmen
 
 ### GitLab Duo with Amazon Q is generally available
 
+<!-- categories: Code Suggestions -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -145,6 +155,8 @@ GitLab Duo with Amazon Q provides major benefits for development teams:
 - Automate testing to ship with confidence: use `/q test` to generate comprehensive unit tests that understand your application logic.
 
 ### Enhance security with protected container tags
+
+<!-- categories: Container Registry -->
 
 {{< details >}}
 
@@ -166,6 +178,8 @@ This feature requires the next-generation container registry, which is already e
 
 ### Safeguard your registry with protected Maven packages
 
+<!-- categories: Package Registry -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -181,6 +195,8 @@ In GitLab 17.11, you can now protect Maven packages by creating protection rules
 [Protected packages](https://gitlab.com/groups/gitlab-org/-/epics/5574) support for Maven and other package formats are all community contributions from `gerardo-navarro` and the Siemens crew. Thank you, Gerardo, and the rest of the crew from Siemens for their many contributions to GitLab! If you want to learn more about how Gerardo and the Siemens crew contributed this change, check out this [video](https://www.youtube.com/watch?v=5-nQ1_Mi7zg) in which Gerardo shares his learnings and best practices for contributing to GitLab based on his experience as an external contributor.
 
 ### Epic, issue, and task custom fields
+
+<!-- categories: Team Planning -->
 
 {{< details >}}
 
@@ -200,6 +216,8 @@ Custom fields are configured in your top-level group and cascade to all subgroup
 You can map fields to one or more work item types and filter by custom field values in the issues and epics lists.
 
 ### New issue look now generally available
+
+<!-- categories: Team Planning -->
 
 {{< details >}}
 
@@ -222,6 +240,8 @@ As of this release, the new issue look is generally available and replaces the l
 
 ### Service accounts UI
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -233,6 +253,8 @@ As of this release, the new issue look is generally available and replaces the l
 You now can use a dedicated space to create and manage service accounts in the GitLab UI. This interface allows you to create, monitor, and control automated access to your GitLab resources. Previously, this functionality was only available in the API.
 
 ### Automated Duo Pro and Duo Enterprise seat assignment
+
+<!-- categories: System Access -->
 
 {{< details >}}
 
@@ -246,6 +268,8 @@ You now can use a dedicated space to create and manage service accounts in the G
 You can now automatically assign a Duo Pro or Duo Enterprise seat to users with SAML Group Sync. As long as the GitLab group has available Duo Pro or Duo Enterprise seats, any user mapped from the identity provider is automatically assigned a seat. This reduces the effort to manage seat assignments.
 
 ### CI/CD pipeline inputs
+
+<!-- categories: Pipeline Composition -->
 
 {{< details >}}
 
@@ -264,6 +288,8 @@ We’d greatly appreciate it if you could try it out and share your feedback thr
 
 ### GitLab Duo Chat now uses Anthropic Claude Sonnet 3.7
 
+<!-- categories: Duo Chat -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -281,6 +307,8 @@ This upgrade applies to all Chat features, and ensures a consistent and improved
 
 ### Open files as context now available on GitLab Duo Self-Hosted Code Suggestions
 
+<!-- categories: Self-Hosted Models -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -292,6 +320,8 @@ This upgrade applies to all Chat features, and ensures a consistent and improved
 On GitLab Duo Self-Hosted, you can now use [files open in tabs in your IDE](../../user/project/repository/code_suggestions/context.md#using-open-files-as-context) as context when using Code Suggestions.
 
 ### Select individual models for AI-powered features on GitLab Duo Self-Hosted
+
+<!-- categories: Self-Hosted Models -->
 
 {{< details >}}
 
@@ -307,6 +337,8 @@ To leave feedback, go to [issue 524175](https://gitlab.com/gitlab-org/gitlab/-/i
 
 ### Llama 3 models generally available for GitLab Duo Chat and Code Suggestions
 
+<!-- categories: Self-Hosted Models -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -320,6 +352,8 @@ Llama 3 models are now generally available with GitLab Duo Self-Hosted to suppor
 To leave feedback on using these models with GitLab Duo Self-Hosted, see [issue 523918](https://gitlab.com/gitlab-org/gitlab/-/issues/523918).
 
 ### Manage multiple conversations in GitLab Duo Chat
+
+<!-- categories: Duo Chat -->
 
 {{< details >}}
 
@@ -339,6 +373,8 @@ Share your experience with us in [issue 526013](https://gitlab.com/gitlab-org/gi
 ## Scale and Deployments
 
 ### All auto-disabled webhooks now automatically re-enable
+
+<!-- categories: Webhooks -->
 
 {{< details >}}
 
@@ -361,6 +397,8 @@ Thanks to [Phawin](https://gitlab.com/lifez) for [this community contribution](h
 
 ### Ghost user contributions auto-mapped during imports
 
+<!-- categories: Importers -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -380,6 +418,8 @@ reducing clutter in user mapping interface and simplifying the migration process
 
 ### SAML verification for contribution reassignment when importing to GitLab.com
 
+<!-- categories: Importers -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -394,6 +434,8 @@ If you import to GitLab.com and use SAML SSO for GitLab.com groups, all users mu
 When you reassign contributions to users who have not verified their SAML identity, you’ll receive error messages. These messages explain the steps to take to help ensure your group memberships are attributed correctly.
 
 ### Filter placeholder users in Admin area
+
+<!-- categories: Importers -->
 
 {{< details >}}
 
@@ -411,6 +453,8 @@ in the **Users** page in the **Admin** area. To do this, select `Type` in the dr
 then choose `Placeholder`.
 
 ### Placeholder user limits appear in group usage quotas
+
+<!-- categories: Importers -->
 
 {{< details >}}
 
@@ -430,6 +474,8 @@ To view your current usage and limits:
 
 ### Geo - New replicables view
 
+<!-- categories: Disaster Recovery, Geo-replication -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -440,6 +486,8 @@ To view your current usage and limits:
 We are introducing a new look and feel for the replicables view in Geo. The new experience better aligns with the rest of GitLab and provides a more streamlined and less cluttered interface to review the synchronization and verification status of Geo secondary sites. In addition, there is now a click-through detailed view for each replicable item, providing information such as the primary and secondary checksums, error details, and much more. This information will make troubleshooting Geo synchronization issues much easier.
 
 ### Linux package improvements
+
+<!-- categories: Omnibus Package -->
 
 {{< details >}}
 
@@ -457,6 +505,8 @@ to be able to upgrade to GitLab 18.0.
 
 ### Pre-deployment opt-out toggle to disable event data sharing
 
+<!-- categories: Application Instrumentation -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -473,6 +523,8 @@ Starting in GitLab 17.11, you will have the ability to opt out of event data col
 
 ### Increased rule coverage for secret push protection and pipeline secret detection
 
+<!-- categories: Secret Detection -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -484,6 +536,8 @@ Starting in GitLab 17.11, you will have the ability to opt out of event data col
 GitLab secret detection has received significant updates, including 17 new secret push protection rules and 12 new pipeline secret detection rules. Some existing rules have also been updated to improve quality and reduce false positives. For details, see v0.9.0 in the [change log](https://gitlab.com/gitlab-org/security-products/secret-detection/secret-detection-rules/-/blob/main/CHANGELOG.md#v090).
 
 ### Static reachability beta with Python support
+
+<!-- categories: Software Composition Analysis -->
 
 {{< details >}}
 
@@ -503,6 +557,8 @@ We welcome feedback on this feature. If you have questions, comments, or would l
 
 ### Dynamic analysis support for reflected XSS checks
 
+<!-- categories: DAST -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -518,6 +574,8 @@ If you have questions or feedback, see [issue 525861](https://gitlab.com/gitlab-
 
 ### Use imported files as context in Code Suggestions
 
+<!-- categories: Code Suggestions -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -530,6 +588,8 @@ If you have questions or feedback, see [issue 525861](https://gitlab.com/gitlab-
 GitLab Duo Code Suggestions can now use imported files in your IDE to enrich and improve the quality of suggestions. Imported files provide additional context about your project. Imported file context is supported for JavaScript and TypeScript files.
 
 ### Assign projects when creating compliance frameworks
+
+<!-- categories: Compliance Management -->
 
 {{< details >}}
 
@@ -554,6 +614,8 @@ monitor and enforce compliance adherence for the entire group.
 
 ### Kubernetes 1.32 support
 
+<!-- categories: Deployment Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -567,6 +629,8 @@ This release adds full support for Kubernetes version 1.32, released in December
 You can read more about [our Kubernetes support policy and other supported Kubernetes versions](../../user/clusters/agent/_index.md#supported-kubernetes-versions-for-gitlab-features).
 
 ### Configure SAML single sign-on with multiple identity providers in Switchboard
+
+<!-- categories: GitLab Dedicated, Switchboard -->
 
 {{< details >}}
 
@@ -582,6 +646,8 @@ All SAML configuration options available for GitLab Dedicated instances can be c
 If you had previously configured multiple IdPs, you can now view and edit all existing SAML configurations directly in Switchboard.
 
 ### Docker Hub authentication UI for the dependency proxy
+
+<!-- categories: Container Registry -->
 
 {{< details >}}
 
@@ -602,6 +668,8 @@ This streamlined approach makes it easier to maintain uninterrupted access to Do
 
 ### Set work in progress limits by weight
 
+<!-- categories: Team Planning -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -618,6 +686,8 @@ Use this feature to optimize your team’s productivity and create a more balanc
 
 ### Improved wiki sidebar styling
 
+<!-- categories: Wiki -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -631,6 +701,8 @@ The custom wiki sidebar now features improved styling with reduced heading sizes
 Custom sidebars help teams organize their wiki content in a way that makes sense for their unique knowledge base structure. With this styling update, the sidebar is now easier to scan, creating a clearer visual hierarchy that helps team members find relevant information more quickly.
 
 ### Display last comment as a column in GLQL views
+
+<!-- categories: Wiki, Team Planning -->
 
 {{< details >}}
 
@@ -648,6 +720,8 @@ We welcome your feedback on this enhancement and GLQL views in general on our [f
 
 ### Nuxt project template for GitLab Pages
 
+<!-- categories: Pages -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -661,6 +735,8 @@ GitLab provides templates for the most popular Static Site Generators (SSGs), an
 This addition expands your options for quickly launching a Pages site with built-in CI/CD pipelines and a modern development experience, without spending time on initial setup and configuration.
 
 ### CycloneDX export for the project dependency list
+
+<!-- categories: Dependency Management -->
 
 {{< details >}}
 
@@ -676,6 +752,8 @@ To download an SBOM directly as a CycloneDX file, in the dependency list, select
 
 ### Email delivery for dependency list and vulnerability report export
 
+<!-- categories: Dependency Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -690,6 +768,8 @@ Now, you are notified by email with a download link when the dependency list or 
 
 ### Export dependency list in CSV format
 
+<!-- categories: Dependency Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -701,6 +781,8 @@ Now, you are notified by email with a download link when the dependency list or 
 Previously, you could not export a dependency list from GitLab as CSV file. Now, when you download a dependency list, you can select the new CSV option to export the list in this format.
 
 ### Tool filter replaced with Scanner and Report Type filters
+
+<!-- categories: Vulnerability Management -->
 
 {{< details >}}
 
@@ -715,6 +797,8 @@ Previously, the **tool** search filter in the vulnerability report allowed you t
 To help you find the appropriate tools more easily, we’ve replaced the **tool** filter with the **scanner** filter and the **report type** filter. You can now filter your search based on each of these types of tools separately.
 
 ### Store and filter a `source` value for CI/CD jobs
+
+<!-- categories: Security Policy Management -->
 
 {{< details >}}
 
@@ -752,6 +836,8 @@ Security and compliance teams can leverage this feature to:
 
 ### Enhanced sorting options for access tokens
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -768,6 +854,8 @@ There are now additional sorting options for access tokens in the UI and API. Th
 - Sort by last used date (descending): View the tokens used most recently.
 
 ### Token statistics for service account management
+
+<!-- categories: System Access -->
 
 {{< details >}}
 
@@ -788,6 +876,8 @@ Thank you [Chaitanya Sonwane](https://gitlab.com/chaitanyason9) for your contrib
 
 ### Improved pipeline graph visualization for failed jobs
 
+<!-- categories: Pipeline Composition -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -799,6 +889,8 @@ Thank you [Chaitanya Sonwane](https://gitlab.com/chaitanyason9) for your contrib
 You can now quickly identify failed jobs in the pipeline graph with new visual indicators. Failed job groups are highlighted in the pipeline graph, and failed jobs are grouped at the top of each stage. This improved visualization helps you troubleshoot pipeline failures without having to search through complex pipeline structures.
 
 ### Force-cancel CI/CD jobs stuck in canceling state
+
+<!-- categories: Continuous Integration (CI) -->
 
 {{< details >}}
 
@@ -814,6 +906,8 @@ Users with the Maintainer [role](../../user/permissions.md) can now force-cancel
 
 ### Improved runner management in projects
 
+<!-- categories: Fleet Visibility -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -827,6 +921,8 @@ You can now manage runners more efficiently in your projects. Runners are displa
 This improved organization makes it simpler to find and manage runners, with new features including a list of assigned projects, runner managers, and jobs that a runner has run. For information about additional runner management improvements planned for GitLab 18.0, see [issue 33803](https://gitlab.com/gitlab-org/gitlab/-/issues/33803).
 
 ### GitLab Runner 17.11
+
+<!-- categories: GitLab Runner Core -->
 
 {{< details >}}
 

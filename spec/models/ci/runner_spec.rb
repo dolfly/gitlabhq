@@ -2597,6 +2597,40 @@ RSpec.describe Ci::Runner, type: :model, factory_default: :keep, feature_categor
       end
     end
 
+    describe '.ids_with_running_builds' do
+      subject(:result) { described_class.ids_with_running_builds(ids) }
+
+      let_it_be(:runner_with_running_build) do
+        create(:ci_runner).tap do |runner|
+          create(:ci_build, :picked, runner: runner)
+        end
+      end
+
+      let_it_be(:runner_without_running_build) do
+        create(:ci_runner).tap do |runner|
+          create(:ci_build, :canceling, runner: runner)
+        end
+      end
+
+      context 'when ids include a runner with a running build' do
+        let(:ids) { [runner_with_running_build.id, runner_without_running_build.id] }
+
+        it { is_expected.to contain_exactly(runner_with_running_build.id) }
+      end
+
+      context 'when ids include only runners without running builds' do
+        let(:ids) { [runner_without_running_build.id] }
+
+        it { is_expected.to be_empty }
+      end
+
+      context 'when ids is empty' do
+        let(:ids) { [] }
+
+        it { is_expected.to be_empty }
+      end
+    end
+
     describe '.assignable_for' do
       let_it_be(:group, freeze: true) { create(:group) }
       let_it_be(:another_project, freeze: true) { other_project }

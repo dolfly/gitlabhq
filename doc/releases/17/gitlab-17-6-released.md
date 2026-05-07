@@ -42,6 +42,8 @@ We are so grateful to Joel for all of his contributions and to all of our open s
 
 ### Use self-hosted model for GitLab Duo Chat
 
+<!-- categories: Self-Hosted Models -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -57,6 +59,8 @@ With self-hosted models, you can use models hosted either on-premise or in a pri
 Please leave feedback in [issue 501268](https://gitlab.com/gitlab-org/gitlab/-/issues/501268).
 
 ### Enhanced merge request reviewer assignments
+
+<!-- categories: Code Review Workflow -->
 
 {{< details >}}
 
@@ -74,6 +78,8 @@ Enhanced reviewer assignments is the next evolution of applying intelligence to 
 
 ### Support for private container registries in workspaces
 
+<!-- categories: Remote Development -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -88,6 +94,8 @@ This feature simplifies workflows, especially for teams that use custom or third
 
 ### Extension marketplace now available in workspaces
 
+<!-- categories: Remote Development -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -101,6 +109,8 @@ The extension marketplace is now available in workspaces. With the extension mar
 The extension marketplace is disabled by default. To get started, go to your user preferences and [enable the extension marketplace](../../user/profile/preferences.md#integrate-with-the-extension-marketplace). For enterprise users, only users with the Owner role for a top-level group can [enable the extension marketplace](../../user/enterprise_user/_index.md#enable-the-extension-marketplace-for-enterprise-users).
 
 ### Improved workspace lifecycle with delayed termination
+
+<!-- categories: Remote Development -->
 
 {{< details >}}
 
@@ -123,6 +133,8 @@ With this feature, a workspace remains available for approximately one month aft
 
 ### Display release notes on deployment details page
 
+<!-- categories: Continuous Delivery -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -139,6 +151,8 @@ This feature was contributed to GitLab by [Anton Kalmykov](https://gitlab.com/an
 
 ### Admin setting to enforce CI/CD job token allowlist
 
+<!-- categories: Secrets Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -152,6 +166,8 @@ Previously, we announced that the default CI/CD job token (`CI_JOB_TOKEN`) behav
 Now, we are giving self-managed and Dedicated instance administrators the ability to enforce this more secure setting on all projects on an instance. After you enable this setting, all projects will need to make use of their allowlist if they want to use CI/CD job tokens for authentication. *Note: We recommend enabling this setting as part of a strong security policy.*
 
 ### Track CI/CD job token authentications
+
+<!-- categories: Secrets Management -->
 
 {{< details >}}
 
@@ -167,6 +183,8 @@ With this authentication log, you can view the list of other projects that have 
 
 ### Vulnerability report grouping
 
+<!-- categories: Vulnerability Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -178,6 +196,8 @@ With this authentication log, you can view the list of other projects that have 
 Users require the ability to view vulnerabilities in groups. This will help security analysts optimize their triage tasks by utilizing bulk actions. In addition users can see how many vulnerabilities match their group; i.e. how many OWASP Top 10 vulnerabilities are there?
 
 ### Model registry now generally available
+
+<!-- categories: MLOps -->
 
 {{< details >}}
 
@@ -195,6 +215,8 @@ Please feel free to drop us a note in our [feedback issue](https://gitlab.com/gi
 
 ### New tenant networking configurations for GitLab Dedicated
 
+<!-- categories: GitLab Dedicated, Switchboard -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -208,6 +230,8 @@ As a GitLab Dedicated tenant administrator, you can now use Switchboard to set u
 Outbound private links and private hosted zones establish secure network connectivity between resources in your AWS account and GitLab Dedicated.
 
 ### New adherence checks for SAST and DAST security scanners
+
+<!-- categories: Compliance Management -->
 
 {{< details >}}
 
@@ -231,6 +255,8 @@ correctly ran in a project and the pipeline results has the correct resulting ar
 
 ### Project events for group webhooks
 
+<!-- categories: Webhooks -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -248,6 +274,8 @@ These events are triggered for [group webhooks](../../user/project/integrations/
 
 ### Filter GitLab Duo users by assigned seat
 
+<!-- categories: Add-on Provisioning -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -260,6 +288,8 @@ These events are triggered for [group webhooks](../../user/project/integrations/
 In previous versions of GitLab, the user list displayed on the GitLab Duo seat assignment page could not be filtered, making it difficult to see which users had previously been assigned a GitLab Duo seat. Now, you can filter your user list by Assigned seat = Yes or Assigned seat = No to see to see which users are currently assigned or not assigned a GitLab Duo seat, allowing for ease in adjusting seat allocations.
 
 ### GitLab Duo seat assignment email update
+
+<!-- categories: Seat Cost Management -->
 
 {{< details >}}
 
@@ -279,6 +309,8 @@ To disable this email, an administrator can disable the `duo_seat_assignment_ema
 
 ### Efficient risk prioritization with EPSS
 
+<!-- categories: Software Composition Analysis -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -292,6 +324,8 @@ In GitLab 17.6, we added support for the Exploit Prediction Scoring System (EPSS
 This data is available to composition analysis users through GraphQL.
 
 ### Enable Secret Push Protection in your projects via API
+
+<!-- categories: Secret Detection -->
 
 {{< details >}}
 
@@ -309,6 +343,8 @@ It’s now easier to programatically enable secret push protection. We’ve upda
 
 ### Secret Push Protection audit events for applied exclusions
 
+<!-- categories: Secret Detection -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -320,6 +356,8 @@ It’s now easier to programatically enable secret push protection. We’ve upda
 Audit events are now logged when a secret push protection exclusion is applied. This enables security teams to audit and track any occurence when a secret on the project’s exclusions list is allowed to be pushed.
 
 ### Automated Repository X-Ray
+
+<!-- categories: Code Suggestions -->
 
 {{< details >}}
 
@@ -336,6 +374,8 @@ Now, when a new commit is pushed to your project’s default branch, Repository 
 
 ### Corporate network support for GitLab Duo
 
+<!-- categories: Editor Extensions -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -349,6 +389,8 @@ The latest update to the GitLab Duo plugin introduces advanced proxy authenticat
 This update is crucial for developers needing secure, authenticated connections in restricted network environments. It ensures all Duo features remain available without compromising security.
 
 ### Merge at a scheduled date and time
+
+<!-- categories: Code Review Workflow -->
 
 {{< details >}}
 
@@ -366,6 +408,8 @@ A big thank you to [Niklas van Schrick](https://gitlab.com/Taucher2003) for the 
 
 ### Add support for values to the `glab agent bootstrap` command
 
+<!-- categories: Deployment Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -377,6 +421,8 @@ A big thank you to [Niklas van Schrick](https://gitlab.com/Taucher2003) for the 
 In the last release, we introduced support for easy agent bootstrapping to the GitLab CLI tool. GitLab 17.6 further improves the `glab cluster agent bootstrap` command with support for custom Helm values. You can use the `--helm-release-values` and `--helm-release-values-from` flags to customize the generated `HelmRelease` resource.
 
 ### Select a GitLab agent for an environment in a CI/CD job
+
+<!-- categories: Environment Management -->
 
 {{< details >}}
 
@@ -391,6 +437,8 @@ In addition, [issue 500164](https://gitlab.com/gitlab-org/gitlab/-/issues/500164
 
 ### Audit events for privileged actions
 
+<!-- categories: Audit Events -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -401,6 +449,8 @@ In addition, [issue 500164](https://gitlab.com/gitlab-org/gitlab/-/issues/500164
 There are now additional audit events for privileged settings-related administrator actions. A record of when these settings were changed can help improve security by providing an audit trail.
 
 ### New audit event when merge requests are merged
+
+<!-- categories: Audit Events -->
 
 {{< details >}}
 
@@ -425,6 +475,8 @@ the merge request, including:
 
 ### Disable OTP authenticator and WebAuthn devices independently
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -436,6 +488,8 @@ the merge request, including:
 It is now possible to disable the OTP authenticator and WebAuthn devices individually or simultaneously. Previously, if you disabled the OTP authenticator, the WebAuthn device(s) were also disabled. Because the two now operate independently, there is more granular control over these authentication methods.
 
 ### Use API to get information about tokens
+
+<!-- categories: System Access -->
 
 {{< details >}}
 
@@ -450,6 +504,8 @@ Thank you [Nicholas Wittstruck](https://gitlab.com/nwittstruck) and the rest of 
 
 ### More information in sign in emails from new locations
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -462,6 +518,8 @@ GitLab optionally sends an email when a sign-in from a new location is detected.
 Thank you [Henry Helm](https://gitlab.com/shangsuru) for your contribution!
 
 ### Prevent modification of group protected branches
+
+<!-- categories: Security Policy Management -->
 
 {{< details >}}
 
@@ -477,6 +535,8 @@ This new project override setting ensures that group protected branch settings c
 
 ### Top-level group Owners can create service accounts
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -487,6 +547,8 @@ This new project override setting ensures that group protected branch settings c
 Currently, only administrators can create service accounts on GitLab self-managed. Now, there is an optional setting which allows top-level group Owners to create service accounts. This allows administrators to choose if they would like a wider range of roles that are allowed to create service accounts, or keep it as an administrator-only task.
 
 ### Service accounts badge
+
+<!-- categories: System Access -->
 
 {{< details >}}
 
@@ -499,6 +561,8 @@ Currently, only administrators can create service accounts on GitLab self-manage
 Service accounts now have a designated badge and can be easily identified in the users list. Previously, these accounts only had the `bot` badge, making it difficult to distinguish between them and group and project access tokens.
 
 ### Deploy your Pages site with any CI/CD job
+
+<!-- categories: Pages -->
 
 {{< details >}}
 
@@ -514,6 +578,8 @@ need to name your Pages deploy job `pages`. You can now simply use the
 
 ### AI Impact Analytics API for GitLab Duo Pro
 
+<!-- categories: Value Stream Management -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -527,6 +593,8 @@ GitLab Duo Pro customers can now programmatically access AI Impact Analytics met
 
 ### Easily remove closed items from your view
 
+<!-- categories: Portfolio Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -538,6 +606,8 @@ GitLab Duo Pro customers can now programmatically access AI Impact Analytics met
 You can now hide closed items from the linked and child items lists by turning off the **Show closed items** toggle. With this addition, you have greater control over your view and can focus on active work while reducing visual clutter in complex projects.
 
 ### Query user-level GitLab Duo Enterprise usage metrics
+
+<!-- categories: Value Stream Management -->
 
 {{< details >}}
 
@@ -552,6 +622,8 @@ Prior to this release, it was not possible to get GitLab Duo Chat and Code Sugge
 
 ### Support for license data from CycloneDX SBOMs
 
+<!-- categories: Software Composition Analysis -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -565,6 +637,8 @@ The License Scanner now has the ability to consume a dependency’s license from
 In cases where the `licenses` field of a CycloneDX SBOM is available, users will see license data from their SBOM. In cases where the SBOM lacks license information we will continue to provide this data from our License database.
 
 ### macOS Sequoia 15 and Xcode 16 job image
+
+<!-- categories: GitLab Hosted Runners -->
 
 {{< details >}}
 
@@ -585,6 +659,8 @@ Try it out today by using the `macos-15-xcode-16` image in your `.gitlab-ci.yml`
 
 ### JaCoCo test coverage visualization now generally available
 
+<!-- categories: Code Testing and Coverage -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -596,6 +672,8 @@ Try it out today by using the `macos-15-xcode-16` image in your `.gitlab-ci.yml`
 You can now see JaCoCo test coverage results directly in your merge request diff view. This visualization allows you to quickly identify which lines are covered by tests and which need additional coverage before merging.
 
 ### GitLab Runner 17.6
+
+<!-- categories: GitLab Runner Core -->
 
 {{< details >}}
 

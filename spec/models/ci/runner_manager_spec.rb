@@ -331,6 +331,42 @@ RSpec.describe Ci::RunnerManager, feature_category: :fleet_visibility, type: :mo
     end
   end
 
+  describe '.ids_with_running_builds' do
+    subject(:result) { described_class.ids_with_running_builds(ids) }
+
+    let_it_be(:runner) { create(:ci_runner) }
+
+    let_it_be(:manager_with_running_build) do
+      create(:ci_runner_machine, runner: runner).tap do |manager|
+        create(:ci_build, :picked, runner_manager: manager)
+      end
+    end
+
+    let_it_be(:manager_without_running_build) do
+      create(:ci_runner_machine, runner: runner).tap do |manager|
+        create(:ci_build, :canceling, runner_manager: manager)
+      end
+    end
+
+    context 'when ids include a manager with a running build' do
+      let(:ids) { [manager_with_running_build.id, manager_without_running_build.id] }
+
+      it { is_expected.to contain_exactly(manager_with_running_build.id) }
+    end
+
+    context 'when ids include only managers without running builds' do
+      let(:ids) { [manager_without_running_build.id] }
+
+      it { is_expected.to be_empty }
+    end
+
+    context 'when ids is empty' do
+      let(:ids) { [] }
+
+      it { is_expected.to be_empty }
+    end
+  end
+
   describe '.order_id_desc' do
     subject(:scope) { described_class.order_id_desc }
 

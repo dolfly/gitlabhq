@@ -45,7 +45,7 @@ Prerequisites:
 
 Before you install OpenBao, verify your Kubernetes distribution meets these requirements:
 
-- [OpenBao sizing recomendations](_index.md#sizing-recommendations) must be satisfied in addition to
+- [OpenBao sizing recommendations](_index.md#sizing-recommendations) must be satisfied in addition to
   the requirements of a Linux package instance and the requirements of your Kubernetes cluster.
 - Nothing in your colocated Kubernetes should try to attach to ports already used by GitLab.
   Many small Kubernetes distributions install load balancers that bind to ports 80 and 443 by
@@ -148,9 +148,9 @@ To install OpenBao by using Helm:
      --values openbao-values.yaml
    ```
 
-   Do not use `--wait`, because the pod cannot connect to PostgreSQL,
-   as PostgreSQL will only accept TCP connections from the pod network
-   after `gitlab-ctl reconfigure`. For now pods will be in `CrashLoopBackOff`
+   Do not use `--wait`, because the pod cannot connect to PostgreSQL.
+   PostgreSQL only accepts TCP connections from the pod network
+   after `gitlab-ctl reconfigure`. For now, pods are in a `CrashLoopBackOff`
    state.
 
 For all available chart options, see the
@@ -166,22 +166,20 @@ You have multiple options for defining the OpenBao internal URL:
   case, you must configure DNS to make sure the internal URL gets resolved to the internal load balancer IP.
 - Cluster `nodePort`. If you customize your OpenBao chart service to run on a Kubernetes service type
   `nodePort`, the internal URL can also be configured to that.
-- Service `clusterIP`: This option is likely the simplest. You can also skip a load balancer completely for your
+- Service `clusterIP`. This option is likely the simplest. You can also skip a load balancer completely for your
   collocated cluster by informing the OpenBao internal URL to talk directly to the OpenBao service `clusterIP`.
   This option saves you from having to install one more load balancer in your machine because the Linux
   package-managed NGINX is already there.
 
-You can find the OpenBao service's `clusterIp` by running: 
+You can find the OpenBao service's `clusterIp` by running:
 
 ```shell
 kubectl -n openbao get svc openbao-active \
   -o jsonpath='{.spec.clusterIP}'
 ```
 
-In all the cases, remember that the IP of the internal URL needs
-to be accessible by the host machine outside of your Kubernetes cluster.
-
-So configure your cluster to allocate IPs from your chosen `<SHARED_NETWORK_IP>`.
+Remember that the IP of the internal URL must be accessible by the host machine outside of your Kubernetes cluster.
+Configure your cluster to allocate IPs from your chosen `<SHARED_NETWORK_IP>`.
 
 ## Configure GitLab
 
@@ -221,16 +219,17 @@ oak['components']['openbao']['external_url'] = 'https://openbao.example.com'
 oak['components']['openbao']['internal_url'] = 'http://<CLUSTER_IP>:8200'
 ```
 
-Where:
+In this configuration:
 
-- `postgresql['listen_address']`: the shared network IP. Connections from CIDRs not listed
+- `postgresql['listen_address']` is the shared network IP. Connections from CIDRs not listed
   in `trust_auth_cidr_addresses` or `md5_auth_cidr_addresses` are rejected by PostgreSQL.
-- `postgresql['trust_auth_cidr_addresses']`: connections from these addresses (localhost only)
-  are accepted without a password. These are used by GitLab services.
-- `postgresql['md5_auth_cidr_addresses']`: connections from the pod CIDR require
+- `postgresql['trust_auth_cidr_addresses']` is a list of CIDR blocks (localhost only). Connections
+  from these blocks don't require a password. These addresses are used by GitLab services.
+- `postgresql['md5_auth_cidr_addresses']` is a list of CIDR blocks from the pod CIDR. Connections
+  from these blocks require a password. These addresses are used by OpenBao pods.
   password authentication. Used by OpenBao pods.
-- `oak['network_address']`: the shared network IP, used by NGINX listen directives.
-- `oak['components']['openbao']['internal_url']`: URL used by the GitLab applications
+- `oak['network_address']` is the shared network IP. Used by NGINX listen directives.
+- `oak['components']['openbao']['internal_url']` is the URL used by the GitLab application
   to talk to OpenBao.
 
 ### TLS configuration
@@ -255,7 +254,7 @@ Apply configuration changes:
 sudo gitlab-ctl reconfigure
 ```
 
-This applies all configuration in a single pass:
+This command applies all configuration in a single pass:
 
 - PostgreSQL starts accepting TCP connections from Kubernetes pods.
 - NGINX is configured with the OpenBao virtual host, including TLS termination
@@ -264,7 +263,7 @@ This applies all configuration in a single pass:
 
 ## Wait for OpenBao to become ready
 
-The pods previously in `CrashLoopBackOff` state should now be healthy after reconfigure.
+The pods previously in a `CrashLoopBackOff` state should now be healthy after reconfigure.
 
 Wait for the rollout to complete:
 
@@ -274,21 +273,23 @@ kubectl -n openbao rollout status deployment openbao
 
 ## Verify the installation
 
-Verify that OpenBao is reachable through the HTTPS proxy:
+To verify the installation:
 
-```shell
-curl "https://openbao.example.com/v1/sys/health"
-```
+1. Verify that OpenBao is reachable through the HTTPS proxy:
 
-A successful response looks like:
+   ```shell
+   curl "https://openbao.example.com/v1/sys/health"
+   ```
 
-```json
-{
-  "initialized": true,
-  "sealed": false,
-  "standby": false,
-  "version": "2.0.0"
-}
-```
+   A successful response looks like:
 
-Then [enable the GitLab Secrets Manager](../../ci/secrets/secrets_manager/_index.md#enable-or-disable-the-gitlab-secrets-manager).
+   ```json
+   {
+     "initialized": true,
+     "sealed": false,
+     "standby": false,
+     "version": "2.0.0"
+   }
+   ```
+
+1. [Enable the GitLab Secrets Manager](../../ci/secrets/secrets_manager/_index.md#enable-or-disable-the-gitlab-secrets-manager).

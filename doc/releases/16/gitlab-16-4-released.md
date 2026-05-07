@@ -39,6 +39,8 @@ Thank you, Kik, for choosing to help build GitLab and being a part of our amazin
 
 ### Customizable roles
 
+<!-- categories: User Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -50,6 +52,8 @@ Thank you, Kik, for choosing to help build GitLab and being a part of our amazin
 Group Owners or administrators can now create and remove custom roles using the UI under the Roles and Permissions menu. To create a custom role, you add [permissions](../../user/permissions.md) on top of an existing [base role](../../user/permissions.md#roles). Currently, there are a limited number of permissions that can be added to a base role, including [granular security permissions](https://docs.gitlab.com/#granular-security-permissions), the ability to approve merge requests, and view code. Each milestone, new permissions will be released that can then be added to existing permissions to create custom roles.
 
 ### Create workspaces for private projects
+
+<!-- categories: Workspaces -->
 
 {{< details >}}
 
@@ -64,6 +68,8 @@ Previously, it was not possible to [create a workspace](../../user/workspace/con
 With GitLab 16.4, you can create a workspace for any public or private project. When you create a workspace, you get a personal access token to use with the workspace. With this token, you can clone private projects and perform Git operations without any additional configuration or authentication.
 
 ### Access clusters locally using your GitLab user identity
+
+<!-- categories: Environment Management, User Profile -->
 
 {{< details >}}
 
@@ -81,6 +87,8 @@ In this first iteration of cluster access, you must [manage your Kubernetes conf
 
 ### Group/sub-group level dependency list
 
+<!-- categories: Dependency Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -92,6 +100,8 @@ In this first iteration of cluster access, you must [manage your Kubernetes conf
 When reviewing a list of dependencies, it is important to have an overall view. Managing dependencies at the project level is problematic for large organizations that want to audit their dependencies across all their projects. With this release, you can see all dependencies at the project or group level, including subgroups. This feature is now available by default.
 
 ### Vulnerability bulk status updates
+
+<!-- categories: Vulnerability Management -->
 
 {{< details >}}
 
@@ -105,6 +115,8 @@ Some vulnerabilities need to be addressed in bulk. Whether they are false positi
 With this release you can bulk change the status and make a comment for multiple vulnerabilities from a group or project Vulnerability Report.
 
 ### Granular security permissions
+
+<!-- categories: Vulnerability Management, Dependency Management -->
 
 {{< details >}}
 
@@ -128,6 +140,8 @@ We plan to remove the ability to change the status of a vulnerability from the D
 
 ### Fast-forward merge support for merge trains
 
+<!-- categories: Merge Trains -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -143,6 +157,8 @@ In this release, self-managed admins can now enable both Fast-forward merge and 
 To enable the Fast-forward merge trains, locate the feature flag `fast_forward_merge_trains_support`, which has been disabled by default, and enable it.
 
 ### Set `id_token` globally and eliminate configuration for individual jobs
+
+<!-- categories: Secrets Management -->
 
 {{< details >}}
 
@@ -160,6 +176,8 @@ In GitLab 15.9 we announced the [deprecation of older versions of JSON web token
 
 ### Elasticsearch index integrity now generally available
 
+<!-- categories: Global Search -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -172,6 +190,8 @@ With GitLab 16.4, Elasticsearch index integrity is generally available for all G
 
 ### Omnibus improvements
 
+<!-- categories: Omnibus Package -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -182,6 +202,8 @@ With GitLab 16.4, Elasticsearch index integrity is generally available for all G
 - GitLab 16.4 includes packages for [OpenSUSE 15.5](https://en.opensuse.org/Release_announcement_15.5).
 
 ### Add webhooks for added or revoked emoji reactions
+
+<!-- categories: Webhooks -->
 
 {{< details >}}
 
@@ -197,6 +219,8 @@ You could use the new webhook, for example, to send an email when users react to
 
 ### Create custom role name and description using API
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -208,6 +232,8 @@ You could use the new webhook, for example, to send an email when users react to
 When creating a custom role, you can now use the member roles API to add a name (required) and description (optional). Any existing custom roles have been given the name `Custom`, and you can use the API to change a custom role’s name to a name of your choosing.
 
 ### Trigger Slack notifications for group mentions
+
+<!-- categories: Integrations -->
 
 {{< details >}}
 
@@ -223,6 +249,8 @@ GitLab can send messages to Slack workspace channels for certain GitLab events. 
 - Comments on issues, merge requests, and commits
 
 ### Expand configurable import limits available in application settings
+
+<!-- categories: Importers -->
 
 {{< details >}}
 
@@ -241,6 +269,8 @@ GitLab.com administrators can adjust this limit as needed.
 
 ### Custom email address for Service Desk
 
+<!-- categories: Service Desk -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -257,6 +287,8 @@ provide feedback in [the feedback issue](https://gitlab.com/gitlab-org/gitlab/-/
 
 ### Geo supports unified URLs on Cloud Native Hybrid sites
 
+<!-- categories: Disaster Recovery, Geo-replication -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -267,6 +299,8 @@ provide feedback in [the feedback issue](https://gitlab.com/gitlab-org/gitlab/-/
 Geo now supports unified URLs on [Cloud Native Hybrid](../../administration/reference_architectures/_index.md#cloud-native-hybrid) sites, which means that Cloud Native Hybrid sites can share a single external URL with the primary site. This delivers a seamless GitLab UI and Git developer experience for your remote teams who can be automatically directed to the optimal Geo secondary site based on their location using a single common URL. With this update, unified URLs are now supported across all GitLab reference architectures.
 
 ### Geo verifies object storage
+
+<!-- categories: Geo-replication, Disaster Recovery -->
 
 {{< details >}}
 
@@ -280,6 +314,8 @@ Geo adds the ability to verify object storage when [object storage replication i
 ## Unified DevOps and Security
 
 ### Support for `environment` keyword in downstream pipelines
+
+<!-- categories: Environment Management, Deployment Management -->
 
 {{< details >}}
 
@@ -295,6 +331,8 @@ Previously, when you ran separate pipelines for CI and CD and used the `trigger`
 
 ### Allow users to define branch exceptions to enforced security policies
 
+<!-- categories: Security Policy Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -309,6 +347,8 @@ For scan execution policies, you can configure exceptions for the [pipeline](../
 
 ### Notifications for expiring access tokens
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -320,6 +360,8 @@ Group and project access tokens are frequently used for automation. It is import
 
 ### Email notification when access expires
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -330,6 +372,8 @@ Group and project access tokens are frequently used for automation. It is import
 A user will get an email notification seven days before their group or project access expires. This only applies if there is an access expiration date set. Previously, there were no notifications when access expired. Advance notice means you can contact your GitLab administrator to ensure continuous access.
 
 ### Browser-based DAST active check 22.1 is enabled by default
+
+<!-- categories: DAST -->
 
 {{< details >}}
 
@@ -343,6 +387,8 @@ Browser-based DAST active check 22.1 has been enabled by default. It replaces ZA
 
 ### Private registry support for Operational Container Scanning
 
+<!-- categories: Container Scanning -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -355,6 +401,8 @@ Browser-based DAST active check 22.1 has been enabled by default. It replaces ZA
 
 ### Dependency and License Scanning support for pnpm lockfile v6.1
 
+<!-- categories: Software Composition Analysis -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -366,6 +414,8 @@ Browser-based DAST active check 22.1 has been enabled by default. It replaces ZA
 Thanks to a community contribution from [Weyert de Boer](https://gitlab.com/weyert-tapico), GitLab Dependency and License Scanning now support analyzing pnpm projects using v6.1 lockfile format.
 
 ### SAST analyzer updates
+
+<!-- categories: SAST -->
 
 {{< details >}}
 
@@ -388,6 +438,8 @@ To remain on a specific version of any analyzer and prevent automatic updates, y
 For previous changes, see [last month’s updates](https://about.gitlab.com/releases/2023/08/22/gitlab-16-3-released/#sast-analyzer-updates).
 
 ### Improved SAST vulnerability tracking
+
+<!-- categories: SAST -->
 
 {{< details >}}
 
@@ -413,6 +465,8 @@ You don’t have to take action to receive this update unless you’ve [pinned S
 
 ### Pipeline-specific CycloneDX SBOM exports
 
+<!-- categories: Software Composition Analysis -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -425,6 +479,8 @@ We’ve added an API that allows you to download a CycloneDX SBOM, which lists a
 
 ### Users with the Maintainer role can view runner details
 
+<!-- categories: Runner Fleet -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -435,6 +491,8 @@ We’ve added an API that allows you to download a CycloneDX SBOM, which lists a
 Users with the Maintainer role for a group can now view details for group runners. Users with this role can view group runners to quickly determine which runners are available, or validate that automatically created runners were registered successfully to the group namespace.
 
 ### macOS 13 (Ventura) image for SaaS runners on macOS
+
+<!-- categories: GitLab Runner SaaS -->
 
 {{< details >}}
 
@@ -451,6 +509,8 @@ SaaS runners on macOS allow you to increase your development teams’ velocity i
 that require macOS in a secure, on-demand GitLab Runner build environment integrated with GitLab CI/CD.
 
 ### GitLab Runner 16.4
+
+<!-- categories: GitLab Runner Core -->
 
 {{< details >}}
 

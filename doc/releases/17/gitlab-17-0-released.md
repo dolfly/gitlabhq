@@ -42,6 +42,8 @@ Many thanks to Gerardo Navarro and the rest of the team from Siemens for helping
 
 ### CI/CD Catalog with components and inputs now generally available
 
+<!-- categories: Pipeline Composition -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -58,6 +60,8 @@ You can read more about the Catalog and its features in the following [blog post
 You’re invited to contribute CI/CD components to the Catalog and help expand this new and growing part of GitLab.com!
 
 ### AI Impact analytics in the Value Streams Dashboard
+
+<!-- categories: Value Stream Management, Code Suggestions -->
 
 {{< details >}}
 
@@ -76,6 +80,8 @@ The AI Impact dashboard is available to users on the Ultimate tier for a limited
 
 ### Introducing hosted runners on Linux Arm
 
+<!-- categories: GitLab Hosted Runners -->
+
 {{< details >}}
 
 - Tier: Silver, Gold
@@ -91,6 +97,8 @@ We are determined to provide the industry’s fastest CI/CD build speed and look
 
 ### Introducing deployment detail pages
 
+<!-- categories: Release Orchestration, Environment Management -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -104,6 +112,8 @@ You can now link directly to a deployment in GitLab. Previously, if you were col
 From 17.0, GitLab offers a deployment details view that you can link to directly. In this first version, the deployment details page offers an overview of the deployment job and the possibility to approve, reject, or comment on a deployment in a continuous delivery setting. We are looking into further avenues to enhance the deployment details page, including by linking to it from the related pipeline job. We would love to hear your feedback in [issue 450700](https://gitlab.com/gitlab-org/gitlab/-/issues/450700).
 
 ### GitLab Duo Chat now uses Anthropic Claude 3 Sonnet
+
+<!-- categories: Duo Chat -->
 
 {{< details >}}
 
@@ -119,6 +129,8 @@ At GitLab, we apply a test-driven approach when choosing the best model for a se
 
 ### How-to questions in GitLab Duo Chat supported on self-managed deployments
 
+<!-- categories: Duo Chat -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -132,6 +144,8 @@ A popular capability of GitLab Duo Chat is answering questions about how to use 
 Whether you’re a newcomer or an expert, you can ask Chat for help with queries like “How do I change my password in GitLab?” or “How do I connect a Kubernetes cluster to GitLab?”. Chat aims to provide helpful information to solve your problems more efficiently.
 
 ### New usage overview panel in the Value Streams Dashboard
+
+<!-- categories: Value Stream Management -->
 
 {{< details >}}
 
@@ -147,6 +161,8 @@ The Overview panel displays metrics for the group level, such as number of (sub)
 
 ### Add a group to the CI/CD job token allowlist
 
+<!-- categories: Secrets Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -161,6 +177,8 @@ In GitLab 17.0, you can now add groups to a project’s CI/CD job token allowlis
 
 ### Enhanced context control with the `rules:exists` CI/CD keyword
 
+<!-- categories: Pipeline Composition -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -173,6 +191,8 @@ The `rules:exists` CI/CD keyword has default behaviors that vary based on where 
 In this release, we have introduced `project` and `ref` subkeys to `rules:exists`, providing you a way to explicitly control the search context for this keyword. These new subkeys help you ensure accurate rule evaluation by precisely specifying the search context, mitigating inconsistencies, and enhancing clarity in your pipeline rule definitions.
 
 ### Change log for configuration changes made using Switchboard
+
+<!-- categories: GitLab Dedicated, Switchboard -->
 
 {{< details >}}
 
@@ -194,6 +214,8 @@ We will be extending this functionality to enable self-serve updates for additio
 
 ### GitLab chart improvements
 
+<!-- categories: Cloud Native Installation -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -211,6 +233,8 @@ The deprecated queue selector and negate options are removed from the Sidekiq ch
 
 ### Linux package improvements
 
+<!-- categories: Omnibus Package -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -221,6 +245,8 @@ The deprecated queue selector and negate options are removed from the Sidekiq ch
 CentOS Linux 7 will reach [end of life](https://www.redhat.com/en/topics/linux/centos-linux-eol) on June 30, 2024. This makes GitLab 17.6 the last GitLab version in which we can provide packages for CentOS 7.
 
 ### Two database mode is available in Beta
+
+<!-- categories: Cell -->
 
 {{< details >}}
 
@@ -243,6 +269,8 @@ The [actual migration](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/135
 
 ### Private shared group members are listed on Members tab for all members
 
+<!-- categories: Groups & Projects -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -255,6 +283,8 @@ Previously, when a public group or project invited a private group, the private 
 
 ### Members page displays members from invited groups
 
+<!-- categories: Groups & Projects -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -266,6 +296,8 @@ Previously, when a public group or project invited a private group, the private 
 Previously, members of groups that were invited to a group or project were visible only in the Groups tab of the Members page. This meant users had to check both the Groups and Members tabs to understand who has access to a certain group or project. Now, shared members are listed also in the Members tab, giving a complete overview of all the members that are part of a group or project at a glance.
 
 ### Import from Bitbucket Cloud by using REST API
+
+<!-- categories: Importers -->
 
 {{< details >}}
 
@@ -280,6 +312,8 @@ In this milestone, we added the ability to import Bitbucket Cloud projects by us
 This can be a better solution for importing a lot of projects than importing by using the UI.
 
 ### Re-import a chosen project relation by using the API
+
+<!-- categories: Importers -->
 
 {{< details >}}
 
@@ -297,6 +331,8 @@ In this release, we added an API endpoint that re-imports a named relation, skip
 - A type (issues, merge requests, pipelines, or milestones).
 
 ### View issues from multiple Jira projects in GitLab
+
+<!-- categories: Integrations -->
 
 {{< details >}}
 
@@ -317,6 +353,8 @@ To [create Jira issues for vulnerabilities](../../integration/jira/configure.md#
 
 ### Enable viewing Jira issues in GitLab with the REST API
 
+<!-- categories: API, Integrations -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -330,6 +368,8 @@ With this release, you can use the REST API to enable [viewing Jira issues](../.
 Thanks to [Ivan](https://gitlab.com/ivantedja) for [this community contribution](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/150209)!
 
 ### Multiple external participants for Service Desk
+
+<!-- categories: Service Desk -->
 
 {{< details >}}
 
@@ -363,6 +403,8 @@ is available to make it easy for external participants to opt out of a conversat
 
 ### Indicate that items were imported using direct transfer
 
+<!-- categories: Importers -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -386,6 +428,8 @@ Until now, imported items were not easily identifiable. With this release, we’
 
 ### 1Password secrets integration in GitLab Duo Plugin for JetBrains IDEs
 
+<!-- categories: Editor Extensions -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -400,6 +444,8 @@ Developers can replace their personal access tokens in their JetBrains IDE setti
 
 ### Access GitLab Duo Chat faster with customizable shortcuts
 
+<!-- categories: Editor Extensions, Duo Chat -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -413,6 +459,8 @@ Opening Duo Chat directly from your editor in JetBrains is now even easier.
 Use the default Alt+D keyboard shortcut (or set your own) to open Duo Chat quickly and type your question. Use the same keyboard shortcut to close the window.
 
 ### Project comment templates
+
+<!-- categories: Code Review Workflow, Team Planning -->
 
 {{< details >}}
 
@@ -432,6 +480,8 @@ We’re really excited about this iteration of comment templates and if you have
 
 ### Commit signing for GitLab UI commits
 
+<!-- categories: Source Code Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -442,6 +492,8 @@ We’re really excited about this iteration of comment templates and if you have
 Previously, web commits and automated commits made by GitLab could not be signed. Now you can configure your self-managed instance with a signing key, a committer name, and email address to sign web and automated commits.
 
 ### Increase Kubernetes agent authorization limit
+
+<!-- categories: Continuous Delivery -->
 
 {{< details >}}
 
@@ -457,6 +509,8 @@ If you need to run multiple agents in a cluster, we would like to hear your feed
 
 ### Support for GitLab agent for Kubernetes in FIPS mode
 
+<!-- categories: Continuous Delivery -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -467,6 +521,8 @@ If you need to run multiple agents in a cluster, we would like to hear your feed
 From GitLab 17.0, you can install GitLab in FIPS mode with the agent for Kubernetes components enabled. Now, FIPS-compliant users can benefit from all the [Kubernetes integrations with GitLab](../../user/clusters/agent/_index.md).
 
 ### Track fast-forward merge requests in deployments
+
+<!-- categories: Continuous Delivery -->
 
 {{< details >}}
 
@@ -479,6 +535,8 @@ From GitLab 17.0, you can install GitLab in FIPS mode with the agent for Kuberne
 In past releases, merge requests were tracked in a deployment only if the project’s merge method was **Merge commit** or **Merge commit with semi-linear history**. From GitLab 17.0, merge requests are tracked in deployments, including in projects with the merge method **Fast-forward merge**.
 
 ### Identify sessions initiated by Admin Mode
+
+<!-- categories: User Management -->
 
 {{< details >}}
 
@@ -493,6 +551,8 @@ Thank you [Roger Meier](https://gitlab.com/bufferoverflow) for your contribution
 
 ### Customize avatars for users
 
+<!-- categories: User Management -->
+
 {{< details >}}
 
 - Tier: Free, Silver, Gold
@@ -506,6 +566,8 @@ Thank you [Phawin](https://gitlab.com/lifez) for your contribution!
 
 ### Edit a custom role and its permissions
 
+<!-- categories: Permissions -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -517,6 +579,8 @@ Thank you [Phawin](https://gitlab.com/lifez) for your contribution!
 Previously, you could not edit an existing custom role and its permissions. Now, you can edit a custom role and its permissions without having to re-create the role to make a change.
 
 ### New permissions for custom roles
+
+<!-- categories: Permissions -->
 
 {{< details >}}
 
@@ -537,6 +601,8 @@ With the release of these custom permissions, you can reduce the number of Owner
 
 ### Manage custom roles at self-managed instance level
 
+<!-- categories: Permissions -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -551,6 +617,8 @@ For more information on migrating existing custom roles, API endpoints, and work
 This update does not impact custom role workflows on GitLab.com.
 
 ### UX improvements to custom roles
+
+<!-- categories: Permissions -->
 
 {{< details >}}
 
@@ -569,6 +637,8 @@ A series of improvements have been made to the user experience for custom roles,
 
 ### Improved branch protection settings for administrators and for groups
 
+<!-- categories: Compliance Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -584,6 +654,8 @@ This allows more flexibility in protecting your default branch and simplifies th
 
 ### Optional configuration for policy bot comment
 
+<!-- categories: Security Policy Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -595,6 +667,8 @@ This allows more flexibility in protecting your default branch and simplifies th
 The security policy bot posts a comment on merge requests when they violate a policy to help users understand when policies are enforced on their project, when evaluation is completed, and if there are any violations blocking an MR, with guidance to resolve them. These comments are now optional and can be enabled or disabled within each policy. This gives organizations the flexibility and control to determine how they want to communicate about these policies to their users.
 
 ### Updated filtering on the Vulnerability Report
+
+<!-- categories: Vulnerability Management -->
 
 {{< details >}}
 
@@ -612,6 +686,8 @@ like this proposed [filter by identifier](https://gitlab.com/groups/gitlab-org/-
 
 ### Toggle merge request approval policies to fail open or fail closed
 
+<!-- categories: Security Policy Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -626,6 +702,8 @@ When a merge request approval policy is configured to fail open, MRs will now on
 
 ### Automatic deletion of unverified secondary email addresses
 
+<!-- categories: User Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -637,6 +715,8 @@ When a merge request approval policy is configured to fail open, MRs will now on
 If you add a secondary email address to your user profile and do not verify it, that email address is now automatically deleted after three days. Previously, these email addresses were in a reserved state and could not be released without manual intervention. This automatic deletion reduces administrator overhead and prevents users from reserving email addresses that they do not have ownership of.
 
 ### Filter package registry UI for packages with errors
+
+<!-- categories: Package Registry -->
 
 {{< details >}}
 
@@ -650,6 +730,8 @@ You can use the GitLab package registry to publish and download packages. Someti
 Now you can filter the package registry UI for packages that failed to upload. This improvement makes it easier to investigate and resolve any issues you encounter.
 
 ### New median time to merge metric in Value Streams Dashboard
+
+<!-- categories: Value Stream Management -->
 
 {{< details >}}
 
@@ -665,6 +747,8 @@ By analyzing how this metric evolves in the [context of other SDLC metrics](http
 
 ### Design Management features extended to Product teams
 
+<!-- categories: Design Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -676,6 +760,8 @@ By analyzing how this metric evolves in the [context of other SDLC metrics](http
 GitLab is expanding collaboration by updating our permissions. Now, users with the Reporter role can access Design Management features, enabling product teams to engage more directly in the design process. This change simplifies workflows and accelerates innovation by inviting broader participation from across your organization.
 
 ### Enhanced epic deletion protection
+
+<!-- categories: Portfolio Management -->
 
 {{< details >}}
 
@@ -691,6 +777,8 @@ Now, when you delete a parent epic, instead of deleting all its child records au
 
 ### Sort the Roadmap by created date, last updated date, and title
 
+<!-- categories: Portfolio Management -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -702,6 +790,8 @@ Now, when you delete a parent epic, instead of deleting all its child records au
 We expanded the epic sorting options available in the Roadmap view, providing you more flexibility in organizing and prioritizing your projects. You can now sort epics by **created date**, **last updated date**, and **title**. This enhancement lays the groundwork for even more advanced sorting capabilities in the future to help you manage epics more dynamically.
 
 ### Simplified configuration file schema for Value Streams Dashboard
+
+<!-- categories: Value Stream Management -->
 
 {{< details >}}
 
@@ -717,6 +807,8 @@ Using this customization, decision-makers can focus on the most relevant informa
 
 ### Guests in groups can link issues
 
+<!-- categories: Portfolio Management -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -729,6 +821,8 @@ We reduced the minimum role required to relate issues and tasks from Reporter to
 
 ### Milestones and iterations visible on issue boards
 
+<!-- categories: Team Planning -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -740,6 +834,8 @@ We reduced the minimum role required to relate issues and tasks from Reporter to
 We’ve improved issue boards to offer you clearer insights into your project’s timeline and phases. Now, with milestone and iteration details directly visible on issue cards, you can easily track progress and adjust your team’s workload on the fly. This enhancement is designed to make your planning and execution more efficient, keeping you in the loop and ahead of schedule.
 
 ### API Security Testing analyzer updates
+
+<!-- categories: API Security -->
 
 {{< details >}}
 
@@ -760,6 +856,8 @@ As [previously announced](../../update/deprecations.md#secure-analyzers-major-ve
 
 ### Dependency Scanning support for Android
 
+<!-- categories: Software Composition Analysis -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -771,6 +869,8 @@ As [previously announced](../../update/deprecations.md#secure-analyzers-major-ve
 Users of Dependency Scanning can now scan Android projects. To configure Android scanning, use the [CI/CD Catalog component](https://gitlab.com/explore/catalog/components/android-dependency-scanning). Android scanning is also supported for users of the [CI/CD template](../../user/application_security/dependency_scanning/legacy_dependency_scanning/_index.md#edit-the-gitlab-ciyml-file-manually).
 
 ### Dependency Scanning default Python image
+
+<!-- categories: Software Composition Analysis -->
 
 {{< details >}}
 
@@ -786,6 +886,8 @@ As outlined in the [deprecation notice](../../update/deprecations.md#deprecate-p
 
 ### DAST now supports both arm64 and amd64 architectures by default
 
+<!-- categories: DAST -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -797,6 +899,8 @@ As outlined in the [deprecation notice](../../update/deprecations.md#deprecate-p
 DAST 5 supports both arm64 and amd64 architectures by default. This enables customers to choose the Runner host architecture and optimize cost savings.
 
 ### Streamlined SAST analyzer coverage for more languages
+
+<!-- categories: SAST -->
 
 {{< details >}}
 
@@ -821,6 +925,8 @@ As [announced](../../update/deprecations.md#sast-analyzer-coverage-changing-in-g
 
 ### Secret Detection now supports remote rulesets when overriding or disabling rules
 
+<!-- categories: Secret Detection -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -832,6 +938,8 @@ As [announced](../../update/deprecations.md#sast-analyzer-coverage-changing-in-g
 We resolved a Secret Detection bug that impacted remote rulesets. It’s now possible to override or disable rules via remote rulesets. Remote rulesets offer a scalable way to configure rules in a single place, which can be applied across multiple projects.
 
 ### Introducing advanced vulnerability tracking for Secret Detection
+
+<!-- categories: Secret Detection -->
 
 {{< details >}}
 
@@ -850,6 +958,8 @@ Otherwise, the existing workflow (merge request widget, pipeline report, and vul
 
 ### Semantic version ranges for published CI/CD components
 
+<!-- categories: Pipeline Composition -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -863,6 +973,8 @@ With this release, you can opt to use the latest major or minor version of a CI/
 
 ### Standardized CI/CD Catalog component publishing process
 
+<!-- categories: Pipeline Composition -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -873,6 +985,8 @@ With this release, you can opt to use the latest major or minor version of a CI/
 We have been hard at work on CI/CD components, including making the process of releasing components to the CI/CD Catalog a consistent experience. As part of that work, we’ve made releasing versions from a CI/CD job with the [`release` keyword](../../ci/yaml/_index.md#release) and the `release-cli` image the only method. All improvements to the release process will apply to this method only. To avoid breaking changes introduced by this restriction, make sure you always use the latest version of the image (`release-cli:latest`) or at least a version greater than `v0.17`. The [**Releases** option in the UI](../../user/project/releases/_index.md#create-a-release-in-the-releases-page) is now disabled for CI/CD component projects.
 
 ### Always run `after_script` commands for canceled jobs
+
+<!-- categories: Continuous Integration (CI) -->
 
 {{< details >}}
 
@@ -887,6 +1001,8 @@ The [`after_script`](../../ci/yaml/_index.md#after_script) CI/CD keyword is used
 As of GitLab 17.0, `after_script` commands will always run when a job is canceled. To opt out, see the [documentation](../../ci/yaml/script.md#skip-after_script-commands-if-a-job-is-canceled).
 
 ### GitLab Runner 17.0
+
+<!-- categories: GitLab Runner Core -->
 
 {{< details >}}
 

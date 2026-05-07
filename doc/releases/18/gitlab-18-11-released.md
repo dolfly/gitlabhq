@@ -23,6 +23,8 @@ Nominated by [Arianna Haradon](https://gitlab.com/aharadon), Senior Fullstack En
 
 ### Vulnerability resolution generally available on GitLab Duo Agent Platform
 
+<!-- categories: Vulnerability Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -44,6 +46,8 @@ We welcome your feedback in [issue 585626](https://gitlab.com/gitlab-org/gitlab/
 
 ### GitLab Data Analyst Foundational Agent now generally available
 
+<!-- categories: Custom Dashboards Foundation -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -59,6 +63,8 @@ Backed by the [GitLab Query Language (GLQL)](../../user/glql/_index.md), the Dat
 These insights can be visualized directly in the agent output and embedded directly into issues and epics for further evaluation.
 
 ### CI Expert Agent launches in beta
+
+<!-- categories: Pipeline Composition -->
 
 {{< details >}}
 
@@ -76,6 +82,8 @@ This turns pipeline creation into a conversational, context-aware experience, wh
 
 ### Automated vulnerability severity overrides
 
+<!-- categories: Security Policy Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -92,6 +100,8 @@ This reduces triage work and ensures developers focus on the findings that matte
 
 ### Create Service Account in subgroups and projects
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -103,6 +113,8 @@ This reduces triage work and ensures developers focus on the findings that matte
 Teams can now create service accounts in subgroups and projects. Instead of broad, top-level group bots, you can attach a dedicated service account to a single subgroup or project and manage its access like any other member of that namespace. Group and subgroup service accounts can be invited to the group where they were created or to any descendant subgroups and projects. Project service accounts are limited to their own project.
 
 ### Service Accounts available on GitLab Free
+
+<!-- categories: System Access -->
 
 {{< details >}}
 
@@ -120,6 +132,8 @@ changes. On GitLab Free, you can create up to 100 service accounts per top-level
 created in subgroups or projects.
 
 ### Fine-grained permissions for personal access tokens now available (Beta)
+
+<!-- categories: Permissions -->
 
 {{< details >}}
 
@@ -139,6 +153,8 @@ To share feedback, see [epic 18555](https://gitlab.com/groups/gitlab-org/-/epics
 
 ### Top CWE chart in security dashboards
 
+<!-- categories: Vulnerability Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -151,6 +167,8 @@ The top CWE chart is now available on the new security dashboards. Identify the 
 
 ### Deploy Gitaly on Kubernetes
 
+<!-- categories: Gitaly -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -162,6 +180,8 @@ The top CWE chart is now available on the new security dashboards. Identify the 
 You can now deploy Gitaly on Kubernetes as a fully supported deployment method. This gives you greater flexibility in managing your GitLab infrastructure by using Kubernetes orchestration capabilities for scaling, high availability, and resource management. Previously, Kubernetes deployments required custom configurations and weren’t officially supported, making it difficult to maintain reliable Gitaly deployments in containerized environments.
 
 ### Reconfigure inputs when manually running MR pipelines
+
+<!-- categories: Pipeline Composition -->
 
 {{< details >}}
 
@@ -180,6 +200,8 @@ After you configure inputs for MR pipelines, you can optionally modify those inp
 
 ### Default model for GitLab Duo Agentic Chat updated from Haiku 4.5 to Sonnet 4.6
 
+<!-- categories: Duo Agent Platform -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -194,6 +216,8 @@ You can select an alternative model, including Haiku, using the [model selection
 
 ### Configure tools in custom flow definitions
 
+<!-- categories: Duo Agent Platform -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -205,6 +229,8 @@ You can select an alternative model, including Haiku, using the [model selection
 You can now configure tool options and parameter values directly in your custom flow definitions to supersede the LLM default values. This gives you more precise, consistent control over how tools behave within a custom flow, making it easier to enforce guardrails and specific parameter values across that flow.
 
 ### Mistral AI now supported as a self-hosted model in GitLab Duo Agent Platform
+
+<!-- categories: Self-Hosted Models -->
 
 {{< details >}}
 
@@ -220,6 +246,8 @@ GitLab Duo Agent Platform now supports Mistral AI as an LLM platform for self-ho
 
 ### View historical months in GitLab Credits dashboard
 
+<!-- categories: Consumables Cost Management -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -231,6 +259,8 @@ GitLab Duo Agent Platform now supports Mistral AI as an LLM platform for self-ho
 The GitLab Credits dashboard in Customers Portal now supports historical month navigation. Billing managers can browse past billing months to review daily usage trends, compare consumption patterns across periods, and reconcile usage with invoices. Previously, the dashboard only displayed the current billing month. With this improvement, administrators can make more informed decisions about credit allocation and forecast future needs based on historical data.
 
 ### Set subscription-level usage cap for GitLab Credits
+
+<!-- categories: Consumables Cost Management -->
 
 {{< details >}}
 
@@ -244,6 +274,8 @@ Administrators can now set a monthly usage cap for On-Demand Credits at the subs
 
 ### Set per-user GitLab Credits cap
 
+<!-- categories: Consumables Cost Management -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -255,6 +287,8 @@ Administrators can now set a monthly usage cap for On-Demand Credits at the subs
 Administrators can now set an optional per-user usage cap for GitLab Credits per billing period. When an individual user’s total credit consumption reaches the configured limit, GitLab Duo Agent Platform access is suspended only for that user, while other users continue unaffected. This prevents any single user from consuming a disproportionate share of the organization’s credit pool, and gives administrators fine-grained control over usage distribution. Per-user usage caps work alongside subscription-level usage caps, by applying the cap that is reached first.
 
 ### Linux package improvements
+
+<!-- categories: Omnibus Package -->
 
 {{< details >}}
 
@@ -270,6 +304,8 @@ If you use [PostgreSQL Cluster](../../administration/postgresql/replication_and_
 
 ### Backup and Restore Support for Container Registry Metadata Database
 
+<!-- categories: Backup/Restore of GitLab instances -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -284,6 +320,8 @@ You can now back up references to blobs, manifests, tags, and other data stored 
 enabling recovery in the event of malicious or accidental data corruption.
 
 ### New navigation experience for groups in Explore
+
+<!-- categories: Groups & Projects -->
 
 {{< details >}}
 
@@ -303,6 +341,8 @@ These changes streamline group discovery and provide clearer visibility into whi
 
 ### Asynchronous transfer of projects
 
+<!-- categories: Groups & Projects -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -317,6 +357,8 @@ In previous versions of GitLab, transfers of large groups and projects could tim
 
 ### ClickHouse is generally available for Self-Managed deployments
 
+<!-- categories: DevOps Reports -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -330,6 +372,8 @@ For GitLab Self-Managed instances, we now have improved recommendations and conf
 This scalable, high-performance database is part of the larger architectural improvements planned for the GitLab analytics infrastructure.
 
 ### Enhanced GitLab Duo Agent Platform analytics on Duo and SDLC trends dashboard
+
+<!-- categories: DevOps Reports -->
 
 {{< details >}}
 
@@ -346,6 +390,8 @@ Additionally, metrics previously displayed as a % usage compared to seat assignm
 This change resolves the [issue](https://gitlab.com/gitlab-org/gitlab/-/work_items/590326) where counts were missing Agent Platform usage controlled under the new usage billing model.
 
 ### GLQL now has access to projects, pipelines, and jobs data sources
+
+<!-- categories: Custom Dashboards Foundation -->
 
 {{< details >}}
 
@@ -365,6 +411,8 @@ as well as provide an accurate overview of projects in a namespace.
 
 ### Dependency resolution for Maven and Python SBOM scanning
 
+<!-- categories: Software Composition Analysis -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -380,6 +428,8 @@ This improvement makes it easier for Maven and Python projects to enable depende
 
 ### Incremental scanning for Advanced SAST
 
+<!-- categories: SAST -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -393,6 +443,8 @@ You can now perform incremental scans that analyze only changed parts of the cod
 By scanning just the code that has changed rather than the entire codebase, your teams can integrate security testing more seamlessly into their development workflow without sacrificing speed or adding friction.
 
 ### Unverified vulnerabilities (Beta)
+
+<!-- categories: SAST -->
 
 {{< details >}}
 
@@ -408,6 +460,8 @@ This feature is in beta status. Provide feedback in [issue 596512](https://gitla
 
 ### Kubernetes 1.35 support
 
+<!-- categories: Deployment Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -421,6 +475,8 @@ and access all features, upgrade your connected clusters to the most recent vers
 For more information, see [supported Kubernetes versions for GitLab features](../../user/clusters/agent/_index.md#supported-kubernetes-versions-for-gitlab-features).
 
 ### Prefer mode for the container registry metadata database
+
+<!-- categories: Container Registry -->
 
 {{< details >}}
 
@@ -437,6 +493,8 @@ If your registry has existing filesystem metadata that has not been imported to 
 In a later release, `prefer` mode will become the default for new Linux package installations. Existing installations will not be affected. For more information, see [issue 595480](https://gitlab.com/gitlab-org/gitlab/-/work_items/595480).
 
 ### Package protection rules now support Terraform modules
+
+<!-- categories: Package Registry -->
 
 {{< details >}}
 
@@ -456,6 +514,8 @@ access based on minimum role. Support is available in the UI package type dropdo
 REST API, the GraphQL API, and the GitLab Terraform provider resource.
 
 ### Release evidence now includes packages
+
+<!-- categories: Package Registry, Release Evidence -->
 
 {{< details >}}
 
@@ -477,6 +537,8 @@ packages together in one complete release snapshot.
 
 ### Wiki sidebar toggle repositioned for easier access
 
+<!-- categories: Wiki -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -493,6 +555,8 @@ control so you can reopen it without scrolling back to the top of the page.
 
 ### Sticky action bar on wiki pages
 
+<!-- categories: Wiki -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -508,6 +572,8 @@ and key actions, including Edit, New page, Templates, Page history, and more,
 stay within reach no matter how far down the page you are.
 
 ### Epic weights
+
+<!-- categories: Portfolio Management -->
 
 {{< details >}}
 
@@ -531,6 +597,8 @@ from child issues, giving you the insight needed to refine estimates over time.
 
 ### Block merge requests with high exploitability risk
 
+<!-- categories: Security Policy Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -547,6 +615,8 @@ This gives security teams precise control over which findings block or warn, red
 
 ### Assign CVSS 4.0 scores to vulnerabilities
 
+<!-- categories: Vulnerability Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -558,6 +628,8 @@ This gives security teams precise control over which findings block or warn, red
 CVSS 4.0 is the latest version of the industry standard used to assess and rate the severity of a vulnerability. You can now view and access CVSS 4.0 score in the UI, including the vulnerability details page and the vulnerability report. You can also query the score using the API.
 
 ### Improved row interaction in the vulnerability report
+
+<!-- categories: Vulnerability Management -->
 
 {{< details >}}
 
@@ -575,6 +647,8 @@ These changes make the vulnerability report more intuitive and accessible.
 
 ### Export a security dashboard as a PDF
 
+<!-- categories: Vulnerability Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -586,6 +660,8 @@ These changes make the vulnerability report more intuitive and accessible.
 You can export the security dashboard as a PDF for use in reports and presentations. The export captures the current state of all of the charts and panels in the dashboard, including any active filters.
 
 ### SAST scanning in security configuration profiles
+
+<!-- categories: Security Testing Configuration -->
 
 {{< details >}}
 
@@ -603,6 +679,8 @@ The profile activates two scan triggers:
 - **Branch Pipelines (default only)**: Runs automatically when changes are merged or pushed to the default branch, providing a complete view of your default branch’s SAST posture.
 
 ### Security attribute filters in group security dashboards
+
+<!-- categories: Vulnerability Management -->
 
 {{< details >}}
 
@@ -623,6 +701,8 @@ The available security attributes include the following:
 - Location
 
 ### Security Manager role (Beta)
+
+<!-- categories: Permissions -->
 
 {{< details >}}
 
@@ -647,6 +727,8 @@ To get started, go to a group and select **Manage** > **Members** to invite and 
 
 ### Identifier list popover in the vulnerability report
 
+<!-- categories: Vulnerability Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -660,6 +742,8 @@ a `"+N more"` popover lists all of the identifiers. Each identifier in the list 
 (for example, in the CVE, CWE, or WASC databases) so you can quickly access more details without leaving the report.
 
 ### GitLab Runner 18.11
+
+<!-- categories: GitLab Runner Core -->
 
 {{< details >}}
 

@@ -80,6 +80,11 @@ const jestConfig = {
         ignore: ['^test_fixtures/', 'tmp/tests/graphql/gitlab_schema.graphql'],
       },
     ],
+    // Catches the FOSS-only `import/no-duplicates` failure described in
+    // gitlab-org/gitlab!230984: in EE, `jest/X` and `ee_else_ce_jest/X`
+    // resolve to different files, but in FOSS the latter falls back to
+    // the former, collapsing both imports onto the same path.
+    'local-rules/no-mixed-jest-aliases': 'error',
   },
 };
 

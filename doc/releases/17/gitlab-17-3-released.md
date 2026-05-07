@@ -43,6 +43,8 @@ Many thanks to Anton and the rest of GitLab’s open source contributors for co-
 
 ### Troubleshoot failed jobs with root cause analysis
 
+<!-- categories: Continuous Integration (CI) -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -55,6 +57,8 @@ Many thanks to Anton and the rest of GitLab’s open source contributors for co-
 Root cause analysis is now generally available. With root cause analysis, you can troubleshoot failed jobs in CI/CD pipelines faster. This AI-powered feature analyzes the failed job log, quickly determines the root cause of the job failure, and suggests a fix for you.
 
 ### Health check for GitLab Duo in beta
+
+<!-- categories: Cloud Connector -->
 
 {{< details >}}
 
@@ -71,6 +75,8 @@ The health check for GitLab Duo is available on Self-managed and GitLab Dedicate
 
 ### Delete a pod from the GitLab UI
 
+<!-- categories: Deployment Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -84,6 +90,8 @@ Have you ever needed to restart or delete a failing pod in Kubernetes? Until now
 You can stop a pod from a [dashboard for Kubernetes](../../ci/environments/kubernetes_dashboard.md), which lists all the pods across your cluster or namespace.
 
 ### Easily connect to a cluster from your local terminal
+
+<!-- categories: Deployment Management -->
 
 {{< details >}}
 
@@ -101,6 +109,8 @@ To retrieve the connection command, either go to a [Kubernetes dashboard](../../
 
 ### Resolve a vulnerability with AI
 
+<!-- categories: Vulnerability Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -113,6 +123,8 @@ To retrieve the connection command, either go to a [Kubernetes dashboard](../../
 Vulnerability resolution uses AI to give specific code suggestions for users to fix vulnerabilities. With the click of a button you can open a merge request to get started resolving any SAST vulnerability from the [list of supported CWE identifiers](../../user/application_security/vulnerabilities/_index.md#supported-vulnerabilities-for-vulnerability-resolution).
 
 ### Add multiple compliance frameworks to a single project
+
+<!-- categories: Compliance Management -->
 
 {{< details >}}
 
@@ -131,6 +143,8 @@ This will allow users to apply multiple different compliance frameworks onto a s
 With this release, you can apply multiple compliance frameworks to a project. The project is then set with the compliance requirements of each framework.
 
 ### AI Impact analytics: Code Suggestions acceptance rate and GitLab Duo seats usage
+
+<!-- categories: Value Stream Management, Code Suggestions -->
 
 {{< details >}}
 
@@ -153,6 +167,8 @@ With the addition of these new metrics, we have also introduced new overview til
 
 ### Omnibus improvements
 
+<!-- categories: Omnibus Package -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -165,6 +181,8 @@ GitLab 17.3 includes packages for supporting [Raspberry Pi OS 12](https://www.ra
 Debian 10 has reached [EOL on June 30th, 2024](https://www.debian.org/releases/buster/). GitLab will remove support for Debian 10 in GitLab 17.6.
 
 ### Improved sorting and filtering for projects and groups in Your Work
+
+<!-- categories: Groups & Projects -->
 
 {{< details >}}
 
@@ -183,6 +201,8 @@ We welcome feedback about these changes in [#438322](https://gitlab.com/gitlab-o
 
 ### End-to-end instance indexing for advanced search
 
+<!-- categories: Global Search -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -196,6 +216,8 @@ When you enable advanced search in GitLab, you can now select **Index the instan
 **Index the instance** replaces the setting to index all projects, which was limited to the initial indexing only.
 
 ### Toggle inheriting settings for integrations by using the API
+
+<!-- categories: Integrations -->
 
 {{< details >}}
 
@@ -213,6 +235,8 @@ whether or not a project inherits integration settings. If not set, the default 
 
 ### List group or project webhook events with the API
 
+<!-- categories: Webhooks -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -228,6 +252,8 @@ In this release, that data is now exposed in the REST API, which can help you au
 Thanks to [Phawin](https://gitlab.com/lifez) for [this community contribution](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/151048)!
 
 ### Find group settings by using the command palette
+
+<!-- categories: Settings, Global Search -->
 
 {{< details >}}
 
@@ -245,6 +271,8 @@ With 17.3, you can now search for group settings from the command palette as wel
 
 ### Granular control of code suggestions by language in VS Code
 
+<!-- categories: Editor Extensions -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -258,6 +286,8 @@ Get more control over your coding experience in VS Code by enabling or disabling
 
 ### Improved TLS support in JetBrains IDEs
 
+<!-- categories: Editor Extensions -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -269,6 +299,8 @@ Get more control over your coding experience in VS Code by enabling or disabling
 For tighter security in sensitive environments, you can now configure custom HTTP agent options, including client certificates and certificate authorities, directly in your JetBrains IDE settings.
 
 ### More easily remove content from repositories
+
+<!-- categories: Source Code Management -->
 
 {{< details >}}
 
@@ -293,6 +325,8 @@ This new UI streamlines the way you can manage your repositories when content ne
 
 ### Audit event when agent for Kubernetes is created and deleted
 
+<!-- categories: Audit Events -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -313,6 +347,8 @@ These audit events extend the `cluster_agent_token_created` and `cluster_agent_t
 
 ### Kubernetes 1.30 support
 
+<!-- categories: Deployment Management -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -326,6 +362,8 @@ This release adds full support for Kubernetes version 1.30, released in April 20
 You can read more about [our Kubernetes support policy and other supported Kubernetes versions](../../user/clusters/agent/_index.md#supported-kubernetes-versions-for-gitlab-features).
 
 ### Add authentication to merge request external status checks
+
+<!-- categories: Security Policy Management -->
 
 {{< details >}}
 
@@ -347,6 +385,8 @@ In a [future iteration](https://gitlab.com/gitlab-org/gitlab/-/issues/476163), G
 
 ### Filter the member list in a group or project by role
 
+<!-- categories: Permissions -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -359,6 +399,8 @@ Users can now filter the Members page by role. Use the filter to find members wi
 
 ### View role details in the right drawer
 
+<!-- categories: Permissions -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -370,6 +412,8 @@ Users can now filter the Members page by role. Use the filter to find members wi
 Previously, if you wanted to view permissions for the custom roles of a user, you had to have the Owner role in the group. This requirement made it difficult to troubleshoot and understand what actions a user can perform when assigned a custom role. Now, any user can view the permissions of a user assigned a custom role in the Members page.
 
 ### LDAP group link support for custom roles
+
+<!-- categories: Permissions -->
 
 {{< details >}}
 
@@ -385,6 +429,8 @@ In this release, we’re extending that support to [custom roles](../../user/cus
 large group of users.
 
 ### New permission for custom roles
+
+<!-- categories: Permissions -->
 
 {{< details >}}
 
@@ -402,6 +448,8 @@ With custom roles, you can reduce the number of users with the Owner role by cre
 
 ### Disable personal access tokens using Admin UI
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -412,6 +460,8 @@ With custom roles, you can reduce the number of users with the Owner role by cre
 Administrators can now disable or re-enable instance personal access tokens through the Admin UI. Previously, administrators had to use the application settings API or the GitLab Rails console to do this.
 
 ### Bluesky identifier in user profile
+
+<!-- categories: User Profile -->
 
 {{< details >}}
 
@@ -427,6 +477,8 @@ Thank you [Dominique](https://domi.zip/) for your contribution!
 
 ### Subdomain cookies preserved on sign out
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -441,6 +493,8 @@ Thank you [Guilherme C. Souza](https://gitlab.com/GCSBOSS) for your contribution
 
 ### AI Impact analytics with enhanced sparklines trend visualization
 
+<!-- categories: Value Stream Management, Code Suggestions -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -454,6 +508,8 @@ We are excited to announce a significant improvement to our [AI Impact analytics
 
 ### Add merge requests to tasks
 
+<!-- categories: Team Planning -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -465,6 +521,8 @@ We are excited to announce a significant improvement to our [AI Impact analytics
 Tasks are frequently used to break down issues into engineering implementation steps. Before this release, there was no way to connect a merge request to a task it implements. You can now use the same [closing pattern](../../user/project/issues/managing_issues.md#closing-issues-automatically) that you would when referencing issues from a merge request description to connect a merge request to a task. From the task view, connected merge requests are visible from the sidebar. If your project has the [auto-close setting enabled](../../user/project/issues/managing_issues.md#disable-automatic-issue-closing), the task will automatically close when the connected merge request is merged into your default branch.
 
 ### Set parent items for OKRs and tasks
+
+<!-- categories: Portfolio Management -->
 
 {{< details >}}
 
@@ -478,6 +536,8 @@ You can now effortlessly update parent assignments for [OKRs](../../user/okrs.md
 
 ### Report abuse for task, objective and key result items
 
+<!-- categories: Team Planning -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -490,6 +550,8 @@ You can now easily report abuse for work items directly from the **Actions** men
 
 ### Resolve threads in tasks, objectives, and key results
 
+<!-- categories: Team Planning -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -501,6 +563,8 @@ You can now easily report abuse for work items directly from the **Actions** men
 You can now resolve threads in tasks, objectives, and key results, making it easier to manage and track important conversations. Resolved threads are collapsed by default, helping you focus on active discussions and streamline your collaboration workflows.
 
 ### New Value Stream Analytics stage events for Cycle Time Reduction
+
+<!-- categories: Value Stream Management -->
 
 {{< details >}}
 
@@ -515,6 +579,8 @@ With this new event teams can identify where delays occur in the review process,
 
 ### Rust support for Dependency and License Scanning
 
+<!-- categories: Software Composition Analysis -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -528,6 +594,8 @@ Composition Analysis has delivered Rust support for Dependency and License Scann
 To enable Rust scanning for your Project use the `cargo` template from the [Dependency Scanning CI/CD Component](https://gitlab.com/explore/catalog/components/dependency-scanning).
 
 ### Display SBOM ingestion errors in GitLab UI
+
+<!-- categories: Software Composition Analysis -->
 
 {{< details >}}
 
@@ -544,6 +612,8 @@ In GitLab 17.3 these validation messages appear in the GitLab UI on the project-
 Users will be able to view SBOM ingestion errors in the following areas of the GitLab UI: the project level vulnerability report and dependency list pages, the licenses and security tabs of the pipeline page.
 
 ### Enforce the ruleset used in SAST, IaC Scanning, and Secret Detection
+
+<!-- categories: SAST, Secret Detection, Security Policy Management -->
 
 {{< details >}}
 
@@ -564,6 +634,8 @@ If you set the value to `false` when you [enforce scan execution](../../user/app
 
 ### Filter jobs by job name
 
+<!-- categories: Continuous Integration (CI) -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -578,6 +650,8 @@ Previously, you could only filter the list of jobs by status, requiring manual s
 
 ### Merge train visualization
 
+<!-- categories: Merge Trains -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -589,6 +663,8 @@ Previously, you could only filter the list of jobs by status, requiring manual s
 You can now visualize the merge train to gain better insight into the status and order of merge requests in the pipeline. With merge train visualization, you can identify conflicts earlier, take actions on merge requests directly in the merge train, and minimize the risk of breaking the default branch.
 
 ### GitLab Runner 17.3
+
+<!-- categories: GitLab Runner Core -->
 
 {{< details >}}
 
@@ -609,6 +685,8 @@ For a list of all changes, see the GitLab Runner [changelog](https://gitlab.com/
 
 ### Improved performance for hosted runners on macOS
 
+<!-- categories: GitLab Hosted Runners -->
+
 {{< details >}}
 
 - Tier: Silver, Gold
@@ -620,6 +698,8 @@ For a list of all changes, see the GitLab Runner [changelog](https://gitlab.com/
 We have shipped performance improvements with the recent upgrade to macOS 14.5 and Xcode 15.4. With this change, Xcode build jobs are significantly faster compared to previous job executions.
 
 ### Description and type added to CI/CD catalog component input details
+
+<!-- categories: Pipeline Composition -->
 
 {{< details >}}
 

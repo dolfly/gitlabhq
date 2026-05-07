@@ -34,6 +34,8 @@ Congratulations Wesley, and thank you for this valuable contribution to GitLab!
 
 ### GitLab Duo Agent Platform now generally available
 
+<!-- categories: Duo Agent Platform -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -64,6 +66,8 @@ GitLab Self-Managed instances with promotional [GitLab Credits](../../subscripti
 
 ### GitLab Duo Planner Agent now generally available
 
+<!-- categories: Portfolio Management -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -80,6 +84,8 @@ Please provide your feedback in [issue 583008](https://gitlab.com/gitlab-org/git
 
 ### GitLab Duo Security Analyst Agent now generally available
 
+<!-- categories: Vulnerability Management, Dependency Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -95,6 +101,8 @@ The Security Analyst Agent enables engineers to manage vulnerabilities through n
 As a foundational agent, the Security Analyst Agent is available by default in GitLab Duo Agentic Chat, with no manual setup required.
 
 ### Auto-dismiss irrelevant vulnerabilities with vulnerability management policies
+
+<!-- categories: Security Policy Management -->
 
 {{< details >}}
 
@@ -118,6 +126,8 @@ Auto-dismissed vulnerabilities appear in the merge request’s security widget w
 
 ### Turn the GitLab Duo Agent Platform on or off
 
+<!-- categories: Duo Agent Platform -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -130,6 +140,8 @@ You can now turn on or off the GitLab Duo Agent Platform, including GitLab Duo C
 and flows for a top-level group or the entire instance. When this setting is turned off, these features are not available.
 
 ### Group access control for GitLab Duo features
+
+<!-- categories: Duo Agent Platform -->
 
 {{< details >}}
 
@@ -144,6 +156,8 @@ You can now define group access rules to control who can use GitLab Duo features
 This feature provides granular governance control so you can scale adoption at your pace while maintaining security and compliance.
 
 ### GitLab Duo Agent Platform for GitLab Duo Self-Hosted (offline licensing) now generally available
+
+<!-- categories: Self-Hosted Models -->
 
 {{< details >}}
 
@@ -162,6 +176,8 @@ Self-Managed administrators can configure [compatible models](../../administrati
 
 ### C/C++ support in Advanced SAST now generally available
 
+<!-- categories: SAST -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -173,6 +189,8 @@ Self-Managed administrators can configure [compatible models](../../administrati
 Cross-file, cross-function scanning support for C/C++ is now generally available in GitLab Advanced SAST.
 
 ### Multiple Container Scanning
+
+<!-- categories: Container Scanning -->
 
 {{< details >}}
 
@@ -187,6 +205,8 @@ In GitLab 18.8, we released multi-container scanning in Beta.
 Users are now able to pass in an array of images to be scanned as part of many Container Scanning jobs.
 
 ### Centralized credential management API for group owners
+
+<!-- categories: System Access -->
 
 {{< details >}}
 
@@ -215,6 +235,8 @@ This API complements the existing Credentials Inventory UI, allowing enterprise 
 
 ### Group Owners can disable SSH keys for enterprise users
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Silver, Gold
@@ -228,6 +250,8 @@ Group Owners can now disable SSH keys for all enterprise users in their group. W
 Thank you to [Wesley Yarde](https://gitlab.com/WYarde) for helping build this feature!
 
 ### GitLab Runner 18.8
+
+<!-- categories: GitLab Runner Core -->
 
 {{< details >}}
 

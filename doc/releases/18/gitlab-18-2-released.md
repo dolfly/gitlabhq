@@ -29,6 +29,8 @@ Thanks to Markus for your valuable contributions to GitLab!
 
 ### Duo Agent Platform in the IDE (Beta)
 
+<!-- categories: Editor Extensions -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -53,6 +55,8 @@ To get started, see the [Duo Agent Platform documentation](../../user/duo_agent_
 and [JetBrains setup guide](../../user/gitlab_duo_chat/agentic_chat.md#use-gitlab-duo-chat-in-jetbrains-ides).
 
 ### Custom workflow statuses for issues and tasks
+
+<!-- categories: Team Planning -->
 
 {{< details >}}
 
@@ -84,6 +88,8 @@ Help us improve this feature by sharing your thoughts and suggestions in our
 
 ### New merge request homepage
 
+<!-- categories: Code Review Workflow -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -108,6 +114,8 @@ The new homepage also expands your visibility by combining both authored and ass
 ensuring you never miss work that’s been delegated to you.
 
 ### Improve security with immutable container tags (Beta)
+
+<!-- categories: Container Registry -->
 
 {{< details >}}
 
@@ -137,6 +145,8 @@ to use immutable container tags.
 
 ### Group and project controls for Premium and Ultimate with GitLab Duo
 
+<!-- categories: Code Suggestions, Duo Chat -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -148,6 +158,8 @@ to use immutable container tags.
 GitLab Premium and Ultimate users can now change the availability of Code Suggestions and GitLab Duo Chat in the IDE for groups and projects. Previously, you could change the availability for the instance or top-level group only.
 
 ### New group overview compliance dashboard
+
+<!-- categories: Compliance Management -->
 
 {{< details >}}
 
@@ -173,6 +185,8 @@ provides them with a clear high-level picture, of their compliance posture.
 
 ### Map workspace Kubernetes agents for the instance
 
+<!-- categories: Workspaces -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -187,6 +201,8 @@ This significantly increases workspace scalability by allowing organizations to 
 
 ### Download a PDF export of security reports
 
+<!-- categories: Vulnerability Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -199,6 +215,8 @@ To communicate the state and progress of your vulnerability management efforts t
 you can now export the security dashboard for each project or group as a PDF document.
 
 ### Centralized Security Policy Management (Beta)
+
+<!-- categories: Security Policy Management -->
 
 {{< details >}}
 
@@ -226,6 +244,8 @@ with support for all existing security policy types, configurable for groups, pr
 
 ### Mistral Small now available for GitLab Duo Self-Hosted
 
+<!-- categories: Self-Hosted Models -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -240,6 +260,8 @@ and is the first fully compatible open source model for GitLab Duo Chat and Code
 ## Scale and Deployments
 
 ### Administrators can reassign contributions without user confirmation
+
+<!-- categories: Importers -->
 
 {{< details >}}
 
@@ -256,6 +278,8 @@ On GitLab instances where user impersonation is enabled, administrators can main
 Users still receive notification emails after the reassignment is complete, ensuring transparency throughout the process.
 
 ### Reassign from placeholder users to inactive users
+
+<!-- categories: Importers -->
 
 {{< details >}}
 
@@ -277,6 +301,8 @@ skipping user confirmation during reassignment while maintaining secure access c
 
 ### Container Scanning support for multi-architecture container images
 
+<!-- categories: Software Composition Analysis -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -292,6 +318,8 @@ setting the `TRIVY_PLATFORM` environment variable to the platform you want to sc
 
 ### Improved archive file support for Container Scanning
 
+<!-- categories: Software Composition Analysis -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -304,6 +332,8 @@ GitLab 18.2 brings improved archive file scanning support to Container Scanning.
 If a vulnerability in a particular package is found in multiple images, you now see a vulnerability attributed to each scanned image.
 
 ### Static reachability support for JavaScript
+
+<!-- categories: Software Composition Analysis -->
 
 {{< details >}}
 
@@ -320,6 +350,8 @@ to provide a more focused view of your vulnerabilities.
 
 ### Improved support for verifying successful DAST login
 
+<!-- categories: DAST -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -333,6 +365,8 @@ Previously, the `DAST_AUTH_SUCCESS_IF_AT_URL` variable required an exact URL mat
 Now, you can use wildcard patterns in the `DAST_AUTH_SUCCESS_IF_AT_URL` variable to match dynamic URL patterns. This enhancement provides the flexibility needed to verify authentication success even when the exact URL changes between sessions.
 
 ### DAST support for time-based one-time password MFA
+
+<!-- categories: DAST -->
 
 {{< details >}}
 
@@ -349,6 +383,8 @@ This enhancement delivers more accurate scan results by testing applications in 
 production environments where MFA is deployed.
 
 ### Deactivate streaming to an audit streaming destination
+
+<!-- categories: Audit Events -->
 
 {{< details >}}
 
@@ -367,6 +403,8 @@ is inactive, audit events are no longer streamed to the chosen destination. When
 again streamed to the chosen destination.
 
 ### Filter functionality for all audit streaming destinations
+
+<!-- categories: Compliance Management -->
 
 {{< details >}}
 
@@ -387,6 +425,8 @@ This change also means that audit event destinations such as AWS and GCP can now
 
 ### Configure epic display preferences
 
+<!-- categories: Portfolio Management -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -404,6 +444,8 @@ like assignees, labels, dates, and milestones.
 
 ### Open epics in a drawer or the full page on the Epics page
 
+<!-- categories: Portfolio Management -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -420,6 +462,8 @@ or open the full page when you need more screen space for detailed editing and c
 
 ### Assign [milestones](../../user/project/milestones/_index.md) to epics for enhanced long-term planning
 
+<!-- categories: Portfolio Management -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -434,6 +478,8 @@ With this clear hierarchy in place, you can reduce administrative overhead and g
 
 ### Assign epics to team members
 
+<!-- categories: Portfolio Management -->
+
 {{< details >}}
 
 - Tier: Premium, Ultimate
@@ -445,6 +491,8 @@ With this clear hierarchy in place, you can reduce administrative overhead and g
 You can now assign epics to individuals, making it clear who is responsible for overseeing strategic initiatives. Epic assignees help you identify ownership at the portfolio level, enabling faster decision-making and clearer accountability for long-term objectives. Teams can quickly see who to contact about epic progress, dependencies, or scope changes.
 
 ### Sorting and pagination for GLQL views
+
+<!-- categories: Wiki, Team Planning -->
 
 {{< details >}}
 
@@ -462,6 +510,8 @@ These improvements help teams efficiently navigate complex project data and focu
 
 ### Work item references and editor improvements for GitLab Flavored Markdown
 
+<!-- categories: Markdown -->
+
 {{< details >}}
 
 - Tier: Free, Premium, Ultimate
@@ -476,6 +526,8 @@ The plain text editor also includes a new [preference to maintain cursor indenta
 
 ### Vulnerability ID added to vulnerability report CSV export
 
+<!-- categories: Vulnerability Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -488,6 +540,8 @@ Previously, the CSV export of the vulnerability report did not include vulnerabi
 You can now find the ID of each vulnerability listed in the CSV export.
 
 ### Reachability filter in the vulnerability report
+
+<!-- categories: Vulnerability Management -->
 
 {{< details >}}
 
@@ -505,6 +559,8 @@ Reachable vulnerabilities represent vulnerabilities that are both:
 
 ### Vulnerability GraphQL API returns additional information
 
+<!-- categories: Vulnerability Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -520,6 +576,8 @@ introduced and when it was last detected. The Vulnerability GraphQL API now incl
 - `latestDetectedPipeline`: Use to retrieve additional commit information about when the vulnerability was removed, such as the commit SHA.
 
 ### Source branch pattern exceptions for approval policies
+
+<!-- categories: Security Policy Management -->
 
 {{< details >}}
 
@@ -546,6 +604,8 @@ approval policies for standard development workflows.
 
 ### Display dependency paths
 
+<!-- categories: Dependency Management -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -560,6 +620,8 @@ You can now determine whether a library is primarily or transitively imported us
 
 ### Credentials inventory now includes service account tokens
 
+<!-- categories: System Access -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -571,6 +633,8 @@ You can now determine whether a library is primarily or transitively imported us
 GitLab now supports service account tokens in the credentials inventory, giving you better visibility and control over the various authentication methods used across your software supply chain. The credentials inventory provides a complete picture of credentials used across your organization.
 
 ### Security Inventory for comprehensive asset visibility now in beta
+
+<!-- categories: Security Asset Inventories -->
 
 {{< details >}}
 
@@ -593,6 +657,8 @@ This feature helps bridge the gap between individual project security and organi
 
 ### Custom admin role in beta
 
+<!-- categories: Permissions -->
+
 {{< details >}}
 
 - Tier: Ultimate
@@ -605,6 +671,8 @@ The custom admin role brings granular permissions to the Admin Area for GitLab S
 We’re actively seeking community feedback on this feature. If you have questions, want to share your implementation experience, or would like to engage directly with our team about potential improvements, please visit our [feedback issue](https://gitlab.com/gitlab-org/gitlab/-/issues/509376).
 
 ### Trigger jobs can mirror the downstream pipeline status
+
+<!-- categories: Pipeline Composition -->
 
 {{< details >}}
 
@@ -624,6 +692,8 @@ the exact real-time status of the downstream pipeline. Statuses include intermed
 the current state of their downstream pipeline without breaking the existing workflow.
 
 ### GitLab Runner 18.2
+
+<!-- categories: GitLab Runner Core -->
 
 {{< details >}}
 

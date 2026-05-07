@@ -12,11 +12,28 @@ export const baseUpdateResponse = fixtures.updateWorkItem;
 export const canCreateBranchResponse = fixtures.canCreateBranch;
 export const workItemsFullResponse = fixtures.getWorkItemsFull;
 
+const { id, name } = fixtures.getWorkItemsRest.data.namespace;
+
+const GET_WORK_ITEMS_REST_GQL_MOCK = {
+  data: {
+    namespace: { id, fullPath: 'gitlab-org/gitlab', name, __typename: 'Namespace' },
+  },
+};
+
+export const GET_WORK_ITEMS_REST_ENDPOINT = {
+  name: 'getWorkItemsRest',
+  method: 'get',
+  path: /\/api\/v4\/namespaces\/.*\/-\/work_items/,
+  response: fixtures.restWorkItemsList,
+  headers: { 'x-next-cursor': '', 'x-prev-cursor': '' },
+};
+
 const OPERATION_NAME_OVERRIDES = {
   workItemMetadataEE: fixtures.workItemMetadata,
   EEgetWorkItemStateCounts: fixtures.getWorkItemStateCounts,
   getWorkItemsFullEE: fixtures.getWorkItemsFull,
   getWorkItemsSlimEE: fixtures.getWorkItemsSlim,
+  getWorkItemsRest: GET_WORK_ITEMS_REST_GQL_MOCK,
 };
 
 const FIXTURE_RESPONSES = {
@@ -135,4 +152,5 @@ export function handleWorkItemOperation({ operationName, variables, res, ctx }) 
 
 export const workItemRestEndpoints = [
   { method: 'get', path: /issues\/\d+\/can_create_branch/, response: fixtures.canCreateBranch },
+  GET_WORK_ITEMS_REST_ENDPOINT,
 ];

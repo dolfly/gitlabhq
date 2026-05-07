@@ -31,18 +31,7 @@ module RapidDiffs
       commit = merge_request.project.commit(options[:commit_id])
       next unless commit
 
-      diff_refs = commit.diff_refs
-
-      {
-        id: commit.id,
-        short_id: Commit.truncate_sha(commit.id),
-        commit_url: project_commit_path(merge_request.project, commit),
-        diff_refs: {
-          base_sha: diff_refs.base_sha,
-          start_sha: diff_refs.start_sha,
-          head_sha: diff_refs.head_sha
-        }
-      }
+      ::RapidDiffs::CommitEntity.represent(commit, type: :full, request: merge_request)
     end
 
     private
