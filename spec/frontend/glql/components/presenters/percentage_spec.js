@@ -10,28 +10,15 @@ describe('PercentagePresenter', () => {
     });
   };
 
-  it('formats decimal as percentage', () => {
-    createComponent(0.425);
-    expect(wrapper.text()).toBe('42.5%');
-  });
-
-  it('handles zero correctly', () => {
-    createComponent(0);
-    expect(wrapper.text()).toBe('0%');
-  });
-
-  it('handles one correctly', () => {
-    createComponent(1);
-    expect(wrapper.text()).toBe('100%');
-  });
-
-  it('formats small percentages correctly', () => {
-    createComponent(0.001);
-    expect(wrapper.text()).toBe('0.1%');
-  });
-
-  it('formats high percentages correctly', () => {
-    createComponent(0.9875);
-    expect(wrapper.text()).toBe('98.8%');
+  it.each`
+    data      | expected
+    ${0.425}  | ${'42.5%'}
+    ${0}      | ${'0%'}
+    ${1}      | ${'100%'}
+    ${0.001}  | ${'0.1%'}
+    ${0.9875} | ${'98.8%'}
+  `('formats $data as $expected', ({ data, expected }) => {
+    createComponent(data);
+    expect(wrapper.text()).toBe(expected);
   });
 });

@@ -26564,6 +26564,31 @@ CREATE TABLE packages_rubygems_metadata (
     CONSTRAINT check_f76bad1a9a CHECK ((char_length(require_paths) <= 255))
 );
 
+CREATE TABLE packages_rubygems_spec_files (
+    id bigint NOT NULL,
+    created_at timestamp with time zone NOT NULL,
+    updated_at timestamp with time zone NOT NULL,
+    project_id bigint NOT NULL,
+    size integer NOT NULL,
+    file_store integer DEFAULT 1,
+    status smallint DEFAULT 0 NOT NULL,
+    file_name text NOT NULL,
+    file text NOT NULL,
+    object_storage_key text NOT NULL,
+    CONSTRAINT check_28c391696a CHECK ((char_length(file_name) <= 255)),
+    CONSTRAINT check_a5687c091b CHECK ((char_length(object_storage_key) <= 255)),
+    CONSTRAINT check_f876a932a9 CHECK ((char_length(file) <= 255))
+);
+
+CREATE SEQUENCE packages_rubygems_spec_files_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+ALTER SEQUENCE packages_rubygems_spec_files_id_seq OWNED BY packages_rubygems_spec_files.id;
+
 CREATE TABLE packages_tags (
     id bigint NOT NULL,
     package_id bigint NOT NULL,
@@ -36552,6 +36577,8 @@ ALTER TABLE ONLY packages_protection_rules ALTER COLUMN id SET DEFAULT nextval('
 
 ALTER TABLE ONLY packages_rpm_repository_files ALTER COLUMN id SET DEFAULT nextval('packages_rpm_repository_files_id_seq'::regclass);
 
+ALTER TABLE ONLY packages_rubygems_spec_files ALTER COLUMN id SET DEFAULT nextval('packages_rubygems_spec_files_id_seq'::regclass);
+
 ALTER TABLE ONLY packages_tags ALTER COLUMN id SET DEFAULT nextval('packages_tags_id_seq'::regclass);
 
 ALTER TABLE ONLY pages_deployment_states ALTER COLUMN pages_deployment_id SET DEFAULT nextval('pages_deployment_states_pages_deployment_id_seq'::regclass);
@@ -40508,6 +40535,9 @@ ALTER TABLE ONLY packages_rpm_repository_files
 ALTER TABLE ONLY packages_rubygems_metadata
     ADD CONSTRAINT packages_rubygems_metadata_pkey PRIMARY KEY (package_id);
 
+ALTER TABLE ONLY packages_rubygems_spec_files
+    ADD CONSTRAINT packages_rubygems_spec_files_pkey PRIMARY KEY (id);
+
 ALTER TABLE ONLY packages_tags
     ADD CONSTRAINT packages_tags_pkey PRIMARY KEY (id);
 
@@ -44319,6 +44349,8 @@ CREATE UNIQUE INDEX i_packages_unique_project_id_package_type_package_name_patte
 CREATE UNIQUE INDEX i_packages_unique_project_package_type_target_pattern ON packages_protection_rules USING btree (project_id, package_type, target_field, pattern_type, pattern);
 
 CREATE INDEX i_pkgs_deb_file_meta_on_updated_at_package_file_id_when_unknown ON packages_debian_file_metadata USING btree (updated_at, package_file_id) WHERE (file_type = 1);
+
+CREATE UNIQUE INDEX i_pkgs_rubygems_spec_files_on_obj_stor_key_and_project_id ON packages_rubygems_spec_files USING btree (object_storage_key, project_id);
 
 CREATE UNIQUE INDEX i_pm_licenses_on_spdx_identifier ON pm_licenses USING btree (spdx_identifier);
 
@@ -48587,6 +48619,10 @@ CREATE INDEX index_packages_rpm_metadata_on_project_id ON packages_rpm_metadata 
 CREATE INDEX index_packages_rpm_repository_files_on_project_id_and_file_name ON packages_rpm_repository_files USING btree (project_id, file_name);
 
 CREATE INDEX index_packages_rubygems_metadata_on_project_id ON packages_rubygems_metadata USING btree (project_id);
+
+CREATE UNIQUE INDEX index_packages_rubygems_spec_files_on_project_id_and_file_name ON packages_rubygems_spec_files USING btree (project_id, file_name);
+
+CREATE INDEX index_packages_rubygems_spec_files_on_project_id_and_status ON packages_rubygems_spec_files USING btree (project_id, status);
 
 CREATE INDEX index_packages_tags_on_package_id_and_updated_at ON packages_tags USING btree (package_id, updated_at DESC);
 

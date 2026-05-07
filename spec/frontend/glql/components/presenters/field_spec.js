@@ -51,9 +51,9 @@ const MOCK_LINK = { title: 'title', webUrl: 'url' };
 
 describe('FieldPresenter', () => {
   let wrapper;
-  const createWrapper = (field, fieldKey) => {
+  const createWrapper = (field, fieldKey, additionalProps = {}) => {
     wrapper = mountExtended(FieldPresenter, {
-      propsData: { item: field, fieldKey },
+      propsData: { item: field, fieldKey, ...additionalProps },
     });
   };
 
@@ -172,6 +172,28 @@ describe('FieldPresenter', () => {
 
       expect(wrapper.findComponent(CiStatusPresenter).exists()).toBe(false);
       expect(wrapper.findComponent(TextPresenter).exists()).toBe(true);
+    });
+  });
+
+  describe('variant-scoped field key presenters', () => {
+    const variant = 'compact';
+
+    it('renders UserPresenter for user field key with compact variant', () => {
+      createWrapper({ user: MOCK_USER }, 'user', { variant });
+
+      expect(wrapper.findComponent(UserPresenter).exists()).toBe(true);
+    });
+
+    it('renders UserPresenter for compact variant even when typename would match', () => {
+      createWrapper({ ...MOCK_DIMENSIONS, user: MOCK_USER }, 'user', { variant });
+
+      expect(wrapper.findComponent(UserPresenter).exists()).toBe(true);
+    });
+
+    it('falls through to typename when variant has no match', () => {
+      createWrapper({ __typename: 'Pipeline', status: 'FAILED' }, 'status', { variant });
+
+      expect(wrapper.findComponent(CiStatusPresenter).exists()).toBe(true);
     });
   });
 });

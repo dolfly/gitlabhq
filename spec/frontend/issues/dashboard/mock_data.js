@@ -107,3 +107,21 @@ export const issuesCountsQueryResponse = {
     },
   },
 };
+
+export const typesInOrganizationQueryResponse = {
+  data: {
+    organization: {
+      id: 'gid://gitlab/Organizations::Organization/1',
+      workItemTypes: {
+        nodes: [
+          {
+            id: 'gid://gitlab/WorkItems::Type/1',
+            iconName: 'work-item-issue',
+            isFilterableListView: true,
+            name: 'Issue',
+          },
+        ],
+      },
+    },
+  },
+};

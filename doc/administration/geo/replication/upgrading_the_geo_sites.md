@@ -23,6 +23,7 @@ title: Upgrading the Geo sites
 Upgrading Geo sites involves performing:
 
 1. Version-specific upgrade steps, depending on the version being upgraded to or from:
+   - [GitLab 19 upgrade notes](../../../update/versions/gitlab_19_changes.md)
    - [GitLab 18 upgrade notes](../../../update/versions/gitlab_18_changes.md)
    - [GitLab 17 upgrade notes](../../../update/versions/gitlab_17_changes.md)
    - [GitLab 16 upgrade notes](../../../update/versions/gitlab_16_changes.md)

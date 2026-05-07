@@ -77,7 +77,6 @@ project:
   - read_feature_flag
   - read_merge_request_status_check_url
   - read_on_demand_dast_scan
-  - read_pipeline_subscription
   - read_pod_logs
   - read_project_security_exclusions
   - read_resource_group
@@ -96,6 +95,7 @@ project:
   - resolve_note
   - retry_failed_status_checks
   - retry_job
+  - subscribe_to_upstream_pipeline
   - trigger_ai_flow
   - trigger_amazon_q
   - unschedule_job

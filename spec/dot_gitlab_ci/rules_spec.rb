@@ -179,7 +179,6 @@ RSpec.describe '.gitlab/ci/rules.gitlab-ci.yml', :unlimited_max_formatted_output
       Dir.glob('.claude/**/*') +
       Dir.glob('.bundle/**/*') +
       Dir.glob('.github/*') +
-      Dir.glob('.gitlab/duo/**/*') +
       Dir.glob('.gitlab/{issue,merge_request}_templates/**/*') +
       Dir.glob('.gitlab/*.toml') +
       Dir.glob('{,**/}.{DS_Store,gitignore,gitkeep,keep}', File::FNM_DOTMATCH) +

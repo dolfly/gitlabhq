@@ -759,6 +759,12 @@ packages_package_file_states:
   - table: packages_package_files
     column: package_file_id
     on_delete: async_delete
+packages_rubygems_spec_files:
+  - table: projects
+    column: project_id
+    on_delete: update_column_to
+    target_column: status
+    target_value: 2
 pages_deployments:
   - table: p_ci_builds
     column: ci_build_id

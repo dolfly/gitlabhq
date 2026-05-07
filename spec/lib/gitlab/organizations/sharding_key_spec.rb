@@ -26,6 +26,22 @@ RSpec.describe 'new tables missing sharding_key', feature_category: :organizatio
   # the table name to remove this once a decision has been made.
   let(:allowed_to_be_missing_not_null) { [] }
 
+  # Tables with a multi-column `sharding_key` must enforce that exactly one of the sharding key columns is
+  # non-null per row, via a `num_nonnulls(...) = 1` (or equivalent `<>`) check constraint. Tables that still
+  # rely on a looser `>= 1` / `> 0` / `OR`-style constraint, or have a NOT VALID strict constraint, are
+  # grandfathered in here. No new entries are allowed: any new (or modified) multi-column sharding key must
+  # use the strict, validated form.
+  let(:allowed_to_have_loose_multi_column_sharding_constraint) do
+    [
+      'dependency_list_export_uploads', # has `num_nonnulls(namespace_id, organization_id, project_id) > 0`
+      'dependency_list_exports', # has `num_nonnulls(group_id, organization_id, project_id) > 0`
+      'events', # has `(group_id IS NOT NULL) OR (project_id IS NOT NULL) OR (personal_namespace_id IS NOT NULL)`
+      'labels', # constraint exists as `num_nonnulls(...) = 1` but is NOT VALID; tracked in https://gitlab.com/gitlab-org/gitlab/-/issues/558353
+      'notes', # has `num_nonnulls(namespace_id, organization_id, project_id) >= 1`
+      'scan_result_policies' # has `num_nonnulls(namespace_id, project_id) >= 1`
+    ]
+  end
+
   # Some reasons to exempt a table:
   #   1. It has no foreign key for performance reasons
   #   2. It does not yet have a foreign key as the index is still being backfilled
@@ -351,6 +367,42 @@ RSpec.describe 'new tables missing sharding_key', feature_category: :organizatio
       expect(tables_missing_sharding_key(starting_from_milestone: starting_from_milestone)).to include(exempted_table),
         "`#{exempted_table}` is not missing a `sharding_key`. " \
           "You must remove this table from the `allowed_to_be_missing_sharding_key` list."
+    end
+  end
+
+  it 'ensures multi-column sharding keys enforce that exactly one column is non-null', :aggregate_failures do
+    all_tables_to_sharding_key.each do |table_name, sharding_key, _gitlab_schema|
+      sharding_key_columns = sharding_key.keys
+      next if sharding_key_columns.one?
+
+      has_strict_constraint = has_exactly_one_not_null_check_constraint?(table_name, sharding_key_columns)
+
+      if allowed_to_have_loose_multi_column_sharding_constraint.include?(table_name)
+        expect(has_strict_constraint).to eq(false),
+          "`#{table_name}` now has a strict `num_nonnulls(...) = 1` check constraint on its sharding key. " \
+            "You must remove this table from the `allowed_to_have_loose_multi_column_sharding_constraint` list."
+      else
+        expect(has_strict_constraint).to eq(true),
+          "`#{table_name}` declares a multi-column `sharding_key` (#{sharding_key_columns.to_sentence}) " \
+            "but does not have a check constraint enforcing that exactly one of those columns is non-null. " \
+            "Add a `num_nonnulls(#{sharding_key_columns.sort.join(', ')}) = 1` check constraint (or for " \
+            "two-column keys, the equivalent `(a IS NULL) <> (b IS NULL)` form). New tables must enforce " \
+            "this strict form; the loose `>= 1` / `OR`-style constraint is no longer permitted. See " \
+            "https://docs.gitlab.com/ee/development/database/not_null_constraints.html#not-null-constraints-for-multiple-columns."
+      end
+    end
+  end
+
+  it 'only allows `allowed_to_have_loose_multi_column_sharding_constraint` to include tables with multi-column ' \
+    'sharding keys', :aggregate_failures do
+    tables_with_multi_column_sharding_key = all_tables_to_sharding_key.filter_map do |table_name, sharding_key, _|
+      table_name if sharding_key.keys.length > 1
+    end
+
+    allowed_to_have_loose_multi_column_sharding_constraint.each do |exempted_table|
+      expect(tables_with_multi_column_sharding_key).to include(exempted_table),
+        "`#{exempted_table}` no longer has a multi-column `sharding_key`. " \
+          "You must remove this table from the `allowed_to_have_loose_multi_column_sharding_constraint` list."
     end
   end
 

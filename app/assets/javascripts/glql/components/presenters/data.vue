@@ -30,6 +30,16 @@ export default {
       default: false,
     },
   },
+  computed: {
+    isList() {
+      return (
+        this.displayType === DISPLAY_TYPES.LIST || this.displayType === DISPLAY_TYPES.ORDERED_LIST
+      );
+    },
+    listType() {
+      return this.displayType === DISPLAY_TYPES.LIST ? 'ul' : 'ol';
+    },
+  },
   DISPLAY_TYPES,
 };
 </script>
@@ -41,13 +51,10 @@ export default {
     :loading="loading"
   />
   <list-presenter
-    v-else-if="
-      displayType === $options.DISPLAY_TYPES.LIST ||
-      displayType === $options.DISPLAY_TYPES.ORDERED_LIST
-    "
+    v-else-if="isList"
     :data="data"
     :fields="fields"
     :loading="loading"
-    :list-type="displayType === $options.DISPLAY_TYPES.LIST ? 'ul' : 'ol'"
+    :list-type="listType"
   />
 </template>

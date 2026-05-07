@@ -801,6 +801,7 @@ project:
 - rpm_repository_files
 - npm_metadata_caches
 - helm_metadata_caches
+- rubygems_spec_files
 - packages_cleanup_policy
 - dependency_proxy_packages_setting
 - project_setting

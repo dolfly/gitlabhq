@@ -62,6 +62,7 @@ When considering a zero-downtime upgrade, be aware that:
   should verify the [version-specific upgrade notes](versions/_index.md) relevant to your [upgrade path](upgrade_paths.md) and be
   aware of any required upgrade stops:
 
+  - [GitLab 19 upgrade notes](versions/gitlab_19_changes.md)
   - [GitLab 18 upgrade notes](versions/gitlab_18_changes.md)
   - [GitLab 17 upgrade notes](versions/gitlab_17_changes.md)
   - [GitLab 16 upgrade notes](versions/gitlab_16_changes.md)

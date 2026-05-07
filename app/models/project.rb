@@ -307,6 +307,7 @@ class Project < ApplicationRecord
     dependent: :destroy # rubocop:disable Cop/ActiveRecordDependent
   has_many :npm_metadata_caches, class_name: 'Packages::Npm::MetadataCache'
   has_many :helm_metadata_caches, class_name: 'Packages::Helm::MetadataCache'
+  has_many :rubygems_spec_files, class_name: 'Packages::Rubygems::SpecFile', inverse_of: :project
   has_one :packages_cleanup_policy, class_name: 'Packages::Cleanup::Policy', inverse_of: :project
   has_many :package_protection_rules,
     class_name: 'Packages::Protection::Rule',

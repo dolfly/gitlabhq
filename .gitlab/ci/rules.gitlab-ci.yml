@@ -341,6 +341,7 @@
 .lint-pipeline-yaml-patterns: &lint-pipeline-yaml-patterns
   - ".gitlab-ci.yml"
   - ".gitlab/ci/**/*.yml"
+  - ".gitlab/duo/**/*.{yml,yaml}"
   - "lib/gitlab/ci/templates/**/*.yml"
   - "data/deprecations/**/*.yml"
   - "data/whats_new/**/*.yml"
@@ -2230,6 +2231,8 @@
       when: never
     - <<: *if-merge-request
       changes: *cng-dependency-patterns
+    - <<: *if-merge-request
+      changes: *workhorse-patterns
     - !reference [".qa:rules:e2e-blocking-base-before", rules]
     - !reference [".prevent-tier-1", rules]
     - !reference [".qa:rules:e2e-blocking-base-after", rules]

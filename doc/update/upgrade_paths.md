@@ -43,6 +43,20 @@ in the [GitLab package repository](https://packages.gitlab.com/ui/browse/gitlab)
 If you're upgrading a GitLab Helm chart instance, see the
 [list of GitLab Helm chart mappings](https://docs.gitlab.com/charts/installation/version_mappings/#previous-chart-versions).
 
+### Required GitLab 19 upgrade stops
+
+Required upgrade stops occur at versions `19.2`, `19.5`, `19.8`, and `19.11`.
+
+You must upgrade to those versions of GitLab 19 before upgrading to later versions. For each version you upgrade to,
+see the [upgrade notes for GitLab 19](versions/gitlab_19_changes.md). If a version is not
+in the upgrade notes, then there's nothing specific about that version to be aware of.
+
+Find the patch releases in the GitLab package repository. For example, to search for the latest
+GitLab 19.2 Enterprise Edition version for Ubuntu 24.04:
+
+1. Go to <https://packages.gitlab.com/ui/browse/gitlab/gitlab-ee/ubuntu/noble/pool/main/g/gitlab-ee>.
+1. Enter `19.2` as a search term.
+
 ### Required GitLab 18 upgrade stops
 
 Required upgrade stops occur at versions `18.2`, `18.5`, `18.8`, and `18.11`.

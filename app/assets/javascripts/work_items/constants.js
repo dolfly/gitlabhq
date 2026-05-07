@@ -249,12 +249,9 @@ export const WORK_ITEM_BASE_ROUTE_MAP = {
   [WORK_ITEM_TYPE_ROUTE_SERVICE_DESK]: WORK_ITEM_TYPE_ENUM_TICKET,
 };
 
-export const WORKITEM_LINKS_SHOWLABELS_LOCALSTORAGEKEY = 'workItemLinks.showLabels';
 export const WORKITEM_LINKS_METADATA_LOCALSTORAGEKEY = 'workItemLinks.hiddenMetadataKeys';
-export const WORKITEM_TREE_SHOWLABELS_LOCALSTORAGEKEY = 'workItemTree.showLabels';
 export const WORKITEM_TREE_SHOWCLOSED_LOCALSTORAGEKEY = 'workItemTree.showClosed';
 export const WORKITEM_TREE_METADATA_LOCALSTORAGEKEY = 'workItemTree.hiddenMetadataKeys';
-export const WORKITEM_RELATIONSHIPS_SHOWLABELS_LOCALSTORAGEKEY = 'workItemRelationships.showLabels';
 export const WORKITEM_RELATIONSHIPS_SHOWCLOSED_LOCALSTORAGEKEY = 'workItemRelationships.showClosed';
 export const WORKITEM_RELATIONSHIPS_METADATA_LOCALSTORAGEKEY =
   'workItemRelationships.hiddenMetadataKeys';

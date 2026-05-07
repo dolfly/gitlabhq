@@ -41,11 +41,9 @@ import {
   convertToSearchQuery,
   convertToUrlParams,
   deriveSortKey,
-  getDefaultWorkItemTypes,
   getFilterTokens,
   getInitialPageParams,
   getSortOptions,
-  getTypeTokenOptions,
   groupMultiSelectFilterTokens,
   getSavedViewFilterTokens,
   saveSavedView,
@@ -56,45 +54,6 @@ import {
   convertLegacyTypeFormat,
 } from 'ee_else_ce/work_items/list/utils';
 import { DEFAULT_PAGE_SIZE } from '~/vue_shared/issuable/list/constants';
-import {
-  WORK_ITEM_TYPE_ENUM_INCIDENT,
-  WORK_ITEM_TYPE_ENUM_ISSUE,
-  WORK_ITEM_TYPE_ENUM_TASK,
-  WORK_ITEM_TYPE_ENUM_TICKET,
-} from '~/work_items/constants';
-
-describe('getDefaultWorkItemTypes', () => {
-  it('returns default work item types', () => {
-    const types = getDefaultWorkItemTypes({
-      hasEpicsFeature: false,
-      hasOkrsFeature: false,
-      hasQualityManagementFeature: false,
-    });
-
-    expect(types).toEqual([
-      WORK_ITEM_TYPE_ENUM_ISSUE,
-      WORK_ITEM_TYPE_ENUM_INCIDENT,
-      WORK_ITEM_TYPE_ENUM_TASK,
-      WORK_ITEM_TYPE_ENUM_TICKET,
-    ]);
-  });
-});
-
-describe('getTypeTokenOptions', () => {
-  it('returns options for the Type token', () => {
-    const options = getTypeTokenOptions({
-      hasEpicsFeature: false,
-      hasOkrsFeature: false,
-      hasQualityManagementFeature: false,
-    });
-
-    expect(options).toEqual([
-      { icon: 'work-item-issue', title: 'Issue', value: 'issue' },
-      { icon: 'work-item-incident', title: 'Incident', value: 'incident' },
-      { icon: 'work-item-task', title: 'Task', value: 'task' },
-    ]);
-  });
-});
 
 describe('getInitialPageParams', () => {
   it('returns page params with a default page size when no arguments are given', () => {

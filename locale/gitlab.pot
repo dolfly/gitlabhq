@@ -84297,16 +84297,10 @@ msgstr ""
 msgid "WorkItem|In progress"
 msgstr ""
 
-msgid "WorkItem|Incident"
-msgstr ""
-
 msgid "WorkItem|Inherited"
 msgstr ""
 
 msgid "WorkItem|Introducing Tickets"
-msgstr ""
-
-msgid "WorkItem|Issue"
 msgstr ""
 
 msgid "WorkItem|Issue has 1 related vulnerability"
@@ -84321,9 +84315,6 @@ msgid "WorkItem|It must have a header row and at least two columns: the first co
 msgstr ""
 
 msgid "WorkItem|Iteration"
-msgstr ""
-
-msgid "WorkItem|Key Result"
 msgstr ""
 
 msgid "WorkItem|Label"
@@ -84575,9 +84566,6 @@ msgid "WorkItem|Notifications turned on."
 msgstr ""
 
 msgid "WorkItem|Number"
-msgstr ""
-
-msgid "WorkItem|Objective"
 msgstr ""
 
 msgid "WorkItem|On track"
@@ -84925,9 +84913,6 @@ msgstr ""
 msgid "WorkItem|Statuses are used to manage workflow of planning items, helping you and your team understand how far an item has progressed."
 msgstr ""
 
-msgid "WorkItem|Task"
-msgstr ""
-
 msgid "WorkItem|Task actions"
 msgstr ""
 
@@ -84938,9 +84923,6 @@ msgid "WorkItem|Task reverted"
 msgstr ""
 
 msgid "WorkItem|Teal"
-msgstr ""
-
-msgid "WorkItem|Test case"
 msgstr ""
 
 msgid "WorkItem|Text"

@@ -480,8 +480,7 @@ RSpec.shared_examples 'graphql issue list request spec' do
       post_query
     end
 
-    context 'when requesting `user_notes_count` and `user_discussions_count`',
-      quarantine: 'https://gitlab.com/gitlab-org/quality/test-failure-issues/-/issues/17052' do
+    context 'when requesting `user_notes_count` and `user_discussions_count`' do
       let(:requested_fields) { 'userNotesCount userDiscussionsCount' }
 
       before do

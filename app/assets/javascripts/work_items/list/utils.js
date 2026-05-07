@@ -39,16 +39,10 @@ import { DEFAULT_PAGE_SIZE } from '~/vue_shared/issuable/list/constants';
 import {
   WORK_ITEM_TO_ISSUABLE_MAP,
   WIDGET_TYPE_MILESTONE,
-  WIDGET_TYPE_AWARD_EMOJI,
   WIDGET_TYPE_ASSIGNEES,
   WIDGET_TYPE_LABELS,
   WIDGET_TYPE_TIME_TRACKING,
-  WORK_ITEM_TYPE_ENUM_ISSUE,
-  WORK_ITEM_TYPE_ENUM_INCIDENT,
-  WORK_ITEM_TYPE_ENUM_TASK,
-  WORK_ITEM_TYPE_ENUM_TICKET,
 } from '~/work_items/constants';
-import { EMOJI_THUMBS_UP, EMOJI_THUMBS_DOWN } from '~/emoji/constants';
 import { BoardType } from '~/boards/constants';
 import { STATUS_CLOSED, STATUS_OPEN, TYPE_EPIC } from '~/issues/constants';
 import {
@@ -106,25 +100,6 @@ import getSubscribedSavedViewsQuery from '~/work_items/list/graphql/work_item_sa
 import namespaceSavedViewQuery from '~/work_items/list/graphql/namespace_saved_view.query.graphql';
 import workItemSavedViewUnsubscribe from '~/work_items/list/graphql/unsubscribe_from_saved_view.mutation.graphql';
 import workItemSavedViewReorder from '~/work_items/graphql/reorder_saved_view.mutation.graphql';
-
-/**
- * Get the types of work items that should be displayed on issues lists.
- * This should be consistent with `TYPES_FOR_LIST` in the backend.
- *
- * @returns {Array<string>}
- */
-export const getDefaultWorkItemTypes = () => [
-  WORK_ITEM_TYPE_ENUM_ISSUE,
-  WORK_ITEM_TYPE_ENUM_INCIDENT,
-  WORK_ITEM_TYPE_ENUM_TASK,
-  WORK_ITEM_TYPE_ENUM_TICKET,
-];
-
-export const getTypeTokenOptions = () => [
-  { icon: 'work-item-issue', title: s__('WorkItem|Issue'), value: 'issue' },
-  { icon: 'work-item-incident', title: s__('WorkItem|Incident'), value: 'incident' },
-  { icon: 'work-item-task', title: s__('WorkItem|Task'), value: 'task' },
-];
 
 export const getInitialPageParams = (
   pageSize,
@@ -874,30 +849,6 @@ export function mapWorkItemWidgetsToIssuableFields({
     activeItem.title = workItem.title;
     activeItem.confidential = workItem.confidential;
     activeItem.type = workItem?.workItemType?.name?.toUpperCase();
-  });
-}
-
-export function updateUpvotesCount({ list, workItem, namespace = BoardType.project }) {
-  const type = WIDGET_TYPE_AWARD_EMOJI;
-  const property = WORK_ITEM_TO_ISSUABLE_MAP[type];
-
-  return produce(list, (draftData) => {
-    const activeItem = draftData[namespace].issues.nodes.find(
-      (issue) => issue.iid === workItem.iid,
-    );
-
-    const currentWidget = findWidget(type, workItem);
-    if (!currentWidget) {
-      return;
-    }
-
-    const upvotesCount =
-      currentWidget[property].nodes.filter((emoji) => emoji.name === EMOJI_THUMBS_UP)?.length ?? 0;
-    const downvotesCount =
-      currentWidget[property].nodes.filter((emoji) => emoji.name === EMOJI_THUMBS_DOWN)?.length ??
-      0;
-    activeItem.upvotes = upvotesCount;
-    activeItem.downvotes = downvotesCount;
   });
 }
 

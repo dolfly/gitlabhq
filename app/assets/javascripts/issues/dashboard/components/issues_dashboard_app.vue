@@ -11,18 +11,18 @@ import getIssuesQuery from 'ee_else_ce/issues/dashboard/queries/get_issues.query
 import IssueCardStatistics from 'ee_else_ce/work_items/list/components/issue_card_statistics.vue';
 import IssueCardTimeInfo from 'ee_else_ce/work_items/list/components/issue_card_time_info.vue';
 import {
+  convertNumberToGid,
   convertToApiParams,
   convertToSearchQuery,
   convertToUrlParams,
   deriveSortKey,
-  getDefaultWorkItemTypes,
   getFilterTokens,
   getInitialPageParams,
   getSortOptions,
-  getTypeTokenOptions,
 } from 'ee_else_ce/work_items/list/utils';
 import { STATUS_ALL, STATUS_CLOSED, STATUS_OPEN } from '~/issues/constants';
 import { i18n, PARAM_STATE, urlSortParams } from '~/work_items/list/constants';
+import getTypesInOrganization from '~/issues/dashboard/queries/get_types_in_organization.query.graphql';
 import setSortPreferenceMutation from '~/issues/dashboard/queries/set_sort_preference.mutation.graphql';
 import { fetchPolicies } from '~/lib/graphql';
 import axios from '~/lib/utils/axios_utils';
@@ -61,6 +61,7 @@ import { DEFAULT_PAGE_SIZE, issuableListTabs } from '~/vue_shared/issuable/list/
 import glFeatureFlagMixin from '~/vue_shared/mixins/gl_feature_flags_mixin';
 import IndexLayout from '~/vue_shared/components/index_layout.vue';
 import NewResourceDropdown from '~/vue_shared/components/new_resource_dropdown/new_resource_dropdown.vue';
+import { NAME_TO_ENUM_MAP } from '~/work_items/constants';
 import { AutocompleteCache } from '../utils';
 
 const UserToken = () => import('~/vue_shared/components/filtered_search_bar/tokens/user_token.vue');
@@ -71,6 +72,8 @@ const LabelToken = () =>
 const DateToken = () => import('~/vue_shared/components/filtered_search_bar/tokens/date_token.vue');
 const MilestoneToken = () =>
   import('~/vue_shared/components/filtered_search_bar/tokens/milestone_token.vue');
+const WorkItemTypeToken = () =>
+  import('~/vue_shared/components/filtered_search_bar/tokens/work_item_type_token.vue');
 
 export default {
   name: 'IssuesDashboardApp',
@@ -132,6 +135,7 @@ export default {
       pageParams: getInitialPageParams(),
       sortKey: deriveSortKey({ sort: this.initialSort, state }),
       state: state || STATUS_OPEN,
+      workItemTypes: [],
     };
   },
   apollo: {
@@ -174,18 +178,39 @@ export default {
         return !this.hasSearch;
       },
     },
+    workItemTypes: {
+      query: getTypesInOrganization,
+      update(data) {
+        return data?.organization?.workItemTypes?.nodes ?? [];
+      },
+      error() {
+        // If there is no organization then we just show no Type filter
+      },
+    },
   },
   computed: {
     apiFilterParams() {
-      return convertToApiParams(this.filterTokens, {
+      const params = convertToApiParams(this.filterTokens, {
         hasStatusFeature: this.hasStatusFeature,
       });
+      if (this.glFeatures.workItemConfigurableTypes) {
+        if (params.types) {
+          params.workItemTypeIds = convertNumberToGid(params.types);
+          delete params.types;
+        }
+        if (params.not?.types) {
+          params.not.workItemTypeIds = convertNumberToGid(params.not.types);
+          delete params.not.types;
+        }
+      }
+      return params;
     },
     defaultWorkItemTypes() {
-      return getDefaultWorkItemTypes({
-        hasOkrsFeature: this.hasOkrsFeature,
-        hasQualityManagementFeature: this.hasQualityManagementFeature,
-      });
+      return this.workItemTypes
+        .filter((type) => type.isFilterableListView)
+        .map((type) =>
+          this.glFeatures.workItemConfigurableTypes ? type.id : NAME_TO_ENUM_MAP[type.name],
+        );
     },
     dropdownItems() {
       return [
@@ -223,6 +248,7 @@ export default {
       );
     },
     queryVariables() {
+      const field = this.glFeatures.workItemConfigurableTypes ? 'workItemTypeIds' : 'types';
       return {
         hideUsers: this.isPublicVisibilityRestricted && !this.isSignedIn,
         isSignedIn: this.isSignedIn,
@@ -230,7 +256,7 @@ export default {
         state: this.state,
         ...this.pageParams,
         ...this.apiFilterParams,
-        types: this.apiFilterParams.types || this.defaultWorkItemTypes,
+        [field]: this.apiFilterParams[field] || this.defaultWorkItemTypes,
       };
     },
     renderedIssues() {
@@ -310,13 +336,6 @@ export default {
           ],
         },
         {
-          type: TOKEN_TYPE_TYPE,
-          title: TOKEN_TITLE_TYPE,
-          icon: 'work-item-issue',
-          token: GlFilteredSearchToken,
-          options: this.typeTokenOptions,
-        },
-        {
           type: TOKEN_TYPE_SUBSCRIBED,
           title: TOKEN_TITLE_SUBSCRIBED,
           icon: 'notifications',
@@ -381,6 +400,17 @@ export default {
         }
       }
 
+      if (this.workItemTypes.length) {
+        tokens.push({
+          type: TOKEN_TYPE_TYPE,
+          title: TOKEN_TITLE_TYPE,
+          icon: 'work-item-issue',
+          token: WorkItemTypeToken,
+          operators: OPERATORS_IS,
+          initialWorkItemTypes: this.workItemTypes,
+        });
+      }
+
       if (this.eeSearchTokens.length) {
         tokens.push(...this.eeSearchTokens);
       }
@@ -411,12 +441,6 @@ export default {
         [STATUS_CLOSED]: closedIssues?.count,
         [STATUS_ALL]: allIssues?.count,
       };
-    },
-    typeTokenOptions() {
-      return getTypeTokenOptions({
-        hasOkrsFeature: this.hasOkrsFeature,
-        hasQualityManagementFeature: this.hasQualityManagementFeature,
-      });
     },
     urlFilterParams() {
       return convertToUrlParams(this.filterTokens);
