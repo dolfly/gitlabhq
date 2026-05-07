@@ -152,6 +152,8 @@ constraints(Projects::ProjectUrlConstraint.new) do
             resources :branch_rules, only: [:index]
           end
 
+          resources :service_accounts, path: 'service_accounts(/*vueroute)', only: [:index]
+
           resources :access_tokens, only: [:index, :create] do
             member do
               put :revoke

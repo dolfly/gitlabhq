@@ -499,7 +499,7 @@ class TodoService
   def attributes_for_todo(project, target, author, action, note = nil)
     attributes_for_target(target).merge!(
       project_id: project&.id,
-      author_id: author.id,
+      author_id: Gitlab::Auth::Identity.resolve_composite_identity_actor(author).id,
       action: action,
       note: note
     )

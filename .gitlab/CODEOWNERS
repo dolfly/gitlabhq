@@ -1666,6 +1666,7 @@ lib/gitlab/checks/
 /ee/lib/api/service_accounts.rb
 /ee/lib/authn/
 /ee/lib/ee/gitlab/auth/
+/ee/lib/ee/gitlab/auth/ldap/sync/ @gitlab-org/fulfillment/seat-management/engineers
 /ee/lib/ee/gitlab/omniauth_initializer.rb
 /ee/lib/ee/gitlab/personal_access_tokens/
 /ee/lib/gitlab/auth/
@@ -1985,6 +1986,11 @@ ee/app/workers/ai/repository_xray/
 /ee/app/models/namespaces/free_user_cap/
 /ee/spec/models/namespaces/free_user_cap/
 # END Fulfillment::Utilization
+
+# Fulfillment::Seat Management
+[Seat Management] @gitlab-org/fulfillment/seat-management/engineers
+/ee/app/workers/authn/
+# END Fulfillment::Seat Management
 
 ^[Foundations::Personal Productivity] @gitlab-org/foundations/personal-productivity/engineering
 /lib/sidebars/

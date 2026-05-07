@@ -29809,6 +29809,8 @@ Returns [`DuoUsageEventsAggregationScope`](#duousageeventsaggregationscope).
 | ---- | ---- | ----------- |
 | <a id="analytics-duousageevents-event"></a>`event` | [`[String!]`](#string) | Filter by one or many events. |
 | <a id="analytics-duousageevents-feature"></a>`feature` | [`[String!]`](#string) | Filter by one or many features. |
+| <a id="analytics-duousageevents-featurescountfrom"></a>`featuresCountFrom` | [`Int`](#int) | Filter by the number of unique features The `features_count` metric must also be requested when using this filter. Start of the range. |
+| <a id="analytics-duousageevents-featurescountto"></a>`featuresCountTo` | [`Int`](#int) | Filter by the number of unique features The `features_count` metric must also be requested when using this filter. End of the range. |
 | <a id="analytics-duousageevents-timestampfrom"></a>`timestampFrom` | [`Time`](#time) | Filter by event timestamp. Start of the range. |
 | <a id="analytics-duousageevents-timestampto"></a>`timestampTo` | [`Time`](#time) | Filter by event timestamp. End of the range. |
 | <a id="analytics-duousageevents-userid"></a>`userId` | [`[String!]`](#string) | Filter by one or many user Global IDs. |
@@ -29830,6 +29832,7 @@ Returns [`FinishedPipelinesAggregationScope`](#finishedpipelinesaggregationscope
 | <a id="analytics-finishedpipelines-startedatfrom"></a>`startedAtFrom` | [`Time`](#time) | Filter by pipeline start timestamp. Start of the range. |
 | <a id="analytics-finishedpipelines-startedatto"></a>`startedAtTo` | [`Time`](#time) | Filter by pipeline start timestamp. End of the range. |
 | <a id="analytics-finishedpipelines-status"></a>`status` | [`[String!]`](#string) | Filter by one or many pipeline statuses. |
+| <a id="analytics-finishedpipelines-successrate"></a>`successRate` | [`[Float!]`](#float) | Filter by exact pipeline success rate The `success_rate` metric must also be requested when using this filter. |
 
 ### `AnalyzerGroupStatusType`
 

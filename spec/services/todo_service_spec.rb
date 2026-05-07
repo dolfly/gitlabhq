@@ -1700,6 +1700,50 @@ RSpec.describe TodoService, feature_category: :notifications do
     end
   end
 
+  describe 'composite identity attribution', :request_store do
+    let_it_be(:service_account) { create(:user, :service_account, composite_identity_enforced: true, developer_of: project) }
+    let_it_be(:human) { create(:user, developer_of: project) }
+    let_it_be(:assignee_user) { create(:user, developer_of: project) }
+    let_it_be_with_reload(:issue) { create(:issue, project: project, author: author, assignees: []) }
+
+    context 'when service account acts via OAuth token (authentication context)' do
+      before do
+        ::Gitlab::Auth::Identity.link_from_scoped_user(service_account, human, context: :authentication)
+      end
+
+      it 'attributes assignment todo to the service account' do
+        issue.assignees = [assignee_user]
+        service.reassigned_assignable(issue, human)
+
+        todo = Todo.find_by(user: assignee_user, target: issue, action: Todo::ASSIGNED)
+        expect(todo.author).to eq(service_account)
+      end
+
+      it 'attributes mention todo to the service account' do
+        note = create(:note, project: project, noteable: issue, author: service_account,
+          note: "FYI #{assignee_user.to_reference}")
+        service.new_note(note, human)
+
+        todo = Todo.find_by(user: assignee_user, target: issue, action: Todo::MENTIONED)
+        expect(todo.author).to eq(service_account)
+      end
+    end
+
+    context 'when human assigns a service account (permission_check context)' do
+      before do
+        ::Gitlab::Auth::Identity.link_from_scoped_user(service_account, human, context: :permission_check)
+      end
+
+      it 'attributes assignment todo to the human user' do
+        issue.assignees = [service_account]
+        service.reassigned_assignable(issue, human)
+
+        todo = Todo.find_by(user: service_account, target: issue, action: Todo::ASSIGNED)
+        expect(todo.author).to eq(human)
+      end
+    end
+  end
+
   def should_create_todo(attributes = {})
     attributes.reverse_merge!(
       project: project,

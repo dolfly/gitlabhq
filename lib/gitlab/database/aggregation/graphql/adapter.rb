@@ -11,13 +11,13 @@ module Gitlab
             end
 
             def each_filter_argument(filters)
-              graphql_exposed_filters(filters).each do |filter|
+              filters.each do |filter|
                 filter_to_arguments(filter).each { |args| yield(*args) }
               end
             end
 
             def arguments_to_filters(engine_class, arguments)
-              graphql_exposed_filters(engine_class.filters)
+              engine_class.filters
                 .map { |filter| build_filter(filter, arguments) }
                 .reject { |f| f[:values].blank? }
             end
@@ -35,22 +35,17 @@ module Gitlab
 
             private
 
-            # Metric filters (HAVING-clause filters that reference an aggregated
-            # metric) are not yet exposed via GraphQL.
-            def graphql_exposed_filters(filters)
-              filters.reject(&:metric?)
-            end
-
             def build_filter(definition, arguments)
               result = {
                 identifier: definition.identifier
               }
               case definition
-              when ::Gitlab::Database::Aggregation::ClickHouse::RangeFilter
+              when ::Gitlab::Database::Aggregation::ClickHouse::RangeFilter,
+                ::Gitlab::Database::Aggregation::ClickHouse::MetricRangeFilter
                 from = arguments[:"#{definition.identifier}_from"]
                 to = arguments[:"#{definition.identifier}_to"]
                 result[:values] = from..to if from || to
-              else # ::Gitlab::Database::Aggregation::ClickHouse::ExactMatchFilter
+              else # ExactMatchFilter / MetricExactMatchFilter
                 result[:values] = arguments[definition.identifier]
               end
               result
@@ -58,16 +53,25 @@ module Gitlab
 
             def filter_to_arguments(filter)
               case filter
-              when ::Gitlab::Database::Aggregation::ClickHouse::RangeFilter
+              when ::Gitlab::Database::Aggregation::ClickHouse::RangeFilter,
+                ::Gitlab::Database::Aggregation::ClickHouse::MetricRangeFilter
                 [[:"#{filter.identifier}_from",
                   graphql_type(filter.type),
-                  { required: false, description: "#{filter.description}. Start of the range." }],
+                  { required: false, description: "#{filter_description(filter)}. Start of the range." }],
                   [:"#{filter.identifier}_to",
                     graphql_type(filter.type),
-                    { required: false, description: "#{filter.description}. End of the range." }]]
-              else # ::Gitlab::Database::Aggregation::ClickHouse::ExactMatchFilter
-                [[filter.identifier, [graphql_type(filter.type)], { required: false, description: filter.description }]]
+                    { required: false, description: "#{filter_description(filter)}. End of the range." }]]
+              else # ExactMatchFilter / MetricExactMatchFilter
+                [[filter.identifier,
+                  [graphql_type(filter.type)],
+                  { required: false, description: filter_description(filter) }]]
               end
+            end
+
+            def filter_description(filter)
+              return filter.description unless filter.metric?
+
+              "#{filter.description} The `#{filter.identifier}` metric must also be requested when using this filter"
             end
           end
         end

@@ -6787,6 +6787,7 @@ CREATE TABLE security_findings (
     finding_data jsonb DEFAULT '{}'::jsonb NOT NULL,
     project_id bigint,
     scanner_reported_severity smallint,
+    context_unaware_uuid uuid,
     CONSTRAINT check_6c2851a8c9 CHECK ((uuid IS NOT NULL)),
     CONSTRAINT check_9c3ba4d6f2 CHECK ((project_id IS NOT NULL))
 )
@@ -28801,6 +28802,7 @@ CREATE TABLE protected_branch_merge_access_levels (
     group_id bigint,
     protected_branch_project_id bigint,
     protected_branch_namespace_id bigint,
+    member_role_id bigint,
     CONSTRAINT check_66e95f5ee9 CHECK ((num_nonnulls(protected_branch_namespace_id, protected_branch_project_id) = 1))
 );
 
@@ -28824,6 +28826,7 @@ CREATE TABLE protected_branch_push_access_levels (
     deploy_key_id bigint,
     protected_branch_project_id bigint,
     protected_branch_namespace_id bigint,
+    member_role_id bigint,
     CONSTRAINT check_2b64375289 CHECK ((num_nonnulls(protected_branch_namespace_id, protected_branch_project_id) = 1))
 );
 
@@ -28844,6 +28847,7 @@ CREATE TABLE protected_branch_unprotect_access_levels (
     group_id bigint,
     protected_branch_project_id bigint,
     protected_branch_namespace_id bigint,
+    member_role_id bigint,
     CONSTRAINT check_a5a558921b CHECK ((num_nonnulls(protected_branch_namespace_id, protected_branch_project_id) = 1))
 );
 
@@ -45026,6 +45030,8 @@ CREATE INDEX idx_protected_branch_merge_access_levels_protected_branch_names ON 
 
 CREATE INDEX idx_protected_branch_merge_access_levels_protected_branch_proje ON protected_branch_merge_access_levels USING btree (protected_branch_project_id);
 
+CREATE INDEX idx_protected_branch_unprotect_access_levels_on_member_role_id ON protected_branch_unprotect_access_levels USING btree (member_role_id);
+
 CREATE INDEX idx_psm_maintenance_tasks_on_organization_id ON project_secrets_manager_maintenance_tasks USING btree (organization_id);
 
 CREATE INDEX idx_psm_maintenance_tasks_on_parent_group_id ON project_secrets_manager_maintenance_tasks USING btree (parent_group_id);
@@ -49070,11 +49076,15 @@ CREATE INDEX index_protected_branch_merge_access ON protected_branch_merge_acces
 
 CREATE INDEX index_protected_branch_merge_access_levels_on_group_id ON protected_branch_merge_access_levels USING btree (group_id);
 
+CREATE INDEX index_protected_branch_merge_access_levels_on_member_role_id ON protected_branch_merge_access_levels USING btree (member_role_id);
+
 CREATE INDEX index_protected_branch_merge_access_levels_on_user_id ON protected_branch_merge_access_levels USING btree (user_id);
 
 CREATE INDEX index_protected_branch_push_access ON protected_branch_push_access_levels USING btree (protected_branch_id);
 
 CREATE INDEX index_protected_branch_push_access_levels_on_group_id ON protected_branch_push_access_levels USING btree (group_id);
+
+CREATE INDEX index_protected_branch_push_access_levels_on_member_role_id ON protected_branch_push_access_levels USING btree (member_role_id);
 
 CREATE INDEX index_protected_branch_push_access_levels_on_protected_branch_n ON protected_branch_push_access_levels USING btree (protected_branch_namespace_id);
 
@@ -57060,6 +57070,9 @@ ALTER TABLE ONLY scim_oauth_access_tokens
 ALTER TABLE ONLY ascp_security_contexts
     ADD CONSTRAINT fk_6fb0a2b15c FOREIGN KEY (scan_id) REFERENCES ascp_scans(id) ON DELETE CASCADE;
 
+ALTER TABLE ONLY protected_branch_unprotect_access_levels
+    ADD CONSTRAINT fk_6fd290f6a3 FOREIGN KEY (member_role_id) REFERENCES member_roles(id) ON DELETE RESTRICT;
+
 ALTER TABLE ONLY deploy_tokens
     ADD CONSTRAINT fk_7082f8a288 FOREIGN KEY (creator_id) REFERENCES users(id) ON DELETE SET NULL;
 
@@ -57515,6 +57528,9 @@ ALTER TABLE ONLY boards_epic_list_user_preferences
 
 ALTER TABLE ONLY issues
     ADD CONSTRAINT fk_96b1dd429c FOREIGN KEY (milestone_id) REFERENCES milestones(id) ON DELETE SET NULL;
+
+ALTER TABLE ONLY protected_branch_push_access_levels
+    ADD CONSTRAINT fk_9778b2c1bb FOREIGN KEY (member_role_id) REFERENCES member_roles(id) ON DELETE RESTRICT;
 
 ALTER TABLE ONLY enabled_foundational_flow_check_results
     ADD CONSTRAINT fk_97ace560fa FOREIGN KEY (enabled_foundational_flow_id) REFERENCES enabled_foundational_flows(id) ON DELETE CASCADE;
@@ -57998,6 +58014,9 @@ ALTER TABLE ONLY gpg_key_subkeys
 
 ALTER TABLE ONLY packages_build_infos
     ADD CONSTRAINT fk_c0bc6b19ff FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE;
+
+ALTER TABLE ONLY protected_branch_merge_access_levels
+    ADD CONSTRAINT fk_c0c9525ab9 FOREIGN KEY (member_role_id) REFERENCES member_roles(id) ON DELETE RESTRICT;
 
 ALTER TABLE ONLY design_management_versions
     ADD CONSTRAINT fk_c1440b4896 FOREIGN KEY (author_id) REFERENCES users(id) ON DELETE SET NULL;

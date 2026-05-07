@@ -215,6 +215,39 @@
             ]
           }
         },
+        "description": {
+          "type": "string",
+          "description": "Human-readable description of the agent's purpose and capabilities. Required when the agent is used as a sub-agent (listed in another agent's subagents)."
+        },
+        "subagents": {
+          "type": "array",
+          "description": "List of subagent config dicts this agent supervises. When provided, the agent runs in Supervisor Mode. Each entry must contain a 'name' key referencing another AgentComponent with a description field.",
+          "items": {
+            "type": "object",
+            "required": [
+              "name"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "$ref": "#/definitions/ComponentName"
+              }
+            }
+          }
+        },
+        "max_delegations": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Maximum number of delegate_task calls allowed before the supervisor is forced to call final_response_tool. Only applicable in Supervisor Mode."
+        },
+        "model_size_preference": {
+          "type": "string",
+          "enum": [
+            "small",
+            "large"
+          ],
+          "description": "Preferred model size to use for this agent. 'small' selects a smaller, faster model; 'large' selects a larger, more capable model."
+        },
         "ui_log_events": {
           "type": "array",
           "description": "UI logging configuration",
@@ -223,7 +256,9 @@
             "enum": [
               "on_agent_final_answer",
               "on_tool_execution_success",
-              "on_tool_execution_failed"
+              "on_tool_execution_failed",
+              "on_delegation",
+              "on_delegation_returns"
             ]
           }
         },

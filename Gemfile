@@ -83,7 +83,7 @@ gem 'devise-pbkdf2-encryptable', '~> 0.0.0', path: 'vendor/gems/devise-pbkdf2-en
   feature_category: :system_access
 gem 'bcrypt', '~> 3.1', '>= 3.1.14', feature_category: :system_access
 gem 'doorkeeper', '~> 5.8', '>= 5.8.1', feature_category: :system_access
-gem 'doorkeeper-openid_connect', '~> 1.8.10', feature_category: :system_access
+gem 'doorkeeper-openid_connect', '~> 1.9.0', feature_category: :system_access
 gem 'doorkeeper-device_authorization_grant', '~> 1.0.0', feature_category: :system_access
 gem 'rexml', '~> 3.4.0', feature_category: :shared # rubocop:todo Gemfile/MissingFeatureCategory -- https://gitlab.com/gitlab-org/gitlab/-/issues/581839
 gem 'ruby-saml', '~> 1.18', feature_category: :system_access

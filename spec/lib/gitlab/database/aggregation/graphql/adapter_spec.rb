@@ -26,25 +26,25 @@ RSpec.describe Gitlab::Database::Aggregation::Graphql::Adapter, feature_category
   describe '.each_filter_argument' do
     let(:exact_match_filter) do
       Gitlab::Database::Aggregation::ClickHouse::ExactMatchFilter.new(
-        :status, :string
+        :status, :string, description: 'Filter by status'
       )
     end
 
     let(:range_filter) do
       Gitlab::Database::Aggregation::ClickHouse::RangeFilter.new(
-        :created_at, :datetime
+        :created_at, :datetime, description: 'Filter by creation date'
       )
     end
 
     let(:metric_exact_match_filter) do
       Gitlab::Database::Aggregation::ClickHouse::MetricExactMatchFilter.new(
-        :session_count, :integer
+        :session_count, :integer, description: 'Filter by session count'
       )
     end
 
     let(:metric_range_filter) do
       Gitlab::Database::Aggregation::ClickHouse::MetricRangeFilter.new(
-        :session_duration, :integer
+        :session_duration, :integer, description: 'Filter by session duration'
       )
     end
 
@@ -63,7 +63,7 @@ RSpec.describe Gitlab::Database::Aggregation::Graphql::Adapter, feature_category
     end
 
     context 'with metric filters' do
-      it 'skips metric filters' do
+      it 'exposes metric filters with the same argument shape as their non-metric counterparts' do
         filters = [exact_match_filter, metric_exact_match_filter, metric_range_filter]
         arguments = []
 
@@ -71,7 +71,30 @@ RSpec.describe Gitlab::Database::Aggregation::Graphql::Adapter, feature_category
           arguments << [identifier, type, options]
         end
 
-        expect(arguments.map(&:first)).to eq([:status])
+        expect(arguments.map(&:first))
+          .to eq([:status, :session_count, :session_duration_from, :session_duration_to])
+      end
+
+      it 'notes that the referenced metric must also be requested in the description' do
+        filters = [exact_match_filter, metric_exact_match_filter, metric_range_filter]
+        descriptions = {}
+
+        described_class.each_filter_argument(filters) do |identifier, _type, options|
+          descriptions[identifier] = options[:description]
+        end
+
+        expect(descriptions[:status]).to eq('Filter by status')
+        expect(descriptions[:session_count]).to eq(
+          'Filter by session count The `session_count` metric must also be requested when using this filter'
+        )
+        expect(descriptions[:session_duration_from]).to eq(
+          'Filter by session duration The `session_duration` metric must also be requested when using this filter. ' \
+            'Start of the range.'
+        )
+        expect(descriptions[:session_duration_to]).to eq(
+          'Filter by session duration The `session_duration` metric must also be requested when using this filter. ' \
+            'End of the range.'
+        )
       end
     end
   end
@@ -82,17 +105,29 @@ RSpec.describe Gitlab::Database::Aggregation::Graphql::Adapter, feature_category
       metric_exact_match = Gitlab::Database::Aggregation::ClickHouse::MetricExactMatchFilter.new(
         :session_count, :integer
       )
+      metric_range = Gitlab::Database::Aggregation::ClickHouse::MetricRangeFilter.new(
+        :session_duration, :integer
+      )
 
       Class.new do
-        define_singleton_method(:filters) { [exact_match, metric_exact_match] }
+        define_singleton_method(:filters) { [exact_match, metric_exact_match, metric_range] }
       end
     end
 
-    it 'skips metric filters even if matching arguments are provided' do
-      arguments = { status: %w[active], session_count: [1, 2, 3] }
+    it 'builds filter configurations for both regular and metric filters' do
+      arguments = {
+        status: %w[active],
+        session_count: [1, 2, 3],
+        session_duration_from: 10,
+        session_duration_to: 20
+      }
 
       expect(described_class.arguments_to_filters(engine_class, arguments))
-        .to contain_exactly(identifier: :status, values: %w[active])
+        .to contain_exactly(
+          { identifier: :status, values: %w[active] },
+          { identifier: :session_count, values: [1, 2, 3] },
+          { identifier: :session_duration, values: 10..20 }
+        )
     end
   end
 end

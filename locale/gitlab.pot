@@ -7492,6 +7492,9 @@ msgstr ""
 msgid "AgentPlan|Edit workplan"
 msgstr ""
 
+msgid "AgentPlan|No workplan has been added yet. You don't have permission to edit the workplan."
+msgstr ""
+
 msgid "AgentPlan|Workplan"
 msgstr ""
 

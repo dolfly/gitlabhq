@@ -360,6 +360,95 @@ module AuthHelper
     !current_user.password_automatically_set? && current_user.allow_password_authentication_for_web?
   end
 
+  def expires_at_for_service_access_tokens(enforce_expiration)
+    return expires_at_field_data if enforce_expiration
+
+    {
+      min_date: 1.day.from_now.iso8601
+    }
+  end
+
+  def admin_service_accounts_data(user = current_user)
+    sources = scope_description(:personal_access_token)
+    scopes = ::Gitlab::Auth.available_scopes_for(user)
+    {
+      base_path: admin_application_settings_service_accounts_path,
+      is_group: false.to_s,
+      service_accounts: {
+        enabled: true.to_s,
+        path: expose_path(api_v4_service_accounts_path),
+        edit_path: expose_path(api_v4_service_accounts_path),
+        docs_path: help_page_path('user/profile/service_accounts.md'),
+        delete_path: expose_path(api_v4_users_path)
+      },
+      access_token: {
+        **expires_at_for_service_access_tokens(
+          ::Gitlab::CurrentSettings.current_application_settings.service_access_tokens_expiration_enforced
+        ),
+        available_scopes: filter_sort_scopes(scopes, sources).to_json,
+        create: expose_path(api_v4_users_personal_access_tokens_path(user_id: ':id')),
+        revoke: expose_path(api_v4_personal_access_tokens_path),
+        rotate: expose_path(api_v4_personal_access_tokens_path),
+        show: "#{expose_path(api_v4_personal_access_tokens_path)}?user_id=:id"
+      }
+    }
+  end
+
+  def groups_service_accounts_data(group, user = current_user)
+    sources = scope_description(:personal_access_token)
+
+    scopes = ::Gitlab::Auth.available_scopes_for(user)
+    {
+      base_path: group_settings_service_accounts_path(group),
+      is_group: true.to_s,
+      service_accounts: {
+        enabled: can?(user, :create_service_account, group).to_s,
+        path: expose_path(api_v4_groups_service_accounts_path(id: group.id)),
+        edit_path: expose_path(api_v4_groups_service_accounts_path(id: group.id)),
+        docs_path: help_page_path('user/profile/service_accounts.md'),
+        delete_path: expose_path(api_v4_groups_service_accounts_path(id: group.id))
+      },
+      access_token: {
+        **expires_at_for_service_access_tokens(group.namespace_settings.service_access_tokens_expiration_enforced),
+        available_scopes: filter_sort_scopes(scopes, sources).to_json,
+        create: expose_path(api_v4_groups_service_accounts_personal_access_tokens_path(id: group.id, user_id: ':id')),
+        revoke: expose_path(api_v4_groups_service_accounts_personal_access_tokens_path(id: group.id, user_id: ':id')),
+        rotate: expose_path(api_v4_groups_service_accounts_personal_access_tokens_path(id: group.id, user_id: ':id')),
+        show: expose_path(api_v4_groups_service_accounts_personal_access_tokens_path(id: group.id, user_id: ':id'))
+      }
+    }
+  end
+
+  def projects_service_accounts_data(project, user = current_user)
+    sources = scope_description(:personal_access_token)
+    scopes = ::Gitlab::Auth.available_scopes_for(user)
+
+    {
+      base_path: project_settings_service_accounts_path(project),
+      is_group: 'false',
+      service_accounts: {
+        enabled: can?(user, :create_service_account, project).to_s,
+        path: expose_path(api_v4_projects_service_accounts_path(id: project.id)),
+        edit_path: expose_path(api_v4_projects_service_accounts_path(id: project.id)),
+        docs_path: help_page_path('user/profile/service_accounts.md'),
+        delete_path: expose_path(api_v4_projects_service_accounts_path(id: project.id))
+      },
+      access_token: {
+        **expires_at_for_service_access_tokens(
+          project.root_namespace.namespace_settings.service_access_tokens_expiration_enforced),
+        available_scopes: filter_sort_scopes(scopes, sources).to_json,
+        create: expose_path(api_v4_projects_service_accounts_personal_access_tokens_path(id: project.id,
+          user_id: ':id')),
+        revoke: expose_path(api_v4_projects_service_accounts_personal_access_tokens_path(id: project.id,
+          user_id: ':id')),
+        rotate: expose_path(api_v4_projects_service_accounts_personal_access_tokens_path(id: project.id,
+          user_id: ':id')),
+        show: expose_path(
+          api_v4_projects_service_accounts_personal_access_tokens_path(id: project.id, user_id: ':id'))
+      }
+    }
+  end
+
   extend self
 end
 

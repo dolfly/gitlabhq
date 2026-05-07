@@ -189,8 +189,8 @@ RSpec.describe Gitlab::Ci::Parsers::Security::Common, feature_category: :vulnera
           end
 
           context 'when name is not provided' do
-            context 'when location does not exist' do
-              let(:location) { nil }
+            context 'when file_path does not exist' do
+              let(:location) { ::Gitlab::Ci::Reports::Security::Locations::Sast.new(file_path: nil, start_line: nil) }
 
               it 'returns only identifier name' do
                 finding = report.findings.third
@@ -199,7 +199,7 @@ RSpec.describe Gitlab::Ci::Parsers::Security::Common, feature_category: :vulnera
               end
             end
 
-            context 'when location exists' do
+            context 'when file_path exists' do
               context 'when CVE identifier exists' do
                 it 'combines identifier with location to create name' do
                   finding = report.findings.third

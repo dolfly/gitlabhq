@@ -384,9 +384,6 @@ Gitlab::Database::Aggregation::Request.new(
 )
 ```
 
-> [!note]
-> Metric filters are not yet exposed via GraphQL.
-
 #### `metric_range` filter
 
 Filters groups by value range on an aggregated metric using `BETWEEN`. Applied as a `HAVING`

@@ -2020,6 +2020,7 @@ CREATE TABLE siphon_security_findings
     `_siphon_replicated_at` DateTime64(6, 'UTC') DEFAULT now64(6, 'UTC') CODEC(ZSTD(1)),
     `_siphon_deleted` Bool DEFAULT false CODEC(ZSTD(1)),
     `scanner_reported_severity` Int16 DEFAULT 0,
+    `context_unaware_uuid` UUID,
     PROJECTION pg_pkey_ordered
     (
         SELECT *
